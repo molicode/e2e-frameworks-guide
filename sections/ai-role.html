@@ -85,23 +85,35 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link is-active" href="ai-role.html" aria-current="page">
+        <a class="nav-link" href="components.html">
           <span class="nav-link__num">07</span>
+          <span data-i18n="nav.components">Componentes clave</span>
+        </a>
+        <a class="nav-link is-active" href="ai-role.html" aria-current="page">
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <span class="section__eyebrow">07</span>
+        <span class="section__eyebrow">08</span>
         <h2 class="section__title" data-i18n="nav.airole">El rol de la AI</h2>
         <div class="prose" data-i18n-html="ai.lead"><p>La AI no vino a reemplazar al QA, sino a <strong>amplificarlo</strong>. Es como tener un par junior infinito: rápido, incansable y que a veces se equivoca. Tu trabajo pasa de <em>escribir todo</em> a <em>dirigir y validar</em>.</p></div>
         <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
@@ -133,6 +145,82 @@
               <h4 data-i18n="ai.stage5.title">Explicar fallos</h4>
               <p data-i18n="ai.stage5.body">Lee el error, el stack trace o la traza y explica en lenguaje claro la causa más probable.</p>
             </div>
+        </div>
+        <h3 class="block-label" data-i18n="ai.tools.label">Skills, MCP y Agentes</h3>
+        <div class="prose" data-i18n-html="ai.tools.body"><p>La AI rinde mucho más cuando le das <strong>herramientas, contexto y autonomía</strong>. Tres piezas modernas que potencian el testing automation:</p></div>
+        <div class="tile-grid">
+            <div class="tile">
+              <div class="tile__icon">🧩</div>
+              <h4 data-i18n="ai.tool.skills.title">Skills</h4>
+              <p data-i18n="ai.tool.skills.body">Instrucciones reutilizables que encapsulan las convenciones de tu equipo (POM, política de selectores) para generar tests consistentes.</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🔌</div>
+              <h4 data-i18n="ai.tool.mcp.title">MCP</h4>
+              <p data-i18n="ai.tool.mcp.body">El Model Context Protocol conecta a la AI con herramientas reales: un navegador, tu repo, el issue tracker, los logs de CI.</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🤖</div>
+              <h4 data-i18n="ai.tool.agents.title">Agentes</h4>
+              <p data-i18n="ai.tool.agents.body">Agentes que planifican y ejecutan varios pasos: generan el test, lo corren, leen el fallo y lo arreglan en un bucle.</p>
+            </div>
+        </div>
+        <div class="prose" data-i18n-html="ai.tool.mcp.note"><p>Con <strong>MCP</strong> la AI deja de adivinar: puede abrir la app, leer el árbol de accesibilidad y proponer selectores que <em>existen</em> de verdad.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JSON</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Give the AI real tools via MCP servers (it can drive a browser, read</span>
+<span class="tok-comment">// the live DOM/accessibility tree, open PRs, query your issue tracker).</span>
+<span class="tok-punctuation">{</span>
+  <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
+    <span class="tok-string">"playwright"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx"</span><span class="tok-punctuation">,</span> <span class="tok-string">"args"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">["@</span>playwright<span class="tok-punctuation">/</span>mcp<span class="tok-punctuation">@</span>latest<span class="tok-string">"] },
+    "</span>github<span class="tok-string">": { "</span>command<span class="tok-string">": "</span>npx<span class="tok-string">", "</span>args<span class="tok-string">": ["</span><span class="tok-punctuation">-</span>y<span class="tok-string">", "</span><span class="tok-punctuation">@</span>modelcontextprotocol<span class="tok-punctuation">/</span>server<span class="tok-punctuation">-</span>github<span class="tok-punctuation">"]</span> <span class="tok-punctuation">}</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <div class="prose" data-i18n-html="ai.tool.skills.note"><p>Una <strong>Skill</strong> es como un comando con el know-how de tu equipo adentro: en vez de re-explicar tus reglas en cada prompt, los tests salen siempre con el mismo estándar.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Markdown</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment"># Skill: generate-e2e  (your team's conventions, reused every time)</span>
+
+When asked to write an end<span class="tok-punctuation">-</span>to<span class="tok-punctuation">-</span>end test<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Use Playwright <span class="tok-punctuation">+</span> the Page Objects <span class="tok-keyword">in</span> src<span class="tok-punctuation">/</span>pages<span class="tok-punctuation">/.</span>
+<span class="tok-punctuation">-</span> Selectors<span class="tok-punctuation">:</span> getByRole <span class="tok-punctuation">/</span> getByTestId only <span class="tok-punctuation">—</span> never CSS <span class="tok-keyword">or</span> XPath<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> One intent per test<span class="tok-punctuation">,</span> web<span class="tok-punctuation">-</span>first assertions<span class="tok-punctuation">,</span> zero fixed sleeps<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Mock the network <span class="tok-keyword">with</span> page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">();</span> never hit the real backend<span class="tok-punctuation">.</span>
+
+<span class="tok-comment"># A skill packages this know-how so every generated test follows the</span>
+<span class="tok-comment"># same standards — no need to re-explain them in each prompt.</span></code></pre>
+        </div>
+        <div class="prose" data-i18n-html="ai.tool.agents.note"><p>Un <strong>agente</strong> cierra el lazo. Y con varios agentes (uno escribe, otro intenta refutar) subís la confianza antes de commitear.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Text</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code>Agent loop <span class="tok-punctuation">—</span> autonomous <span class="tok-string">"write → run → read failure → fix"</span><span class="tok-punctuation">:</span>
+
+  <span class="tok-number">1</span><span class="tok-punctuation">.</span> Read the user story <span class="tok-punctuation">+</span> acceptance criteria<span class="tok-punctuation">.</span>
+  <span class="tok-number">2</span><span class="tok-punctuation">.</span> Generate the Playwright test <span class="tok-punctuation">(</span>using the team Skill above<span class="tok-punctuation">).</span>
+  <span class="tok-number">3</span><span class="tok-punctuation">.</span> Run it via the Playwright MCP server<span class="tok-punctuation">.</span>
+  <span class="tok-number">4</span><span class="tok-punctuation">.</span> If it fails<span class="tok-punctuation">:</span> read the error <span class="tok-punctuation">+</span> trace<span class="tok-punctuation">,</span> locate the cause<span class="tok-punctuation">,</span> patch the test<span class="tok-punctuation">.</span>
+  <span class="tok-number">5</span><span class="tok-punctuation">.</span> Repeat until green<span class="tok-punctuation">,</span> then open a PR<span class="tok-punctuation">.</span>
+
+Multi<span class="tok-punctuation">-</span>agent variant <span class="tok-punctuation">(</span>higher confidence<span class="tok-punctuation">):</span>
+  <span class="tok-punctuation">-</span> Writer agent  <span class="tok-punctuation">-&gt;</span> drafts the test<span class="tok-punctuation">.</span>
+  <span class="tok-punctuation">-</span> Reviewer agent <span class="tok-punctuation">-&gt;</span> tries to REFUTE it<span class="tok-punctuation">:</span> <span class="tok-string">"can this pass even if the app is
+    broken?"</span> Only tests that survive the review get committed<span class="tok-punctuation">.</span></code></pre>
         </div>
         <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
         <div class="vs-grid">
@@ -185,9 +273,9 @@ Mark which cases are good candidates <span class="tok-keyword">for</span> automa
         </div>
         <div class="callout callout--warn" data-i18n-html="ai.callout"><strong>Regla de oro:</strong> la AI es un acelerador, no un oráculo. Puede inventar selectores que no existen o assertions que no reflejan los criterios de aceptación. Nunca mergees código de test que no entendiste y no corriste.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="comparison.html">
+          <a class="page-nav__link page-nav__prev" href="components.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="nav.comparison">Comparativa</span>
+            <span class="page-nav__title" data-i18n="nav.components">Componentes clave</span>
           </a>
           <a class="page-nav__link page-nav__next" href="prompts.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>

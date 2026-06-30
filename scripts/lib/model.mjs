@@ -524,6 +524,95 @@ test("VerifyOrder", async ({ page }) => {
 //  - No hidden waits/sleeps, no test that can never fail.
 //  - It fails when it should: temporarily break the app and re-run.`,
   },
+
+  /* ---- Key components (how to test each) ---- */
+  validationTest: {
+    lang: "JavaScript",
+    code: `// Form validation — the inline error shows and submit stays disabled.
+await page.getByLabel("Email").fill("not-an-email");
+await page.getByRole("button", { name: "Sign up" }).click();
+await expect(page.getByText("Enter a valid email")).toBeVisible();
+await expect(page.getByRole("button", { name: "Sign up" })).toBeDisabled();`,
+  },
+  selectTest: {
+    lang: "JavaScript",
+    code: `// Select / dropdown — choose an option and assert the value.
+const country = page.getByRole("combobox", { name: "Country" });
+await country.selectOption("AR");
+await expect(country).toHaveValue("AR");`,
+  },
+  checkboxTest: {
+    lang: "JavaScript",
+    code: `// Checkbox / toggle — check it and assert its state.
+const optIn = page.getByRole("checkbox", { name: "Email me about updates" });
+await optIn.check();
+await expect(optIn).toBeChecked();`,
+  },
+  modalTest: {
+    lang: "JavaScript",
+    code: `// Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.
+await page.getByRole("button", { name: "Delete order" }).click();
+const dialog = page.getByRole("dialog");
+await expect(dialog).toBeVisible();
+await dialog.getByRole("button", { name: "Delete" }).click();
+await expect(dialog).toBeHidden();`,
+  },
+  tableTest: {
+    lang: "JavaScript",
+    code: `// Data table — assert the row count and a specific cell.
+const rows = page.getByRole("row");
+await expect(rows).toHaveCount(4); // 1 header + 3 data rows
+await expect(page.getByRole("cell", { name: "Ada Lovelace" })).toBeVisible();`,
+  },
+  toastTest: {
+    lang: "JavaScript",
+    code: `// Toast / alert — assert it appears, then disappears on its own.
+await page.getByRole("button", { name: "Save" }).click();
+const toast = page.getByRole("alert");
+await expect(toast).toContainText("saved successfully");
+await expect(toast).toBeHidden({ timeout: 6000 });`,
+  },
+
+  /* ---- AI tooling: MCP, Skills, Agents ---- */
+  mcpConfig: {
+    lang: "JSON",
+    code: `// Give the AI real tools via MCP servers (it can drive a browser, read
+// the live DOM/accessibility tree, open PRs, query your issue tracker).
+{
+  "mcpServers": {
+    "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] },
+    "github": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-github"] }
+  }
+}`,
+  },
+  skillExample: {
+    lang: "Markdown",
+    code: `# Skill: generate-e2e  (your team's conventions, reused every time)
+
+When asked to write an end-to-end test:
+- Use Playwright + the Page Objects in src/pages/.
+- Selectors: getByRole / getByTestId only — never CSS or XPath.
+- One intent per test, web-first assertions, zero fixed sleeps.
+- Mock the network with page.route(); never hit the real backend.
+
+# A skill packages this know-how so every generated test follows the
+# same standards — no need to re-explain them in each prompt.`,
+  },
+  agentLoop: {
+    lang: "Text",
+    code: `Agent loop — autonomous "write → run → read failure → fix":
+
+  1. Read the user story + acceptance criteria.
+  2. Generate the Playwright test (using the team Skill above).
+  3. Run it via the Playwright MCP server.
+  4. If it fails: read the error + trace, locate the cause, patch the test.
+  5. Repeat until green, then open a PR.
+
+Multi-agent variant (higher confidence):
+  - Writer agent  -> drafts the test.
+  - Reviewer agent -> tries to REFUTE it: "can this pass even if the app is
+    broken?" Only tests that survive the review get committed.`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -622,6 +711,23 @@ export const SECTIONS = [
       { type: "label", text: "fund.flaky.label" },
       { type: "prose", html: "fund.flaky.body" },
       { type: "code", sample: "flaky" },
+      { type: "mock", screen: "flaky" },
+      { type: "label", text: "fund.levels.label" },
+      { type: "prose", html: "fund.levels.body" },
+      { type: "label", text: "fund.design.label" },
+      { type: "prose", html: "fund.design.body" },
+      { type: "label", text: "fund.nonfunc.label" },
+      { type: "prose", html: "fund.nonfunc.body" },
+      { type: "label", text: "fund.defects.label" },
+      { type: "prose", html: "fund.defects.body" },
+      {
+        type: "table",
+        head: ["fund.sp.th1", "fund.sp.th2", "fund.sp.th3"],
+        rows: [
+          ["fund.sp.r1a", "fund.sp.r1b", "fund.sp.r1c"],
+          ["fund.sp.r2a", "fund.sp.r2b", "fund.sp.r2c"],
+        ],
+      },
       { type: "label", text: "ui.vs" },
       {
         type: "vs",
@@ -646,7 +752,7 @@ export const SECTIONS = [
       { codes: ["cypressSetup", "cypressFirst"], mock: "login" }, // 1 Interactive runner
       { codes: ["cypChain"] },                        // 2 Commands & async chain
       { codes: ["cypAssertions"] },                   // 3 Assertions & selectors
-      { codes: ["cypIntercept"] },                    // 4 Network with cy.intercept()
+      { codes: ["cypIntercept"], mock: "error" },     // 4 Network with cy.intercept()
       { codes: ["cypCommands"] },                     // 5 Custom commands & fixtures
       { codes: ["cypComponent"] },                    // 6 Component testing + CI
     ]),
@@ -657,7 +763,7 @@ export const SECTIONS = [
       { codes: ["pwLocators"], mock: "order" },           // 2 Locators & actions
       { codes: ["pwAssertions"] },                        // 3 Assertions & auto-waiting
       { codes: ["pwFixtures"] },                          // 4 Fixtures & organization
-      { codes: ["pwNetwork"] },                           // 5 Network & auth
+      { codes: ["pwNetwork"], mock: "error" },            // 5 Network & auth
       { codes: ["pwConfig", "pwCIyml"] },                 // 6 CI + trace viewer
     ]),
 
@@ -688,6 +794,45 @@ export const SECTIONS = [
   },
 
   {
+    id: "components",
+    navKey: "nav.components",
+    blocks: [
+      { type: "prose", html: "comp.lead" },
+      { type: "callout", variant: "", html: "comp.callout" },
+
+      { type: "label", text: "comp.validation.label" },
+      { type: "prose", html: "comp.validation.body" },
+      { type: "code", sample: "validationTest" },
+      { type: "mock", screen: "validation" },
+
+      { type: "label", text: "comp.select.label" },
+      { type: "prose", html: "comp.select.body" },
+      { type: "code", sample: "selectTest" },
+      { type: "mock", screen: "select" },
+
+      { type: "label", text: "comp.checkbox.label" },
+      { type: "prose", html: "comp.checkbox.body" },
+      { type: "code", sample: "checkboxTest" },
+      { type: "mock", screen: "checkbox" },
+
+      { type: "label", text: "comp.modal.label" },
+      { type: "prose", html: "comp.modal.body" },
+      { type: "code", sample: "modalTest" },
+      { type: "mock", screen: "modal" },
+
+      { type: "label", text: "comp.table.label" },
+      { type: "prose", html: "comp.table.body" },
+      { type: "code", sample: "tableTest" },
+      { type: "mock", screen: "table" },
+
+      { type: "label", text: "comp.toast.label" },
+      { type: "prose", html: "comp.toast.body" },
+      { type: "code", sample: "toastTest" },
+      { type: "mock", screen: "toast" },
+    ],
+  },
+
+  {
     id: "ai-role",
     navKey: "nav.airole",
     blocks: [
@@ -705,6 +850,22 @@ export const SECTIONS = [
           { icon: "🩺", title: "ai.stage5.title", body: "ai.stage5.body" },
         ],
       },
+      { type: "label", text: "ai.tools.label" },
+      { type: "prose", html: "ai.tools.body" },
+      {
+        type: "tiles",
+        items: [
+          { icon: "🧩", title: "ai.tool.skills.title", body: "ai.tool.skills.body" },
+          { icon: "🔌", title: "ai.tool.mcp.title", body: "ai.tool.mcp.body" },
+          { icon: "🤖", title: "ai.tool.agents.title", body: "ai.tool.agents.body" },
+        ],
+      },
+      { type: "prose", html: "ai.tool.mcp.note" },
+      { type: "code", sample: "mcpConfig" },
+      { type: "prose", html: "ai.tool.skills.note" },
+      { type: "code", sample: "skillExample" },
+      { type: "prose", html: "ai.tool.agents.note" },
+      { type: "code", sample: "agentLoop" },
       { type: "label", text: "ui.vs" },
       {
         type: "vs",
@@ -748,6 +909,164 @@ export const SECTIONS = [
       { type: "label", text: "best.next.label" },
       { type: "steps", items: ["best.step1", "best.step2", "best.step3", "best.step4", "best.step5"] },
       { type: "callout", variant: "ok", html: "best.callout" },
+    ],
+  },
+
+  {
+    id: "key-terms",
+    navKey: "nav.keyterms",
+    blocks: [
+      { type: "prose", html: "kt.lead" },
+
+      { type: "label", text: "kt.cat.process" },
+      {
+        type: "glossary",
+        items: [
+          { term: "SDLC / STLC", def: "kt.proc.sdlc" },
+          { term: "Shift-left testing", def: "kt.proc.shiftleft" },
+          { term: "TDD (Test-Driven Development)", def: "kt.proc.tdd" },
+          { term: "BDD (Gherkin / Cucumber)", def: "kt.proc.bdd" },
+          { term: "ATDD", def: "kt.proc.atdd" },
+          { term: "Regression testing", def: "kt.proc.regression" },
+          { term: "Smoke vs Sanity", def: "kt.proc.smoke" },
+          { term: "Exploratory testing", def: "kt.proc.exploratory" },
+          { term: "Acceptance / UAT", def: "kt.proc.uat" },
+          { term: "Risk-based testing", def: "kt.proc.risk" },
+          { term: "Data-driven testing", def: "kt.proc.ddt" },
+        ],
+      },
+
+      { type: "label", text: "kt.cat.design" },
+      {
+        type: "glossary",
+        items: [
+          { term: "Equivalence Partitioning", def: "kt.design.ep" },
+          { term: "Boundary Value Analysis", def: "kt.design.bva" },
+          { term: "Decision Table", def: "kt.design.dt" },
+          { term: "State Transition", def: "kt.design.state" },
+          { term: "Pairwise / Combinatorial", def: "kt.design.pairwise" },
+          { term: "Traceability Matrix", def: "kt.design.trace" },
+        ],
+      },
+
+      { type: "label", text: "kt.cat.defects" },
+      {
+        type: "glossary",
+        items: [
+          { term: "Severity vs Priority", def: "kt.def.sevprio" },
+          { term: "Defect lifecycle", def: "kt.def.lifecycle" },
+          { term: "Root Cause Analysis (RCA)", def: "kt.def.rca" },
+          { term: "Triage", def: "kt.def.triage" },
+          { term: "Reproducible steps", def: "kt.def.repro" },
+        ],
+      },
+
+      { type: "label", text: "kt.cat.automation" },
+      {
+        type: "glossary",
+        items: [
+          { term: "Assertion", def: "kt.auto.assertion" },
+          { term: "Selector / Locator", def: "kt.auto.locator" },
+          { term: "Page Object Model (POM)", def: "kt.auto.pom" },
+          { term: "Fixtures", def: "kt.auto.fixtures" },
+          { term: "Hooks (setup / teardown)", def: "kt.auto.hooks" },
+          { term: "Test doubles (mock / stub / spy / fake)", def: "kt.auto.doubles" },
+          { term: "Implicit / Explicit / Fluent wait", def: "kt.auto.waits" },
+          { term: "Auto-wait / retry", def: "kt.auto.autowait" },
+          { term: "Flaky test", def: "kt.auto.flaky" },
+          { term: "Headless", def: "kt.auto.headless" },
+          { term: "Parallelization", def: "kt.auto.parallel" },
+          { term: "Cross-browser", def: "kt.auto.crossbrowser" },
+          { term: "Code coverage", def: "kt.auto.coverage" },
+          { term: "CI/CD & quality gate", def: "kt.auto.cicd" },
+          { term: "Test isolation / idempotency", def: "kt.auto.isolation" },
+          { term: "Test data management", def: "kt.auto.tdm" },
+          { term: "Visual regression", def: "kt.auto.visual" },
+          { term: "Accessibility (a11y) testing", def: "kt.auto.a11y" },
+          { term: "API testing", def: "kt.auto.api" },
+        ],
+      },
+
+      { type: "label", text: "kt.cat.ai" },
+      {
+        type: "glossary",
+        items: [
+          { term: "Prompt engineering", def: "kt.ai.prompt" },
+          { term: "Hallucination", def: "kt.ai.halluc" },
+          { term: "Self-healing locators", def: "kt.ai.selfheal" },
+          { term: "LLM test generation", def: "kt.ai.gen" },
+          { term: "Human-in-the-loop", def: "kt.ai.hitl" },
+          { term: "MCP (Model Context Protocol)", def: "kt.ai.mcp" },
+          { term: "Skill", def: "kt.ai.skill" },
+          { term: "Agent / sub-agent", def: "kt.ai.agent" },
+          { term: "RAG (Retrieval-Augmented Generation)", def: "kt.ai.rag" },
+          { term: "Context window / tokens", def: "kt.ai.context" },
+        ],
+      },
+      { type: "callout", variant: "", html: "kt.callout" },
+    ],
+  },
+
+  {
+    id: "bibliography",
+    navKey: "nav.biblio",
+    blocks: [
+      { type: "prose", html: "biblio.lead" },
+
+      { type: "label", text: "biblio.cat.selenium" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Selenium — Documentation", url: "https://www.selenium.dev/documentation/", desc: "biblio.sel.docs" },
+          { title: "W3C WebDriver (specification)", url: "https://www.w3.org/TR/webdriver/", desc: "biblio.sel.w3c" },
+          { title: "SeleniumHQ/selenium — GitHub", url: "https://github.com/SeleniumHQ/selenium", desc: "biblio.sel.gh" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.cypress" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Cypress — Documentation", url: "https://docs.cypress.io/", desc: "biblio.cyp.docs" },
+          { title: "Cypress — Best Practices", url: "https://docs.cypress.io/app/core-concepts/best-practices", desc: "biblio.cyp.bp" },
+          { title: "cypress-io/cypress — GitHub", url: "https://github.com/cypress-io/cypress", desc: "biblio.cyp.gh" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.playwright" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Playwright — Documentation", url: "https://playwright.dev/docs/intro", desc: "biblio.pw.docs" },
+          { title: "Playwright — Best Practices", url: "https://playwright.dev/docs/best-practices", desc: "biblio.pw.bp" },
+          { title: "Playwright — Locators", url: "https://playwright.dev/docs/locators", desc: "biblio.pw.loc" },
+          { title: "microsoft/playwright — GitHub", url: "https://github.com/microsoft/playwright", desc: "biblio.pw.gh" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.general" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Martin Fowler — The Practical Test Pyramid", url: "https://martinfowler.com/articles/practical-test-pyramid.html", desc: "biblio.gen.pyramid" },
+          { title: "Kent C. Dodds — The Testing Trophy", url: "https://kentcdodds.com/blog/the-testing-trophy-and-testing-classifications", desc: "biblio.gen.trophy" },
+          { title: "ISTQB — Glossary", url: "https://glossary.istqb.org/", desc: "biblio.gen.istqb" },
+          { title: "Testing Library", url: "https://testing-library.com/", desc: "biblio.gen.tl" },
+          { title: "MDN — CSS selectors", url: "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors", desc: "biblio.gen.mdn" },
+          { title: "W3C — ARIA Authoring Practices", url: "https://www.w3.org/WAI/ARIA/apg/", desc: "biblio.gen.aria" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.ai" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Anthropic — Documentation", url: "https://docs.anthropic.com/", desc: "biblio.ai.anthropic" },
+          { title: "Model Context Protocol (MCP)", url: "https://modelcontextprotocol.io/", desc: "biblio.ai.mcp" },
+          { title: "Prompt Engineering Guide", url: "https://www.promptingguide.ai/", desc: "biblio.ai.peg" },
+          { title: "OpenAI — Prompt engineering", url: "https://platform.openai.com/docs/guides/prompt-engineering", desc: "biblio.ai.openai" },
+        ],
+      },
     ],
   },
 ];
