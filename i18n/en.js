@@ -28,6 +28,7 @@ I18n.register("en", {
   "ui.philosophy": "Philosophy",
   "ui.when": "When to use it",
   "ui.path": "Learning path",
+  "ui.langLabel": "Language of the examples",
   "ui.prev": "Previous",
   "ui.next": "Next",
   "ui.mockCaption": "👆 Mock screen: this is what the code above tests. The chips show which selector targets each element.",
@@ -152,10 +153,10 @@ I18n.register("en", {
     "<p>Choose Selenium when you need <strong>broad browser and language coverage</strong>, integration with an existing enterprise ecosystem, or to test browsers/devices others don't support (via Selenium Grid). The cost: you assemble the waits and assertions by hand.</p>",
   "sel.manual.title": "By hand",
   "sel.manual.body":
-    "<p>You write every <code>findElement</code>, every explicit <code>wait</code> and every <code>assert</code>. Total control, but also full responsibility for avoiding flakiness.</p>",
+    "<p>You write every <code>find_element</code>, every explicit <code>WebDriverWait</code> and every <code>assert</code>. Total control, but also full responsibility for avoiding flakiness.</p>",
   "sel.ai.title": "With AI",
   "sel.ai.body":
-    "<p>AI saves you the boilerplate: it scaffolds the driver setup, reminds you to add <code>driver.wait(...)</code> before each assertion, and translates a Java test to JavaScript when you switch stacks.</p>",
+    "<p>AI saves you the boilerplate: it scaffolds the driver setup, reminds you to add <code>WebDriverWait(...)</code> before each assertion, and translates a Java test to Python when you switch stacks.</p>",
 
   "sel.rung1.title": "WebDriver & navigation",
   "sel.rung1.body":
@@ -163,11 +164,11 @@ I18n.register("en", {
   "sel.rung2.title": "Locating elements",
   "sel.rung2.desc": "Master the By strategies: CSS over XPath whenever you can. Practice robust selectors.",
   "sel.rung2.body":
-    "<p>Selenium locates elements with the <code>By</code> class: <code>By.id</code>, <code>By.css</code>, <code>By.xpath</code>… Use <code>findElement</code> for one and <code>findElements</code> for a list. Rule of thumb: <strong>prefer CSS over XPath</strong> (more readable and faster), and reserve XPath for matching by visible text.</p>",
+    "<p>Selenium locates elements with the <code>By</code> class: <code>By.ID</code>, <code>By.CSS_SELECTOR</code>, <code>By.XPATH</code>… Use <code>find_element</code> for one and <code>find_elements</code> for a list. Rule of thumb: <strong>prefer CSS over XPath</strong> (more readable and faster), and reserve XPath for matching by visible text.</p>",
   "sel.rung3.title": "Explicit waits",
   "sel.rung3.desc": "The single most important concept. WebDriverWait + ExpectedConditions. Avoid Thread.sleep.",
   "sel.rung3.body":
-    "<p>Selenium <strong>does not retry on its own</strong>: act before the element exists and it fails. The fix is <strong>explicit waits</strong>: in JS, <code>driver.wait(until.…)</code>; in Java, <code>WebDriverWait</code> + <code>ExpectedConditions</code>. Never use a fixed <code>Thread.sleep</code> — it's the number-one cause of flakiness.</p>",
+    "<p>Selenium <strong>does not retry on its own</strong>: act before the element exists and it fails. The fix is <strong>explicit waits</strong>: in Python, <code>WebDriverWait(driver, 5).until(...)</code> together with <code>expected_conditions</code> (EC). Never use a fixed <code>time.sleep</code> — it's the number-one cause of flakiness.</p>",
   "sel.rung4.title": "Runner + assertions",
   "sel.rung4.desc": "Pair it with JUnit5/TestNG (Java) or pytest (Python). Selenium drives, it doesn't assert.",
   "sel.rung4.body":
@@ -179,7 +180,7 @@ I18n.register("en", {
   "sel.rung6.title": "Grid & CI",
   "sel.rung6.desc": "Run in parallel with Selenium Grid or a cloud service, and wire it into the pipeline.",
   "sel.rung6.body":
-    "<p><strong>Selenium Grid</strong> lets you run tests on remote browsers in parallel: point the driver at a hub with <code>usingServer(...)</code> instead of a local browser. In CI you spin up the Grid (e.g. with Docker) and run the suite on every pull request.</p>",
+    "<p><strong>Selenium Grid</strong> lets you run tests on remote browsers in parallel: use <code>webdriver.Remote(command_executor=...)</code> pointing at a hub instead of a local browser. In CI you spin up the Grid (e.g. with Docker) and run the suite on every pull request.</p>",
 
   /* ====================================================================
      3b. CYPRESS
@@ -227,39 +228,39 @@ I18n.register("en", {
   "pw.lead":
     "<p><strong>Playwright</strong> (from Microsoft) is the modern choice: fast, truly cross-browser (Chromium, Firefox, WebKit), with auto-wait and web-first assertions out of the box.</p>",
   "pw.philosophy":
-    "<p>Playwright drives the browser out-of-process, but with <strong>lazy locators</strong> that automatically wait for the element to be actionable, and <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>) that retry on their own. It ships parallelism, traces, video and its own test runner.</p>",
+    "<p>Playwright drives the browser out-of-process, but with <strong>lazy locators</strong> that automatically wait for the element to be actionable, and <strong>web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>) that retry on their own. It ships parallelism, traces, video and integrates with pytest via <code>pytest-playwright</code>.</p>",
   "pw.when":
     "<p>Choose Playwright when you want <strong>speed, parallelism and real coverage of all three browser engines</strong> from a single API. It's excellent for large CI suites and for teams starting a new project today.</p>",
   "pw.manual.title": "By hand",
   "pw.manual.body":
-    "<p>You use <code>getByRole</code> / <code>getByLabel</code> and <code>expect(...)</code>. Auto-wait removes nearly all flakiness; you define intent and coverage.</p>",
+    "<p>You use <code>get_by_role</code> / <code>get_by_label</code> and <code>expect(...)</code>. Auto-wait removes nearly all flakiness; you define intent and coverage.</p>",
   "pw.ai.title": "With AI",
   "pw.ai.body":
     "<p>AI generates the full test from a description, recommends accessible locators (by role/label), and on a failure it reads the trace and explains the likely cause.</p>",
 
   "pw.rung1.title": "Setup & first test",
   "pw.rung1.body":
-    "<p><code>npm init playwright@latest</code> gives you config, example tests and a CI workflow in one command. Each test is a <code>test('name', async ({ page }) =&gt; { … })</code> function. Run <code>npx playwright test --ui</code> for the interactive mode with watch and time-travel.</p>",
+    "<p><code>pip install pytest-playwright</code> plus <code>playwright install</code> gets you ready. Each test is a <code>def test_name(page): …</code> function that receives the <code>page</code> fixture. Run <code>pytest</code> (headless) or <code>pytest --headed</code> to watch it live.</p>",
   "pw.rung2.title": "Locators & actions",
   "pw.rung2.desc": "Master getByRole/Label/Text. Filter, chain, and handle lists with .nth().",
   "pw.rung2.body":
-    "<p><strong>Locators</strong> are lazy: they describe <em>how</em> to find an element and resolve when you act or assert. Prefer user-facing queries: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Narrow lists with <code>.filter()</code>, index with <code>.nth()</code>/<code>.first()</code>/<code>.last()</code>, and chain to reach the exact element.</p>",
+    "<p><strong>Locators</strong> are lazy: they describe <em>how</em> to find an element and resolve when you act or assert. Prefer user-facing queries: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_text</code>. Narrow lists with <code>.filter()</code>, index with <code>.nth()</code>/<code>.first</code>/<code>.last</code>, and chain to reach the exact element.</p>",
   "pw.rung3.title": "Assertions & auto-waiting",
   "pw.rung3.desc": "Learn web-first assertions and why you almost never wait by hand.",
   "pw.rung3.body":
-    "<p><strong>Web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>retry on their own</strong> until they pass or time out. That's why you almost never wait by hand. For non-DOM values, <code>expect(value).toBe(...)</code> does not retry.</p>",
+    "<p><strong>Web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>, <code>to_be_visible()</code>, <code>to_have_count()</code>) <strong>retry on their own</strong> until they pass or time out. That's why you almost never wait by hand. For non-DOM values, a plain <code>assert</code> does not retry.</p>",
   "pw.rung4.title": "Fixtures & organization",
   "pw.rung4.desc": "Hooks, custom fixtures and the Page Object Model for suites that scale.",
   "pw.rung4.body":
-    "<p>To make the suite scale: use <strong>hooks</strong> (<code>beforeEach</code>) for setup, wrap pages in a <strong>Page Object</strong>, and expose it as a custom <strong>fixture</strong> with <code>base.extend()</code>. Each test then receives exactly what it needs and stays clean and readable.</p>",
+    "<p>To make the suite scale: use pytest <strong>fixtures</strong> (in <code>conftest.py</code>) for setup, wrap pages in a <strong>Page Object</strong>, and expose it as a custom fixture with <code>@pytest.fixture</code>. Each test then receives exactly what it needs and stays clean and readable.</p>",
   "pw.rung5.title": "Network & auth",
   "pw.rung5.desc": "Intercept with page.route(), mock APIs, and reuse sessions with storageState.",
   "pw.rung5.body":
-    "<p>With <code>page.route()</code> you intercept requests and reply with mocked data: fast, deterministic tests without a real backend. To avoid logging in every test, save the session once with <code>storageState</code> and reuse it in the config. Less flakiness, more speed.</p>",
+    "<p>With <code>page.route()</code> you intercept requests and reply with mocked data: fast, deterministic tests without a real backend. To avoid logging in every test, save the session once with <code>storage_state</code> and reuse it via the <code>browser_context_args</code> fixture. Less flakiness, more speed.</p>",
   "pw.rung6.title": "CI + trace viewer",
   "pw.rung6.desc": "Wire it into the pipeline, enable traces and reports. This is where it shines.",
   "pw.rung6.body":
-    "<p>Where Playwright shines: in <code>playwright.config.js</code> you enable <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) and HTML reports. On a CI failure, open the <strong>trace viewer</strong> with <code>npx playwright show-trace</code> and see every step, the DOM and the network. Add retries and artifacts in the pipeline.</p>",
+    "<p>Where Playwright shines: in <code>pytest.ini</code> you enable <strong>traces</strong> (<code>--tracing retain-on-failure</code>) and artifacts. On a CI failure, open the <strong>trace viewer</strong> with <code>playwright show-trace</code> and see every step, the DOM and the network. Add retries and artifacts in the pipeline.</p>",
 
   /* ====================================================================
      4. COMPARISON

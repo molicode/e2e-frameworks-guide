@@ -124,7 +124,7 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
         <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
         <ol class="steps roadmap">
@@ -155,27 +155,27 @@
             </li>
         </ol>
         <h3 class="block-label" id="pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</h3>
-        <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first()</code>/<code>.last()</code> y encadenás para llegar al elemento exacto.</p></div>
+        <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_text</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first</code>/<code>.last</code> y encadenás para llegar al elemento exacto.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Locators are lazy: they describe HOW to find an element and resolve</span>
-<span class="tok-comment">// at the moment you act or assert. Prefer user-facing queries.</span>
-<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-string">", { name: "</span>Sign <span class="tok-keyword">in</span><span class="tok-string">" }).click();
-await page.getByLabel("</span>Email<span class="tok-string">").fill("</span>demo<span class="tok-punctuation">@</span>acme<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-string">");
-await page.getByText("</span>Welcome<span class="tok-string">").click();
+          <pre><code><span class="tok-comment"># Locators are lazy: they describe HOW to find an element and resolve</span>
+<span class="tok-comment"># at the moment you act or assert. Prefer user-facing queries.</span>
+page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Sign <span class="tok-keyword">in</span><span class="tok-string">").click()
+page.get_by_label("</span>Email<span class="tok-string">").fill("</span>demo<span class="tok-punctuation">@</span>acme<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-string">")
+page.get_by_text("</span>Welcome<span class="tok-string">").click()
 
-// Filter and narrow down lists:
-const rows = page.getByRole("</span>row<span class="tok-string">");
-await rows.filter({ hasText: "</span>book<span class="tok-string">" }).getByRole("</span>button<span class="tok-string">", { name: "</span>Remove<span class="tok-string">" }).click();
+# Filter and narrow down lists:
+rows = page.get_by_role("</span>row<span class="tok-string">")
+rows.filter(has_text="</span>book<span class="tok-string">").get_by_role("</span>button<span class="tok-string">", name="</span>Remove<span class="tok-string">").click()
 
-// Index into a list with .nth() (0-based), or .first() / .last():
-await page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").nth(2).click();
-await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-punctuation">")).</span><span class="tok-function">toHaveCount</span><span class="tok-punctuation">(</span><span class="tok-number">3</span><span class="tok-punctuation">);</span></code></pre>
+# Index into a list with .nth() (0-based), or .first / .last:
+page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").nth(2).click()
+expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-punctuation">")).</span><span class="tok-function">to_have_count</span><span class="tok-punctuation">(</span><span class="tok-number">3</span><span class="tok-punctuation">)</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -210,27 +210,27 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h3 class="block-label" id="pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</h3>
-        <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, <code>expect(valor).toBe(...)</code> no reintenta.</p></div>
+        <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>, <code>to_be_visible()</code>, <code>to_have_count()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, un <code>assert</code> común no reintenta.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Web-first assertions auto-retry until they pass or hit the timeout.</span>
-<span class="tok-comment">// You almost never wait manually.</span>
-<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>heading<span class="tok-string">")).toHaveText("</span>Order <span class="tok-comment">#42");</span>
-<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).toHaveText("</span>PAID<span class="tok-string">");
-await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).toHaveCount(3);
-await expect(page.getByTestId("</span>pay<span class="tok-punctuation">-</span>btn<span class="tok-string">")).toBeDisabled();
+          <pre><code><span class="tok-comment"># Web-first assertions auto-retry until they pass or hit the timeout.</span>
+<span class="tok-comment"># You almost never wait manually.</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>heading<span class="tok-string">")).to_have_text("</span>Order <span class="tok-comment">#42")</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
+expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_have_count(3)
+expect(page.get_by_test_id("</span>pay<span class="tok-punctuation">-</span>btn<span class="tok-string">")).to_be_disabled()
 
-// Non-retrying assertions are for plain values (not the DOM):
-expect(1 + 1).toBe(2);
+# A plain assert is for non-DOM values (it does not retry):
+assert 1 + 1 == 2
 
-// Need a specific state? Wait for the CONDITION, not a sleep:
-await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
-await expect(page.getByText("</span>Payment confirmed<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></code></pre>
+# Need a specific state? Wait for the CONDITION, not a sleep:
+page.get_by_role("</span>button<span class="tok-string">", name="</span>Pay<span class="tok-string">").click()
+expect(page.get_by_text("</span>Payment confirmed<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -257,63 +257,70 @@ await expect(page.getByText("</span>Payment confirmed<span class="tok-punctuatio
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h3 class="block-label" id="pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</h3>
-        <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>hooks</strong> (<code>beforeEach</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una <strong>fixture</strong> propia con <code>base.extend()</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
+        <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>fixtures</strong> de pytest (en <code>conftest.py</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una fixture propia con <code>@pytest.fixture</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// orders.page.js — a Page Object encapsulates selectors + actions.</span>
-<span class="tok-keyword">export</span> <span class="tok-keyword">class</span> OrderPage <span class="tok-punctuation">{</span>
-  <span class="tok-keyword">constructor</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
-    <span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">page</span> <span class="tok-punctuation">=</span> page<span class="tok-punctuation">;</span>
-    <span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">total</span> <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">");
-    this.status = page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">");
-  }
-  async goto(id) { await this.page.goto(`/orders/${id}`); }
-}
+          <pre><code><span class="tok-comment"># order_page.py — a Page Object encapsulates selectors + actions.</span>
+<span class="tok-keyword">class</span> OrderPage<span class="tok-punctuation">:</span>
+    <span class="tok-keyword">def</span> <span class="tok-function">__init__</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">,</span> page<span class="tok-punctuation">):</span>
+        <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">page</span> <span class="tok-punctuation">=</span> page
+        <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">total</span> <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")
+        self.status = page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")
 
-// fixtures.js — expose the Page Object as a custom fixture.
-import { test as base, expect } from "</span><span class="tok-punctuation">@</span>playwright<span class="tok-punctuation">/</span>test<span class="tok-string">";
-import { OrderPage } from "</span><span class="tok-punctuation">./</span>orders<span class="tok-punctuation">.</span><span class="tok-property">page</span><span class="tok-punctuation">.</span><span class="tok-property">js</span><span class="tok-string">";
+    def goto(self, order_id):
+        self.page.goto(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}")</span>
 
-export const test = base.extend({
-  orderPage: async ({ page }, use) =&gt; { await use(new OrderPage(page)); },
-});
 
-// order.spec.js — hooks + the fixture keep tests clean.
-test.beforeEach(async ({ orderPage }) =&gt; { await orderPage.goto(42); });
+<span class="tok-comment"># conftest.py — expose the Page Object as a fixture.</span>
+<span class="tok-keyword">import</span> pytest
+<span class="tok-keyword">from</span> order_page <span class="tok-keyword">import</span> OrderPage
 
-test("</span>VerifyOrder<span class="tok-string">", async ({ orderPage }) =&gt; {
-  await expect(orderPage.total).toHaveText("</span><span class="tok-number">250</span><span class="tok-string">");
-  await expect(orderPage.status).toHaveText("</span>PAID<span class="tok-punctuation">");</span>
-<span class="tok-punctuation">});</span></code></pre>
+
+<span class="tok-punctuation">@</span>pytest<span class="tok-punctuation">.</span><span class="tok-property">fixture</span>
+<span class="tok-keyword">def</span> <span class="tok-function">order_page</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">):</span>
+    <span class="tok-keyword">return</span> <span class="tok-function">OrderPage</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">)</span>
+
+
+<span class="tok-comment"># test_order.py — the fixture keeps tests clean.</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> expect
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>order_page<span class="tok-punctuation">):</span>
+    order_page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">(</span><span class="tok-number">42</span><span class="tok-punctuation">)</span>
+    <span class="tok-function">expect</span><span class="tok-punctuation">(</span>order_page<span class="tok-punctuation">.</span><span class="tok-property">total</span><span class="tok-punctuation">).</span><span class="tok-function">to_have_text</span><span class="tok-punctuation">("</span><span class="tok-number">250</span><span class="tok-string">")
+    expect(order_page.status).to_have_text("</span>PAID<span class="tok-punctuation">")</span></code></pre>
         </div>
         <h3 class="block-label" id="pw-rung-5" data-i18n="pw.rung5.title">Network y auth</h3>
-        <div class="prose" data-i18n-html="pw.rung5.body"><p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storageState</code> y la reusás en la config. Menos flakiness, más velocidad.</p></div>
+        <div class="prose" data-i18n-html="pw.rung5.body"><p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storage_state</code> y la reusás vía la fixture <code>browser_context_args</code>. Menos flakiness, más velocidad.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Mock an API so the test is fast and deterministic (no real backend).</span>
-<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">("**/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">", (route) =&gt;
-  route.fulfill({
-    status: 200,
-    contentType: "</span>application<span class="tok-punctuation">/</span>json<span class="tok-string">",
-    body: JSON.stringify({ total: 250, status: "</span>PAID<span class="tok-string">", items: ["</span>book<span class="tok-string">"] }),
-  })
-);
-await page.goto("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
-await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).toHaveText("</span><span class="tok-number">250</span><span class="tok-string">");
+          <pre><code><span class="tok-comment"># Mock an API so the test is fast and deterministic (no real backend).</span>
+<span class="tok-keyword">import</span> json
 
-// Reuse a logged-in session across tests with storageState:
-//   1) Save it once after logging in: await context.storageState({ path: "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-string">" });
-//   2) Reuse it in playwright.config.js: use: { storageState: "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-punctuation">"</span> <span class="tok-punctuation">}</span></code></pre>
+page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">(</span>
+    <span class="tok-string">"**/api/orders/42"</span><span class="tok-punctuation">,</span>
+    <span class="tok-keyword">lambda</span> route<span class="tok-punctuation">:</span> route<span class="tok-punctuation">.</span><span class="tok-function">fulfill</span><span class="tok-punctuation">(</span>
+        status<span class="tok-punctuation">=</span><span class="tok-number">200</span><span class="tok-punctuation">,</span>
+        content_type<span class="tok-punctuation">="</span>application<span class="tok-punctuation">/</span>json<span class="tok-string">",
+        body=json.dumps({"</span>total<span class="tok-string">": 250, "</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">", "</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]}),
+    ),
+)
+page.goto("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
+
+# Reuse a logged-in session across tests with storage_state:
+#   1) Save it once after logging in: context.storage_state(path="</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-string">")
+#   2) Reuse it via the browser_context_args fixture: {"</span>storage_state<span class="tok-string">": "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-punctuation">"}</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -337,23 +344,22 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h3 class="block-label" id="pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</h3>
-        <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>playwright.config.js</code> activás <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) y reportes HTML. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>npx playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>
+        <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>pytest.ini</code> activás <strong>traces</strong> (<code>--tracing retain-on-failure</code>) y artefactos. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">INI</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// playwright.config.js — traces + HTML report + CI retries.</span>
-<span class="tok-keyword">export</span> <span class="tok-keyword">default</span> <span class="tok-punctuation">{</span>
-  use<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
-    baseURL<span class="tok-punctuation">:</span> <span class="tok-string">"http://localhost:3000"</span><span class="tok-punctuation">,</span>
-    trace<span class="tok-punctuation">:</span> <span class="tok-string">"on-first-retry"</span><span class="tok-punctuation">,</span>   <span class="tok-comment">// record a trace when a test is retried</span>
-  <span class="tok-punctuation">},</span>
-  reporter<span class="tok-punctuation">:</span> <span class="tok-punctuation">[["</span>html<span class="tok-string">"], ["</span>list<span class="tok-punctuation">"]],</span>
-  retries<span class="tok-punctuation">:</span> process<span class="tok-punctuation">.</span><span class="tok-property">env</span><span class="tok-punctuation">.</span><span class="tok-property">CI</span> <span class="tok-punctuation">?</span> <span class="tok-number">2</span> <span class="tok-punctuation">:</span> <span class="tok-number">0</span><span class="tok-punctuation">,</span>
-<span class="tok-punctuation">};</span></code></pre>
+          <pre><code><span class="tok-comment"># pytest.ini — base URL, tracing and CI retries for pytest-playwright.</span>
+<span class="tok-punctuation">[</span>pytest<span class="tok-punctuation">]</span>
+addopts <span class="tok-punctuation">=</span>
+    <span class="tok-punctuation">--</span>base<span class="tok-punctuation">-</span>url http<span class="tok-punctuation">://</span>localhost<span class="tok-punctuation">:</span><span class="tok-number">3000</span>
+    <span class="tok-punctuation">--</span>tracing retain<span class="tok-punctuation">-</span>on<span class="tok-punctuation">-</span>failure
+    <span class="tok-punctuation">--</span>output test<span class="tok-punctuation">-</span>results
+<span class="tok-comment"># Re-run flaky tests in CI (needs the pytest-rerunfailures plugin):</span>
+<span class="tok-comment">#   --reruns 2</span></code></pre>
         </div>
         <div class="code-block">
           <div class="code-block__head">
@@ -363,15 +369,15 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
             </button>
           </div>
           <pre><code><span class="tok-comment"># .github/workflows/e2e.yml — run Playwright on every pull request.</span>
-<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> npm ci
-<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> npx playwright install <span class="tok-punctuation">--</span><span class="tok-keyword">with</span><span class="tok-punctuation">-</span>deps
-<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> npx playwright test
+<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> pip install pytest<span class="tok-punctuation">-</span>playwright
+<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> playwright install <span class="tok-punctuation">--</span><span class="tok-keyword">with</span><span class="tok-punctuation">-</span>deps
+<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> pytest <span class="tok-punctuation">--</span>tracing retain<span class="tok-punctuation">-</span>on<span class="tok-punctuation">-</span>failure
 <span class="tok-punctuation">-</span> uses<span class="tok-punctuation">:</span> actions<span class="tok-punctuation">/</span>upload<span class="tok-punctuation">-</span>artifact<span class="tok-punctuation">@</span>v4
   <span class="tok-keyword">if</span><span class="tok-punctuation">:</span> <span class="tok-function">always</span><span class="tok-punctuation">()</span>
   <span class="tok-keyword">with</span><span class="tok-punctuation">:</span>
-    name<span class="tok-punctuation">:</span> playwright<span class="tok-punctuation">-</span>report
-    path<span class="tok-punctuation">:</span> playwright<span class="tok-punctuation">-</span>report<span class="tok-punctuation">/</span>
-<span class="tok-comment"># Locally, inspect a failure: npx playwright show-trace trace.zip</span></code></pre>
+    name<span class="tok-punctuation">:</span> test<span class="tok-punctuation">-</span>results
+    path<span class="tok-punctuation">:</span> test<span class="tok-punctuation">-</span>results<span class="tok-punctuation">/</span>
+<span class="tok-comment"># Locally, inspect a failure: playwright show-trace test-results/.../trace.zip</span></code></pre>
         </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="playwright-hola-mundo.html">

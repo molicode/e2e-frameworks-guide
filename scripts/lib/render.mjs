@@ -233,10 +233,13 @@ function sectionHeader(section, topNum, dict) {
           <p class="hero__lead" data-i18n="intro.subtitle">${escText(t(dict, "intro.subtitle"))}</p>
         </div>`;
   }
-  // Framework sub-page: breadcrumb chip (framework) + sub-page title.
+  // Framework sub-page: breadcrumb chip (framework) + language pill + sub-page title.
   if (section.group) {
+    const langPill = section.chip.lang
+      ? `<span class="lang-pill" title="${escAttr(t(dict, "ui.langLabel"))}">${escText(section.chip.lang)}</span>`
+      : "";
     return `
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:${section.chip.color}">${escText(section.chip.label)}</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:${section.chip.color}">${escText(section.chip.label)}</span>${langPill}</div>
         <h2 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h2>`;
   }
   const chip = section.chip

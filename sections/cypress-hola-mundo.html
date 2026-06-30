@@ -124,7 +124,7 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span><span class="lang-pill" title="Lenguaje de los ejemplos">TypeScript</span></div>
         <h2 class="section__title" data-i18n="page.hello">Hola mundo</h2>
         <h3 class="block-label" id="cyp-rung-1" data-i18n="cyp.rung1.title">El runner interactivo</h3>
         <div class="prose" data-i18n-html="cyp.rung1.body"><p>Cypress trae un <strong>runner visual</strong>: con <code>cypress open</code> ves cada comando ejecutarse en vivo y podés viajar en el tiempo a cualquier paso (<em>time-travel</em>). Los tests se organizan con <code>describe()</code> (un grupo) e <code>it()</code> (un caso), igual que en muchos frameworks de JS.</p></div>
@@ -136,8 +136,9 @@
             </button>
           </div>
           <pre><code>npm init <span class="tok-punctuation">-</span>y
-npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev cypress
+npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev cypress typescript
 
+<span class="tok-comment"># Cypress has built-in TypeScript support — just name your specs *.cy.ts.</span>
 <span class="tok-comment"># Open the interactive runner (great while writing tests)...</span>
 npx cypress open
 
@@ -146,12 +147,12 @@ npx cypress run</code></pre>
         </div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// cypress/e2e/login.cy.js — Cypress</span>
+          <pre><code><span class="tok-comment">// cypress/e2e/login.cy.ts — Cypress with TypeScript</span>
 <span class="tok-function">describe</span><span class="tok-punctuation">("</span>Login<span class="tok-string">", () =&gt; {
   it("</span>greets the user after a valid login<span class="tok-string">", () =&gt; {
     cy.visit("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">");

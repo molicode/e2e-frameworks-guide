@@ -124,7 +124,7 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h2 class="section__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</h2>
         <div class="prose" data-i18n-html="sel.lead"><p><strong>Selenium</strong> es el abuelo del testing E2E: el proyecto que estandarizó el control de navegadores reales vía WebDriver. Es el más veterano, el más flexible en lenguajes y el más presente en la industria.</p></div>
         <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
@@ -138,7 +138,7 @@
               <span class="vs-badge" data-i18n="ui.manual">Manual</span>
               <span data-i18n="sel.manual.title">A mano</span>
             </div>
-            <div data-i18n-html="sel.manual.body"><p>Escribís cada <code>findElement</code>, cada <code>wait</code> explícito y cada <code>assert</code>. Tenés control absoluto, pero también toda la responsabilidad de evitar flakiness.</p></div>
+            <div data-i18n-html="sel.manual.body"><p>Escribís cada <code>find_element</code>, cada <code>WebDriverWait</code> explícito y cada <code>assert</code>. Tenés control absoluto, pero también toda la responsabilidad de evitar flakiness.</p></div>
             
           </div>
           <div class="vs-card vs-card--ai">
@@ -146,7 +146,7 @@
               <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
               <span data-i18n="sel.ai.title">Con AI</span>
             </div>
-            <div data-i18n-html="sel.ai.body"><p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>driver.wait(...)</code> antes de cada assertion y traduce un test de Java a JavaScript si cambiás de stack.</p></div>
+            <div data-i18n-html="sel.ai.body"><p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>WebDriverWait(...)</code> antes de cada assertion y traduce un test de Java a Python si cambiás de stack.</p></div>
             
           </div>
         </div>

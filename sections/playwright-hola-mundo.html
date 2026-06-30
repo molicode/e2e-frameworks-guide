@@ -124,10 +124,10 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h2 class="section__title" data-i18n="page.hello">Hola mundo</h2>
         <h3 class="block-label" id="pw-rung-1" data-i18n="pw.rung1.title">Setup y primer test</h3>
-        <div class="prose" data-i18n-html="pw.rung1.body"><p>Con <code>npm init playwright@latest</code> tenés config, tests de ejemplo y workflow de CI en un comando. Cada test es una función <code>test('nombre', async ({ page }) =&gt; { … })</code>. Corré <code>npx playwright test --ui</code> para el modo interactivo con watch y time-travel.</p></div>
+        <div class="prose" data-i18n-html="pw.rung1.body"><p>Con <code>pip install pytest-playwright</code> y <code>playwright install</code> tenés todo listo. Cada test es una función <code>def test_nombre(page): …</code> que recibe la fixture <code>page</code>. Corré <code>pytest</code> (headless) o <code>pytest --headed</code> para verlo en vivo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Bash</span>
@@ -135,37 +135,37 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Scaffold a project (config + example tests + CI workflow):</span>
-npm init playwright<span class="tok-punctuation">@</span>latest
+          <pre><code><span class="tok-comment"># Install pytest-playwright (the official Python test plugin):</span>
+pip install pytest<span class="tok-punctuation">-</span>playwright
+playwright install        <span class="tok-comment"># downloads the browser binaries</span>
 
-<span class="tok-comment"># Or install manually:</span>
-npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev <span class="tok-punctuation">@</span>playwright<span class="tok-punctuation">/</span>test
-npx playwright install        <span class="tok-comment"># downloads the browser binaries</span>
+<span class="tok-comment"># Run the suite (headless Chromium by default):</span>
+pytest
 
-<span class="tok-comment"># Run the suite (Chromium, Firefox and WebKit by default):</span>
-npx playwright test</code></pre>
+<span class="tok-comment"># Run across all three engines, headed:</span>
+pytest <span class="tok-punctuation">--</span>browser chromium <span class="tok-punctuation">--</span>browser firefox <span class="tok-punctuation">--</span>browser webkit <span class="tok-punctuation">--</span>headed</code></pre>
         </div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// tests/login.spec.js — Playwright Test</span>
-<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> test<span class="tok-punctuation">,</span> expect <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("@</span>playwright<span class="tok-punctuation">/</span>test<span class="tok-string">");
+          <pre><code><span class="tok-comment"># test_login.py — pytest-playwright</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
 
-test("</span>greets the user after a valid login<span class="tok-string">", async ({ page }) =&gt; {
-  await page.goto("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">");
 
-  // Locators are lazy and auto-wait for the element to be actionable.
-  await page.getByLabel("</span>Username<span class="tok-string">").fill("</span>demo<span class="tok-string">");
-  await page.getByLabel("</span>Password<span class="tok-string">").fill("</span>secret<span class="tok-string">");
-  await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Sign <span class="tok-keyword">in</span><span class="tok-string">" }).click();
+<span class="tok-keyword">def</span> <span class="tok-function">test_greets_the_user_after_login</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">")
 
-  // Web-first assertions auto-retry until they pass or time out.
-  await expect(page.getByText("</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span>
-<span class="tok-punctuation">});</span></code></pre>
+    # Locators are lazy and auto-wait for the element to be actionable.
+    page.get_by_label("</span>Username<span class="tok-string">").fill("</span>demo<span class="tok-string">")
+    page.get_by_label("</span>Password<span class="tok-string">").fill("</span>secret<span class="tok-string">")
+    page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign <span class="tok-keyword">in</span><span class="tok-string">").click()
+
+    # Web-first assertions auto-retry until they pass or time out.
+    expect(page.get_by_text("</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">

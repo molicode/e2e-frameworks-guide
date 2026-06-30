@@ -381,6 +381,27 @@
   background: var(--chip-color, var(--accent));
 }
 
+/* Language pill — shows the framework's primary language (Python / TypeScript) */
+.section__crumb { display: inline-flex; align-items: center; gap: var(--space-2); }
+.lang-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 3px var(--space-3);
+  border-radius: 999px;
+  background: var(--surface-2, var(--surface));
+  border: 1px dashed var(--border-strong);
+  color: var(--text-soft);
+}
+.lang-pill::before {
+  content: "{ }";
+  margin-right: 6px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
 /* --------------------------------------------------------------------------
    Comparison table
    -------------------------------------------------------------------------- */

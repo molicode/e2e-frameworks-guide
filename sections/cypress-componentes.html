@@ -124,14 +124,14 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span><span class="lang-pill" title="Lenguaje de los ejemplos">TypeScript</span></div>
         <h2 class="section__title" data-i18n="page.components">Componentes clave</h2>
         <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
         <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
         <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -169,7 +169,7 @@ cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-
         <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -205,7 +205,7 @@ cy.get("</span><span class="tok-comment">#country").should("have.value", "AR");<
         <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -241,7 +241,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><sp
         <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -281,7 +281,7 @@ cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctu
         <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -321,7 +321,7 @@ cy.get("</span>table<span class="tok-string">").contains("</span>td<span class="
         <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -357,7 +357,7 @@ cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctu
         <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>

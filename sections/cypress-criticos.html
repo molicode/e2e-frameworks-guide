@@ -124,14 +124,14 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span><span class="lang-pill" title="Lenguaje de los ejemplos">TypeScript</span></div>
         <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
         <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -176,7 +176,7 @@ cy.request({ url: "</span><span class="tok-punctuation">/</span>api<span class="
         <div class="prose" data-i18n-html="crit.receipt.body"><p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -223,7 +223,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">request</span
         <div class="prose" data-i18n-html="crit.docs.body"><p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -269,7 +269,7 @@ cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">
         <div class="prose" data-i18n-html="crit.authz.body"><p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>

@@ -29,6 +29,7 @@ I18n.register("es", {
   "ui.philosophy": "Filosofía",
   "ui.when": "Cuándo usarlo",
   "ui.path": "Ruta de aprendizaje",
+  "ui.langLabel": "Lenguaje de los ejemplos",
   "ui.prev": "Anterior",
   "ui.next": "Siguiente",
   "ui.mockCaption": "👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.",
@@ -153,10 +154,10 @@ I18n.register("es", {
     "<p>Elegí Selenium cuando necesitás <strong>cobertura de muchos navegadores y lenguajes</strong>, integrarte con un ecosistema corporativo existente, o testear navegadores/dispositivos que otros no soportan (vía Selenium Grid). El costo: tenés que armar a mano las esperas y los assertions.</p>",
   "sel.manual.title": "A mano",
   "sel.manual.body":
-    "<p>Escribís cada <code>findElement</code>, cada <code>wait</code> explícito y cada <code>assert</code>. Tenés control absoluto, pero también toda la responsabilidad de evitar flakiness.</p>",
+    "<p>Escribís cada <code>find_element</code>, cada <code>WebDriverWait</code> explícito y cada <code>assert</code>. Tenés control absoluto, pero también toda la responsabilidad de evitar flakiness.</p>",
   "sel.ai.title": "Con AI",
   "sel.ai.body":
-    "<p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>driver.wait(...)</code> antes de cada assertion y traduce un test de Java a JavaScript si cambiás de stack.</p>",
+    "<p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>WebDriverWait(...)</code> antes de cada assertion y traduce un test de Java a Python si cambiás de stack.</p>",
 
   "sel.rung1.title": "WebDriver y navegación",
   "sel.rung1.body":
@@ -164,11 +165,11 @@ I18n.register("es", {
   "sel.rung2.title": "Localizar elementos",
   "sel.rung2.desc": "Dominá los By: CSS sobre XPath siempre que puedas. Practicá selectores robustos.",
   "sel.rung2.body":
-    "<p>Selenium localiza elementos con la clase <code>By</code>: <code>By.id</code>, <code>By.css</code>, <code>By.xpath</code>… Usá <code>findElement</code> para uno y <code>findElements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p>",
+    "<p>Selenium localiza elementos con la clase <code>By</code>: <code>By.ID</code>, <code>By.CSS_SELECTOR</code>, <code>By.XPATH</code>… Usá <code>find_element</code> para uno y <code>find_elements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p>",
   "sel.rung3.title": "Esperas explícitas",
   "sel.rung3.desc": "El concepto más importante. WebDriverWait + ExpectedConditions. Evitá Thread.sleep.",
   "sel.rung3.body":
-    "<p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en JS, <code>driver.wait(until.…)</code>; en Java, <code>WebDriverWait</code> + <code>ExpectedConditions</code>. Nunca uses un <code>Thread.sleep</code> fijo: es la causa número uno de flakiness.</p>",
+    "<p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en Python, <code>WebDriverWait(driver, 5).until(...)</code> junto con <code>expected_conditions</code> (EC). Nunca uses un <code>time.sleep</code> fijo: es la causa número uno de flakiness.</p>",
   "sel.rung4.title": "Runner + assertions",
   "sel.rung4.desc": "Integralo con JUnit5/TestNG (Java) o pytest (Python). Selenium conduce, no testea.",
   "sel.rung4.body":
@@ -180,7 +181,7 @@ I18n.register("es", {
   "sel.rung6.title": "Grid y CI",
   "sel.rung6.desc": "Corré en paralelo con Selenium Grid o un servicio cloud, e integralo al pipeline.",
   "sel.rung6.body":
-    "<p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: apuntás el driver a un hub con <code>usingServer(...)</code> en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p>",
+    "<p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: usás <code>webdriver.Remote(command_executor=...)</code> apuntando a un hub en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p>",
 
   /* ====================================================================
      3b. CYPRESS
@@ -228,39 +229,39 @@ I18n.register("es", {
   "pw.lead":
     "<p><strong>Playwright</strong> (de Microsoft) es la opción moderna: rápido, multi-navegador real (Chromium, Firefox, WebKit), con auto-wait y assertions web-first de fábrica.</p>",
   "pw.philosophy":
-    "<p>Playwright maneja el navegador por fuera, pero con <strong>locators perezosos</strong> que esperan automáticamente a que el elemento sea accionable, y <strong>assertions web-first</strong> (<code>expect(locator).toHaveText(...)</code>) que reintentan solas. Trae paralelismo, trazas, video y test runner propio.</p>",
+    "<p>Playwright maneja el navegador por fuera, pero con <strong>locators perezosos</strong> que esperan automáticamente a que el elemento sea accionable, y <strong>assertions web-first</strong> (<code>expect(locator).to_have_text(...)</code>) que reintentan solas. Trae paralelismo, trazas, video y se integra con pytest mediante <code>pytest-playwright</code>.</p>",
   "pw.when":
     "<p>Elegí Playwright cuando querés <strong>velocidad, paralelismo y cobertura real de los tres motores de navegador</strong> con una sola API. Es excelente para suites grandes en CI y para equipos que arrancan un proyecto nuevo hoy.</p>",
   "pw.manual.title": "A mano",
   "pw.manual.body":
-    "<p>Usás <code>getByRole</code> / <code>getByLabel</code> y <code>expect(...)</code>. El auto-wait elimina casi toda la flakiness; vos definís intención y cobertura.</p>",
+    "<p>Usás <code>get_by_role</code> / <code>get_by_label</code> y <code>expect(...)</code>. El auto-wait elimina casi toda la flakiness; vos definís intención y cobertura.</p>",
   "pw.ai.title": "Con AI",
   "pw.ai.body":
     "<p>La AI genera el test completo desde una descripción, recomienda locators accesibles (por rol/etiqueta) y, ante un fallo, lee la traza y te explica la causa probable.</p>",
 
   "pw.rung1.title": "Setup y primer test",
   "pw.rung1.body":
-    "<p>Con <code>npm init playwright@latest</code> tenés config, tests de ejemplo y workflow de CI en un comando. Cada test es una función <code>test('nombre', async ({ page }) =&gt; { … })</code>. Corré <code>npx playwright test --ui</code> para el modo interactivo con watch y time-travel.</p>",
+    "<p>Con <code>pip install pytest-playwright</code> y <code>playwright install</code> tenés todo listo. Cada test es una función <code>def test_nombre(page): …</code> que recibe la fixture <code>page</code>. Corré <code>pytest</code> (headless) o <code>pytest --headed</code> para verlo en vivo.</p>",
   "pw.rung2.title": "Locators y acciones",
   "pw.rung2.desc": "Dominá getByRole/Label/Text. Filtrá, encadená y manejá listas con .nth().",
   "pw.rung2.body":
-    "<p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first()</code>/<code>.last()</code> y encadenás para llegar al elemento exacto.</p>",
+    "<p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_text</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first</code>/<code>.last</code> y encadenás para llegar al elemento exacto.</p>",
   "pw.rung3.title": "Assertions y auto-waiting",
   "pw.rung3.desc": "Aprendé las web-first assertions y por qué casi nunca esperás a mano.",
   "pw.rung3.body":
-    "<p>Las <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, <code>expect(valor).toBe(...)</code> no reintenta.</p>",
+    "<p>Las <strong>web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>, <code>to_be_visible()</code>, <code>to_have_count()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, un <code>assert</code> común no reintenta.</p>",
   "pw.rung4.title": "Fixtures y organización",
   "pw.rung4.desc": "Hooks, fixtures propias y Page Object Model para suites que escalan.",
   "pw.rung4.body":
-    "<p>Para que la suite escale: usá <strong>hooks</strong> (<code>beforeEach</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una <strong>fixture</strong> propia con <code>base.extend()</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p>",
+    "<p>Para que la suite escale: usá <strong>fixtures</strong> de pytest (en <code>conftest.py</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una fixture propia con <code>@pytest.fixture</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p>",
   "pw.rung5.title": "Network y auth",
   "pw.rung5.desc": "Interceptá con page.route(), mockeá APIs y reusá sesión con storageState.",
   "pw.rung5.body":
-    "<p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storageState</code> y la reusás en la config. Menos flakiness, más velocidad.</p>",
+    "<p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storage_state</code> y la reusás vía la fixture <code>browser_context_args</code>. Menos flakiness, más velocidad.</p>",
   "pw.rung6.title": "CI + trace viewer",
   "pw.rung6.desc": "Integralo al pipeline, activá traces y reportes. Acá es donde brilla.",
   "pw.rung6.body":
-    "<p>Donde Playwright brilla: en <code>playwright.config.js</code> activás <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) y reportes HTML. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>npx playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p>",
+    "<p>Donde Playwright brilla: en <code>pytest.ini</code> activás <strong>traces</strong> (<code>--tracing retain-on-failure</code>) y artefactos. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p>",
 
   /* ====================================================================
      4. COMPARATIVA

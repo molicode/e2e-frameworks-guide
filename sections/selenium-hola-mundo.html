@@ -124,7 +124,7 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h2 class="section__title" data-i18n="page.hello">Hola mundo</h2>
         <h3 class="block-label" id="sel-rung-1" data-i18n="sel.rung1.title">WebDriver y navegación</h3>
         <div class="prose" data-i18n-html="sel.rung1.body"><p>Todo test de Selenium empieza creando un <strong>driver</strong> (la sesión del navegador) y termina con <code>driver.quit()</code> para liberarla. En el medio navegás con <code>driver.get(url)</code>. Pensá el driver como el control remoto del navegador: si no lo apagás, queda consumiendo recursos.</p></div>
@@ -135,48 +135,47 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Selenium needs three things: the client library, a browser, and a</span>
-<span class="tok-comment"># matching driver. Since v4.6 Selenium Manager fetches the driver for you.</span>
-npm init <span class="tok-punctuation">-</span>y
-npm install selenium<span class="tok-punctuation">-</span>webdriver
-npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev mocha
+          <pre><code><span class="tok-comment"># Selenium needs two things: the client library and a browser.</span>
+<span class="tok-comment"># Since Selenium 4.6, Selenium Manager fetches the matching driver for you.</span>
+pip install selenium pytest
 
-<span class="tok-comment"># Run a test file:</span>
-npx mocha login<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">.</span><span class="tok-property">js</span></code></pre>
+<span class="tok-comment"># Run your tests with pytest:</span>
+pytest test_login<span class="tok-punctuation">.</span><span class="tok-property">py</span></code></pre>
         </div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// login.test.js — Selenium WebDriver (JavaScript)</span>
-<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> Builder<span class="tok-punctuation">,</span> By<span class="tok-punctuation">,</span> until <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("</span>selenium<span class="tok-punctuation">-</span>webdriver<span class="tok-string">");
-const assert = require("</span><span class="tok-keyword">assert</span><span class="tok-string">");
+          <pre><code><span class="tok-comment"># test_login.py — Selenium WebDriver (Python)</span>
+<span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span> <span class="tok-keyword">import</span> expected_conditions <span class="tok-keyword">as</span> EC
 
-(async function loginTest() {
-  // 1. Start a browser session (the "</span>driver<span class="tok-string">").
-  const driver = await new Builder().forBrowser("</span>chrome<span class="tok-string">").build();
-  try {
-    // 2. Navigate and locate elements with explicit selectors.
-    await driver.get("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">");
-    await driver.findElement(By.id("</span>username<span class="tok-string">")).sendKeys("</span>demo<span class="tok-string">");
-    await driver.findElement(By.id("</span>password<span class="tok-string">")).sendKeys("</span>secret<span class="tok-string">");
-    await driver.findElement(By.css("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
 
-    <span class="tok-comment">// 3. Wait EXPLICITLY — Selenium does not auto-retry assertions.</span>
-    <span class="tok-keyword">const</span> banner <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>
-      until<span class="tok-punctuation">.</span><span class="tok-function">elementLocated</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">(".</span><span class="tok-property">welcome</span><span class="tok-string">")), 5000
-    );
+<span class="tok-keyword">def</span> <span class="tok-function">test_login_greets_the_user</span><span class="tok-punctuation">():</span>
+    <span class="tok-comment"># 1. Start a browser session (the "driver").</span>
+    driver <span class="tok-punctuation">=</span> webdriver<span class="tok-punctuation">.</span><span class="tok-function">Chrome</span><span class="tok-punctuation">()</span>
+    <span class="tok-keyword">try</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># 2. Navigate and locate elements with explicit selectors.</span>
+        driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">")
+        driver.find_element(By.ID, "</span>username<span class="tok-string">").send_keys("</span>demo<span class="tok-string">")
+        driver.find_element(By.ID, "</span>password<span class="tok-string">").send_keys("</span>secret<span class="tok-string">")
+        driver.find_element(By.CSS_SELECTOR, "</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
 
-    // 4. Assert by hand with Node's assert module.
-    assert.strictEqual(await banner.getText(), "</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">");</span>
-  <span class="tok-punctuation">}</span> <span class="tok-keyword">finally</span> <span class="tok-punctuation">{</span>
-    <span class="tok-comment">// 5. Always quit to free the browser session.</span>
-    <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">();</span>
-  <span class="tok-punctuation">}</span>
-<span class="tok-punctuation">})();</span></code></pre>
+        <span class="tok-comment"># 3. Wait EXPLICITLY — Selenium does not auto-retry assertions.</span>
+        banner <span class="tok-punctuation">=</span> <span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">5</span><span class="tok-punctuation">).</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>
+            EC<span class="tok-punctuation">.</span><span class="tok-function">visibility_of_element_located</span><span class="tok-punctuation">((</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".welcome"</span><span class="tok-punctuation">))</span>
+        <span class="tok-punctuation">)</span>
+
+        <span class="tok-comment"># 4. Assert by hand with a plain assert.</span>
+        <span class="tok-keyword">assert</span> banner<span class="tok-punctuation">.</span><span class="tok-property">text</span> <span class="tok-punctuation">==</span> <span class="tok-string">"Welcome, demo"</span>
+    <span class="tok-keyword">finally</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># 5. Always quit to free the browser session.</span>
+        driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">()</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
