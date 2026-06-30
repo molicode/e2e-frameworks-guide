@@ -37,12 +37,14 @@ jobs:
       - name: Check i18n parity
         run: node scripts/check-i18n.mjs
 
-      # Pages must be enabled ONCE in the repo settings:
+      # Now that the repo is PUBLIC, enablement: true lets the workflow create
+      # and configure the Pages site itself (build source = GitHub Actions), so
+      # no manual Settings step is needed. If this ever returns "Resource not
+      # accessible by integration", enable Pages once by hand instead:
       #   Settings → Pages → Build and deployment → Source: GitHub Actions
-      # (the workflow token cannot create the Pages site itself — that returns
-      # "Resource not accessible by integration"). The repo must also be PUBLIC
-      # for a free, shareable URL. After that, this step just reads the config.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
