@@ -1,0 +1,6 @@
+# Montos — leé el recibo por HTTP y verificá las cuentas del dinero (en centavos).
+${res}=    GET On Session    api    /receipts/9087
+${r}=    Set Variable    ${res.json()}
+Should Be Equal As Integers    ${r}[totalCents]    10890
+Should Be True    ${r}[totalCents] == ${r}[subtotalCents] + ${r}[taxCents]
+Should Be True    ${r}[totalCents] > 0

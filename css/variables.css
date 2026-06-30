@@ -96,6 +96,7 @@
   --fw-playwright: #2ead52;
   --fw-python: #3776ab;
   --fw-typescript: #3178c6;
+  --fw-robot: #00c0b5;
 }
 
 /* --------------------------------------------------------------------------
@@ -144,4 +145,5 @@
   --fw-playwright: #4ade80;
   --fw-python: #6aade4;
   --fw-typescript: #6ea8e0;
+  --fw-robot: #2dd4cf;
 }

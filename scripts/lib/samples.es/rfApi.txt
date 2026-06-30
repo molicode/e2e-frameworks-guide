@@ -1,0 +1,9 @@
+*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Read an order over HTTP
+    Create Session    api    https://api.example.com
+    ${res}=    GET On Session    api    /orders/42
+    Status Should Be    200    ${res}
+    Should Be Equal As Strings    ${res.json()}[status]    PAID

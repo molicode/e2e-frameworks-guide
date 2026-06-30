@@ -89,35 +89,39 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link is-active" href="comparison.html" aria-current="page">
+        <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
+          <span data-i18n="nav.robot">Robot Framework</span>
+        </a>
+        <a class="nav-link is-active" href="comparison.html" aria-current="page">
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">10</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">11</span>
+          <span class="nav-link__num">12</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">13</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">13</span>
+          <span class="nav-link__num">14</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <span class="section__eyebrow">08</span>
+        <span class="section__eyebrow">09</span>
         <h2 class="section__title" data-i18n="nav.comparison">Comparativa</h2>
         <div class="prose" data-i18n-html="cmp.lead"><p>Nada explica mejor las diferencias que <strong>el mismo test en los tres frameworks</strong>. Resolvemos el caso <code>VerifyOrder</code> y observamos cómo cada uno maneja los assertions y las esperas.</p></div>
         <div class="callout" data-i18n-html="cmp.case"><strong>Caso “VerifyOrder”:</strong> en la página de una orden, verificar que <code>total = 250</code>, que <code>status = PAID</code> y que la lista de items contiene <code>book</code>. Mismo objetivo, tres estilos.</div>
@@ -261,22 +265,56 @@ cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">
     expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span></code></pre>
         </div>
         </div>
+        <div class="fw-block">
+          <span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span>
+          <p class="prose" data-i18n-html="cmp.robot.note"><strong>Robot Framework:</strong> keyword-driven — cada paso es un keyword legible (<code>Element Text Should Be</code>). El más fácil de leer; por debajo usa Selenium o Playwright.</p>
+          
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Robot Framework</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-punctuation">***</span> Settings <span class="tok-punctuation">***</span>
+Library    SeleniumLibrary
+
+<span class="tok-punctuation">***</span> Test Cases <span class="tok-punctuation">***</span>
+VerifyOrder
+    Open Browser    https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>    chrome
+    <span class="tok-comment"># Cada aserción es una keyword legible, parecida al inglés.</span>
+    Element Text Should Be    css<span class="tok-punctuation">=.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total     <span class="tok-number">250</span>
+    Element Text Should Be    css<span class="tok-punctuation">=.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status    PAID
+    Page Should Contain Element    css<span class="tok-punctuation">=.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+    <span class="tok-punctuation">[</span>Teardown<span class="tok-punctuation">]</span>    Close Browser</code><code class="code-i18n code-i18n--en"><span class="tok-punctuation">***</span> Settings <span class="tok-punctuation">***</span>
+Library    SeleniumLibrary
+
+<span class="tok-punctuation">***</span> Test Cases <span class="tok-punctuation">***</span>
+VerifyOrder
+    Open Browser    https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>    chrome
+    <span class="tok-comment"># Each assertion is a readable, English-like keyword.</span>
+    Element Text Should Be    css<span class="tok-punctuation">=.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total     <span class="tok-number">250</span>
+    Element Text Should Be    css<span class="tok-punctuation">=.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status    PAID
+    Page Should Contain Element    css<span class="tok-punctuation">=.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+    <span class="tok-punctuation">[</span>Teardown<span class="tok-punctuation">]</span>    Close Browser</code></pre>
+        </div>
+        </div>
         <h3 class="block-label" data-i18n="cmp.table.label">De un vistazo</h3>
         <div class="cmp-table-wrap">
           <table class="cmp">
-            <thead><tr><th data-i18n="cmp.th.feature">Característica</th><th data-i18n="cmp.th.selenium">Selenium</th><th data-i18n="cmp.th.cypress">Cypress</th><th data-i18n="cmp.th.playwright">Playwright</th></tr></thead>
+            <thead><tr><th data-i18n="cmp.th.feature">Característica</th><th data-i18n="cmp.th.selenium">Selenium</th><th data-i18n="cmp.th.cypress">Cypress</th><th data-i18n="cmp.th.playwright">Playwright</th><th data-i18n="cmp.th.robot">Robot Framework</th></tr></thead>
             <tbody>
-              <tr><td data-i18n="cmp.r1.f">Estilo de assertion</td><td data-i18n="cmp.r1.s">Manual (assert lib)</td><td data-i18n="cmp.r1.c">.should() encadenable</td><td data-i18n="cmp.r1.p">expect() web-first</td></tr>
-              <tr><td data-i18n="cmp.r2.f">Esperas / retry</td><td data-i18n="cmp.r2.s">Explícitas (a mano)</td><td data-i18n="cmp.r2.c">Auto-retry</td><td data-i18n="cmp.r2.p">Auto-wait</td></tr>
-              <tr><td data-i18n="cmp.r3.f">Lenguajes</td><td data-i18n="cmp.r3.s">Java, Py, C#, JS, Ruby…</td><td data-i18n="cmp.r3.c">JavaScript / TypeScript</td><td data-i18n="cmp.r3.p">JS/TS, Python, Java, .NET</td></tr>
-              <tr><td data-i18n="cmp.r4.f">Navegadores</td><td data-i18n="cmp.r4.s">Todos (vía WebDriver)</td><td data-i18n="cmp.r4.c">Chromium, Firefox, WebKit*</td><td data-i18n="cmp.r4.p">Chromium, Firefox, WebKit</td></tr>
-              <tr><td data-i18n="cmp.r5.f">Ejecución</td><td data-i18n="cmp.r5.s">Fuera del navegador</td><td data-i18n="cmp.r5.c">Dentro del navegador</td><td data-i18n="cmp.r5.p">Fuera, con auto-wait</td></tr>
-              <tr><td data-i18n="cmp.r6.f">Mejor para</td><td data-i18n="cmp.r6.s">Cobertura amplia, legacy</td><td data-i18n="cmp.r6.c">DX y SPAs modernas</td><td data-i18n="cmp.r6.p">Suites grandes, CI veloz</td></tr>
+              <tr><td data-i18n="cmp.r1.f">Estilo de assertion</td><td data-i18n="cmp.r1.s">Manual (assert lib)</td><td data-i18n="cmp.r1.c">.should() encadenable</td><td data-i18n="cmp.r1.p">expect() web-first</td><td data-i18n="cmp.r1.r">Keywords (Element Text Should Be)</td></tr>
+              <tr><td data-i18n="cmp.r2.f">Esperas / retry</td><td data-i18n="cmp.r2.s">Explícitas (a mano)</td><td data-i18n="cmp.r2.c">Auto-retry</td><td data-i18n="cmp.r2.p">Auto-wait</td><td data-i18n="cmp.r2.r">Wait Until… (explícitas)</td></tr>
+              <tr><td data-i18n="cmp.r3.f">Lenguajes</td><td data-i18n="cmp.r3.s">Java, Py, C#, JS, Ruby…</td><td data-i18n="cmp.r3.c">JavaScript / TypeScript</td><td data-i18n="cmp.r3.p">JS/TS, Python, Java, .NET</td><td data-i18n="cmp.r3.r">DSL de Robot (+ Python)</td></tr>
+              <tr><td data-i18n="cmp.r4.f">Navegadores</td><td data-i18n="cmp.r4.s">Todos (vía WebDriver)</td><td data-i18n="cmp.r4.c">Chromium, Firefox, WebKit*</td><td data-i18n="cmp.r4.p">Chromium, Firefox, WebKit</td><td data-i18n="cmp.r4.r">Según la librería</td></tr>
+              <tr><td data-i18n="cmp.r5.f">Ejecución</td><td data-i18n="cmp.r5.s">Fuera del navegador</td><td data-i18n="cmp.r5.c">Dentro del navegador</td><td data-i18n="cmp.r5.p">Fuera, con auto-wait</td><td data-i18n="cmp.r5.r">Keywords sobre una librería</td></tr>
+              <tr><td data-i18n="cmp.r6.f">Mejor para</td><td data-i18n="cmp.r6.s">Cobertura amplia, legacy</td><td data-i18n="cmp.r6.c">DX y SPAs modernas</td><td data-i18n="cmp.r6.p">Suites grandes, CI veloz</td><td data-i18n="cmp.r6.r">Legibilidad, ATDD/BDD, RPA</td></tr>
             </tbody>
           </table>
         </div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="playwright-criticos.html">
+          <a class="page-nav__link page-nav__prev" href="robot-criticos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
             <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
           </a>

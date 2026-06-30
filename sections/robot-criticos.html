@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="page.cases">Casos críticos</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--robot-criticos">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="python-intro.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.pyqa">Python para QA</span>
+        </a>
+        <a class="nav-link nav-group" href="ts-intro.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.tsqa">TypeScript para QA</span>
+        </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.robot">Robot Framework</span>
+        </a>
+          <a class="nav-link nav-sublink" href="robot-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="robot-criticos.html" aria-current="page">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">13</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">14</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
+        <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
+        <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
+        <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
+        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente, cubriendo <strong>todos los verbos</strong>: creás (POST → 201), leés (GET → 200), actualizás (PATCH/PUT → 200) y borrás (DELETE → 204, y un GET posterior da 404). Validás el <strong>contrato</strong> de cada respuesta y la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Robot Framework</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-punctuation">***</span> Settings <span class="tok-punctuation">***</span>
+Library    RequestsLibrary
+
+<span class="tok-punctuation">***</span> Test Cases <span class="tok-punctuation">***</span>
+Orders CRUD contract
+    Create Session    api    https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span>    headers<span class="tok-punctuation">=</span>$<span class="tok-punctuation">{</span>AUTH<span class="tok-punctuation">}</span>
+    <span class="tok-comment"># CREATE (POST) -&gt; 201</span>
+    $<span class="tok-punctuation">{</span>created<span class="tok-punctuation">}=</span>    POST On Session    api    <span class="tok-punctuation">/</span>orders    json<span class="tok-punctuation">={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]}
+    Status Should Be    201    ${created}
+    ${id}=    Set Variable    ${created.json()}[id]
+    # READ (GET) -&gt; 200
+    ${got}=    GET On Session    api    /orders/${id}
+    Should Be Equal As Strings    ${got.json()}[status]    NEW
+    # UPDATE (PATCH) -&gt; 200
+    ${upd}=    PATCH On Session    api    /orders/${id}    json={"</span>status<span class="tok-string">": "</span>PAID<span class="tok-punctuation">"}</span>
+    Should Be Equal As Strings    $<span class="tok-punctuation">{</span>upd<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()}[</span>status<span class="tok-punctuation">]</span>    PAID
+    <span class="tok-comment"># DELETE -&gt; 204, después GET 404</span>
+    DELETE On Session    api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span>$<span class="tok-punctuation">{</span>id<span class="tok-punctuation">}</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">204</span>
+    GET On Session    api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span>$<span class="tok-punctuation">{</span>id<span class="tok-punctuation">}</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">404</span></code><code class="code-i18n code-i18n--en"><span class="tok-punctuation">***</span> Settings <span class="tok-punctuation">***</span>
+Library    RequestsLibrary
+
+<span class="tok-punctuation">***</span> Test Cases <span class="tok-punctuation">***</span>
+Orders CRUD contract
+    Create Session    api    https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span>    headers<span class="tok-punctuation">=</span>$<span class="tok-punctuation">{</span>AUTH<span class="tok-punctuation">}</span>
+    <span class="tok-comment"># CREATE (POST) -&gt; 201</span>
+    $<span class="tok-punctuation">{</span>created<span class="tok-punctuation">}=</span>    POST On Session    api    <span class="tok-punctuation">/</span>orders    json<span class="tok-punctuation">={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]}
+    Status Should Be    201    ${created}
+    ${id}=    Set Variable    ${created.json()}[id]
+    # READ (GET) -&gt; 200
+    ${got}=    GET On Session    api    /orders/${id}
+    Should Be Equal As Strings    ${got.json()}[status]    NEW
+    # UPDATE (PATCH) -&gt; 200
+    ${upd}=    PATCH On Session    api    /orders/${id}    json={"</span>status<span class="tok-string">": "</span>PAID<span class="tok-punctuation">"}</span>
+    Should Be Equal As Strings    $<span class="tok-punctuation">{</span>upd<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()}[</span>status<span class="tok-punctuation">]</span>    PAID
+    <span class="tok-comment"># DELETE -&gt; 204, then GET 404</span>
+    DELETE On Session    api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span>$<span class="tok-punctuation">{</span>id<span class="tok-punctuation">}</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">204</span>
+    GET On Session    api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span>$<span class="tok-punctuation">{</span>id<span class="tok-punctuation">}</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">404</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock-method">GET</span>
+            <span class="mock__url">api.example.com/orders/42</span>
+            <span class="mock-status mock-status--ok">200 OK</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <pre class="mock-json"><code>{
+  "total": 250,
+  "status": "PAID",
+  "items": ["book"]
+}</code></pre>
+            <div class="mock-tags-row">
+              <code class="mock-tag">request.get("/orders/42")</code>
+              <code class="mock-tag">expect(res).toBeOK()</code>
+              <code class="mock-tag">res.json()</code>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.receipt.label">Cuentas y recibos de pago</h3>
+        <div class="prose" data-i18n-html="crit.receipt.body"><p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Robot Framework</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Montos — leé el recibo por HTTP y verificá las cuentas del dinero (en centavos).</span>
+$<span class="tok-punctuation">{</span>res<span class="tok-punctuation">}=</span>    GET On Session    api    <span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span>
+$<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}=</span>    Set Variable    $<span class="tok-punctuation">{</span>res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()}</span>
+Should Be Equal As Integers    $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>totalCents<span class="tok-punctuation">]</span>    <span class="tok-number">10890</span>
+Should Be <span class="tok-keyword">True</span>    $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>totalCents<span class="tok-punctuation">]</span> <span class="tok-punctuation">==</span> $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>subtotalCents<span class="tok-punctuation">]</span> <span class="tok-punctuation">+</span> $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>taxCents<span class="tok-punctuation">]</span>
+Should Be <span class="tok-keyword">True</span>    $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>totalCents<span class="tok-punctuation">]</span> <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Amounts — read the receipt over HTTP and assert the money math (in cents).</span>
+$<span class="tok-punctuation">{</span>res<span class="tok-punctuation">}=</span>    GET On Session    api    <span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span>
+$<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}=</span>    Set Variable    $<span class="tok-punctuation">{</span>res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()}</span>
+Should Be Equal As Integers    $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>totalCents<span class="tok-punctuation">]</span>    <span class="tok-number">10890</span>
+Should Be <span class="tok-keyword">True</span>    $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>totalCents<span class="tok-punctuation">]</span> <span class="tok-punctuation">==</span> $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>subtotalCents<span class="tok-punctuation">]</span> <span class="tok-punctuation">+</span> $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>taxCents<span class="tok-punctuation">]</span>
+Should Be <span class="tok-keyword">True</span>    $<span class="tok-punctuation">{</span>r<span class="tok-punctuation">}[</span>totalCents<span class="tok-punctuation">]</span> <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">pay.example.com/receipts/9087</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Receipt #9087</h4>
+                <span class="mock-badge">PAID</span>
+              </div>
+              <ul class="mock-receipt">
+                <li><span>The Pragmatic Programmer <em>(book)</em></span><span>$40.00</span></li>
+                <li><span>Wireless Mouse</span><span>$25.00</span></li>
+                <li><span>USB-C Cable × 5</span><span>$25.00</span></li>
+              </ul>
+              <div class="mock-receipt-row"><span>Subtotal</span><span>$90.00</span><code class="mock-tag">.subtotal</code></div>
+              <div class="mock-receipt-row"><span>Tax (21%)</span><span>$18.90</span><code class="mock-tag">.tax</code></div>
+              <div class="mock-receipt-row mock-receipt-total"><span>Total</span><span>$108.90</span><code class="mock-tag">.total</code></div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ items = subtotal</code>
+                <code class="mock-tag mock-tag--good">✓ subtotal + tax = total</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.docs.label">Validación de documentos legales</h3>
+        <div class="prose" data-i18n-html="crit.docs.body"><p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Robot Framework</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Validación de documento legal — campos requeridos y formato de una factura.</span>
+Go To    https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0042</span>
+$<span class="tok-punctuation">{</span>num<span class="tok-punctuation">}=</span>    Get Text    css<span class="tok-punctuation">=.</span><span class="tok-property">invoice</span><span class="tok-punctuation">-</span>number
+Should Match Regexp    $<span class="tok-punctuation">{</span>num<span class="tok-punctuation">}</span>    <span class="tok-punctuation">^</span>INV<span class="tok-punctuation">-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}</span>$
+$<span class="tok-punctuation">{</span>tax_id<span class="tok-punctuation">}=</span>    Get Text    css<span class="tok-punctuation">=.</span><span class="tok-property">tax</span><span class="tok-punctuation">-</span>id
+Should Not Be Empty    $<span class="tok-punctuation">{</span>tax_id<span class="tok-punctuation">}</span>
+Element Text Should Be    css<span class="tok-punctuation">=.</span><span class="tok-property">doc</span><span class="tok-punctuation">-</span>status    SIGNED</code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Legal document validation — an invoice's required fields &amp; format.</span>
+Go To    https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0042</span>
+$<span class="tok-punctuation">{</span>num<span class="tok-punctuation">}=</span>    Get Text    css<span class="tok-punctuation">=.</span><span class="tok-property">invoice</span><span class="tok-punctuation">-</span>number
+Should Match Regexp    $<span class="tok-punctuation">{</span>num<span class="tok-punctuation">}</span>    <span class="tok-punctuation">^</span>INV<span class="tok-punctuation">-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}</span>$
+$<span class="tok-punctuation">{</span>tax_id<span class="tok-punctuation">}=</span>    Get Text    css<span class="tok-punctuation">=.</span><span class="tok-property">tax</span><span class="tok-punctuation">-</span>id
+Should Not Be Empty    $<span class="tok-punctuation">{</span>tax_id<span class="tok-punctuation">}</span>
+Element Text Should Be    css<span class="tok-punctuation">=.</span><span class="tok-property">doc</span><span class="tok-punctuation">-</span>status    SIGNED</code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/invoices/INV-2026-0042</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Invoice INV-2026-0042</h4>
+                <span class="mock-badge">SIGNED</span>
+              </div>
+              <div class="mock-doc-grid">
+                <div><span>Number</span><strong>INV-2026-0042</strong><code class="mock-tag">.invoice-number</code></div>
+                <div><span>Tax ID</span><strong>30-12345678-9</strong><code class="mock-tag">.tax-id</code></div>
+                <div><span>Issued</span><strong>2026-03-14</strong><code class="mock-tag">.issued-date</code></div>
+                <div><span>Total</span><strong>$108.90</strong><code class="mock-tag">.total</code></div>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ format INV-YYYY-NNNN</code>
+                <code class="mock-tag mock-tag--good">✓ status SIGNED</code>
+                <code class="mock-tag mock-tag--good">✓ date not in the future</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.authz.label">Seguridad: autorización e IDOR</h3>
+        <div class="prose" data-i18n-html="crit.authz.body"><p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Robot Framework</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Seguridad — autorización/IDOR + XSS.</span>
+<span class="tok-comment"># El usuario A NO debe leer la factura del usuario B (403, no 200).</span>
+GET On Session    api    <span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0099</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">403</span>
+
+<span class="tok-comment"># XSS: el payload se renderiza como texto, nunca se ejecuta.</span>
+Go To    https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>search<span class="tok-punctuation">?</span>q<span class="tok-punctuation">=&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;</span>
+Page Should Contain    <span class="tok-punctuation">&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Security — authorization/IDOR + XSS.</span>
+<span class="tok-comment"># User A must NOT read user B's invoice (403, not 200).</span>
+GET On Session    api    <span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0099</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">403</span>
+
+<span class="tok-comment"># XSS: the payload renders as text, never executes.</span>
+Go To    https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>search<span class="tok-punctuation">?</span>q<span class="tok-punctuation">=&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;</span>
+Page Should Contain    <span class="tok-punctuation">&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/99</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">🔒</div>
+              <h4 class="mock-h">403 — Forbidden</h4>
+              <p class="mock-error-msg">You don't have permission to view this order.</p>
+              <div class="mock-http">GET /api/orders/99 → 403</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">expect(res.status()).toBe(403)</code>
+                <code class="mock-tag mock-tag--bad">✗ IDOR if it returned 200</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="robot-componentes.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="comparison.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.comparison">Comparativa</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

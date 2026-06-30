@@ -1,0 +1,4 @@
+# Select / desplegable — elegí una opción y verificá el valor.
+Select From List By Value    id=country    AR
+${value}=    Get Selected List Value    id=country
+Should Be Equal    ${value}    AR

@@ -1,0 +1,7 @@
+# Esperá una CONDICIÓN, nunca un Sleep fijo (la causa #1 de suites inestables).
+Wait Until Element Is Visible    css=.welcome    timeout=5s
+Wait Until Page Contains         Welcome, demo   timeout=5s
+Wait Until Element Is Enabled    id=pay
+
+# Evitá esto:
+# Sleep    5s

@@ -1,0 +1,12 @@
+# orders.resource — un "resource file" es el Page Object de Robot: keywords compartidas.
+*** Keywords ***
+Open Order
+    [Arguments]    ${id}
+    Go To    https://shop.example.com/orders/${id}
+
+Order Total Should Be
+    [Arguments]    ${expected}
+    Element Text Should Be    css=.order-total    ${expected}
+
+# En un test:  Resource    orders.resource    y después llamá a esas keywords.
+# En CI:  robot --variable BROWSER:headlesschrome --outputdir results tests/

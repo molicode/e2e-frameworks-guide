@@ -1,0 +1,5 @@
+# Validación de formulario — aparece el error, el submit queda deshabilitado.
+Input Text    id=email    not-an-email
+Click Button    Sign up
+Element Should Be Visible    css=.error
+Element Should Be Disabled    css=button[type=submit]

@@ -1,0 +1,5 @@
+# Modal / diálogo — abrí, confirmá, verificá que desapareció.
+Click Element    css=[data-action=delete]
+Wait Until Element Is Visible    css=[role=dialog]
+Click Button    Delete
+Wait Until Element Is Not Visible    css=[role=dialog]

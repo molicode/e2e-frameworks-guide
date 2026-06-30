@@ -1,0 +1,4 @@
+# Tabla de datos — verificá la cantidad de filas y una celda específica.
+${rows}=    Get Element Count    css=table tbody tr
+Should Be Equal As Integers    ${rows}    3
+Table Should Contain    css=table    Ada Lovelace

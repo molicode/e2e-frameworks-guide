@@ -1,0 +1,18 @@
+*** Settings ***
+Library    SeleniumLibrary
+
+*** Variables ***
+${LOGIN_URL}    https://example.com/login
+
+*** Test Cases ***
+Valid login
+    Login With    demo    secret           # llamá a tu propia keyword
+    Page Should Contain    Welcome, demo
+
+*** Keywords ***
+Login With
+    [Arguments]    ${user}    ${pass}       # una keyword de usuario reutilizable
+    Open Browser    ${LOGIN_URL}    chrome
+    Input Text      id=username    ${user}
+    Input Text      id=password    ${pass}
+    Click Button    Sign in

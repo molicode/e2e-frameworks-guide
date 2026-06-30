@@ -1,0 +1,4 @@
+# Accesibilidad — no hay axe incorporado; los equipos envuelven axe-core en una
+# librería propia, o verifican roles/labels directamente con keywords de SeleniumLibrary.
+Element Attribute Value Should Be    css=button.icon    aria-label    Close
+Page Should Contain Element    xpath=//*[@role='navigation']

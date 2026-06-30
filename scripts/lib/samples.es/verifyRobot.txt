@@ -1,0 +1,11 @@
+*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+VerifyOrder
+    Open Browser    https://shop.example.com/orders/42    chrome
+    # Cada aserción es una keyword legible, parecida al inglés.
+    Element Text Should Be    css=.order-total     250
+    Element Text Should Be    css=.order-status    PAID
+    Page Should Contain Element    css=.order-items li
+    [Teardown]    Close Browser

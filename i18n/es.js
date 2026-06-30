@@ -49,6 +49,7 @@ I18n.register("es", {
   "nav.selenium": "Selenium",
   "nav.cypress": "Cypress",
   "nav.playwright": "Playwright",
+  "nav.robot": "Robot Framework",
   "nav.comparison": "Comparativa",
   "nav.airole": "El rol de la AI",
   "nav.prompts": "Ejemplos con AI",
@@ -69,6 +70,7 @@ I18n.register("es", {
   "home.selenium": "El estándar W3C WebDriver: ruta de aprendizaje de 6 pasos.",
   "home.cypress": "La mejor DX, runner visual y auto-retry: ruta de 6 pasos.",
   "home.playwright": "Multi-navegador, auto-wait y trazas: ruta de 6 pasos.",
+  "home.robot": "Keyword-driven y legible: tests en lenguaje casi natural con librerías Python.",
   "home.comparison": "El mismo test VerifyOrder resuelto en los 3 frameworks.",
   "home.ai-role": "Cómo la AI complementa cada etapa del testing.",
   "home.prompts": "Prompts concretos, cómo iterar y cómo validar el output.",
@@ -448,6 +450,46 @@ I18n.register("es", {
     "<p>Donde Playwright brilla: en <code>pytest.ini</code> activás <strong>traces</strong> (<code>--tracing retain-on-failure</code>) y artefactos. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p>",
 
   /* ====================================================================
+     3d. ROBOT FRAMEWORK
+     ==================================================================== */
+  "rf.lead":
+    "<p><strong>Robot Framework</strong> es un framework de automatización <strong>keyword-driven</strong>, open-source y basado en Python. En vez de programar, armás los tests con <strong>palabras clave</strong> legibles, casi en lenguaje natural — ideal para acceptance testing, ATDD/BDD y hasta RPA.</p>",
+  "rf.philosophy":
+    "<p>Robot Framework no maneja el navegador por sí mismo: es una <strong>capa de keywords</strong> por encima de librerías. <code>SeleniumLibrary</code> usa Selenium, <code>Browser</code> usa Playwright y <code>RequestsLibrary</code> pega a las APIs. Un test es una secuencia de keywords (<code>Open Browser</code>, <code>Input Text</code>, <code>Page Should Contain</code>) que se lee como una receta. Cuando un keyword no existe, te lo escribís en Python.</p>",
+  "rf.when":
+    "<p>Elegí Robot Framework cuando querés tests <strong>muy legibles</strong> (que pueda leer QA no-programador o gente de negocio), un enfoque <strong>keyword-driven</strong> reutilizable, reportes HTML de fábrica, o cuando hacés también <strong>RPA</strong>. El costo: la sintaxis tabular se siente rara al principio y, para lógica compleja, igual bajás a Python.</p>",
+  "rf.manual.title": "A mano",
+  "rf.manual.body":
+    "<p>Componés cada test con keywords y los agrupás en <strong>resource files</strong> reutilizables. Tenés control total y máxima legibilidad, pero vos elegís los locators y las esperas.</p>",
+  "rf.ai.title": "Con AI",
+  "rf.ai.body":
+    "<p>La AI traduce un caso en lenguaje natural a keywords de Robot, te sugiere el keyword correcto de la librería y te arma resource files (POM) para que el test quede limpio.</p>",
+
+  "rf.rung1.title": "Setup y primer test",
+  "rf.rung1.body":
+    "<p>Robot Framework corre sobre <strong>Python</strong>: lo instalás con <code>pip</code> junto a las librerías que necesites (<code>SeleniumLibrary</code>, <code>RequestsLibrary</code>). Un archivo <code>.robot</code> se divide en secciones (<code>*** Settings ***</code>, <code>*** Test Cases ***</code>). Corrés la suite con <code>robot tests/</code> y obtenés <code>report.html</code> y <code>log.html</code> automáticamente.</p>",
+  "rf.rung2.title": "Keywords y estructura",
+  "rf.rung2.desc": "El corazón de Robot: encadenás keywords y creás los tuyos en *** Keywords ***.",
+  "rf.rung2.body":
+    "<p>Un test es una lista de <strong>keywords</strong>. Las traés de una librería (<code>Library SeleniumLibrary</code>) o creás los tuyos en la sección <code>*** Keywords ***</code> con <code>[Arguments]</code>. Las variables viven en <code>*** Variables ***</code> y se usan como <code>${VAR}</code>. Encapsular flujos en keywords propios es lo que hace la suite legible y mantenible.</p>",
+  "rf.rung3.title": "Localizar elementos",
+  "rf.rung3.desc": "Locators estilo \"strategy=value\": id=, css=, xpath=. Preferí id/css.",
+  "rf.rung3.body":
+    "<p>Con SeleniumLibrary los locators usan la forma <strong>estrategia=valor</strong>: <code>id=submit</code>, <code>css=.order-total</code>, <code>xpath=//button[...]</code>. Las acciones (<code>Click Button</code>, <code>Input Text</code>) y las aserciones (<code>Element Should Be Visible</code>, <code>Element Text Should Be</code>) son todas keywords. Regla: preferí <code>id</code>/<code>css</code> sobre <code>xpath</code>.</p>",
+  "rf.rung4.title": "Esperas explícitas",
+  "rf.rung4.desc": "Wait Until… en vez de Sleep: esperá la condición, no el reloj.",
+  "rf.rung4.body":
+    "<p>Como en Selenium, nunca uses un <code>Sleep</code> fijo: es la causa número uno de flakiness. Usá los keywords <code>Wait Until Element Is Visible</code>, <code>Wait Until Page Contains</code> o <code>Wait Until Element Is Enabled</code> con un <code>timeout</code>. Esperás la <strong>condición</strong>, no un tiempo arbitrario.</p>",
+  "rf.rung5.title": "APIs con RequestsLibrary",
+  "rf.rung5.desc": "Create Session + GET/POST/PATCH/DELETE On Session, sin navegador.",
+  "rf.rung5.body":
+    "<p>Para testear APIs sin navegador usás <code>RequestsLibrary</code>: abrís una sesión con <code>Create Session</code> y disparás <code>GET/POST/PATCH/DELETE On Session</code>. Verificás el status con <code>Status Should Be</code> (o el parámetro <code>expected_status</code>) y la forma del body con <code>Should Be Equal As Strings</code>. Mismo contrato CRUD que en los otros frameworks.</p>",
+  "rf.rung6.title": "Resource files (POM) y CI",
+  "rf.rung6.desc": "Resource files como Page Objects; robot --variable y --outputdir en CI.",
+  "rf.rung6.body":
+    "<p>El <strong>Page Object Model</strong> en Robot son los <strong>resource files</strong>: archivos <code>.resource</code> con keywords compartidos que importás con <code>Resource</code>. Encapsulás selectores y acciones de una página en un solo lugar. En CI corrés <code>robot --variable BROWSER:headlesschrome --outputdir results tests/</code> y publicás el <code>report.html</code>.</p>",
+
+  /* ====================================================================
      4. COMPARATIVA
      ==================================================================== */
   "cmp.lead":
@@ -460,36 +502,45 @@ I18n.register("es", {
     "<strong>Cypress:</strong> <code>.should()</code> encadenado, con auto-retry. Conciso y legible; las esperas son implícitas.",
   "cmp.pw.note":
     "<strong>Playwright:</strong> <code>expect(...)</code> web-first que auto-espera. Conciso, explícito en la intención y multi-navegador.",
+  "cmp.robot.note":
+    "<strong>Robot Framework:</strong> keyword-driven — cada paso es un keyword legible (<code>Element Text Should Be</code>). El más fácil de leer; por debajo usa Selenium o Playwright.",
   "cmp.table.label": "De un vistazo",
   "cmp.th.feature": "Característica",
   "cmp.th.selenium": "Selenium",
   "cmp.th.cypress": "Cypress",
   "cmp.th.playwright": "Playwright",
+  "cmp.th.robot": "Robot Framework",
 
   "cmp.r1.f": "Estilo de assertion",
   "cmp.r1.s": "Manual (assert lib)",
   "cmp.r1.c": ".should() encadenable",
   "cmp.r1.p": "expect() web-first",
+  "cmp.r1.r": "Keywords (Element Text Should Be)",
   "cmp.r2.f": "Esperas / retry",
   "cmp.r2.s": "Explícitas (a mano)",
   "cmp.r2.c": "Auto-retry",
   "cmp.r2.p": "Auto-wait",
+  "cmp.r2.r": "Wait Until… (explícitas)",
   "cmp.r3.f": "Lenguajes",
   "cmp.r3.s": "Java, Py, C#, JS, Ruby…",
   "cmp.r3.c": "JavaScript / TypeScript",
   "cmp.r3.p": "JS/TS, Python, Java, .NET",
+  "cmp.r3.r": "DSL de Robot (+ Python)",
   "cmp.r4.f": "Navegadores",
   "cmp.r4.s": "Todos (vía WebDriver)",
   "cmp.r4.c": "Chromium, Firefox, WebKit*",
   "cmp.r4.p": "Chromium, Firefox, WebKit",
+  "cmp.r4.r": "Según la librería",
   "cmp.r5.f": "Ejecución",
   "cmp.r5.s": "Fuera del navegador",
   "cmp.r5.c": "Dentro del navegador",
   "cmp.r5.p": "Fuera, con auto-wait",
+  "cmp.r5.r": "Keywords sobre una librería",
   "cmp.r6.f": "Mejor para",
   "cmp.r6.s": "Cobertura amplia, legacy",
   "cmp.r6.c": "DX y SPAs modernas",
   "cmp.r6.p": "Suites grandes, CI veloz",
+  "cmp.r6.r": "Legibilidad, ATDD/BDD, RPA",
 
   /* ====================================================================
      5. EL ROL DE LA AI EN QA

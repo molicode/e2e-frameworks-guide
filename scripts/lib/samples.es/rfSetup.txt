@@ -1,0 +1,7 @@
+# Robot Framework corre sobre Python. Instalalo junto con las librerías que necesités:
+pip install robotframework robotframework-seleniumlibrary robotframework-requests
+
+# Corré una suite (una carpeta o un único archivo .robot):
+robot tests/
+
+# Genera report.html y log.html automáticamente.
