@@ -1,0 +1,17 @@
+Feature: Cart totals
+
+  # El Background corre antes de CADA escenario del feature:
+  Background:
+    Given I am logged in as "demo"
+
+  # Un Scenario Outline corre una vez por fila de Examples — guiado por datos.
+  @smoke
+  Scenario Outline: Totals by quantity
+    Given a book that costs 10
+    When I add <qty> of them
+    Then the total should be <total>
+
+    Examples:
+      | qty | total |
+      | 1   | 10    |
+      | 3   | 30    |

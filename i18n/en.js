@@ -49,6 +49,7 @@ I18n.register("en", {
   "nav.cypress": "Cypress",
   "nav.playwright": "Playwright",
   "nav.robot": "Robot Framework",
+  "nav.bdd": "BDD: Gherkin & Cucumber",
   "nav.comparison": "Comparison",
   "nav.airole": "The role of AI",
   "nav.prompts": "AI examples",
@@ -70,6 +71,7 @@ I18n.register("en", {
   "home.cypress": "The best DX, visual runner and auto-retry: a 6-step path.",
   "home.playwright": "Cross-browser, auto-wait and traces: a 6-step path.",
   "home.robot": "Keyword-driven and readable: tests in near-natural language with Python libraries.",
+  "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) and Cucumber to give context.",
   "home.comparison": "The same VerifyOrder test solved in all 3 frameworks.",
   "home.ai-role": "How AI complements each stage of testing.",
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
@@ -487,6 +489,63 @@ I18n.register("en", {
   "rf.rung6.desc": "Resource files as Page Objects; robot --variable and --outputdir in CI.",
   "rf.rung6.body":
     "<p>The <strong>Page Object Model</strong> in Robot is <strong>resource files</strong>: <code>.resource</code> files with shared keywords you import with <code>Resource</code>. You wrap a page's selectors and actions in one place. In CI you run <code>robot --variable BROWSER:headlesschrome --outputdir results tests/</code> and publish <code>report.html</code>.</p>",
+
+  /* ====================================================================
+     3e. BDD: GHERKIN & CUCUMBER
+     ==================================================================== */
+  "bdd.page.intro": "What BDD is & why",
+  "bdd.page.gherkin": "The Gherkin syntax",
+  "bdd.page.cucumber": "Cucumber & step definitions",
+  "bdd.page.practica": "BDD in practice",
+
+  "bdd.lead":
+    "<p><strong>BDD</strong> (Behavior-Driven Development) isn't a framework: it's a <strong>technique</strong> for describing expected behavior in language the <em>whole team</em> understands — business, QA and development. It gives tests <strong>context</strong> before you write a line of code.</p>",
+  "bdd.why":
+    "<p>The idea: instead of starting from code, you start from concrete <strong>examples</strong> of behavior, written in <strong>Gherkin</strong> (<code>Given</code> / <code>When</code> / <code>Then</code>). Those examples are at once the <strong>specification</strong>, the <strong>living documentation</strong> and the basis of the automated tests. It comes from the \"three amigos\" conversation (business, dev, QA) and uses a <strong>ubiquitous language</strong>: the same words for everyone.</p>",
+  "bdd.t1.title": "Shared language",
+  "bdd.t1.body": "Business, QA and dev speak the same language: fewer misunderstandings about what to build.",
+  "bdd.t2.title": "Three amigos",
+  "bdd.t2.body": "A short chat between product, dev and QA defines examples before coding. Pure shift-left.",
+  "bdd.t3.title": "Living documentation",
+  "bdd.t3.body": "The .feature files are spec AND tests: if they pass, the docs are up to date by definition.",
+  "bdd.when":
+    "<p>Use BDD when <strong>business value</strong> and collaboration matter: complex rules, teams with non-technical stakeholders, acceptance criteria worth agreeing up front. It isn't free: maintaining step definitions has a cost, so don't apply BDD to <em>everything</em> — reserve it for flows where the shared language pays off.</p>",
+  "bdd.callout":
+    "<strong>Watch out:</strong> BDD isn't \"writing tests in English\". If no one from the business reads the <code>.feature</code> files, you're paying Gherkin's cost without its benefit. The value is in the <em>conversation</em>, not the syntax.",
+
+  "bdd.gherkin.lead":
+    "<p><strong>Gherkin</strong> is the language scenarios are written in: plain text with a few keywords. It lives in <code>.feature</code> files.</p>",
+  "bdd.gherkin.label": "Feature and Scenario",
+  "bdd.gherkin.body":
+    "<p>A <code>Feature</code> groups related scenarios. Each <code>Scenario</code> is an example with three key steps: <strong>Given</strong> (the initial context), <strong>When</strong> (the action) and <strong>Then</strong> (the expected result). You add steps with <code>And</code> and <code>But</code>. It reads like a story.</p>",
+  "bdd.outline.label": "Background, Outline and tags",
+  "bdd.outline.body":
+    "<p>The <code>Background</code> runs before <em>each</em> scenario (shared setup). The <code>Scenario Outline</code> + <code>Examples</code> is <strong>data-driven</strong>: the same scenario runs once per table row, replacing the <code>&lt;placeholders&gt;</code>. With <strong>tags</strong> (<code>@smoke</code>) you filter what you run.</p>",
+
+  "bdd.cuke.lead":
+    "<p>Gherkin describes <em>what</em> to test; the <strong>step definitions</strong> say <em>how</em>. <strong>Cucumber</strong> is the tool that wires each natural-language step to the code that runs it (the \"glue\"). It exists for nearly every language.</p>",
+  "bdd.cuke.js.label": "Cucumber.js (with Playwright)",
+  "bdd.cuke.js.body":
+    "<p>In JS/TS you use <code>@cucumber/cucumber</code>: you register <code>Given</code>/<code>When</code>/<code>Then</code> with the exact step phrase and the code that implements it (here, with Playwright). The <code>{string}</code> captures values from the step and passes them as arguments.</p>",
+  "bdd.cuke.py.label": "pytest-bdd (with Python)",
+  "bdd.cuke.py.body":
+    "<p>In Python, <code>pytest-bdd</code> (or <code>behave</code>) does the same: <code>scenarios(\"checkout.feature\")</code> binds the file's scenarios and you decorate functions with <code>@given</code>/<code>@when</code>/<code>@then</code>. You reuse all of pytest's power (fixtures, parametrize).</p>",
+  "bdd.cuke.callout":
+    "<strong>Tip:</strong> keep step definitions <strong>thin</strong> — have them call Page Objects or helpers, not hold test logic inside. Reusable steps = features that scale.",
+
+  "bdd.prac.lead":
+    "<p>BDD doesn't replace your framework: it <strong>sits on top</strong> of it. Cucumber handles the Gherkin and, under the hood, drives the browser with Selenium or Playwright. And some frameworks already speak Given/When/Then out of the box.</p>",
+  "bdd.prac.robot.label": "Given/When/Then in Robot Framework",
+  "bdd.prac.robot.body":
+    "<p><strong>Robot Framework</strong> understands the <code>Given</code>/<code>When</code>/<code>Then</code> prefixes natively: they're \"sugar\" over normal keywords. You define a keyword with the step's text and Robot ignores the prefix when resolving it. So you get BDD-style scenarios with no extra tool.</p>",
+  "bdd.manual.title": "By hand",
+  "bdd.manual.body":
+    "<p>You write the <code>.feature</code> files with the team and then implement each step. The effort is in agreeing on good examples and keeping steps reusable.</p>",
+  "bdd.ai.title": "With AI",
+  "bdd.ai.body":
+    "<p>AI drafts Gherkin scenarios from a user story, spots missing edge cases and generates the step-definition skeleton. You validate that they reflect the real behavior.</p>",
+  "bdd.prac.callout":
+    "<strong>Next step:</strong> pick a critical flow (login, checkout), write its <code>.feature</code> with the business in the room, and wire it to your framework. Start with just one: BDD earns its place by showing value, not by being imposed.",
 
   /* ====================================================================
      4. COMPARISON

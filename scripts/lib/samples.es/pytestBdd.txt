@@ -1,0 +1,20 @@
+# test_checkout.py — el mismo feature conectado con pytest-bdd.
+from pytest_bdd import scenarios, given, when, then
+from playwright.sync_api import Page, expect
+
+scenarios("checkout.feature")   # vincula cada escenario del archivo
+
+
+@given("I have a book in my cart")
+def add_book(page: Page):
+    page.goto("/cart?items=book")
+
+
+@when("I pay with a valid card")
+def pay(page: Page):
+    page.get_by_role("button", name="Pay").click()
+
+
+@then('the order status should be "PAID"')
+def status_paid(page: Page):
+    expect(page.locator(".order-status")).to_have_text("PAID")
