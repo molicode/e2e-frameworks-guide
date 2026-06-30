@@ -179,6 +179,63 @@
             </tbody>
           </table>
         </div>
+        <figure class="mock-figure">
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock__url">API console · api.example.com/orders</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <div class="mock-req">
+              <span class="mock-method mock-method--post">POST</span>
+              <span class="mock-req__path">/orders</span>
+              <span class="mock-status mock-status--ok">201 Created</span>
+              <span class="mock-req__note">create</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">read</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--put">PUT</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">replace · idempotent</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--patch">PATCH</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">partial update</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--delete">DELETE</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">204 No Content</span>
+              <span class="mock-req__note">remove · idempotent</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--bad">404 Not Found</span>
+              <span class="mock-req__note">after delete</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/1</span>
+              <span class="mock-status mock-status--bad">401 Unauthorized</span>
+              <span class="mock-req__note">no token</span>
+            </div>
+            <div class="mock-tags-row">
+              <code class="mock-tag mock-tag--good">✓ 2xx happy paths</code>
+              <code class="mock-tag mock-tag--good">✓ 401 / 404 unhappy paths</code>
+              <code class="mock-tag">idempotent: GET · PUT · DELETE</code>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <div class="prose" data-i18n-html="verbs.pw.lead"><p>Playwright tiene un <strong>request context</strong> independiente del navegador, con un método por verbo (<code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, <code>delete</code>, <code>head</code>) y <code>fetch</code> genérico para el resto.</p></div>
         <div class="prose" data-i18n-html="verbs.pw.body"><p>La respuesta expone <code>.status</code>, <code>.json()</code>, <code>.ok</code> y <code>.headers</code>. Para <code>OPTIONS</code> usás <code>fetch(url, method="OPTIONS")</code> porque no hay un atajo dedicado.</p></div>
         <div class="code-block">

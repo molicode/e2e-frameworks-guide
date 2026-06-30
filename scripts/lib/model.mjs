@@ -2162,6 +2162,7 @@ function verbsBlocks(verbs) {
     { type: "prose", html: "verbs.why" },
     { type: "label", text: "verbs.table.label" },
     verbsTableBlock(),
+    { type: "mock", screen: "verbs" },
     { type: "prose", html: verbs.leadKey },
     { type: "prose", html: verbs.bodyKey },
     { type: "code", sample: verbs.sample },
@@ -2407,7 +2408,7 @@ function bddGroup() {
       { type: "label", text: "bdd.gherkin.label" },
       { type: "prose", html: "bdd.gherkin.body" },
       { type: "code", sample: "gherkinFeature" },
-      { type: "mock", screen: "order" },
+      { type: "mock", screen: "gherkin" },
       { type: "label", text: "bdd.outline.label" },
       { type: "prose", html: "bdd.outline.body" },
       { type: "code", sample: "gherkinOutline" },
@@ -2483,7 +2484,7 @@ function skillsGroup() {
       { type: "label", text: "skills.appium.test.label" },
       { type: "prose", html: "skills.appium.test.body" },
       { type: "code", sample: "appiumTest" },
-      { type: "mock", screen: "login" },
+      { type: "mock", screen: "mobile" },
       { type: "label", text: "ui.vs" },
       { type: "vs",
         manual: { title: "skills.appium.manual.title", body: "skills.appium.manual.body" },
@@ -2578,6 +2579,7 @@ function perfGroup() {
       { type: "prose", html: "perf.k6.lead" },
       { type: "prose", html: "perf.k6.body" },
       { type: "code", sample: "k6Script" },
+      { type: "mock", screen: "perf" },
       { type: "callout", variant: "ok", html: "perf.k6.callout" },
     ] },
     { ...grp, id: "perf-jmeter", navKey: "perf.page.jmeter", blocks: [
@@ -3077,6 +3079,60 @@ export const SECTIONS = [
           { title: "Playwright — Best Practices", url: "https://playwright.dev/docs/best-practices", desc: "biblio.pw.bp" },
           { title: "Playwright — Locators", url: "https://playwright.dev/docs/locators", desc: "biblio.pw.loc" },
           { title: "microsoft/playwright — GitHub", url: "https://github.com/microsoft/playwright", desc: "biblio.pw.gh" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.robot" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Robot Framework — User Guide", url: "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html", desc: "biblio.rf.guide" },
+          { title: "SeleniumLibrary", url: "https://robotframework.org/SeleniumLibrary/", desc: "biblio.rf.sel" },
+          { title: "Browser library (Playwright-based)", url: "https://marketsquare.github.io/robotframework-browser/", desc: "biblio.rf.browser" },
+          { title: "RequestsLibrary", url: "https://marketsquare.github.io/robotframework-requests/", desc: "biblio.rf.requests" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.bdd" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Cucumber — Documentation", url: "https://cucumber.io/docs/", desc: "biblio.bdd.cuke" },
+          { title: "Gherkin — Reference", url: "https://cucumber.io/docs/gherkin/reference/", desc: "biblio.bdd.gherkin" },
+          { title: "pytest-bdd", url: "https://pytest-bdd.readthedocs.io/", desc: "biblio.bdd.pytest" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.perf" },
+      {
+        type: "biblio",
+        items: [
+          { title: "k6 — Documentation", url: "https://grafana.com/docs/k6/latest/", desc: "biblio.perf.k6" },
+          { title: "Apache JMeter — User Manual", url: "https://jmeter.apache.org/usermanual/index.html", desc: "biblio.perf.jmeter" },
+          { title: "Locust — Documentation", url: "https://docs.locust.io/", desc: "biblio.perf.locust" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.skills" },
+      {
+        type: "biblio",
+        items: [
+          { title: "Appium — Documentation", url: "https://appium.io/docs/en/latest/", desc: "biblio.skills.appium" },
+          { title: "GitHub Actions — Documentation", url: "https://docs.github.com/en/actions", desc: "biblio.skills.actions" },
+          { title: "Pro Git (book, free)", url: "https://git-scm.com/book", desc: "biblio.skills.git" },
+          { title: "SQLBolt — Interactive SQL", url: "https://sqlbolt.com/", desc: "biblio.skills.sql" },
+          { title: "MDN — HTTP request methods", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods", desc: "biblio.skills.http" },
+        ],
+      },
+
+      { type: "label", text: "biblio.cat.standards" },
+      {
+        type: "biblio",
+        items: [
+          { title: "ISTQB — Certifications", url: "https://www.istqb.org/certifications/", desc: "biblio.std.istqb" },
+          { title: "ISTQB — Certified Tester Finance Testing (CT-FT)", url: "https://www.istqb.org/certifications/certified-tester-finance-testing-ct-ft", desc: "biblio.std.ctft" },
+          { title: "TMMi Foundation", url: "https://www.tmmi.org/", desc: "biblio.std.tmmi" },
+          { title: "ISO 9001 — Quality management", url: "https://www.iso.org/iso-9001-quality-management.html", desc: "biblio.std.iso" },
         ],
       },
 

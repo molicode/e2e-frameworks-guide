@@ -360,9 +360,127 @@ function documentScreen() {
   );
 }
 
+/** An API "console" listing every verb with its status — used by the verbs pages. */
+function verbsConsoleScreen() {
+  const row = (m, path, code, note, cls) => `
+            <div class="mock-req">
+              <span class="mock-method mock-method--${m.toLowerCase()}">${m}</span>
+              <span class="mock-req__path">${path}</span>
+              <span class="mock-status mock-status--${cls}">${code}</span>
+              <span class="mock-req__note">${note}</span>
+            </div>`;
+  return `
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock__url">API console · api.example.com/orders</span>
+          </div>
+          <div class="mock__body mock__body--api">${
+            row("POST", "/orders", "201 Created", "create", "ok") +
+            row("GET", "/orders/42", "200 OK", "read", "ok") +
+            row("PUT", "/orders/42", "200 OK", "replace · idempotent", "ok") +
+            row("PATCH", "/orders/42", "200 OK", "partial update", "ok") +
+            row("DELETE", "/orders/42", "204 No Content", "remove · idempotent", "ok") +
+            row("GET", "/orders/42", "404 Not Found", "after delete", "bad") +
+            row("GET", "/orders/1", "401 Unauthorized", "no token", "bad")}
+            <div class="mock-tags-row">
+              <code class="mock-tag mock-tag--good">✓ 2xx happy paths</code>
+              <code class="mock-tag mock-tag--good">✓ 401 / 404 unhappy paths</code>
+              <code class="mock-tag">idempotent: GET · PUT · DELETE</code>
+            </div>
+          </div>
+        </div>`;
+}
+
+/** A native mobile app screen (a phone) — used by the Appium example. */
+function mobileScreen() {
+  return `
+        <div class="mock-phone-wrap">
+          <div class="mock-phone">
+            <span class="mock-phone__notch"></span>
+            <div class="mock-phone__screen">
+              <h4 class="mock-h">Shop</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-input">demo</span>
+                <code class="mock-tag">ACCESSIBILITY_ID "username"</code>
+              </div>
+              <div class="mock-field mock-field--col">
+                <span class="mock-input">••••••</span>
+                <code class="mock-tag">ACCESSIBILITY_ID "password"</code>
+              </div>
+              <div class="mock-btn-row mock-btn-row--col">
+                <span class="mock-btn">Sign in</span>
+                <code class="mock-tag">ACCESSIBILITY_ID "signin"</code>
+              </div>
+              <p class="mock-after">→ <strong>Welcome, demo</strong>
+                <code class="mock-tag">ACCESSIBILITY_ID "welcome"</code>
+              </p>
+            </div>
+          </div>
+        </div>`;
+}
+
+/** A Gherkin .feature file — used by the BDD example. */
+function gherkinScreen() {
+  const kw = (w) => `<span class="mock-gk">${w}</span>`;
+  return `
+        <div class="mock mock--file">
+          <div class="mock__bar mock__bar--file">
+            <span class="mock-file__icon">📄</span>
+            <span class="mock__url">checkout.feature</span>
+          </div>
+          <div class="mock__body mock__body--file">
+            <pre class="mock-gherkin"><code><span class="mock-gk-feat">Feature:</span> Checkout
+
+  <span class="mock-gk-feat">Scenario:</span> Successful payment
+    ${kw("Given")} I have a book in my cart
+    ${kw("When")}  I pay with a valid card
+    ${kw("Then")}  the order status should be "PAID"
+    ${kw("And")}   I should see "Payment confirmed"</code></pre>
+            <div class="mock-tags-row">
+              <code class="mock-tag">Given → Arrange</code>
+              <code class="mock-tag">When → Act</code>
+              <code class="mock-tag">Then → Assert</code>
+            </div>
+          </div>
+        </div>`;
+}
+
+/** A load-test results summary (k6-style) — used by the performance example. */
+function perfScreen() {
+  const stat = (label, value, cls) => `
+            <div class="mock-stat">
+              <span class="mock-stat__val mock-stat__val--${cls || "plain"}">${value}</span>
+              <span class="mock-stat__label">${label}</span>
+            </div>`;
+  return `
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock__url">k6 · load-test summary</span>
+            <span class="mock-status mock-status--ok">THRESHOLDS PASS</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <div class="mock-stat-grid">${
+              stat("VUs (peak)", "50", "plain") +
+              stat("Throughput", "1.2k rps", "plain") +
+              stat("p95 latency", "412 ms", "ok") +
+              stat("Error rate", "0.3 %", "ok")}
+            </div>
+            <div class="mock-tags-row">
+              <code class="mock-tag mock-tag--good">✓ p(95) &lt; 500ms</code>
+              <code class="mock-tag mock-tag--good">✓ error rate &lt; 1%</code>
+              <code class="mock-tag">threshold → quality gate</code>
+            </div>
+          </div>
+        </div>`;
+}
+
 const SCREENS = {
   login: loginScreen,
   order: orderScreen,
+  verbs: verbsConsoleScreen,
+  mobile: mobileScreen,
+  gherkin: gherkinScreen,
+  perf: perfScreen,
   api: apiScreen,
   a11y: a11yScreen,
   receipt: receiptScreen,

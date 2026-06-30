@@ -880,6 +880,64 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .mock-doc-grid .mock-tag { margin-top: 2px; align-self: flex-start; }
 @media (max-width: 520px) { .mock-doc-grid { grid-template-columns: 1fr; } }
 
+/* ---- HTTP verbs console mock ---- */
+.mock-status--bad { color: var(--danger); background: color-mix(in srgb, var(--danger) 15%, transparent); border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent); }
+.mock-method--get { background: var(--secondary); }
+.mock-method--post { background: var(--success); }
+.mock-method--put,
+.mock-method--patch { background: var(--warning); }
+.mock-method--delete { background: var(--danger); }
+.mock-method--head,
+.mock-method--options { background: var(--text-muted); }
+.mock-req {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) 0; border-bottom: 1px dashed var(--border);
+  font-family: var(--font-mono); font-size: var(--fs-sm);
+}
+.mock-req:last-of-type { border-bottom: 0; }
+.mock-req .mock-method { min-width: 4.2em; text-align: center; }
+.mock-req__path { color: var(--text); }
+.mock-req .mock-status { margin-left: auto; }
+.mock-req__note { color: var(--text-muted); font-size: var(--fs-xs); width: 100%; padding-left: 4.6em; }
+@media (min-width: 460px) { .mock-req__note { width: auto; padding-left: 0; } }
+
+/* ---- Mobile (Appium) mock ---- */
+.mock-phone-wrap { display: flex; justify-content: center; padding: var(--space-2) 0; }
+.mock-phone {
+  position: relative; width: min(260px, 80%);
+  background: var(--surface); border: 2px solid var(--border-strong);
+  border-radius: 28px; padding: var(--space-5) var(--space-4) var(--space-4);
+  box-shadow: var(--shadow-md);
+}
+.mock-phone__notch {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  width: 42%; height: 8px; background: var(--border-strong); border-radius: 999px;
+}
+.mock-phone__screen { display: flex; flex-direction: column; gap: var(--space-3); }
+.mock-phone__screen .mock-h { text-align: center; margin-bottom: var(--space-2); }
+.mock-btn-row--col { flex-direction: column; align-items: stretch; }
+.mock-btn-row--col .mock-btn { text-align: center; }
+
+/* ---- Gherkin .feature file mock ---- */
+.mock--file .mock__bar--file { gap: var(--space-2); }
+.mock-file__icon { font-size: 1em; }
+.mock__body--file { background: none; }
+.mock-gherkin {
+  margin: 0 0 var(--space-3); padding: var(--space-4);
+  background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-md); overflow-x: auto;
+  font-family: var(--font-mono); font-size: var(--fs-sm); line-height: 1.6; color: var(--code-text);
+}
+.mock-gk { color: var(--accent); font-weight: 700; }
+.mock-gk-feat { color: var(--secondary); font-weight: 700; }
+
+/* ---- Performance summary mock ---- */
+.mock-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin: var(--space-2) 0 var(--space-3); }
+.mock-stat { display: flex; flex-direction: column; gap: 2px; padding: var(--space-3); background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.mock-stat__val { font-family: var(--font-mono); font-size: var(--fs-lg); font-weight: 700; color: var(--text); }
+.mock-stat__val--ok { color: var(--success); }
+.mock-stat__label { font-size: var(--fs-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
 /* --------------------------------------------------------------------------
    Glossary (key terms) — term + definition rows
    -------------------------------------------------------------------------- */

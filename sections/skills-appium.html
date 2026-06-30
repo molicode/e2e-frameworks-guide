@@ -225,29 +225,25 @@ appium
         driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">()</span></code></pre>
         </div>
         <figure class="mock-figure">
-        <div class="mock">
-          <div class="mock__bar">
-            <span class="mock__dots"><i></i><i></i><i></i></span>
-            <span class="mock__url">example.com/login</span>
-          </div>
-          <div class="mock__body">
-            <div class="mock-card">
-              <h4 class="mock-h">Sign in</h4>
-              <div class="mock-field">
-                <span class="mock-field__label">Email</span>
-                <span class="mock-input">demo@acme.test</span>
-                <code class="mock-tag">getByLabel("Email")</code>
+        <div class="mock-phone-wrap">
+          <div class="mock-phone">
+            <span class="mock-phone__notch"></span>
+            <div class="mock-phone__screen">
+              <h4 class="mock-h">Shop</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-input">demo</span>
+                <code class="mock-tag">ACCESSIBILITY_ID "username"</code>
               </div>
-              <div class="mock-field">
-                <span class="mock-field__label">Password</span>
-                <span class="mock-input">••••••••</span>
+              <div class="mock-field mock-field--col">
+                <span class="mock-input">••••••</span>
+                <code class="mock-tag">ACCESSIBILITY_ID "password"</code>
               </div>
-              <div class="mock-btn-row">
+              <div class="mock-btn-row mock-btn-row--col">
                 <span class="mock-btn">Sign in</span>
-                <code class="mock-tag">getByRole("button", { name: "Sign in" })</code>
+                <code class="mock-tag">ACCESSIBILITY_ID "signin"</code>
               </div>
-              <p class="mock-after">after login → <strong>Welcome, demo</strong>
-                <code class="mock-tag">getByText("Welcome")</code>
+              <p class="mock-after">→ <strong>Welcome, demo</strong>
+                <code class="mock-tag">ACCESSIBILITY_ID "welcome"</code>
               </p>
             </div>
           </div>
