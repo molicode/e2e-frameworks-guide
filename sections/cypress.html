@@ -85,17 +85,29 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link" href="ai-role.html">
+        <a class="nav-link" href="components.html">
           <span class="nav-link__num">07</span>
+          <span data-i18n="nav.components">Componentes clave</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
     </aside>
@@ -278,6 +290,27 @@ cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">
 // Test an error state by stubbing a 500:
 cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/*",</span> <span class="tok-punctuation">{</span> statusCode<span class="tok-punctuation">:</span> <span class="tok-number">500</span> <span class="tok-punctuation">}).</span><span class="tok-keyword">as</span><span class="tok-punctuation">("</span>boom<span class="tok-punctuation">");</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">⚠️</div>
+              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
+              <div class="mock-http">HTTP 500 · Internal Server Error</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">cy.intercept(..., { statusCode: 500 })</code>
+                <code class="mock-tag">route.fulfill({ status: 500 })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="cyp.rung5.title">Custom commands y fixtures</h3>
         <div class="prose" data-i18n-html="cyp.rung5.body"><p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p></div>
         <div class="code-block">

@@ -85,17 +85,29 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link" href="ai-role.html">
+        <a class="nav-link" href="components.html">
           <span class="nav-link__num">07</span>
+          <span data-i18n="nav.components">Componentes clave</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
     </aside>
@@ -191,6 +203,47 @@ page.getByTestId("</span>submit<span class="tok-punctuation">-</span>order<span 
 // STABLE: wait for the CONDITION, not the clock. The assertion
 //   retries until the element shows "</span><span class="tok-number">250</span><span class="tok-string">" or the timeout is reached.
 await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">total</span><span class="tok-string">")).toHaveText("</span><span class="tok-number">250</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-total">
+                <span>Total</span>
+                <span class="mock-spinner" aria-hidden="true"></span>
+                <span class="mock-loading">loading…</span>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--bad">✗ sleep(1000) → flaky</code>
+                <code class="mock-tag mock-tag--good">✓ toHaveText("250") → auto-retry</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="fund.levels.label">Niveles y tipos de prueba</h3>
+        <div class="prose" data-i18n-html="fund.levels.body"><p>Más allá de unit/integration/E2E, vas a escuchar:</p><ul><li><strong>Smoke</strong>: chequeo rápido de que lo crítico funciona (¿prende?).</li><li><strong>Sanity</strong>: verificación acotada tras un cambio puntual.</li><li><strong>Regression</strong>: re-correr la suite para asegurar que lo nuevo no rompió lo viejo.</li><li><strong>Exploratory</strong>: probar sin guion, aprendiendo del sistema sobre la marcha.</li><li><strong>Acceptance / UAT</strong>: valida que cumple los criterios del negocio/usuario.</li></ul></div>
+        <h3 class="block-label" data-i18n="fund.design.label">Técnicas de diseño de casos</h3>
+        <div class="prose" data-i18n-html="fund.design.body"><p>Para cubrir más con menos casos:</p><ul><li><strong>Partición de equivalencia</strong>: agrupás entradas que se comportan igual y probás una de cada grupo.</li><li><strong>Valores límite</strong>: los bugs viven en los bordes (0, 1, máx, máx+1).</li><li><strong>Tabla de decisión</strong>: combinaciones de condiciones → acción esperada.</li><li><strong>Transición de estados</strong>: probás los caminos entre estados (borrador → pagado → reembolsado).</li></ul></div>
+        <h3 class="block-label" data-i18n="fund.nonfunc.label">Funcional vs no funcional</h3>
+        <div class="prose" data-i18n-html="fund.nonfunc.body"><p>Lo <strong>funcional</strong> verifica <em>qué</em> hace el sistema; lo <strong>no funcional</strong>, <em>cómo</em> se comporta: <strong>performance</strong> (carga, estrés), <strong>seguridad</strong>, <strong>accesibilidad</strong> (a11y), <strong>usabilidad</strong> y <strong>compatibilidad</strong> entre navegadores y dispositivos.</p></div>
+        <h3 class="block-label" data-i18n="fund.defects.label">Defectos: severidad vs prioridad</h3>
+        <div class="prose" data-i18n-html="fund.defects.body"><p>Un <strong>defecto</strong> recorre un ciclo (nuevo → asignado → corregido → re-test → cerrado, o reabierto). Dos atributos se confunden seguido: <strong>severidad</strong> (impacto técnico) y <strong>prioridad</strong> (urgencia de arreglarlo). No siempre coinciden:</p></div>
+        <div class="cmp-table-wrap">
+          <table class="cmp">
+            <thead><tr><th data-i18n="fund.sp.th1">Caso</th><th data-i18n="fund.sp.th2">Severidad</th><th data-i18n="fund.sp.th3">Prioridad</th></tr></thead>
+            <tbody>
+              <tr><td data-i18n="fund.sp.r1a">Logo mal alineado en la home</td><td data-i18n="fund.sp.r1b">Baja</td><td data-i18n="fund.sp.r1c">Alta (lo ven todos)</td></tr>
+              <tr><td data-i18n="fund.sp.r2a">Crash en un reporte que casi nadie usa</td><td data-i18n="fund.sp.r2b">Alta</td><td data-i18n="fund.sp.r2c">Baja</td></tr>
+            </tbody>
+          </table>
         </div>
         <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
         <div class="vs-grid">

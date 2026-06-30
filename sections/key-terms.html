@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="nav.keyterms">Conceptos clave</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--key-terms">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link" href="selenium.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link" href="cypress.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link" href="playwright.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="components.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.components">Componentes clave</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link is-active" href="key-terms.html" aria-current="page">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <span class="section__eyebrow">11</span>
+        <h2 class="section__title" data-i18n="nav.keyterms">Conceptos clave</h2>
+        <div class="prose" data-i18n-html="kt.lead"><p>El vocabulario que más cae en una entrevista de QA, ordenado por tema. Definiciones cortas y al hueso para repasar antes de la charla.</p></div>
+        <h3 class="block-label" data-i18n="kt.cat.process">Proceso y estrategia</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">SDLC / STLC</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.sdlc"><strong>SDLC</strong> es el ciclo de vida del software; <strong>STLC</strong> es el del testing dentro de él (planificación, diseño, ejecución, cierre).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Shift-left testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.shiftleft">Mover el testing lo más temprano posible (incluso antes de codear): es más barato arreglar un bug en diseño que en producción.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">TDD (Test-Driven Development)</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.tdd">Escribís el test <em>antes</em> que el código: rojo → verde → refactor. Guía el diseño y deja una red de seguridad.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">BDD (Gherkin / Cucumber)</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.bdd">Describís el comportamiento en lenguaje Given/When/Then (Gherkin); herramientas como Cucumber lo conectan al código.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">ATDD</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.atdd">Acceptance Test-Driven: el equipo define juntos los criterios de aceptación como tests antes de desarrollar.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Regression testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.regression">Re-correr pruebas existentes para confirmar que un cambio no rompió funcionalidad que ya andaba.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Smoke vs Sanity</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.smoke"><strong>Smoke</strong>: ¿lo más crítico funciona? <strong>Sanity</strong>: chequeo rápido y acotado tras un fix puntual.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Exploratory testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.exploratory">Probar sin guion, diseñando y ejecutando a la vez, para descubrir lo que los casos escritos no previeron.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Acceptance / UAT</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.uat">User Acceptance Testing: el usuario/negocio valida que el sistema cumple sus criterios antes de salir a producción.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Risk-based testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.risk">Priorizás qué probar según probabilidad e impacto del fallo: más esfuerzo donde más duele.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Data-driven testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.ddt">Un mismo test corre con muchos sets de datos (tabla/CSV/JSON), separando la lógica de los datos.</span>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="kt.cat.design">Diseño de casos</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">Equivalence Partitioning</span>
+              <span class="gloss__def" data-i18n-html="kt.design.ep">Agrupás entradas que el sistema trata igual y probás un representante de cada grupo (válido e inválido).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Boundary Value Analysis</span>
+              <span class="gloss__def" data-i18n-html="kt.design.bva">Probás los bordes de cada rango (mín, mín±1, máx, máx±1): ahí se esconde la mayoría de los bugs.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Decision Table</span>
+              <span class="gloss__def" data-i18n-html="kt.design.dt">Tabla que mapea combinaciones de condiciones a la acción/resultado esperado; ideal para lógica con muchos ifs.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">State Transition</span>
+              <span class="gloss__def" data-i18n-html="kt.design.state">Modelás los estados y las transiciones válidas e inválidas (nueva → pagada → reembolsada) y probás los caminos.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Pairwise / Combinatorial</span>
+              <span class="gloss__def" data-i18n-html="kt.design.pairwise">Técnica combinatoria que cubre todos los pares de valores con muchos menos casos que el total de combinaciones.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Traceability Matrix</span>
+              <span class="gloss__def" data-i18n-html="kt.design.trace">Matriz que vincula requisitos ↔ casos de prueba para ver qué quedó sin cubrir.</span>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="kt.cat.defects">Defectos</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">Severity vs Priority</span>
+              <span class="gloss__def" data-i18n-html="kt.def.sevprio"><strong>Severidad</strong> = impacto técnico del bug; <strong>prioridad</strong> = qué tan urgente es arreglarlo. Pueden no coincidir.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Defect lifecycle</span>
+              <span class="gloss__def" data-i18n-html="kt.def.lifecycle">El recorrido de un defecto: nuevo → asignado → en progreso → corregido → re-test → cerrado (o reabierto).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Root Cause Analysis (RCA)</span>
+              <span class="gloss__def" data-i18n-html="kt.def.rca">Análisis de causa raíz: ir más allá del síntoma para encontrar el origen real y evitar que vuelva a pasar.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Triage</span>
+              <span class="gloss__def" data-i18n-html="kt.def.triage">Reunión/decisión para clasificar y priorizar bugs: qué se arregla ahora, qué después y qué no.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Reproducible steps</span>
+              <span class="gloss__def" data-i18n-html="kt.def.repro">Pasos claros y mínimos para reproducir el bug; sin ellos, el reporte es casi inútil.</span>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="kt.cat.automation">Automatización</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">Assertion</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.assertion">La afirmación que decide si el test pasa o falla: compara lo real contra lo esperado.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Selector / Locator</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.locator">La estrategia para encontrar un elemento (rol, etiqueta, texto, <code>data-testid</code>, CSS, XPath).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Page Object Model (POM)</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.pom">Patrón que encapsula los selectores y acciones de una página en una clase reutilizable.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Fixtures</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.fixtures">Mecanismo para preparar y proveer estado/dependencias a un test (datos, sesión, página).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Hooks (setup / teardown)</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.hooks">Ganchos que corren antes/después (<code>beforeEach</code>, <code>afterAll</code>) para setup y limpieza.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Test doubles (mock / stub / spy / fake)</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.doubles">Objetos falsos que reemplazan dependencias: <strong>mock</strong>, <strong>stub</strong>, <strong>spy</strong>, <strong>fake</strong> y <strong>dummy</strong>.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Implicit / Explicit / Fluent wait</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.waits"><strong>Implícita</strong> (global), <strong>explícita</strong> (espera una condición puntual) y <strong>fluent</strong> (con polling y timeout configurables).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Auto-wait / retry</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.autowait">El framework reintenta la acción/assertion hasta que se cumple o expira, en vez de esperar a ciegas.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Flaky test</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.flaky">Test que a veces pasa y a veces falla sin cambiar el código; suele ser por esperas o datos compartidos.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Headless</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.headless">Correr el navegador sin interfaz gráfica: más rápido, ideal para CI.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Parallelization</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.parallel">Ejecutar muchos tests a la vez para acortar el tiempo total de la suite.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Cross-browser</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.crossbrowser">Verificar que la app funciona en distintos navegadores/motores (Chromium, Firefox, WebKit).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Code coverage</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.coverage">Cuánto del código ejecutan tus tests (por sentencia, rama, función). Útil, pero no garantiza calidad.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">CI/CD &amp; quality gate</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.cicd">Correr la suite automáticamente en cada cambio; un <em>quality gate</em> bloquea el merge si algo está rojo.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Test isolation / idempotency</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.isolation">Cada test crea y limpia sus datos y no depende de otros; corre igual solo o en cualquier orden.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Test data management</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.tdm">Gestión de datos de prueba: crearlos, aislarlos y limpiarlos para tener tests deterministas.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Visual regression</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.visual">Comparar capturas contra una referencia para detectar cambios visuales no deseados.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Accessibility (a11y) testing</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.a11y">Probar accesibilidad: roles ARIA, navegación por teclado, contraste y lectores de pantalla.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">API testing</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.api">Probar la API directamente (sin UI): status codes, contratos y payloads; más rápido y estable.</span>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="kt.cat.ai">AI en QA</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">Prompt engineering</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.prompt">Diseñar la instrucción (rol, contexto, restricciones, formato) para obtener mejor salida del modelo.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Hallucination</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.halluc">Cuando la AI inventa algo plausible pero falso (un selector o método que no existe). Siempre validá.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Self-healing locators</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.selfheal">Locators que se reajustan solos cuando el DOM cambia, reduciendo el mantenimiento de selectores frágiles.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">LLM test generation</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.gen">Usar un LLM para generar casos o código de test a partir de una historia, el HTML o los criterios.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Human-in-the-loop</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.hitl">Human-in-the-loop: la AI propone, una persona revisa y decide. La responsabilidad final es humana.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">MCP (Model Context Protocol)</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.mcp">Model Context Protocol: estándar abierto que conecta al modelo con herramientas y datos externos.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Skill</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.skill">Capacidad reutilizable que empaqueta instrucciones/convenciones para repetir un flujo de forma consistente.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Agent / sub-agent</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.agent">Sistema de AI que planifica y ejecuta varios pasos con herramientas; los sub-agentes dividen el trabajo.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">RAG (Retrieval-Augmented Generation)</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.rag">Retrieval-Augmented Generation: el modelo consulta tu documentación/datos para responder con contexto real.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Context window / tokens</span>
+              <span class="gloss__def" data-i18n-html="kt.ai.context">La ventana de <em>tokens</em> que el modelo puede ver a la vez; limita cuánto contexto entra de una.</span>
+            </div>
+        </div>
+        <div class="callout" data-i18n-html="kt.callout"><strong>Tip de entrevista:</strong> no alcanza con definir — tené un <em>ejemplo</em> de cada término. “Un test flaky es… por ejemplo, cuando usás un <code>sleep</code> fijo y la red tarda más de la cuenta.”</div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="best-practices.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="nav.best">Buenas prácticas</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="bibliography.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.biblio">Bibliografía</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

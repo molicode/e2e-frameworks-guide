@@ -149,6 +149,35 @@ function renderBlock(block, dict) {
       return `\n        <ol class="steps">${items}\n        </ol>`;
     }
 
+    case "glossary": {
+      // item.term is a literal (English technical term, kept as-is); item.def
+      // is an i18n key (definition, translated, may contain inline <code>).
+      const items = block.items
+        .map(
+          (it) => `
+            <div class="gloss">
+              <span class="gloss__term">${escText(it.term)}</span>
+              <span class="gloss__def" data-i18n-html="${it.def}">${t(dict, it.def)}</span>
+            </div>`
+        )
+        .join("");
+      return `\n        <div class="gloss-list">${items}\n        </div>`;
+    }
+
+    case "biblio": {
+      // item.title + item.url are literals; item.desc is an i18n key.
+      const items = block.items
+        .map(
+          (it) => `
+            <li class="ref">
+              <a class="ref__link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">${escText(it.title)}</a>
+              <span class="ref__desc" data-i18n="${it.desc}">${escText(t(dict, it.desc))}</span>
+            </li>`
+        )
+        .join("");
+      return `\n        <ul class="ref-list">${items}\n        </ul>`;
+    }
+
     default:
       return "";
   }

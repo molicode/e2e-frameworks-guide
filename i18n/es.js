@@ -396,6 +396,192 @@ I18n.register("es", {
   "best.callout":
     "<strong>Lo importante:</strong> la automatización no busca cero bugs, busca <em>confianza para entregar seguido</em>. Empezá chico, mantené verde y crecé desde ahí.",
 
+  /* ---- Navegación / índice de las secciones nuevas ---- */
+  "nav.components": "Componentes clave",
+  "nav.keyterms": "Conceptos clave",
+  "nav.biblio": "Bibliografía",
+  "home.components": "Cómo testear los componentes de UI más comunes: formularios, selects, modales, tablas, toasts.",
+  "home.key-terms": "Glosario de términos clave de QA para entrevistas, ordenado por categoría.",
+  "home.bibliography": "Fuentes oficiales de Selenium, Cypress, Playwright y AI.",
+
+  /* ---- Fundamentos (ampliación) ---- */
+  "fund.levels.label": "Niveles y tipos de prueba",
+  "fund.levels.body":
+    "<p>Más allá de unit/integration/E2E, vas a escuchar:</p><ul>" +
+    "<li><strong>Smoke</strong>: chequeo rápido de que lo crítico funciona (¿prende?).</li>" +
+    "<li><strong>Sanity</strong>: verificación acotada tras un cambio puntual.</li>" +
+    "<li><strong>Regression</strong>: re-correr la suite para asegurar que lo nuevo no rompió lo viejo.</li>" +
+    "<li><strong>Exploratory</strong>: probar sin guion, aprendiendo del sistema sobre la marcha.</li>" +
+    "<li><strong>Acceptance / UAT</strong>: valida que cumple los criterios del negocio/usuario.</li></ul>",
+  "fund.design.label": "Técnicas de diseño de casos",
+  "fund.design.body":
+    "<p>Para cubrir más con menos casos:</p><ul>" +
+    "<li><strong>Partición de equivalencia</strong>: agrupás entradas que se comportan igual y probás una de cada grupo.</li>" +
+    "<li><strong>Valores límite</strong>: los bugs viven en los bordes (0, 1, máx, máx+1).</li>" +
+    "<li><strong>Tabla de decisión</strong>: combinaciones de condiciones → acción esperada.</li>" +
+    "<li><strong>Transición de estados</strong>: probás los caminos entre estados (borrador → pagado → reembolsado).</li></ul>",
+  "fund.nonfunc.label": "Funcional vs no funcional",
+  "fund.nonfunc.body":
+    "<p>Lo <strong>funcional</strong> verifica <em>qué</em> hace el sistema; lo <strong>no funcional</strong>, <em>cómo</em> se comporta: <strong>performance</strong> (carga, estrés), <strong>seguridad</strong>, <strong>accesibilidad</strong> (a11y), <strong>usabilidad</strong> y <strong>compatibilidad</strong> entre navegadores y dispositivos.</p>",
+  "fund.defects.label": "Defectos: severidad vs prioridad",
+  "fund.defects.body":
+    "<p>Un <strong>defecto</strong> recorre un ciclo (nuevo → asignado → corregido → re-test → cerrado, o reabierto). Dos atributos se confunden seguido: <strong>severidad</strong> (impacto técnico) y <strong>prioridad</strong> (urgencia de arreglarlo). No siempre coinciden:</p>",
+  "fund.sp.th1": "Caso",
+  "fund.sp.th2": "Severidad",
+  "fund.sp.th3": "Prioridad",
+  "fund.sp.r1a": "Logo mal alineado en la home",
+  "fund.sp.r1b": "Baja",
+  "fund.sp.r1c": "Alta (lo ven todos)",
+  "fund.sp.r2a": "Crash en un reporte que casi nadie usa",
+  "fund.sp.r2b": "Alta",
+  "fund.sp.r2c": "Baja",
+
+  /* ---- AI: Skills, MCP y Agentes ---- */
+  "ai.tools.label": "Skills, MCP y Agentes",
+  "ai.tools.body":
+    "<p>La AI rinde mucho más cuando le das <strong>herramientas, contexto y autonomía</strong>. Tres piezas modernas que potencian el testing automation:</p>",
+  "ai.tool.skills.title": "Skills",
+  "ai.tool.skills.body":
+    "Instrucciones reutilizables que encapsulan las convenciones de tu equipo (POM, política de selectores) para generar tests consistentes.",
+  "ai.tool.skills.note":
+    "<p>Una <strong>Skill</strong> es como un comando con el know-how de tu equipo adentro: en vez de re-explicar tus reglas en cada prompt, los tests salen siempre con el mismo estándar.</p>",
+  "ai.tool.mcp.title": "MCP",
+  "ai.tool.mcp.body":
+    "El Model Context Protocol conecta a la AI con herramientas reales: un navegador, tu repo, el issue tracker, los logs de CI.",
+  "ai.tool.mcp.note":
+    "<p>Con <strong>MCP</strong> la AI deja de adivinar: puede abrir la app, leer el árbol de accesibilidad y proponer selectores que <em>existen</em> de verdad.</p>",
+  "ai.tool.agents.title": "Agentes",
+  "ai.tool.agents.body":
+    "Agentes que planifican y ejecutan varios pasos: generan el test, lo corren, leen el fallo y lo arreglan en un bucle.",
+  "ai.tool.agents.note":
+    "<p>Un <strong>agente</strong> cierra el lazo. Y con varios agentes (uno escribe, otro intenta refutar) subís la confianza antes de commitear.</p>",
+
+  /* ====================================================================
+     COMPONENTES CLAVE
+     ==================================================================== */
+  "comp.lead":
+    "<p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá están los que más se testean, con el código para probarlos en Playwright y la pantalla que afectan. Fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p>",
+  "comp.callout":
+    "<strong>Patrón común:</strong> localizá por rol/etiqueta (lo que ve el usuario), accioná y afirmá con una <em>web-first assertion</em>. Sirve igual para botones, inputs, selects, modales o tablas.",
+  "comp.validation.label": "Formulario con validación",
+  "comp.validation.body":
+    "<p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p>",
+  "comp.select.label": "Select / dropdown",
+  "comp.select.body":
+    "<p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p>",
+  "comp.checkbox.label": "Checkbox / toggle",
+  "comp.checkbox.body":
+    "<p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p>",
+  "comp.modal.label": "Modal / diálogo",
+  "comp.modal.body":
+    "<p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p>",
+  "comp.table.label": "Tabla de datos",
+  "comp.table.body":
+    "<p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p>",
+  "comp.toast.label": "Toast / alerta",
+  "comp.toast.body":
+    "<p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p>",
+
+  /* ====================================================================
+     CONCEPTOS CLAVE (glosario)
+     ==================================================================== */
+  "kt.lead":
+    "<p>El vocabulario que más cae en una entrevista de QA, ordenado por tema. Definiciones cortas y al hueso para repasar antes de la charla.</p>",
+  "kt.callout":
+    "<strong>Tip de entrevista:</strong> no alcanza con definir — tené un <em>ejemplo</em> de cada término. “Un test flaky es… por ejemplo, cuando usás un <code>sleep</code> fijo y la red tarda más de la cuenta.”",
+  "kt.cat.process": "Proceso y estrategia",
+  "kt.cat.design": "Diseño de casos",
+  "kt.cat.defects": "Defectos",
+  "kt.cat.automation": "Automatización",
+  "kt.cat.ai": "AI en QA",
+
+  "kt.proc.sdlc": "<strong>SDLC</strong> es el ciclo de vida del software; <strong>STLC</strong> es el del testing dentro de él (planificación, diseño, ejecución, cierre).",
+  "kt.proc.shiftleft": "Mover el testing lo más temprano posible (incluso antes de codear): es más barato arreglar un bug en diseño que en producción.",
+  "kt.proc.tdd": "Escribís el test <em>antes</em> que el código: rojo → verde → refactor. Guía el diseño y deja una red de seguridad.",
+  "kt.proc.bdd": "Describís el comportamiento en lenguaje Given/When/Then (Gherkin); herramientas como Cucumber lo conectan al código.",
+  "kt.proc.atdd": "Acceptance Test-Driven: el equipo define juntos los criterios de aceptación como tests antes de desarrollar.",
+  "kt.proc.regression": "Re-correr pruebas existentes para confirmar que un cambio no rompió funcionalidad que ya andaba.",
+  "kt.proc.smoke": "<strong>Smoke</strong>: ¿lo más crítico funciona? <strong>Sanity</strong>: chequeo rápido y acotado tras un fix puntual.",
+  "kt.proc.exploratory": "Probar sin guion, diseñando y ejecutando a la vez, para descubrir lo que los casos escritos no previeron.",
+  "kt.proc.uat": "User Acceptance Testing: el usuario/negocio valida que el sistema cumple sus criterios antes de salir a producción.",
+  "kt.proc.risk": "Priorizás qué probar según probabilidad e impacto del fallo: más esfuerzo donde más duele.",
+  "kt.proc.ddt": "Un mismo test corre con muchos sets de datos (tabla/CSV/JSON), separando la lógica de los datos.",
+
+  "kt.design.ep": "Agrupás entradas que el sistema trata igual y probás un representante de cada grupo (válido e inválido).",
+  "kt.design.bva": "Probás los bordes de cada rango (mín, mín±1, máx, máx±1): ahí se esconde la mayoría de los bugs.",
+  "kt.design.dt": "Tabla que mapea combinaciones de condiciones a la acción/resultado esperado; ideal para lógica con muchos ifs.",
+  "kt.design.state": "Modelás los estados y las transiciones válidas e inválidas (nueva → pagada → reembolsada) y probás los caminos.",
+  "kt.design.pairwise": "Técnica combinatoria que cubre todos los pares de valores con muchos menos casos que el total de combinaciones.",
+  "kt.design.trace": "Matriz que vincula requisitos ↔ casos de prueba para ver qué quedó sin cubrir.",
+
+  "kt.def.sevprio": "<strong>Severidad</strong> = impacto técnico del bug; <strong>prioridad</strong> = qué tan urgente es arreglarlo. Pueden no coincidir.",
+  "kt.def.lifecycle": "El recorrido de un defecto: nuevo → asignado → en progreso → corregido → re-test → cerrado (o reabierto).",
+  "kt.def.rca": "Análisis de causa raíz: ir más allá del síntoma para encontrar el origen real y evitar que vuelva a pasar.",
+  "kt.def.triage": "Reunión/decisión para clasificar y priorizar bugs: qué se arregla ahora, qué después y qué no.",
+  "kt.def.repro": "Pasos claros y mínimos para reproducir el bug; sin ellos, el reporte es casi inútil.",
+
+  "kt.auto.assertion": "La afirmación que decide si el test pasa o falla: compara lo real contra lo esperado.",
+  "kt.auto.locator": "La estrategia para encontrar un elemento (rol, etiqueta, texto, <code>data-testid</code>, CSS, XPath).",
+  "kt.auto.pom": "Patrón que encapsula los selectores y acciones de una página en una clase reutilizable.",
+  "kt.auto.fixtures": "Mecanismo para preparar y proveer estado/dependencias a un test (datos, sesión, página).",
+  "kt.auto.hooks": "Ganchos que corren antes/después (<code>beforeEach</code>, <code>afterAll</code>) para setup y limpieza.",
+  "kt.auto.doubles": "Objetos falsos que reemplazan dependencias: <strong>mock</strong>, <strong>stub</strong>, <strong>spy</strong>, <strong>fake</strong> y <strong>dummy</strong>.",
+  "kt.auto.waits": "<strong>Implícita</strong> (global), <strong>explícita</strong> (espera una condición puntual) y <strong>fluent</strong> (con polling y timeout configurables).",
+  "kt.auto.autowait": "El framework reintenta la acción/assertion hasta que se cumple o expira, en vez de esperar a ciegas.",
+  "kt.auto.flaky": "Test que a veces pasa y a veces falla sin cambiar el código; suele ser por esperas o datos compartidos.",
+  "kt.auto.headless": "Correr el navegador sin interfaz gráfica: más rápido, ideal para CI.",
+  "kt.auto.parallel": "Ejecutar muchos tests a la vez para acortar el tiempo total de la suite.",
+  "kt.auto.crossbrowser": "Verificar que la app funciona en distintos navegadores/motores (Chromium, Firefox, WebKit).",
+  "kt.auto.coverage": "Cuánto del código ejecutan tus tests (por sentencia, rama, función). Útil, pero no garantiza calidad.",
+  "kt.auto.cicd": "Correr la suite automáticamente en cada cambio; un <em>quality gate</em> bloquea el merge si algo está rojo.",
+  "kt.auto.isolation": "Cada test crea y limpia sus datos y no depende de otros; corre igual solo o en cualquier orden.",
+  "kt.auto.tdm": "Gestión de datos de prueba: crearlos, aislarlos y limpiarlos para tener tests deterministas.",
+  "kt.auto.visual": "Comparar capturas contra una referencia para detectar cambios visuales no deseados.",
+  "kt.auto.a11y": "Probar accesibilidad: roles ARIA, navegación por teclado, contraste y lectores de pantalla.",
+  "kt.auto.api": "Probar la API directamente (sin UI): status codes, contratos y payloads; más rápido y estable.",
+
+  "kt.ai.prompt": "Diseñar la instrucción (rol, contexto, restricciones, formato) para obtener mejor salida del modelo.",
+  "kt.ai.halluc": "Cuando la AI inventa algo plausible pero falso (un selector o método que no existe). Siempre validá.",
+  "kt.ai.selfheal": "Locators que se reajustan solos cuando el DOM cambia, reduciendo el mantenimiento de selectores frágiles.",
+  "kt.ai.gen": "Usar un LLM para generar casos o código de test a partir de una historia, el HTML o los criterios.",
+  "kt.ai.hitl": "Human-in-the-loop: la AI propone, una persona revisa y decide. La responsabilidad final es humana.",
+  "kt.ai.mcp": "Model Context Protocol: estándar abierto que conecta al modelo con herramientas y datos externos.",
+  "kt.ai.skill": "Capacidad reutilizable que empaqueta instrucciones/convenciones para repetir un flujo de forma consistente.",
+  "kt.ai.agent": "Sistema de AI que planifica y ejecuta varios pasos con herramientas; los sub-agentes dividen el trabajo.",
+  "kt.ai.rag": "Retrieval-Augmented Generation: el modelo consulta tu documentación/datos para responder con contexto real.",
+  "kt.ai.context": "La ventana de <em>tokens</em> que el modelo puede ver a la vez; limita cuánto contexto entra de una.",
+
+  /* ====================================================================
+     BIBLIOGRAFÍA
+     ==================================================================== */
+  "biblio.lead":
+    "<p>Fuentes oficiales y recursos de referencia para profundizar. Los enlaces abren en una pestaña nueva.</p>",
+  "biblio.cat.selenium": "Selenium",
+  "biblio.cat.cypress": "Cypress",
+  "biblio.cat.playwright": "Playwright",
+  "biblio.cat.general": "Testing (general)",
+  "biblio.cat.ai": "AI en QA",
+  "biblio.sel.docs": "Documentación oficial: instalación, WebDriver, esperas y grid.",
+  "biblio.sel.w3c": "La especificación W3C del protocolo WebDriver.",
+  "biblio.sel.gh": "Código fuente, releases e issues del proyecto.",
+  "biblio.cyp.docs": "Guías, API y conceptos centrales.",
+  "biblio.cyp.bp": "Buenas prácticas oficiales: selectores, aislamiento y anti-patrones.",
+  "biblio.cyp.gh": "Código fuente, releases e issues del proyecto.",
+  "biblio.pw.docs": "Introducción, configuración y test runner.",
+  "biblio.pw.bp": "Buenas prácticas oficiales para tests resilientes.",
+  "biblio.pw.loc": "Guía de locators (getByRole, getByLabel, filtros).",
+  "biblio.pw.gh": "Código fuente, releases e issues del proyecto.",
+  "biblio.gen.pyramid": "El artículo de referencia sobre la pirámide de testing.",
+  "biblio.gen.trophy": "El “trofeo” de testing: otra mirada sobre dónde invertir.",
+  "biblio.gen.istqb": "Glosario estándar de la industria con cientos de términos.",
+  "biblio.gen.tl": "Filosofía de tests centrados en el usuario y queries por rol.",
+  "biblio.gen.mdn": "Referencia de selectores CSS.",
+  "biblio.gen.aria": "Roles y patrones ARIA: la base de getByRole.",
+  "biblio.ai.anthropic": "Docs de Claude: prompts, tool use, agentes y MCP.",
+  "biblio.ai.mcp": "Sitio oficial del Model Context Protocol.",
+  "biblio.ai.peg": "Guía abierta de prompt engineering con técnicas y ejemplos.",
+  "biblio.ai.openai": "Guía de prompt engineering de OpenAI.",
+
   /* ---- Pie de página ---- */
   "footer.text":
     "Hecho con ♥ para la comunidad de QA · Proyecto open source — las contribuciones son bienvenidas (mirá <code>CONTRIBUTING.md</code>).",

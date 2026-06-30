@@ -85,17 +85,29 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link" href="ai-role.html">
+        <a class="nav-link" href="components.html">
           <span class="nav-link__num">07</span>
+          <span data-i18n="nav.components">Componentes clave</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
     </aside>
@@ -349,6 +361,27 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
 //   1) Save it once after logging in: await context.storageState({ path: "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-string">" });
 //   2) Reuse it in playwright.config.js: use: { storageState: "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-punctuation">"</span> <span class="tok-punctuation">}</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">⚠️</div>
+              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
+              <div class="mock-http">HTTP 500 · Internal Server Error</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">cy.intercept(..., { statusCode: 500 })</code>
+                <code class="mock-tag">route.fulfill({ status: 500 })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="pw.rung6.title">CI + trace viewer</h3>
         <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>playwright.config.js</code> activás <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) y reportes HTML. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>npx playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>
         <div class="code-block">
