@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="page.path">Ruta de aprendizaje</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--playwright-ruta">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+          <a class="nav-link nav-sublink" href="playwright-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="playwright-ruta.html" aria-current="page">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span></div>
+        <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
+        <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
+        <ol class="steps roadmap">
+            <li>
+              <a class="roadmap__link" href="#pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="pw.rung2.desc">Dominá getByRole/Label/Text. Filtrá, encadená y manejá listas con .nth().</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="pw.rung3.desc">Aprendé las web-first assertions y por qué casi nunca esperás a mano.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="pw.rung4.desc">Hooks, fixtures propias y Page Object Model para suites que escalan.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#pw-rung-5" data-i18n="pw.rung5.title">Network y auth</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="pw.rung5.desc">Interceptá con page.route(), mockeá APIs y reusá sesión con storageState.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="pw.rung6.desc">Integralo al pipeline, activá traces y reportes. Acá es donde brilla.</span>
+            </li>
+        </ol>
+        <h3 class="block-label" id="pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</h3>
+        <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first()</code>/<code>.last()</code> y encadenás para llegar al elemento exacto.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Locators are lazy: they describe HOW to find an element and resolve</span>
+<span class="tok-comment">// at the moment you act or assert. Prefer user-facing queries.</span>
+<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-string">", { name: "</span>Sign <span class="tok-keyword">in</span><span class="tok-string">" }).click();
+await page.getByLabel("</span>Email<span class="tok-string">").fill("</span>demo<span class="tok-punctuation">@</span>acme<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-string">");
+await page.getByText("</span>Welcome<span class="tok-string">").click();
+
+// Filter and narrow down lists:
+const rows = page.getByRole("</span>row<span class="tok-string">");
+await rows.filter({ hasText: "</span>book<span class="tok-string">" }).getByRole("</span>button<span class="tok-string">", { name: "</span>Remove<span class="tok-string">" }).click();
+
+// Index into a list with .nth() (0-based), or .first() / .last():
+await page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").nth(2).click();
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-punctuation">")).</span><span class="tok-function">toHaveCount</span><span class="tok-punctuation">(</span><span class="tok-number">3</span><span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Order #42</h4>
+                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
+              </div>
+              <div class="mock-total">
+                <span>Total</span><strong>250</strong>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <ul class="mock-list">
+                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
+              </ul>
+              <div class="mock-tags-row">
+                <code class="mock-tag">.order-items li</code>
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(3)</code>
+                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" id="pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</h3>
+        <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, <code>expect(valor).toBe(...)</code> no reintenta.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Web-first assertions auto-retry until they pass or hit the timeout.</span>
+<span class="tok-comment">// You almost never wait manually.</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>heading<span class="tok-string">")).toHaveText("</span>Order <span class="tok-comment">#42");</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).toHaveText("</span>PAID<span class="tok-string">");
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).toHaveCount(3);
+await expect(page.getByTestId("</span>pay<span class="tok-punctuation">-</span>btn<span class="tok-string">")).toBeDisabled();
+
+// Non-retrying assertions are for plain values (not the DOM):
+expect(1 + 1).toBe(2);
+
+// Need a specific state? Wait for the CONDITION, not a sleep:
+await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
+await expect(page.getByText("</span>Payment confirmed<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-total">
+                <span>Total</span>
+                <span class="mock-spinner" aria-hidden="true"></span>
+                <span class="mock-loading">loading…</span>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--bad">✗ sleep(1000) → flaky</code>
+                <code class="mock-tag mock-tag--good">✓ toHaveText("250") → auto-retry</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" id="pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</h3>
+        <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>hooks</strong> (<code>beforeEach</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una <strong>fixture</strong> propia con <code>base.extend()</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// orders.page.js — a Page Object encapsulates selectors + actions.</span>
+<span class="tok-keyword">export</span> <span class="tok-keyword">class</span> OrderPage <span class="tok-punctuation">{</span>
+  <span class="tok-keyword">constructor</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
+    <span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">page</span> <span class="tok-punctuation">=</span> page<span class="tok-punctuation">;</span>
+    <span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">total</span> <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">");
+    this.status = page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">");
+  }
+  async goto(id) { await this.page.goto(`/orders/${id}`); }
+}
+
+// fixtures.js — expose the Page Object as a custom fixture.
+import { test as base, expect } from "</span><span class="tok-punctuation">@</span>playwright<span class="tok-punctuation">/</span>test<span class="tok-string">";
+import { OrderPage } from "</span><span class="tok-punctuation">./</span>orders<span class="tok-punctuation">.</span><span class="tok-property">page</span><span class="tok-punctuation">.</span><span class="tok-property">js</span><span class="tok-string">";
+
+export const test = base.extend({
+  orderPage: async ({ page }, use) =&gt; { await use(new OrderPage(page)); },
+});
+
+// order.spec.js — hooks + the fixture keep tests clean.
+test.beforeEach(async ({ orderPage }) =&gt; { await orderPage.goto(42); });
+
+test("</span>VerifyOrder<span class="tok-string">", async ({ orderPage }) =&gt; {
+  await expect(orderPage.total).toHaveText("</span><span class="tok-number">250</span><span class="tok-string">");
+  await expect(orderPage.status).toHaveText("</span>PAID<span class="tok-punctuation">");</span>
+<span class="tok-punctuation">});</span></code></pre>
+        </div>
+        <h3 class="block-label" id="pw-rung-5" data-i18n="pw.rung5.title">Network y auth</h3>
+        <div class="prose" data-i18n-html="pw.rung5.body"><p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storageState</code> y la reusás en la config. Menos flakiness, más velocidad.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Mock an API so the test is fast and deterministic (no real backend).</span>
+<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">("**/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">", (route) =&gt;
+  route.fulfill({
+    status: 200,
+    contentType: "</span>application<span class="tok-punctuation">/</span>json<span class="tok-string">",
+    body: JSON.stringify({ total: 250, status: "</span>PAID<span class="tok-string">", items: ["</span>book<span class="tok-string">"] }),
+  })
+);
+await page.goto("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).toHaveText("</span><span class="tok-number">250</span><span class="tok-string">");
+
+// Reuse a logged-in session across tests with storageState:
+//   1) Save it once after logging in: await context.storageState({ path: "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-string">" });
+//   2) Reuse it in playwright.config.js: use: { storageState: "</span>auth<span class="tok-punctuation">.</span><span class="tok-property">json</span><span class="tok-punctuation">"</span> <span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">⚠️</div>
+              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
+              <div class="mock-http">HTTP 500 · Internal Server Error</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">cy.intercept(..., { statusCode: 500 })</code>
+                <code class="mock-tag">route.fulfill({ status: 500 })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" id="pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</h3>
+        <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>playwright.config.js</code> activás <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) y reportes HTML. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>npx playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// playwright.config.js — traces + HTML report + CI retries.</span>
+<span class="tok-keyword">export</span> <span class="tok-keyword">default</span> <span class="tok-punctuation">{</span>
+  use<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
+    baseURL<span class="tok-punctuation">:</span> <span class="tok-string">"http://localhost:3000"</span><span class="tok-punctuation">,</span>
+    trace<span class="tok-punctuation">:</span> <span class="tok-string">"on-first-retry"</span><span class="tok-punctuation">,</span>   <span class="tok-comment">// record a trace when a test is retried</span>
+  <span class="tok-punctuation">},</span>
+  reporter<span class="tok-punctuation">:</span> <span class="tok-punctuation">[["</span>html<span class="tok-string">"], ["</span>list<span class="tok-punctuation">"]],</span>
+  retries<span class="tok-punctuation">:</span> process<span class="tok-punctuation">.</span><span class="tok-property">env</span><span class="tok-punctuation">.</span><span class="tok-property">CI</span> <span class="tok-punctuation">?</span> <span class="tok-number">2</span> <span class="tok-punctuation">:</span> <span class="tok-number">0</span><span class="tok-punctuation">,</span>
+<span class="tok-punctuation">};</span></code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">YAML</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment"># .github/workflows/e2e.yml — run Playwright on every pull request.</span>
+<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> npm ci
+<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> npx playwright install <span class="tok-punctuation">--</span><span class="tok-keyword">with</span><span class="tok-punctuation">-</span>deps
+<span class="tok-punctuation">-</span> run<span class="tok-punctuation">:</span> npx playwright test
+<span class="tok-punctuation">-</span> uses<span class="tok-punctuation">:</span> actions<span class="tok-punctuation">/</span>upload<span class="tok-punctuation">-</span>artifact<span class="tok-punctuation">@</span>v4
+  <span class="tok-keyword">if</span><span class="tok-punctuation">:</span> <span class="tok-function">always</span><span class="tok-punctuation">()</span>
+  <span class="tok-keyword">with</span><span class="tok-punctuation">:</span>
+    name<span class="tok-punctuation">:</span> playwright<span class="tok-punctuation">-</span>report
+    path<span class="tok-punctuation">:</span> playwright<span class="tok-punctuation">-</span>report<span class="tok-punctuation">/</span>
+<span class="tok-comment"># Locally, inspect a failure: npx playwright show-trace trace.zip</span></code></pre>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="playwright-hola-mundo.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="playwright-componentes.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="page.components">Componentes clave</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

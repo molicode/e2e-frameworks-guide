@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="page.components">Componentes clave</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--cypress-componentes">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+          <a class="nav-link nav-sublink" href="cypress-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="cypress-componentes.html" aria-current="page">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <h2 class="section__title" data-i18n="page.components">Componentes clave</h2>
+        <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
+        <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
+        <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Form validation (Cypress) — error shows, submit stays disabled.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>email<span class="tok-string">").type("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">contains</span><span class="tok-punctuation">(".</span><span class="tok-property">error</span><span class="tok-string">", "</span>valid email<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">disabled</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/signup</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Create account</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input mock-input--bad">not-an-email</span>
+                <span class="mock-err">Enter a valid email<code class="mock-tag">getByText("valid email")</code></span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn mock-btn--off">Sign up</span>
+                <code class="mock-tag">toBeDisabled()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.select.label">Select / dropdown</h3>
+        <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Select / dropdown (Cypress) — .select() picks the option.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>country<span class="tok-string">").select("</span>AR<span class="tok-string">");
+cy.get("</span><span class="tok-comment">#country").should("have.value", "AR");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/checkout</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Shipping</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Country</span>
+                <span class="mock-select">Argentina <i>▾</i></span>
+                <code class="mock-tag">selectOption("AR")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("combobox")</code>
+                <code class="mock-tag">toHaveValue("AR")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.checkbox.label">Checkbox / toggle</h3>
+        <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Checkbox (Cypress) — check and assert state.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>name<span class="tok-punctuation">=</span>optIn<span class="tok-punctuation">]").</span><span class="tok-function">check</span><span class="tok-punctuation">().</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">checked</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/settings</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Preferences</h4>
+              <label class="mock-check">
+                <span class="mock-box mock-box--on">✓</span>
+                <span>Email me about updates</span>
+                <code class="mock-tag">getByRole("checkbox")</code>
+              </label>
+              <div class="mock-toggle-row">
+                <span>Dark mode</span>
+                <span class="mock-switch mock-switch--on"><i></i></span>
+                <code class="mock-tag">toBeChecked()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.modal.label">Modal / diálogo</h3>
+        <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Modal / dialog (Cypress) — open, confirm, assert it's gone.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span><span class="tok-keyword">delete</span><span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-keyword">as</span><span class="tok-punctuation">("</span>dlg<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">@</span>dlg<span class="tok-string">").contains("</span>button<span class="tok-string">", "</span>Delete<span class="tok-string">").click();
+cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage">
+              <div class="mock-dialog" role="dialog">
+                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-error-msg">This action can't be undone.</p>
+                <div class="mock-btn-row">
+                  <span class="mock-btn mock-btn--ghost">Cancel</span>
+                  <span class="mock-btn mock-btn--danger">Delete</span>
+                </div>
+                <div class="mock-tags-row">
+                  <code class="mock-tag">getByRole("dialog")</code>
+                  <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.table.label">Tabla de datos</h3>
+        <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Data table (Cypress) — assert the row count and a specific cell.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>table tbody tr<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-string">", 3);
+cy.get("</span>table<span class="tok-string">").contains("</span>td<span class="tok-string">", "</span>Ada Lovelace<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">admin.example.com/users</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Users</h4>
+              <table class="mock-table">
+                <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Ada Lovelace</td><td>Admin</td><td>Active</td></tr>
+                  <tr><td>Alan Turing</td><td>Editor</td><td>Active</td></tr>
+                  <tr><td>Grace Hopper</td><td>Viewer</td><td>Invited</td></tr>
+                </tbody>
+              </table>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(4)</code>
+                <code class="mock-tag">getByRole("cell", { name: "Admin" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.toast.label">Toast / alerta</h3>
+        <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Toast / alert (Cypress) — appears, then disappears on its own.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span>save<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>contain<span class="tok-string">", "</span>saved<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span> <span class="tok-comment">// auto-dismissed</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage mock-stage--top">
+              <div class="mock-toast" role="alert">
+                <span class="mock-toast__icon">✓</span>
+                <span>Order saved successfully</span>
+                <code class="mock-tag">getByRole("alert")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">toBeVisible()</code>
+                <code class="mock-tag">toContainText("saved")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.a11y.label">Accesibilidad (a11y)</h3>
+        <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Accessibility (Cypress) — cypress-axe runs axe in the browser.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">injectAxe</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">checkA11y</span><span class="tok-punctuation">();</span> <span class="tok-comment">// fails the test on any violation</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Accessibility scan</h4>
+              <ul class="mock-a11y-list">
+                <li class="mock-a11y-ok">Buttons have an accessible name</li>
+                <li class="mock-a11y-ok">Form inputs have labels</li>
+                <li class="mock-a11y-bad">Image missing alt text <code>img.logo</code></li>
+                <li class="mock-a11y-ok">Color contrast &ge; 4.5:1</li>
+              </ul>
+              <div class="mock-a11y-score">1 violation</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">@axe-core/playwright</code>
+                <code class="mock-tag">expect(violations).toEqual([])</code>
+                <code class="mock-tag">getByRole("button", { name })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="cypress-ruta.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="cypress-criticos.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

@@ -33,6 +33,13 @@ I18n.register("es", {
   "ui.next": "Siguiente",
   "ui.mockCaption": "👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.",
 
+  /* ---- Sub-páginas de cada framework ---- */
+  "page.philosophy": "Filosofía y cuándo usarlo",
+  "page.hello": "Hola mundo",
+  "page.path": "Ruta de aprendizaje",
+  "page.components": "Componentes clave",
+  "page.cases": "Casos críticos",
+
   /* ---- Navegación ---- */
   "nav.intro": "Introducción",
   "nav.fundamentals": "Fundamentos",
@@ -152,7 +159,6 @@ I18n.register("es", {
     "<p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>driver.wait(...)</code> antes de cada assertion y traduce un test de Java a JavaScript si cambiás de stack.</p>",
 
   "sel.rung1.title": "WebDriver y navegación",
-  "sel.rung1.desc": "Levantá un driver, abrí una página y cerrá con quit(). Entendé el ciclo de vida.",
   "sel.rung1.body":
     "<p>Todo test de Selenium empieza creando un <strong>driver</strong> (la sesión del navegador) y termina con <code>driver.quit()</code> para liberarla. En el medio navegás con <code>driver.get(url)</code>. Pensá el driver como el control remoto del navegador: si no lo apagás, queda consumiendo recursos.</p>",
   "sel.rung2.title": "Localizar elementos",
@@ -193,7 +199,6 @@ I18n.register("es", {
     "<p>La AI convierte un caso en lenguaje natural a comandos <code>cy.*</code>, sugiere el <code>.should()</code> correcto para cada verificación y propone <code>data-cy</code> como selectores estables.</p>",
 
   "cyp.rung1.title": "El runner interactivo",
-  "cyp.rung1.desc": "Corré cypress open, mirá el time-travel y entendé describe / it.",
   "cyp.rung1.body":
     "<p>Cypress trae un <strong>runner visual</strong>: con <code>cypress open</code> ves cada comando ejecutarse en vivo y podés viajar en el tiempo a cualquier paso (<em>time-travel</em>). Los tests se organizan con <code>describe()</code> (un grupo) e <code>it()</code> (un caso), igual que en muchos frameworks de JS.</p>",
   "cyp.rung2.title": "Comandos y la cadena async",
@@ -234,7 +239,6 @@ I18n.register("es", {
     "<p>La AI genera el test completo desde una descripción, recomienda locators accesibles (por rol/etiqueta) y, ante un fallo, lee la traza y te explica la causa probable.</p>",
 
   "pw.rung1.title": "Setup y primer test",
-  "pw.rung1.desc": "Instalá, corré el ejemplo en modo --ui y entendé la estructura test().",
   "pw.rung1.body":
     "<p>Con <code>npm init playwright@latest</code> tenés config, tests de ejemplo y workflow de CI en un comando. Cada test es una función <code>test('nombre', async ({ page }) =&gt; { … })</code>. Corré <code>npx playwright test --ui</code> para el modo interactivo con watch y time-travel.</p>",
   "pw.rung2.title": "Locators y acciones",
@@ -395,7 +399,6 @@ I18n.register("es", {
     "<strong>Lo importante:</strong> la automatización no busca cero bugs, busca <em>confianza para entregar seguido</em>. Empezá chico, mantené verde y crecé desde ahí.",
 
   /* ---- Navegación / índice de las secciones nuevas ---- */
-  "nav.components": "Componentes clave",
   "nav.keyterms": "Conceptos clave",
   "nav.biblio": "Bibliografía",
   "home.key-terms": "Glosario de términos clave de QA para entrevistas, ordenado por categoría.",
@@ -603,7 +606,6 @@ I18n.register("es", {
   "kt.sec.sensitive": "Exposición de datos sensibles: tokens, contraseñas o tarjetas filtrados en respuestas, logs o URLs.",
 
   /* ---- Casos críticos por framework (compartidos) ---- */
-  "ui.cases": "Casos críticos",
   "cases.intro":
     "<p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p>",
   "crit.docs.label": "Validación de documentos legales",

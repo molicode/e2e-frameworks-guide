@@ -943,10 +943,10 @@ Multi-agent variant (higher confidence):
 /* ------------------------------------------------------------------ *
  * 2. Helpers to build a framework "learning path" (roadmap + rungs)   *
  * ------------------------------------------------------------------ */
-function roadmapItems(prefix, count) {
+// Roadmap entries for rungs [from..to]; each links to that rung's heading.
+function roadmapItems(prefix, from, to) {
   const items = [];
-  for (let i = 1; i <= count; i++) {
-    // anchor links the roadmap entry to that rung's detailed heading below.
+  for (let i = from; i <= to; i++) {
     items.push({
       title: `${prefix}.rung${i}.title`,
       desc: `${prefix}.rung${i}.desc`,
@@ -956,10 +956,11 @@ function roadmapItems(prefix, count) {
   return items;
 }
 
-function rungBlocks(prefix, rungs) {
+// Detailed blocks for a subset of rungs, numbered starting at startN.
+function rungBlocks(prefix, rungs, startN) {
   const blocks = [];
   rungs.forEach((rung, i) => {
-    const n = i + 1;
+    const n = startN + i;
     blocks.push({ type: "label", text: `${prefix}.rung${n}.title`, anchor: `${prefix}-rung-${n}` });
     blocks.push({ type: "prose", html: `${prefix}.rung${n}.body` });
     rung.codes.forEach((sample) => blocks.push({ type: "code", sample }));
@@ -970,13 +971,9 @@ function rungBlocks(prefix, rungs) {
 }
 
 // The critical real-world scenarios EVERY framework must cover, in its own
-// idiom. Labels/intros are shared (same concept); only the code + framework
-// differ. `cases` is an array of { labelKey, bodyKey, sample, mock }.
+// idiom. Labels/intros are shared; only the code + framework differ.
 function casesBlocks(cases) {
-  const blocks = [
-    { type: "label", text: "ui.cases" },
-    { type: "prose", html: "cases.intro" },
-  ];
+  const blocks = [{ type: "prose", html: "cases.intro" }];
   cases.forEach((c) => {
     blocks.push({ type: "label", text: c.labelKey });
     blocks.push({ type: "prose", html: c.bodyKey });
@@ -1009,10 +1006,7 @@ function frameworkComponents(sampleFor) {
 }
 
 function componentsBlocks(components) {
-  const blocks = [
-    { type: "label", text: "nav.components" },
-    { type: "prose", html: "components.intro" },
-  ];
+  const blocks = [{ type: "prose", html: "components.intro" }];
   components.forEach((c) => {
     blocks.push({ type: "label", text: c.labelKey });
     blocks.push({ type: "prose", html: c.bodyKey });
@@ -1022,30 +1016,43 @@ function componentsBlocks(components) {
   return blocks;
 }
 
-function frameworkSection(id, navKey, prefix, chip, rungs, cases, components) {
-  return {
-    id,
-    navKey,
-    chip,
-    blocks: [
-      { type: "prose", html: `${prefix}.lead` },
-      { type: "label", text: "ui.philosophy" },
-      { type: "prose", html: `${prefix}.philosophy` },
-      { type: "label", text: "ui.when" },
-      { type: "prose", html: `${prefix}.when` },
-      { type: "label", text: "ui.path" },
-      { type: "roadmap", items: roadmapItems(prefix, rungs.length) },
-      ...rungBlocks(prefix, rungs),
-      ...componentsBlocks(components),
-      ...casesBlocks(cases),
-      { type: "label", text: "ui.vs" },
-      {
-        type: "vs",
-        manual: { title: `${prefix}.manual.title`, body: `${prefix}.manual.body` },
-        ai: { title: `${prefix}.ai.title`, body: `${prefix}.ai.body` },
-      },
-    ],
-  };
+// A framework is a GROUP of sub-pages (so students don't scroll forever):
+// Philosophy · Hello world · Learning path · Key components · Critical cases.
+// Returns an array of leaf sections sharing { group, groupKey, chip }.
+function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components) {
+  const grp = { group: id, groupKey: navKey, chip };
+  return [
+    {
+      ...grp, id: `${id}-filosofia`, navKey: "page.philosophy",
+      blocks: [
+        { type: "prose", html: `${prefix}.lead` },
+        { type: "label", text: "ui.philosophy" },
+        { type: "prose", html: `${prefix}.philosophy` },
+        { type: "label", text: "ui.when" },
+        { type: "prose", html: `${prefix}.when` },
+        { type: "label", text: "ui.vs" },
+        {
+          type: "vs",
+          manual: { title: `${prefix}.manual.title`, body: `${prefix}.manual.body` },
+          ai: { title: `${prefix}.ai.title`, body: `${prefix}.ai.body` },
+        },
+      ],
+    },
+    {
+      ...grp, id: `${id}-hola-mundo`, navKey: "page.hello",
+      blocks: rungBlocks(prefix, rungs.slice(0, 1), 1),
+    },
+    {
+      ...grp, id: `${id}-ruta`, navKey: "page.path",
+      blocks: [
+        { type: "label", text: "ui.path" },
+        { type: "roadmap", items: roadmapItems(prefix, 2, rungs.length) },
+        ...rungBlocks(prefix, rungs.slice(1), 2),
+      ],
+    },
+    { ...grp, id: `${id}-componentes`, navKey: "page.components", blocks: componentsBlocks(components) },
+    { ...grp, id: `${id}-criticos`, navKey: "page.cases", blocks: casesBlocks(cases) },
+  ];
 }
 
 // The four shared critical cases (label/body keys reused across frameworks).
@@ -1145,7 +1152,7 @@ export const SECTIONS = [
     ],
   },
 
-  frameworkSection("selenium", "nav.selenium", "sel",
+  ...frameworkGroup("selenium", "nav.selenium", "sel",
     { label: "Selenium", color: "var(--fw-selenium)" }, [
       { codes: ["seleniumSetup", "seleniumFirst"], mock: "login" }, // 1 WebDriver & navigation
       { codes: ["selLocate"], mock: "order" },        // 2 Locating elements
@@ -1156,7 +1163,7 @@ export const SECTIONS = [
     ], frameworkCases("selApi", "selMoney", "selDocs", "selSecurity"),
        frameworkComponents((k) => "sel" + k)),
 
-  frameworkSection("cypress", "nav.cypress", "cyp",
+  ...frameworkGroup("cypress", "nav.cypress", "cyp",
     { label: "Cypress", color: "var(--fw-cypress)" }, [
       { codes: ["cypressSetup", "cypressFirst"], mock: "login" }, // 1 Interactive runner
       { codes: ["cypChain"] },                        // 2 Commands & async chain
@@ -1167,7 +1174,7 @@ export const SECTIONS = [
     ], frameworkCases("cypApi", "cypMoney", "cypDocs", "cypSecurity"),
        frameworkComponents((k) => "cyp" + k)),
 
-  frameworkSection("playwright", "nav.playwright", "pw",
+  ...frameworkGroup("playwright", "nav.playwright", "pw",
     { label: "Playwright", color: "var(--fw-playwright)" }, [
       { codes: ["playwrightSetup", "playwrightFirst"], mock: "login" }, // 1 Setup & first test
       { codes: ["pwLocators"], mock: "order" },           // 2 Locators & actions

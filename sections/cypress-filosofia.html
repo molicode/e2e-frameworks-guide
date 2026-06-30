@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="nav.best">Buenas prácticas</title>
+  <title data-i18n="page.philosophy">Filosofía y cuándo usarlo</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--best-practices">
+<body class="page--section page--cypress-filosofia">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -73,10 +73,25 @@
           <span class="nav-link__num">03</span>
           <span data-i18n="nav.selenium">Selenium</span>
         </a>
-        <a class="nav-link nav-group" href="cypress-filosofia.html">
+        <a class="nav-link nav-group is-active-group" href="cypress-filosofia.html">
           <span class="nav-link__num">04</span>
           <span data-i18n="nav.cypress">Cypress</span>
         </a>
+          <a class="nav-link nav-sublink is-active" href="cypress-filosofia.html" aria-current="page">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
         <a class="nav-link nav-group" href="playwright-filosofia.html">
           <span class="nav-link__num">05</span>
           <span data-i18n="nav.playwright">Playwright</span>
@@ -93,7 +108,7 @@
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
-        <a class="nav-link is-active" href="best-practices.html" aria-current="page">
+        <a class="nav-link" href="best-practices.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
@@ -109,28 +124,40 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <span class="section__eyebrow">09</span>
-        <h2 class="section__title" data-i18n="nav.best">Buenas prácticas</h2>
-        <div class="prose" data-i18n-html="best.lead"><p>Cerramos con principios que aplican sin importar el framework o si usás AI o no. Son los hábitos que separan una suite confiable de un dolor de cabeza.</p></div>
-        <h3 class="block-label" data-i18n="best.practices.label">Principios que perduran</h3>
-        <div class="prose" data-i18n-html="best.practices.body"><ul><li><strong>Esperá condiciones, no tiempo.</strong> Cero <code>sleep</code> fijos.</li><li><strong>Selectores estables.</strong> Preferí roles, etiquetas y <code>data-testid</code> sobre css/xpath profundos.</li><li><strong>Tests independientes.</strong> Cada uno crea y limpia sus propios datos; el orden no debe importar.</li><li><strong>Un test, una intención.</strong> Nombres claros y un objetivo por test.</li><li><strong>Respetá la pirámide.</strong> Pocos E2E, muchos unit.</li><li><strong>Que falle bien.</strong> Un test que nunca puede fallar no protege nada.</li><li><strong>La AI asiste, vos validás.</strong> Revisá y entendé todo lo que entra al repo.</li></ul></div>
-        <h3 class="block-label" data-i18n="best.next.label">Próximos pasos</h3>
-        <ol class="steps">
-            <li data-i18n-html="best.step1"><strong>Elegí un framework</strong> y resolvé el caso <code>VerifyOrder</code> de esta guía de punta a punta.</li>
-            <li data-i18n-html="best.step2"><strong>Integralo a CI</strong> (GitHub Actions, GitLab CI…) para que corra en cada pull request.</li>
-            <li data-i18n-html="best.step3"><strong>Adoptá el patrón Page Object</strong> o helpers para no repetir selectores por toda la suite.</li>
-            <li data-i18n-html="best.step4"><strong>Sumá AI a tu flujo:</strong> usala para generar casos y revisar tests, siempre validando el output.</li>
-            <li data-i18n-html="best.step5"><strong>Contribuí a esta guía:</strong> es open source. Agregá un idioma, una sección o un ejemplo (ver el README).</li>
-        </ol>
-        <div class="callout callout--ok" data-i18n-html="best.callout"><strong>Lo importante:</strong> la automatización no busca cero bugs, busca <em>confianza para entregar seguido</em>. Empezá chico, mantené verde y crecé desde ahí.</div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <h2 class="section__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</h2>
+        <div class="prose" data-i18n-html="cyp.lead"><p><strong>Cypress</strong> reinventó la experiencia de escribir tests E2E con un runner visual, recarga en vivo y una API encadenable pensada para la felicidad del desarrollador.</p></div>
+        <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
+        <div class="prose" data-i18n-html="cyp.philosophy"><p>Cypress corre <em>dentro</em> del navegador, en el mismo loop de ejecución que tu app. Esto le da acceso directo al DOM y un <strong>auto-retry</strong> incorporado: cada comando se reintenta hasta que pasa o expira. Su API es encadenable (<code>cy.get(...).should(...)</code>) y muy legible.</p></div>
+        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
+        <div class="prose" data-i18n-html="cyp.when"><p>Elegí Cypress para apps web modernas (especialmente SPAs) donde valorás una <strong>DX excelente</strong>, el time-travel debugger y una curva de aprendizaje suave. Tené en cuenta sus límites: foco en Chromium/Firefox y un modelo de una sola pestaña/origen (aunque mejoró con los años).</p></div>
+        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
+        <div class="vs-grid">
+          <div class="vs-card vs-card--manual">
+            <div class="vs-card__head">
+              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
+              <span data-i18n="cyp.manual.title">A mano</span>
+            </div>
+            <div data-i18n-html="cyp.manual.body"><p>Encadenás comandos y assertions con <code>.should()</code>. El auto-retry te quita los <code>sleep</code>, pero vos elegís los selectores y los escenarios.</p></div>
+            
+          </div>
+          <div class="vs-card vs-card--ai">
+            <div class="vs-card__head">
+              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
+              <span data-i18n="cyp.ai.title">Con AI</span>
+            </div>
+            <div data-i18n-html="cyp.ai.body"><p>La AI convierte un caso en lenguaje natural a comandos <code>cy.*</code>, sugiere el <code>.should()</code> correcto para cada verificación y propone <code>data-cy</code> como selectores estables.</p></div>
+            
+          </div>
+        </div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="prompts.html">
+          <a class="page-nav__link page-nav__prev" href="selenium-criticos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="nav.prompts">Ejemplos con AI</span>
+            <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="key-terms.html">
+          <a class="page-nav__link page-nav__next" href="cypress-hola-mundo.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="nav.keyterms">Conceptos clave</span>
+            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
           </a>
         </nav>
       </div>

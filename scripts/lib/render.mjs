@@ -189,7 +189,42 @@ function renderBlock(block, dict) {
 }
 
 /* ---- section header (hero for intro, numbered title otherwise) ---- */
-function sectionHeader(section, num, dict) {
+// Collapse the flat section list into TOP-LEVEL entries: a standalone section,
+// or a framework GROUP (its sub-pages share section.group). Used for numbering,
+// the nested sidebar and the index cards.
+function topLevelEntries(sections) {
+  const entries = [];
+  const seen = new Set();
+  sections.forEach((s) => {
+    if (s.group) {
+      if (!seen.has(s.group)) {
+        seen.add(s.group);
+        entries.push({
+          type: "group", group: s.group, groupKey: s.groupKey, chip: s.chip,
+          first: s, members: sections.filter((x) => x.group === s.group),
+        });
+      }
+    } else {
+      entries.push({ type: "single", section: s });
+    }
+  });
+  return entries;
+}
+
+// The top-level number for a section (1-based, groups count once).
+function topNumberOf(sections, section) {
+  const entries = topLevelEntries(sections);
+  for (let i = 0; i < entries.length; i++) {
+    const e = entries[i];
+    if ((e.type === "single" && e.section === section) ||
+        (e.type === "group" && e.members.includes(section))) {
+      return i + 1;
+    }
+  }
+  return 0;
+}
+
+function sectionHeader(section, topNum, dict) {
   if (section.hero) {
     return `
         <div class="hero">
@@ -198,11 +233,17 @@ function sectionHeader(section, num, dict) {
           <p class="hero__lead" data-i18n="intro.subtitle">${escText(t(dict, "intro.subtitle"))}</p>
         </div>`;
   }
+  // Framework sub-page: breadcrumb chip (framework) + sub-page title.
+  if (section.group) {
+    return `
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:${section.chip.color}">${escText(section.chip.label)}</span></div>
+        <h2 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h2>`;
+  }
   const chip = section.chip
     ? ` <span class="fw-chip" style="--chip-color:${section.chip.color};margin-left:var(--space-3)">${escText(section.chip.label)}</span>`
     : "";
   return `
-        <span class="section__eyebrow">${String(num).padStart(2, "0")}${chip}</span>
+        <span class="section__eyebrow">${String(topNum).padStart(2, "0")}${chip}</span>
         <h2 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h2>`;
 }
 
@@ -224,22 +265,48 @@ function pager(sections, index, dict) {
         </nav>`;
 }
 
-/* ---- the shared sidebar (links to every section page) ---- */
+/* ---- the shared, nested sidebar ---- */
 export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
   const home = `
         <a class="nav-link nav-link--home" href="${homeHref}">
           <span class="nav-link__num">⌂</span>
           <span data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
         </a>`;
-  const links = sections
-    .map((s, i) => {
-      const active = s.id === activeId ? " is-active" : "";
-      const cur = s.id === activeId ? ' aria-current="page"' : "";
-      return `
+
+  const entries = topLevelEntries(sections);
+  const links = entries
+    .map((e, i) => {
+      const num = String(i + 1).padStart(2, "0");
+      if (e.type === "single") {
+        const s = e.section;
+        const active = s.id === activeId ? " is-active" : "";
+        const cur = s.id === activeId ? ' aria-current="page"' : "";
+        return `
         <a class="nav-link${active}" href="${sectionHref(s.id)}"${cur}>
-          <span class="nav-link__num">${String(i + 1).padStart(2, "0")}</span>
+          <span class="nav-link__num">${num}</span>
           <span data-i18n="${s.navKey}">${escText(t(dict, s.navKey))}</span>
         </a>`;
+      }
+      // group: header (links to its first sub-page) + sub-pages when active.
+      const isActiveGroup = e.members.some((m) => m.id === activeId);
+      const headActive = isActiveGroup ? " is-active-group" : "";
+      const sub = isActiveGroup
+        ? e.members
+            .map((m) => {
+              const a = m.id === activeId ? " is-active" : "";
+              const cur = m.id === activeId ? ' aria-current="page"' : "";
+              return `
+          <a class="nav-link nav-sublink${a}" href="${sectionHref(m.id)}"${cur}>
+            <span data-i18n="${m.navKey}">${escText(t(dict, m.navKey))}</span>
+          </a>`;
+            })
+            .join("")
+        : "";
+      return `
+        <a class="nav-link nav-group${headActive}" href="${sectionHref(e.first.id)}">
+          <span class="nav-link__num">${num}</span>
+          <span data-i18n="${e.groupKey}">${escText(t(dict, e.groupKey))}</span>
+        </a>${sub}`;
     })
     .join("");
   return `<nav class="sidebar__nav">${home}${links}\n      </nav>`;
@@ -328,7 +395,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
 /* ---- render a section page's <main> inner content ---- */
 export function sectionMain(sections, index, dict) {
   const section = sections[index];
-  const header = sectionHeader(section, index + 1, dict);
+  const header = sectionHeader(section, topNumberOf(sections, section), dict);
   const blocks = section.blocks.map((b) => renderBlock(b, dict)).join("");
   const foot = pager(sections, index, dict);
   return `${header}${blocks}${foot}`;
@@ -336,16 +403,20 @@ export function sectionMain(sections, index, dict) {
 
 /* ---- render the index / landing page's <main> inner content ---- */
 export function indexMain(sections, dict, { sectionHref }) {
-  const cards = sections
-    .map(
-      (s, i) => `
-          <a class="toc-card" href="${sectionHref(s.id)}">
-            <span class="toc-card__num">${String(i + 1).padStart(2, "0")}</span>
-            <span class="toc-card__title" data-i18n="${s.navKey}">${escText(t(dict, s.navKey))}</span>
-            <span class="toc-card__desc" data-i18n="home.${s.id}">${escText(t(dict, "home." + s.id))}</span>
+  const cards = topLevelEntries(sections)
+    .map((e, i) => {
+      const num = String(i + 1).padStart(2, "0");
+      const id = e.type === "single" ? e.section.id : e.group;
+      const href = e.type === "single" ? e.section.id : e.first.id;
+      const titleKey = e.type === "single" ? e.section.navKey : e.groupKey;
+      return `
+          <a class="toc-card" href="${sectionHref(href)}">
+            <span class="toc-card__num">${num}</span>
+            <span class="toc-card__title" data-i18n="${titleKey}">${escText(t(dict, titleKey))}</span>
+            <span class="toc-card__desc" data-i18n="home.${id}">${escText(t(dict, "home." + id))}</span>
             <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>`
-    )
+          </a>`;
+    })
     .join("");
   return `
         <div class="hero hero--home">

@@ -85,6 +85,21 @@
   background: var(--accent-soft);
   font-weight: 600;
 }
+
+/* Nested nav: framework group header + its sub-pages */
+.nav-group.is-active-group {
+  color: var(--text);
+  font-weight: 650;
+}
+.nav-sublink {
+  padding-left: calc(var(--space-3) + 1.4em + var(--space-3));
+  font-size: var(--fs-sm);
+  border-left: 2px solid var(--border);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.nav-sublink.is-active {
+  border-left-color: var(--accent);
+}
 .nav-link__num {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
@@ -123,6 +138,8 @@
   margin: 0 0 var(--space-3);
   letter-spacing: -0.02em;
 }
+/* Breadcrumb above a framework sub-page title (shows the framework chip) */
+.section__crumb { margin-bottom: var(--space-3); }
 .section__subtitle {
   font-size: var(--fs-lg);
   color: var(--text-soft);
