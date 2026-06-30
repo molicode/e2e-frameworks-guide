@@ -101,6 +101,7 @@
   --fw-skills: #f59e0b;
   --fw-maturity: #8b5cf6;
   --fw-verbs: #e11d48;
+  --fw-perf: #f97316;
 }
 
 /* --------------------------------------------------------------------------
@@ -154,4 +155,5 @@
   --fw-skills: #fbbf24;
   --fw-maturity: #a78bfa;
   --fw-verbs: #fb7185;
+  --fw-perf: #fb923c;
 }

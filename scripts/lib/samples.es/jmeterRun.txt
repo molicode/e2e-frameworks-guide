@@ -1,0 +1,8 @@
+# JMeter: armá el plan en la GUI, después corrélo headless (-n) en CI.
+# Un plan es: Thread Group (usuarios virtuales) -> Samplers (requests) ->
+# Assertions (pass/fail) -> Listeners (resultados).
+
+# Corré un plan .jmx guardado, escribí resultados crudos, después un dashboard HTML:
+jmeter -n -t orders-load.jmx -l results.jtl -e -o report/
+
+# -n sin GUI  ·  -t plan  ·  -l resultados  ·  -e -o arma el reporte HTML

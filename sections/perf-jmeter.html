@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="page.philosophy">Filosofía y cuándo usarlo</title>
+  <title data-i18n="perf.page.jmeter">JMeter</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--robot-filosofia">
+<body class="page--section page--perf-jmeter">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -89,28 +89,10 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
+        <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="robot-filosofia.html" aria-current="page">
-            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
-            <span data-i18n="page.hello">Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-ruta.html">
-            <span data-i18n="page.path">Ruta de aprendizaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-componentes.html">
-            <span data-i18n="page.components">Componentes clave</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-criticos.html">
-            <span data-i18n="page.cases">Casos críticos</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-verbos.html">
-            <span data-i18n="page.verbs">Verbos HTTP</span>
-          </a>
         <a class="nav-link nav-group" href="bdd-intro.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
@@ -119,10 +101,22 @@
           <span class="nav-link__num">10</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link nav-group" href="perf-intro.html">
+        <a class="nav-link nav-group is-active-group" href="perf-intro.html">
           <span class="nav-link__num">11</span>
           <span data-i18n="nav.perf">Performance testing</span>
         </a>
+          <a class="nav-link nav-sublink" href="perf-intro.html">
+            <span data-i18n="perf.page.intro">Qué es y qué se mide</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-k6.html">
+            <span data-i18n="perf.page.k6">k6</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="perf-jmeter.html" aria-current="page">
+            <span data-i18n="perf.page.jmeter">JMeter</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-locust.html">
+            <span data-i18n="perf.page.locust">Locust</span>
+          </a>
         <a class="nav-link" href="ai-role.html">
           <span class="nav-link__num">12</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
@@ -155,40 +149,42 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
-        <h2 class="section__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</h2>
-        <div class="prose" data-i18n-html="rf.lead"><p><strong>Robot Framework</strong> es un framework de automatización <strong>keyword-driven</strong>, open-source y basado en Python. En vez de programar, armás los tests con <strong>palabras clave</strong> legibles, casi en lenguaje natural — ideal para acceptance testing, ATDD/BDD y hasta RPA.</p></div>
-        <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
-        <div class="prose" data-i18n-html="rf.philosophy"><p>Robot Framework no maneja el navegador por sí mismo: es una <strong>capa de keywords</strong> por encima de librerías. <code>SeleniumLibrary</code> usa Selenium, <code>Browser</code> usa Playwright y <code>RequestsLibrary</code> pega a las APIs. Un test es una secuencia de keywords (<code>Open Browser</code>, <code>Input Text</code>, <code>Page Should Contain</code>) que se lee como una receta. Cuando un keyword no existe, te lo escribís en Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="rf.when"><p>Elegí Robot Framework cuando querés tests <strong>muy legibles</strong> (que pueda leer QA no-programador o gente de negocio), un enfoque <strong>keyword-driven</strong> reutilizable, reportes HTML de fábrica, o cuando hacés también <strong>RPA</strong>. El costo: la sintaxis tabular se siente rara al principio y, para lógica compleja, igual bajás a Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
-        <div class="vs-grid">
-          <div class="vs-card vs-card--manual">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
-              <span data-i18n="rf.manual.title">A mano</span>
-            </div>
-            <div data-i18n-html="rf.manual.body"><p>Componés cada test con keywords y los agrupás en <strong>resource files</strong> reutilizables. Tenés control total y máxima legibilidad, pero vos elegís los locators y las esperas.</p></div>
-            
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-perf)">Performance</span></div>
+        <h2 class="section__title" data-i18n="perf.page.jmeter">JMeter</h2>
+        <div class="prose" data-i18n-html="perf.jm.lead"><p><strong>Apache JMeter</strong> es el clásico de la industria: maduro, con interfaz gráfica y un enorme ecosistema de plugins. Armás el plan de prueba en la <strong>GUI</strong> y lo corrés sin interfaz en CI.</p></div>
+        <div class="prose" data-i18n-html="perf.jm.body"><p>Un plan se estructura en <strong>Thread Group</strong> (los usuarios virtuales), <strong>Samplers</strong> (las requests), <strong>Assertions</strong> (pasa/falla) y <strong>Listeners</strong> (resultados). Para CI, lo corrés en modo <em>non-GUI</em> (<code>-n</code>) y generás un reporte HTML.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Bash</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
           </div>
-          <div class="vs-card vs-card--ai">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
-              <span data-i18n="rf.ai.title">Con AI</span>
-            </div>
-            <div data-i18n-html="rf.ai.body"><p>La AI traduce un caso en lenguaje natural a keywords de Robot, te sugiere el keyword correcto de la librería y te arma resource files (POM) para que el test quede limpio.</p></div>
-            
-          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># JMeter: armá el plan en la GUI, después corrélo headless (-n) en CI.</span>
+<span class="tok-comment"># Un plan es: Thread Group (usuarios virtuales) -&gt; Samplers (requests) -&gt;</span>
+<span class="tok-comment"># Assertions (pass/fail) -&gt; Listeners (resultados).</span>
+
+<span class="tok-comment"># Corré un plan .jmx guardado, escribí resultados crudos, después un dashboard HTML:</span>
+jmeter <span class="tok-punctuation">-</span>n <span class="tok-punctuation">-</span>t orders<span class="tok-punctuation">-</span>load<span class="tok-punctuation">.</span><span class="tok-property">jmx</span> <span class="tok-punctuation">-</span>l results<span class="tok-punctuation">.</span><span class="tok-property">jtl</span> <span class="tok-punctuation">-</span>e <span class="tok-punctuation">-</span>o report<span class="tok-punctuation">/</span>
+
+<span class="tok-comment"># -n sin GUI  ·  -t plan  ·  -l resultados  ·  -e -o arma el reporte HTML</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># JMeter: build the plan in the GUI, then run it headless (-n) in CI.</span>
+<span class="tok-comment"># A plan is: Thread Group (virtual users) -&gt; Samplers (requests) -&gt;</span>
+<span class="tok-comment"># Assertions (pass/fail) -&gt; Listeners (results).</span>
+
+<span class="tok-comment"># Run a saved .jmx plan, write raw results, then an HTML dashboard:</span>
+jmeter <span class="tok-punctuation">-</span>n <span class="tok-punctuation">-</span>t orders<span class="tok-punctuation">-</span>load<span class="tok-punctuation">.</span><span class="tok-property">jmx</span> <span class="tok-punctuation">-</span>l results<span class="tok-punctuation">.</span><span class="tok-property">jtl</span> <span class="tok-punctuation">-</span>e <span class="tok-punctuation">-</span>o report<span class="tok-punctuation">/</span>
+
+<span class="tok-comment"># -n non-GUI  ·  -t plan  ·  -l results  ·  -e -o build the HTML report</span></code></pre>
         </div>
+        <div class="callout" data-i18n-html="perf.jm.callout"><strong>Tip:</strong> usá la GUI solo para <em>armar y depurar</em> el plan; nunca para correr la carga real (consume recursos y falsea los números). La carga seria siempre va en modo <code>-n</code> por línea de comandos.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="playwright-verbos.html">
+          <a class="page-nav__link page-nav__prev" href="perf-k6.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="page.verbs">Verbos HTTP</span>
+            <span class="page-nav__title" data-i18n="perf.page.k6">k6</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="robot-hola-mundo.html">
+          <a class="page-nav__link page-nav__next" href="perf-locust.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
+            <span class="page-nav__title" data-i18n="perf.page.locust">Locust</span>
           </a>
         </nav>
       </div>

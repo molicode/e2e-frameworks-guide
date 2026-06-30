@@ -52,6 +52,7 @@ I18n.register("en", {
   "nav.robot": "Robot Framework",
   "nav.bdd": "BDD: Gherkin & Cucumber",
   "nav.comparison": "Comparison",
+  "nav.perf": "Performance testing",
   "nav.airole": "The role of AI",
   "nav.prompts": "AI examples",
   "nav.best": "Best practices",
@@ -76,6 +77,7 @@ I18n.register("en", {
   "home.robot": "Keyword-driven and readable: tests in near-natural language with Python libraries.",
   "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) and Cucumber to give context.",
   "home.comparison": "The same VerifyOrder test solved in all 3 frameworks.",
+  "home.perf": "Load & performance testing: metrics, types and k6, JMeter and Locust.",
   "home.ai-role": "How AI complements each stage of testing.",
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
   "home.best-practices": "Principles that endure and your next steps.",
@@ -664,6 +666,71 @@ I18n.register("en", {
     "<p>In Robot Framework, <code>RequestsLibrary</code> exposes one keyword per verb: <code>GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS On Session</code>. First you open the session with <code>Create Session</code>.</p>",
   "verbs.rf.body":
     "<p>Each keyword only fails if the status isn't 2xx; if you expect another (say a <code>204</code> or an error), declare it with <code>expected_status</code>. You read the body with <code>${r.json()}</code>.</p>",
+
+  /* ====================================================================
+     4c. PERFORMANCE TESTING
+     ==================================================================== */
+  "perf.page.intro": "What it is & what to measure",
+  "perf.page.k6": "k6",
+  "perf.page.jmeter": "JMeter",
+  "perf.page.locust": "Locust",
+
+  "perf.lead":
+    "<p>Functional testing asks <em>“does it do the right thing?”</em>; <strong>performance testing</strong> asks <em>“does it do it fast and stay stable under load?”</em>. You simulate many concurrent users and measure how the system responds: speed, stability and scalability.</p>",
+  "perf.why":
+    "<p>It isn't a single kind of test. Depending on how you apply load, you talk about <strong>load</strong> (expected traffic), <strong>stress</strong> (push until it breaks), <strong>spike</strong> (sudden bursts) or <strong>soak</strong> (sustained load for hours, to catch memory leaks). Each answers a different question about the system.</p>",
+  "perf.t1.title": "Load",
+  "perf.t1.body": "Expected traffic (a normal day's users): does it meet the target times?",
+  "perf.t2.title": "Stress",
+  "perf.t2.body": "Push the load until something breaks, to find the limit and see how it fails.",
+  "perf.t3.title": "Spike",
+  "perf.t3.body": "A sudden, sharp burst (a promo, going viral): does it hold and recover?",
+  "perf.t4.title": "Soak / endurance",
+  "perf.t4.body": "Moderate load sustained for hours: catches memory leaks and slow degradation.",
+  "perf.metrics.label": "The metrics that matter",
+  "perf.metrics.body":
+    "<p>The average lies: if 95% of users wait 200ms but 5% wait 8s, the average looks fine and the experience is bad. That's why you look at <strong>percentiles</strong> (p95, p99), not means.</p>",
+  "perf.m.th.name": "Metric",
+  "perf.m.th.meaning": "What it measures",
+  "perf.m.tput.n": "Throughput (RPS)",
+  "perf.m.tput.m": "Requests per second the system processes. How much it “moves”.",
+  "perf.m.lat.n": "Latency (p95 / p99)",
+  "perf.m.lat.m": "How long a request takes. Look at percentiles, not the average.",
+  "perf.m.err.n": "Error rate",
+  "perf.m.err.m": "Percentage of requests that fail as load rises. Keep it low (&lt; 1%).",
+  "perf.m.vus.n": "VUs / concurrency",
+  "perf.m.vus.m": "Concurrent virtual users you're simulating.",
+  "perf.m.sat.n": "Saturation",
+  "perf.m.sat.m": "Resource usage (CPU, memory, connections) as load rises. Where the bottleneck is.",
+  "perf.callout":
+    "<strong>Define the goal first:</strong> a performance test with no <strong>SLO</strong> (“p95 must be &lt; 500ms with 200 users”) just produces numbers. The number becomes useful once there's a pass/fail threshold to compare it against.",
+
+  "perf.k6.lead":
+    "<p><strong>k6</strong> (by Grafana) is the modern option: you write the test as <strong>JavaScript code</strong>, it runs from the CLI and integrates easily into CI. Lightweight and developer-oriented.</p>",
+  "perf.k6.body":
+    "<p>You define load <code>stages</code> that ramp <strong>VUs</strong> up and down, and <strong>thresholds</strong> that turn the run into a <em>quality gate</em>: if p95 or the error rate breach the limit, the build fails. <code>check()</code> validates each response.</p>",
+  "perf.k6.callout":
+    "<strong>Why CI loves it:</strong> being code + thresholds, a k6 test fails only when a performance goal breaks — just like a functional test. No dashboards to eyeball.",
+
+  "perf.jm.lead":
+    "<p><strong>Apache JMeter</strong> is the industry classic: mature, with a GUI and a huge plugin ecosystem. You build the test plan in the <strong>GUI</strong> and run it headless in CI.</p>",
+  "perf.jm.body":
+    "<p>A plan is structured as a <strong>Thread Group</strong> (the virtual users), <strong>Samplers</strong> (the requests), <strong>Assertions</strong> (pass/fail) and <strong>Listeners</strong> (results). For CI, you run it in <em>non-GUI</em> mode (<code>-n</code>) and generate an HTML report.</p>",
+  "perf.jm.callout":
+    "<strong>Tip:</strong> use the GUI only to <em>build and debug</em> the plan; never to run the real load (it eats resources and skews the numbers). Serious load always runs in <code>-n</code> mode from the command line.",
+
+  "perf.lo.lead":
+    "<p><strong>Locust</strong> is the <strong>Python</strong>, code-first option: you model a user's behavior as a class with tasks. It ships a web UI to launch the run and watch metrics live.</p>",
+  "perf.lo.body":
+    "<p>You subclass <code>HttpUser</code>, mark methods with <code>@task</code> (with <strong>weights</strong> so some actions happen more often than others) and set the <code>wait_time</code> (think time). Run it with the UI or <code>--headless</code> in CI, giving users (<code>-u</code>) and ramp-up (<code>-r</code>).</p>",
+  "perf.manual.title": "By hand",
+  "perf.manual.body":
+    "<p>You define the scenario, the weight of each action and the thresholds. The value is in choosing well <em>what</em> to simulate and <em>what</em> goal to measure.</p>",
+  "perf.ai.title": "With AI",
+  "perf.ai.body":
+    "<p>AI scaffolds the script (k6/Locust) from a flow description, suggests reasonable thresholds, and helps you read the results (“your p99 spikes past 150 VUs → likely a database bottleneck”).</p>",
+  "perf.lo.callout":
+    "<strong>Next step:</strong> pick a tool (k6 for code-first + CI, JMeter for GUI/enterprise, Locust if your team is Python), set a clear SLO, and start with the most critical endpoint under realistic load.",
 
   /* ====================================================================
      5. THE ROLE OF AI IN QA
