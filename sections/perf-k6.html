@@ -214,6 +214,40 @@ export default function () {
 
 <span class="tok-comment">// Run it:  k6 run load-test.js</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock__url">k6 · load-test summary</span>
+            <span class="mock-status mock-status--ok">THRESHOLDS PASS</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <div class="mock-stat-grid">
+            <div class="mock-stat">
+              <span class="mock-stat__val mock-stat__val--plain">50</span>
+              <span class="mock-stat__label">VUs (peak)</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat__val mock-stat__val--plain">1.2k rps</span>
+              <span class="mock-stat__label">Throughput</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat__val mock-stat__val--ok">412 ms</span>
+              <span class="mock-stat__label">p95 latency</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat__val mock-stat__val--ok">0.3 %</span>
+              <span class="mock-stat__label">Error rate</span>
+            </div>
+            </div>
+            <div class="mock-tags-row">
+              <code class="mock-tag mock-tag--good">✓ p(95) &lt; 500ms</code>
+              <code class="mock-tag mock-tag--good">✓ error rate &lt; 1%</code>
+              <code class="mock-tag">threshold → quality gate</code>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <div class="callout callout--ok" data-i18n-html="perf.k6.callout"><strong>Por qué gusta en CI:</strong> al ser código + thresholds, un test de k6 falla solo cuando se rompe un objetivo de performance — igual que un test funcional. Sin dashboards que interpretar a ojo.</div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="perf-intro.html">

@@ -188,32 +188,23 @@ Feature<span class="tok-punctuation">:</span> Checkout
     And I should see <span class="tok-string">"Payment confirmed"</span></code></pre>
         </div>
         <figure class="mock-figure">
-        <div class="mock">
-          <div class="mock__bar">
-            <span class="mock__dots"><i></i><i></i><i></i></span>
-            <span class="mock__url">shop.example.com/orders/42</span>
+        <div class="mock mock--file">
+          <div class="mock__bar mock__bar--file">
+            <span class="mock-file__icon">📄</span>
+            <span class="mock__url">checkout.feature</span>
           </div>
-          <div class="mock__body">
-            <div class="mock-card">
-              <div class="mock-order-head">
-                <h4 class="mock-h">Order #42</h4>
-                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
-              </div>
-              <div class="mock-total">
-                <span>Total</span><strong>250</strong>
-                <code class="mock-tag">.order-total</code>
-              </div>
-              <ul class="mock-list">
-                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
-                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
-                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
-              </ul>
-              <div class="mock-tags-row">
-                <code class="mock-tag">.order-items li</code>
-                <code class="mock-tag">getByRole("row")</code>
-                <code class="mock-tag">toHaveCount(3)</code>
-                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
-              </div>
+          <div class="mock__body mock__body--file">
+            <pre class="mock-gherkin"><code><span class="mock-gk-feat">Feature:</span> Checkout
+
+  <span class="mock-gk-feat">Scenario:</span> Successful payment
+    <span class="mock-gk">Given</span> I have a book in my cart
+    <span class="mock-gk">When</span>  I pay with a valid card
+    <span class="mock-gk">Then</span>  the order status should be "PAID"
+    <span class="mock-gk">And</span>   I should see "Payment confirmed"</code></pre>
+            <div class="mock-tags-row">
+              <code class="mock-tag">Given → Arrange</code>
+              <code class="mock-tag">When → Act</code>
+              <code class="mock-tag">Then → Assert</code>
             </div>
           </div>
         </div>
