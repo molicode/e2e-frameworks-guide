@@ -26,7 +26,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       # Regenerate the static HTML from the model + dictionaries so the
       # published pages are always in sync with the source of truth.
@@ -37,13 +37,12 @@ jobs:
       - name: Check i18n parity
         run: node scripts/check-i18n.mjs
 
-      # enablement: true asks GitHub to turn on Pages (with GitHub Actions as
-      # the build source) automatically, so no manual Settings step is needed.
-      # NOTE: Pages on a PRIVATE repo requires a paid plan — make the repo
-      # public (recommended) for a free, shareable URL.
+      # Pages must be enabled ONCE in the repo settings:
+      #   Settings → Pages → Build and deployment → Source: GitHub Actions
+      # (the workflow token cannot create the Pages site itself — that returns
+      # "Resource not accessible by integration"). The repo must also be PUBLIC
+      # for a free, shareable URL. After that, this step just reads the config.
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
