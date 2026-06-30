@@ -124,31 +124,34 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
         <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// API testing in a Selenium project — Selenium drives the UI; the API</span>
-<span class="tok-comment">// layer uses a plain HTTP client (or REST Assured in Java).</span>
-<span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-function">fetch</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">", {
-  headers: { Authorization: `Bearer ${token}` },
-});
-assert.strictEqual(res.status, 200);
-const order = await res.json();
-assert.strictEqual(order.total, 250);
-assert.strictEqual(order.status, "</span>PAID<span class="tok-string">");
+          <pre><code><span class="tok-comment"># API testing in a Selenium project — Selenium drives the UI; the API</span>
+<span class="tok-comment"># layer uses a plain HTTP client like requests.</span>
+<span class="tok-keyword">import</span> requests
 
-// Without a token → 401, never a silent 200.
-const anon = await fetch("</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">");</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span>anon<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">,</span> <span class="tok-number">401</span><span class="tok-punctuation">);</span></code></pre>
+res <span class="tok-punctuation">=</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>
+    <span class="tok-string">"https://api.example.com/orders/42"</span><span class="tok-punctuation">,</span>
+    headers<span class="tok-punctuation">={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
+<span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">200</span>
+order <span class="tok-punctuation">=</span> res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> order<span class="tok-punctuation">["</span>total<span class="tok-string">"] == 250
+assert order["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+
+# Without a token -&gt; 401, never a silent 200.
+anon = requests.get("</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">")</span>
+<span class="tok-keyword">assert</span> anon<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock mock--api">
@@ -176,22 +179,24 @@ const anon = await fetch("</span>https<span class="tok-punctuation">://</span>ap
         <div class="prose" data-i18n-html="crit.receipt.body"><p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Amounts (Selenium) — read the money fields and assert the math in cents.</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>pay<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span><span class="tok-string">");
-const cents = (s) =&gt; Math.round(parseFloat(s.replace(/[^0-9.]/g, "</span><span class="tok-string">")) * 100);
+          <pre><code><span class="tok-comment"># Amounts (Selenium) — read the money fields and assert the math in cents.</span>
+<span class="tok-keyword">import</span> re
 
-const sub   = cents(await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">subtotal</span><span class="tok-string">")).getText());
-const tax   = cents(await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">tax</span><span class="tok-string">")).getText());
-const total = cents(await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">total</span><span class="tok-punctuation">")).</span><span class="tok-function">getText</span><span class="tok-punctuation">());</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>pay<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span><span class="tok-string">")
+cents = lambda s: round(float(re.sub(r"</span><span class="tok-punctuation">[^</span><span class="tok-number">0</span><span class="tok-punctuation">-</span><span class="tok-number">9</span><span class="tok-punctuation">.]",</span> <span class="tok-string">""</span><span class="tok-punctuation">,</span> s<span class="tok-punctuation">))</span> <span class="tok-punctuation">*</span> <span class="tok-number">100</span><span class="tok-punctuation">)</span>
 
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span>tax<span class="tok-punctuation">,</span> Math<span class="tok-punctuation">.</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>sub <span class="tok-punctuation">*</span> <span class="tok-number">0.21</span><span class="tok-punctuation">));</span> <span class="tok-comment">// exact tax</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span>total<span class="tok-punctuation">,</span> sub <span class="tok-punctuation">+</span> tax<span class="tok-punctuation">);</span>            <span class="tok-comment">// subtotal + tax = total</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">(</span>total <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span>                            <span class="tok-comment">// never negative</span></code></pre>
+sub <span class="tok-punctuation">=</span> <span class="tok-function">cents</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".subtotal"</span><span class="tok-punctuation">).</span><span class="tok-property">text</span><span class="tok-punctuation">)</span>
+tax <span class="tok-punctuation">=</span> <span class="tok-function">cents</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".tax"</span><span class="tok-punctuation">).</span><span class="tok-property">text</span><span class="tok-punctuation">)</span>
+total <span class="tok-punctuation">=</span> <span class="tok-function">cents</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".total"</span><span class="tok-punctuation">).</span><span class="tok-property">text</span><span class="tok-punctuation">)</span>
+
+<span class="tok-keyword">assert</span> tax <span class="tok-punctuation">==</span> <span class="tok-function">round</span><span class="tok-punctuation">(</span>sub <span class="tok-punctuation">*</span> <span class="tok-number">0.21</span><span class="tok-punctuation">)</span>  <span class="tok-comment"># exact tax</span>
+<span class="tok-keyword">assert</span> total <span class="tok-punctuation">==</span> sub <span class="tok-punctuation">+</span> tax        <span class="tok-comment"># subtotal + tax = total</span>
+<span class="tok-keyword">assert</span> total <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span>                 <span class="tok-comment"># never negative</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -226,19 +231,22 @@ const total = cents(await driver.findElement(By.css("</span><span class="tok-pun
         <div class="prose" data-i18n-html="crit.docs.body"><p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Legal document validation (Selenium) — an invoice's required fields &amp; format.</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0042</span><span class="tok-string">");
-const text = async (sel) =&gt; (await driver.findElement(By.css(sel)).getText()).trim();
+          <pre><code><span class="tok-comment"># Legal document validation (Selenium) — an invoice's required fields &amp; format.</span>
+<span class="tok-keyword">import</span> re
+<span class="tok-keyword">from</span> datetime <span class="tok-keyword">import</span> date
 
-assert.match(await text("</span><span class="tok-punctuation">.</span><span class="tok-property">invoice</span><span class="tok-punctuation">-</span>number<span class="tok-string">"), /^INV-\d{4}-\d{4}$/); // ID format
-assert.ok((await text("</span><span class="tok-punctuation">.</span><span class="tok-property">tax</span><span class="tok-punctuation">-</span>id<span class="tok-string">")).length &gt; 0);                     // present
-assert.strictEqual(await text("</span><span class="tok-punctuation">.</span><span class="tok-property">doc</span><span class="tok-punctuation">-</span>status<span class="tok-string">"), "</span>SIGNED<span class="tok-string">");           // signed
-assert.ok(new Date(await text("</span><span class="tok-punctuation">.</span><span class="tok-property">issued</span><span class="tok-punctuation">-</span>date<span class="tok-punctuation">"))</span> <span class="tok-punctuation">&lt;=</span> <span class="tok-keyword">new</span> <span class="tok-function">Date</span><span class="tok-punctuation">());</span>     <span class="tok-comment">// not future</span></code></pre>
+driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0042</span><span class="tok-string">")
+text = lambda sel: driver.find_element(By.CSS_SELECTOR, sel).text.strip()
+
+assert re.match(r"</span><span class="tok-punctuation">^</span>INV<span class="tok-punctuation">-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}</span>$<span class="tok-string">", text("</span><span class="tok-punctuation">.</span><span class="tok-property">invoice</span><span class="tok-punctuation">-</span>number<span class="tok-string">"))  # ID format
+assert len(text("</span><span class="tok-punctuation">.</span><span class="tok-property">tax</span><span class="tok-punctuation">-</span>id<span class="tok-string">")) &gt; 0                                  # present
+assert text("</span><span class="tok-punctuation">.</span><span class="tok-property">doc</span><span class="tok-punctuation">-</span>status<span class="tok-string">") == "</span>SIGNED<span class="tok-string">"                           # signed
+assert date.fromisoformat(text("</span><span class="tok-punctuation">.</span><span class="tok-property">issued</span><span class="tok-punctuation">-</span>date<span class="tok-punctuation">"))</span> <span class="tok-punctuation">&lt;=</span> date<span class="tok-punctuation">.</span><span class="tok-function">today</span><span class="tok-punctuation">()</span>  <span class="tok-comment"># not future</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -272,22 +280,25 @@ assert.ok(new Date(await text("</span><span class="tok-punctuation">.</span><spa
         <div class="prose" data-i18n-html="crit.authz.body"><p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Security (Selenium project) — authorization/IDOR + input handling.</span>
-<span class="tok-comment">// User A must NOT read user B's invoice by changing the id.</span>
-<span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-function">fetch</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0099</span><span class="tok-string">", {
-  headers: { Authorization: `Bearer ${userAToken}` },
-});
-assert.strictEqual(res.status, 403); // forbidden, NOT 200
+          <pre><code><span class="tok-comment"># Security (Selenium project) — authorization/IDOR + input handling.</span>
+<span class="tok-keyword">import</span> requests
 
-// XSS: a script payload must render as text, never execute.
-await driver.get("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>search<span class="tok-punctuation">?</span>q<span class="tok-punctuation">=%</span>3Cscript<span class="tok-punctuation">%</span>3<span class="tok-function">Ealert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)%</span>3C<span class="tok-punctuation">/</span>script<span class="tok-punctuation">%</span>3E<span class="tok-string">");
-const shown = await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">results</span><span class="tok-string">")).getText();
-assert.ok(shown.includes("</span><span class="tok-punctuation">&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;"));</span> <span class="tok-comment">// escaped, literal</span></code></pre>
+<span class="tok-comment"># User A must NOT read user B's invoice by changing the id.</span>
+res <span class="tok-punctuation">=</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>
+    <span class="tok-string">"https://api.example.com/invoices/INV-2026-0099"</span><span class="tok-punctuation">,</span>
+    headers<span class="tok-punctuation">={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>user_a_token<span class="tok-punctuation">}"},</span>
+<span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">403</span>  <span class="tok-comment"># forbidden, NOT 200</span>
+
+<span class="tok-comment"># XSS: a script payload must render as text, never execute.</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>search<span class="tok-punctuation">?</span>q<span class="tok-punctuation">=%</span>3Cscript<span class="tok-punctuation">%</span>3<span class="tok-function">Ealert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)%</span>3C<span class="tok-punctuation">/</span>script<span class="tok-punctuation">%</span>3E<span class="tok-string">")
+shown = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">results</span><span class="tok-string">").text
+assert "</span><span class="tok-punctuation">&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;"</span> <span class="tok-keyword">in</span> shown  <span class="tok-comment"># escaped, literal</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">

@@ -124,23 +124,23 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h2 class="section__title" data-i18n="page.components">Componentes clave</h2>
         <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
         <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
         <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Form validation (Selenium) — error shows, submit stays disabled.</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>email<span class="tok-string">")).sendKeys("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
-await driver.findElement(By.css("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">((</span><span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">(".</span><span class="tok-property">error</span><span class="tok-string">")).getText()).includes("</span>valid email<span class="tok-string">"));
-assert.ok(await driver.findElement(By.css("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]")).</span><span class="tok-function">getAttribute</span><span class="tok-punctuation">("</span>disabled<span class="tok-punctuation">"));</span></code></pre>
+          <pre><code><span class="tok-comment"># Form validation (Selenium) — error shows, submit stays disabled.</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">ID</span><span class="tok-punctuation">,</span> <span class="tok-string">"email"</span><span class="tok-punctuation">).</span><span class="tok-function">send_keys</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">")
+driver.find_element(By.CSS_SELECTOR, "</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> <span class="tok-string">"valid email"</span> <span class="tok-keyword">in</span> driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".error"</span><span class="tok-punctuation">).</span><span class="tok-property">text</span>
+<span class="tok-keyword">assert</span> driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"button[type=submit]"</span><span class="tok-punctuation">).</span><span class="tok-function">get_attribute</span><span class="tok-punctuation">("</span>disabled<span class="tok-punctuation">")</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -169,15 +169,17 @@ assert.ok(await driver.findElement(By.css("</span>button<span class="tok-punctua
         <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Select / dropdown (Selenium) — Java has the Select helper; in JS click the option.</span>
-<span class="tok-keyword">const</span> country <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>country<span class="tok-string">"));
-await country.findElement(By.css("</span>option<span class="tok-punctuation">[</span>value<span class="tok-punctuation">=</span>AR<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> country<span class="tok-punctuation">.</span><span class="tok-function">getAttribute</span><span class="tok-punctuation">("</span>value<span class="tok-string">"), "</span>AR<span class="tok-punctuation">");</span></code></pre>
+          <pre><code><span class="tok-comment"># Select / dropdown (Selenium) — the Select helper picks the option.</span>
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> Select
+
+country <span class="tok-punctuation">=</span> <span class="tok-function">Select</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">ID</span><span class="tok-punctuation">,</span> <span class="tok-string">"country"</span><span class="tok-punctuation">))</span>
+country<span class="tok-punctuation">.</span><span class="tok-function">select_by_value</span><span class="tok-punctuation">("</span>AR<span class="tok-string">")
+assert country.first_selected_option.get_attribute("</span>value<span class="tok-string">") == "</span>AR<span class="tok-punctuation">"</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -206,15 +208,16 @@ await country.findElement(By.css("</span>option<span class="tok-punctuation">[</
         <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Checkbox (Selenium) — click and assert state.</span>
-<span class="tok-keyword">const</span> optIn <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("</span>input<span class="tok-punctuation">[</span>name<span class="tok-punctuation">=</span>optIn<span class="tok-punctuation">]"));</span>
-<span class="tok-keyword">if</span> <span class="tok-punctuation">(!(</span><span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">isSelected</span><span class="tok-punctuation">()))</span> <span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">isSelected</span><span class="tok-punctuation">());</span></code></pre>
+          <pre><code><span class="tok-comment"># Checkbox (Selenium) — click and assert state.</span>
+opt_in <span class="tok-punctuation">=</span> driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"input[name=optIn]"</span><span class="tok-punctuation">)</span>
+<span class="tok-keyword">if</span> <span class="tok-keyword">not</span> opt_in<span class="tok-punctuation">.</span><span class="tok-function">is_selected</span><span class="tok-punctuation">():</span>
+    opt_in<span class="tok-punctuation">.</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> opt_in<span class="tok-punctuation">.</span><span class="tok-function">is_selected</span><span class="tok-punctuation">()</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -244,17 +247,21 @@ await country.findElement(By.css("</span>option<span class="tok-punctuation">[</
         <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Modal / dialog (Selenium) — open, confirm, assert it's gone.</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span><span class="tok-keyword">delete</span><span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">const</span> dialog <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>
-  until<span class="tok-punctuation">.</span><span class="tok-function">elementIsVisible</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]"))),</span> <span class="tok-number">5000</span><span class="tok-punctuation">);</span>
-<span class="tok-keyword">await</span> dialog<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">xpath</span><span class="tok-punctuation">(".//</span>button<span class="tok-punctuation">[</span><span class="tok-function">text</span><span class="tok-punctuation">()='</span>Delete<span class="tok-punctuation">']")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>until<span class="tok-punctuation">.</span><span class="tok-function">stalenessOf</span><span class="tok-punctuation">(</span>dialog<span class="tok-punctuation">),</span> <span class="tok-number">5000</span><span class="tok-punctuation">);</span> <span class="tok-comment">// dialog closed</span></code></pre>
+          <pre><code><span class="tok-comment"># Modal / dialog (Selenium) — open, confirm, assert it's gone.</span>
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span> <span class="tok-keyword">import</span> expected_conditions <span class="tok-keyword">as</span> EC
+
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"[data-action=delete]"</span><span class="tok-punctuation">).</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+dialog <span class="tok-punctuation">=</span> <span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">5</span><span class="tok-punctuation">).</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>
+    EC<span class="tok-punctuation">.</span><span class="tok-function">visibility_of_element_located</span><span class="tok-punctuation">((</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"[role=dialog]"</span><span class="tok-punctuation">))</span>
+<span class="tok-punctuation">)</span>
+dialog<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">XPATH</span><span class="tok-punctuation">,</span> <span class="tok-string">".//button[text()='Delete']"</span><span class="tok-punctuation">).</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+<span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">5</span><span class="tok-punctuation">).</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>EC<span class="tok-punctuation">.</span><span class="tok-function">staleness_of</span><span class="tok-punctuation">(</span>dialog<span class="tok-punctuation">))</span>  <span class="tok-comment"># dialog closed</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -285,17 +292,16 @@ await country.findElement(By.css("</span>option<span class="tok-punctuation">[</
         <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Data table (Selenium) — assert the row count and a specific cell.</span>
-<span class="tok-keyword">const</span> rows <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElements</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("</span>table tbody tr<span class="tok-string">"));
-assert.strictEqual(rows.length, 3);
-const cell = await driver.findElement(
-  By.xpath("</span><span class="tok-comment">//td[normalize-space()='Ada Lovelace']"));</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> cell<span class="tok-punctuation">.</span><span class="tok-function">isDisplayed</span><span class="tok-punctuation">());</span></code></pre>
+          <pre><code><span class="tok-comment"># Data table (Selenium) — assert the row count and a specific cell.</span>
+rows <span class="tok-punctuation">=</span> driver<span class="tok-punctuation">.</span><span class="tok-function">find_elements</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"table tbody tr"</span><span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> <span class="tok-function">len</span><span class="tok-punctuation">(</span>rows<span class="tok-punctuation">)</span> <span class="tok-punctuation">==</span> <span class="tok-number">3</span>
+cell <span class="tok-punctuation">=</span> driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">XPATH</span><span class="tok-punctuation">,</span> <span class="tok-string">"//td[normalize-space()='Ada Lovelace']"</span><span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> cell<span class="tok-punctuation">.</span><span class="tok-function">is_displayed</span><span class="tok-punctuation">()</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -328,16 +334,21 @@ const cell = await driver.findElement(
         <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Toast / alert (Selenium) — appears, then disappears on its own.</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span>save<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">const</span> toast <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>until<span class="tok-punctuation">.</span><span class="tok-function">elementLocated</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]")),</span> <span class="tok-number">5000</span><span class="tok-punctuation">);</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">((</span><span class="tok-keyword">await</span> toast<span class="tok-punctuation">.</span><span class="tok-function">getText</span><span class="tok-punctuation">()).</span><span class="tok-function">includes</span><span class="tok-punctuation">("</span>saved<span class="tok-punctuation">"));</span>
-<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>until<span class="tok-punctuation">.</span><span class="tok-function">stalenessOf</span><span class="tok-punctuation">(</span>toast<span class="tok-punctuation">),</span> <span class="tok-number">8000</span><span class="tok-punctuation">);</span> <span class="tok-comment">// auto-dismissed</span></code></pre>
+          <pre><code><span class="tok-comment"># Toast / alert (Selenium) — appears, then disappears on its own.</span>
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span> <span class="tok-keyword">import</span> expected_conditions <span class="tok-keyword">as</span> EC
+
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"[data-action=save]"</span><span class="tok-punctuation">).</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+toast <span class="tok-punctuation">=</span> <span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">5</span><span class="tok-punctuation">).</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>
+    EC<span class="tok-punctuation">.</span><span class="tok-function">presence_of_element_located</span><span class="tok-punctuation">((</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"[role=alert]"</span><span class="tok-punctuation">))</span>
+<span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> <span class="tok-string">"saved"</span> <span class="tok-keyword">in</span> toast<span class="tok-punctuation">.</span><span class="tok-property">text</span>
+<span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">8</span><span class="tok-punctuation">).</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>EC<span class="tok-punctuation">.</span><span class="tok-function">staleness_of</span><span class="tok-punctuation">(</span>toast<span class="tok-punctuation">))</span>  <span class="tok-comment"># auto-dismissed</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">
@@ -365,16 +376,18 @@ const cell = await driver.findElement(
         <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">Python</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Accessibility (Selenium) — run axe-core via @axe-core/webdriverjs.</span>
-<span class="tok-keyword">import</span> AxeBuilder <span class="tok-keyword">from</span> <span class="tok-string">"@axe-core/webdriverjs"</span><span class="tok-punctuation">;</span>
+          <pre><code><span class="tok-comment"># Accessibility (Selenium) — run axe-core via axe-selenium-python.</span>
+<span class="tok-keyword">from</span> axe_selenium_python <span class="tok-keyword">import</span> Axe
 
-<span class="tok-keyword">const</span> results <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-keyword">new</span> <span class="tok-function">AxeBuilder</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">).</span><span class="tok-function">analyze</span><span class="tok-punctuation">();</span>
-<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span>results<span class="tok-punctuation">.</span><span class="tok-property">violations</span><span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-punctuation">,</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span></code></pre>
+axe <span class="tok-punctuation">=</span> <span class="tok-function">Axe</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">)</span>
+axe<span class="tok-punctuation">.</span><span class="tok-function">inject</span><span class="tok-punctuation">()</span>
+results <span class="tok-punctuation">=</span> axe<span class="tok-punctuation">.</span><span class="tok-function">run</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> <span class="tok-function">len</span><span class="tok-punctuation">(</span>results<span class="tok-punctuation">["</span>violations<span class="tok-punctuation">"])</span> <span class="tok-punctuation">==</span> <span class="tok-number">0</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock">

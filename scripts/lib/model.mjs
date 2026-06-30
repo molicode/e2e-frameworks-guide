@@ -55,136 +55,136 @@ expect(await page.locator(".total").textContent()).toBe("250");
 await expect(page.locator(".total")).toHaveText("250");`,
   },
 
-  /* ---- Selenium learning path ---- */
+  /* ---- Selenium learning path (Python) ---- */
   seleniumSetup: {
     lang: "Bash",
-    code: `# Selenium needs three things: the client library, a browser, and a
-# matching driver. Since v4.6 Selenium Manager fetches the driver for you.
-npm init -y
-npm install selenium-webdriver
-npm install --save-dev mocha
+    code: `# Selenium needs two things: the client library and a browser.
+# Since Selenium 4.6, Selenium Manager fetches the matching driver for you.
+pip install selenium pytest
 
-# Run a test file:
-npx mocha login.test.js`,
+# Run your tests with pytest:
+pytest test_login.py`,
   },
   seleniumFirst: {
-    lang: "JavaScript",
-    code: `// login.test.js — Selenium WebDriver (JavaScript)
-const { Builder, By, until } = require("selenium-webdriver");
-const assert = require("assert");
+    lang: "Python",
+    code: `# test_login.py — Selenium WebDriver (Python)
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-(async function loginTest() {
-  // 1. Start a browser session (the "driver").
-  const driver = await new Builder().forBrowser("chrome").build();
-  try {
-    // 2. Navigate and locate elements with explicit selectors.
-    await driver.get("https://example.com/login");
-    await driver.findElement(By.id("username")).sendKeys("demo");
-    await driver.findElement(By.id("password")).sendKeys("secret");
-    await driver.findElement(By.css("button[type=submit]")).click();
 
-    // 3. Wait EXPLICITLY — Selenium does not auto-retry assertions.
-    const banner = await driver.wait(
-      until.elementLocated(By.css(".welcome")), 5000
-    );
+def test_login_greets_the_user():
+    # 1. Start a browser session (the "driver").
+    driver = webdriver.Chrome()
+    try:
+        # 2. Navigate and locate elements with explicit selectors.
+        driver.get("https://example.com/login")
+        driver.find_element(By.ID, "username").send_keys("demo")
+        driver.find_element(By.ID, "password").send_keys("secret")
+        driver.find_element(By.CSS_SELECTOR, "button[type=submit]").click()
 
-    // 4. Assert by hand with Node's assert module.
-    assert.strictEqual(await banner.getText(), "Welcome, demo");
-  } finally {
-    // 5. Always quit to free the browser session.
-    await driver.quit();
-  }
-})();`,
+        # 3. Wait EXPLICITLY — Selenium does not auto-retry assertions.
+        banner = WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, ".welcome"))
+        )
+
+        # 4. Assert by hand with a plain assert.
+        assert banner.text == "Welcome, demo"
+    finally:
+        # 5. Always quit to free the browser session.
+        driver.quit()`,
   },
   selLocate: {
-    lang: "JavaScript",
-    code: `// Selenium offers many locator strategies via By. Prefer CSS over XPath.
-await driver.findElement(By.id("username"));            // by id
-await driver.findElement(By.css(".order-total"));       // by CSS (preferred)
-await driver.findElement(By.css("[data-testid=pay]"));  // by test attribute
-await driver.findElements(By.css(".order-items li"));   // a list (plural!)
-
-// XPath is powerful but brittle — reserve it for "match by visible text":
-await driver.findElement(By.xpath("//button[text()='Pay']"));`,
-  },
-  selWaitsJs: {
-    lang: "JavaScript",
-    code: `// JavaScript (selenium-webdriver): wait for an explicit condition.
-const { until, By } = require("selenium-webdriver");
-
-await driver.wait(until.elementLocated(By.css(".welcome")), 5000);
-await driver.wait(
-  until.elementIsVisible(driver.findElement(By.css(".welcome"))),
-  5000
-);`,
-  },
-  selWaitsJava: {
-    lang: "Java",
-    code: `// Java: the canonical WebDriverWait + ExpectedConditions.
-WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-wait.until(ExpectedConditions.visibilityOfElementLocated(
-    By.cssSelector(".welcome")));
-
-// Never do this — a blind sleep is the #1 cause of flaky Selenium suites:
-// Thread.sleep(5000);`,
-  },
-  selRunnerJava: {
-    lang: "Java",
-    code: `// Selenium drives the browser; JUnit 5 provides structure + assertions.
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-@Test
-void verifyOrder() {
-  driver.get("https://shop.example.com/orders/42");
-  String total = driver.findElement(By.cssSelector(".order-total")).getText();
-  assertEquals("250", total);
-}`,
-  },
-  selRunnerPy: {
     lang: "Python",
-    code: `# The same idea in Python with pytest:
+    code: `# Selenium offers many locator strategies via By. Prefer CSS over XPath.
+driver.find_element(By.ID, "username")                    # by id
+driver.find_element(By.CSS_SELECTOR, ".order-total")      # by CSS (preferred)
+driver.find_element(By.CSS_SELECTOR, "[data-testid=pay]") # by test attribute
+driver.find_elements(By.CSS_SELECTOR, ".order-items li")  # a list (plural!)
+
+# XPath is powerful but brittle — reserve it for "match by visible text":
+driver.find_element(By.XPATH, "//button[text()='Pay']")`,
+  },
+  selWaits: {
+    lang: "Python",
+    code: `# Explicit waits: wait for a CONDITION, never a fixed sleep.
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+wait = WebDriverWait(driver, 5)
+wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".welcome")))
+wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".welcome")))
+
+# Never do this — a blind sleep is the #1 cause of flaky Selenium suites:
+# import time; time.sleep(5)`,
+  },
+  selRunner: {
+    lang: "Python",
+    code: `# Selenium drives the browser; pytest provides structure + assertions.
+import pytest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+
+@pytest.fixture
+def driver():
+    d = webdriver.Chrome()
+    yield d           # setup before the test, teardown after
+    d.quit()
+
+
 def test_verify_order(driver):
     driver.get("https://shop.example.com/orders/42")
     total = driver.find_element(By.CSS_SELECTOR, ".order-total").text
     assert total == "250"`,
   },
   selPOM: {
-    lang: "JavaScript",
-    code: `// order.page.js — a Page Object hides selectors behind intent-revealing methods.
-const { By } = require("selenium-webdriver");
+    lang: "Python",
+    code: `# order_page.py — a Page Object hides selectors behind intent-revealing methods.
+from selenium.webdriver.common.by import By
 
-class OrderPage {
-  constructor(driver) { this.driver = driver; }
-  open(id) { return this.driver.get(\`https://shop.example.com/orders/\${id}\`); }
-  total() { return this.driver.findElement(By.css(".order-total")).getText(); }
-  status() { return this.driver.findElement(By.css(".order-status")).getText(); }
-}
 
-// The test reads like a sentence and survives DOM changes:
-const order = new OrderPage(driver);
-await order.open(42);
-assert.strictEqual(await order.total(), "250");`,
+class OrderPage:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def open(self, order_id):
+        self.driver.get(f"https://shop.example.com/orders/{order_id}")
+
+    def total(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".order-total").text
+
+    def status(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".order-status").text
+
+
+# The test reads like a sentence and survives DOM changes:
+order = OrderPage(driver)
+order.open(42)
+assert order.total() == "250"`,
   },
   selGrid: {
-    lang: "JavaScript",
-    code: `// Run against a remote Selenium Grid instead of a local browser.
-const { Builder } = require("selenium-webdriver");
+    lang: "Python",
+    code: `# Run against a remote Selenium Grid instead of a local browser.
+from selenium import webdriver
 
-const driver = await new Builder()
-  .usingServer("http://grid.internal:4444/wd/hub")  // the Grid hub
-  .forBrowser("chrome")
-  .build();
+driver = webdriver.Remote(
+    command_executor="http://grid.internal:4444/wd/hub",  # the Grid hub
+    options=webdriver.ChromeOptions(),
+)
 
-// In CI you usually start the Grid with Docker first:
-//   docker run -d -p 4444:4444 selenium/standalone-chrome`,
+# In CI you usually start the Grid with Docker first:
+#   docker run -d -p 4444:4444 selenium/standalone-chrome`,
   },
 
-  /* ---- Cypress learning path ---- */
+  /* ---- Cypress learning path (TypeScript) ---- */
   cypressSetup: {
     lang: "Bash",
     code: `npm init -y
-npm install --save-dev cypress
+npm install --save-dev cypress typescript
 
+# Cypress has built-in TypeScript support — just name your specs *.cy.ts.
 # Open the interactive runner (great while writing tests)...
 npx cypress open
 
@@ -192,8 +192,8 @@ npx cypress open
 npx cypress run`,
   },
   cypressFirst: {
-    lang: "JavaScript",
-    code: `// cypress/e2e/login.cy.js — Cypress
+    lang: "TypeScript",
+    code: `// cypress/e2e/login.cy.ts — Cypress with TypeScript
 describe("Login", () => {
   it("greets the user after a valid login", () => {
     cy.visit("https://example.com/login");
@@ -210,13 +210,13 @@ describe("Login", () => {
 });`,
   },
   cypChain: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// cy.* commands are NOT promises — they enqueue work. You chain, you don't await.
 cy.get("#username").type("demo");          // queued
 cy.get("button[type=submit]").click();     // runs after the type resolves
 
 // Need the *value*? Use .then() — but reach for it sparingly.
-cy.get(".order-total").then(($el) => {
+cy.get(".order-total").then(($el: JQuery<HTMLElement>) => {
   expect($el.text()).to.eq("250");
 });
 
@@ -225,13 +225,13 @@ cy.get(".order-items li").as("items");
 cy.get("@items").should("have.length", 3);`,
   },
   cypAssertions: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Implicit assertions retry the previous command until they pass:
 cy.get(".order-status").should("have.text", "PAID");
 cy.get(".order-items li").should("have.length", 3).and("contain", "book");
 
 // Explicit assertions with expect() inside a .should() callback:
-cy.get(".order-total").should(($el) => {
+cy.get(".order-total").should(($el: JQuery<HTMLElement>) => {
   expect($el.text().trim()).to.eq("250");
 });
 
@@ -240,7 +240,7 @@ cy.get(".order-total").should(($el) => {
 cy.get("[data-cy=pay]").click();`,
   },
   cypIntercept: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Stub the API: deterministic data, no real backend, instant tests.
 cy.intercept("GET", "/api/orders/42", {
   statusCode: 200,
@@ -255,9 +255,9 @@ cy.get(".order-total").should("have.text", "250");
 cy.intercept("GET", "/api/orders/*", { statusCode: 500 }).as("boom");`,
   },
   cypCommands: {
-    lang: "JavaScript",
-    code: `// cypress/support/commands.js — encapsulate repetitive flows once.
-Cypress.Commands.add("login", (user, pass) => {
+    lang: "TypeScript",
+    code: `// cypress/support/commands.ts — encapsulate repetitive flows once.
+Cypress.Commands.add("login", (user: string, pass: string) => {
   cy.session([user], () => {
     cy.visit("/login");
     cy.get("[data-cy=user]").type(user);
@@ -266,15 +266,20 @@ Cypress.Commands.add("login", (user, pass) => {
   });
 });
 
-// cypress/fixtures/order.json -> { "total": 250, "status": "PAID" }
-cy.login("demo", "secret");
-cy.fixture("order").then((order) => {
-  cy.intercept("/api/orders/42", order);
-});`,
+// Teach TypeScript about the new command (cypress/support/index.d.ts):
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(user: string, pass: string): void;
+    }
+  }
+}
+
+cy.login("demo", "secret");`,
   },
   cypComponent: {
-    lang: "JavaScript",
-    code: `// button.cy.jsx — mount a component in isolation (no full app needed).
+    lang: "TypeScript",
+    code: `// button.cy.tsx — mount a component in isolation (no full app needed).
 import Button from "./Button";
 
 it("calls onClick", () => {
@@ -287,164 +292,170 @@ it("calls onClick", () => {
 // In CI:  npx cypress run --component   (and --e2e for end-to-end)`,
   },
 
-  /* ---- Playwright learning path ---- */
+  /* ---- Playwright learning path (Python) ---- */
   playwrightSetup: {
     lang: "Bash",
-    code: `# Scaffold a project (config + example tests + CI workflow):
-npm init playwright@latest
+    code: `# Install pytest-playwright (the official Python test plugin):
+pip install pytest-playwright
+playwright install        # downloads the browser binaries
 
-# Or install manually:
-npm install --save-dev @playwright/test
-npx playwright install        # downloads the browser binaries
+# Run the suite (headless Chromium by default):
+pytest
 
-# Run the suite (Chromium, Firefox and WebKit by default):
-npx playwright test`,
+# Run across all three engines, headed:
+pytest --browser chromium --browser firefox --browser webkit --headed`,
   },
   playwrightFirst: {
-    lang: "JavaScript",
-    code: `// tests/login.spec.js — Playwright Test
-const { test, expect } = require("@playwright/test");
+    lang: "Python",
+    code: `# test_login.py — pytest-playwright
+from playwright.sync_api import Page, expect
 
-test("greets the user after a valid login", async ({ page }) => {
-  await page.goto("https://example.com/login");
 
-  // Locators are lazy and auto-wait for the element to be actionable.
-  await page.getByLabel("Username").fill("demo");
-  await page.getByLabel("Password").fill("secret");
-  await page.getByRole("button", { name: "Sign in" }).click();
+def test_greets_the_user_after_login(page: Page):
+    page.goto("https://example.com/login")
 
-  // Web-first assertions auto-retry until they pass or time out.
-  await expect(page.getByText("Welcome, demo")).toBeVisible();
-});`,
+    # Locators are lazy and auto-wait for the element to be actionable.
+    page.get_by_label("Username").fill("demo")
+    page.get_by_label("Password").fill("secret")
+    page.get_by_role("button", name="Sign in").click()
+
+    # Web-first assertions auto-retry until they pass or time out.
+    expect(page.get_by_text("Welcome, demo")).to_be_visible()`,
   },
   pwLocators: {
-    lang: "JavaScript",
-    code: `// Locators are lazy: they describe HOW to find an element and resolve
-// at the moment you act or assert. Prefer user-facing queries.
-await page.getByRole("button", { name: "Sign in" }).click();
-await page.getByLabel("Email").fill("demo@acme.test");
-await page.getByText("Welcome").click();
+    lang: "Python",
+    code: `# Locators are lazy: they describe HOW to find an element and resolve
+# at the moment you act or assert. Prefer user-facing queries.
+page.get_by_role("button", name="Sign in").click()
+page.get_by_label("Email").fill("demo@acme.test")
+page.get_by_text("Welcome").click()
 
-// Filter and narrow down lists:
-const rows = page.getByRole("row");
-await rows.filter({ hasText: "book" }).getByRole("button", { name: "Remove" }).click();
+# Filter and narrow down lists:
+rows = page.get_by_role("row")
+rows.filter(has_text="book").get_by_role("button", name="Remove").click()
 
-// Index into a list with .nth() (0-based), or .first() / .last():
-await page.locator(".order-items li").nth(2).click();
-await expect(page.locator(".order-items li")).toHaveCount(3);`,
+# Index into a list with .nth() (0-based), or .first / .last:
+page.locator(".order-items li").nth(2).click()
+expect(page.locator(".order-items li")).to_have_count(3)`,
   },
   pwAssertions: {
-    lang: "JavaScript",
-    code: `// Web-first assertions auto-retry until they pass or hit the timeout.
-// You almost never wait manually.
-await expect(page.getByRole("heading")).toHaveText("Order #42");
-await expect(page.locator(".order-status")).toHaveText("PAID");
-await expect(page.locator(".order-items li")).toHaveCount(3);
-await expect(page.getByTestId("pay-btn")).toBeDisabled();
+    lang: "Python",
+    code: `# Web-first assertions auto-retry until they pass or hit the timeout.
+# You almost never wait manually.
+expect(page.get_by_role("heading")).to_have_text("Order #42")
+expect(page.locator(".order-status")).to_have_text("PAID")
+expect(page.locator(".order-items li")).to_have_count(3)
+expect(page.get_by_test_id("pay-btn")).to_be_disabled()
 
-// Non-retrying assertions are for plain values (not the DOM):
-expect(1 + 1).toBe(2);
+# A plain assert is for non-DOM values (it does not retry):
+assert 1 + 1 == 2
 
-// Need a specific state? Wait for the CONDITION, not a sleep:
-await page.getByRole("button", { name: "Pay" }).click();
-await expect(page.getByText("Payment confirmed")).toBeVisible();`,
+# Need a specific state? Wait for the CONDITION, not a sleep:
+page.get_by_role("button", name="Pay").click()
+expect(page.get_by_text("Payment confirmed")).to_be_visible()`,
   },
   pwFixtures: {
-    lang: "JavaScript",
-    code: `// orders.page.js — a Page Object encapsulates selectors + actions.
-export class OrderPage {
-  constructor(page) {
-    this.page = page;
-    this.total = page.locator(".order-total");
-    this.status = page.locator(".order-status");
-  }
-  async goto(id) { await this.page.goto(\`/orders/\${id}\`); }
-}
+    lang: "Python",
+    code: `# order_page.py — a Page Object encapsulates selectors + actions.
+class OrderPage:
+    def __init__(self, page):
+        self.page = page
+        self.total = page.locator(".order-total")
+        self.status = page.locator(".order-status")
 
-// fixtures.js — expose the Page Object as a custom fixture.
-import { test as base, expect } from "@playwright/test";
-import { OrderPage } from "./orders.page.js";
+    def goto(self, order_id):
+        self.page.goto(f"/orders/{order_id}")
 
-export const test = base.extend({
-  orderPage: async ({ page }, use) => { await use(new OrderPage(page)); },
-});
 
-// order.spec.js — hooks + the fixture keep tests clean.
-test.beforeEach(async ({ orderPage }) => { await orderPage.goto(42); });
+# conftest.py — expose the Page Object as a fixture.
+import pytest
+from order_page import OrderPage
 
-test("VerifyOrder", async ({ orderPage }) => {
-  await expect(orderPage.total).toHaveText("250");
-  await expect(orderPage.status).toHaveText("PAID");
-});`,
+
+@pytest.fixture
+def order_page(page):
+    return OrderPage(page)
+
+
+# test_order.py — the fixture keeps tests clean.
+from playwright.sync_api import expect
+
+
+def test_verify_order(order_page):
+    order_page.goto(42)
+    expect(order_page.total).to_have_text("250")
+    expect(order_page.status).to_have_text("PAID")`,
   },
   pwNetwork: {
-    lang: "JavaScript",
-    code: `// Mock an API so the test is fast and deterministic (no real backend).
-await page.route("**/api/orders/42", (route) =>
-  route.fulfill({
-    status: 200,
-    contentType: "application/json",
-    body: JSON.stringify({ total: 250, status: "PAID", items: ["book"] }),
-  })
-);
-await page.goto("/orders/42");
-await expect(page.locator(".order-total")).toHaveText("250");
+    lang: "Python",
+    code: `# Mock an API so the test is fast and deterministic (no real backend).
+import json
 
-// Reuse a logged-in session across tests with storageState:
-//   1) Save it once after logging in: await context.storageState({ path: "auth.json" });
-//   2) Reuse it in playwright.config.js: use: { storageState: "auth.json" }`,
+page.route(
+    "**/api/orders/42",
+    lambda route: route.fulfill(
+        status=200,
+        content_type="application/json",
+        body=json.dumps({"total": 250, "status": "PAID", "items": ["book"]}),
+    ),
+)
+page.goto("/orders/42")
+expect(page.locator(".order-total")).to_have_text("250")
+
+# Reuse a logged-in session across tests with storage_state:
+#   1) Save it once after logging in: context.storage_state(path="auth.json")
+#   2) Reuse it via the browser_context_args fixture: {"storage_state": "auth.json"}`,
   },
   pwConfig: {
-    lang: "JavaScript",
-    code: `// playwright.config.js — traces + HTML report + CI retries.
-export default {
-  use: {
-    baseURL: "http://localhost:3000",
-    trace: "on-first-retry",   // record a trace when a test is retried
-  },
-  reporter: [["html"], ["list"]],
-  retries: process.env.CI ? 2 : 0,
-};`,
+    lang: "INI",
+    code: `# pytest.ini — base URL, tracing and CI retries for pytest-playwright.
+[pytest]
+addopts =
+    --base-url http://localhost:3000
+    --tracing retain-on-failure
+    --output test-results
+# Re-run flaky tests in CI (needs the pytest-rerunfailures plugin):
+#   --reruns 2`,
   },
   pwCIyml: {
     lang: "YAML",
     code: `# .github/workflows/e2e.yml — run Playwright on every pull request.
-- run: npm ci
-- run: npx playwright install --with-deps
-- run: npx playwright test
+- run: pip install pytest-playwright
+- run: playwright install --with-deps
+- run: pytest --tracing retain-on-failure
 - uses: actions/upload-artifact@v4
   if: always()
   with:
-    name: playwright-report
-    path: playwright-report/
-# Locally, inspect a failure: npx playwright show-trace trace.zip`,
+    name: test-results
+    path: test-results/
+# Locally, inspect a failure: playwright show-trace test-results/.../trace.zip`,
   },
 
   /* ---- Comparison (VerifyOrder) ---- */
   verifySelenium: {
-    lang: "JavaScript",
-    code: `// VerifyOrder — Selenium WebDriver
-const { Builder, By } = require("selenium-webdriver");
-const assert = require("assert");
+    lang: "Python",
+    code: `# VerifyOrder — Selenium WebDriver (Python)
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-const driver = await new Builder().forBrowser("chrome").build();
-await driver.get("https://shop.example.com/orders/42");
+driver = webdriver.Chrome()
+driver.get("https://shop.example.com/orders/42")
 
-// Read every value first, then assert by hand.
-const total  = await driver.findElement(By.css(".order-total")).getText();
-const status = await driver.findElement(By.css(".order-status")).getText();
-const items  = await driver.findElements(By.css(".order-items li"));
-const texts  = await Promise.all(items.map((el) => el.getText()));
+# Read every value first, then assert by hand.
+total = driver.find_element(By.CSS_SELECTOR, ".order-total").text
+status = driver.find_element(By.CSS_SELECTOR, ".order-status").text
+items = driver.find_elements(By.CSS_SELECTOR, ".order-items li")
+texts = [el.text for el in items]
 
-assert.strictEqual(total, "250");
-assert.strictEqual(status, "PAID");
-assert.ok(texts.some((t) => t.includes("book")));
+assert total == "250"
+assert status == "PAID"
+assert any("book" in t for t in texts)
 
-await driver.quit();`,
+driver.quit()`,
   },
   verifyCypress: {
-    lang: "JavaScript",
-    code: `// VerifyOrder — Cypress
+    lang: "TypeScript",
+    code: `// VerifyOrder — Cypress with TypeScript
 cy.visit("https://shop.example.com/orders/42");
 
 // Each .should() retries automatically until it passes or times out.
@@ -453,18 +464,18 @@ cy.get(".order-status").should("have.text", "PAID");
 cy.get(".order-items li").should("contain", "book");`,
   },
   verifyPlaywright: {
-    lang: "JavaScript",
-    code: `// VerifyOrder — Playwright Test
-import { test, expect } from "@playwright/test";
+    lang: "Python",
+    code: `# VerifyOrder — pytest-playwright
+from playwright.sync_api import Page, expect
 
-test("VerifyOrder", async ({ page }) => {
-  await page.goto("https://shop.example.com/orders/42");
 
-  // Web-first assertions auto-wait and retry — no manual reads.
-  await expect(page.locator(".order-total")).toHaveText("250");
-  await expect(page.locator(".order-status")).toHaveText("PAID");
-  await expect(page.locator(".order-items li")).toContainText("book");
-});`,
+def test_verify_order(page: Page):
+    page.goto("https://shop.example.com/orders/42")
+
+    # Web-first assertions auto-wait and retry — no manual reads.
+    expect(page.locator(".order-total")).to_have_text("250")
+    expect(page.locator(".order-status")).to_have_text("PAID")
+    expect(page.locator(".order-items li")).to_contain_text("book")`,
   },
 
   /* ---- AI section ---- */
@@ -490,209 +501,222 @@ Mark which cases are good candidates for automation and why.`,
   },
   aiPromptCode: {
     lang: "Prompt",
-    code: `You are a senior QA engineer. Write a Playwright test in JavaScript.
+    code: `You are a senior QA engineer. Write a Playwright test in Python (pytest).
 
 Context:
 - Page: https://shop.example.com/orders/42  (an order summary)
 - Stable selectors: .order-total, .order-status, .order-items li
 
-Test "VerifyOrder" must assert:
+Test "test_verify_order" must assert:
 - .order-total      has text "250"
 - .order-status     has text "PAID"
 - .order-items      contains an item whose text includes "book"
 
 Requirements:
-- Use web-first assertions (expect(...).toHaveText / toContainText).
+- Use web-first assertions (expect(...).to_have_text / to_contain_text).
 - No fixed sleeps. No conditional (if/else) logic in the test.
 - One short comment above each assertion explaining intent.`,
   },
   aiValidate: {
-    lang: "JavaScript",
-    code: `// AI output — review it the way you would a junior dev's pull request.
-import { test, expect } from "@playwright/test";
+    lang: "Python",
+    code: `# AI output — review it the way you would a junior dev's pull request.
+from playwright.sync_api import Page, expect
 
-test("VerifyOrder", async ({ page }) => {
-  await page.goto("https://shop.example.com/orders/42");
-  await expect(page.locator(".order-total")).toHaveText("250");
-  await expect(page.locator(".order-status")).toHaveText("PAID");
-  await expect(page.locator(".order-items li")).toContainText("book");
-});
 
-// Checklist before you trust it:
-//  - Selectors actually exist in the app (don't assume).
-//  - Assertions match the ACCEPTANCE CRITERIA, not just the happy path.
-//  - No hidden waits/sleeps, no test that can never fail.
-//  - It fails when it should: temporarily break the app and re-run.`,
+def test_verify_order(page: Page):
+    page.goto("https://shop.example.com/orders/42")
+    expect(page.locator(".order-total")).to_have_text("250")
+    expect(page.locator(".order-status")).to_have_text("PAID")
+    expect(page.locator(".order-items li")).to_contain_text("book")
+
+
+# Checklist before you trust it:
+#  - Selectors actually exist in the app (don't assume).
+#  - Assertions match the ACCEPTANCE CRITERIA, not just the happy path.
+#  - No hidden waits/sleeps, no test that can never fail.
+#  - It fails when it should: temporarily break the app and re-run.`,
   },
 
-  /* ---- Key components (how to test each) ---- */
+  /* ---- Key components (how to test each) — Playwright (Python) ---- */
   validationTest: {
-    lang: "JavaScript",
-    code: `// Form validation — the inline error shows and submit stays disabled.
-await page.getByLabel("Email").fill("not-an-email");
-await page.getByRole("button", { name: "Sign up" }).click();
-await expect(page.getByText("Enter a valid email")).toBeVisible();
-await expect(page.getByRole("button", { name: "Sign up" })).toBeDisabled();`,
+    lang: "Python",
+    code: `# Form validation — the inline error shows and submit stays disabled.
+page.get_by_label("Email").fill("not-an-email")
+page.get_by_role("button", name="Sign up").click()
+expect(page.get_by_text("Enter a valid email")).to_be_visible()
+expect(page.get_by_role("button", name="Sign up")).to_be_disabled()`,
   },
   selectTest: {
-    lang: "JavaScript",
-    code: `// Select / dropdown — choose an option and assert the value.
-const country = page.getByRole("combobox", { name: "Country" });
-await country.selectOption("AR");
-await expect(country).toHaveValue("AR");`,
+    lang: "Python",
+    code: `# Select / dropdown — choose an option and assert the value.
+country = page.get_by_role("combobox", name="Country")
+country.select_option("AR")
+expect(country).to_have_value("AR")`,
   },
   checkboxTest: {
-    lang: "JavaScript",
-    code: `// Checkbox / toggle — check it and assert its state.
-const optIn = page.getByRole("checkbox", { name: "Email me about updates" });
-await optIn.check();
-await expect(optIn).toBeChecked();`,
+    lang: "Python",
+    code: `# Checkbox / toggle — check it and assert its state.
+opt_in = page.get_by_role("checkbox", name="Email me about updates")
+opt_in.check()
+expect(opt_in).to_be_checked()`,
   },
   modalTest: {
-    lang: "JavaScript",
-    code: `// Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.
-await page.getByRole("button", { name: "Delete order" }).click();
-const dialog = page.getByRole("dialog");
-await expect(dialog).toBeVisible();
-await dialog.getByRole("button", { name: "Delete" }).click();
-await expect(dialog).toBeHidden();`,
+    lang: "Python",
+    code: `# Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.
+page.get_by_role("button", name="Delete order").click()
+dialog = page.get_by_role("dialog")
+expect(dialog).to_be_visible()
+dialog.get_by_role("button", name="Delete").click()
+expect(dialog).to_be_hidden()`,
   },
   tableTest: {
-    lang: "JavaScript",
-    code: `// Data table — assert the row count and a specific cell.
-const rows = page.getByRole("row");
-await expect(rows).toHaveCount(4); // 1 header + 3 data rows
-await expect(page.getByRole("cell", { name: "Ada Lovelace" })).toBeVisible();`,
+    lang: "Python",
+    code: `# Data table — assert the row count and a specific cell.
+rows = page.get_by_role("row")
+expect(rows).to_have_count(4)  # 1 header + 3 data rows
+expect(page.get_by_role("cell", name="Ada Lovelace")).to_be_visible()`,
   },
   toastTest: {
-    lang: "JavaScript",
-    code: `// Toast / alert — assert it appears, then disappears on its own.
-await page.getByRole("button", { name: "Save" }).click();
-const toast = page.getByRole("alert");
-await expect(toast).toContainText("saved successfully");
-await expect(toast).toBeHidden({ timeout: 6000 });`,
+    lang: "Python",
+    code: `# Toast / alert — assert it appears, then disappears on its own.
+page.get_by_role("button", name="Save").click()
+toast = page.get_by_role("alert")
+expect(toast).to_contain_text("saved successfully")
+expect(toast).to_be_hidden(timeout=6000)`,
   },
   a11yTest: {
-    lang: "JavaScript",
-    code: `// Accessibility — scan the page with axe and assert zero violations.
-import AxeBuilder from "@axe-core/playwright";
+    lang: "Python",
+    code: `# Accessibility — scan the page with axe and assert zero violations.
+from axe_playwright_python.sync_playwright import Axe
 
-test("home page has no a11y violations", async ({ page }) => {
-  await page.goto("/");
-  const results = await new AxeBuilder({ page }).analyze();
-  expect(results.violations).toEqual([]);
-});
 
-// Bonus: querying by role + name makes tests resilient AND accessible.
-await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();`,
+def test_home_page_has_no_a11y_violations(page):
+    page.goto("/")
+    results = Axe().run(page)
+    assert results.violations_count == 0
+
+
+# Bonus: querying by role + name makes tests resilient AND accessible.
+expect(page.get_by_role("button", name="Sign in")).to_be_visible()`,
   },
 
   /* ---- Critical cases: accounts, payments, value validation, security ---- */
   apiCrud: {
-    lang: "JavaScript",
-    code: `// API CRUD with auth — create, read, assert the contract. No UI.
-const api = await request.newContext({
-  baseURL: "https://api.example.com",
-  extraHTTPHeaders: { Authorization: \`Bearer \${token}\` },
-});
+    lang: "Python",
+    code: `# API CRUD with auth — create, read, assert the contract. No UI.
+api = playwright.request.new_context(
+    base_url="https://api.example.com",
+    extra_http_headers={"Authorization": f"Bearer {token}"},
+)
 
-// CREATE
-const created = await api.post("/orders", { data: { items: ["book"] } });
-expect(created.status()).toBe(201);
-const { id } = await created.json();
+# CREATE
+created = api.post("/orders", data={"items": ["book"]})
+assert created.status == 201
+order_id = created.json()["id"]
 
-// READ + assert the response shape
-const res = await api.get(\`/orders/\${id}\`);
-await expect(res).toBeOK();
-expect(await res.json()).toMatchObject({ id, status: "NEW" });
+# READ + assert the response shape
+res = api.get(f"/orders/{order_id}")
+assert res.ok
+assert res.json()["status"] == "NEW"
 
-// Without a token → 401 (not a silent 200 or a 500)
-const anon = await request.get(\`https://api.example.com/orders/\${id}\`);
-expect(anon.status()).toBe(401);`,
+# Without a token -> 401 (not a silent 200 or a 500)
+anon = playwright.request.new_context()
+assert anon.get(f"https://api.example.com/orders/{order_id}").status == 401`,
   },
   receiptTest: {
-    lang: "JavaScript",
-    code: `// Payment receipt — the money math must ALWAYS add up.
-// Work in integer cents to avoid floating-point errors.
-const r = await (await request.get("/api/receipts/9087")).json();
+    lang: "Python",
+    code: `# Payment receipt — the money math must ALWAYS add up.
+# Work in integer cents to avoid floating-point errors.
+r = api.get("/api/receipts/9087").json()
 
-// Sum of line items equals the subtotal.
-const itemsTotal = r.items.reduce((sum, it) => sum + it.cents, 0);
-expect(itemsTotal).toBe(r.subtotalCents);                 // 9000
+# Sum of line items equals the subtotal.
+items_total = sum(it["cents"] for it in r["items"])
+assert items_total == r["subtotalCents"]                  # 9000
 
-// Tax and total are exact.
-expect(r.taxCents).toBe(Math.round(r.subtotalCents * 0.21)); // 1890
-expect(r.totalCents).toBe(r.subtotalCents + r.taxCents);     // 10890
+# Tax and total are exact.
+assert r["taxCents"] == round(r["subtotalCents"] * 0.21)  # 1890
+assert r["totalCents"] == r["subtotalCents"] + r["taxCents"]  # 10890
 
-// Invariants: never negative, status consistent with the amount paid.
-expect(r.totalCents).toBeGreaterThan(0);
-expect(r.status).toBe("PAID");`,
+# Invariants: never negative, status consistent with the amount paid.
+assert r["totalCents"] > 0
+assert r["status"] == "PAID"`,
   },
 
   /* ================================================================== *
    * Per-framework critical cases (same scenarios, each idiom)           *
    * ================================================================== */
 
-  /* ---- Selenium ---- */
+  /* ---- Selenium (Python) ---- */
   selApi: {
-    lang: "JavaScript",
-    code: `// API testing in a Selenium project — Selenium drives the UI; the API
-// layer uses a plain HTTP client (or REST Assured in Java).
-const res = await fetch("https://api.example.com/orders/42", {
-  headers: { Authorization: \`Bearer \${token}\` },
-});
-assert.strictEqual(res.status, 200);
-const order = await res.json();
-assert.strictEqual(order.total, 250);
-assert.strictEqual(order.status, "PAID");
+    lang: "Python",
+    code: `# API testing in a Selenium project — Selenium drives the UI; the API
+# layer uses a plain HTTP client like requests.
+import requests
 
-// Without a token → 401, never a silent 200.
-const anon = await fetch("https://api.example.com/orders/42");
-assert.strictEqual(anon.status, 401);`,
+res = requests.get(
+    "https://api.example.com/orders/42",
+    headers={"Authorization": f"Bearer {token}"},
+)
+assert res.status_code == 200
+order = res.json()
+assert order["total"] == 250
+assert order["status"] == "PAID"
+
+# Without a token -> 401, never a silent 200.
+anon = requests.get("https://api.example.com/orders/42")
+assert anon.status_code == 401`,
   },
   selMoney: {
-    lang: "JavaScript",
-    code: `// Amounts (Selenium) — read the money fields and assert the math in cents.
-await driver.get("https://pay.example.com/receipts/9087");
-const cents = (s) => Math.round(parseFloat(s.replace(/[^0-9.]/g, "")) * 100);
+    lang: "Python",
+    code: `# Amounts (Selenium) — read the money fields and assert the math in cents.
+import re
 
-const sub   = cents(await driver.findElement(By.css(".subtotal")).getText());
-const tax   = cents(await driver.findElement(By.css(".tax")).getText());
-const total = cents(await driver.findElement(By.css(".total")).getText());
+driver.get("https://pay.example.com/receipts/9087")
+cents = lambda s: round(float(re.sub(r"[^0-9.]", "", s)) * 100)
 
-assert.strictEqual(tax, Math.round(sub * 0.21)); // exact tax
-assert.strictEqual(total, sub + tax);            // subtotal + tax = total
-assert.ok(total > 0);                            // never negative`,
+sub = cents(driver.find_element(By.CSS_SELECTOR, ".subtotal").text)
+tax = cents(driver.find_element(By.CSS_SELECTOR, ".tax").text)
+total = cents(driver.find_element(By.CSS_SELECTOR, ".total").text)
+
+assert tax == round(sub * 0.21)  # exact tax
+assert total == sub + tax        # subtotal + tax = total
+assert total > 0                 # never negative`,
   },
   selDocs: {
-    lang: "JavaScript",
-    code: `// Legal document validation (Selenium) — an invoice's required fields & format.
-await driver.get("https://app.example.com/invoices/INV-2026-0042");
-const text = async (sel) => (await driver.findElement(By.css(sel)).getText()).trim();
+    lang: "Python",
+    code: `# Legal document validation (Selenium) — an invoice's required fields & format.
+import re
+from datetime import date
 
-assert.match(await text(".invoice-number"), /^INV-\\d{4}-\\d{4}$/); // ID format
-assert.ok((await text(".tax-id")).length > 0);                     // present
-assert.strictEqual(await text(".doc-status"), "SIGNED");           // signed
-assert.ok(new Date(await text(".issued-date")) <= new Date());     // not future`,
+driver.get("https://app.example.com/invoices/INV-2026-0042")
+text = lambda sel: driver.find_element(By.CSS_SELECTOR, sel).text.strip()
+
+assert re.match(r"^INV-\\d{4}-\\d{4}$", text(".invoice-number"))  # ID format
+assert len(text(".tax-id")) > 0                                  # present
+assert text(".doc-status") == "SIGNED"                           # signed
+assert date.fromisoformat(text(".issued-date")) <= date.today()  # not future`,
   },
   selSecurity: {
-    lang: "JavaScript",
-    code: `// Security (Selenium project) — authorization/IDOR + input handling.
-// User A must NOT read user B's invoice by changing the id.
-const res = await fetch("https://api.example.com/invoices/INV-2026-0099", {
-  headers: { Authorization: \`Bearer \${userAToken}\` },
-});
-assert.strictEqual(res.status, 403); // forbidden, NOT 200
+    lang: "Python",
+    code: `# Security (Selenium project) — authorization/IDOR + input handling.
+import requests
 
-// XSS: a script payload must render as text, never execute.
-await driver.get("https://app.example.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E");
-const shown = await driver.findElement(By.css(".results")).getText();
-assert.ok(shown.includes("<script>alert(1)</script>")); // escaped, literal`,
+# User A must NOT read user B's invoice by changing the id.
+res = requests.get(
+    "https://api.example.com/invoices/INV-2026-0099",
+    headers={"Authorization": f"Bearer {user_a_token}"},
+)
+assert res.status_code == 403  # forbidden, NOT 200
+
+# XSS: a script payload must render as text, never execute.
+driver.get("https://app.example.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E")
+shown = driver.find_element(By.CSS_SELECTOR, ".results").text
+assert "<script>alert(1)</script>" in shown  # escaped, literal`,
   },
 
-  /* ---- Cypress ---- */
+  /* ---- Cypress (TypeScript) ---- */
   cypApi: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// API testing (Cypress) — cy.request hits the API directly, no UI.
 cy.request({
   url: "/api/orders/42",
@@ -708,7 +732,7 @@ cy.request({ url: "/api/orders/42", failOnStatusCode: false })
   .its("status").should("eq", 401);`,
   },
   cypMoney: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Amounts (Cypress) — assert the receipt math in integer cents.
 cy.request("/api/receipts/9087").then(({ body: r }) => {
   const items = r.items.reduce((s, it) => s + it.cents, 0);
@@ -719,7 +743,7 @@ cy.request("/api/receipts/9087").then(({ body: r }) => {
 });`,
   },
   cypDocs: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Legal document validation (Cypress) — invoice required fields & format.
 cy.visit("/invoices/INV-2026-0042");
 cy.get(".invoice-number").invoke("text").should("match", /^INV-\\d{4}-\\d{4}$/);
@@ -730,7 +754,7 @@ cy.get(".issued-date").invoke("text").then((d) => {
 });`,
   },
   cypSecurity: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Security (Cypress) — authorization/IDOR + XSS.
 // User A must NOT read user B's invoice by changing the id.
 cy.request({
@@ -745,98 +769,114 @@ cy.get(".results").should("be.visible");
 cy.contains("<script>alert(1)</script>").should("exist"); // escaped`,
   },
 
-  /* ---- Playwright (extra) ---- */
+  /* ---- Playwright (extra) — Python ---- */
   pwDocs: {
-    lang: "JavaScript",
-    code: `// Legal document validation (Playwright) — invoice required fields & format.
-await page.goto("/invoices/INV-2026-0042");
-await expect(page.locator(".invoice-number")).toHaveText(/^INV-\\d{4}-\\d{4}$/);
-await expect(page.locator(".tax-id")).not.toBeEmpty();
-await expect(page.locator(".doc-status")).toHaveText("SIGNED");
-const issued = await page.locator(".issued-date").textContent();
-expect(new Date(issued).getTime()).toBeLessThanOrEqual(Date.now()); // not future`,
+    lang: "Python",
+    code: `# Legal document validation (Playwright) — invoice required fields & format.
+import re
+from datetime import date
+
+page.goto("/invoices/INV-2026-0042")
+expect(page.locator(".invoice-number")).to_have_text(re.compile(r"^INV-\\d{4}-\\d{4}$"))
+expect(page.locator(".tax-id")).not_to_be_empty()
+expect(page.locator(".doc-status")).to_have_text("SIGNED")
+issued = page.locator(".issued-date").text_content()
+assert date.fromisoformat(issued) <= date.today()  # not future`,
   },
   pwSecurity: {
-    lang: "JavaScript",
-    code: `// Security (Playwright) — authorization/IDOR + XSS.
-// User A must NOT read user B's invoice by changing the id.
-const asUserA = await request.newContext({
-  extraHTTPHeaders: { Authorization: \`Bearer \${userAToken}\` },
-});
-const res = await asUserA.get("/api/invoices/INV-2026-0099");
-expect(res.status()).toBe(403); // forbidden, NOT 200
+    lang: "Python",
+    code: `# Security (Playwright) — authorization/IDOR + XSS.
+# User A must NOT read user B's invoice by changing the id.
+as_user_a = playwright.request.new_context(
+    extra_http_headers={"Authorization": f"Bearer {user_a_token}"},
+)
+res = as_user_a.get("/api/invoices/INV-2026-0099")
+assert res.status == 403  # forbidden, NOT 200
 
-// XSS: the payload renders as text, never executes.
-await page.goto("/search?q=<script>alert(1)</script>");
-await expect(page.getByText("<script>alert(1)</script>")).toBeVisible();
-await expect(page.locator(".results")).toBeVisible();`,
+# XSS: the payload renders as text, never executes.
+page.goto("/search?q=<script>alert(1)</script>")
+expect(page.get_by_text("<script>alert(1)</script>")).to_be_visible()
+expect(page.locator(".results")).to_be_visible()`,
   },
 
   /* ================================================================== *
    * Per-framework UI components (same components, each idiom)            *
    * ================================================================== */
 
-  /* ---- Selenium ---- */
+  /* ---- Selenium (Python) ---- */
   selValidation: {
-    lang: "JavaScript",
-    code: `// Form validation (Selenium) — error shows, submit stays disabled.
-await driver.findElement(By.id("email")).sendKeys("not-an-email");
-await driver.findElement(By.css("button[type=submit]")).click();
-assert.ok((await driver.findElement(By.css(".error")).getText()).includes("valid email"));
-assert.ok(await driver.findElement(By.css("button[type=submit]")).getAttribute("disabled"));`,
+    lang: "Python",
+    code: `# Form validation (Selenium) — error shows, submit stays disabled.
+driver.find_element(By.ID, "email").send_keys("not-an-email")
+driver.find_element(By.CSS_SELECTOR, "button[type=submit]").click()
+assert "valid email" in driver.find_element(By.CSS_SELECTOR, ".error").text
+assert driver.find_element(By.CSS_SELECTOR, "button[type=submit]").get_attribute("disabled")`,
   },
   selSelect: {
-    lang: "JavaScript",
-    code: `// Select / dropdown (Selenium) — Java has the Select helper; in JS click the option.
-const country = await driver.findElement(By.id("country"));
-await country.findElement(By.css("option[value=AR]")).click();
-assert.strictEqual(await country.getAttribute("value"), "AR");`,
+    lang: "Python",
+    code: `# Select / dropdown (Selenium) — the Select helper picks the option.
+from selenium.webdriver.support.ui import Select
+
+country = Select(driver.find_element(By.ID, "country"))
+country.select_by_value("AR")
+assert country.first_selected_option.get_attribute("value") == "AR"`,
   },
   selCheckbox: {
-    lang: "JavaScript",
-    code: `// Checkbox (Selenium) — click and assert state.
-const optIn = await driver.findElement(By.css("input[name=optIn]"));
-if (!(await optIn.isSelected())) await optIn.click();
-assert.ok(await optIn.isSelected());`,
+    lang: "Python",
+    code: `# Checkbox (Selenium) — click and assert state.
+opt_in = driver.find_element(By.CSS_SELECTOR, "input[name=optIn]")
+if not opt_in.is_selected():
+    opt_in.click()
+assert opt_in.is_selected()`,
   },
   selModal: {
-    lang: "JavaScript",
-    code: `// Modal / dialog (Selenium) — open, confirm, assert it's gone.
-await driver.findElement(By.css("[data-action=delete]")).click();
-const dialog = await driver.wait(
-  until.elementIsVisible(driver.findElement(By.css("[role=dialog]"))), 5000);
-await dialog.findElement(By.xpath(".//button[text()='Delete']")).click();
-await driver.wait(until.stalenessOf(dialog), 5000); // dialog closed`,
+    lang: "Python",
+    code: `# Modal / dialog (Selenium) — open, confirm, assert it's gone.
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver.find_element(By.CSS_SELECTOR, "[data-action=delete]").click()
+dialog = WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located((By.CSS_SELECTOR, "[role=dialog]"))
+)
+dialog.find_element(By.XPATH, ".//button[text()='Delete']").click()
+WebDriverWait(driver, 5).until(EC.staleness_of(dialog))  # dialog closed`,
   },
   selTable: {
-    lang: "JavaScript",
-    code: `// Data table (Selenium) — assert the row count and a specific cell.
-const rows = await driver.findElements(By.css("table tbody tr"));
-assert.strictEqual(rows.length, 3);
-const cell = await driver.findElement(
-  By.xpath("//td[normalize-space()='Ada Lovelace']"));
-assert.ok(await cell.isDisplayed());`,
+    lang: "Python",
+    code: `# Data table (Selenium) — assert the row count and a specific cell.
+rows = driver.find_elements(By.CSS_SELECTOR, "table tbody tr")
+assert len(rows) == 3
+cell = driver.find_element(By.XPATH, "//td[normalize-space()='Ada Lovelace']")
+assert cell.is_displayed()`,
   },
   selToast: {
-    lang: "JavaScript",
-    code: `// Toast / alert (Selenium) — appears, then disappears on its own.
-await driver.findElement(By.css("[data-action=save]")).click();
-const toast = await driver.wait(until.elementLocated(By.css("[role=alert]")), 5000);
-assert.ok((await toast.getText()).includes("saved"));
-await driver.wait(until.stalenessOf(toast), 8000); // auto-dismissed`,
+    lang: "Python",
+    code: `# Toast / alert (Selenium) — appears, then disappears on its own.
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver.find_element(By.CSS_SELECTOR, "[data-action=save]").click()
+toast = WebDriverWait(driver, 5).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "[role=alert]"))
+)
+assert "saved" in toast.text
+WebDriverWait(driver, 8).until(EC.staleness_of(toast))  # auto-dismissed`,
   },
   selA11y: {
-    lang: "JavaScript",
-    code: `// Accessibility (Selenium) — run axe-core via @axe-core/webdriverjs.
-import AxeBuilder from "@axe-core/webdriverjs";
+    lang: "Python",
+    code: `# Accessibility (Selenium) — run axe-core via axe-selenium-python.
+from axe_selenium_python import Axe
 
-const results = await new AxeBuilder(driver).analyze();
-assert.strictEqual(results.violations.length, 0);`,
+axe = Axe(driver)
+axe.inject()
+results = axe.run()
+assert len(results["violations"]) == 0`,
   },
 
-  /* ---- Cypress ---- */
+  /* ---- Cypress (TypeScript) ---- */
   cypValidation: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Form validation (Cypress) — error shows, submit stays disabled.
 cy.get("#email").type("not-an-email");
 cy.get("button[type=submit]").click();
@@ -844,18 +884,18 @@ cy.contains(".error", "valid email").should("be.visible");
 cy.get("button[type=submit]").should("be.disabled");`,
   },
   cypSelect: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Select / dropdown (Cypress) — .select() picks the option.
 cy.get("#country").select("AR");
 cy.get("#country").should("have.value", "AR");`,
   },
   cypCheckbox: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Checkbox (Cypress) — check and assert state.
 cy.get("[name=optIn]").check().should("be.checked");`,
   },
   cypModal: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Modal / dialog (Cypress) — open, confirm, assert it's gone.
 cy.get("[data-action=delete]").click();
 cy.get("[role=dialog]").as("dlg").should("be.visible");
@@ -863,20 +903,20 @@ cy.get("@dlg").contains("button", "Delete").click();
 cy.get("[role=dialog]").should("not.exist");`,
   },
   cypTable: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Data table (Cypress) — assert the row count and a specific cell.
 cy.get("table tbody tr").should("have.length", 3);
 cy.get("table").contains("td", "Ada Lovelace").should("be.visible");`,
   },
   cypToast: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Toast / alert (Cypress) — appears, then disappears on its own.
 cy.get("[data-action=save]").click();
 cy.get("[role=alert]").should("contain", "saved");
 cy.get("[role=alert]").should("not.exist"); // auto-dismissed`,
   },
   cypA11y: {
-    lang: "JavaScript",
+    lang: "TypeScript",
     code: `// Accessibility (Cypress) — cypress-axe runs axe in the browser.
 cy.injectAxe();
 cy.checkA11y(); // fails the test on any violation`,
@@ -1153,18 +1193,18 @@ export const SECTIONS = [
   },
 
   ...frameworkGroup("selenium", "nav.selenium", "sel",
-    { label: "Selenium", color: "var(--fw-selenium)" }, [
+    { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" }, [
       { codes: ["seleniumSetup", "seleniumFirst"], mock: "login" }, // 1 WebDriver & navigation
       { codes: ["selLocate"], mock: "order" },        // 2 Locating elements
-      { codes: ["selWaitsJs", "selWaitsJava"], mock: "flaky" }, // 3 Explicit waits
-      { codes: ["selRunnerJava", "selRunnerPy"] },    // 4 Runner + assertions
+      { codes: ["selWaits"], mock: "flaky" },         // 3 Explicit waits
+      { codes: ["selRunner"] },                       // 4 Runner + assertions
       { codes: ["selPOM"], mock: "table" },           // 5 Page Object Model
       { codes: ["selGrid"] },                         // 6 Grid & CI
     ], frameworkCases("selApi", "selMoney", "selDocs", "selSecurity"),
        frameworkComponents((k) => "sel" + k)),
 
   ...frameworkGroup("cypress", "nav.cypress", "cyp",
-    { label: "Cypress", color: "var(--fw-cypress)" }, [
+    { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" }, [
       { codes: ["cypressSetup", "cypressFirst"], mock: "login" }, // 1 Interactive runner
       { codes: ["cypChain"] },                        // 2 Commands & async chain
       { codes: ["cypAssertions"], mock: "order" },    // 3 Assertions & selectors
@@ -1175,7 +1215,7 @@ export const SECTIONS = [
        frameworkComponents((k) => "cyp" + k)),
 
   ...frameworkGroup("playwright", "nav.playwright", "pw",
-    { label: "Playwright", color: "var(--fw-playwright)" }, [
+    { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" }, [
       { codes: ["playwrightSetup", "playwrightFirst"], mock: "login" }, // 1 Setup & first test
       { codes: ["pwLocators"], mock: "order" },           // 2 Locators & actions
       { codes: ["pwAssertions"], mock: "flaky" },         // 3 Assertions & auto-waiting

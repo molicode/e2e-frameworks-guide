@@ -124,7 +124,7 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span><span class="lang-pill" title="Lenguaje de los ejemplos">TypeScript</span></div>
         <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
         <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
         <ol class="steps roadmap">
@@ -158,7 +158,7 @@
         <div class="prose" data-i18n-html="cyp.rung2.body"><p>El concepto que más cuesta: los comandos <code>cy.*</code> <strong>no son promesas</strong> y no devuelven un valor directo — se <strong>encolan</strong> y se encadenan. Si necesitás el valor de un elemento usás <code>.then()</code>, pero conviene evitarlo. Con <code>.as()</code> creás un alias y lo reusás con <code>@nombre</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -168,7 +168,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><sp
 cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>     <span class="tok-comment">// runs after the type resolves</span>
 
 <span class="tok-comment">// Need the *value*? Use .then() — but reach for it sparingly.</span>
-cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").then(($el) =&gt; {
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").then(($el: JQuery&lt;HTMLElement&gt;) =&gt; {
   expect($el.text()).to.eq("</span><span class="tok-number">250</span><span class="tok-string">");
 });
 
@@ -180,7 +180,7 @@ cy.get("</span><span class="tok-punctuation">@</span>items<span class="tok-strin
         <div class="prose" data-i18n-html="cyp.rung3.body"><p>Las assertions de Cypress son <strong>implícitas</strong>: <code>.should()</code> reintenta el comando anterior hasta que se cumple. Encadenás más condiciones con <code>.and()</code>, o usás <code>expect()</code> dentro de un callback para casos explícitos. Para selectores estables, la comunidad usa la convención <code>data-cy</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -190,7 +190,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><sp
 cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-string">", 3).and("</span>contain<span class="tok-string">", "</span>book<span class="tok-string">");
 
 // Explicit assertions with expect() inside a .should() callback:
-cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").should(($el) =&gt; {
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").should(($el: JQuery&lt;HTMLElement&gt;) =&gt; {
   expect($el.text().trim()).to.eq("</span><span class="tok-number">250</span><span class="tok-string">");
 });
 
@@ -234,7 +234,7 @@ cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctu
         <div class="prose" data-i18n-html="cyp.rung4.body"><p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
@@ -277,13 +277,13 @@ cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-pun
         <div class="prose" data-i18n-html="cyp.rung5.body"><p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// cypress/support/commands.js — encapsulate repetitive flows once.</span>
-Cypress<span class="tok-punctuation">.</span><span class="tok-property">Commands</span><span class="tok-punctuation">.</span><span class="tok-function">add</span><span class="tok-punctuation">("</span>login<span class="tok-string">", (user, pass) =&gt; {
+          <pre><code><span class="tok-comment">// cypress/support/commands.ts — encapsulate repetitive flows once.</span>
+Cypress<span class="tok-punctuation">.</span><span class="tok-property">Commands</span><span class="tok-punctuation">.</span><span class="tok-function">add</span><span class="tok-punctuation">("</span>login<span class="tok-string">", (user: string, pass: string) =&gt; {
   cy.session([user], () =&gt; {
     cy.visit("</span><span class="tok-punctuation">/</span>login<span class="tok-string">");
     cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctuation">-</span>cy<span class="tok-punctuation">=</span>user<span class="tok-punctuation">]").</span><span class="tok-function">type</span><span class="tok-punctuation">(</span>user<span class="tok-punctuation">);</span>
@@ -292,22 +292,27 @@ Cypress<span class="tok-punctuation">.</span><span class="tok-property">Commands
   <span class="tok-punctuation">});</span>
 <span class="tok-punctuation">});</span>
 
-<span class="tok-comment">// cypress/fixtures/order.json -&gt; { "total": 250, "status": "PAID" }</span>
-cy<span class="tok-punctuation">.</span><span class="tok-function">login</span><span class="tok-punctuation">("</span>demo<span class="tok-string">", "</span>secret<span class="tok-string">");
-cy.fixture("</span>order<span class="tok-string">").then((order) =&gt; {
-  cy.intercept("</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">",</span> order<span class="tok-punctuation">);</span>
-<span class="tok-punctuation">});</span></code></pre>
+<span class="tok-comment">// Teach TypeScript about the new command (cypress/support/index.d.ts):</span>
+declare global <span class="tok-punctuation">{</span>
+  namespace Cypress <span class="tok-punctuation">{</span>
+    <span class="tok-keyword">interface</span> Chainable <span class="tok-punctuation">{</span>
+      <span class="tok-function">login</span><span class="tok-punctuation">(</span>user<span class="tok-punctuation">:</span> string<span class="tok-punctuation">,</span> <span class="tok-keyword">pass</span><span class="tok-punctuation">:</span> string<span class="tok-punctuation">):</span> <span class="tok-keyword">void</span><span class="tok-punctuation">;</span>
+    <span class="tok-punctuation">}</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">}</span>
+
+cy<span class="tok-punctuation">.</span><span class="tok-function">login</span><span class="tok-punctuation">("</span>demo<span class="tok-string">", "</span>secret<span class="tok-punctuation">");</span></code></pre>
         </div>
         <h3 class="block-label" id="cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</h3>
         <div class="prose" data-i18n-html="cyp.rung6.body"><p>Además de E2E, Cypress hace <strong>component testing</strong>: montás un componente aislado con <code>cy.mount()</code> y lo probás sin levantar toda la app. En CI corrés <code>cypress run</code> (headless), con <code>--component</code> o <code>--e2e</code> según el tipo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
+            <span class="code-block__lang">TypeScript</span>
             <button class="copy-btn" type="button">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// button.cy.jsx — mount a component in isolation (no full app needed).</span>
+          <pre><code><span class="tok-comment">// button.cy.tsx — mount a component in isolation (no full app needed).</span>
 <span class="tok-keyword">import</span> Button <span class="tok-keyword">from</span> <span class="tok-string">"./Button"</span><span class="tok-punctuation">;</span>
 
 <span class="tok-function">it</span><span class="tok-punctuation">("</span>calls onClick<span class="tok-string">", () =&gt; {
