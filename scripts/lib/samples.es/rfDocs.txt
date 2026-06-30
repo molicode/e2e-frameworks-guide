@@ -1,0 +1,7 @@
+# Validación de documento legal — campos requeridos y formato de una factura.
+Go To    https://app.example.com/invoices/INV-2026-0042
+${num}=    Get Text    css=.invoice-number
+Should Match Regexp    ${num}    ^INV-\d{4}-\d{4}$
+${tax_id}=    Get Text    css=.tax-id
+Should Not Be Empty    ${tax_id}
+Element Text Should Be    css=.doc-status    SIGNED

@@ -1,0 +1,19 @@
+*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Orders CRUD contract
+    Create Session    api    https://api.example.com    headers=${AUTH}
+    # CREATE (POST) -> 201
+    ${created}=    POST On Session    api    /orders    json={"items": ["book"]}
+    Status Should Be    201    ${created}
+    ${id}=    Set Variable    ${created.json()}[id]
+    # READ (GET) -> 200
+    ${got}=    GET On Session    api    /orders/${id}
+    Should Be Equal As Strings    ${got.json()}[status]    NEW
+    # UPDATE (PATCH) -> 200
+    ${upd}=    PATCH On Session    api    /orders/${id}    json={"status": "PAID"}
+    Should Be Equal As Strings    ${upd.json()}[status]    PAID
+    # DELETE -> 204, después GET 404
+    DELETE On Session    api    /orders/${id}    expected_status=204
+    GET On Session    api    /orders/${id}    expected_status=404

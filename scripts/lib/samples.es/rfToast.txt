@@ -1,0 +1,5 @@
+# Toast / alerta — aparece y después desaparece solo.
+Click Element    css=[data-action=save]
+Wait Until Element Is Visible    css=[role=alert]
+Element Should Contain    css=[role=alert]    saved
+Wait Until Element Is Not Visible    css=[role=alert]    timeout=8s

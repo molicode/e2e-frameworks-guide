@@ -1,0 +1,8 @@
+# Los locators de SeleniumLibrary usan la forma "strategy=value". Preferí id/css antes que xpath.
+Click Button     id=submit                      # por id
+Input Text       css=.search    book            # por CSS
+Click Element    xpath=//button[text()='Pay']   # por texto visible
+
+# Las aserciones también son keywords:
+Element Should Be Visible    css=.welcome
+Element Text Should Be       css=.order-status    PAID

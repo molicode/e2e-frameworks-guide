@@ -1406,6 +1406,223 @@ describe("Login", () => {
   });
 });`,
   },
+
+  /* ---- Robot Framework (keyword-driven, Python-based) ---- */
+  rfSetup: {
+    lang: "Bash",
+    code: `# Robot Framework runs on Python. Install it plus the libraries you need:
+pip install robotframework robotframework-seleniumlibrary robotframework-requests
+
+# Run a suite (a folder or a single .robot file):
+robot tests/
+
+# It generates report.html and log.html automatically.`,
+  },
+  rfFirst: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+Login greets the user
+    Open Browser    https://example.com/login    chrome
+    Input Text      id=username    demo
+    Input Text      id=password    secret
+    Click Button    Sign in
+    Page Should Contain    Welcome, demo
+    [Teardown]    Close Browser`,
+  },
+  rfKeywords: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    SeleniumLibrary
+
+*** Variables ***
+\${LOGIN_URL}    https://example.com/login
+
+*** Test Cases ***
+Valid login
+    Login With    demo    secret           # call your own keyword
+    Page Should Contain    Welcome, demo
+
+*** Keywords ***
+Login With
+    [Arguments]    \${user}    \${pass}       # a reusable user keyword
+    Open Browser    \${LOGIN_URL}    chrome
+    Input Text      id=username    \${user}
+    Input Text      id=password    \${pass}
+    Click Button    Sign in`,
+  },
+  rfLocators: {
+    lang: "Robot Framework",
+    code: `# SeleniumLibrary locators use a "strategy=value" form. Prefer id/css over xpath.
+Click Button     id=submit                      # by id
+Input Text       css=.search    book            # by CSS
+Click Element    xpath=//button[text()='Pay']   # by visible text
+
+# Assertions are keywords too:
+Element Should Be Visible    css=.welcome
+Element Text Should Be       css=.order-status    PAID`,
+  },
+  rfWaits: {
+    lang: "Robot Framework",
+    code: `# Wait for a CONDITION, never a fixed Sleep (the #1 cause of flaky suites).
+Wait Until Element Is Visible    css=.welcome    timeout=5s
+Wait Until Page Contains         Welcome, demo   timeout=5s
+Wait Until Element Is Enabled    id=pay
+
+# Avoid this:
+# Sleep    5s`,
+  },
+  rfApi: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Read an order over HTTP
+    Create Session    api    https://api.example.com
+    \${res}=    GET On Session    api    /orders/42
+    Status Should Be    200    \${res}
+    Should Be Equal As Strings    \${res.json()}[status]    PAID`,
+  },
+  rfResource: {
+    lang: "Robot Framework",
+    code: `# orders.resource — a "resource file" is Robot's Page Object: shared keywords.
+*** Keywords ***
+Open Order
+    [Arguments]    \${id}
+    Go To    https://shop.example.com/orders/\${id}
+
+Order Total Should Be
+    [Arguments]    \${expected}
+    Element Text Should Be    css=.order-total    \${expected}
+
+# In a test:  Resource    orders.resource    then call those keywords.
+# In CI:  robot --variable BROWSER:headlesschrome --outputdir results tests/`,
+  },
+
+  /* ---- Robot Framework: critical cases ---- */
+  rfApiCase: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Orders CRUD contract
+    Create Session    api    https://api.example.com    headers=\${AUTH}
+    # CREATE (POST) -> 201
+    \${created}=    POST On Session    api    /orders    json={"items": ["book"]}
+    Status Should Be    201    \${created}
+    \${id}=    Set Variable    \${created.json()}[id]
+    # READ (GET) -> 200
+    \${got}=    GET On Session    api    /orders/\${id}
+    Should Be Equal As Strings    \${got.json()}[status]    NEW
+    # UPDATE (PATCH) -> 200
+    \${upd}=    PATCH On Session    api    /orders/\${id}    json={"status": "PAID"}
+    Should Be Equal As Strings    \${upd.json()}[status]    PAID
+    # DELETE -> 204, then GET 404
+    DELETE On Session    api    /orders/\${id}    expected_status=204
+    GET On Session    api    /orders/\${id}    expected_status=404`,
+  },
+  rfMoney: {
+    lang: "Robot Framework",
+    code: `# Amounts — read the receipt over HTTP and assert the money math (in cents).
+\${res}=    GET On Session    api    /receipts/9087
+\${r}=    Set Variable    \${res.json()}
+Should Be Equal As Integers    \${r}[totalCents]    10890
+Should Be True    \${r}[totalCents] == \${r}[subtotalCents] + \${r}[taxCents]
+Should Be True    \${r}[totalCents] > 0`,
+  },
+  rfDocs: {
+    lang: "Robot Framework",
+    code: `# Legal document validation — an invoice's required fields & format.
+Go To    https://app.example.com/invoices/INV-2026-0042
+\${num}=    Get Text    css=.invoice-number
+Should Match Regexp    \${num}    ^INV-\\d{4}-\\d{4}$
+\${tax_id}=    Get Text    css=.tax-id
+Should Not Be Empty    \${tax_id}
+Element Text Should Be    css=.doc-status    SIGNED`,
+  },
+  rfSecurity: {
+    lang: "Robot Framework",
+    code: `# Security — authorization/IDOR + XSS.
+# User A must NOT read user B's invoice (403, not 200).
+GET On Session    api    /invoices/INV-2026-0099    expected_status=403
+
+# XSS: the payload renders as text, never executes.
+Go To    https://app.example.com/search?q=<script>alert(1)</script>
+Page Should Contain    <script>alert(1)</script>`,
+  },
+
+  /* ---- Robot Framework: UI components ---- */
+  rfValidation: {
+    lang: "Robot Framework",
+    code: `# Form validation — error shows, submit stays disabled.
+Input Text    id=email    not-an-email
+Click Button    Sign up
+Element Should Be Visible    css=.error
+Element Should Be Disabled    css=button[type=submit]`,
+  },
+  rfSelect: {
+    lang: "Robot Framework",
+    code: `# Select / dropdown — pick an option and assert the value.
+Select From List By Value    id=country    AR
+\${value}=    Get Selected List Value    id=country
+Should Be Equal    \${value}    AR`,
+  },
+  rfCheckbox: {
+    lang: "Robot Framework",
+    code: `# Checkbox — select and assert state.
+Select Checkbox    name=optIn
+Checkbox Should Be Selected    name=optIn`,
+  },
+  rfModal: {
+    lang: "Robot Framework",
+    code: `# Modal / dialog — open, confirm, assert it's gone.
+Click Element    css=[data-action=delete]
+Wait Until Element Is Visible    css=[role=dialog]
+Click Button    Delete
+Wait Until Element Is Not Visible    css=[role=dialog]`,
+  },
+  rfTable: {
+    lang: "Robot Framework",
+    code: `# Data table — assert the row count and a specific cell.
+\${rows}=    Get Element Count    css=table tbody tr
+Should Be Equal As Integers    \${rows}    3
+Table Should Contain    css=table    Ada Lovelace`,
+  },
+  rfToast: {
+    lang: "Robot Framework",
+    code: `# Toast / alert — appears, then disappears on its own.
+Click Element    css=[data-action=save]
+Wait Until Element Is Visible    css=[role=alert]
+Element Should Contain    css=[role=alert]    saved
+Wait Until Element Is Not Visible    css=[role=alert]    timeout=8s`,
+  },
+  rfA11y: {
+    lang: "Robot Framework",
+    code: `# Accessibility — there's no built-in axe; teams wrap axe-core in a custom
+# library, or assert roles/labels directly with SeleniumLibrary keywords.
+Element Attribute Value Should Be    css=button.icon    aria-label    Close
+Page Should Contain Element    xpath=//*[@role='navigation']`,
+  },
+
+  /* ---- Robot Framework: comparison (VerifyOrder) ---- */
+  verifyRobot: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+VerifyOrder
+    Open Browser    https://shop.example.com/orders/42    chrome
+    # Each assertion is a readable, English-like keyword.
+    Element Text Should Be    css=.order-total     250
+    Element Text Should Be    css=.order-status    PAID
+    Page Should Contain Element    css=.order-items li
+    [Teardown]    Close Browser`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -1825,6 +2042,17 @@ export const SECTIONS = [
          Modal: "modalTest", Table: "tableTest", Toast: "toastTest", A11y: "a11yTest",
        }[k]))),
 
+  ...frameworkGroup("robot", "nav.robot", "rf",
+    { label: "Robot Framework", color: "var(--fw-robot)" }, [
+      { codes: ["rfSetup", "rfFirst"], mock: "login" }, // 1 Setup & first test
+      { codes: ["rfKeywords"] },                        // 2 Keywords & structure
+      { codes: ["rfLocators"], mock: "order" },         // 3 Locators (SeleniumLibrary)
+      { codes: ["rfWaits"], mock: "flaky" },            // 4 Explicit waits
+      { codes: ["rfApi"], mock: "error" },              // 5 API with RequestsLibrary
+      { codes: ["rfResource"], mock: "table" },         // 6 Resource files (POM) & CI
+    ], frameworkCases("rfApiCase", "rfMoney", "rfDocs", "rfSecurity"),
+       frameworkComponents((k) => "rf" + k)),
+
   {
     id: "comparison",
     navKey: "nav.comparison",
@@ -1835,17 +2063,18 @@ export const SECTIONS = [
       { type: "fwblock", chip: { label: "Selenium", color: "var(--fw-selenium)" }, note: "cmp.sel.note", sample: "verifySelenium" },
       { type: "fwblock", chip: { label: "Cypress", color: "var(--fw-cypress)" }, note: "cmp.cyp.note", sample: "verifyCypress" },
       { type: "fwblock", chip: { label: "Playwright", color: "var(--fw-playwright)" }, note: "cmp.pw.note", sample: "verifyPlaywright" },
+      { type: "fwblock", chip: { label: "Robot Framework", color: "var(--fw-robot)" }, note: "cmp.robot.note", sample: "verifyRobot" },
       { type: "label", text: "cmp.table.label" },
       {
         type: "table",
-        head: ["cmp.th.feature", "cmp.th.selenium", "cmp.th.cypress", "cmp.th.playwright"],
+        head: ["cmp.th.feature", "cmp.th.selenium", "cmp.th.cypress", "cmp.th.playwright", "cmp.th.robot"],
         rows: [
-          ["cmp.r1.f", "cmp.r1.s", "cmp.r1.c", "cmp.r1.p"],
-          ["cmp.r2.f", "cmp.r2.s", "cmp.r2.c", "cmp.r2.p"],
-          ["cmp.r3.f", "cmp.r3.s", "cmp.r3.c", "cmp.r3.p"],
-          ["cmp.r4.f", "cmp.r4.s", "cmp.r4.c", "cmp.r4.p"],
-          ["cmp.r5.f", "cmp.r5.s", "cmp.r5.c", "cmp.r5.p"],
-          ["cmp.r6.f", "cmp.r6.s", "cmp.r6.c", "cmp.r6.p"],
+          ["cmp.r1.f", "cmp.r1.s", "cmp.r1.c", "cmp.r1.p", "cmp.r1.r"],
+          ["cmp.r2.f", "cmp.r2.s", "cmp.r2.c", "cmp.r2.p", "cmp.r2.r"],
+          ["cmp.r3.f", "cmp.r3.s", "cmp.r3.c", "cmp.r3.p", "cmp.r3.r"],
+          ["cmp.r4.f", "cmp.r4.s", "cmp.r4.c", "cmp.r4.p", "cmp.r4.r"],
+          ["cmp.r5.f", "cmp.r5.s", "cmp.r5.c", "cmp.r5.p", "cmp.r5.r"],
+          ["cmp.r6.f", "cmp.r6.s", "cmp.r6.c", "cmp.r6.p", "cmp.r6.r"],
         ],
       },
     ],

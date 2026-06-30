@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="tsqa.page.intro">Por qué TypeScript para QA</title>
+  <title data-i18n="page.hello">Hola mundo</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--ts-intro">
+<body class="page--section page--robot-hola-mundo">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -73,28 +73,10 @@
           <span class="nav-link__num">03</span>
           <span data-i18n="nav.pyqa">Python para QA</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="ts-intro.html">
+        <a class="nav-link nav-group" href="ts-intro.html">
           <span class="nav-link__num">04</span>
           <span data-i18n="nav.tsqa">TypeScript para QA</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="ts-intro.html" aria-current="page">
-            <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-hola.html">
-            <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-fundamentos.html">
-            <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-tipos.html">
-            <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-pruebas.html">
-            <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-componente.html">
-            <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
-          </a>
         <a class="nav-link nav-group" href="selenium-filosofia.html">
           <span class="nav-link__num">05</span>
           <span data-i18n="nav.selenium">Selenium</span>
@@ -107,10 +89,25 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link nav-group" href="robot-filosofia.html">
+        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
         </a>
+          <a class="nav-link nav-sublink" href="robot-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="robot-hola-mundo.html" aria-current="page">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
         <a class="nav-link" href="comparison.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.comparison">Comparativa</span>
@@ -139,44 +136,88 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
-        <h2 class="section__title" data-i18n="tsqa.page.intro">Por qué TypeScript para QA</h2>
-        <div class="prose" data-i18n-html="tsqa.lead"><p><strong>TypeScript</strong> es JavaScript con tipos: te avisa de los errores <em>antes</em> de correr el test y te da autocompletado en todo el editor. Es el lenguaje de <strong>Cypress</strong> (y también funciona de diez con Playwright), así que es tu puerta de entrada al testing del front moderno.</p></div>
-        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
-        <div class="prose" data-i18n-html="tsqa.why"><p>JavaScript es el idioma del navegador; TypeScript le agrega una capa de <strong>tipos</strong> que el compilador chequea. Para QA eso significa menos errores tontos (un campo mal escrito, un valor del tipo equivocado) y tests que se auto-documentan. Las herramientas clave — <code>Vitest</code>/<code>Jest</code>, Cypress y Playwright — son TypeScript de primera.</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon">🛡️</div>
-              <h4 data-i18n="tsqa.t1.title">Tipado</h4>
-              <p data-i18n="tsqa.t1.body">El compilador caza errores antes de ejecutar: menos sorpresas en runtime.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">💡</div>
-              <h4 data-i18n="tsqa.t2.title">Autocompletado</h4>
-              <p data-i18n="tsqa.t2.body">El editor conoce la forma de tus datos y comandos: escribís más rápido y con menos typos.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🌐</div>
-              <h4 data-i18n="tsqa.t3.title">Cypress &amp; Playwright</h4>
-              <p data-i18n="tsqa.t3.body">El lenguaje nativo de Cypress y un ciudadano de primera en Playwright. Web testing puro.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🤖</div>
-              <h4 data-i18n="tsqa.t4.title">AI-friendly</h4>
-              <p data-i18n="tsqa.t4.body">Los asistentes de AI generan TypeScript con tipos que vos revisás y el compilador valida.</p>
-            </div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
+        <h2 class="section__title" data-i18n="page.hello">Hola mundo</h2>
+        <h3 class="block-label" id="rf-rung-1" data-i18n="rf.rung1.title">Setup y primer test</h3>
+        <div class="prose" data-i18n-html="rf.rung1.body"><p>Robot Framework corre sobre <strong>Python</strong>: lo instalás con <code>pip</code> junto a las librerías que necesites (<code>SeleniumLibrary</code>, <code>RequestsLibrary</code>). Un archivo <code>.robot</code> se divide en secciones (<code>*** Settings ***</code>, <code>*** Test Cases ***</code>). Corrés la suite con <code>robot tests/</code> y obtenés <code>report.html</code> y <code>log.html</code> automáticamente.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Bash</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Robot Framework corre sobre Python. Instalalo junto con las librerías que necesités:</span>
+pip install robotframework robotframework<span class="tok-punctuation">-</span>seleniumlibrary robotframework<span class="tok-punctuation">-</span>requests
+
+<span class="tok-comment"># Corré una suite (una carpeta o un único archivo .robot):</span>
+robot tests<span class="tok-punctuation">/</span>
+
+<span class="tok-comment"># Genera report.html y log.html automáticamente.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Robot Framework runs on Python. Install it plus the libraries you need:</span>
+pip install robotframework robotframework<span class="tok-punctuation">-</span>seleniumlibrary robotframework<span class="tok-punctuation">-</span>requests
+
+<span class="tok-comment"># Run a suite (a folder or a single .robot file):</span>
+robot tests<span class="tok-punctuation">/</span>
+
+<span class="tok-comment"># It generates report.html and log.html automatically.</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="tsqa.when"><p>Elegí TypeScript para QA cuando trabajás sobre apps web modernas (sobre todo con Cypress), cuando el equipo de front ya usa TS, o cuando querés que el compilador te cubra la espalda. Si tu foco es testing de APIs y multi-lenguaje, mirá la sección de Python; para el front, TypeScript es la apuesta natural.</p></div>
-        <div class="callout" data-i18n-html="tsqa.callout"><strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Node y TypeScript, escribí tu primer archivo, aprendé tipos y sintaxis, y terminá escribiendo tu primer test. Después saltá a Cypress con base sólida.</div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Robot Framework</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-punctuation">***</span> Settings <span class="tok-punctuation">***</span>
+Library    SeleniumLibrary
+
+<span class="tok-punctuation">***</span> Test Cases <span class="tok-punctuation">***</span>
+Login greets the user
+    Open Browser    https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login    chrome
+    Input Text      id<span class="tok-punctuation">=</span>username    demo
+    Input Text      id<span class="tok-punctuation">=</span>password    secret
+    Click Button    Sign <span class="tok-keyword">in</span>
+    Page Should Contain    Welcome<span class="tok-punctuation">,</span> demo
+    <span class="tok-punctuation">[</span>Teardown<span class="tok-punctuation">]</span>    Close Browser</code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">example.com/login</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Sign in</h4>
+              <div class="mock-field">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input">demo@acme.test</span>
+                <code class="mock-tag">getByLabel("Email")</code>
+              </div>
+              <div class="mock-field">
+                <span class="mock-field__label">Password</span>
+                <span class="mock-input">••••••••</span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn">Sign in</span>
+                <code class="mock-tag">getByRole("button", { name: "Sign in" })</code>
+              </div>
+              <p class="mock-after">after login → <strong>Welcome, demo</strong>
+                <code class="mock-tag">getByText("Welcome")</code>
+              </p>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="python-componente.html">
+          <a class="page-nav__link page-nav__prev" href="robot-filosofia.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+            <span class="page-nav__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="ts-hola.html">
+          <a class="page-nav__link page-nav__next" href="robot-ruta.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+            <span class="page-nav__title" data-i18n="page.path">Ruta de aprendizaje</span>
           </a>
         </nav>
       </div>

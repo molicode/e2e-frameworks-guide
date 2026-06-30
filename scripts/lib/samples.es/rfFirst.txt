@@ -1,0 +1,11 @@
+*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+Login greets the user
+    Open Browser    https://example.com/login    chrome
+    Input Text      id=username    demo
+    Input Text      id=password    secret
+    Click Button    Sign in
+    Page Should Contain    Welcome, demo
+    [Teardown]    Close Browser

@@ -1,0 +1,7 @@
+# Seguridad — autorización/IDOR + XSS.
+# El usuario A NO debe leer la factura del usuario B (403, no 200).
+GET On Session    api    /invoices/INV-2026-0099    expected_status=403
+
+# XSS: el payload se renderiza como texto, nunca se ejecuta.
+Go To    https://app.example.com/search?q=<script>alert(1)</script>
+Page Should Contain    <script>alert(1)</script>

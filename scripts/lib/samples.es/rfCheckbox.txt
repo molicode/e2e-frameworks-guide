@@ -1,0 +1,3 @@
+# Checkbox — seleccioná y verificá el estado.
+Select Checkbox    name=optIn
+Checkbox Should Be Selected    name=optIn
