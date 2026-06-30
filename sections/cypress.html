@@ -268,6 +268,38 @@ cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">
 //   &lt;button data-cy="</span>pay<span class="tok-string">"&gt;Pay&lt;/button&gt;
 cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctuation">-</span>cy<span class="tok-punctuation">=</span>pay<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Order #42</h4>
+                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
+              </div>
+              <div class="mock-total">
+                <span>Total</span><strong>250</strong>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <ul class="mock-list">
+                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
+              </ul>
+              <div class="mock-tags-row">
+                <code class="mock-tag">.order-items li</code>
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(3)</code>
+                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="cyp.rung4.title">Network con cy.intercept()</h3>
         <div class="prose" data-i18n-html="cyp.rung4.body"><p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p></div>
         <div class="code-block">
@@ -357,6 +389,31 @@ cy.fixture("</span>order<span class="tok-string">").then((order) =&gt; {
 
 <span class="tok-comment">// In CI:  npx cypress run --component   (and --e2e for end-to-end)</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage">
+              <div class="mock-dialog" role="dialog">
+                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-error-msg">This action can't be undone.</p>
+                <div class="mock-btn-row">
+                  <span class="mock-btn mock-btn--ghost">Cancel</span>
+                  <span class="mock-btn mock-btn--danger">Delete</span>
+                </div>
+                <div class="mock-tags-row">
+                  <code class="mock-tag">getByRole("dialog")</code>
+                  <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
         <div class="vs-grid">
           <div class="vs-card vs-card--manual">

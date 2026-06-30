@@ -302,6 +302,30 @@ expect(1 + 1).toBe(2);
 await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
 await expect(page.getByText("</span>Payment confirmed<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-total">
+                <span>Total</span>
+                <span class="mock-spinner" aria-hidden="true"></span>
+                <span class="mock-loading">loading…</span>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--bad">✗ sleep(1000) → flaky</code>
+                <code class="mock-tag mock-tag--good">✓ toHaveText("250") → auto-retry</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="pw.rung4.title">Fixtures y organización</h3>
         <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>hooks</strong> (<code>beforeEach</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una <strong>fixture</strong> propia con <code>base.extend()</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
         <div class="code-block">

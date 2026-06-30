@@ -244,9 +244,58 @@ function flakyScreen() {
   );
 }
 
+/** An API request/response panel — used by the API-testing example. */
+function apiScreen() {
+  return `
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock-method">GET</span>
+            <span class="mock__url">api.example.com/orders/42</span>
+            <span class="mock-status mock-status--ok">200 OK</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <pre class="mock-json"><code>{
+  "total": 250,
+  "status": "PAID",
+  "items": ["book"]
+}</code></pre>
+            <div class="mock-tags-row">
+              <code class="mock-tag">request.get("/orders/42")</code>
+              <code class="mock-tag">expect(res).toBeOK()</code>
+              <code class="mock-tag">res.json()</code>
+            </div>
+          </div>
+        </div>`;
+}
+
+/** An accessibility audit panel (axe-style) — used by the a11y example. */
+function a11yScreen() {
+  return browser(
+    "app.example.com",
+    `
+            <div class="mock-card">
+              <h4 class="mock-h">Accessibility scan</h4>
+              <ul class="mock-a11y-list">
+                <li class="mock-a11y-ok">Buttons have an accessible name</li>
+                <li class="mock-a11y-ok">Form inputs have labels</li>
+                <li class="mock-a11y-bad">Image missing alt text <code>img.logo</code></li>
+                <li class="mock-a11y-ok">Color contrast &ge; 4.5:1</li>
+              </ul>
+              <div class="mock-a11y-score">1 violation</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">@axe-core/playwright</code>
+                <code class="mock-tag">expect(violations).toEqual([])</code>
+                <code class="mock-tag">getByRole("button", { name })</code>
+              </div>
+            </div>`
+  );
+}
+
 const SCREENS = {
   login: loginScreen,
   order: orderScreen,
+  api: apiScreen,
+  a11y: a11yScreen,
   validation: validationScreen,
   select: selectScreen,
   checkbox: checkboxScreen,
