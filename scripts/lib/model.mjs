@@ -600,6 +600,98 @@ test("home page has no a11y violations", async ({ page }) => {
 await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();`,
   },
 
+  /* ---- Critical cases: accounts, payments, value validation, security ---- */
+  apiCrud: {
+    lang: "JavaScript",
+    code: `// API CRUD with auth — create, read, assert the contract. No UI.
+const api = await request.newContext({
+  baseURL: "https://api.example.com",
+  extraHTTPHeaders: { Authorization: \`Bearer \${token}\` },
+});
+
+// CREATE
+const created = await api.post("/orders", { data: { items: ["book"] } });
+expect(created.status()).toBe(201);
+const { id } = await created.json();
+
+// READ + assert the response shape
+const res = await api.get(\`/orders/\${id}\`);
+await expect(res).toBeOK();
+expect(await res.json()).toMatchObject({ id, status: "NEW" });
+
+// Without a token → 401 (not a silent 200 or a 500)
+const anon = await request.get(\`https://api.example.com/orders/\${id}\`);
+expect(anon.status()).toBe(401);`,
+  },
+  receiptTest: {
+    lang: "JavaScript",
+    code: `// Payment receipt — the money math must ALWAYS add up.
+// Work in integer cents to avoid floating-point errors.
+const r = await (await request.get("/api/receipts/9087")).json();
+
+// Sum of line items equals the subtotal.
+const itemsTotal = r.items.reduce((sum, it) => sum + it.cents, 0);
+expect(itemsTotal).toBe(r.subtotalCents);                 // 9000
+
+// Tax and total are exact.
+expect(r.taxCents).toBe(Math.round(r.subtotalCents * 0.21)); // 1890
+expect(r.totalCents).toBe(r.subtotalCents + r.taxCents);     // 10890
+
+// Invariants: never negative, status consistent with the amount paid.
+expect(r.totalCents).toBeGreaterThan(0);
+expect(r.status).toBe("PAID");`,
+  },
+  moneyTest: {
+    lang: "JavaScript",
+    code: `// Value validation — the classic money pitfalls QA must catch.
+
+// 1) Never trust floats for money — work in integer cents.
+expect(0.1 + 0.2).not.toBe(0.3);   // 0.30000000000000004 !
+expect(10 + 20).toBe(30);          // cents are safe
+
+// 2) Boundary inputs the form MUST reject:
+for (const bad of ["-5", "0", "abc", "1e9", "10.999"]) {
+  await page.getByLabel("Amount").fill(bad);
+  await page.getByRole("button", { name: "Pay" }).click();
+  await expect(page.getByText("Invalid amount")).toBeVisible();
+}
+
+// 3) Rounding is half-up and currency-formatted.
+expect(formatMoney(1890)).toBe("$18.90");`,
+  },
+  securityAuthz: {
+    lang: "JavaScript",
+    code: `// Security — authorization & IDOR (Insecure Direct Object Reference).
+// User A must NOT read User B's order just by changing the id in the URL.
+const asUserA = await request.newContext({
+  extraHTTPHeaders: { Authorization: \`Bearer \${userAToken}\` },
+});
+
+const res = await asUserA.get("/api/orders/99"); // belongs to user B
+expect(res.status()).toBe(403);                  // forbidden, NOT 200
+
+// No token at all → 401 (never a 500 or a silent 200).
+const anon = await request.get("/api/orders/99");
+expect(anon.status()).toBe(401);`,
+  },
+  securityInjection: {
+    lang: "JavaScript",
+    code: `// Security — the app must NEUTRALIZE malicious input, not run it.
+const payloads = [
+  "<script>alert(1)</script>",  // XSS
+  "'; DROP TABLE orders;--",     // SQL injection
+];
+
+for (const p of payloads) {
+  await page.getByLabel("Search").fill(p);
+  await page.getByRole("button", { name: "Search" }).click();
+
+  // The payload is shown as TEXT (escaped), never executed; nothing breaks.
+  await expect(page.getByText(p)).toBeVisible();
+  await expect(page.locator(".results")).toBeVisible();
+}`,
+  },
+
   /* ---- AI tooling: MCP, Skills, Agents ---- */
   mcpConfig: {
     lang: "JSON",
@@ -870,6 +962,38 @@ export const SECTIONS = [
   },
 
   {
+    id: "critical",
+    navKey: "nav.critical",
+    blocks: [
+      { type: "prose", html: "crit.lead" },
+      { type: "callout", variant: "warn", html: "crit.callout" },
+
+      { type: "label", text: "crit.api.label" },
+      { type: "prose", html: "crit.api.body" },
+      { type: "code", sample: "apiCrud" },
+
+      { type: "label", text: "crit.receipt.label" },
+      { type: "prose", html: "crit.receipt.body" },
+      { type: "code", sample: "receiptTest" },
+      { type: "mock", screen: "receipt" },
+
+      { type: "label", text: "crit.value.label" },
+      { type: "prose", html: "crit.value.body" },
+      { type: "code", sample: "moneyTest" },
+
+      { type: "label", text: "crit.authz.label" },
+      { type: "prose", html: "crit.authz.body" },
+      { type: "code", sample: "securityAuthz" },
+      { type: "mock", screen: "forbidden" },
+
+      { type: "label", text: "crit.injection.label" },
+      { type: "prose", html: "crit.injection.body" },
+      { type: "code", sample: "securityInjection" },
+      { type: "callout", variant: "danger", html: "crit.injection.callout" },
+    ],
+  },
+
+  {
     id: "ai-role",
     navKey: "nav.airole",
     blocks: [
@@ -1038,6 +1162,21 @@ export const SECTIONS = [
           { term: "Agent / sub-agent", def: "kt.ai.agent" },
           { term: "RAG (Retrieval-Augmented Generation)", def: "kt.ai.rag" },
           { term: "Context window / tokens", def: "kt.ai.context" },
+        ],
+      },
+
+      { type: "label", text: "kt.cat.security" },
+      {
+        type: "glossary",
+        items: [
+          { term: "Authentication vs Authorization", def: "kt.sec.authn" },
+          { term: "IDOR", def: "kt.sec.idor" },
+          { term: "XSS (Cross-Site Scripting)", def: "kt.sec.xss" },
+          { term: "SQL Injection", def: "kt.sec.sqli" },
+          { term: "CSRF", def: "kt.sec.csrf" },
+          { term: "Rate limiting", def: "kt.sec.ratelimit" },
+          { term: "Least privilege", def: "kt.sec.leastpriv" },
+          { term: "Sensitive data exposure", def: "kt.sec.sensitive" },
         ],
       },
       { type: "callout", variant: "", html: "kt.callout" },
