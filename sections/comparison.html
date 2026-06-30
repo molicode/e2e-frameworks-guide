@@ -105,6 +105,38 @@
         <h2 class="section__title" data-i18n="nav.comparison">Comparativa</h2>
         <div class="prose" data-i18n-html="cmp.lead"><p>Nada explica mejor las diferencias que <strong>el mismo test en los tres frameworks</strong>. Resolvemos el caso <code>VerifyOrder</code> y observamos cómo cada uno maneja los assertions y las esperas.</p></div>
         <div class="callout" data-i18n-html="cmp.case"><strong>Caso “VerifyOrder”:</strong> en la página de una orden, verificar que <code>total = 250</code>, que <code>status = PAID</code> y que la lista de items contiene <code>book</code>. Mismo objetivo, tres estilos.</div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Order #42</h4>
+                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
+              </div>
+              <div class="mock-total">
+                <span>Total</span><strong>250</strong>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <ul class="mock-list">
+                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
+              </ul>
+              <div class="mock-tags-row">
+                <code class="mock-tag">.order-items li</code>
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(3)</code>
+                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <div class="fw-block">
           <span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span>
           <p class="prose" data-i18n-html="cmp.sel.note"><strong>Selenium:</strong> leés cada valor con <code>getText()</code> y comparás con <code>assert</code> a mano. Más verboso y tenés que pensar las esperas.</p>

@@ -13,6 +13,7 @@
 
 import { SAMPLES } from "./model.mjs";
 import { highlight } from "./highlight.mjs";
+import { renderMock } from "./mocks.mjs";
 
 /* ---- small escaping helpers ---- */
 function escText(s) {
@@ -67,6 +68,12 @@ function renderBlock(block, dict) {
 
     case "code":
       return codeBlock(block.sample, dict);
+
+    case "mock":
+      return `
+        <figure class="mock-figure">${renderMock(block.screen)}
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">${escText(t(dict, "ui.mockCaption"))}</figcaption>
+        </figure>`;
 
     case "callout": {
       const mod = block.variant ? ` callout--${block.variant}` : "";
