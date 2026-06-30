@@ -1,0 +1,13 @@
+// Una interface describe la FORMA de un objeto — tus contratos de API en código.
+interface Order {
+  id: number;
+  status: "NEW" | "PAID" | "REFUNDED"; // una unión de valores permitidos
+  total: number;
+  coupon?: string;                     // propiedad opcional
+}
+
+const order: Order = { id: 42, status: "PAID", total: 250 };
+
+// El compilador ahora protege cada acceso:
+console.log(order.status);   // ok
+// order.status = "DONE";    // error: no está en la unión

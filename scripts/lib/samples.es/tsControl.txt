@@ -1,0 +1,16 @@
+// El control de flujo usa llaves. if / else if / else para decidir.
+const status = "PAID";
+if (status === "PAID") {
+  console.log("Charged");
+} else if (status === "NEW") {
+  console.log("Pending");
+} else {
+  console.log("Other state");
+}
+
+// for...of recorre los valores de cualquier iterable:
+const names = ["Ada", "Linus", "Grace"];
+for (const n of names) {
+  if (n === "Linus") continue; // salteá este
+  console.log(n);
+}

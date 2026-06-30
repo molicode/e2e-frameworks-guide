@@ -1,0 +1,12 @@
+// Anotás tipos con ": tipo", pero TS también los INFIERE desde el valor.
+const name: string = "Ada";
+let attempts = 3;           // inferido como number
+const price = 19.99;        // number
+const isActive = true;      // boolean
+
+// "const" no se puede reasignar; "let" sí. Preferí const por defecto.
+attempts = attempts + 1;    // ok
+// price = 20;              // error de compilación: price es const
+
+// El compilador detecta errores de tipo ANTES de ejecutar:
+const label = `${name} has ${attempts} attempts`;

@@ -1,0 +1,23 @@
+// beforeEach prepara estado fresco; it.each corre un test sobre muchos casos.
+import { describe, it, expect, beforeEach } from "vitest";
+
+describe("order", () => {
+  let order: { id: number; status: string };
+
+  beforeEach(() => {
+    // Preparás una vez antes de CADA test — no se filtra estado entre tests.
+    order = { id: 42, status: "PAID" };
+  });
+
+  it("is paid", () => {
+    expect(order.status).toBe("PAID");
+  });
+
+  it.each([
+    [1.0, 100],
+    [19.99, 1999],
+    [0, 0],
+  ])("toCents(%d) === %d", (amount, cents) => {
+    expect(Math.round(amount * 100)).toBe(cents);
+  });
+});

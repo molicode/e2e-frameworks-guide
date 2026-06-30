@@ -1,0 +1,9 @@
+// Las APIs hablan JSON; JSON.parse/stringify convierten texto <-> objetos.
+const raw = '{"id": 42, "items": ["book"], "total": 250}';
+const order = JSON.parse(raw) as { id: number; items: string[]; total: number };
+console.log(order.items[0]); // book
+
+// Objeto -> texto JSON (el 2 agrega indentación para diffs de test legibles):
+const payload = JSON.stringify({ status: "PAID" }, null, 2);
+
+// fetch hace esto por vos: await res.json() devuelve el body parseado.

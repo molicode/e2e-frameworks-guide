@@ -1,0 +1,12 @@
+// login.cy.ts — la misma idea contra un browser real, con Cypress.
+describe("Login", () => {
+  it("greets the user after a valid login", () => {
+    cy.visit("https://example.com/login");
+    cy.get("#username").type("demo");
+    cy.get("#password").type("secret");
+    cy.get("button[type=submit]").click();
+
+    // .should() reintenta hasta que la aserción se cumpla o expire el tiempo.
+    cy.get(".welcome").should("have.text", "Welcome, demo");
+  });
+});

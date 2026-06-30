@@ -1,0 +1,17 @@
+// orders.test.ts — tu primer test real: pegale a una API, verificá el contrato.
+import { describe, it, expect } from "vitest";
+
+const BASE = "https://api.example.com";
+
+describe("orders API", () => {
+  it("order 42 is paid", async () => {
+    const res = await fetch(`${BASE}/orders/42`);
+
+    // Primero el status, después la forma del body.
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.status).toBe("PAID");
+    expect(body.total).toBe(250);
+    expect(body.items).toContain("book");
+  });
+});

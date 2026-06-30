@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="tsqa.page.fund">Fundamentos del lenguaje</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--ts-fundamentos">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="python-intro.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.pyqa">Python para QA</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="ts-intro.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.tsqa">TypeScript para QA</span>
+        </a>
+          <a class="nav-link nav-sublink" href="ts-intro.html">
+            <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-hola.html">
+            <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="ts-fundamentos.html" aria-current="page">
+            <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-tipos.html">
+            <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-pruebas.html">
+            <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-componente.html">
+            <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
+          </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">13</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
+        <h2 class="section__title" data-i18n="tsqa.page.fund">Fundamentos del lenguaje</h2>
+        <div class="prose" data-i18n-html="tsqa.fund.lead"><p>La sintaxis esencial: variables tipadas, control de flujo y funciones. Lo mismo que en JavaScript, pero con tipos que te cubren.</p></div>
+        <h3 class="block-label" data-i18n="tsqa.types.label">Variables y tipos</h3>
+        <div class="prose" data-i18n-html="tsqa.types.body"><p>Anotás tipos con <code>: tipo</code>, pero TS también los <strong>infiere</strong> del valor. Los básicos: <code>string</code>, <code>number</code>, <code>boolean</code>. Usá <code>const</code> por defecto (no se reasigna) y <code>let</code> solo cuando necesitás cambiar el valor. El compilador caza los errores de tipo antes de correr.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Anotás tipos con ": tipo", pero TS también los INFIERE desde el valor.</span>
+<span class="tok-keyword">const</span> name<span class="tok-punctuation">:</span> string <span class="tok-punctuation">=</span> <span class="tok-string">"Ada"</span><span class="tok-punctuation">;</span>
+<span class="tok-keyword">let</span> attempts <span class="tok-punctuation">=</span> <span class="tok-number">3</span><span class="tok-punctuation">;</span>           <span class="tok-comment">// inferido como number</span>
+<span class="tok-keyword">const</span> price <span class="tok-punctuation">=</span> <span class="tok-number">19.99</span><span class="tok-punctuation">;</span>        <span class="tok-comment">// number</span>
+<span class="tok-keyword">const</span> isActive <span class="tok-punctuation">=</span> <span class="tok-keyword">true</span><span class="tok-punctuation">;</span>      <span class="tok-comment">// boolean</span>
+
+<span class="tok-comment">// "const" no se puede reasignar; "let" sí. Preferí const por defecto.</span>
+attempts <span class="tok-punctuation">=</span> attempts <span class="tok-punctuation">+</span> <span class="tok-number">1</span><span class="tok-punctuation">;</span>    <span class="tok-comment">// ok</span>
+<span class="tok-comment">// price = 20;              // error de compilación: price es const</span>
+
+<span class="tok-comment">// El compilador detecta errores de tipo ANTES de ejecutar:</span>
+<span class="tok-keyword">const</span> label <span class="tok-punctuation">=</span> <span class="tok-string">`${name} has ${attempts} attempts`</span><span class="tok-punctuation">;</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// You annotate types with ": type", but TS also INFERS them from the value.</span>
+<span class="tok-keyword">const</span> name<span class="tok-punctuation">:</span> string <span class="tok-punctuation">=</span> <span class="tok-string">"Ada"</span><span class="tok-punctuation">;</span>
+<span class="tok-keyword">let</span> attempts <span class="tok-punctuation">=</span> <span class="tok-number">3</span><span class="tok-punctuation">;</span>           <span class="tok-comment">// inferred as number</span>
+<span class="tok-keyword">const</span> price <span class="tok-punctuation">=</span> <span class="tok-number">19.99</span><span class="tok-punctuation">;</span>        <span class="tok-comment">// number</span>
+<span class="tok-keyword">const</span> isActive <span class="tok-punctuation">=</span> <span class="tok-keyword">true</span><span class="tok-punctuation">;</span>      <span class="tok-comment">// boolean</span>
+
+<span class="tok-comment">// "const" can't be reassigned; "let" can. Prefer const by default.</span>
+attempts <span class="tok-punctuation">=</span> attempts <span class="tok-punctuation">+</span> <span class="tok-number">1</span><span class="tok-punctuation">;</span>    <span class="tok-comment">// ok</span>
+<span class="tok-comment">// price = 20;              // compile error: price is const</span>
+
+<span class="tok-comment">// The compiler catches type mistakes BEFORE you run:</span>
+<span class="tok-keyword">const</span> label <span class="tok-punctuation">=</span> <span class="tok-string">`${name} has ${attempts} attempts`</span><span class="tok-punctuation">;</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="tsqa.control.label">Condicionales y bucles</h3>
+        <div class="prose" data-i18n-html="tsqa.control.body"><p>El control de flujo usa llaves: <code>if/else if/else</code> para decidir, <code>for...of</code> para recorrer los valores de un iterable y <code>while</code> para una condición. <code>continue</code> saltea una vuelta y <code>break</code> corta el bucle.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// El control de flujo usa llaves. if / else if / else para decidir.</span>
+<span class="tok-keyword">const</span> status <span class="tok-punctuation">=</span> <span class="tok-string">"PAID"</span><span class="tok-punctuation">;</span>
+<span class="tok-keyword">if</span> <span class="tok-punctuation">(</span>status <span class="tok-punctuation">===</span> <span class="tok-string">"PAID"</span><span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
+  console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">("</span>Charged<span class="tok-string">");
+} else if (status === "</span>NEW<span class="tok-string">") {
+  console.log("</span>Pending<span class="tok-string">");
+} else {
+  console.log("</span>Other state<span class="tok-string">");
+}
+
+// for...of recorre los valores de cualquier iterable:
+const names = ["</span>Ada<span class="tok-string">", "</span>Linus<span class="tok-string">", "</span>Grace<span class="tok-string">"];
+for (const n of names) {
+  if (n === "</span>Linus<span class="tok-punctuation">")</span> <span class="tok-keyword">continue</span><span class="tok-punctuation">;</span> <span class="tok-comment">// salteá este</span>
+  console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>n<span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Control flow uses braces. if / else if / else to decide.</span>
+<span class="tok-keyword">const</span> status <span class="tok-punctuation">=</span> <span class="tok-string">"PAID"</span><span class="tok-punctuation">;</span>
+<span class="tok-keyword">if</span> <span class="tok-punctuation">(</span>status <span class="tok-punctuation">===</span> <span class="tok-string">"PAID"</span><span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
+  console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">("</span>Charged<span class="tok-string">");
+} else if (status === "</span>NEW<span class="tok-string">") {
+  console.log("</span>Pending<span class="tok-string">");
+} else {
+  console.log("</span>Other state<span class="tok-string">");
+}
+
+// for...of walks the values of any iterable:
+const names = ["</span>Ada<span class="tok-string">", "</span>Linus<span class="tok-string">", "</span>Grace<span class="tok-string">"];
+for (const n of names) {
+  if (n === "</span>Linus<span class="tok-punctuation">")</span> <span class="tok-keyword">continue</span><span class="tok-punctuation">;</span> <span class="tok-comment">// skip this one</span>
+  console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>n<span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="tsqa.funcs.label">Funciones</h3>
+        <div class="prose" data-i18n-html="tsqa.funcs.body"><p>Definís funciones con parámetros tipados (opcionales con <code>?</code>, con valor por defecto con <code>=</code>) y un tipo de retorno. Las <strong>arrow functions</strong> (<code>=&gt;</code>) son concisas y aparecen en todo el código de test. Las funciones son valores: podés pasarlas como argumento.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Funciones: params tipados (opcionales con ?, defaults con =) y un tipo de retorno.</span>
+<span class="tok-keyword">function</span> <span class="tok-function">totalCents</span><span class="tok-punctuation">(</span>price<span class="tok-punctuation">:</span> number<span class="tok-punctuation">,</span> qty<span class="tok-punctuation">:</span> number <span class="tok-punctuation">=</span> <span class="tok-number">1</span><span class="tok-punctuation">):</span> number <span class="tok-punctuation">{</span>
+  <span class="tok-keyword">return</span> Math<span class="tok-punctuation">.</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>price <span class="tok-punctuation">*</span> qty <span class="tok-punctuation">*</span> <span class="tok-number">100</span><span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span>
+
+<span class="tok-comment">// Las arrow functions son concisas y están por todos lados en el código de tests:</span>
+<span class="tok-keyword">const</span> double <span class="tok-punctuation">=</span> <span class="tok-punctuation">(</span>n<span class="tok-punctuation">:</span> number<span class="tok-punctuation">):</span> number <span class="tok-punctuation">=&gt;</span> n <span class="tok-punctuation">*</span> <span class="tok-number">2</span><span class="tok-punctuation">;</span>
+
+<span class="tok-comment">// Las funciones son valores — pasalas de un lado a otro (la base de hooks/fixtures):</span>
+<span class="tok-keyword">function</span> apply<span class="tok-punctuation">&lt;</span>T<span class="tok-punctuation">&gt;(</span>fn<span class="tok-punctuation">:</span> <span class="tok-punctuation">(</span>v<span class="tok-punctuation">:</span> T<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> T<span class="tok-punctuation">,</span> value<span class="tok-punctuation">:</span> T<span class="tok-punctuation">):</span> T <span class="tok-punctuation">{</span>
+  <span class="tok-keyword">return</span> <span class="tok-function">fn</span><span class="tok-punctuation">(</span>value<span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span>
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span><span class="tok-function">totalCents</span><span class="tok-punctuation">(</span><span class="tok-number">19.99</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">));</span> <span class="tok-comment">// 5997</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Functions: typed params (optional with ?, defaults with =) and a return type.</span>
+<span class="tok-keyword">function</span> <span class="tok-function">totalCents</span><span class="tok-punctuation">(</span>price<span class="tok-punctuation">:</span> number<span class="tok-punctuation">,</span> qty<span class="tok-punctuation">:</span> number <span class="tok-punctuation">=</span> <span class="tok-number">1</span><span class="tok-punctuation">):</span> number <span class="tok-punctuation">{</span>
+  <span class="tok-keyword">return</span> Math<span class="tok-punctuation">.</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>price <span class="tok-punctuation">*</span> qty <span class="tok-punctuation">*</span> <span class="tok-number">100</span><span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span>
+
+<span class="tok-comment">// Arrow functions are concise and everywhere in test code:</span>
+<span class="tok-keyword">const</span> double <span class="tok-punctuation">=</span> <span class="tok-punctuation">(</span>n<span class="tok-punctuation">:</span> number<span class="tok-punctuation">):</span> number <span class="tok-punctuation">=&gt;</span> n <span class="tok-punctuation">*</span> <span class="tok-number">2</span><span class="tok-punctuation">;</span>
+
+<span class="tok-comment">// Functions are values — pass them around (the basis of hooks/fixtures):</span>
+<span class="tok-keyword">function</span> apply<span class="tok-punctuation">&lt;</span>T<span class="tok-punctuation">&gt;(</span>fn<span class="tok-punctuation">:</span> <span class="tok-punctuation">(</span>v<span class="tok-punctuation">:</span> T<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> T<span class="tok-punctuation">,</span> value<span class="tok-punctuation">:</span> T<span class="tok-punctuation">):</span> T <span class="tok-punctuation">{</span>
+  <span class="tok-keyword">return</span> <span class="tok-function">fn</span><span class="tok-punctuation">(</span>value<span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span>
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span><span class="tok-function">totalCents</span><span class="tok-punctuation">(</span><span class="tok-number">19.99</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">));</span> <span class="tok-comment">// 5997</span></code></pre>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="ts-hola.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="ts-tipos.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+// Los arrays son tipados; map/filter/reduce son tus transformaciones diarias.
+const prices: number[] = [10, 25, 7, 50];
+const withTax = prices.map((p) => Math.round(p * 121) / 100); // [12.1, 30.25, 8.47, 60.5]
+const expensive = prices.filter((p) => p > 20);               // [25, 50]
+const sum = prices.reduce((acc, p) => acc + p, 0);            // 92
+
+// every() / some() se leen como aserciones sobre una colección:
+const allPositive = prices.every((p) => p > 0); // true

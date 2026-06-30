@@ -1,0 +1,19 @@
+// money.test.ts — Vitest (su API es compatible con Jest).
+import { describe, it, expect } from "vitest";
+
+function toCents(amount: number): number {
+  return Math.round(amount * 100);
+}
+
+describe("toCents", () => {
+  it("converts to integer cents", () => {
+    // expect(...).toBe(...) es la aserción; imprime ambos valores al fallar.
+    expect(toCents(19.99)).toBe(1999);
+  });
+
+  it("handles zero", () => {
+    expect(toCents(0)).toBe(0);
+  });
+});
+
+// Corré la suite:  npx vitest run
