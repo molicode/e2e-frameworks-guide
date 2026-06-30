@@ -128,7 +128,7 @@
         <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
-        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
+        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente, cubriendo <strong>todos los verbos</strong>: creás (POST → 201), leés (GET → 200), actualizás (PATCH/PUT → 200) y borrás (DELETE → 204, y un GET posterior da 404). Validás el <strong>contrato</strong> de cada respuesta y la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -136,43 +136,61 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># CRUD de API con auth — creá, leé, aseverá el contrato. Sin UI.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># CRUD de API con auth — ejercé TODOS los verbos contra el contrato. Sin UI.</span>
 api <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">(</span>
     base_url<span class="tok-punctuation">="</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-string">",
     extra_http_headers={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
 <span class="tok-punctuation">)</span>
 
-<span class="tok-comment"># CREATE</span>
+<span class="tok-comment"># CREATE (POST) -&gt; 201 + el id nuevo</span>
 created <span class="tok-punctuation">=</span> api<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">("/</span>orders<span class="tok-string">", data={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]})
 assert created.status == 201
 order_id = created.json()["</span>id<span class="tok-string">"]
 
-# READ + aseverá la forma de la respuesta
-res = api.get(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}")</span>
-<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">ok</span>
-<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
+# READ (GET) -&gt; 200 + la forma esperada
+got = api.get(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}")</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-property">ok</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
 
-# Sin un token -&gt; 401 (no un 200 silencioso ni un 500)
-anon = playwright.request.new_context()
-assert anon.get(f"</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}").</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># API CRUD with auth — create, read, assert the contract. No UI.</span>
+# UPDATE (PATCH) -&gt; 200 + el cambio persistido
+patched = api.patch(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> data<span class="tok-punctuation">={"</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">"})
+assert patched.status == 200
+assert patched.json()["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+
+# DELETE -&gt; 204, y luego un GET da 404
+assert api.delete(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}").</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">204</span>
+<span class="tok-keyword">assert</span> api<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"/orders/{order_id}"</span><span class="tok-punctuation">).</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">404</span>
+
+<span class="tok-comment"># Sin token -&gt; 401 (no un 200 silencioso ni un 500)</span>
+anon <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> anon<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"https://api.example.com/orders/{order_id}"</span><span class="tok-punctuation">).</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># API CRUD with auth — exercise EVERY verb against the contract. No UI.</span>
 api <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">(</span>
     base_url<span class="tok-punctuation">="</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-string">",
     extra_http_headers={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
 <span class="tok-punctuation">)</span>
 
-<span class="tok-comment"># CREATE</span>
+<span class="tok-comment"># CREATE (POST) -&gt; 201 + the new id</span>
 created <span class="tok-punctuation">=</span> api<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">("/</span>orders<span class="tok-string">", data={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]})
 assert created.status == 201
 order_id = created.json()["</span>id<span class="tok-string">"]
 
-# READ + assert the response shape
-res = api.get(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}")</span>
-<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">ok</span>
-<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
+# READ (GET) -&gt; 200 + the expected shape
+got = api.get(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}")</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-property">ok</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
 
-# Without a token -&gt; 401 (not a silent 200 or a 500)
-anon = playwright.request.new_context()
-assert anon.get(f"</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}").</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code></pre>
+# UPDATE (PATCH) -&gt; 200 + the change persisted
+patched = api.patch(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> data<span class="tok-punctuation">={"</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">"})
+assert patched.status == 200
+assert patched.json()["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+
+# DELETE -&gt; 204, then a follow-up GET is 404
+assert api.delete(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}").</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">204</span>
+<span class="tok-keyword">assert</span> api<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"/orders/{order_id}"</span><span class="tok-punctuation">).</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">404</span>
+
+<span class="tok-comment"># Without a token -&gt; 401 (not a silent 200 or a 500)</span>
+anon <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> anon<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"https://api.example.com/orders/{order_id}"</span><span class="tok-punctuation">).</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock mock--api">

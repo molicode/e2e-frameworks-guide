@@ -586,7 +586,7 @@ I18n.register("en", {
      ==================================================================== */
   "crit.api.label": "API testing (CRUD + auth)",
   "crit.api.body":
-    "<p>You test the API directly: create (POST → 201), read (GET → 200) and validate the response <strong>contract</strong>. And you check auth: with no token, <code>401</code>; never a silent 200.</p>",
+    "<p>You test the API directly, covering <strong>every verb</strong>: create (POST → 201), read (GET → 200), update (PATCH/PUT → 200) and delete (DELETE → 204, and a follow-up GET returns 404). You validate each response <strong>contract</strong> and auth: with no token, <code>401</code>; never a silent 200.</p>",
   "crit.receipt.label": "Accounts & payment receipts",
   "crit.receipt.body":
     "<p>The receipt math must <em>always</em> add up: sum of items = subtotal, exact tax, and subtotal + tax = total. Plus invariants: never negative, status consistent with the amount paid.</p>",

@@ -1,16 +1,28 @@
 # Testing de API en un proyecto Selenium — Selenium maneja la UI; la capa de
-# API usa un cliente HTTP simple como requests.
+# API usa un cliente HTTP simple como requests. Cubrí todo el contrato CRUD.
 import requests
 
-res = requests.get(
-    "https://api.example.com/orders/42",
-    headers={"Authorization": f"Bearer {token}"},
-)
-assert res.status_code == 200
-order = res.json()
-assert order["total"] == 250
-assert order["status"] == "PAID"
+base = "https://api.example.com"
+auth = {"Authorization": f"Bearer {token}"}
 
-# Sin un token -> 401, nunca un 200 silencioso.
-anon = requests.get("https://api.example.com/orders/42")
-assert anon.status_code == 401
+# CREATE (POST) -> 201 + el id nuevo
+created = requests.post(f"{base}/orders", json={"items": ["book"]}, headers=auth)
+assert created.status_code == 201
+order_id = created.json()["id"]
+
+# READ (GET) -> 200 + la forma esperada
+got = requests.get(f"{base}/orders/{order_id}", headers=auth)
+assert got.status_code == 200
+assert got.json()["status"] == "NEW"
+
+# UPDATE (PATCH) -> 200 + el cambio persistido
+patched = requests.patch(f"{base}/orders/{order_id}", json={"status": "PAID"}, headers=auth)
+assert patched.status_code == 200
+assert patched.json()["status"] == "PAID"
+
+# DELETE -> 204, y luego un GET da 404
+assert requests.delete(f"{base}/orders/{order_id}", headers=auth).status_code == 204
+assert requests.get(f"{base}/orders/{order_id}", headers=auth).status_code == 404
+
+# Sin token -> 401, nunca un 200 silencioso.
+assert requests.get(f"{base}/orders/{order_id}").status_code == 401

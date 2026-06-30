@@ -293,7 +293,9 @@ html[lang="en"] .code-i18n--en { display: block; }
    -------------------------------------------------------------------------- */
 .vs-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0, 1fr) lets a track shrink below its content (a wide code block)
+     instead of forcing the page to scroll horizontally. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-4);
   margin: var(--space-3) 0 var(--space-5);
 }
@@ -304,6 +306,7 @@ html[lang="en"] .code-i18n--en { display: block; }
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
+  min-width: 0; /* allow the card (and the code block inside) to shrink */
 }
 .vs-card--ai {
   border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
@@ -333,7 +336,7 @@ html[lang="en"] .code-i18n--en { display: block; }
 .vs-card p { margin: 0 0 var(--space-3); color: var(--text-soft); font-size: var(--fs-sm); }
 .vs-card ul { margin: 0; padding-left: var(--space-5); color: var(--text-soft); font-size: var(--fs-sm); }
 .vs-card li { margin-bottom: var(--space-2); }
-.vs-card .code-block { margin-top: auto; }
+.vs-card .code-block { margin-top: auto; min-width: 0; max-width: 100%; }
 
 /* --------------------------------------------------------------------------
    Cards grid (used for overview tiles)
