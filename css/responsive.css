@@ -1,0 +1,89 @@
+/* ==========================================================================
+   responsive.css — Breakpoints. The base stylesheet targets desktop; here we
+   adapt down to tablet and mobile. The sidebar becomes a slide-in drawer and
+   the MANUAL-vs-AI columns stack.
+   ========================================================================== */
+
+/* ----- Tablet and below: collapse the sidebar into a drawer ----- */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    bottom: 0;
+    width: min(82vw, var(--sidebar-w));
+    height: auto;
+    background: var(--bg);
+    z-index: 45;
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+    box-shadow: var(--shadow-md);
+  }
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    background: rgba(2, 6, 23, 0.5);
+    z-index: 44;
+    border: 0;
+    padding: 0;
+  }
+  .sidebar-backdrop[hidden] {
+    display: none;
+  }
+
+  .content {
+    padding: var(--space-5) var(--space-5) var(--space-8);
+  }
+}
+
+/* ----- Phones: stack the MANUAL-vs-AI columns, tighten spacing ----- */
+@media (max-width: 640px) {
+  .vs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header__inner {
+    padding: 0 var(--space-4);
+    gap: var(--space-3);
+  }
+
+  /* Keep the brand text but let it shrink gracefully. */
+  .brand__text {
+    font-size: var(--fs-sm);
+  }
+
+  .content {
+    padding: var(--space-4) var(--space-4) var(--space-7);
+  }
+
+  .hero__title {
+    font-size: var(--fs-2xl);
+  }
+  .section__title {
+    font-size: var(--fs-xl);
+  }
+
+  .site-header__actions {
+    gap: var(--space-2);
+  }
+}
+
+/* ----- Very small phones: hide the brand wordmark text ----- */
+@media (max-width: 400px) {
+  .brand__text {
+    display: none;
+  }
+}
