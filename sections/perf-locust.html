@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="page.philosophy">Filosofía y cuándo usarlo</title>
+  <title data-i18n="perf.page.locust">Locust</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--robot-filosofia">
+<body class="page--section page--perf-locust">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -89,28 +89,10 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
+        <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="robot-filosofia.html" aria-current="page">
-            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
-            <span data-i18n="page.hello">Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-ruta.html">
-            <span data-i18n="page.path">Ruta de aprendizaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-componentes.html">
-            <span data-i18n="page.components">Componentes clave</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-criticos.html">
-            <span data-i18n="page.cases">Casos críticos</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-verbos.html">
-            <span data-i18n="page.verbs">Verbos HTTP</span>
-          </a>
         <a class="nav-link nav-group" href="bdd-intro.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
@@ -119,10 +101,22 @@
           <span class="nav-link__num">10</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link nav-group" href="perf-intro.html">
+        <a class="nav-link nav-group is-active-group" href="perf-intro.html">
           <span class="nav-link__num">11</span>
           <span data-i18n="nav.perf">Performance testing</span>
         </a>
+          <a class="nav-link nav-sublink" href="perf-intro.html">
+            <span data-i18n="perf.page.intro">Qué es y qué se mide</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-k6.html">
+            <span data-i18n="perf.page.k6">k6</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-jmeter.html">
+            <span data-i18n="perf.page.jmeter">JMeter</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="perf-locust.html" aria-current="page">
+            <span data-i18n="perf.page.locust">Locust</span>
+          </a>
         <a class="nav-link" href="ai-role.html">
           <span class="nav-link__num">12</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
@@ -155,40 +149,83 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
-        <h2 class="section__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</h2>
-        <div class="prose" data-i18n-html="rf.lead"><p><strong>Robot Framework</strong> es un framework de automatización <strong>keyword-driven</strong>, open-source y basado en Python. En vez de programar, armás los tests con <strong>palabras clave</strong> legibles, casi en lenguaje natural — ideal para acceptance testing, ATDD/BDD y hasta RPA.</p></div>
-        <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
-        <div class="prose" data-i18n-html="rf.philosophy"><p>Robot Framework no maneja el navegador por sí mismo: es una <strong>capa de keywords</strong> por encima de librerías. <code>SeleniumLibrary</code> usa Selenium, <code>Browser</code> usa Playwright y <code>RequestsLibrary</code> pega a las APIs. Un test es una secuencia de keywords (<code>Open Browser</code>, <code>Input Text</code>, <code>Page Should Contain</code>) que se lee como una receta. Cuando un keyword no existe, te lo escribís en Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="rf.when"><p>Elegí Robot Framework cuando querés tests <strong>muy legibles</strong> (que pueda leer QA no-programador o gente de negocio), un enfoque <strong>keyword-driven</strong> reutilizable, reportes HTML de fábrica, o cuando hacés también <strong>RPA</strong>. El costo: la sintaxis tabular se siente rara al principio y, para lógica compleja, igual bajás a Python.</p></div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-perf)">Performance</span></div>
+        <h2 class="section__title" data-i18n="perf.page.locust">Locust</h2>
+        <div class="prose" data-i18n-html="perf.lo.lead"><p><strong>Locust</strong> es la opción <strong>Python</strong>, code-first: modelás el comportamiento de un usuario como una clase con tareas. Trae una web UI para lanzar la prueba y ver métricas en vivo.</p></div>
+        <div class="prose" data-i18n-html="perf.lo.body"><p>Heredás de <code>HttpUser</code>, marcás métodos con <code>@task</code> (con <strong>pesos</strong> para que unas acciones pasen más seguido que otras) y definís el <code>wait_time</code> (think time). Lo corrés con UI o <code>--headless</code> en CI, indicando usuarios (<code>-u</code>) y ramp-up (<code>-r</code>).</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Python</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># locustfile.py — Locust: modelá el comportamiento de un usuario en Python.</span>
+<span class="tok-keyword">from</span> locust <span class="tok-keyword">import</span> HttpUser<span class="tok-punctuation">,</span> task<span class="tok-punctuation">,</span> between
+
+
+<span class="tok-keyword">class</span> <span class="tok-function">ShopUser</span><span class="tok-punctuation">(</span>HttpUser<span class="tok-punctuation">):</span>
+    <span class="tok-comment"># Cada usuario simulado espera 1-3s entre acciones (think time).</span>
+    wait_time <span class="tok-punctuation">=</span> <span class="tok-function">between</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-punctuation">@</span><span class="tok-function">task</span><span class="tok-punctuation">(</span><span class="tok-number">3</span><span class="tok-punctuation">)</span>              <span class="tok-comment"># peso 3: leé tres veces más seguido que el checkout</span>
+    <span class="tok-keyword">def</span> <span class="tok-function">view_order</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">):</span>
+        <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">client</span><span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+
+    @task(1)
+    def checkout(self):
+        self.client.post("</span><span class="tok-punctuation">/</span>orders<span class="tok-string">", json={"</span>items<span class="tok-string">": ["</span>book<span class="tok-punctuation">"]})</span>
+
+
+<span class="tok-comment"># Web UI:            locust -f locustfile.py --host https://api.example.com</span>
+<span class="tok-comment"># Headless (CI):     locust ... --headless -u 100 -r 10 -t 2m</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># locustfile.py — Locust: model a user's behavior in Python.</span>
+<span class="tok-keyword">from</span> locust <span class="tok-keyword">import</span> HttpUser<span class="tok-punctuation">,</span> task<span class="tok-punctuation">,</span> between
+
+
+<span class="tok-keyword">class</span> <span class="tok-function">ShopUser</span><span class="tok-punctuation">(</span>HttpUser<span class="tok-punctuation">):</span>
+    <span class="tok-comment"># Each simulated user waits 1-3s between actions (think time).</span>
+    wait_time <span class="tok-punctuation">=</span> <span class="tok-function">between</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-punctuation">@</span><span class="tok-function">task</span><span class="tok-punctuation">(</span><span class="tok-number">3</span><span class="tok-punctuation">)</span>              <span class="tok-comment"># weight 3: read three times as often as checkout</span>
+    <span class="tok-keyword">def</span> <span class="tok-function">view_order</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">):</span>
+        <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">client</span><span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+
+    @task(1)
+    def checkout(self):
+        self.client.post("</span><span class="tok-punctuation">/</span>orders<span class="tok-string">", json={"</span>items<span class="tok-string">": ["</span>book<span class="tok-punctuation">"]})</span>
+
+
+<span class="tok-comment"># Web UI:            locust -f locustfile.py --host https://api.example.com</span>
+<span class="tok-comment"># Headless (CI):     locust ... --headless -u 100 -r 10 -t 2m</span></code></pre>
+        </div>
         <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
         <div class="vs-grid">
           <div class="vs-card vs-card--manual">
             <div class="vs-card__head">
               <span class="vs-badge" data-i18n="ui.manual">Manual</span>
-              <span data-i18n="rf.manual.title">A mano</span>
+              <span data-i18n="perf.manual.title">A mano</span>
             </div>
-            <div data-i18n-html="rf.manual.body"><p>Componés cada test con keywords y los agrupás en <strong>resource files</strong> reutilizables. Tenés control total y máxima legibilidad, pero vos elegís los locators y las esperas.</p></div>
+            <div data-i18n-html="perf.manual.body"><p>Definís el escenario, los pesos de cada acción y los thresholds. El valor está en elegir bien <em>qué</em> simular y <em>qué</em> objetivo medir.</p></div>
             
           </div>
           <div class="vs-card vs-card--ai">
             <div class="vs-card__head">
               <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
-              <span data-i18n="rf.ai.title">Con AI</span>
+              <span data-i18n="perf.ai.title">Con AI</span>
             </div>
-            <div data-i18n-html="rf.ai.body"><p>La AI traduce un caso en lenguaje natural a keywords de Robot, te sugiere el keyword correcto de la librería y te arma resource files (POM) para que el test quede limpio.</p></div>
+            <div data-i18n-html="perf.ai.body"><p>La AI arma el esqueleto del script (k6/Locust) desde una descripción del flujo, sugiere thresholds razonables y te ayuda a interpretar los resultados (“tu p99 se dispara a partir de 150 VUs → posible cuello en la base”).</p></div>
             
           </div>
         </div>
+        <div class="callout callout--ok" data-i18n-html="perf.lo.callout"><strong>Próximo paso:</strong> elegí una herramienta (k6 si querés code-first y CI, JMeter si necesitás GUI/enterprise, Locust si tu equipo es Python), poné un SLO claro y empezá con el endpoint más crítico bajo carga realista.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="playwright-verbos.html">
+          <a class="page-nav__link page-nav__prev" href="perf-jmeter.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="page.verbs">Verbos HTTP</span>
+            <span class="page-nav__title" data-i18n="perf.page.jmeter">JMeter</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="robot-hola-mundo.html">
+          <a class="page-nav__link page-nav__next" href="ai-role.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
+            <span class="page-nav__title" data-i18n="nav.airole">El rol de la AI</span>
           </a>
         </nav>
       </div>

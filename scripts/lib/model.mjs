@@ -1940,6 +1940,69 @@ Every HTTP verb
     # OPTIONS — which methods are allowed
     OPTIONS On Session    api    /orders`,
   },
+
+  /* ---- Performance testing: k6, JMeter, Locust ---- */
+  k6Script: {
+    lang: "JavaScript",
+    code: `// load-test.js — k6: a load test as code, with pass/fail thresholds.
+import http from "k6/http";
+import { check, sleep } from "k6";
+
+export const options = {
+  // Ramp virtual users (VUs): 0 -> 50 over 30s, hold, then ramp down.
+  stages: [
+    { duration: "30s", target: 50 },
+    { duration: "1m", target: 50 },
+    { duration: "10s", target: 0 },
+  ],
+  // Thresholds turn the run into a quality gate (fail the build if breached).
+  thresholds: {
+    http_req_failed: ["rate<0.01"],    // less than 1% errors
+    http_req_duration: ["p(95)<500"],  // 95% of requests under 500ms
+  },
+};
+
+export default function () {
+  const res = http.get("https://api.example.com/orders/42");
+  check(res, { "status is 200": (r) => r.status === 200 });
+  sleep(1); // think time between requests
+}
+
+// Run it:  k6 run load-test.js`,
+  },
+  jmeterRun: {
+    lang: "Bash",
+    code: `# JMeter: build the plan in the GUI, then run it headless (-n) in CI.
+# A plan is: Thread Group (virtual users) -> Samplers (requests) ->
+# Assertions (pass/fail) -> Listeners (results).
+
+# Run a saved .jmx plan, write raw results, then an HTML dashboard:
+jmeter -n -t orders-load.jmx -l results.jtl -e -o report/
+
+# -n non-GUI  ·  -t plan  ·  -l results  ·  -e -o build the HTML report`,
+  },
+  locustFile: {
+    lang: "Python",
+    code: `# locustfile.py — Locust: model a user's behavior in Python.
+from locust import HttpUser, task, between
+
+
+class ShopUser(HttpUser):
+    # Each simulated user waits 1-3s between actions (think time).
+    wait_time = between(1, 3)
+
+    @task(3)              # weight 3: read three times as often as checkout
+    def view_order(self):
+        self.client.get("/orders/42")
+
+    @task(1)
+    def checkout(self):
+        self.client.post("/orders", json={"items": ["book"]})
+
+
+# Web UI:            locust -f locustfile.py --host https://api.example.com
+# Headless (CI):     locust ... --headless -u 100 -r 10 -t 2m`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -2428,6 +2491,59 @@ function maturityGroup() {
   ];
 }
 
+// "Performance testing" — load/stress testing with k6, JMeter and Locust.
+// A GROUP: concept + metrics, then one page per tool.
+function perfGroup() {
+  const grp = { group: "perf", groupKey: "nav.perf", chip: { label: "Performance", color: "var(--fw-perf)" } };
+  return [
+    { ...grp, id: "perf-intro", navKey: "perf.page.intro", blocks: [
+      { type: "prose", html: "perf.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "perf.why" },
+      { type: "tiles", items: [
+        { icon: "📈", title: "perf.t1.title", body: "perf.t1.body" },
+        { icon: "🔥", title: "perf.t2.title", body: "perf.t2.body" },
+        { icon: "⚡", title: "perf.t3.title", body: "perf.t3.body" },
+        { icon: "⏳", title: "perf.t4.title", body: "perf.t4.body" },
+      ] },
+      { type: "label", text: "perf.metrics.label" },
+      { type: "prose", html: "perf.metrics.body" },
+      { type: "table",
+        head: ["perf.m.th.name", "perf.m.th.meaning"],
+        rows: [
+          ["perf.m.tput.n", "perf.m.tput.m"],
+          ["perf.m.lat.n", "perf.m.lat.m"],
+          ["perf.m.err.n", "perf.m.err.m"],
+          ["perf.m.vus.n", "perf.m.vus.m"],
+          ["perf.m.sat.n", "perf.m.sat.m"],
+        ] },
+      { type: "callout", variant: "", html: "perf.callout" },
+    ] },
+    { ...grp, id: "perf-k6", navKey: "perf.page.k6", blocks: [
+      { type: "prose", html: "perf.k6.lead" },
+      { type: "prose", html: "perf.k6.body" },
+      { type: "code", sample: "k6Script" },
+      { type: "callout", variant: "ok", html: "perf.k6.callout" },
+    ] },
+    { ...grp, id: "perf-jmeter", navKey: "perf.page.jmeter", blocks: [
+      { type: "prose", html: "perf.jm.lead" },
+      { type: "prose", html: "perf.jm.body" },
+      { type: "code", sample: "jmeterRun" },
+      { type: "callout", variant: "", html: "perf.jm.callout" },
+    ] },
+    { ...grp, id: "perf-locust", navKey: "perf.page.locust", blocks: [
+      { type: "prose", html: "perf.lo.lead" },
+      { type: "prose", html: "perf.lo.body" },
+      { type: "code", sample: "locustFile" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "perf.manual.title", body: "perf.manual.body" },
+        ai: { title: "perf.ai.title", body: "perf.ai.body" } },
+      { type: "callout", variant: "ok", html: "perf.lo.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2598,6 +2714,8 @@ export const SECTIONS = [
       },
     ],
   },
+
+  ...perfGroup(),
 
   {
     id: "ai-role",

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="page.philosophy">Filosofía y cuándo usarlo</title>
+  <title data-i18n="perf.page.intro">Qué es y qué se mide</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--robot-filosofia">
+<body class="page--section page--perf-intro">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -89,28 +89,10 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
+        <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="robot-filosofia.html" aria-current="page">
-            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
-            <span data-i18n="page.hello">Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-ruta.html">
-            <span data-i18n="page.path">Ruta de aprendizaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-componentes.html">
-            <span data-i18n="page.components">Componentes clave</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-criticos.html">
-            <span data-i18n="page.cases">Casos críticos</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-verbos.html">
-            <span data-i18n="page.verbs">Verbos HTTP</span>
-          </a>
         <a class="nav-link nav-group" href="bdd-intro.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
@@ -119,10 +101,22 @@
           <span class="nav-link__num">10</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link nav-group" href="perf-intro.html">
+        <a class="nav-link nav-group is-active-group" href="perf-intro.html">
           <span class="nav-link__num">11</span>
           <span data-i18n="nav.perf">Performance testing</span>
         </a>
+          <a class="nav-link nav-sublink is-active" href="perf-intro.html" aria-current="page">
+            <span data-i18n="perf.page.intro">Qué es y qué se mide</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-k6.html">
+            <span data-i18n="perf.page.k6">k6</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-jmeter.html">
+            <span data-i18n="perf.page.jmeter">JMeter</span>
+          </a>
+          <a class="nav-link nav-sublink" href="perf-locust.html">
+            <span data-i18n="perf.page.locust">Locust</span>
+          </a>
         <a class="nav-link" href="ai-role.html">
           <span class="nav-link__num">12</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
@@ -155,40 +149,56 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
-        <h2 class="section__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</h2>
-        <div class="prose" data-i18n-html="rf.lead"><p><strong>Robot Framework</strong> es un framework de automatización <strong>keyword-driven</strong>, open-source y basado en Python. En vez de programar, armás los tests con <strong>palabras clave</strong> legibles, casi en lenguaje natural — ideal para acceptance testing, ATDD/BDD y hasta RPA.</p></div>
-        <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
-        <div class="prose" data-i18n-html="rf.philosophy"><p>Robot Framework no maneja el navegador por sí mismo: es una <strong>capa de keywords</strong> por encima de librerías. <code>SeleniumLibrary</code> usa Selenium, <code>Browser</code> usa Playwright y <code>RequestsLibrary</code> pega a las APIs. Un test es una secuencia de keywords (<code>Open Browser</code>, <code>Input Text</code>, <code>Page Should Contain</code>) que se lee como una receta. Cuando un keyword no existe, te lo escribís en Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="rf.when"><p>Elegí Robot Framework cuando querés tests <strong>muy legibles</strong> (que pueda leer QA no-programador o gente de negocio), un enfoque <strong>keyword-driven</strong> reutilizable, reportes HTML de fábrica, o cuando hacés también <strong>RPA</strong>. El costo: la sintaxis tabular se siente rara al principio y, para lógica compleja, igual bajás a Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
-        <div class="vs-grid">
-          <div class="vs-card vs-card--manual">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
-              <span data-i18n="rf.manual.title">A mano</span>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-perf)">Performance</span></div>
+        <h2 class="section__title" data-i18n="perf.page.intro">Qué es y qué se mide</h2>
+        <div class="prose" data-i18n-html="perf.lead"><p>El testing funcional pregunta <em>“¿hace lo correcto?”</em>; el <strong>performance testing</strong> pregunta <em>“¿lo hace rápido y estable bajo carga?”</em>. Simulás muchos usuarios en paralelo y medís cómo responde el sistema: velocidad, estabilidad y escalabilidad.</p></div>
+        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
+        <div class="prose" data-i18n-html="perf.why"><p>No es un solo tipo de prueba. Según cómo apliques la carga, hablás de <strong>load</strong> (carga esperada), <strong>stress</strong> (hasta romperlo), <strong>spike</strong> (picos bruscos) o <strong>soak</strong> (carga sostenida por horas, para detectar memory leaks). Cada uno responde una pregunta distinta sobre el sistema.</p></div>
+        <div class="tile-grid">
+            <div class="tile">
+              <div class="tile__icon">📈</div>
+              <h4 data-i18n="perf.t1.title">Load</h4>
+              <p data-i18n="perf.t1.body">Carga esperada (los usuarios de un día normal): ¿cumple los tiempos objetivo?</p>
             </div>
-            <div data-i18n-html="rf.manual.body"><p>Componés cada test con keywords y los agrupás en <strong>resource files</strong> reutilizables. Tenés control total y máxima legibilidad, pero vos elegís los locators y las esperas.</p></div>
-            
-          </div>
-          <div class="vs-card vs-card--ai">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
-              <span data-i18n="rf.ai.title">Con AI</span>
+            <div class="tile">
+              <div class="tile__icon">🔥</div>
+              <h4 data-i18n="perf.t2.title">Stress</h4>
+              <p data-i18n="perf.t2.body">Subís la carga hasta que algo se rompe, para encontrar el límite y ver cómo falla.</p>
             </div>
-            <div data-i18n-html="rf.ai.body"><p>La AI traduce un caso en lenguaje natural a keywords de Robot, te sugiere el keyword correcto de la librería y te arma resource files (POM) para que el test quede limpio.</p></div>
-            
-          </div>
+            <div class="tile">
+              <div class="tile__icon">⚡</div>
+              <h4 data-i18n="perf.t3.title">Spike</h4>
+              <p data-i18n="perf.t3.body">Un pico brusco y repentino (una promo, un viral): ¿aguanta y se recupera?</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">⏳</div>
+              <h4 data-i18n="perf.t4.title">Soak / endurance</h4>
+              <p data-i18n="perf.t4.body">Carga moderada sostenida por horas: detecta fugas de memoria y degradación lenta.</p>
+            </div>
         </div>
+        <h3 class="block-label" data-i18n="perf.metrics.label">Las métricas que importan</h3>
+        <div class="prose" data-i18n-html="perf.metrics.body"><p>El promedio engaña: si el 95% de los usuarios espera 200ms pero el 5% espera 8s, el promedio se ve bien y la experiencia es mala. Por eso se miran <strong>percentiles</strong> (p95, p99), no medias.</p></div>
+        <div class="cmp-table-wrap">
+          <table class="cmp">
+            <thead><tr><th data-i18n="perf.m.th.name">Métrica</th><th data-i18n="perf.m.th.meaning">Qué mide</th></tr></thead>
+            <tbody>
+              <tr><td data-i18n="perf.m.tput.n">Throughput (RPS)</td><td data-i18n="perf.m.tput.m">Requests por segundo que el sistema procesa. Cuánto “mueve”.</td></tr>
+              <tr><td data-i18n="perf.m.lat.n">Latencia (p95 / p99)</td><td data-i18n="perf.m.lat.m">Cuánto tarda una request. Mirá los percentiles, no el promedio.</td></tr>
+              <tr><td data-i18n="perf.m.err.n">Error rate</td><td data-i18n="perf.m.err.m">Porcentaje de requests que fallan al subir la carga. Debe quedar bajo (&amp;lt; 1%).</td></tr>
+              <tr><td data-i18n="perf.m.vus.n">VUs / concurrencia</td><td data-i18n="perf.m.vus.m">Usuarios virtuales simultáneos que estás simulando.</td></tr>
+              <tr><td data-i18n="perf.m.sat.n">Saturación</td><td data-i18n="perf.m.sat.m">Uso de recursos (CPU, memoria, conexiones) al subir la carga. Dónde está el cuello de botella.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout" data-i18n-html="perf.callout"><strong>Definí el objetivo primero:</strong> un test de performance sin un <strong>SLO</strong> (“el p95 debe ser &lt; 500ms con 200 usuarios”) solo genera números. El número se vuelve útil cuando hay un umbral de pasa/no pasa contra el cual compararlo.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="playwright-verbos.html">
+          <a class="page-nav__link page-nav__prev" href="comparison.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="page.verbs">Verbos HTTP</span>
+            <span class="page-nav__title" data-i18n="nav.comparison">Comparativa</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="robot-hola-mundo.html">
+          <a class="page-nav__link page-nav__next" href="perf-k6.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
+            <span class="page-nav__title" data-i18n="perf.page.k6">k6</span>
           </a>
         </nav>
       </div>
