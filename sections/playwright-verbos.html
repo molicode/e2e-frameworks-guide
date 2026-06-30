@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="verbs.page.playwright">Con Playwright</title>
+  <title data-i18n="page.verbs">Verbos HTTP</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--verbs-playwright">
+<body class="page--section page--playwright-verbos">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -85,10 +85,28 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.cypress">Cypress</span>
         </a>
-        <a class="nav-link nav-group" href="playwright-filosofia.html">
+        <a class="nav-link nav-group is-active-group" href="playwright-filosofia.html">
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
+          <a class="nav-link nav-sublink" href="playwright-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="playwright-verbos.html" aria-current="page">
+            <span data-i18n="page.verbs">Verbos HTTP</span>
+          </a>
         <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
@@ -101,59 +119,58 @@
           <span class="nav-link__num">10</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="verbs-intro.html">
-          <span class="nav-link__num">11</span>
-          <span data-i18n="nav.verbs">Verbos HTTP</span>
-        </a>
-          <a class="nav-link nav-sublink" href="verbs-intro.html">
-            <span data-i18n="verbs.page.intro">Los verbos y cómo se testean</span>
-          </a>
-          <a class="nav-link nav-sublink" href="verbs-python.html">
-            <span data-i18n="verbs.page.python">Con Python (requests)</span>
-          </a>
-          <a class="nav-link nav-sublink" href="verbs-cypress.html">
-            <span data-i18n="verbs.page.cypress">Con Cypress</span>
-          </a>
-          <a class="nav-link nav-sublink is-active" href="verbs-playwright.html" aria-current="page">
-            <span data-i18n="verbs.page.playwright">Con Playwright</span>
-          </a>
-          <a class="nav-link nav-sublink" href="verbs-robot.html">
-            <span data-i18n="verbs.page.robot">Con Robot Framework</span>
-          </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">13</span>
+          <span class="nav-link__num">12</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">14</span>
+          <span class="nav-link__num">13</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link nav-group" href="skills-intro.html">
-          <span class="nav-link__num">15</span>
+          <span class="nav-link__num">14</span>
           <span data-i18n="nav.skills">Habilidades del QA</span>
         </a>
         <a class="nav-link nav-group" href="maturity-intro.html">
-          <span class="nav-link__num">16</span>
+          <span class="nav-link__num">15</span>
           <span data-i18n="nav.maturity">Estrategia y madurez de QA</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">17</span>
+          <span class="nav-link__num">16</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">18</span>
+          <span class="nav-link__num">17</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-verbs)">Verbos HTTP</span></div>
-        <h2 class="section__title" data-i18n="verbs.page.playwright">Con Playwright</h2>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
+        <h2 class="section__title" data-i18n="page.verbs">Verbos HTTP</h2>
+        <div class="prose" data-i18n-html="verbs.lead"><p>Una API REST se maneja con <strong>verbos HTTP</strong>: cada uno declara una intención (leer, crear, reemplazar, borrar…). Testear una API es, en gran parte, disparar el verbo correcto y verificar el <strong>código de estado</strong> y el cuerpo de la respuesta. Acá los ves todos, en el idiom de este framework.</p></div>
+        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
+        <div class="prose" data-i18n-html="verbs.why"><p>Dos conceptos que toda entrevista pregunta: el <strong>código de estado</strong> (2xx ok, 4xx error del cliente, 5xx error del servidor) y la <strong>idempotencia</strong> — si repetir la misma llamada deja el sistema igual. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes; <code>POST</code> no (cada llamada crea algo nuevo). <code>PATCH</code> suele serlo, pero depende de cómo lo implementes.</p></div>
+        <h3 class="block-label" data-i18n="verbs.table.label">Los verbos de un vistazo</h3>
+        <div class="cmp-table-wrap">
+          <table class="cmp">
+            <thead><tr><th data-i18n="verbs.th.verb">Verbo</th><th data-i18n="verbs.th.purpose">Qué hace</th><th data-i18n="verbs.th.idem">Idempotente</th><th data-i18n="verbs.th.status">Status típico</th></tr></thead>
+            <tbody>
+              <tr><td data-i18n="verbs.get.v">GET</td><td data-i18n="verbs.get.p">Leer un recurso (no lo modifica)</td><td data-i18n="verbs.get.i">Sí</td><td data-i18n="verbs.get.s">200</td></tr>
+              <tr><td data-i18n="verbs.post.v">POST</td><td data-i18n="verbs.post.p">Crear un recurso nuevo</td><td data-i18n="verbs.post.i">No</td><td data-i18n="verbs.post.s">201</td></tr>
+              <tr><td data-i18n="verbs.put.v">PUT</td><td data-i18n="verbs.put.p">Reemplazar el recurso completo</td><td data-i18n="verbs.put.i">Sí</td><td data-i18n="verbs.put.s">200 / 204</td></tr>
+              <tr><td data-i18n="verbs.patch.v">PATCH</td><td data-i18n="verbs.patch.p">Actualizar parte del recurso</td><td data-i18n="verbs.patch.i">Suele serlo</td><td data-i18n="verbs.patch.s">200</td></tr>
+              <tr><td data-i18n="verbs.delete.v">DELETE</td><td data-i18n="verbs.delete.p">Eliminar el recurso</td><td data-i18n="verbs.delete.i">Sí</td><td data-i18n="verbs.delete.s">204</td></tr>
+              <tr><td data-i18n="verbs.head.v">HEAD</td><td data-i18n="verbs.head.p">Como GET pero solo headers (sin cuerpo)</td><td data-i18n="verbs.head.i">Sí</td><td data-i18n="verbs.head.s">200</td></tr>
+              <tr><td data-i18n="verbs.options.v">OPTIONS</td><td data-i18n="verbs.options.p">Qué métodos permite el recurso (CORS)</td><td data-i18n="verbs.options.i">Sí</td><td data-i18n="verbs.options.s">200 / 204</td></tr>
+            </tbody>
+          </table>
+        </div>
         <div class="prose" data-i18n-html="verbs.pw.lead"><p>Playwright tiene un <strong>request context</strong> independiente del navegador, con un método por verbo (<code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, <code>delete</code>, <code>head</code>) y <code>fetch</code> genérico para el resto.</p></div>
         <div class="prose" data-i18n-html="verbs.pw.body"><p>La respuesta expone <code>.status</code>, <code>.json()</code>, <code>.ok</code> y <code>.headers</code>. Para <code>OPTIONS</code> usás <code>fetch(url, method="OPTIONS")</code> porque no hay un atajo dedicado.</p></div>
         <div class="code-block">
@@ -223,14 +240,15 @@ assert api.delete(f"</span><span class="tok-punctuation">/</span>orders<span cla
 opt = api.fetch("</span><span class="tok-punctuation">/</span>orders<span class="tok-string">", method="</span>OPTIONS<span class="tok-string">")
 assert "</span>POST<span class="tok-string">" in opt.headers.get("</span>allow<span class="tok-string">", "</span><span class="tok-punctuation">")</span></code></pre>
         </div>
+        <div class="callout" data-i18n-html="verbs.callout"><strong>Regla práctica:</strong> verificá <em>primero</em> el status y <em>después</em> el cuerpo. Y testeá los caminos infelices: sin token → <code>401</code>, recurso de otro usuario → <code>403</code>, id inexistente → <code>404</code>. Un 200 que debería ser un 404 es un bug.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="verbs-cypress.html">
+          <a class="page-nav__link page-nav__prev" href="playwright-criticos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="verbs.page.cypress">Con Cypress</span>
+            <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="verbs-robot.html">
+          <a class="page-nav__link page-nav__next" href="robot-filosofia.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="verbs.page.robot">Con Robot Framework</span>
+            <span class="page-nav__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
           </a>
         </nav>
       </div>

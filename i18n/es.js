@@ -40,6 +40,7 @@ I18n.register("es", {
   "page.path": "Ruta de aprendizaje",
   "page.components": "Componentes clave",
   "page.cases": "Casos críticos",
+  "page.verbs": "Verbos HTTP",
 
   /* ---- Navegación ---- */
   "nav.intro": "Introducción",
@@ -52,7 +53,6 @@ I18n.register("es", {
   "nav.robot": "Robot Framework",
   "nav.bdd": "BDD: Gherkin y Cucumber",
   "nav.comparison": "Comparativa",
-  "nav.verbs": "Verbos HTTP",
   "nav.airole": "El rol de la AI",
   "nav.prompts": "Ejemplos con AI",
   "nav.best": "Buenas prácticas",
@@ -77,7 +77,6 @@ I18n.register("es", {
   "home.robot": "Keyword-driven y legible: tests en lenguaje casi natural con librerías Python.",
   "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) y Cucumber para dar contexto.",
   "home.comparison": "El mismo test VerifyOrder resuelto en los 3 frameworks.",
-  "home.verbs": "Cómo testear cada verbo HTTP (GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS) en cada framework.",
   "home.ai-role": "Cómo la AI complementa cada etapa del testing.",
   "home.prompts": "Prompts concretos, cómo iterar y cómo validar el output.",
   "home.best-practices": "Principios que perduran y tus próximos pasos.",
@@ -610,14 +609,8 @@ I18n.register("es", {
   /* ====================================================================
      4b. VERBOS HTTP EN CADA FRAMEWORK
      ==================================================================== */
-  "verbs.page.intro": "Los verbos y cómo se testean",
-  "verbs.page.python": "Con Python (requests)",
-  "verbs.page.cypress": "Con Cypress",
-  "verbs.page.playwright": "Con Playwright",
-  "verbs.page.robot": "Con Robot Framework",
-
   "verbs.lead":
-    "<p>Una API REST se maneja con <strong>verbos HTTP</strong>: cada uno declara una intención (leer, crear, reemplazar, borrar…). Testear una API es, en gran parte, disparar el verbo correcto y verificar el <strong>código de estado</strong> y el cuerpo de la respuesta. Acá los ves todos, en cada framework de la guía.</p>",
+    "<p>Una API REST se maneja con <strong>verbos HTTP</strong>: cada uno declara una intención (leer, crear, reemplazar, borrar…). Testear una API es, en gran parte, disparar el verbo correcto y verificar el <strong>código de estado</strong> y el cuerpo de la respuesta. Acá los ves todos, en el idiom de este framework.</p>",
   "verbs.why":
     "<p>Dos conceptos que toda entrevista pregunta: el <strong>código de estado</strong> (2xx ok, 4xx error del cliente, 5xx error del servidor) y la <strong>idempotencia</strong> — si repetir la misma llamada deja el sistema igual. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes; <code>POST</code> no (cada llamada crea algo nuevo). <code>PATCH</code> suele serlo, pero depende de cómo lo implementes.</p>",
   "verbs.table.label": "Los verbos de un vistazo",

@@ -2018,10 +2018,43 @@ function componentsBlocks(components) {
   return blocks;
 }
 
+// The shared HTTP-verbs reference table (verb · purpose · idempotent · status).
+function verbsTableBlock() {
+  return {
+    type: "table",
+    head: ["verbs.th.verb", "verbs.th.purpose", "verbs.th.idem", "verbs.th.status"],
+    rows: [
+      ["verbs.get.v", "verbs.get.p", "verbs.get.i", "verbs.get.s"],
+      ["verbs.post.v", "verbs.post.p", "verbs.post.i", "verbs.post.s"],
+      ["verbs.put.v", "verbs.put.p", "verbs.put.i", "verbs.put.s"],
+      ["verbs.patch.v", "verbs.patch.p", "verbs.patch.i", "verbs.patch.s"],
+      ["verbs.delete.v", "verbs.delete.p", "verbs.delete.i", "verbs.delete.s"],
+      ["verbs.head.v", "verbs.head.p", "verbs.head.i", "verbs.head.s"],
+      ["verbs.options.v", "verbs.options.p", "verbs.options.i", "verbs.options.s"],
+    ],
+  };
+}
+
+// A framework's "HTTP verbs" sub-page: the shared concept + reference table, then
+// THIS framework's sample exercising every verb. (verbs = {sample, leadKey, bodyKey})
+function verbsBlocks(verbs) {
+  return [
+    { type: "prose", html: "verbs.lead" },
+    { type: "label", text: "ui.theory" },
+    { type: "prose", html: "verbs.why" },
+    { type: "label", text: "verbs.table.label" },
+    verbsTableBlock(),
+    { type: "prose", html: verbs.leadKey },
+    { type: "prose", html: verbs.bodyKey },
+    { type: "code", sample: verbs.sample },
+    { type: "callout", variant: "", html: "verbs.callout" },
+  ];
+}
+
 // A framework is a GROUP of sub-pages (so students don't scroll forever):
-// Philosophy · Hello world · Learning path · Key components · Critical cases.
+// Philosophy · Hello world · Learning path · Components · Critical cases · HTTP verbs.
 // Returns an array of leaf sections sharing { group, groupKey, chip }.
-function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components) {
+function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components, verbs) {
   const grp = { group: id, groupKey: navKey, chip };
   return [
     {
@@ -2054,6 +2087,7 @@ function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components) {
     },
     { ...grp, id: `${id}-componentes`, navKey: "page.components", blocks: componentsBlocks(components) },
     { ...grp, id: `${id}-criticos`, navKey: "page.cases", blocks: casesBlocks(cases) },
+    { ...grp, id: `${id}-verbos`, navKey: "page.verbs", blocks: verbsBlocks(verbs) },
   ];
 }
 
@@ -2394,48 +2428,6 @@ function maturityGroup() {
   ];
 }
 
-// "Verbos HTTP en cada framework" — how to test GET/POST/PUT/PATCH/DELETE/HEAD/
-// OPTIONS in each tool's idiom, with an idempotency/status reference. A GROUP.
-function verbsGroup() {
-  const grp = { group: "verbs", groupKey: "nav.verbs", chip: { label: "Verbos HTTP", color: "var(--fw-verbs)" } };
-  const table = {
-    type: "table",
-    head: ["verbs.th.verb", "verbs.th.purpose", "verbs.th.idem", "verbs.th.status"],
-    rows: [
-      ["verbs.get.v", "verbs.get.p", "verbs.get.i", "verbs.get.s"],
-      ["verbs.post.v", "verbs.post.p", "verbs.post.i", "verbs.post.s"],
-      ["verbs.put.v", "verbs.put.p", "verbs.put.i", "verbs.put.s"],
-      ["verbs.patch.v", "verbs.patch.p", "verbs.patch.i", "verbs.patch.s"],
-      ["verbs.delete.v", "verbs.delete.p", "verbs.delete.i", "verbs.delete.s"],
-      ["verbs.head.v", "verbs.head.p", "verbs.head.i", "verbs.head.s"],
-      ["verbs.options.v", "verbs.options.p", "verbs.options.i", "verbs.options.s"],
-    ],
-  };
-  const fw = (id, navKey, leadKey, bodyKey, sample, mock) => ({
-    ...grp, id, navKey,
-    blocks: [
-      { type: "prose", html: leadKey },
-      { type: "prose", html: bodyKey },
-      { type: "code", sample },
-      ...(mock ? [{ type: "mock", screen: mock }] : []),
-    ],
-  });
-  return [
-    { ...grp, id: "verbs-intro", navKey: "verbs.page.intro", blocks: [
-      { type: "prose", html: "verbs.lead" },
-      { type: "label", text: "ui.theory" },
-      { type: "prose", html: "verbs.why" },
-      { type: "label", text: "verbs.table.label" },
-      table,
-      { type: "callout", variant: "", html: "verbs.callout" },
-    ] },
-    fw("verbs-python", "verbs.page.python", "verbs.py.lead", "verbs.py.body", "verbsRequests", "order"),
-    fw("verbs-cypress", "verbs.page.cypress", "verbs.cy.lead", "verbs.cy.body", "verbsCypress"),
-    fw("verbs-playwright", "verbs.page.playwright", "verbs.pw.lead", "verbs.pw.body", "verbsPlaywright"),
-    fw("verbs-robot", "verbs.page.robot", "verbs.rf.lead", "verbs.rf.body", "verbsRobot"),
-  ];
-}
-
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2536,7 +2528,8 @@ export const SECTIONS = [
       { codes: ["selPOM"], mock: "table" },           // 5 Page Object Model
       { codes: ["selGrid"] },                         // 6 Grid & CI
     ], frameworkCases("selApi", "selMoney", "selDocs", "selSecurity"),
-       frameworkComponents((k) => "sel" + k)),
+       frameworkComponents((k) => "sel" + k),
+       { sample: "verbsRequests", leadKey: "verbs.py.lead", bodyKey: "verbs.py.body" }),
 
   ...frameworkGroup("cypress", "nav.cypress", "cyp",
     { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" }, [
@@ -2547,7 +2540,8 @@ export const SECTIONS = [
       { codes: ["cypCommands"] },                     // 5 Custom commands & fixtures
       { codes: ["cypComponent"], mock: "modal" },     // 6 Component testing + CI
     ], frameworkCases("cypApi", "cypMoney", "cypDocs", "cypSecurity"),
-       frameworkComponents((k) => "cyp" + k)),
+       frameworkComponents((k) => "cyp" + k),
+       { sample: "verbsCypress", leadKey: "verbs.cy.lead", bodyKey: "verbs.cy.body" }),
 
   ...frameworkGroup("playwright", "nav.playwright", "pw",
     { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" }, [
@@ -2561,7 +2555,8 @@ export const SECTIONS = [
        frameworkComponents((k) => ({
          Validation: "validationTest", Select: "selectTest", Checkbox: "checkboxTest",
          Modal: "modalTest", Table: "tableTest", Toast: "toastTest", A11y: "a11yTest",
-       }[k]))),
+       }[k])),
+       { sample: "verbsPlaywright", leadKey: "verbs.pw.lead", bodyKey: "verbs.pw.body" }),
 
   ...frameworkGroup("robot", "nav.robot", "rf",
     { label: "Robot Framework", color: "var(--fw-robot)" }, [
@@ -2572,7 +2567,8 @@ export const SECTIONS = [
       { codes: ["rfApi"], mock: "error" },              // 5 API with RequestsLibrary
       { codes: ["rfResource"], mock: "table" },         // 6 Resource files (POM) & CI
     ], frameworkCases("rfApiCase", "rfMoney", "rfDocs", "rfSecurity"),
-       frameworkComponents((k) => "rf" + k)),
+       frameworkComponents((k) => "rf" + k),
+       { sample: "verbsRobot", leadKey: "verbs.rf.lead", bodyKey: "verbs.rf.body" }),
 
   ...bddGroup(),
 
@@ -2602,8 +2598,6 @@ export const SECTIONS = [
       },
     ],
   },
-
-  ...verbsGroup(),
 
   {
     id: "ai-role",
