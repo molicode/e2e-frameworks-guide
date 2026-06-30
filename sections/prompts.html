@@ -142,9 +142,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <span class="section__eyebrow">13</span>
-        <h2 class="section__title" data-i18n="nav.prompts">Ejemplos con AI</h2>
+        <h1 class="section__title" data-i18n="nav.prompts">Ejemplos con AI</h1>
         <div class="prose" data-i18n-html="prompts.lead"><p>Un buen resultado empieza por un buen prompt. La clave es dar <strong>contexto, restricciones y formato de salida</strong>. Veamos prompts concretos y cómo iterar y validar lo que la AI produce.</p></div>
-        <h3 class="block-label" data-i18n="prompts.generate.label">Prompt para generar un test</h3>
+        <h2 class="block-label" data-i18n="prompts.generate.label">Prompt para generar un test</h2>
         <div class="prose" data-i18n-html="prompts.generate.body"><p>Incluí siempre cuatro cosas: <strong>rol</strong> (“sos QA senior”), <strong>contexto</strong> (URL, selectores), <strong>objetivo</strong> (qué verificar) y <strong>restricciones</strong> (sin sleeps, assertions web-first). Cuanto más específico, menos alucina.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -183,9 +183,9 @@ Requirements<span class="tok-punctuation">:</span>
 <span class="tok-punctuation">-</span> No fixed sleeps<span class="tok-punctuation">.</span> No conditional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> logic <span class="tok-keyword">in</span> the test<span class="tok-punctuation">.</span>
 <span class="tok-punctuation">-</span> One short comment above each assertion explaining intent<span class="tok-punctuation">.</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="prompts.iterate.label">Cómo iterar sobre el output</h3>
+        <h2 class="block-label" data-i18n="prompts.iterate.label">Cómo iterar sobre el output</h2>
         <div class="prose" data-i18n-html="prompts.iterate.body"><p>Casi nunca el primer intento es perfecto. Iterá con feedback corto y concreto:</p><ul><li>“El selector <code>.total</code> no existe; usá <code>.order-total</code>.”</li><li>“Quitá el <code>cy.wait(2000)</code> y confiá en el auto-retry.”</li><li>“Agregá un caso para <code>status = REFUNDED</code>.”</li></ul><p>Tratá a la AI como a un colega: respuestas cortas, ejemplos del resultado esperado y un cambio por vez.</p></div>
-        <h3 class="block-label" data-i18n="prompts.validate.label">Cómo validar lo que produjo</h3>
+        <h2 class="block-label" data-i18n="prompts.validate.label">Cómo validar lo que produjo</h2>
         <div class="prose" data-i18n-html="prompts.validate.body"><p>No confíes a ciegas. Revisá el código generado como si fuera un pull request de alguien más:</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -226,7 +226,7 @@ Requirements<span class="tok-punctuation">:</span>
 <span class="tok-comment">#  - No hidden waits/sleeps, no test that can never fail.</span>
 <span class="tok-comment">#  - It fails when it should: temporarily break the app and re-run.</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
+        <h2 class="block-label" data-i18n="ui.vs">Manual vs AI</h2>
         <div class="vs-grid">
           <div class="vs-card vs-card--manual">
             <div class="vs-card__head">

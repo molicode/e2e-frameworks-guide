@@ -154,7 +154,7 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-perf)">Performance</span></div>
-        <h2 class="section__title" data-i18n="perf.page.locust">Locust</h2>
+        <h1 class="section__title" data-i18n="perf.page.locust">Locust</h1>
         <div class="prose" data-i18n-html="perf.lo.lead"><p><strong>Locust</strong> es la opción <strong>Python</strong>, code-first: modelás el comportamiento de un usuario como una clase con tareas. Trae una web UI para lanzar la prueba y ver métricas en vivo.</p></div>
         <div class="prose" data-i18n-html="perf.lo.body"><p>Heredás de <code>HttpUser</code>, marcás métodos con <code>@task</code> (con <strong>pesos</strong> para que unas acciones pasen más seguido que otras) y definís el <code>wait_time</code> (think time). Lo corrés con UI o <code>--headless</code> en CI, indicando usuarios (<code>-u</code>) y ramp-up (<code>-r</code>).</p></div>
         <div class="code-block">
@@ -202,7 +202,7 @@
 <span class="tok-comment"># Web UI:            locust -f locustfile.py --host https://api.example.com</span>
 <span class="tok-comment"># Headless (CI):     locust ... --headless -u 100 -r 10 -t 2m</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
+        <h2 class="block-label" data-i18n="ui.vs">Manual vs AI</h2>
         <div class="vs-grid">
           <div class="vs-card vs-card--manual">
             <div class="vs-card__head">

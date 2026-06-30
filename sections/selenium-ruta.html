@@ -160,8 +160,8 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
-        <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
-        <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
+        <h1 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h1>
+        <h2 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h2>
         <ol class="steps roadmap">
             <li>
               <a class="roadmap__link" href="#sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</a>
@@ -189,7 +189,7 @@
               <span data-i18n="sel.rung6.desc">Corré en paralelo con Selenium Grid o un servicio cloud, e integralo al pipeline.</span>
             </li>
         </ol>
-        <h3 class="block-label" id="sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</h3>
+        <h2 class="block-label" id="sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</h2>
         <div class="prose" data-i18n-html="sel.rung2.body"><p>Selenium localiza elementos con la clase <code>By</code>: <code>By.ID</code>, <code>By.CSS_SELECTOR</code>, <code>By.XPATH</code>… Usá <code>find_element</code> para uno y <code>find_elements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -223,7 +223,7 @@ driver<span class="tok-punctuation">.</span><span class="tok-function">find_elem
           <div class="mock__body">
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Order #42</h4>
+                <p class="mock-h">Order #42</p>
                 <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
               </div>
               <div class="mock-total">
@@ -246,7 +246,7 @@ driver<span class="tok-punctuation">.</span><span class="tok-function">find_elem
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="sel-rung-3" data-i18n="sel.rung3.title">Esperas explícitas</h3>
+        <h2 class="block-label" id="sel-rung-3" data-i18n="sel.rung3.title">Esperas explícitas</h2>
         <div class="prose" data-i18n-html="sel.rung3.body"><p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en Python, <code>WebDriverWait(driver, 5).until(...)</code> junto con <code>expected_conditions</code> (EC). Nunca uses un <code>time.sleep</code> fijo: es la causa número uno de flakiness.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -283,7 +283,7 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-order-head"><p class="mock-h">Order #42</p></div>
               <div class="mock-total">
                 <span>Total</span>
                 <span class="mock-spinner" aria-hidden="true"></span>
@@ -299,7 +299,7 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="sel-rung-4" data-i18n="sel.rung4.title">Runner + assertions</h3>
+        <h2 class="block-label" id="sel-rung-4" data-i18n="sel.rung4.title">Runner + assertions</h2>
         <div class="prose" data-i18n-html="sel.rung4.body"><p>Selenium solo <em>conduce</em> el navegador; las afirmaciones las pone un <strong>test runner</strong>. En Java se combina con <strong>JUnit 5</strong> o <strong>TestNG</strong>; en Python con <strong>pytest</strong>. El runner aporta estructura (setup/teardown), assertions y reportes.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -342,7 +342,7 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
     total = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").text
     assert total == "</span><span class="tok-number">250</span><span class="tok-punctuation">"</span></code></pre>
         </div>
-        <h3 class="block-label" id="sel-rung-5" data-i18n="sel.rung5.title">Page Object Model</h3>
+        <h2 class="block-label" id="sel-rung-5" data-i18n="sel.rung5.title">Page Object Model</h2>
         <div class="prose" data-i18n-html="sel.rung5.body"><p>El <strong>Page Object Model (POM)</strong> encapsula los selectores y acciones de una página en una clase con métodos que revelan intención (<code>order.total()</code> en vez de un <code>css</code> suelto). Cuando el HTML cambia, tocás un solo lugar. Es la diferencia entre una suite mantenible y un infierno de selectores repetidos.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -403,7 +403,7 @@ order<span class="tok-punctuation">.</span><span class="tok-function">open</span
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Users</h4>
+              <p class="mock-h">Users</p>
               <table class="mock-table">
                 <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
                 <tbody>
@@ -422,7 +422,7 @@ order<span class="tok-punctuation">.</span><span class="tok-function">open</span
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="sel-rung-6" data-i18n="sel.rung6.title">Grid y CI</h3>
+        <h2 class="block-label" id="sel-rung-6" data-i18n="sel.rung6.title">Grid y CI</h2>
         <div class="prose" data-i18n-html="sel.rung6.body"><p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: usás <code>webdriver.Remote(command_executor=...)</code> apuntando a un hub en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p></div>
         <div class="code-block">
           <div class="code-block__head">

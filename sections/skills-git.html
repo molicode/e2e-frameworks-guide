@@ -154,9 +154,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-skills)">Habilidades QA</span></div>
-        <h2 class="section__title" data-i18n="skills.page.git">Git para QA</h2>
+        <h1 class="section__title" data-i18n="skills.page.git">Git para QA</h1>
         <div class="prose" data-i18n-html="skills.git.lead"><p>Tus tests son código: viven en un repositorio y se revisan como cualquier cambio. <strong>Git</strong> es la herramienta de versionado estándar — sin ella no colaborás ni te integrás a un pipeline de CI.</p></div>
-        <h3 class="block-label" data-i18n="skills.git.basics.label">El flujo básico</h3>
+        <h2 class="block-label" data-i18n="skills.git.basics.label">El flujo básico</h2>
         <div class="prose" data-i18n-html="skills.git.basics.body"><p>El ciclo de todos los días: <code>clone</code> el repo, creás una <strong>branch</strong> propia (nunca toques <code>main</code> directo), hacés <code>add</code> + <code>commit</code> con un mensaje claro y <code>push</code>. Un buen mensaje de commit explica el <em>por qué</em>, no solo el qué.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -179,7 +179,7 @@ git add tests<span class="tok-punctuation">/</span>login<span class="tok-punctua
 git commit <span class="tok-punctuation">-</span>m <span class="tok-string">"test: add login happy path"</span>
 git push <span class="tok-punctuation">-</span>u origin feature<span class="tok-punctuation">/</span>login<span class="tok-punctuation">-</span>tests</code></pre>
         </div>
-        <h3 class="block-label" data-i18n="skills.git.flow.label">Actualizar y resolver conflictos</h3>
+        <h2 class="block-label" data-i18n="skills.git.flow.label">Actualizar y resolver conflictos</h2>
         <div class="prose" data-i18n-html="skills.git.flow.body"><p>Antes de abrir un PR, traés lo último de <code>main</code> con <code>pull --rebase</code>. Si hay un <strong>conflicto</strong>, editás el archivo, <code>git add</code> y <code>git rebase --continue</code> (o <code>--abort</code> para volver atrás). <code>git stash</code> te guarda cambios a medio hacer para cambiar de tarea sin commitear.</p></div>
         <div class="code-block">
           <div class="code-block__head">

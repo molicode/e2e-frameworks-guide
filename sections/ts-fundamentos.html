@@ -160,9 +160,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
-        <h2 class="section__title" data-i18n="tsqa.page.fund">Fundamentos del lenguaje</h2>
+        <h1 class="section__title" data-i18n="tsqa.page.fund">Fundamentos del lenguaje</h1>
         <div class="prose" data-i18n-html="tsqa.fund.lead"><p>La sintaxis esencial: variables tipadas, control de flujo y funciones. Lo mismo que en JavaScript, pero con tipos que te cubren.</p></div>
-        <h3 class="block-label" data-i18n="tsqa.types.label">Variables y tipos</h3>
+        <h2 class="block-label" data-i18n="tsqa.types.label">Variables y tipos</h2>
         <div class="prose" data-i18n-html="tsqa.types.body"><p>Anotás tipos con <code>: tipo</code>, pero TS también los <strong>infiere</strong> del valor. Los básicos: <code>string</code>, <code>number</code>, <code>boolean</code>. Usá <code>const</code> por defecto (no se reasigna) y <code>let</code> solo cuando necesitás cambiar el valor. El compilador caza los errores de tipo antes de correr.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -195,7 +195,7 @@ attempts <span class="tok-punctuation">=</span> attempts <span class="tok-punctu
 <span class="tok-comment">// The compiler catches type mistakes BEFORE you run:</span>
 <span class="tok-keyword">const</span> label <span class="tok-punctuation">=</span> <span class="tok-string">`${name} has ${attempts} attempts`</span><span class="tok-punctuation">;</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="tsqa.control.label">Condicionales y bucles</h3>
+        <h2 class="block-label" data-i18n="tsqa.control.label">Condicionales y bucles</h2>
         <div class="prose" data-i18n-html="tsqa.control.body"><p>El control de flujo usa llaves: <code>if/else if/else</code> para decidir, <code>for...of</code> para recorrer los valores de un iterable y <code>while</code> para una condición. <code>continue</code> saltea una vuelta y <code>break</code> corta el bucle.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -236,7 +236,7 @@ for (const n of names) {
   console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>n<span class="tok-punctuation">);</span>
 <span class="tok-punctuation">}</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="tsqa.funcs.label">Funciones</h3>
+        <h2 class="block-label" data-i18n="tsqa.funcs.label">Funciones</h2>
         <div class="prose" data-i18n-html="tsqa.funcs.body"><p>Definís funciones con parámetros tipados (opcionales con <code>?</code>, con valor por defecto con <code>=</code>) y un tipo de retorno. Las <strong>arrow functions</strong> (<code>=&gt;</code>) son concisas y aparecen en todo el código de test. Las funciones son valores: podés pasarlas como argumento.</p></div>
         <div class="code-block">
           <div class="code-block__head">

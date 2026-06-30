@@ -160,8 +160,8 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span><span class="lang-pill" title="Lenguaje de los ejemplos">TypeScript</span></div>
-        <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
-        <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
+        <h1 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h1>
+        <h2 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h2>
         <ol class="steps roadmap">
             <li>
               <a class="roadmap__link" href="#cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</a>
@@ -189,7 +189,7 @@
               <span data-i18n="cyp.rung6.desc">Probá componentes aislados y armá la corrida en el pipeline.</span>
             </li>
         </ol>
-        <h3 class="block-label" id="cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</h3>
+        <h2 class="block-label" id="cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</h2>
         <div class="prose" data-i18n-html="cyp.rung2.body"><p>El concepto que más cuesta: los comandos <code>cy.*</code> <strong>no son promesas</strong> y no devuelven un valor directo — se <strong>encolan</strong> y se encadenan. Si necesitás el valor de un elemento usás <code>.then()</code>, pero conviene evitarlo. Con <code>.as()</code> creás un alias y lo reusás con <code>@nombre</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -222,7 +222,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><sp
 cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").as("</span>items<span class="tok-string">");
 cy.get("</span><span class="tok-punctuation">@</span>items<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-punctuation">",</span> <span class="tok-number">3</span><span class="tok-punctuation">);</span></code></pre>
         </div>
-        <h3 class="block-label" id="cyp-rung-3" data-i18n="cyp.rung3.title">Assertions y selectores</h3>
+        <h2 class="block-label" id="cyp-rung-3" data-i18n="cyp.rung3.title">Assertions y selectores</h2>
         <div class="prose" data-i18n-html="cyp.rung3.body"><p>Las assertions de Cypress son <strong>implícitas</strong>: <code>.should()</code> reintenta el comando anterior hasta que se cumple. Encadenás más condiciones con <code>.and()</code>, o usás <code>expect()</code> dentro de un callback para casos explícitos. Para selectores estables, la comunidad usa la convención <code>data-cy</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -264,7 +264,7 @@ cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctu
           <div class="mock__body">
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Order #42</h4>
+                <p class="mock-h">Order #42</p>
                 <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
               </div>
               <div class="mock-total">
@@ -287,7 +287,7 @@ cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctu
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</h3>
+        <h2 class="block-label" id="cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</h2>
         <div class="prose" data-i18n-html="cyp.rung4.body"><p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -329,7 +329,7 @@ cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-pun
           <div class="mock__body">
             <div class="mock-card mock-card--error">
               <div class="mock-error-icon">⚠️</div>
-              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
               <div class="mock-tags-row">
@@ -341,7 +341,7 @@ cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-pun
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</h3>
+        <h2 class="block-label" id="cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</h2>
         <div class="prose" data-i18n-html="cyp.rung5.body"><p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -390,7 +390,7 @@ declare global <span class="tok-punctuation">{</span>
 
 cy<span class="tok-punctuation">.</span><span class="tok-function">login</span><span class="tok-punctuation">("</span>demo<span class="tok-string">", "</span>secret<span class="tok-punctuation">");</span></code></pre>
         </div>
-        <h3 class="block-label" id="cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</h3>
+        <h2 class="block-label" id="cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</h2>
         <div class="prose" data-i18n-html="cyp.rung6.body"><p>Además de E2E, Cypress hace <strong>component testing</strong>: montás un componente aislado con <code>cy.mount()</code> y lo probás sin levantar toda la app. En CI corrés <code>cypress run</code> (headless), con <code>--component</code> o <code>--e2e</code> según el tipo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -430,7 +430,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">login</span><
           <div class="mock__body">
             <div class="mock-stage">
               <div class="mock-dialog" role="dialog">
-                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-h">Delete order?</p>
                 <p class="mock-error-msg">This action can't be undone.</p>
                 <div class="mock-btn-row">
                   <span class="mock-btn mock-btn--ghost">Cancel</span>

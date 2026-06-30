@@ -154,9 +154,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-skills)">Habilidades QA</span></div>
-        <h2 class="section__title" data-i18n="skills.page.sql">SQL para QA</h2>
+        <h1 class="section__title" data-i18n="skills.page.sql">SQL para QA</h1>
         <div class="prose" data-i18n-html="skills.sql.lead"><p>El testing es validar datos, y muchos viven en una base relacional. Con saber <strong>leer</strong> (no hace falta ser DBA) ya verificás un montón: que un pago se guardó, que no hay duplicados, que los montos cierran.</p></div>
-        <h3 class="block-label" data-i18n="skills.sql.basics.label">Leer datos: SELECT</h3>
+        <h2 class="block-label" data-i18n="skills.sql.basics.label">Leer datos: SELECT</h2>
         <div class="prose" data-i18n-html="skills.sql.basics.body"><p>El 90% del SQL para QA es leer. <code>SELECT</code> elige columnas, <code>FROM</code> la tabla, <code>WHERE</code> filtra filas, <code>ORDER BY</code> ordena y <code>LIMIT</code> acota. Con eso ya inspeccionás lo que tu test dejó en la base.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -177,7 +177,7 @@ WHERE status <span class="tok-punctuation">=</span> <span class="tok-string">'PA
 ORDER BY total DESC            <span class="tok-punctuation">--</span> biggest first
 LIMIT <span class="tok-number">10</span><span class="tok-punctuation">;</span>                      <span class="tok-punctuation">--</span> only the top <span class="tok-number">10</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="skills.sql.join.label">Cruzar tablas: JOIN y agregaciones</h3>
+        <h2 class="block-label" data-i18n="skills.sql.join.label">Cruzar tablas: JOIN y agregaciones</h2>
         <div class="prose" data-i18n-html="skills.sql.join.body"><p>Los datos están repartidos en tablas relacionadas. Un <code>JOIN</code> las cruza por su clave. Sumá <code>COUNT</code>, <code>SUM</code>, <code>GROUP BY</code> y <code>HAVING</code> para encontrar problemas: usuarios duplicados, totales que no cuadran, pedidos huérfanos.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -200,7 +200,7 @@ WHERE o<span class="tok-punctuation">.</span><span class="tok-property">status</
 GROUP BY u<span class="tok-punctuation">.</span><span class="tok-property">email</span>
 HAVING <span class="tok-function">COUNT</span><span class="tok-punctuation">(</span>o<span class="tok-punctuation">.</span><span class="tok-property">id</span><span class="tok-punctuation">)</span> <span class="tok-punctuation">&gt;</span> <span class="tok-number">1</span><span class="tok-punctuation">;</span>                <span class="tok-punctuation">--</span> users <span class="tok-keyword">with</span> more than one order</code></pre>
         </div>
-        <h3 class="block-label" data-i18n="skills.sql.validate.label">Validar la DB desde un test</h3>
+        <h2 class="block-label" data-i18n="skills.sql.validate.label">Validar la DB desde un test</h2>
         <div class="prose" data-i18n-html="skills.sql.validate.body"><p>El truco más potente: después de una acción en la UI, <strong>verificá la base directamente</strong>. La UI puede mostrar "PAID" por un cache o un bug visual; la fila en la tabla no miente. Una query dentro del test cierra el círculo.</p></div>
         <div class="code-block">
           <div class="code-block__head">

@@ -88,7 +88,7 @@ function renderBlock(block, dict) {
 
     case "label": {
       const idAttr = block.anchor ? ` id="${escAttr(block.anchor)}"` : "";
-      return `\n        <h3 class="block-label"${idAttr} data-i18n="${block.text}">${escText(t(dict, block.text))}</h3>`;
+      return `\n        <h2 class="block-label"${idAttr} data-i18n="${block.text}">${escText(t(dict, block.text))}</h2>`;
     }
 
     case "code":
@@ -111,7 +111,7 @@ function renderBlock(block, dict) {
           (item) => `
             <div class="tile">
               <div class="tile__icon">${item.icon}</div>
-              <h4 data-i18n="${item.title}">${escText(t(dict, item.title))}</h4>
+              <h3 data-i18n="${item.title}">${escText(t(dict, item.title))}</h3>
               <p data-i18n="${item.body}">${escText(t(dict, item.body))}</p>
             </div>`
         )
@@ -263,14 +263,14 @@ function sectionHeader(section, topNum, dict) {
       : "";
     return `
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:${section.chip.color}">${escText(section.chip.label)}</span>${langPill}</div>
-        <h2 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h2>`;
+        <h1 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h1>`;
   }
   const chip = section.chip
     ? ` <span class="fw-chip" style="--chip-color:${section.chip.color};margin-left:var(--space-3)">${escText(section.chip.label)}</span>`
     : "";
   return `
         <span class="section__eyebrow">${String(topNum).padStart(2, "0")}${chip}</span>
-        <h2 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h2>`;
+        <h1 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h1>`;
 }
 
 /* ---- prev / next pager ---- */
@@ -451,7 +451,7 @@ export function indexMain(sections, dict, { sectionHref }) {
           <p class="hero__lead" data-i18n="home.lead">${escText(t(dict, "home.lead"))}</p>
           <a class="cta-btn" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
         </div>
-        <h3 class="block-label" data-i18n="home.toc">${escText(t(dict, "home.toc"))}</h3>
+        <h2 class="block-label" data-i18n="home.toc">${escText(t(dict, "home.toc"))}</h2>
         <div class="toc-grid">${cards}
         </div>`;
 }

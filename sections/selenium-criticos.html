@@ -160,9 +160,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
-        <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
+        <h1 class="section__title" data-i18n="page.cases">Casos críticos</h1>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
-        <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
+        <h2 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h2>
         <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente, cubriendo <strong>todos los verbos</strong>: creás (POST → 201), leés (GET → 200), actualizás (PATCH/PUT → 200) y borrás (DELETE → 204, y un GET posterior da 404). Validás el <strong>contrato</strong> de cada respuesta y la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -249,7 +249,7 @@ assert requests.delete(f"</span><span class="tok-punctuation">{</span>base<span 
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="crit.receipt.label">Cuentas y recibos de pago</h3>
+        <h2 class="block-label" data-i18n="crit.receipt.label">Cuentas y recibos de pago</h2>
         <div class="prose" data-i18n-html="crit.receipt.body"><p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -293,7 +293,7 @@ total <span class="tok-punctuation">=</span> <span class="tok-function">cents</s
           <div class="mock__body">
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Receipt #9087</h4>
+                <p class="mock-h">Receipt #9087</p>
                 <span class="mock-badge">PAID</span>
               </div>
               <ul class="mock-receipt">
@@ -313,7 +313,7 @@ total <span class="tok-punctuation">=</span> <span class="tok-function">cents</s
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="crit.docs.label">Validación de documentos legales</h3>
+        <h2 class="block-label" data-i18n="crit.docs.label">Validación de documentos legales</h2>
         <div class="prose" data-i18n-html="crit.docs.body"><p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -353,7 +353,7 @@ assert date.fromisoformat(text("</span><span class="tok-punctuation">.</span><sp
           <div class="mock__body">
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Invoice INV-2026-0042</h4>
+                <p class="mock-h">Invoice INV-2026-0042</p>
                 <span class="mock-badge">SIGNED</span>
               </div>
               <div class="mock-doc-grid">
@@ -372,7 +372,7 @@ assert date.fromisoformat(text("</span><span class="tok-punctuation">.</span><sp
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="crit.authz.label">Seguridad: autorización e IDOR</h3>
+        <h2 class="block-label" data-i18n="crit.authz.label">Seguridad: autorización e IDOR</h2>
         <div class="prose" data-i18n-html="crit.authz.body"><p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -418,7 +418,7 @@ assert "</span><span class="tok-punctuation">&lt;</span>script<span class="tok-p
           <div class="mock__body">
             <div class="mock-card mock-card--error">
               <div class="mock-error-icon">🔒</div>
-              <h4 class="mock-h">403 — Forbidden</h4>
+              <p class="mock-h">403 — Forbidden</p>
               <p class="mock-error-msg">You don't have permission to view this order.</p>
               <div class="mock-http">GET /api/orders/99 → 403</div>
               <div class="mock-tags-row">

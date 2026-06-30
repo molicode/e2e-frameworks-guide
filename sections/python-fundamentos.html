@@ -160,9 +160,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-python)">Python</span></div>
-        <h2 class="section__title" data-i18n="pyqa.page.fund">Fundamentos del lenguaje</h2>
+        <h1 class="section__title" data-i18n="pyqa.page.fund">Fundamentos del lenguaje</h1>
         <div class="prose" data-i18n-html="pyqa.fund.lead"><p>La sintaxis esencial que vas a usar en cada test: variables y tipos, condicionales y bucles, y funciones. Con esto ya podés leer y escribir la mayoría del código de automatización.</p></div>
-        <h3 class="block-label" data-i18n="pyqa.vars.label">Variables y tipos</h3>
+        <h2 class="block-label" data-i18n="pyqa.vars.label">Variables y tipos</h2>
         <div class="prose" data-i18n-html="pyqa.vars.body"><p>No declarás tipos: Python los infiere del valor. Los básicos son <code>str</code> (texto), <code>int</code>, <code>float</code>, <code>bool</code> y <code>None</code>. Los <strong>f-strings</strong> (<code>f"..."</code>) interpolan variables dentro del texto y son tu herramienta diaria para mensajes y URLs.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -193,7 +193,7 @@ nothing <span class="tok-punctuation">=</span> <span class="tok-keyword">None</s
 total <span class="tok-punctuation">=</span> price <span class="tok-punctuation">*</span> attempts             <span class="tok-comment"># 59.97</span>
 label <span class="tok-punctuation">=</span> f<span class="tok-string">"{name} has {attempts} attempts"</span>   <span class="tok-comment"># f-string</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="pyqa.control.label">Condicionales y bucles</h3>
+        <h2 class="block-label" data-i18n="pyqa.control.label">Condicionales y bucles</h2>
         <div class="prose" data-i18n-html="pyqa.control.body"><p>El control de flujo usa <strong>indentación</strong> (4 espacios), no llaves. <code>if/elif/else</code> para decidir; <code>for</code> para recorrer cualquier iterable y <code>while</code> para repetir mientras se cumpla una condición. <code>continue</code> saltea una vuelta y <code>break</code> corta el bucle.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -238,7 +238,7 @@ for n in names:
         <span class="tok-keyword">continue</span>            <span class="tok-comment"># skip this one</span>
     <span class="tok-function">print</span><span class="tok-punctuation">(</span>n<span class="tok-punctuation">)</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="pyqa.funcs.label">Funciones</h3>
+        <h2 class="block-label" data-i18n="pyqa.funcs.label">Funciones</h2>
         <div class="prose" data-i18n-html="pyqa.funcs.body"><p>Definís funciones con <code>def</code>, con parámetros (que pueden tener valores por defecto) y un <code>return</code>. En Python las funciones son <strong>valores</strong>: podés pasarlas como argumento, lo que es la base de fixtures y hooks en los frameworks de testing.</p></div>
         <div class="code-block">
           <div class="code-block__head">

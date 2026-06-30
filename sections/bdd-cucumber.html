@@ -154,9 +154,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-bdd)">BDD · Gherkin</span></div>
-        <h2 class="section__title" data-i18n="bdd.page.cucumber">Cucumber y step definitions</h2>
+        <h1 class="section__title" data-i18n="bdd.page.cucumber">Cucumber y step definitions</h1>
         <div class="prose" data-i18n-html="bdd.cuke.lead"><p>Gherkin describe <em>qué</em> probar; los <strong>step definitions</strong> dicen <em>cómo</em>. <strong>Cucumber</strong> es la herramienta que conecta cada paso en lenguaje natural con el código que lo ejecuta (el "glue"). Existe para casi todos los lenguajes.</p></div>
-        <h3 class="block-label" data-i18n="bdd.cuke.js.label">Cucumber.js (con Playwright)</h3>
+        <h2 class="block-label" data-i18n="bdd.cuke.js.label">Cucumber.js (con Playwright)</h2>
         <div class="prose" data-i18n-html="bdd.cuke.js.body"><p>En JS/TS usás <code>@cucumber/cucumber</code>: registrás <code>Given</code>/<code>When</code>/<code>Then</code> con la frase exacta del paso y el código que la implementa (acá, con Playwright). Los <code>{string}</code> capturan valores del paso y llegan como argumento.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -197,7 +197,7 @@ Then("</span>the order status should be <span class="tok-punctuation">{</span>st
   <span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">page</span><span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">")).</span><span class="tok-function">toHaveText</span><span class="tok-punctuation">(</span>status<span class="tok-punctuation">);</span>
 <span class="tok-punctuation">});</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="bdd.cuke.py.label">pytest-bdd (con Python)</h3>
+        <h2 class="block-label" data-i18n="bdd.cuke.py.label">pytest-bdd (con Python)</h2>
         <div class="prose" data-i18n-html="bdd.cuke.py.body"><p>En Python, <code>pytest-bdd</code> (o <code>behave</code>) hace lo mismo: <code>scenarios("checkout.feature")</code> ata los escenarios del archivo y decorás funciones con <code>@given</code>/<code>@when</code>/<code>@then</code>. Reusás toda la potencia de pytest (fixtures, parametrize).</p></div>
         <div class="code-block">
           <div class="code-block__head">

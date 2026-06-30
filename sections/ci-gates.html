@@ -154,7 +154,7 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-ci)">CI/CD</span></div>
-        <h2 class="section__title" data-i18n="ci.page.gates">Quality gates y reportes</h2>
+        <h1 class="section__title" data-i18n="ci.page.gates">Quality gates y reportes</h1>
         <div class="prose" data-i18n-html="ci.gate.lead"><p>El <strong>quality gate</strong> es lo que convierte a los tests en una barrera real: una serie de chequeos que <em>deben</em> pasar para poder mergear o desplegar. Si uno falla, se corta.</p></div>
         <div class="prose" data-i18n-html="ci.gate.body"><p>Cada comando que devuelve un código de salida ≠ 0 <strong>falla el job</strong>: tests rojos, cobertura por debajo del umbral (<code>--cov-fail-under</code>), un threshold de performance roto (k6). En GitHub los configurás como <strong>required checks</strong> con protección de rama, así nadie puede saltearlos.</p></div>
         <div class="code-block">
@@ -180,7 +180,7 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
 
 <span class="tok-comment"># In GitHub: Settings -&gt; Branches -&gt; require these checks to pass before merge.</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
+        <h2 class="block-label" data-i18n="ui.vs">Manual vs AI</h2>
         <div class="vs-grid">
           <div class="vs-card vs-card--manual">
             <div class="vs-card__head">

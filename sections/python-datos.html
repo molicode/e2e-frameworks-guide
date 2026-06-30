@@ -160,9 +160,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-python)">Python</span></div>
-        <h2 class="section__title" data-i18n="pyqa.page.datos">Colecciones y JSON</h2>
+        <h1 class="section__title" data-i18n="pyqa.page.datos">Colecciones y JSON</h1>
         <div class="prose" data-i18n-html="pyqa.datos.lead"><p>El testing es, en gran parte, manejar datos: listas de elementos, diccionarios con la respuesta de una API, y JSON yendo y viniendo. Estas estructuras son el pan de cada día.</p></div>
-        <h3 class="block-label" data-i18n="pyqa.coll.label">Listas y diccionarios</h3>
+        <h2 class="block-label" data-i18n="pyqa.coll.label">Listas y diccionarios</h2>
         <div class="prose" data-i18n-html="pyqa.coll.body"><p>La <strong>lista</strong> es una secuencia ordenada y mutable (<code>items[0]</code>, <code>items[-1]</code>, <code>len(items)</code>). El <strong>diccionario</strong> mapea claves a valores (<code>order["status"]</code>) y es el reflejo natural de un objeto JSON. Las <strong>tuplas</strong> son inmutables y los <strong>sets</strong> descartan duplicados.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -197,7 +197,7 @@ print("</span>total<span class="tok-punctuation">"</span> <span class="tok-keywo
 point <span class="tok-punctuation">=</span> <span class="tok-punctuation">(</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">20</span><span class="tok-punctuation">)</span>
 unique <span class="tok-punctuation">=</span> <span class="tok-function">set</span><span class="tok-punctuation">([</span><span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">])</span>               <span class="tok-comment"># {1, 2, 3}</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="pyqa.comp.label">Comprehensions</h3>
+        <h2 class="block-label" data-i18n="pyqa.comp.label">Comprehensions</h2>
         <div class="prose" data-i18n-html="pyqa.comp.body"><p>Una <strong>comprehension</strong> construye una lista o diccionario en una línea legible, con filtro opcional. Combinada con <code>all(...)</code> y <code>any(...)</code> es ideal para afirmar sobre toda una colección ("todos los precios son positivos").</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -228,7 +228,7 @@ by_id = {u["</span>id<span class="tok-string">"]: u["</span>name<span class="tok
 <span class="tok-comment"># any() / all() read like English in assertions over a collection.</span>
 <span class="tok-keyword">assert</span> <span class="tok-function">all</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span> <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices<span class="tok-punctuation">)</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="pyqa.json.label">JSON</h3>
+        <h2 class="block-label" data-i18n="pyqa.json.label">JSON</h2>
         <div class="prose" data-i18n-html="pyqa.json.body"><p>Las APIs hablan JSON. El módulo <code>json</code> convierte texto JSON a <code>dict</code>/<code>list</code> con <code>json.loads</code> y de vuelta con <code>json.dumps</code>. En la práctica, <code>requests</code> ya te devuelve el body parseado con <code>response.json()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
