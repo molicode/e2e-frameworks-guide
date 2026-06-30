@@ -128,7 +128,7 @@
         <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
-        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
+        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente, cubriendo <strong>todos los verbos</strong>: creás (POST → 201), leés (GET → 200), actualizás (PATCH/PUT → 200) y borrás (DELETE → 204, y un GET posterior da 404). Validás el <strong>contrato</strong> de cada respuesta y la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">TypeScript</span>
@@ -136,31 +136,61 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Testing de API (Cypress) — cy.request pega a la API directamente, sin UI.</span>
-cy<span class="tok-punctuation">.</span><span class="tok-function">request</span><span class="tok-punctuation">({</span>
-  url<span class="tok-punctuation">:</span> <span class="tok-string">"/api/orders/42"</span><span class="tok-punctuation">,</span>
-  headers<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${token}`</span> <span class="tok-punctuation">},</span>
-<span class="tok-punctuation">}).</span><span class="tok-function">then</span><span class="tok-punctuation">((</span>res<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> <span class="tok-punctuation">{</span>
-  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>res<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">).</span><span class="tok-property">to</span><span class="tok-punctuation">.</span><span class="tok-function">eq</span><span class="tok-punctuation">(</span><span class="tok-number">200</span><span class="tok-punctuation">);</span>
-  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>res<span class="tok-punctuation">.</span><span class="tok-property">body</span><span class="tok-punctuation">.</span><span class="tok-property">total</span><span class="tok-punctuation">).</span><span class="tok-property">to</span><span class="tok-punctuation">.</span><span class="tok-function">eq</span><span class="tok-punctuation">(</span><span class="tok-number">250</span><span class="tok-punctuation">);</span>
-  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>res<span class="tok-punctuation">.</span><span class="tok-property">body</span><span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">).</span><span class="tok-property">to</span><span class="tok-punctuation">.</span><span class="tok-function">eq</span><span class="tok-punctuation">("</span>PAID<span class="tok-string">");
-});
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Testing de API (Cypress) — cy.request pega a la API directo, todos los verbos. Sin UI.</span>
+<span class="tok-keyword">const</span> auth <span class="tok-punctuation">=</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${token}`</span> <span class="tok-punctuation">};</span>
 
-// Auth: sin token debe ser rechazado (401).
-cy.request({ url: "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">", failOnStatusCode: false })
-  .its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-punctuation">",</span> <span class="tok-number">401</span><span class="tok-punctuation">);</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// API testing (Cypress) — cy.request hits the API directly, no UI.</span>
-cy<span class="tok-punctuation">.</span><span class="tok-function">request</span><span class="tok-punctuation">({</span>
-  url<span class="tok-punctuation">:</span> <span class="tok-string">"/api/orders/42"</span><span class="tok-punctuation">,</span>
-  headers<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${token}`</span> <span class="tok-punctuation">},</span>
-<span class="tok-punctuation">}).</span><span class="tok-function">then</span><span class="tok-punctuation">((</span>res<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> <span class="tok-punctuation">{</span>
-  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>res<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">).</span><span class="tok-property">to</span><span class="tok-punctuation">.</span><span class="tok-function">eq</span><span class="tok-punctuation">(</span><span class="tok-number">200</span><span class="tok-punctuation">);</span>
-  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>res<span class="tok-punctuation">.</span><span class="tok-property">body</span><span class="tok-punctuation">.</span><span class="tok-property">total</span><span class="tok-punctuation">).</span><span class="tok-property">to</span><span class="tok-punctuation">.</span><span class="tok-function">eq</span><span class="tok-punctuation">(</span><span class="tok-number">250</span><span class="tok-punctuation">);</span>
-  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>res<span class="tok-punctuation">.</span><span class="tok-property">body</span><span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">).</span><span class="tok-property">to</span><span class="tok-punctuation">.</span><span class="tok-function">eq</span><span class="tok-punctuation">("</span>PAID<span class="tok-string">");
-});
+<span class="tok-comment">// CREATE (POST) -&gt; 201 + el id nuevo</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">request</span><span class="tok-punctuation">({</span> method<span class="tok-punctuation">:</span> <span class="tok-string">"POST"</span><span class="tok-punctuation">,</span> url<span class="tok-punctuation">:</span> <span class="tok-string">"/api/orders"</span><span class="tok-punctuation">,</span> headers<span class="tok-punctuation">:</span> auth<span class="tok-punctuation">,</span> body<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> items<span class="tok-punctuation">:</span> <span class="tok-punctuation">["</span>book<span class="tok-string">"] } })
+  .then((created) =&gt; {
+    expect(created.status).to.eq(201);
+    const id = created.body.id;
+
+    // READ (GET) -&gt; 200 + la forma esperada
+    cy.request({ url: `/api/orders/${id}`, headers: auth }).then((got) =&gt; {
+      expect(got.status).to.eq(200);
+      expect(got.body.status).to.eq("</span>NEW<span class="tok-string">");
+    });
+
+    // UPDATE (PATCH) -&gt; 200 + el cambio persistido
+    cy.request({ method: "</span>PATCH<span class="tok-string">", url: `/api/orders/${id}`, headers: auth, body: { status: "</span>PAID<span class="tok-string">" } })
+      .its("</span>body<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-string">").should("</span>eq<span class="tok-string">", "</span>PAID<span class="tok-string">");
+
+    // DELETE -&gt; 204, y luego un GET da 404
+    cy.request({ method: "</span>DELETE<span class="tok-string">", url: `/api/orders/${id}`, headers: auth })
+      .its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-string">", 204);
+    cy.request({ url: `/api/orders/${id}`, headers: auth, failOnStatusCode: false })
+      .its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-string">", 404);
+  });
+
+// Auth: sin token, debe rechazarse (401).
+cy.request({ url: "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">1</span><span class="tok-string">", failOnStatusCode: false }).its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-punctuation">",</span> <span class="tok-number">401</span><span class="tok-punctuation">);</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// API testing (Cypress) — cy.request hits the API directly, every verb. No UI.</span>
+<span class="tok-keyword">const</span> auth <span class="tok-punctuation">=</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${token}`</span> <span class="tok-punctuation">};</span>
+
+<span class="tok-comment">// CREATE (POST) -&gt; 201 + the new id</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">request</span><span class="tok-punctuation">({</span> method<span class="tok-punctuation">:</span> <span class="tok-string">"POST"</span><span class="tok-punctuation">,</span> url<span class="tok-punctuation">:</span> <span class="tok-string">"/api/orders"</span><span class="tok-punctuation">,</span> headers<span class="tok-punctuation">:</span> auth<span class="tok-punctuation">,</span> body<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> items<span class="tok-punctuation">:</span> <span class="tok-punctuation">["</span>book<span class="tok-string">"] } })
+  .then((created) =&gt; {
+    expect(created.status).to.eq(201);
+    const id = created.body.id;
+
+    // READ (GET) -&gt; 200 + the expected shape
+    cy.request({ url: `/api/orders/${id}`, headers: auth }).then((got) =&gt; {
+      expect(got.status).to.eq(200);
+      expect(got.body.status).to.eq("</span>NEW<span class="tok-string">");
+    });
+
+    // UPDATE (PATCH) -&gt; 200 + the change persisted
+    cy.request({ method: "</span>PATCH<span class="tok-string">", url: `/api/orders/${id}`, headers: auth, body: { status: "</span>PAID<span class="tok-string">" } })
+      .its("</span>body<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-string">").should("</span>eq<span class="tok-string">", "</span>PAID<span class="tok-string">");
+
+    // DELETE -&gt; 204, then a follow-up GET is 404
+    cy.request({ method: "</span>DELETE<span class="tok-string">", url: `/api/orders/${id}`, headers: auth })
+      .its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-string">", 204);
+    cy.request({ url: `/api/orders/${id}`, headers: auth, failOnStatusCode: false })
+      .its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-string">", 404);
+  });
 
 // Auth: no token must be rejected (401).
-cy.request({ url: "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">", failOnStatusCode: false })
-  .its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-punctuation">",</span> <span class="tok-number">401</span><span class="tok-punctuation">);</span></code></pre>
+cy.request({ url: "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">1</span><span class="tok-string">", failOnStatusCode: false }).its("</span>status<span class="tok-string">").should("</span>eq<span class="tok-punctuation">",</span> <span class="tok-number">401</span><span class="tok-punctuation">);</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock mock--api">

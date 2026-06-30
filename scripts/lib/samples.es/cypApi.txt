@@ -1,13 +1,28 @@
-// Testing de API (Cypress) — cy.request pega a la API directamente, sin UI.
-cy.request({
-  url: "/api/orders/42",
-  headers: { Authorization: `Bearer ${token}` },
-}).then((res) => {
-  expect(res.status).to.eq(200);
-  expect(res.body.total).to.eq(250);
-  expect(res.body.status).to.eq("PAID");
-});
+// Testing de API (Cypress) — cy.request pega a la API directo, todos los verbos. Sin UI.
+const auth = { Authorization: `Bearer ${token}` };
 
-// Auth: sin token debe ser rechazado (401).
-cy.request({ url: "/api/orders/42", failOnStatusCode: false })
-  .its("status").should("eq", 401);
+// CREATE (POST) -> 201 + el id nuevo
+cy.request({ method: "POST", url: "/api/orders", headers: auth, body: { items: ["book"] } })
+  .then((created) => {
+    expect(created.status).to.eq(201);
+    const id = created.body.id;
+
+    // READ (GET) -> 200 + la forma esperada
+    cy.request({ url: `/api/orders/${id}`, headers: auth }).then((got) => {
+      expect(got.status).to.eq(200);
+      expect(got.body.status).to.eq("NEW");
+    });
+
+    // UPDATE (PATCH) -> 200 + el cambio persistido
+    cy.request({ method: "PATCH", url: `/api/orders/${id}`, headers: auth, body: { status: "PAID" } })
+      .its("body.status").should("eq", "PAID");
+
+    // DELETE -> 204, y luego un GET da 404
+    cy.request({ method: "DELETE", url: `/api/orders/${id}`, headers: auth })
+      .its("status").should("eq", 204);
+    cy.request({ url: `/api/orders/${id}`, headers: auth, failOnStatusCode: false })
+      .its("status").should("eq", 404);
+  });
+
+// Auth: sin token, debe rechazarse (401).
+cy.request({ url: "/api/orders/1", failOnStatusCode: false }).its("status").should("eq", 401);

@@ -1,19 +1,28 @@
-# CRUD de API con auth — creá, leé, aseverá el contrato. Sin UI.
+# CRUD de API con auth — ejercé TODOS los verbos contra el contrato. Sin UI.
 api = playwright.request.new_context(
     base_url="https://api.example.com",
     extra_http_headers={"Authorization": f"Bearer {token}"},
 )
 
-# CREATE
+# CREATE (POST) -> 201 + el id nuevo
 created = api.post("/orders", data={"items": ["book"]})
 assert created.status == 201
 order_id = created.json()["id"]
 
-# READ + aseverá la forma de la respuesta
-res = api.get(f"/orders/{order_id}")
-assert res.ok
-assert res.json()["status"] == "NEW"
+# READ (GET) -> 200 + la forma esperada
+got = api.get(f"/orders/{order_id}")
+assert got.ok
+assert got.json()["status"] == "NEW"
 
-# Sin un token -> 401 (no un 200 silencioso ni un 500)
+# UPDATE (PATCH) -> 200 + el cambio persistido
+patched = api.patch(f"/orders/{order_id}", data={"status": "PAID"})
+assert patched.status == 200
+assert patched.json()["status"] == "PAID"
+
+# DELETE -> 204, y luego un GET da 404
+assert api.delete(f"/orders/{order_id}").status == 204
+assert api.get(f"/orders/{order_id}").status == 404
+
+# Sin token -> 401 (no un 200 silencioso ni un 500)
 anon = playwright.request.new_context()
 assert anon.get(f"https://api.example.com/orders/{order_id}").status == 401

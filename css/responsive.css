@@ -52,7 +52,7 @@
 /* ----- Phones: stack the MANUAL-vs-AI columns, tighten spacing ----- */
 @media (max-width: 640px) {
   .vs-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .site-header__inner {

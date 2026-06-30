@@ -603,21 +603,30 @@ expect(page.get_by_role("button", name="Sign in")).to_be_visible()`,
   /* ---- Critical cases: accounts, payments, value validation, security ---- */
   apiCrud: {
     lang: "Python",
-    code: `# API CRUD with auth — create, read, assert the contract. No UI.
+    code: `# API CRUD with auth — exercise EVERY verb against the contract. No UI.
 api = playwright.request.new_context(
     base_url="https://api.example.com",
     extra_http_headers={"Authorization": f"Bearer {token}"},
 )
 
-# CREATE
+# CREATE (POST) -> 201 + the new id
 created = api.post("/orders", data={"items": ["book"]})
 assert created.status == 201
 order_id = created.json()["id"]
 
-# READ + assert the response shape
-res = api.get(f"/orders/{order_id}")
-assert res.ok
-assert res.json()["status"] == "NEW"
+# READ (GET) -> 200 + the expected shape
+got = api.get(f"/orders/{order_id}")
+assert got.ok
+assert got.json()["status"] == "NEW"
+
+# UPDATE (PATCH) -> 200 + the change persisted
+patched = api.patch(f"/orders/{order_id}", data={"status": "PAID"})
+assert patched.status == 200
+assert patched.json()["status"] == "PAID"
+
+# DELETE -> 204, then a follow-up GET is 404
+assert api.delete(f"/orders/{order_id}").status == 204
+assert api.get(f"/orders/{order_id}").status == 404
 
 # Without a token -> 401 (not a silent 200 or a 500)
 anon = playwright.request.new_context()
@@ -650,21 +659,33 @@ assert r["status"] == "PAID"`,
   selApi: {
     lang: "Python",
     code: `# API testing in a Selenium project — Selenium drives the UI; the API
-# layer uses a plain HTTP client like requests.
+# layer uses a plain HTTP client like requests. Cover the full CRUD contract.
 import requests
 
-res = requests.get(
-    "https://api.example.com/orders/42",
-    headers={"Authorization": f"Bearer {token}"},
-)
-assert res.status_code == 200
-order = res.json()
-assert order["total"] == 250
-assert order["status"] == "PAID"
+base = "https://api.example.com"
+auth = {"Authorization": f"Bearer {token}"}
+
+# CREATE (POST) -> 201 + the new id
+created = requests.post(f"{base}/orders", json={"items": ["book"]}, headers=auth)
+assert created.status_code == 201
+order_id = created.json()["id"]
+
+# READ (GET) -> 200 + the expected shape
+got = requests.get(f"{base}/orders/{order_id}", headers=auth)
+assert got.status_code == 200
+assert got.json()["status"] == "NEW"
+
+# UPDATE (PATCH) -> 200 + the change persisted
+patched = requests.patch(f"{base}/orders/{order_id}", json={"status": "PAID"}, headers=auth)
+assert patched.status_code == 200
+assert patched.json()["status"] == "PAID"
+
+# DELETE -> 204, then a follow-up GET is 404
+assert requests.delete(f"{base}/orders/{order_id}", headers=auth).status_code == 204
+assert requests.get(f"{base}/orders/{order_id}", headers=auth).status_code == 404
 
 # Without a token -> 401, never a silent 200.
-anon = requests.get("https://api.example.com/orders/42")
-assert anon.status_code == 401`,
+assert requests.get(f"{base}/orders/{order_id}").status_code == 401`,
   },
   selMoney: {
     lang: "Python",
@@ -717,19 +738,34 @@ assert "<script>alert(1)</script>" in shown  # escaped, literal`,
   /* ---- Cypress (TypeScript) ---- */
   cypApi: {
     lang: "TypeScript",
-    code: `// API testing (Cypress) — cy.request hits the API directly, no UI.
-cy.request({
-  url: "/api/orders/42",
-  headers: { Authorization: \`Bearer \${token}\` },
-}).then((res) => {
-  expect(res.status).to.eq(200);
-  expect(res.body.total).to.eq(250);
-  expect(res.body.status).to.eq("PAID");
-});
+    code: `// API testing (Cypress) — cy.request hits the API directly, every verb. No UI.
+const auth = { Authorization: \`Bearer \${token}\` };
+
+// CREATE (POST) -> 201 + the new id
+cy.request({ method: "POST", url: "/api/orders", headers: auth, body: { items: ["book"] } })
+  .then((created) => {
+    expect(created.status).to.eq(201);
+    const id = created.body.id;
+
+    // READ (GET) -> 200 + the expected shape
+    cy.request({ url: \`/api/orders/\${id}\`, headers: auth }).then((got) => {
+      expect(got.status).to.eq(200);
+      expect(got.body.status).to.eq("NEW");
+    });
+
+    // UPDATE (PATCH) -> 200 + the change persisted
+    cy.request({ method: "PATCH", url: \`/api/orders/\${id}\`, headers: auth, body: { status: "PAID" } })
+      .its("body.status").should("eq", "PAID");
+
+    // DELETE -> 204, then a follow-up GET is 404
+    cy.request({ method: "DELETE", url: \`/api/orders/\${id}\`, headers: auth })
+      .its("status").should("eq", 204);
+    cy.request({ url: \`/api/orders/\${id}\`, headers: auth, failOnStatusCode: false })
+      .its("status").should("eq", 404);
+  });
 
 // Auth: no token must be rejected (401).
-cy.request({ url: "/api/orders/42", failOnStatusCode: false })
-  .its("status").should("eq", 401);`,
+cy.request({ url: "/api/orders/1", failOnStatusCode: false }).its("status").should("eq", 401);`,
   },
   cypMoney: {
     lang: "TypeScript",

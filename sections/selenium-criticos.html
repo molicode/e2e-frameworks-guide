@@ -128,7 +128,7 @@
         <h2 class="section__title" data-i18n="page.cases">Casos críticos</h2>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
-        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
+        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente, cubriendo <strong>todos los verbos</strong>: creás (POST → 201), leés (GET → 200), actualizás (PATCH/PUT → 200) y borrás (DELETE → 204, y un GET posterior da 404). Validás el <strong>contrato</strong> de cada respuesta y la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -137,36 +137,60 @@
             </button>
           </div>
           <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Testing de API en un proyecto Selenium — Selenium maneja la UI; la capa de</span>
-<span class="tok-comment"># API usa un cliente HTTP simple como requests.</span>
+<span class="tok-comment"># API usa un cliente HTTP simple como requests. Cubrí todo el contrato CRUD.</span>
 <span class="tok-keyword">import</span> requests
 
-res <span class="tok-punctuation">=</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>
-    <span class="tok-string">"https://api.example.com/orders/42"</span><span class="tok-punctuation">,</span>
-    headers<span class="tok-punctuation">={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
-<span class="tok-punctuation">)</span>
-<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">200</span>
-order <span class="tok-punctuation">=</span> res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()</span>
-<span class="tok-keyword">assert</span> order<span class="tok-punctuation">["</span>total<span class="tok-string">"] == 250
-assert order["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+base <span class="tok-punctuation">=</span> <span class="tok-string">"https://api.example.com"</span>
+auth <span class="tok-punctuation">=</span> <span class="tok-punctuation">{"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"}</span>
 
-# Sin un token -&gt; 401, nunca un 200 silencioso.
-anon = requests.get("</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">")</span>
-<span class="tok-keyword">assert</span> anon<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># API testing in a Selenium project — Selenium drives the UI; the API</span>
-<span class="tok-comment"># layer uses a plain HTTP client like requests.</span>
+<span class="tok-comment"># CREATE (POST) -&gt; 201 + el id nuevo</span>
+created <span class="tok-punctuation">=</span> requests<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">(</span>f<span class="tok-string">"{base}/orders"</span><span class="tok-punctuation">,</span> json<span class="tok-punctuation">={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]}, headers=auth)
+assert created.status_code == 201
+order_id = created.json()["</span>id<span class="tok-string">"]
+
+# READ (GET) -&gt; 200 + la forma esperada
+got = requests.get(f"</span><span class="tok-punctuation">{</span>base<span class="tok-punctuation">}/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> headers<span class="tok-punctuation">=</span>auth<span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">200</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
+
+# UPDATE (PATCH) -&gt; 200 + el cambio persistido
+patched = requests.patch(f"</span><span class="tok-punctuation">{</span>base<span class="tok-punctuation">}/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> json<span class="tok-punctuation">={"</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">"}, headers=auth)
+assert patched.status_code == 200
+assert patched.json()["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+
+# DELETE -&gt; 204, y luego un GET da 404
+assert requests.delete(f"</span><span class="tok-punctuation">{</span>base<span class="tok-punctuation">}/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> headers<span class="tok-punctuation">=</span>auth<span class="tok-punctuation">).</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">204</span>
+<span class="tok-keyword">assert</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"{base}/orders/{order_id}"</span><span class="tok-punctuation">,</span> headers<span class="tok-punctuation">=</span>auth<span class="tok-punctuation">).</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">404</span>
+
+<span class="tok-comment"># Sin token -&gt; 401, nunca un 200 silencioso.</span>
+<span class="tok-keyword">assert</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"{base}/orders/{order_id}"</span><span class="tok-punctuation">).</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># API testing in a Selenium project — Selenium drives the UI; the API</span>
+<span class="tok-comment"># layer uses a plain HTTP client like requests. Cover the full CRUD contract.</span>
 <span class="tok-keyword">import</span> requests
 
-res <span class="tok-punctuation">=</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>
-    <span class="tok-string">"https://api.example.com/orders/42"</span><span class="tok-punctuation">,</span>
-    headers<span class="tok-punctuation">={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
-<span class="tok-punctuation">)</span>
-<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">200</span>
-order <span class="tok-punctuation">=</span> res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()</span>
-<span class="tok-keyword">assert</span> order<span class="tok-punctuation">["</span>total<span class="tok-string">"] == 250
-assert order["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+base <span class="tok-punctuation">=</span> <span class="tok-string">"https://api.example.com"</span>
+auth <span class="tok-punctuation">=</span> <span class="tok-punctuation">{"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"}</span>
 
-# Without a token -&gt; 401, never a silent 200.
-anon = requests.get("</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">")</span>
-<span class="tok-keyword">assert</span> anon<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code></pre>
+<span class="tok-comment"># CREATE (POST) -&gt; 201 + the new id</span>
+created <span class="tok-punctuation">=</span> requests<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">(</span>f<span class="tok-string">"{base}/orders"</span><span class="tok-punctuation">,</span> json<span class="tok-punctuation">={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]}, headers=auth)
+assert created.status_code == 201
+order_id = created.json()["</span>id<span class="tok-string">"]
+
+# READ (GET) -&gt; 200 + the expected shape
+got = requests.get(f"</span><span class="tok-punctuation">{</span>base<span class="tok-punctuation">}/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> headers<span class="tok-punctuation">=</span>auth<span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">200</span>
+<span class="tok-keyword">assert</span> got<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
+
+# UPDATE (PATCH) -&gt; 200 + the change persisted
+patched = requests.patch(f"</span><span class="tok-punctuation">{</span>base<span class="tok-punctuation">}/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> json<span class="tok-punctuation">={"</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">"}, headers=auth)
+assert patched.status_code == 200
+assert patched.json()["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-string">"
+
+# DELETE -&gt; 204, then a follow-up GET is 404
+assert requests.delete(f"</span><span class="tok-punctuation">{</span>base<span class="tok-punctuation">}/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}",</span> headers<span class="tok-punctuation">=</span>auth<span class="tok-punctuation">).</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">204</span>
+<span class="tok-keyword">assert</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"{base}/orders/{order_id}"</span><span class="tok-punctuation">,</span> headers<span class="tok-punctuation">=</span>auth<span class="tok-punctuation">).</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">404</span>
+
+<span class="tok-comment"># Without a token -&gt; 401, never a silent 200.</span>
+<span class="tok-keyword">assert</span> requests<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"{base}/orders/{order_id}"</span><span class="tok-punctuation">).</span><span class="tok-property">status_code</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code></pre>
         </div>
         <figure class="mock-figure">
         <div class="mock mock--api">
