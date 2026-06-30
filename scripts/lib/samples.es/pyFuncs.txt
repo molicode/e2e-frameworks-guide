@@ -1,0 +1,13 @@
+# Funciones: def, parámetros con valor por defecto opcional, un valor de retorno.
+def total_cents(price, qty=1):
+    """Return price * quantity as integer cents."""
+    return round(price * qty * 100)
+
+
+# Llamá por posición o por palabra clave:
+print(total_cents(19.99))          # 1999
+print(total_cents(19.99, qty=3))   # 5997
+
+# Las funciones son valores — podés pasarlas (útil para fixtures/hooks).
+def apply(fn, value):
+    return fn(value)

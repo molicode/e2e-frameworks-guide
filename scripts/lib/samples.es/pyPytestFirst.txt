@@ -1,0 +1,14 @@
+# test_money.py — pytest descubre archivos test_*.py y funciones test_*.
+def to_cents(amount):
+    return round(amount * 100)
+
+
+def test_converts_to_integer_cents():
+    # Un assert simple es todo lo que pytest necesita — imprime los valores al fallar.
+    assert to_cents(19.99) == 1999
+
+
+def test_handles_zero():
+    assert to_cents(0) == 0
+
+# Corré toda la suite:  pytest -q

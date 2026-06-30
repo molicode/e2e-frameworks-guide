@@ -1,0 +1,15 @@
+# test_orders_api.py — tu primer test real: pegale a una API, verificá el contrato.
+import requests
+
+BASE = "https://api.example.com"
+
+
+def test_order_42_is_paid():
+    res = requests.get(f"{BASE}/orders/42", timeout=10)
+
+    # Primero el status, después la forma del body.
+    assert res.status_code == 200
+    body = res.json()
+    assert body["status"] == "PAID"
+    assert body["total"] == 250
+    assert "book" in body["items"]

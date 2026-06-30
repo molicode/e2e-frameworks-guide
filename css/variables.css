@@ -94,6 +94,7 @@
   --fw-selenium: #34a853;
   --fw-cypress: #17202a;
   --fw-playwright: #2ead52;
+  --fw-python: #3776ab;
 }
 
 /* --------------------------------------------------------------------------
@@ -140,4 +141,5 @@
   --fw-selenium: #43c463;
   --fw-cypress: #cdd9e5;
   --fw-playwright: #4ade80;
+  --fw-python: #6aade4;
 }

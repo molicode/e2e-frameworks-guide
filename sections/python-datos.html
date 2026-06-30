@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="pyqa.page.datos">Colecciones y JSON</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--python-datos">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="python-intro.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.pyqa">Python para QA</span>
+        </a>
+          <a class="nav-link nav-sublink" href="python-intro.html">
+            <span data-i18n="pyqa.page.intro">Por qué Python para QA</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-hola.html">
+            <span data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-fundamentos.html">
+            <span data-i18n="pyqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="python-datos.html" aria-current="page">
+            <span data-i18n="pyqa.page.datos">Colecciones y JSON</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-pytest.html">
+            <span data-i18n="pyqa.page.pytest">pytest: tu primer test</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-componente.html">
+            <span data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+          </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-python)">Python</span></div>
+        <h2 class="section__title" data-i18n="pyqa.page.datos">Colecciones y JSON</h2>
+        <div class="prose" data-i18n-html="pyqa.datos.lead"><p>El testing es, en gran parte, manejar datos: listas de elementos, diccionarios con la respuesta de una API, y JSON yendo y viniendo. Estas estructuras son el pan de cada día.</p></div>
+        <h3 class="block-label" data-i18n="pyqa.coll.label">Listas y diccionarios</h3>
+        <div class="prose" data-i18n-html="pyqa.coll.body"><p>La <strong>lista</strong> es una secuencia ordenada y mutable (<code>items[0]</code>, <code>items[-1]</code>, <code>len(items)</code>). El <strong>diccionario</strong> mapea claves a valores (<code>order["status"]</code>) y es el reflejo natural de un objeto JSON. Las <strong>tuplas</strong> son inmutables y los <strong>sets</strong> descartan duplicados.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Python</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Las listas (ordenadas, mutables) y los dicts (clave -&gt; valor) son tu día a día.</span>
+items <span class="tok-punctuation">=</span> <span class="tok-punctuation">["</span>book<span class="tok-string">", "</span>pen<span class="tok-string">", "</span>mug<span class="tok-string">"]
+items.append("</span>lamp<span class="tok-string">")
+print(items[0], items[-1], len(items))   # book lamp 4
+
+order = {"</span>id<span class="tok-string">": 42, "</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">", "</span>total<span class="tok-string">": 250}
+print(order["</span>status<span class="tok-string">"])                   # PAID
+order["</span>status<span class="tok-string">"] = "</span>REFUNDED<span class="tok-string">"             # actualizá un valor
+print("</span>total<span class="tok-punctuation">"</span> <span class="tok-keyword">in</span> order<span class="tok-punctuation">)</span>                  <span class="tok-comment"># True</span>
+
+<span class="tok-comment"># Las tuplas son inmutables; los sets descartan duplicados.</span>
+point <span class="tok-punctuation">=</span> <span class="tok-punctuation">(</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">20</span><span class="tok-punctuation">)</span>
+unique <span class="tok-punctuation">=</span> <span class="tok-function">set</span><span class="tok-punctuation">([</span><span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">])</span>               <span class="tok-comment"># {1, 2, 3}</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Lists (ordered, mutable) and dicts (key -&gt; value) are your daily tools.</span>
+items <span class="tok-punctuation">=</span> <span class="tok-punctuation">["</span>book<span class="tok-string">", "</span>pen<span class="tok-string">", "</span>mug<span class="tok-string">"]
+items.append("</span>lamp<span class="tok-string">")
+print(items[0], items[-1], len(items))   # book lamp 4
+
+order = {"</span>id<span class="tok-string">": 42, "</span>status<span class="tok-string">": "</span>PAID<span class="tok-string">", "</span>total<span class="tok-string">": 250}
+print(order["</span>status<span class="tok-string">"])                   # PAID
+order["</span>status<span class="tok-string">"] = "</span>REFUNDED<span class="tok-string">"             # update a value
+print("</span>total<span class="tok-punctuation">"</span> <span class="tok-keyword">in</span> order<span class="tok-punctuation">)</span>                  <span class="tok-comment"># True</span>
+
+<span class="tok-comment"># Tuples are immutable; sets drop duplicates.</span>
+point <span class="tok-punctuation">=</span> <span class="tok-punctuation">(</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">20</span><span class="tok-punctuation">)</span>
+unique <span class="tok-punctuation">=</span> <span class="tok-function">set</span><span class="tok-punctuation">([</span><span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">1</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">])</span>               <span class="tok-comment"># {1, 2, 3}</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="pyqa.comp.label">Comprehensions</h3>
+        <div class="prose" data-i18n-html="pyqa.comp.body"><p>Una <strong>comprehension</strong> construye una lista o diccionario en una línea legible, con filtro opcional. Combinada con <code>all(...)</code> y <code>any(...)</code> es ideal para afirmar sobre toda una colección ("todos los precios son positivos").</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Python</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Una comprensión construye una colección en una línea legible.</span>
+prices <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">25</span><span class="tok-punctuation">,</span> <span class="tok-number">7</span><span class="tok-punctuation">,</span> <span class="tok-number">50</span><span class="tok-punctuation">]</span>
+with_tax <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">*</span> <span class="tok-number">1.21</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">)</span> <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices<span class="tok-punctuation">]</span>   <span class="tok-comment"># [12.1, 30.25, 8.47, 60.5]</span>
+expensive <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span>p <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices <span class="tok-keyword">if</span> p <span class="tok-punctuation">&gt;</span> <span class="tok-number">20</span><span class="tok-punctuation">]</span>         <span class="tok-comment"># [25, 50]</span>
+
+<span class="tok-comment"># Comprensión de dict: id -&gt; name</span>
+users <span class="tok-punctuation">=</span> <span class="tok-punctuation">[{"</span>id<span class="tok-string">": 1, "</span>name<span class="tok-string">": "</span>Ada<span class="tok-string">"}, {"</span>id<span class="tok-string">": 2, "</span>name<span class="tok-string">": "</span>Grace<span class="tok-string">"}]
+by_id = {u["</span>id<span class="tok-string">"]: u["</span>name<span class="tok-string">"] for u in users}       # {1: "</span>Ada<span class="tok-string">", 2: "</span>Grace<span class="tok-punctuation">"}</span>
+
+<span class="tok-comment"># any() / all() se leen como en inglés en asserts sobre una colección.</span>
+<span class="tok-keyword">assert</span> <span class="tok-function">all</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span> <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices<span class="tok-punctuation">)</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># A comprehension builds a collection in one readable line.</span>
+prices <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">25</span><span class="tok-punctuation">,</span> <span class="tok-number">7</span><span class="tok-punctuation">,</span> <span class="tok-number">50</span><span class="tok-punctuation">]</span>
+with_tax <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">*</span> <span class="tok-number">1.21</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">)</span> <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices<span class="tok-punctuation">]</span>   <span class="tok-comment"># [12.1, 30.25, 8.47, 60.5]</span>
+expensive <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span>p <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices <span class="tok-keyword">if</span> p <span class="tok-punctuation">&gt;</span> <span class="tok-number">20</span><span class="tok-punctuation">]</span>         <span class="tok-comment"># [25, 50]</span>
+
+<span class="tok-comment"># Dict comprehension: id -&gt; name</span>
+users <span class="tok-punctuation">=</span> <span class="tok-punctuation">[{"</span>id<span class="tok-string">": 1, "</span>name<span class="tok-string">": "</span>Ada<span class="tok-string">"}, {"</span>id<span class="tok-string">": 2, "</span>name<span class="tok-string">": "</span>Grace<span class="tok-string">"}]
+by_id = {u["</span>id<span class="tok-string">"]: u["</span>name<span class="tok-string">"] for u in users}       # {1: "</span>Ada<span class="tok-string">", 2: "</span>Grace<span class="tok-punctuation">"}</span>
+
+<span class="tok-comment"># any() / all() read like English in assertions over a collection.</span>
+<span class="tok-keyword">assert</span> <span class="tok-function">all</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span> <span class="tok-keyword">for</span> p <span class="tok-keyword">in</span> prices<span class="tok-punctuation">)</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="pyqa.json.label">JSON</h3>
+        <div class="prose" data-i18n-html="pyqa.json.body"><p>Las APIs hablan JSON. El módulo <code>json</code> convierte texto JSON a <code>dict</code>/<code>list</code> con <code>json.loads</code> y de vuelta con <code>json.dumps</code>. En la práctica, <code>requests</code> ya te devuelve el body parseado con <code>response.json()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Python</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Las APIs hablan JSON; el módulo json lo mapea a dicts/lists y viceversa.</span>
+<span class="tok-keyword">import</span> json
+
+raw <span class="tok-punctuation">=</span> <span class="tok-string">'{"id": 42, "items": ["book"], "total": 250}'</span>
+order <span class="tok-punctuation">=</span> json<span class="tok-punctuation">.</span><span class="tok-function">loads</span><span class="tok-punctuation">(</span>raw<span class="tok-punctuation">)</span>        <span class="tok-comment"># texto JSON -&gt; dict</span>
+<span class="tok-function">print</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">["</span>items<span class="tok-string">"][0])       # book
+
+# dict -&gt; texto JSON (indent hace legibles los diffs de los tests)
+payload = json.dumps({"</span>status<span class="tok-string">": "</span>PAID<span class="tok-punctuation">"},</span> indent<span class="tok-punctuation">=</span><span class="tok-number">2</span><span class="tok-punctuation">)</span>
+
+<span class="tok-comment"># requests hace esto por vos: response.json() devuelve el body parseado.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># APIs speak JSON; the json module maps it to dicts/lists and back.</span>
+<span class="tok-keyword">import</span> json
+
+raw <span class="tok-punctuation">=</span> <span class="tok-string">'{"id": 42, "items": ["book"], "total": 250}'</span>
+order <span class="tok-punctuation">=</span> json<span class="tok-punctuation">.</span><span class="tok-function">loads</span><span class="tok-punctuation">(</span>raw<span class="tok-punctuation">)</span>        <span class="tok-comment"># JSON text -&gt; dict</span>
+<span class="tok-function">print</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">["</span>items<span class="tok-string">"][0])       # book
+
+# dict -&gt; JSON text (indent makes test diffs readable)
+payload = json.dumps({"</span>status<span class="tok-string">": "</span>PAID<span class="tok-punctuation">"},</span> indent<span class="tok-punctuation">=</span><span class="tok-number">2</span><span class="tok-punctuation">)</span>
+
+<span class="tok-comment"># requests does this for you: response.json() returns the parsed body.</span></code></pre>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="python-fundamentos.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="pyqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="python-pytest.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="pyqa.page.pytest">pytest: tu primer test</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

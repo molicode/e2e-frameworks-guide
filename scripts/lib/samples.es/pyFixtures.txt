@@ -1,0 +1,17 @@
+# Las fixtures dan setup reutilizable; parametrize corre un test sobre muchas entradas.
+import pytest
+
+
+@pytest.fixture
+def order():
+    # Preparalo una vez; cualquier test que pida "order" recibe una copia fresca.
+    return {"id": 42, "status": "PAID", "total": 250}
+
+
+def test_order_is_paid(order):
+    assert order["status"] == "PAID"
+
+
+@pytest.mark.parametrize("amount,cents", [(1.0, 100), (19.99, 1999), (0, 0)])
+def test_to_cents(amount, cents):
+    assert round(amount * 100) == cents

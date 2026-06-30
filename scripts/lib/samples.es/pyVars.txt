@@ -1,0 +1,11 @@
+# Python infiere el tipo a partir del valor — no hace falta declararlo.
+name = "Ada"          # str
+attempts = 3          # int
+price = 19.99         # float
+is_active = True      # bool
+nothing = None        # el valor "sin valor"
+
+# Los tipos son dinámicos pero fuertes: no los mezcla en silencio.
+print(type(name), type(attempts))   # <class 'str'> <class 'int'>
+total = price * attempts             # 59.97
+label = f"{name} has {attempts} attempts"   # f-string

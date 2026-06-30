@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="nav.best">Buenas prácticas</title>
+  <title data-i18n="pyqa.page.intro">Por qué Python para QA</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--best-practices">
+<body class="page--section page--python-intro">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -69,10 +69,28 @@
           <span class="nav-link__num">02</span>
           <span data-i18n="nav.fundamentals">Fundamentos</span>
         </a>
-        <a class="nav-link nav-group" href="python-intro.html">
+        <a class="nav-link nav-group is-active-group" href="python-intro.html">
           <span class="nav-link__num">03</span>
           <span data-i18n="nav.pyqa">Python para QA</span>
         </a>
+          <a class="nav-link nav-sublink is-active" href="python-intro.html" aria-current="page">
+            <span data-i18n="pyqa.page.intro">Por qué Python para QA</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-hola.html">
+            <span data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-fundamentos.html">
+            <span data-i18n="pyqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-datos.html">
+            <span data-i18n="pyqa.page.datos">Colecciones y JSON</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-pytest.html">
+            <span data-i18n="pyqa.page.pytest">pytest: tu primer test</span>
+          </a>
+          <a class="nav-link nav-sublink" href="python-componente.html">
+            <span data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+          </a>
         <a class="nav-link nav-group" href="selenium-filosofia.html">
           <span class="nav-link__num">04</span>
           <span data-i18n="nav.selenium">Selenium</span>
@@ -97,7 +115,7 @@
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
-        <a class="nav-link is-active" href="best-practices.html" aria-current="page">
+        <a class="nav-link" href="best-practices.html">
           <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
@@ -113,28 +131,44 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <span class="section__eyebrow">10</span>
-        <h2 class="section__title" data-i18n="nav.best">Buenas prácticas</h2>
-        <div class="prose" data-i18n-html="best.lead"><p>Cerramos con principios que aplican sin importar el framework o si usás AI o no. Son los hábitos que separan una suite confiable de un dolor de cabeza.</p></div>
-        <h3 class="block-label" data-i18n="best.practices.label">Principios que perduran</h3>
-        <div class="prose" data-i18n-html="best.practices.body"><ul><li><strong>Esperá condiciones, no tiempo.</strong> Cero <code>sleep</code> fijos.</li><li><strong>Selectores estables.</strong> Preferí roles, etiquetas y <code>data-testid</code> sobre css/xpath profundos.</li><li><strong>Tests independientes.</strong> Cada uno crea y limpia sus propios datos; el orden no debe importar.</li><li><strong>Un test, una intención.</strong> Nombres claros y un objetivo por test.</li><li><strong>Respetá la pirámide.</strong> Pocos E2E, muchos unit.</li><li><strong>Que falle bien.</strong> Un test que nunca puede fallar no protege nada.</li><li><strong>La AI asiste, vos validás.</strong> Revisá y entendé todo lo que entra al repo.</li></ul></div>
-        <h3 class="block-label" data-i18n="best.next.label">Próximos pasos</h3>
-        <ol class="steps">
-            <li data-i18n-html="best.step1"><strong>Elegí un framework</strong> y resolvé el caso <code>VerifyOrder</code> de esta guía de punta a punta.</li>
-            <li data-i18n-html="best.step2"><strong>Integralo a CI</strong> (GitHub Actions, GitLab CI…) para que corra en cada pull request.</li>
-            <li data-i18n-html="best.step3"><strong>Adoptá el patrón Page Object</strong> o helpers para no repetir selectores por toda la suite.</li>
-            <li data-i18n-html="best.step4"><strong>Sumá AI a tu flujo:</strong> usala para generar casos y revisar tests, siempre validando el output.</li>
-            <li data-i18n-html="best.step5"><strong>Contribuí a esta guía:</strong> es open source. Agregá un idioma, una sección o un ejemplo (ver el README).</li>
-        </ol>
-        <div class="callout callout--ok" data-i18n-html="best.callout"><strong>Lo importante:</strong> la automatización no busca cero bugs, busca <em>confianza para entregar seguido</em>. Empezá chico, mantené verde y crecé desde ahí.</div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-python)">Python</span></div>
+        <h2 class="section__title" data-i18n="pyqa.page.intro">Por qué Python para QA</h2>
+        <div class="prose" data-i18n-html="pyqa.lead"><p><strong>Python</strong> es el lenguaje más amigable para entrar a la automatización: legible, sin ceremonia y con un ecosistema enorme de testing. Es el que usamos para <strong>Selenium</strong> y <strong>Playwright</strong> en esta guía, así que dominarlo te abre las dos puertas.</p></div>
+        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
+        <div class="prose" data-i18n-html="pyqa.why"><p>Python lee casi como pseudocódigo en inglés: poca sintaxis, indentación en vez de llaves y baterías incluidas. Para QA eso significa que pasás menos tiempo peleando con el lenguaje y más tiempo escribiendo verificaciones. Además, las herramientas que más vas a usar — <code>pytest</code>, <code>requests</code>, Selenium y Playwright — son de primera clase en Python.</p></div>
+        <div class="tile-grid">
+            <div class="tile">
+              <div class="tile__icon">📖</div>
+              <h4 data-i18n="pyqa.t1.title">Legible</h4>
+              <p data-i18n="pyqa.t1.body">Indentación en vez de llaves; el código se lee como una receta. Ideal para arrancar.</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🧪</div>
+              <h4 data-i18n="pyqa.t2.title">pytest</h4>
+              <p data-i18n="pyqa.t2.body">El runner de testing más usado: assert plano, fixtures y parametrización con muy poco código.</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🌐</div>
+              <h4 data-i18n="pyqa.t3.title">Web + API</h4>
+              <p data-i18n="pyqa.t3.body">Selenium y Playwright manejan el navegador; requests pega a las APIs. Todo desde Python.</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🤖</div>
+              <h4 data-i18n="pyqa.t4.title">AI-friendly</h4>
+              <p data-i18n="pyqa.t4.body">Es el lenguaje que mejor generan los asistentes de AI: te dan tests Python listos para revisar.</p>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
+        <div class="prose" data-i18n-html="pyqa.when"><p>Usá Python para QA cuando querés una curva de aprendizaje suave, automatizar APIs y UI con una sola base, o trabajar en equipos donde Python ya está presente (data, backend, scripting). Si tu stack es 100% front y Cypress, mirá la sección de TypeScript; para todo lo demás, Python es una apuesta segura.</p></div>
+        <div class="callout" data-i18n-html="pyqa.callout"><strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Python, escribí tu primer script, aprendé la sintaxis esencial y terminá escribiendo tu primer test real. Después saltá a Selenium o Playwright con base sólida.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="prompts.html">
+          <a class="page-nav__link page-nav__prev" href="fundamentals.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="nav.prompts">Ejemplos con AI</span>
+            <span class="page-nav__title" data-i18n="nav.fundamentals">Fundamentos</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="key-terms.html">
+          <a class="page-nav__link page-nav__next" href="python-hola.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="nav.keyterms">Conceptos clave</span>
+            <span class="page-nav__title" data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
           </a>
         </nav>
       </div>
