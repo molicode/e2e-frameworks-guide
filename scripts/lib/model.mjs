@@ -2003,6 +2003,61 @@ class ShopUser(HttpUser):
 # Web UI:            locust -f locustfile.py --host https://api.example.com
 # Headless (CI):     locust ... --headless -u 100 -r 10 -t 2m`,
   },
+
+  /* ---- CI/CD for QA ---- */
+  ciWorkflow: {
+    lang: "YAML",
+    code: `# .github/workflows/ci.yml — run the test suite on every push and PR.
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - run: pip install -r requirements.txt   # deps (cached by setup-python)
+      - run: ruff check .                       # lint first — fail fast
+      - run: pytest -q --cov=app                # unit + integration
+
+      # Web E2E with Playwright (browsers installed once):
+      - run: playwright install --with-deps
+      - run: pytest tests/e2e --tracing retain-on-failure
+
+      - uses: actions/upload-artifact@v4        # keep reports/traces on failure
+        if: always()
+        with: { name: test-results, path: test-results/ }`,
+  },
+  ciMatrix: {
+    lang: "YAML",
+    code: `# Run the SAME suite across browsers/shards in parallel with a matrix.
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false                 # let every combo finish to see ALL failures
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard: [1, 2, 3, 4]            # split the suite into 4 parallel shards
+    steps:
+      - uses: actions/checkout@v4
+      - run: npx playwright install --with-deps \${{ matrix.browser }}
+      - run: npx playwright test --project=\${{ matrix.browser }} --shard=\${{ matrix.shard }}/4`,
+  },
+  ciGate: {
+    lang: "Bash",
+    code: `# A "quality gate": each command FAILS the job if its bar isn't met,
+# so a regression can't be merged. Wire these as required checks.
+
+pytest --cov=app --cov-fail-under=80     # fail if coverage drops below 80%
+npx playwright test                      # fail if any E2E test fails
+k6 run --quiet load-test.js              # fail if a perf threshold is breached
+
+# In GitHub: Settings -> Branches -> require these checks to pass before merge.`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -2544,6 +2599,48 @@ function perfGroup() {
   ];
 }
 
+// "CI/CD para QA" — running the tests in a pipeline: workflow, parallelism,
+// quality gates and reports. A GROUP of sub-pages.
+function ciGroup() {
+  const grp = { group: "ci", groupKey: "nav.ci", chip: { label: "CI/CD", color: "var(--fw-ci)" } };
+  return [
+    { ...grp, id: "ci-intro", navKey: "ci.page.intro", blocks: [
+      { type: "prose", html: "ci.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "ci.why" },
+      { type: "tiles", items: [
+        { icon: "⏱️", title: "ci.t1.title", body: "ci.t1.body" },
+        { icon: "🚦", title: "ci.t2.title", body: "ci.t2.body" },
+        { icon: "↩️", title: "ci.t3.title", body: "ci.t3.body" },
+        { icon: "📦", title: "ci.t4.title", body: "ci.t4.body" },
+      ] },
+      { type: "callout", variant: "", html: "ci.callout" },
+    ] },
+    { ...grp, id: "ci-pipeline", navKey: "ci.page.pipeline", blocks: [
+      { type: "prose", html: "ci.pipe.lead" },
+      { type: "prose", html: "ci.pipe.body" },
+      { type: "code", sample: "ciWorkflow" },
+      { type: "callout", variant: "ok", html: "ci.pipe.callout" },
+    ] },
+    { ...grp, id: "ci-matrix", navKey: "ci.page.matrix", blocks: [
+      { type: "prose", html: "ci.matrix.lead" },
+      { type: "prose", html: "ci.matrix.body" },
+      { type: "code", sample: "ciMatrix" },
+      { type: "callout", variant: "warn", html: "ci.matrix.callout" },
+    ] },
+    { ...grp, id: "ci-gates", navKey: "ci.page.gates", blocks: [
+      { type: "prose", html: "ci.gate.lead" },
+      { type: "prose", html: "ci.gate.body" },
+      { type: "code", sample: "ciGate" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "ci.manual.title", body: "ci.manual.body" },
+        ai: { title: "ci.ai.title", body: "ci.ai.body" } },
+      { type: "callout", variant: "ok", html: "ci.gate.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2796,6 +2893,8 @@ export const SECTIONS = [
       { type: "callout", variant: "ok", html: "best.callout" },
     ],
   },
+
+  ...ciGroup(),
 
   ...skillsGroup(),
 

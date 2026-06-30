@@ -1,0 +1,23 @@
+# .github/workflows/ci.yml — corré la suite de tests en cada push y PR.
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - run: pip install -r requirements.txt   # deps (cacheadas por setup-python)
+      - run: ruff check .                       # primero el lint — fallá rápido
+      - run: pytest -q --cov=app                # unitarios + integración
+
+      # E2E web con Playwright (browsers instalados una sola vez):
+      - run: playwright install --with-deps
+      - run: pytest tests/e2e --tracing retain-on-failure
+
+      - uses: actions/upload-artifact@v4        # guardá reportes/traces ante un fallo
+        if: always()
+        with: { name: test-results, path: test-results/ }

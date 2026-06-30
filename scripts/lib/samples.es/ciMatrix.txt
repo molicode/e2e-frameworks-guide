@@ -1,0 +1,13 @@
+# Corré la MISMA suite en browsers/shards en paralelo con una matrix.
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false                 # dejá terminar cada combo para ver TODOS los fallos
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard: [1, 2, 3, 4]            # dividí la suite en 4 shards paralelos
+    steps:
+      - uses: actions/checkout@v4
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npx playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/4
