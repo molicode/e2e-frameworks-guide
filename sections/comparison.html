@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="nav.comparison">Comparativa</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--comparison">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link" href="selenium.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link" href="cypress.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link" href="playwright.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link is-active" href="comparison.html" aria-current="page">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <span class="section__eyebrow">06</span>
+        <h2 class="section__title" data-i18n="nav.comparison">Comparativa</h2>
+        <div class="prose" data-i18n-html="cmp.lead"><p>Nada explica mejor las diferencias que <strong>el mismo test en los tres frameworks</strong>. Resolvemos el caso <code>VerifyOrder</code> y observamos cómo cada uno maneja los assertions y las esperas.</p></div>
+        <div class="callout" data-i18n-html="cmp.case"><strong>Caso “VerifyOrder”:</strong> en la página de una orden, verificar que <code>total = 250</code>, que <code>status = PAID</code> y que la lista de items contiene <code>book</code>. Mismo objetivo, tres estilos.</div>
+        <div class="fw-block">
+          <span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span>
+          <p class="prose" data-i18n-html="cmp.sel.note"><strong>Selenium:</strong> leés cada valor con <code>getText()</code> y comparás con <code>assert</code> a mano. Más verboso y tenés que pensar las esperas.</p>
+          
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// VerifyOrder — Selenium WebDriver</span>
+<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> Builder<span class="tok-punctuation">,</span> By <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("</span>selenium<span class="tok-punctuation">-</span>webdriver<span class="tok-string">");
+const assert = require("</span><span class="tok-keyword">assert</span><span class="tok-string">");
+
+const driver = await new Builder().forBrowser("</span>chrome<span class="tok-string">").build();
+await driver.get("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+
+// Read every value first, then assert by hand.
+const total  = await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).getText();
+const status = await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).getText();
+const items  = await driver.findElements(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">"));
+const texts  = await Promise.all(items.map((el) =&gt; el.getText()));
+
+assert.strictEqual(total, "</span><span class="tok-number">250</span><span class="tok-string">");
+assert.strictEqual(status, "</span>PAID<span class="tok-string">");
+assert.ok(texts.some((t) =&gt; t.includes("</span>book<span class="tok-punctuation">")));</span>
+
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        </div>
+        <div class="fw-block">
+          <span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span>
+          <p class="prose" data-i18n-html="cmp.cyp.note"><strong>Cypress:</strong> <code>.should()</code> encadenado, con auto-retry. Conciso y legible; las esperas son implícitas.</p>
+          
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// VerifyOrder — Cypress</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">visit</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+
+// Each .should() retries automatically until it passes or times out.
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span><span class="tok-number">250</span><span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span>PAID<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").should("</span>contain<span class="tok-string">", "</span>book<span class="tok-punctuation">");</span></code></pre>
+        </div>
+        </div>
+        <div class="fw-block">
+          <span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span>
+          <p class="prose" data-i18n-html="cmp.pw.note"><strong>Playwright:</strong> <code>expect(...)</code> web-first que auto-espera. Conciso, explícito en la intención y multi-navegador.</p>
+          
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// VerifyOrder — Playwright Test</span>
+<span class="tok-keyword">import</span> <span class="tok-punctuation">{</span> test<span class="tok-punctuation">,</span> expect <span class="tok-punctuation">}</span> <span class="tok-keyword">from</span> <span class="tok-string">"@playwright/test"</span><span class="tok-punctuation">;</span>
+
+<span class="tok-function">test</span><span class="tok-punctuation">("</span>VerifyOrder<span class="tok-string">", async ({ page }) =&gt; {
+  await page.goto("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+
+  // Web-first assertions auto-wait and retry — no manual reads.
+  await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).toHaveText("</span><span class="tok-number">250</span><span class="tok-string">");
+  await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).toHaveText("</span>PAID<span class="tok-string">");
+  await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).toContainText("</span>book<span class="tok-punctuation">");</span>
+<span class="tok-punctuation">});</span></code></pre>
+        </div>
+        </div>
+        <h3 class="block-label" data-i18n="cmp.table.label">De un vistazo</h3>
+        <div class="cmp-table-wrap">
+          <table class="cmp">
+            <thead><tr><th data-i18n="cmp.th.feature">Característica</th><th data-i18n="cmp.th.selenium">Selenium</th><th data-i18n="cmp.th.cypress">Cypress</th><th data-i18n="cmp.th.playwright">Playwright</th></tr></thead>
+            <tbody>
+              <tr><td data-i18n="cmp.r1.f">Estilo de assertion</td><td data-i18n="cmp.r1.s">Manual (assert lib)</td><td data-i18n="cmp.r1.c">.should() encadenable</td><td data-i18n="cmp.r1.p">expect() web-first</td></tr>
+              <tr><td data-i18n="cmp.r2.f">Esperas / retry</td><td data-i18n="cmp.r2.s">Explícitas (a mano)</td><td data-i18n="cmp.r2.c">Auto-retry</td><td data-i18n="cmp.r2.p">Auto-wait</td></tr>
+              <tr><td data-i18n="cmp.r3.f">Lenguajes</td><td data-i18n="cmp.r3.s">Java, Py, C#, JS, Ruby…</td><td data-i18n="cmp.r3.c">JavaScript / TypeScript</td><td data-i18n="cmp.r3.p">JS/TS, Python, Java, .NET</td></tr>
+              <tr><td data-i18n="cmp.r4.f">Navegadores</td><td data-i18n="cmp.r4.s">Todos (vía WebDriver)</td><td data-i18n="cmp.r4.c">Chromium, Firefox, WebKit*</td><td data-i18n="cmp.r4.p">Chromium, Firefox, WebKit</td></tr>
+              <tr><td data-i18n="cmp.r5.f">Ejecución</td><td data-i18n="cmp.r5.s">Fuera del navegador</td><td data-i18n="cmp.r5.c">Dentro del navegador</td><td data-i18n="cmp.r5.p">Fuera, con auto-wait</td></tr>
+              <tr><td data-i18n="cmp.r6.f">Mejor para</td><td data-i18n="cmp.r6.s">Cobertura amplia, legacy</td><td data-i18n="cmp.r6.c">DX y SPAs modernas</td><td data-i18n="cmp.r6.p">Suites grandes, CI veloz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="playwright.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="nav.playwright">Playwright</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="ai-role.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.airole">El rol de la AI</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

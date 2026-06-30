@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="nav.selenium">Selenium</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--selenium">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link is-active" href="selenium.html" aria-current="page">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link" href="cypress.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link" href="playwright.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <span class="section__eyebrow">03 <span class="fw-chip" style="--chip-color:var(--fw-selenium);margin-left:var(--space-3)">Selenium</span></span>
+        <h2 class="section__title" data-i18n="nav.selenium">Selenium</h2>
+        <div class="prose" data-i18n-html="sel.lead"><p><strong>Selenium</strong> es el abuelo del testing E2E: el proyecto que estandarizó el control de navegadores reales vía WebDriver. Es el más veterano, el más flexible en lenguajes y el más presente en la industria.</p></div>
+        <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
+        <div class="prose" data-i18n-html="sel.philosophy"><p>Selenium automatiza navegadores <em>de verdad</em> a través del protocolo estándar <strong>W3C WebDriver</strong>. Su filosofía es ser una capa fina y neutral: te da control total, pero no opina sobre esperas, assertions ni estructura. Funciona en Java, Python, C#, JavaScript, Ruby y más.</p></div>
+        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
+        <div class="prose" data-i18n-html="sel.when"><p>Elegí Selenium cuando necesitás <strong>cobertura de muchos navegadores y lenguajes</strong>, integrarte con un ecosistema corporativo existente, o testear navegadores/dispositivos que otros no soportan (vía Selenium Grid). El costo: tenés que armar a mano las esperas y los assertions.</p></div>
+        <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
+        <ol class="steps roadmap">
+            <li>
+              <strong data-i18n="sel.rung1.title">WebDriver y navegación</strong>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="sel.rung1.desc">Levantá un driver, abrí una página y cerrá con quit(). Entendé el ciclo de vida.</span>
+            </li>
+            <li>
+              <strong data-i18n="sel.rung2.title">Localizar elementos</strong>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="sel.rung2.desc">Dominá los By: CSS sobre XPath siempre que puedas. Practicá selectores robustos.</span>
+            </li>
+            <li>
+              <strong data-i18n="sel.rung3.title">Esperas explícitas</strong>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="sel.rung3.desc">El concepto más importante. WebDriverWait + ExpectedConditions. Evitá Thread.sleep.</span>
+            </li>
+            <li>
+              <strong data-i18n="sel.rung4.title">Runner + assertions</strong>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="sel.rung4.desc">Integralo con JUnit5/TestNG (Java) o pytest (Python). Selenium conduce, no testea.</span>
+            </li>
+            <li>
+              <strong data-i18n="sel.rung5.title">Page Object Model</strong>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="sel.rung5.desc">Refactorizá a POM antes de que la suite crezca. La diferencia entre mantenible e infierno.</span>
+            </li>
+            <li>
+              <strong data-i18n="sel.rung6.title">Grid y CI</strong>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="sel.rung6.desc">Corré en paralelo con Selenium Grid o un servicio cloud, e integralo al pipeline.</span>
+            </li>
+        </ol>
+        <h3 class="block-label" data-i18n="sel.rung1.title">WebDriver y navegación</h3>
+        <div class="prose" data-i18n-html="sel.rung1.body"><p>Todo test de Selenium empieza creando un <strong>driver</strong> (la sesión del navegador) y termina con <code>driver.quit()</code> para liberarla. En el medio navegás con <code>driver.get(url)</code>. Pensá el driver como el control remoto del navegador: si no lo apagás, queda consumiendo recursos.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Bash</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment"># Selenium needs three things: the client library, a browser, and a</span>
+<span class="tok-comment"># matching driver. Since v4.6 Selenium Manager fetches the driver for you.</span>
+npm init <span class="tok-punctuation">-</span>y
+npm install selenium<span class="tok-punctuation">-</span>webdriver
+npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev mocha
+
+<span class="tok-comment"># Run a test file:</span>
+npx mocha login<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">.</span><span class="tok-property">js</span></code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// login.test.js — Selenium WebDriver (JavaScript)</span>
+<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> Builder<span class="tok-punctuation">,</span> By<span class="tok-punctuation">,</span> until <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("</span>selenium<span class="tok-punctuation">-</span>webdriver<span class="tok-string">");
+const assert = require("</span><span class="tok-keyword">assert</span><span class="tok-string">");
+
+(async function loginTest() {
+  // 1. Start a browser session (the "</span>driver<span class="tok-string">").
+  const driver = await new Builder().forBrowser("</span>chrome<span class="tok-string">").build();
+  try {
+    // 2. Navigate and locate elements with explicit selectors.
+    await driver.get("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">");
+    await driver.findElement(By.id("</span>username<span class="tok-string">")).sendKeys("</span>demo<span class="tok-string">");
+    await driver.findElement(By.id("</span>password<span class="tok-string">")).sendKeys("</span>secret<span class="tok-string">");
+    await driver.findElement(By.css("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+
+    <span class="tok-comment">// 3. Wait EXPLICITLY — Selenium does not auto-retry assertions.</span>
+    <span class="tok-keyword">const</span> banner <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>
+      until<span class="tok-punctuation">.</span><span class="tok-function">elementLocated</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">(".</span><span class="tok-property">welcome</span><span class="tok-string">")), 5000
+    );
+
+    // 4. Assert by hand with Node's assert module.
+    assert.strictEqual(await banner.getText(), "</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">");</span>
+  <span class="tok-punctuation">}</span> <span class="tok-keyword">finally</span> <span class="tok-punctuation">{</span>
+    <span class="tok-comment">// 5. Always quit to free the browser session.</span>
+    <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">();</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">})();</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="sel.rung2.title">Localizar elementos</h3>
+        <div class="prose" data-i18n-html="sel.rung2.body"><p>Selenium localiza elementos con la clase <code>By</code>: <code>By.id</code>, <code>By.css</code>, <code>By.xpath</code>… Usá <code>findElement</code> para uno y <code>findElements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Selenium offers many locator strategies via By. Prefer CSS over XPath.</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>username<span class="tok-string">"));            // by id
+await driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">"));       // by CSS (preferred)
+await driver.findElement(By.css("</span><span class="tok-punctuation">[</span>data<span class="tok-punctuation">-</span>testid<span class="tok-punctuation">=</span>pay<span class="tok-punctuation">]"));</span>  <span class="tok-comment">// by test attribute</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElements</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">"));   // a list (plural!)
+
+// XPath is powerful but brittle — reserve it for "</span>match by visible text<span class="tok-string">":
+await driver.findElement(By.xpath("</span><span class="tok-comment">//button[text()='Pay']"));</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="sel.rung3.title">Esperas explícitas</h3>
+        <div class="prose" data-i18n-html="sel.rung3.body"><p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en JS, <code>driver.wait(until.…)</code>; en Java, <code>WebDriverWait</code> + <code>ExpectedConditions</code>. Nunca uses un <code>Thread.sleep</code> fijo: es la causa número uno de flakiness.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// JavaScript (selenium-webdriver): wait for an explicit condition.</span>
+<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> until<span class="tok-punctuation">,</span> By <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("</span>selenium<span class="tok-punctuation">-</span>webdriver<span class="tok-string">");
+
+await driver.wait(until.elementLocated(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">welcome</span><span class="tok-string">")), 5000);
+await driver.wait(
+  until.elementIsVisible(driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">welcome</span><span class="tok-punctuation">"))),</span>
+  <span class="tok-number">5000</span>
+<span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Java</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Java: the canonical WebDriverWait + ExpectedConditions.</span>
+WebDriverWait wait <span class="tok-punctuation">=</span> <span class="tok-keyword">new</span> <span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> Duration<span class="tok-punctuation">.</span><span class="tok-function">ofSeconds</span><span class="tok-punctuation">(</span><span class="tok-number">5</span><span class="tok-punctuation">));</span>
+wait<span class="tok-punctuation">.</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>ExpectedConditions<span class="tok-punctuation">.</span><span class="tok-function">visibilityOfElementLocated</span><span class="tok-punctuation">(</span>
+    By<span class="tok-punctuation">.</span><span class="tok-function">cssSelector</span><span class="tok-punctuation">(".</span><span class="tok-property">welcome</span><span class="tok-punctuation">")));</span>
+
+<span class="tok-comment">// Never do this — a blind sleep is the #1 cause of flaky Selenium suites:</span>
+<span class="tok-comment">// Thread.sleep(5000);</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="sel.rung4.title">Runner + assertions</h3>
+        <div class="prose" data-i18n-html="sel.rung4.body"><p>Selenium solo <em>conduce</em> el navegador; las afirmaciones las pone un <strong>test runner</strong>. En Java se combina con <strong>JUnit 5</strong> o <strong>TestNG</strong>; en Python con <strong>pytest</strong>. El runner aporta estructura (setup/teardown), assertions y reportes.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Java</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Selenium drives the browser; JUnit 5 provides structure + assertions.</span>
+<span class="tok-keyword">import</span> <span class="tok-keyword">static</span> org<span class="tok-punctuation">.</span><span class="tok-property">junit</span><span class="tok-punctuation">.</span><span class="tok-property">jupiter</span><span class="tok-punctuation">.</span><span class="tok-property">api</span><span class="tok-punctuation">.</span><span class="tok-property">Assertions</span><span class="tok-punctuation">.</span><span class="tok-property">assertEquals</span><span class="tok-punctuation">;</span>
+
+<span class="tok-punctuation">@</span>Test
+<span class="tok-keyword">void</span> <span class="tok-function">verifyOrder</span><span class="tok-punctuation">()</span> <span class="tok-punctuation">{</span>
+  driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+  String total = driver.findElement(By.cssSelector("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).getText();
+  assertEquals("</span><span class="tok-number">250</span><span class="tok-punctuation">",</span> total<span class="tok-punctuation">);</span>
+<span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Python</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment"># The same idea in Python with pytest:</span>
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">):</span>
+    driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+    total = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").text
+    assert total == "</span><span class="tok-number">250</span><span class="tok-punctuation">"</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="sel.rung5.title">Page Object Model</h3>
+        <div class="prose" data-i18n-html="sel.rung5.body"><p>El <strong>Page Object Model (POM)</strong> encapsula los selectores y acciones de una página en una clase con métodos que revelan intención (<code>order.total()</code> en vez de un <code>css</code> suelto). Cuando el HTML cambia, tocás un solo lugar. Es la diferencia entre una suite mantenible y un infierno de selectores repetidos.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// order.page.js — a Page Object hides selectors behind intent-revealing methods.</span>
+<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> By <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("</span>selenium<span class="tok-punctuation">-</span>webdriver<span class="tok-string">");
+
+class OrderPage {
+  constructor(driver) { this.driver = driver; }
+  open(id) { return this.driver.get(`https://shop.example.com/orders/${id}`); }
+  total() { return this.driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).getText(); }
+  status() { return this.driver.findElement(By.css("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).getText(); }
+}
+
+// The test reads like a sentence and survives DOM changes:
+const order = new OrderPage(driver);
+await order.open(42);
+assert.strictEqual(await order.total(), "</span><span class="tok-number">250</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="sel.rung6.title">Grid y CI</h3>
+        <div class="prose" data-i18n-html="sel.rung6.body"><p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: apuntás el driver a un hub con <code>usingServer(...)</code> en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Run against a remote Selenium Grid instead of a local browser.</span>
+<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> Builder <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("</span>selenium<span class="tok-punctuation">-</span>webdriver<span class="tok-string">");
+
+const driver = await new Builder()
+  .usingServer("</span>http<span class="tok-punctuation">://</span>grid<span class="tok-punctuation">.</span><span class="tok-property">internal</span><span class="tok-punctuation">:</span><span class="tok-number">4444</span><span class="tok-punctuation">/</span>wd<span class="tok-punctuation">/</span>hub<span class="tok-string">")  // the Grid hub
+  .forBrowser("</span>chrome<span class="tok-punctuation">")</span>
+  <span class="tok-punctuation">.</span><span class="tok-function">build</span><span class="tok-punctuation">();</span>
+
+<span class="tok-comment">// In CI you usually start the Grid with Docker first:</span>
+<span class="tok-comment">//   docker run -d -p 4444:4444 selenium/standalone-chrome</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
+        <div class="vs-grid">
+          <div class="vs-card vs-card--manual">
+            <div class="vs-card__head">
+              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
+              <span data-i18n="sel.manual.title">A mano</span>
+            </div>
+            <div data-i18n-html="sel.manual.body"><p>Escribís cada <code>findElement</code>, cada <code>wait</code> explícito y cada <code>assert</code>. Tenés control absoluto, pero también toda la responsabilidad de evitar flakiness.</p></div>
+            
+          </div>
+          <div class="vs-card vs-card--ai">
+            <div class="vs-card__head">
+              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
+              <span data-i18n="sel.ai.title">Con AI</span>
+            </div>
+            <div data-i18n-html="sel.ai.body"><p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>driver.wait(...)</code> antes de cada assertion y traduce un test de Java a JavaScript si cambiás de stack.</p></div>
+            
+          </div>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="fundamentals.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="nav.fundamentals">Fundamentos</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="cypress.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.cypress">Cypress</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>
