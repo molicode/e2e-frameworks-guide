@@ -1,0 +1,9 @@
+// FLAKY: una espera fija compite contra la red. A veces 1s no
+//   alcanza y el test falla por una razón que no tiene nada que ver
+//   con un bug real.
+await sleep(1000);
+expect(await page.locator(".total").textContent()).toBe("250");
+
+// ESTABLE: esperá la CONDICIÓN, no el reloj. La aserción
+//   reintenta hasta que el elemento muestra "250" o se agota el timeout.
+await expect(page.locator(".total")).toHaveText("250");

@@ -163,7 +163,14 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Selenium offers many locator strategies via By. Prefer CSS over XPath.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Selenium ofrece muchas estrategias de localización vía By. Preferí CSS sobre XPath.</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">ID</span><span class="tok-punctuation">,</span> <span class="tok-string">"username"</span><span class="tok-punctuation">)</span>                    <span class="tok-comment"># por id</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".order-total"</span><span class="tok-punctuation">)</span>      <span class="tok-comment"># por CSS (preferido)</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"[data-testid=pay]"</span><span class="tok-punctuation">)</span> <span class="tok-comment"># por atributo de test</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_elements</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".order-items li"</span><span class="tok-punctuation">)</span>  <span class="tok-comment"># una lista (¡plural!)</span>
+
+<span class="tok-comment"># XPath es potente pero frágil — reservalo para "buscar por texto visible":</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">XPATH</span><span class="tok-punctuation">,</span> <span class="tok-string">"//button[text()='Pay']"</span><span class="tok-punctuation">)</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Selenium offers many locator strategies via By. Prefer CSS over XPath.</span>
 driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">ID</span><span class="tok-punctuation">,</span> <span class="tok-string">"username"</span><span class="tok-punctuation">)</span>                    <span class="tok-comment"># by id</span>
 driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".order-total"</span><span class="tok-punctuation">)</span>      <span class="tok-comment"># by CSS (preferred)</span>
 driver<span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">"[data-testid=pay]"</span><span class="tok-punctuation">)</span> <span class="tok-comment"># by test attribute</span>
@@ -213,7 +220,16 @@ driver<span class="tok-punctuation">.</span><span class="tok-function">find_elem
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Explicit waits: wait for a CONDITION, never a fixed sleep.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Esperas explícitas: esperá una CONDICIÓN, nunca un sleep fijo.</span>
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span> <span class="tok-keyword">import</span> expected_conditions <span class="tok-keyword">as</span> EC
+
+wait <span class="tok-punctuation">=</span> <span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">5</span><span class="tok-punctuation">)</span>
+wait<span class="tok-punctuation">.</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>EC<span class="tok-punctuation">.</span><span class="tok-function">visibility_of_element_located</span><span class="tok-punctuation">((</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".welcome"</span><span class="tok-punctuation">)))</span>
+wait<span class="tok-punctuation">.</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>EC<span class="tok-punctuation">.</span><span class="tok-function">element_to_be_clickable</span><span class="tok-punctuation">((</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".welcome"</span><span class="tok-punctuation">)))</span>
+
+<span class="tok-comment"># Nunca hagas esto — un sleep ciego es la causa #1 de suites Selenium inestables:</span>
+<span class="tok-comment"># import time; time.sleep(5)</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Explicit waits: wait for a CONDITION, never a fixed sleep.</span>
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span> <span class="tok-keyword">import</span> expected_conditions <span class="tok-keyword">as</span> EC
 
@@ -257,7 +273,23 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Selenium drives the browser; pytest provides structure + assertions.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Selenium maneja el navegador; pytest aporta estructura + aserciones.</span>
+<span class="tok-keyword">import</span> pytest
+<span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
+
+
+<span class="tok-punctuation">@</span>pytest<span class="tok-punctuation">.</span><span class="tok-property">fixture</span>
+<span class="tok-keyword">def</span> <span class="tok-function">driver</span><span class="tok-punctuation">():</span>
+    d <span class="tok-punctuation">=</span> webdriver<span class="tok-punctuation">.</span><span class="tok-function">Chrome</span><span class="tok-punctuation">()</span>
+    <span class="tok-keyword">yield</span> d           <span class="tok-comment"># setup antes del test, teardown después</span>
+    d<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">()</span>
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">):</span>
+    driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+    total = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").text
+    assert total == "</span><span class="tok-number">250</span><span class="tok-punctuation">"</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Selenium drives the browser; pytest provides structure + assertions.</span>
 <span class="tok-keyword">import</span> pytest
 <span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
@@ -284,7 +316,28 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># order_page.py — a Page Object hides selectors behind intent-revealing methods.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># order_page.py — un Page Object esconde los selectores tras métodos que revelan la intención.</span>
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
+
+
+<span class="tok-keyword">class</span> OrderPage<span class="tok-punctuation">:</span>
+    <span class="tok-keyword">def</span> <span class="tok-function">__init__</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">,</span> driver<span class="tok-punctuation">):</span>
+        <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">driver</span> <span class="tok-punctuation">=</span> driver
+
+    <span class="tok-keyword">def</span> <span class="tok-function">open</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">,</span> order_id<span class="tok-punctuation">):</span>
+        <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">driver</span><span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(</span>f<span class="tok-string">"https://shop.example.com/orders/{order_id}"</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-keyword">def</span> <span class="tok-function">total</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">):</span>
+        <span class="tok-keyword">return</span> <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">driver</span><span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".order-total"</span><span class="tok-punctuation">).</span><span class="tok-property">text</span>
+
+    <span class="tok-keyword">def</span> <span class="tok-function">status</span><span class="tok-punctuation">(</span><span class="tok-keyword">self</span><span class="tok-punctuation">):</span>
+        <span class="tok-keyword">return</span> <span class="tok-keyword">self</span><span class="tok-punctuation">.</span><span class="tok-property">driver</span><span class="tok-punctuation">.</span><span class="tok-function">find_element</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".order-status"</span><span class="tok-punctuation">).</span><span class="tok-property">text</span>
+
+
+<span class="tok-comment"># El test se lee como una oración y sobrevive a los cambios del DOM:</span>
+order <span class="tok-punctuation">=</span> <span class="tok-function">OrderPage</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">)</span>
+order<span class="tok-punctuation">.</span><span class="tok-function">open</span><span class="tok-punctuation">(</span><span class="tok-number">42</span><span class="tok-punctuation">)</span>
+<span class="tok-keyword">assert</span> order<span class="tok-punctuation">.</span><span class="tok-function">total</span><span class="tok-punctuation">()</span> <span class="tok-punctuation">==</span> <span class="tok-string">"250"</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># order_page.py — a Page Object hides selectors behind intent-revealing methods.</span>
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
 
 
@@ -343,7 +396,16 @@ order<span class="tok-punctuation">.</span><span class="tok-function">open</span
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Run against a remote Selenium Grid instead of a local browser.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Ejecutá contra un Selenium Grid remoto en vez de un navegador local.</span>
+<span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
+
+driver <span class="tok-punctuation">=</span> webdriver<span class="tok-punctuation">.</span><span class="tok-function">Remote</span><span class="tok-punctuation">(</span>
+    command_executor<span class="tok-punctuation">="</span>http<span class="tok-punctuation">://</span>grid<span class="tok-punctuation">.</span><span class="tok-property">internal</span><span class="tok-punctuation">:</span><span class="tok-number">4444</span><span class="tok-punctuation">/</span>wd<span class="tok-punctuation">/</span>hub<span class="tok-punctuation">",</span>  <span class="tok-comment"># el hub del Grid</span>
+    options<span class="tok-punctuation">=</span>webdriver<span class="tok-punctuation">.</span><span class="tok-function">ChromeOptions</span><span class="tok-punctuation">(),</span>
+<span class="tok-punctuation">)</span>
+
+<span class="tok-comment"># En CI normalmente arrancás el Grid con Docker primero:</span>
+<span class="tok-comment">#   docker run -d -p 4444:4444 selenium/standalone-chrome</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Run against a remote Selenium Grid instead of a local browser.</span>
 <span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
 
 driver <span class="tok-punctuation">=</span> webdriver<span class="tok-punctuation">.</span><span class="tok-function">Remote</span><span class="tok-punctuation">(</span>

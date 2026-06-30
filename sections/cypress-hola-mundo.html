@@ -135,7 +135,15 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code>npm init <span class="tok-punctuation">-</span>y
+          <pre><code class="code-i18n code-i18n--es">npm init <span class="tok-punctuation">-</span>y
+npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev cypress typescript
+
+<span class="tok-comment"># Cypress tiene soporte de TypeScript integrado — solo nombrá tus specs como *.cy.ts.</span>
+<span class="tok-comment"># Abrí el runner interactivo (ideal mientras escribís tests)...</span>
+npx cypress open
+
+<span class="tok-comment"># ...o ejecutalo en modo headless, por ejemplo en CI:</span>
+npx cypress run</code><code class="code-i18n code-i18n--en">npm init <span class="tok-punctuation">-</span>y
 npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev cypress typescript
 
 <span class="tok-comment"># Cypress has built-in TypeScript support — just name your specs *.cy.ts.</span>
@@ -152,7 +160,21 @@ npx cypress run</code></pre>
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// cypress/e2e/login.cy.ts — Cypress with TypeScript</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// cypress/e2e/login.cy.ts — Cypress con TypeScript</span>
+<span class="tok-function">describe</span><span class="tok-punctuation">("</span>Login<span class="tok-string">", () =&gt; {
+  it("</span>greets the user after a valid login<span class="tok-string">", () =&gt; {
+    cy.visit("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">");
+
+    // Los comandos se encolan y se reintentan automáticamente hasta que pasan
+    // o expiran — rara vez escribís una espera explícita.
+    cy.get("</span><span class="tok-comment">#username").type("demo");</span>
+    cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>password<span class="tok-string">").type("</span>secret<span class="tok-string">");
+    cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+
+    <span class="tok-comment">// .should() vuelve a consultar el DOM hasta que la aserción se cumple.</span>
+    cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(".</span><span class="tok-property">welcome</span><span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">");</span>
+  <span class="tok-punctuation">});</span>
+<span class="tok-punctuation">});</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// cypress/e2e/login.cy.ts — Cypress with TypeScript</span>
 <span class="tok-function">describe</span><span class="tok-punctuation">("</span>Login<span class="tok-string">", () =&gt; {
   it("</span>greets the user after a valid login<span class="tok-string">", () =&gt; {
     cy.visit("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">");

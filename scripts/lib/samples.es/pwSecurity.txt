@@ -1,0 +1,12 @@
+# Seguridad (Playwright) — autorización/IDOR + XSS.
+# El usuario A NO debe leer la factura del usuario B cambiando el id.
+as_user_a = playwright.request.new_context(
+    extra_http_headers={"Authorization": f"Bearer {user_a_token}"},
+)
+res = as_user_a.get("/api/invoices/INV-2026-0099")
+assert res.status == 403  # prohibido, NO 200
+
+# XSS: el payload se renderiza como texto, nunca se ejecuta.
+page.goto("/search?q=<script>alert(1)</script>")
+expect(page.get_by_text("<script>alert(1)</script>")).to_be_visible()
+expect(page.locator(".results")).to_be_visible()

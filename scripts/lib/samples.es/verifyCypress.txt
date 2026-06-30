@@ -1,0 +1,7 @@
+// VerifyOrder — Cypress con TypeScript
+cy.visit("https://shop.example.com/orders/42");
+
+// Cada .should() reintenta automáticamente hasta que pasa o se agota el tiempo.
+cy.get(".order-total").should("have.text", "250");
+cy.get(".order-status").should("have.text", "PAID");
+cy.get(".order-items li").should("contain", "book");

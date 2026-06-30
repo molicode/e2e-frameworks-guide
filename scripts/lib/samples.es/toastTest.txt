@@ -1,0 +1,5 @@
+# Toast / alerta — aseverá que aparece y luego desaparece por su cuenta.
+page.get_by_role("button", name="Save").click()
+toast = page.get_by_role("alert")
+expect(toast).to_contain_text("saved successfully")
+expect(toast).to_be_hidden(timeout=6000)

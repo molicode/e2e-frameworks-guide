@@ -1,0 +1,5 @@
+# Validación de formulario — el error inline aparece y el submit queda deshabilitado.
+page.get_by_label("Email").fill("not-an-email")
+page.get_by_role("button", name="Sign up").click()
+expect(page.get_by_text("Enter a valid email")).to_be_visible()
+expect(page.get_by_role("button", name="Sign up")).to_be_disabled()

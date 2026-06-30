@@ -1,0 +1,12 @@
+# Accesibilidad — escaneá la página con axe y aseverá cero violaciones.
+from axe_playwright_python.sync_playwright import Axe
+
+
+def test_home_page_has_no_a11y_violations(page):
+    page.goto("/")
+    results = Axe().run(page)
+    assert results.violations_count == 0
+
+
+# Bonus: consultar por role + name hace los tests resilientes Y accesibles.
+expect(page.get_by_role("button", name="Sign in")).to_be_visible()

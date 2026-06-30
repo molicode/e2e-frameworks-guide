@@ -1,0 +1,17 @@
+# Mockeá una API para que el test sea rápido y determinista (sin backend real).
+import json
+
+page.route(
+    "**/api/orders/42",
+    lambda route: route.fulfill(
+        status=200,
+        content_type="application/json",
+        body=json.dumps({"total": 250, "status": "PAID", "items": ["book"]}),
+    ),
+)
+page.goto("/orders/42")
+expect(page.locator(".order-total")).to_have_text("250")
+
+# Reutilizá una sesión logueada entre tests con storage_state:
+#   1) Guardala una vez tras loguearte: context.storage_state(path="auth.json")
+#   2) Reutilizala con la fixture browser_context_args: {"storage_state": "auth.json"}

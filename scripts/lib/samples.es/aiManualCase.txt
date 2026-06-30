@@ -1,0 +1,6 @@
+Caso de prueba (escrito a mano):
+
+  Título:   La orden 42 está pagada y contiene un libro
+  Pasos:    1. Abrir /orders/42
+            2. Leer el total, el estado y la lista de ítems
+  Esperado: total = 250, status = PAID, items include "book"

@@ -1,0 +1,14 @@
+# test_login.py — pytest-playwright
+from playwright.sync_api import Page, expect
+
+
+def test_greets_the_user_after_login(page: Page):
+    page.goto("https://example.com/login")
+
+    # Los locators son lazy y autoesperan a que el elemento sea accionable.
+    page.get_by_label("Username").fill("demo")
+    page.get_by_label("Password").fill("secret")
+    page.get_by_role("button", name="Sign in").click()
+
+    # Las aserciones web-first reintentan hasta pasar o agotar el timeout.
+    expect(page.get_by_text("Welcome, demo")).to_be_visible()

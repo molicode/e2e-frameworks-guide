@@ -1,0 +1,12 @@
+// Mockeá la API: datos deterministas, sin backend real, tests instantáneos.
+cy.intercept("GET", "/api/orders/42", {
+  statusCode: 200,
+  body: { total: 250, status: "PAID", items: ["book"] },
+}).as("getOrder");
+
+cy.visit("/orders/42");
+cy.wait("@getOrder");                       // esperá la request, no un sleep
+cy.get(".order-total").should("have.text", "250");
+
+// Probá un estado de error mockeando un 500:
+cy.intercept("GET", "/api/orders/*", { statusCode: 500 }).as("boom");

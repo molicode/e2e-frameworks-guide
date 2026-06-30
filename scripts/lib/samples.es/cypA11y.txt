@@ -1,0 +1,3 @@
+// Accesibilidad (Cypress) — cypress-axe corre axe en el navegador.
+cy.injectAxe();
+cy.checkA11y(); // falla el test ante cualquier violación

@@ -136,7 +136,11 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Form validation — the inline error shows and submit stays disabled.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Validación de formulario — el error inline aparece y el submit queda deshabilitado.</span>
+page<span class="tok-punctuation">.</span><span class="tok-function">get_by_label</span><span class="tok-punctuation">("</span>Email<span class="tok-string">").fill("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">")
+page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign up<span class="tok-string">").click()
+expect(page.get_by_text("</span>Enter a valid email<span class="tok-string">")).to_be_visible()
+expect(page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign up<span class="tok-punctuation">")).</span><span class="tok-function">to_be_disabled</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Form validation — the inline error shows and submit stays disabled.</span>
 page<span class="tok-punctuation">.</span><span class="tok-function">get_by_label</span><span class="tok-punctuation">("</span>Email<span class="tok-string">").fill("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">")
 page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign up<span class="tok-string">").click()
 expect(page.get_by_text("</span>Enter a valid email<span class="tok-string">")).to_be_visible()
@@ -174,7 +178,10 @@ expect(page.get_by_role("</span>button<span class="tok-string">", name="</span>S
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Select / dropdown — choose an option and assert the value.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Select / dropdown — elegí una opción y aseverá el valor.</span>
+country <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>combobox<span class="tok-string">", name="</span>Country<span class="tok-string">")
+country.select_option("</span>AR<span class="tok-string">")
+expect(country).to_have_value("</span>AR<span class="tok-punctuation">")</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Select / dropdown — choose an option and assert the value.</span>
 country <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>combobox<span class="tok-string">", name="</span>Country<span class="tok-string">")
 country.select_option("</span>AR<span class="tok-string">")
 expect(country).to_have_value("</span>AR<span class="tok-punctuation">")</span></code></pre>
@@ -211,7 +218,10 @@ expect(country).to_have_value("</span>AR<span class="tok-punctuation">")</span><
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Checkbox / toggle — check it and assert its state.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Checkbox / toggle — marcalo y aseverá su estado.</span>
+opt_in <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>checkbox<span class="tok-string">", name="</span>Email me about updates<span class="tok-punctuation">")</span>
+opt_in<span class="tok-punctuation">.</span><span class="tok-function">check</span><span class="tok-punctuation">()</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>opt_in<span class="tok-punctuation">).</span><span class="tok-function">to_be_checked</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Checkbox / toggle — check it and assert its state.</span>
 opt_in <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>checkbox<span class="tok-string">", name="</span>Email me about updates<span class="tok-punctuation">")</span>
 opt_in<span class="tok-punctuation">.</span><span class="tok-function">check</span><span class="tok-punctuation">()</span>
 <span class="tok-function">expect</span><span class="tok-punctuation">(</span>opt_in<span class="tok-punctuation">).</span><span class="tok-function">to_be_checked</span><span class="tok-punctuation">()</span></code></pre>
@@ -249,7 +259,12 @@ opt_in<span class="tok-punctuation">.</span><span class="tok-function">check</sp
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Modal / diálogo — abrilo, acotá las consultas al diálogo, confirmá, aseverá que cerró.</span>
+page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Delete order<span class="tok-string">").click()
+dialog = page.get_by_role("</span>dialog<span class="tok-string">")
+expect(dialog).to_be_visible()
+dialog.get_by_role("</span>button<span class="tok-string">", name="</span>Delete<span class="tok-punctuation">").</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>dialog<span class="tok-punctuation">).</span><span class="tok-function">to_be_hidden</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.</span>
 page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Delete order<span class="tok-string">").click()
 dialog = page.get_by_role("</span>dialog<span class="tok-string">")
 expect(dialog).to_be_visible()
@@ -290,7 +305,10 @@ dialog.get_by_role("</span>button<span class="tok-string">", name="</span>Delete
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Data table — assert the row count and a specific cell.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Tabla de datos — aseverá la cantidad de filas y una celda específica.</span>
+rows <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>row<span class="tok-string">")
+expect(rows).to_have_count(4)  # 1 encabezado + 3 filas de datos
+expect(page.get_by_role("</span>cell<span class="tok-string">", name="</span>Ada Lovelace<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Data table — assert the row count and a specific cell.</span>
 rows <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>row<span class="tok-string">")
 expect(rows).to_have_count(4)  # 1 header + 3 data rows
 expect(page.get_by_role("</span>cell<span class="tok-string">", name="</span>Ada Lovelace<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code></pre>
@@ -331,7 +349,11 @@ expect(page.get_by_role("</span>cell<span class="tok-string">", name="</span>Ada
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Toast / alert — assert it appears, then disappears on its own.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Toast / alerta — aseverá que aparece y luego desaparece por su cuenta.</span>
+page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Save<span class="tok-string">").click()
+toast = page.get_by_role("</span>alert<span class="tok-string">")
+expect(toast).to_contain_text("</span>saved successfully<span class="tok-punctuation">")</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>toast<span class="tok-punctuation">).</span><span class="tok-function">to_be_hidden</span><span class="tok-punctuation">(</span>timeout<span class="tok-punctuation">=</span><span class="tok-number">6000</span><span class="tok-punctuation">)</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Toast / alert — assert it appears, then disappears on its own.</span>
 page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Save<span class="tok-string">").click()
 toast = page.get_by_role("</span>alert<span class="tok-string">")
 expect(toast).to_contain_text("</span>saved successfully<span class="tok-punctuation">")</span>
@@ -368,7 +390,18 @@ expect(toast).to_contain_text("</span>saved successfully<span class="tok-punctua
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Accessibility — scan the page with axe and assert zero violations.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Accesibilidad — escaneá la página con axe y aseverá cero violaciones.</span>
+<span class="tok-keyword">from</span> axe_playwright_python<span class="tok-punctuation">.</span><span class="tok-property">sync_playwright</span> <span class="tok-keyword">import</span> Axe
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_home_page_has_no_a11y_violations</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("/")</span>
+    results <span class="tok-punctuation">=</span> <span class="tok-function">Axe</span><span class="tok-punctuation">().</span><span class="tok-function">run</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">)</span>
+    <span class="tok-keyword">assert</span> results<span class="tok-punctuation">.</span><span class="tok-property">violations_count</span> <span class="tok-punctuation">==</span> <span class="tok-number">0</span>
+
+
+<span class="tok-comment"># Bonus: consultar por role + name hace los tests resilientes Y accesibles.</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Sign <span class="tok-keyword">in</span><span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Accessibility — scan the page with axe and assert zero violations.</span>
 <span class="tok-keyword">from</span> axe_playwright_python<span class="tok-punctuation">.</span><span class="tok-property">sync_playwright</span> <span class="tok-keyword">import</span> Axe
 
 

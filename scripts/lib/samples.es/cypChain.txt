@@ -1,0 +1,12 @@
+// Los comandos cy.* NO son promesas — encolan trabajo. Encadenás, no usás await.
+cy.get("#username").type("demo");          // encolado
+cy.get("button[type=submit]").click();     // corre después de que resuelve el type
+
+// ¿Necesitás el *valor*? Usá .then() — pero recurrí a él con moderación.
+cy.get(".order-total").then(($el: JQuery<HTMLElement>) => {
+  expect($el.text()).to.eq("250");
+});
+
+// Aliasá una consulta con .as() y reutilizala más tarde con @:
+cy.get(".order-items li").as("items");
+cy.get("@items").should("have.length", 3);

@@ -1,0 +1,10 @@
+# Ejecutá contra un Selenium Grid remoto en vez de un navegador local.
+from selenium import webdriver
+
+driver = webdriver.Remote(
+    command_executor="http://grid.internal:4444/wd/hub",  # el hub del Grid
+    options=webdriver.ChromeOptions(),
+)
+
+# En CI normalmente arrancás el Grid con Docker primero:
+#   docker run -d -p 4444:4444 selenium/standalone-chrome

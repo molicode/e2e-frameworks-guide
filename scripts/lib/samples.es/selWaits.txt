@@ -1,0 +1,10 @@
+# Esperas explícitas: esperá una CONDICIÓN, nunca un sleep fijo.
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+wait = WebDriverWait(driver, 5)
+wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".welcome")))
+wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".welcome")))
+
+# Nunca hagas esto — un sleep ciego es la causa #1 de suites Selenium inestables:
+# import time; time.sleep(5)

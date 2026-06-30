@@ -136,7 +136,11 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Form validation (Cypress) — error shows, submit stays disabled.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Validación de formulario (Cypress) — aparece el error, submit queda deshabilitado.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>email<span class="tok-string">").type("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">contains</span><span class="tok-punctuation">(".</span><span class="tok-property">error</span><span class="tok-string">", "</span>valid email<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">disabled</span><span class="tok-punctuation">");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Form validation (Cypress) — error shows, submit stays disabled.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>email<span class="tok-string">").type("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
 cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">contains</span><span class="tok-punctuation">(".</span><span class="tok-property">error</span><span class="tok-string">", "</span>valid email<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
@@ -174,7 +178,9 @@ cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Select / dropdown (Cypress) — .select() picks the option.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Select / dropdown (Cypress) — .select() elige la opción.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>country<span class="tok-string">").select("</span>AR<span class="tok-string">");
+cy.get("</span><span class="tok-comment">#country").should("have.value", "AR");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Select / dropdown (Cypress) — .select() picks the option.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>country<span class="tok-string">").select("</span>AR<span class="tok-string">");
 cy.get("</span><span class="tok-comment">#country").should("have.value", "AR");</span></code></pre>
         </div>
@@ -210,7 +216,8 @@ cy.get("</span><span class="tok-comment">#country").should("have.value", "AR");<
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Checkbox (Cypress) — check and assert state.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Checkbox (Cypress) — marcá y verificá el estado.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>name<span class="tok-punctuation">=</span>optIn<span class="tok-punctuation">]").</span><span class="tok-function">check</span><span class="tok-punctuation">().</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">checked</span><span class="tok-punctuation">");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Checkbox (Cypress) — check and assert state.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>name<span class="tok-punctuation">=</span>optIn<span class="tok-punctuation">]").</span><span class="tok-function">check</span><span class="tok-punctuation">().</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">checked</span><span class="tok-punctuation">");</span></code></pre>
         </div>
         <figure class="mock-figure">
@@ -246,7 +253,11 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><sp
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Modal / dialog (Cypress) — open, confirm, assert it's gone.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Modal / diálogo (Cypress) — abrí, confirmá, verificá que desapareció.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span><span class="tok-keyword">delete</span><span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-keyword">as</span><span class="tok-punctuation">("</span>dlg<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">@</span>dlg<span class="tok-string">").contains("</span>button<span class="tok-string">", "</span>Delete<span class="tok-string">").click();
+cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Modal / dialog (Cypress) — open, confirm, assert it's gone.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span><span class="tok-keyword">delete</span><span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-keyword">as</span><span class="tok-punctuation">("</span>dlg<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
 cy.get("</span><span class="tok-punctuation">@</span>dlg<span class="tok-string">").contains("</span>button<span class="tok-string">", "</span>Delete<span class="tok-string">").click();
@@ -286,7 +297,9 @@ cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctu
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Data table (Cypress) — assert the row count and a specific cell.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Tabla de datos (Cypress) — verificá la cantidad de filas y una celda específica.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>table tbody tr<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-string">", 3);
+cy.get("</span>table<span class="tok-string">").contains("</span>td<span class="tok-string">", "</span>Ada Lovelace<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-punctuation">");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Data table (Cypress) — assert the row count and a specific cell.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>table tbody tr<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-string">", 3);
 cy.get("</span>table<span class="tok-string">").contains("</span>td<span class="tok-string">", "</span>Ada Lovelace<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-punctuation">");</span></code></pre>
         </div>
@@ -326,7 +339,10 @@ cy.get("</span>table<span class="tok-string">").contains("</span>td<span class="
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Toast / alert (Cypress) — appears, then disappears on its own.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Toast / alerta (Cypress) — aparece y luego desaparece solo.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span>save<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>contain<span class="tok-string">", "</span>saved<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span> <span class="tok-comment">// auto-descartado</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Toast / alert (Cypress) — appears, then disappears on its own.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span>save<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>contain<span class="tok-string">", "</span>saved<span class="tok-string">");
 cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span> <span class="tok-comment">// auto-dismissed</span></code></pre>
@@ -362,7 +378,9 @@ cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctu
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Accessibility (Cypress) — cypress-axe runs axe in the browser.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Accesibilidad (Cypress) — cypress-axe corre axe en el navegador.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">injectAxe</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">checkA11y</span><span class="tok-punctuation">();</span> <span class="tok-comment">// falla el test ante cualquier violación</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Accessibility (Cypress) — cypress-axe runs axe in the browser.</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">injectAxe</span><span class="tok-punctuation">();</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">checkA11y</span><span class="tok-punctuation">();</span> <span class="tok-comment">// fails the test on any violation</span></code></pre>
         </div>

@@ -1,0 +1,4 @@
+# Checkbox / toggle — marcalo y aseverá su estado.
+opt_in = page.get_by_role("checkbox", name="Email me about updates")
+opt_in.check()
+expect(opt_in).to_be_checked()

@@ -11,9 +11,22 @@
    needs no highlighter at runtime.
    ========================================================================== */
 
+import { readFileSync } from "node:fs";
 import { SAMPLES } from "./model.mjs";
 import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
+
+// Spanish-commented variant of a code sample, if one exists. These live as raw
+// text files under samples.es/<id>.txt (same code, only comments translated) so
+// there are zero escaping pitfalls. Returns null when there is no translation.
+function esVariant(id) {
+  try {
+    const src = readFileSync(new URL(`./samples.es/${id}.txt`, import.meta.url), "utf8");
+    return src.replace(/\n+$/, ""); // drop any trailing newline added on save
+  } catch (e) {
+    return null;
+  }
+}
 
 /* ---- small escaping helpers ---- */
 function escText(s) {
@@ -26,10 +39,20 @@ function t(dict, key) {
   return Object.prototype.hasOwnProperty.call(dict, key) ? dict[key] : key;
 }
 
-/* ---- code block (baked highlighted, with a copy button) ---- */
+/* ---- code block (baked highlighted, with a copy button) ----
+   When a Spanish-commented variant exists we bake BOTH versions and let CSS
+   show the one matching <html lang>. Spanish is visible by default (the page
+   ships in es), so the comments are localized even with JS disabled. */
 function codeBlock(sampleId, dict) {
   const sample = SAMPLES[sampleId];
   if (!sample) return "";
+  const enHtml = highlight(sample.code);
+  const esSrc = esVariant(sampleId);
+  const hasEs = typeof esSrc === "string" && esSrc !== sample.code;
+  const codeEls = hasEs
+    ? `<code class="code-i18n code-i18n--es">${highlight(esSrc)}</code>` +
+      `<code class="code-i18n code-i18n--en">${enHtml}</code>`
+    : `<code>${enHtml}</code>`;
   return `
         <div class="code-block">
           <div class="code-block__head">
@@ -38,7 +61,7 @@ function codeBlock(sampleId, dict) {
               <span data-i18n="ui.copy">${escText(t(dict, "ui.copy"))}</span>
             </button>
           </div>
-          <pre><code>${highlight(sample.code)}</code></pre>
+          <pre>${codeEls}</pre>
         </div>`;
 }
 

@@ -1,0 +1,16 @@
+# Testing de API en un proyecto Selenium — Selenium maneja la UI; la capa de
+# API usa un cliente HTTP simple como requests.
+import requests
+
+res = requests.get(
+    "https://api.example.com/orders/42",
+    headers={"Authorization": f"Bearer {token}"},
+)
+assert res.status_code == 200
+order = res.json()
+assert order["total"] == 250
+assert order["status"] == "PAID"
+
+# Sin un token -> 401, nunca un 200 silencioso.
+anon = requests.get("https://api.example.com/orders/42")
+assert anon.status_code == 401

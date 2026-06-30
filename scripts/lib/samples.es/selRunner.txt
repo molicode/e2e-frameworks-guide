@@ -1,0 +1,17 @@
+# Selenium maneja el navegador; pytest aporta estructura + aserciones.
+import pytest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+
+@pytest.fixture
+def driver():
+    d = webdriver.Chrome()
+    yield d           # setup antes del test, teardown después
+    d.quit()
+
+
+def test_verify_order(driver):
+    driver.get("https://shop.example.com/orders/42")
+    total = driver.find_element(By.CSS_SELECTOR, ".order-total").text
+    assert total == "250"

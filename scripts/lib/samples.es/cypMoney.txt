@@ -1,0 +1,8 @@
+// Montos (Cypress) — verificá los cálculos del recibo en centavos enteros.
+cy.request("/api/receipts/9087").then(({ body: r }) => {
+  const items = r.items.reduce((s, it) => s + it.cents, 0);
+  expect(items).to.eq(r.subtotalCents);                         // 9000
+  expect(r.taxCents).to.eq(Math.round(r.subtotalCents * 0.21)); // 1890
+  expect(r.totalCents).to.eq(r.subtotalCents + r.taxCents);     // 10890
+  expect(r.totalCents).to.be.greaterThan(0);
+});

@@ -1,0 +1,12 @@
+// Seguridad (Cypress) — autorización/IDOR + XSS.
+// El usuario A NO debe poder leer la factura del usuario B cambiando el id.
+cy.request({
+  url: "/api/invoices/INV-2026-0099",
+  headers: { Authorization: `Bearer ${userAToken}` },
+  failOnStatusCode: false,
+}).its("status").should("eq", 403); // prohibido, NO 200
+
+// XSS: el payload se renderiza como texto, nunca se ejecuta.
+cy.visit("/search?q=<script>alert(1)</script>");
+cy.get(".results").should("be.visible");
+cy.contains("<script>alert(1)</script>").should("exist"); // escapado

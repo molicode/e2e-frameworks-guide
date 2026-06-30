@@ -1,0 +1,6 @@
+# Select / desplegable (Selenium) — el helper Select elige la opción.
+from selenium.webdriver.support.ui import Select
+
+country = Select(driver.find_element(By.ID, "country"))
+country.select_by_value("AR")
+assert country.first_selected_option.get_attribute("value") == "AR"

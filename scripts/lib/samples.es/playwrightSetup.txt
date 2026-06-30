@@ -1,0 +1,9 @@
+# Instalá pytest-playwright (el plugin oficial de testing para Python):
+pip install pytest-playwright
+playwright install        # descarga los binarios del navegador
+
+# Ejecutá la suite (Chromium headless por defecto):
+pytest
+
+# Ejecutá en los tres motores, con interfaz gráfica:
+pytest --browser chromium --browser firefox --browser webkit --headed

@@ -1,0 +1,4 @@
+# Tabla de datos — aseverá la cantidad de filas y una celda específica.
+rows = page.get_by_role("row")
+expect(rows).to_have_count(4)  # 1 encabezado + 3 filas de datos
+expect(page.get_by_role("cell", name="Ada Lovelace")).to_be_visible()

@@ -1,0 +1,27 @@
+# test_login.py — Selenium WebDriver (Python)
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+def test_login_greets_the_user():
+    # 1. Iniciá una sesión del navegador (el "driver").
+    driver = webdriver.Chrome()
+    try:
+        # 2. Navegá y ubicá elementos con selectores explícitos.
+        driver.get("https://example.com/login")
+        driver.find_element(By.ID, "username").send_keys("demo")
+        driver.find_element(By.ID, "password").send_keys("secret")
+        driver.find_element(By.CSS_SELECTOR, "button[type=submit]").click()
+
+        # 3. Esperá EXPLÍCITAMENTE — Selenium no reintenta las aserciones solo.
+        banner = WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, ".welcome"))
+        )
+
+        # 4. Verificá a mano con un assert simple.
+        assert banner.text == "Welcome, demo"
+    finally:
+        # 5. Cerrá siempre para liberar la sesión del navegador.
+        driver.quit()

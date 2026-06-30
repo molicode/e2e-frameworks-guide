@@ -273,6 +273,10 @@
   font-family: var(--font-mono);
   white-space: pre;
 }
+/* Bilingual code: show the variant whose comments match the active language. */
+.code-i18n { display: none; }
+html[lang="es"] .code-i18n--es,
+html[lang="en"] .code-i18n--en { display: block; }
 
 /* Syntax-highlight token colors (set by js/highlight.js spans) */
 .tok-comment { color: var(--tok-comment); font-style: italic; }

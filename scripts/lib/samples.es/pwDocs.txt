@@ -1,0 +1,10 @@
+# Validación de documento legal (Playwright) — campos requeridos y formato de la factura.
+import re
+from datetime import date
+
+page.goto("/invoices/INV-2026-0042")
+expect(page.locator(".invoice-number")).to_have_text(re.compile(r"^INV-\d{4}-\d{4}$"))
+expect(page.locator(".tax-id")).not_to_be_empty()
+expect(page.locator(".doc-status")).to_have_text("SIGNED")
+issued = page.locator(".issued-date").text_content()
+assert date.fromisoformat(issued) <= date.today()  # no futura

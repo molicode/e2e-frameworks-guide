@@ -1,0 +1,9 @@
+// Los selectores localizan elementos. Del más frágil al más robusto:
+page.locator("#submit");                        // id         — ok, pero los ids cambian
+page.locator(".btn.btn-primary");               // clase css  — estilos, frágil
+page.locator("//div[3]/button");                // xpath      — muy frágil
+page.getByRole("button", { name: "Submit" });   // rol+nombre — robusto + accesible
+page.getByTestId("submit-order");               // test id    — el más estable
+
+// Regla práctica: preferí selectores que un usuario reconocería
+// (roles, etiquetas, texto) sobre detalles de implementación (nth-child, css profundo).

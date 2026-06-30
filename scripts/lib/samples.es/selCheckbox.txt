@@ -1,0 +1,5 @@
+# Checkbox (Selenium) — hacé clic y verificá el estado.
+opt_in = driver.find_element(By.CSS_SELECTOR, "input[name=optIn]")
+if not opt_in.is_selected():
+    opt_in.click()
+assert opt_in.is_selected()

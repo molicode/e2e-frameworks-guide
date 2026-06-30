@@ -135,7 +135,12 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Selenium needs two things: the client library and a browser.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Selenium necesita dos cosas: la librería cliente y un navegador.</span>
+<span class="tok-comment"># Desde Selenium 4.6, Selenium Manager descarga el driver que corresponde.</span>
+pip install selenium pytest
+
+<span class="tok-comment"># Ejecutá tus tests con pytest:</span>
+pytest test_login<span class="tok-punctuation">.</span><span class="tok-property">py</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Selenium needs two things: the client library and a browser.</span>
 <span class="tok-comment"># Since Selenium 4.6, Selenium Manager fetches the matching driver for you.</span>
 pip install selenium pytest
 
@@ -149,7 +154,33 @@ pytest test_login<span class="tok-punctuation">.</span><span class="tok-property
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># test_login.py — Selenium WebDriver (Python)</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># test_login.py — Selenium WebDriver (Python)</span>
+<span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span> <span class="tok-keyword">import</span> expected_conditions <span class="tok-keyword">as</span> EC
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_login_greets_the_user</span><span class="tok-punctuation">():</span>
+    <span class="tok-comment"># 1. Iniciá una sesión del navegador (el "driver").</span>
+    driver <span class="tok-punctuation">=</span> webdriver<span class="tok-punctuation">.</span><span class="tok-function">Chrome</span><span class="tok-punctuation">()</span>
+    <span class="tok-keyword">try</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># 2. Navegá y ubicá elementos con selectores explícitos.</span>
+        driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">")
+        driver.find_element(By.ID, "</span>username<span class="tok-string">").send_keys("</span>demo<span class="tok-string">")
+        driver.find_element(By.ID, "</span>password<span class="tok-string">").send_keys("</span>secret<span class="tok-string">")
+        driver.find_element(By.CSS_SELECTOR, "</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">()</span>
+
+        <span class="tok-comment"># 3. Esperá EXPLÍCITAMENTE — Selenium no reintenta las aserciones solo.</span>
+        banner <span class="tok-punctuation">=</span> <span class="tok-function">WebDriverWait</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">,</span> <span class="tok-number">5</span><span class="tok-punctuation">).</span><span class="tok-function">until</span><span class="tok-punctuation">(</span>
+            EC<span class="tok-punctuation">.</span><span class="tok-function">visibility_of_element_located</span><span class="tok-punctuation">((</span>By<span class="tok-punctuation">.</span><span class="tok-property">CSS_SELECTOR</span><span class="tok-punctuation">,</span> <span class="tok-string">".welcome"</span><span class="tok-punctuation">))</span>
+        <span class="tok-punctuation">)</span>
+
+        <span class="tok-comment"># 4. Verificá a mano con un assert simple.</span>
+        <span class="tok-keyword">assert</span> banner<span class="tok-punctuation">.</span><span class="tok-property">text</span> <span class="tok-punctuation">==</span> <span class="tok-string">"Welcome, demo"</span>
+    <span class="tok-keyword">finally</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># 5. Cerrá siempre para liberar la sesión del navegador.</span>
+        driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># test_login.py — Selenium WebDriver (Python)</span>
 <span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">support</span><span class="tok-punctuation">.</span><span class="tok-property">ui</span> <span class="tok-keyword">import</span> WebDriverWait

@@ -1,0 +1,14 @@
+# Seguridad (proyecto Selenium) — autorización/IDOR + manejo de entradas.
+import requests
+
+# El usuario A NO debe leer la factura del usuario B cambiando el id.
+res = requests.get(
+    "https://api.example.com/invoices/INV-2026-0099",
+    headers={"Authorization": f"Bearer {user_a_token}"},
+)
+assert res.status_code == 403  # prohibido, NO 200
+
+# XSS: un payload de script debe mostrarse como texto, nunca ejecutarse.
+driver.get("https://app.example.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E")
+shown = driver.find_element(By.CSS_SELECTOR, ".results").text
+assert "<script>alert(1)</script>" in shown  # escapado, literal

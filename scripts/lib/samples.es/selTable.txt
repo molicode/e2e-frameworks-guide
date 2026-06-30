@@ -1,0 +1,5 @@
+# Tabla de datos (Selenium) — verificá la cantidad de filas y una celda específica.
+rows = driver.find_elements(By.CSS_SELECTOR, "table tbody tr")
+assert len(rows) == 3
+cell = driver.find_element(By.XPATH, "//td[normalize-space()='Ada Lovelace']")
+assert cell.is_displayed()

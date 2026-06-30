@@ -141,7 +141,17 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Anatomy of a test — Arrange, Act, Assert (AAA).</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Anatomía de un test — Arrange, Act, Assert (AAA).</span>
+<span class="tok-function">test</span><span class="tok-punctuation">("</span>paying an order shows the PAID badge<span class="tok-string">", async ({ page }) =&gt; {
+  // Arrange — poné el sistema en un estado conocido.
+  await page.goto("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+
+  // Act — hacé la ÚNICA cosa bajo prueba.
+  await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
+
+  // Assert — verificá el resultado esperado (una intención por test).
+  await expect(page.getByText("</span>PAID<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span>
+<span class="tok-punctuation">});</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Anatomy of a test — Arrange, Act, Assert (AAA).</span>
 <span class="tok-function">test</span><span class="tok-punctuation">("</span>paying an order shows the PAID badge<span class="tok-string">", async ({ page }) =&gt; {
   // Arrange — put the system in a known state.
   await page.goto("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
@@ -164,7 +174,13 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// An assertion compares the ACTUAL result against the EXPECTED one.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Una aserción compara el resultado REAL contra el ESPERADO.</span>
+<span class="tok-comment">// Si difieren, el test falla y reporta exactamente por qué.</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-function">sum</span><span class="tok-punctuation">(</span><span class="tok-number">2</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">)).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">5</span><span class="tok-punctuation">);</span>          <span class="tok-comment">// pasa</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">).</span><span class="tok-function">toBe</span><span class="tok-punctuation">("</span>PAID<span class="tok-string">");  // falla si status !== "</span>PAID<span class="tok-punctuation">"</span>
+
+<span class="tok-comment">// Un test sin aserciones no es un test: nunca puede fallar,</span>
+<span class="tok-comment">// así que nunca puede atrapar una regresión.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// An assertion compares the ACTUAL result against the EXPECTED one.</span>
 <span class="tok-comment">// If they differ, the test fails and reports exactly why.</span>
 <span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-function">sum</span><span class="tok-punctuation">(</span><span class="tok-number">2</span><span class="tok-punctuation">,</span> <span class="tok-number">3</span><span class="tok-punctuation">)).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">5</span><span class="tok-punctuation">);</span>          <span class="tok-comment">// passes</span>
 <span class="tok-function">expect</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">).</span><span class="tok-function">toBe</span><span class="tok-punctuation">("</span>PAID<span class="tok-string">");  // fails if status !== "</span>PAID<span class="tok-punctuation">"</span>
@@ -181,7 +197,15 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Selectors locate elements. From most brittle to most robust:</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Los selectores localizan elementos. Del más frágil al más robusto:</span>
+page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">("#</span>submit<span class="tok-string">");                        // id         — ok, pero los ids cambian
+page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">btn</span><span class="tok-punctuation">.</span><span class="tok-property">btn</span><span class="tok-punctuation">-</span>primary<span class="tok-string">");               // clase css  — estilos, frágil
+page.locator("</span><span class="tok-comment">//div[3]/button");                // xpath      — muy frágil</span>
+page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-string">", { name: "</span>Submit<span class="tok-string">" });   // rol+nombre — robusto + accesible
+page.getByTestId("</span>submit<span class="tok-punctuation">-</span>order<span class="tok-punctuation">");</span>               <span class="tok-comment">// test id    — el más estable</span>
+
+<span class="tok-comment">// Regla práctica: preferí selectores que un usuario reconocería</span>
+<span class="tok-comment">// (roles, etiquetas, texto) sobre detalles de implementación (nth-child, css profundo).</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Selectors locate elements. From most brittle to most robust:</span>
 page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">("#</span>submit<span class="tok-string">");                        // id         — ok, but ids change
 page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">btn</span><span class="tok-punctuation">.</span><span class="tok-property">btn</span><span class="tok-punctuation">-</span>primary<span class="tok-string">");               // css class  — styling, brittle
 page.locator("</span><span class="tok-comment">//div[3]/button");                // xpath      — very brittle</span>
@@ -230,7 +254,15 @@ page.getByTestId("</span>submit<span class="tok-punctuation">-</span>order<span 
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// FLAKY: a fixed sleep races against the network. Sometimes 1s is</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// FLAKY: una espera fija compite contra la red. A veces 1s no</span>
+<span class="tok-comment">//   alcanza y el test falla por una razón que no tiene nada que ver</span>
+<span class="tok-comment">//   con un bug real.</span>
+<span class="tok-keyword">await</span> <span class="tok-function">sleep</span><span class="tok-punctuation">(</span><span class="tok-number">1000</span><span class="tok-punctuation">);</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">total</span><span class="tok-string">").textContent()).toBe("</span><span class="tok-number">250</span><span class="tok-string">");
+
+// ESTABLE: esperá la CONDICIÓN, no el reloj. La aserción
+//   reintenta hasta que el elemento muestra "</span><span class="tok-number">250</span><span class="tok-string">" o se agota el timeout.
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">total</span><span class="tok-string">")).toHaveText("</span><span class="tok-number">250</span><span class="tok-punctuation">");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// FLAKY: a fixed sleep races against the network. Sometimes 1s is</span>
 <span class="tok-comment">//   not enough and the test fails for a reason that has nothing to do</span>
 <span class="tok-comment">//   with a real bug.</span>
 <span class="tok-keyword">await</span> <span class="tok-function">sleep</span><span class="tok-punctuation">(</span><span class="tok-number">1000</span><span class="tok-punctuation">);</span>

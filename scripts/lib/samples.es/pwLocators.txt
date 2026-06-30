@@ -1,0 +1,13 @@
+# Los locators son lazy: describen CÓMO encontrar un elemento y se resuelven
+# en el momento en que actuás o aseverás. Preferí consultas orientadas al usuario.
+page.get_by_role("button", name="Sign in").click()
+page.get_by_label("Email").fill("demo@acme.test")
+page.get_by_text("Welcome").click()
+
+# Filtrá y acotá listas:
+rows = page.get_by_role("row")
+rows.filter(has_text="book").get_by_role("button", name="Remove").click()
+
+# Indexá una lista con .nth() (base 0), o .first / .last:
+page.locator(".order-items li").nth(2).click()
+expect(page.locator(".order-items li")).to_have_count(3)

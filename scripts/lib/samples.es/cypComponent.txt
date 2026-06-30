@@ -1,0 +1,11 @@
+// button.cy.tsx — montá un componente en aislamiento (no hace falta la app completa).
+import Button from "./Button";
+
+it("calls onClick", () => {
+  const onClick = cy.stub().as("onClick");
+  cy.mount(<Button onClick={onClick}>Pay</Button>);
+  cy.get("button").click();
+  cy.get("@onClick").should("have.been.calledOnce");
+});
+
+// En CI:  npx cypress run --component   (y --e2e para end-to-end)
