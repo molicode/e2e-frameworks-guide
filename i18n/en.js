@@ -1108,6 +1108,32 @@ I18n.register("en", {
   "kt.sec.leastpriv": "Principle of least privilege: each user/service gets only the permissions it needs, nothing more.",
   "kt.sec.sensitive": "Sensitive data exposure: tokens, passwords or cards leaked in responses, logs or URLs.",
 
+  /* ---- Glossary: new terms (process, automation, API/HTTP, maturity) ---- */
+  "kt.proc.gwt": "The shape of a BDD scenario: <strong>Given</strong> (the initial context), <strong>When</strong> (the action) and <strong>Then</strong> (the expected result).",
+  "kt.proc.amigos": "The short conversation between <strong>business, development and QA</strong> that defines examples/acceptance criteria before coding. The essence of BDD.",
+  "kt.proc.keyword": "An automation style where the test is built from readable <strong>keywords</strong> (reusable actions) instead of code. It's Robot Framework's approach.",
+  "kt.proc.ct": "<strong>Continuous testing</strong>: running tests automatically on every change in the pipeline (and monitoring in production) for constant feedback.",
+
+  "kt.auto.mobile": "Automating <strong>native/hybrid</strong> Android and iOS apps. <strong>Appium</strong> is the standard: the same Selenium-WebDriver-style API for phones.",
+
+  "kt.cat.api": "API, HTTP & data",
+  "kt.api.methods": "<strong>HTTP verbs</strong> declare intent: <code>GET</code> (read), <code>POST</code> (create), <code>PUT</code> (replace), <code>PATCH</code> (partial update), <code>DELETE</code> (remove), <code>HEAD</code> (headers only), <code>OPTIONS</code> (allowed methods).",
+  "kt.api.idempotency": "<strong>Idempotency</strong>: an operation is idempotent if repeating it N times leaves the system in the <em>same</em> state as doing it once. In HTTP, <code>GET</code>, <code>PUT</code> and <code>DELETE</code> are idempotent (deleting twice still ends “deleted”); <code>POST</code> is <strong>not</strong> (each call creates a new resource). The classic mistake: confusing it with “safe” → a <code>DELETE</code> is idempotent even though it does change state.",
+  "kt.api.safe": "A method is <strong>safe</strong> if it <em>doesn't modify</em> server state: <code>GET</code>, <code>HEAD</code> and <code>OPTIONS</code>. Every safe method is idempotent, but not the other way round (<code>DELETE</code> is idempotent and NOT safe).",
+  "kt.api.status": "<strong>Status codes</strong>: <code>2xx</code> ok (200, 201, 204), <code>3xx</code> redirect, <code>4xx</code> client error (400, 401, 403, 404), <code>5xx</code> server error. The first thing you check in an API test.",
+  "kt.api.rest": "<strong>REST</strong>: an architectural style for APIs where each <em>resource</em> has a URL and is operated on with HTTP verbs. Stateless between requests.",
+  "kt.api.crud": "<strong>CRUD</strong> = Create, Read, Update, Delete. Maps to the verbs: <code>POST</code> / <code>GET</code> / <code>PUT</code>–<code>PATCH</code> / <code>DELETE</code>.",
+  "kt.api.cors": "<strong>CORS</strong>: rules controlling which origins may call an API from the browser. The browser first sends an <code>OPTIONS</code> (preflight) to check permissions.",
+  "kt.api.sql": "<strong>SQL</strong> queries relational databases (<code>SELECT … WHERE</code>). A <strong>JOIN</strong> matches tables by their key. Key for QA: validate in the DB what the UI claims.",
+
+  "kt.cat.maturity": "Metrics, maturity & certification",
+  "kt.mat.dd": "<strong>Defect density</strong>: defects per unit of size (per KLOC or per module). Helps locate the riskiest areas.",
+  "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): the average time to fix a failure once detected. Measures responsiveness.",
+  "kt.mat.escape": "<strong>Defect escape rate</strong>: the percentage of bugs that reached production (escaped the testing filter). The lower, the better.",
+  "kt.mat.models": "Process maturity frameworks: <strong>TMMi</strong> (testing-specific, 5 levels) and <strong>CMMI</strong> (development in general). They work as a \"what are we missing\" map.",
+  "kt.mat.iso": "<strong>ISO 9001</strong>: a generic, certifiable quality-management standard. Not testing-specific, but it orders processes and responsibilities.",
+  "kt.mat.istqb": "<strong>ISTQB</strong>: the global testing-certification standard (Foundation, Advanced, Expert and specialties). Provides a shared vocabulary highly valued in interviews.",
+
   /* ---- Per-framework critical scenarios (shared) ---- */
   "cases.intro":
     "<p>The scenarios every real app needs — <strong>APIs, amounts, legal documents and security</strong> — solved in this framework. (<strong>Login</strong> was already your first test, above.)</p>",
