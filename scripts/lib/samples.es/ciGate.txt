@@ -1,0 +1,8 @@
+# Un "quality gate": cada comando HACE FALLAR el job si no cumple su umbral,
+# así una regresión no se puede mergear. Conectá estos como required checks.
+
+pytest --cov=app --cov-fail-under=80     # fallá si la cobertura baja del 80%
+npx playwright test                      # fallá si algún test E2E falla
+k6 run --quiet load-test.js              # fallá si se supera un umbral de perf
+
+# En GitHub: Settings -> Branches -> requerí que pasen estos checks antes del merge.

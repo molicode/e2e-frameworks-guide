@@ -56,6 +56,7 @@ I18n.register("en", {
   "nav.airole": "The role of AI",
   "nav.prompts": "AI examples",
   "nav.best": "Best practices",
+  "nav.ci": "CI/CD for QA",
   "nav.skills": "QA skills",
   "nav.maturity": "QA strategy & maturity",
   "nav.home": "Home",
@@ -81,6 +82,7 @@ I18n.register("en", {
   "home.ai-role": "How AI complements each stage of testing.",
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
   "home.best-practices": "Principles that endure and your next steps.",
+  "home.ci": "Run the tests in the pipeline: workflow, parallelization, quality gates and reports.",
   "home.skills": "Cross-cutting QA skills: SQL, Git and mobile testing with Appium.",
   "home.maturity": "QA as strategy: a 4-phase maturity roadmap, KPIs, models and ISTQB.",
 
@@ -823,6 +825,56 @@ I18n.register("en", {
     "<strong>Contribute to this guide:</strong> it's open source. Add a language, a section or an example (see the README).",
   "best.callout":
     "<strong>The point:</strong> automation isn't about zero bugs, it's about <em>confidence to ship often</em>. Start small, keep it green, and grow from there.",
+
+  /* ====================================================================
+     6a-bis. CI/CD FOR QA
+     ==================================================================== */
+  "ci.page.intro": "Why QA lives in the pipeline",
+  "ci.page.pipeline": "An example pipeline",
+  "ci.page.matrix": "Parallelization & matrix",
+  "ci.page.gates": "Quality gates & reports",
+
+  "ci.lead":
+    "<p>A test that only runs on your machine protects no one. <strong>CI/CD</strong> runs your tests <strong>automatically on every change</strong> (every push, every PR), so a regression is caught in minutes and never reaches production. It's where automation truly pays off.</p>",
+  "ci.why":
+    "<p><strong>CI</strong> (Continuous Integration) integrates and tests each change as soon as it's pushed; <strong>CD</strong> (Continuous Delivery/Deployment) ships it to production if everything is green. For QA, the pipeline is where tests stop being optional: if they don't pass, the code is <em>not</em> merged or deployed.</p>",
+  "ci.t1.title": "Fast feedback",
+  "ci.t1.body": "The team learns in minutes that it broke something, not days later in production.",
+  "ci.t2.title": "Quality gate",
+  "ci.t2.body": "If the tests (or coverage, or performance) don't meet the bar, the merge is blocked. No excuses.",
+  "ci.t3.title": "Fail fast",
+  "ci.t3.body": "Order steps fastest to slowest (lint → unit → e2e): stop the moment something fails.",
+  "ci.t4.title": "Artifacts",
+  "ci.t4.body": "Reports, traces, screenshots and videos are saved to diagnose a failure without reproducing it.",
+  "ci.callout":
+    "<strong>Golden rule:</strong> the pipeline must be <em>trustworthy</em>. A CI that fails on flaky tests trains the team to ignore red — and then you lose all the protection. Green = really green.",
+
+  "ci.pipe.lead":
+    "<p>A pipeline is a sequence of <strong>jobs</strong> and <strong>steps</strong> running on a clean runner. For QA, the heart is: check out the code, install dependencies, lint, tests (unit → integration → e2e) and save the results.</p>",
+  "ci.pipe.body":
+    "<p>Here's a <strong>GitHub Actions</strong> workflow triggered on every <code>push</code> and <code>pull_request</code>. Ordered to <strong>fail fast</strong> (lint before e2e) and to upload artifacts <strong>always</strong> (<code>if: always()</code>), including on failure — exactly when you need them.</p>",
+  "ci.pipe.callout":
+    "<strong>Cache what you can:</strong> dependencies and browsers. A 20-minute pipeline gets ignored; a 3-minute one gets watched. CI speed is a QA feature, not a luxury.",
+
+  "ci.matrix.lead":
+    "<p>When the suite grows or you need to cover several browsers/versions, a single sequential run becomes endless. The fix: run in <strong>parallel</strong>.</p>",
+  "ci.matrix.body":
+    "<p>A <strong>matrix</strong> runs the same suite across every combination (Chromium/Firefox/WebKit × versions) at once. <strong>Sharding</strong> (<code>--shard=1/4</code>) splits the suite into N chunks that run in parallel. With <code>fail-fast: false</code> you let them all finish to see <em>every</em> failure, not just the first.</p>",
+  "ci.matrix.callout":
+    "<strong>Mind the flakiness:</strong> in parallel, tests can't share state (same DB row, same user). Isolation + per-shard data, or you'll chase phantom failures.",
+
+  "ci.gate.lead":
+    "<p>The <strong>quality gate</strong> is what turns tests into a real barrier: a set of checks that <em>must</em> pass before you can merge or deploy. If one fails, it stops.</p>",
+  "ci.gate.body":
+    "<p>Every command that returns a non-zero exit code <strong>fails the job</strong>: red tests, coverage below the threshold (<code>--cov-fail-under</code>), a broken performance threshold (k6). In GitHub you set them as <strong>required checks</strong> with branch protection, so no one can skip them.</p>",
+  "ci.manual.title": "By hand",
+  "ci.manual.body":
+    "<p>You define the jobs, the order, the thresholds and which checks are required. The value is choosing gates that protect without slowing the team with false positives.</p>",
+  "ci.ai.title": "With AI",
+  "ci.ai.body":
+    "<p>AI builds the workflow YAML from a description, suggests caching and a matrix, and when CI goes red it reads the job log and points you at the likely cause and fix.</p>",
+  "ci.gate.callout":
+    "<strong>Next step:</strong> start with a minimal gate (tests must pass) and raise the bar gradually — coverage, then performance. A gate the team respects beats ten they bypass.",
 
   /* ====================================================================
      6b. QA SKILLS (SQL, Git, Appium)
