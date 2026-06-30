@@ -1812,6 +1812,134 @@ def test_login_on_android():
     finally:
         driver.quit()`,
   },
+
+  /* ---- HTTP verbs in each framework ---- */
+  verbsRequests: {
+    lang: "Python",
+    code: `# Every HTTP verb with requests. The status code tells you what happened.
+import requests
+
+base = "https://api.example.com"
+auth = {"Authorization": f"Bearer {token}"}
+
+# GET — read a resource (safe, idempotent).
+assert requests.get(f"{base}/orders/42", headers=auth).status_code == 200
+
+# POST — create a new resource (NOT idempotent: a new id each time).
+created = requests.post(f"{base}/orders", json={"items": ["book"]}, headers=auth)
+assert created.status_code == 201
+order_id = created.json()["id"]
+
+# PUT — replace the WHOLE resource (idempotent).
+put = requests.put(f"{base}/orders/{order_id}",
+                   json={"items": ["pen"], "status": "NEW"}, headers=auth)
+assert put.status_code == 200
+
+# PATCH — update PART of the resource (idempotent in practice).
+assert requests.patch(f"{base}/orders/{order_id}",
+                      json={"status": "PAID"}, headers=auth).status_code == 200
+
+# DELETE — remove it (idempotent: deleting twice still ends "gone").
+assert requests.delete(f"{base}/orders/{order_id}", headers=auth).status_code == 204
+
+# HEAD — like GET but headers only, no body (cheap "does it exist?").
+assert requests.head(f"{base}/orders/42", headers=auth).status_code == 200
+
+# OPTIONS — which methods are allowed (CORS preflight / discovery).
+opt = requests.options(f"{base}/orders", headers=auth)
+assert "POST" in opt.headers.get("Allow", "")`,
+  },
+  verbsCypress: {
+    lang: "TypeScript",
+    code: `// Every HTTP verb with cy.request: pass method + url + body, assert the status.
+const auth = { Authorization: \`Bearer \${token}\` };
+
+// GET — read (safe, idempotent)
+cy.request({ url: "/api/orders/42", headers: auth }).its("status").should("eq", 200);
+
+// POST — create (NOT idempotent)
+cy.request({ method: "POST", url: "/api/orders", headers: auth, body: { items: ["book"] } })
+  .then((created) => {
+    expect(created.status).to.eq(201);
+    const id = created.body.id;
+
+    // PUT — replace the whole resource (idempotent)
+    cy.request({ method: "PUT", url: \`/api/orders/\${id}\`, headers: auth,
+                 body: { items: ["pen"], status: "NEW" } }).its("status").should("eq", 200);
+
+    // PATCH — partial update
+    cy.request({ method: "PATCH", url: \`/api/orders/\${id}\`, headers: auth,
+                 body: { status: "PAID" } }).its("status").should("eq", 200);
+
+    // DELETE — remove (idempotent)
+    cy.request({ method: "DELETE", url: \`/api/orders/\${id}\`, headers: auth })
+      .its("status").should("eq", 204);
+  });
+
+// HEAD — headers only, no body
+cy.request({ method: "HEAD", url: "/api/orders/42", headers: auth }).its("status").should("eq", 200);
+
+// OPTIONS — allowed methods (CORS preflight)
+cy.request({ method: "OPTIONS", url: "/api/orders", headers: auth })
+  .its("headers.allow").should("contain", "POST");`,
+  },
+  verbsPlaywright: {
+    lang: "Python",
+    code: `# Every HTTP verb with Playwright's request context.
+api = playwright.request.new_context(
+    base_url="https://api.example.com",
+    extra_http_headers={"Authorization": f"Bearer {token}"},
+)
+
+# GET — read (safe, idempotent)
+assert api.get("/orders/42").status == 200
+
+# POST — create (NOT idempotent)
+created = api.post("/orders", data={"items": ["book"]})
+assert created.status == 201
+order_id = created.json()["id"]
+
+# PUT — replace the whole resource (idempotent)
+assert api.put(f"/orders/{order_id}",
+               data={"items": ["pen"], "status": "NEW"}).status == 200
+
+# PATCH — partial update
+assert api.patch(f"/orders/{order_id}", data={"status": "PAID"}).status == 200
+
+# DELETE — remove (idempotent)
+assert api.delete(f"/orders/{order_id}").status == 204
+
+# HEAD — headers only, no body
+assert api.head("/orders/42").status == 200
+
+# OPTIONS — allowed methods (use the generic fetch)
+opt = api.fetch("/orders", method="OPTIONS")
+assert "POST" in opt.headers.get("allow", "")`,
+  },
+  verbsRobot: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Every HTTP verb
+    Create Session    api    https://api.example.com    headers=\${AUTH}
+    # GET — read (safe, idempotent)
+    GET On Session    api    /orders/42
+    # POST — create (NOT idempotent)
+    \${r}=    POST On Session    api    /orders    json={"items": ["book"]}
+    \${id}=    Set Variable    \${r.json()}[id]
+    # PUT — replace the whole resource (idempotent)
+    PUT On Session    api    /orders/\${id}    json={"items": ["pen"], "status": "NEW"}
+    # PATCH — partial update
+    PATCH On Session    api    /orders/\${id}    json={"status": "PAID"}
+    # DELETE — remove (idempotent)
+    DELETE On Session    api    /orders/\${id}    expected_status=204
+    # HEAD — headers only, no body
+    HEAD On Session    api    /orders/42
+    # OPTIONS — which methods are allowed
+    OPTIONS On Session    api    /orders`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -2266,6 +2394,48 @@ function maturityGroup() {
   ];
 }
 
+// "Verbos HTTP en cada framework" — how to test GET/POST/PUT/PATCH/DELETE/HEAD/
+// OPTIONS in each tool's idiom, with an idempotency/status reference. A GROUP.
+function verbsGroup() {
+  const grp = { group: "verbs", groupKey: "nav.verbs", chip: { label: "Verbos HTTP", color: "var(--fw-verbs)" } };
+  const table = {
+    type: "table",
+    head: ["verbs.th.verb", "verbs.th.purpose", "verbs.th.idem", "verbs.th.status"],
+    rows: [
+      ["verbs.get.v", "verbs.get.p", "verbs.get.i", "verbs.get.s"],
+      ["verbs.post.v", "verbs.post.p", "verbs.post.i", "verbs.post.s"],
+      ["verbs.put.v", "verbs.put.p", "verbs.put.i", "verbs.put.s"],
+      ["verbs.patch.v", "verbs.patch.p", "verbs.patch.i", "verbs.patch.s"],
+      ["verbs.delete.v", "verbs.delete.p", "verbs.delete.i", "verbs.delete.s"],
+      ["verbs.head.v", "verbs.head.p", "verbs.head.i", "verbs.head.s"],
+      ["verbs.options.v", "verbs.options.p", "verbs.options.i", "verbs.options.s"],
+    ],
+  };
+  const fw = (id, navKey, leadKey, bodyKey, sample, mock) => ({
+    ...grp, id, navKey,
+    blocks: [
+      { type: "prose", html: leadKey },
+      { type: "prose", html: bodyKey },
+      { type: "code", sample },
+      ...(mock ? [{ type: "mock", screen: mock }] : []),
+    ],
+  });
+  return [
+    { ...grp, id: "verbs-intro", navKey: "verbs.page.intro", blocks: [
+      { type: "prose", html: "verbs.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "verbs.why" },
+      { type: "label", text: "verbs.table.label" },
+      table,
+      { type: "callout", variant: "", html: "verbs.callout" },
+    ] },
+    fw("verbs-python", "verbs.page.python", "verbs.py.lead", "verbs.py.body", "verbsRequests", "order"),
+    fw("verbs-cypress", "verbs.page.cypress", "verbs.cy.lead", "verbs.cy.body", "verbsCypress"),
+    fw("verbs-playwright", "verbs.page.playwright", "verbs.pw.lead", "verbs.pw.body", "verbsPlaywright"),
+    fw("verbs-robot", "verbs.page.robot", "verbs.rf.lead", "verbs.rf.body", "verbsRobot"),
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2432,6 +2602,8 @@ export const SECTIONS = [
       },
     ],
   },
+
+  ...verbsGroup(),
 
   {
     id: "ai-role",

@@ -1,0 +1,31 @@
+// Todos los verbos HTTP con cy.request: pasá method + url + body, verificá el status.
+const auth = { Authorization: `Bearer ${token}` };
+
+// GET — leer (seguro, idempotente)
+cy.request({ url: "/api/orders/42", headers: auth }).its("status").should("eq", 200);
+
+// POST — crear (NO idempotente)
+cy.request({ method: "POST", url: "/api/orders", headers: auth, body: { items: ["book"] } })
+  .then((created) => {
+    expect(created.status).to.eq(201);
+    const id = created.body.id;
+
+    // PUT — reemplazar el recurso entero (idempotente)
+    cy.request({ method: "PUT", url: `/api/orders/${id}`, headers: auth,
+                 body: { items: ["pen"], status: "NEW" } }).its("status").should("eq", 200);
+
+    // PATCH — actualización parcial
+    cy.request({ method: "PATCH", url: `/api/orders/${id}`, headers: auth,
+                 body: { status: "PAID" } }).its("status").should("eq", 200);
+
+    // DELETE — eliminar (idempotente)
+    cy.request({ method: "DELETE", url: `/api/orders/${id}`, headers: auth })
+      .its("status").should("eq", 204);
+  });
+
+// HEAD — solo headers, sin body
+cy.request({ method: "HEAD", url: "/api/orders/42", headers: auth }).its("status").should("eq", 200);
+
+// OPTIONS — métodos permitidos (CORS preflight)
+cy.request({ method: "OPTIONS", url: "/api/orders", headers: auth })
+  .its("headers.allow").should("contain", "POST");

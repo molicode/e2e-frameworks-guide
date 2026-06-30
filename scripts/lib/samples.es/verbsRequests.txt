@@ -1,0 +1,32 @@
+# Todos los verbos HTTP con requests. El status code te dice qué pasó.
+import requests
+
+base = "https://api.example.com"
+auth = {"Authorization": f"Bearer {token}"}
+
+# GET — leer un recurso (seguro, idempotente).
+assert requests.get(f"{base}/orders/42", headers=auth).status_code == 200
+
+# POST — crear un recurso nuevo (NO idempotente: un id nuevo cada vez).
+created = requests.post(f"{base}/orders", json={"items": ["book"]}, headers=auth)
+assert created.status_code == 201
+order_id = created.json()["id"]
+
+# PUT — reemplazar el recurso ENTERO (idempotente).
+put = requests.put(f"{base}/orders/{order_id}",
+                   json={"items": ["pen"], "status": "NEW"}, headers=auth)
+assert put.status_code == 200
+
+# PATCH — actualizar PARTE del recurso (idempotente en la práctica).
+assert requests.patch(f"{base}/orders/{order_id}",
+                      json={"status": "PAID"}, headers=auth).status_code == 200
+
+# DELETE — eliminarlo (idempotente: borrar dos veces igual queda "gone").
+assert requests.delete(f"{base}/orders/{order_id}", headers=auth).status_code == 204
+
+# HEAD — como GET pero solo headers, sin body (barato "¿existe?").
+assert requests.head(f"{base}/orders/42", headers=auth).status_code == 200
+
+# OPTIONS — qué métodos están permitidos (CORS preflight / descubrimiento).
+opt = requests.options(f"{base}/orders", headers=auth)
+assert "POST" in opt.headers.get("Allow", "")

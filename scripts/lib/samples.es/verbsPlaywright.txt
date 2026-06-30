@@ -1,0 +1,30 @@
+# Todos los verbos HTTP con el request context de Playwright.
+api = playwright.request.new_context(
+    base_url="https://api.example.com",
+    extra_http_headers={"Authorization": f"Bearer {token}"},
+)
+
+# GET — leer (seguro, idempotente)
+assert api.get("/orders/42").status == 200
+
+# POST — crear (NO idempotente)
+created = api.post("/orders", data={"items": ["book"]})
+assert created.status == 201
+order_id = created.json()["id"]
+
+# PUT — reemplazar el recurso entero (idempotente)
+assert api.put(f"/orders/{order_id}",
+               data={"items": ["pen"], "status": "NEW"}).status == 200
+
+# PATCH — actualización parcial
+assert api.patch(f"/orders/{order_id}", data={"status": "PAID"}).status == 200
+
+# DELETE — eliminar (idempotente)
+assert api.delete(f"/orders/{order_id}").status == 204
+
+# HEAD — solo headers, sin body
+assert api.head("/orders/42").status == 200
+
+# OPTIONS — métodos permitidos (usá el fetch genérico)
+opt = api.fetch("/orders", method="OPTIONS")
+assert "POST" in opt.headers.get("allow", "")
