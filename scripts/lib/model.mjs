@@ -572,19 +572,6 @@ const toast = page.getByRole("alert");
 await expect(toast).toContainText("saved successfully");
 await expect(toast).toBeHidden({ timeout: 6000 });`,
   },
-  apiTest: {
-    lang: "JavaScript",
-    code: `// API testing — no browser/UI: hit the endpoint and assert the response.
-// Playwright's "request" fixture sends real HTTP requests.
-const res = await request.get("https://api.example.com/orders/42");
-await expect(res).toBeOK();           // status in the 200–299 range
-const body = await res.json();
-expect(body.total).toBe(250);
-expect(body.status).toBe("PAID");
-expect(body.items).toContain("book");
-
-// Faster and more stable than the UI — great for data setup and contracts.`,
-  },
   a11yTest: {
     lang: "JavaScript",
     code: `// Accessibility — scan the page with axe and assert zero violations.
@@ -640,56 +627,6 @@ expect(r.totalCents).toBe(r.subtotalCents + r.taxCents);     // 10890
 // Invariants: never negative, status consistent with the amount paid.
 expect(r.totalCents).toBeGreaterThan(0);
 expect(r.status).toBe("PAID");`,
-  },
-  moneyTest: {
-    lang: "JavaScript",
-    code: `// Value validation — the classic money pitfalls QA must catch.
-
-// 1) Never trust floats for money — work in integer cents.
-expect(0.1 + 0.2).not.toBe(0.3);   // 0.30000000000000004 !
-expect(10 + 20).toBe(30);          // cents are safe
-
-// 2) Boundary inputs the form MUST reject:
-for (const bad of ["-5", "0", "abc", "1e9", "10.999"]) {
-  await page.getByLabel("Amount").fill(bad);
-  await page.getByRole("button", { name: "Pay" }).click();
-  await expect(page.getByText("Invalid amount")).toBeVisible();
-}
-
-// 3) Rounding is half-up and currency-formatted.
-expect(formatMoney(1890)).toBe("$18.90");`,
-  },
-  securityAuthz: {
-    lang: "JavaScript",
-    code: `// Security — authorization & IDOR (Insecure Direct Object Reference).
-// User A must NOT read User B's order just by changing the id in the URL.
-const asUserA = await request.newContext({
-  extraHTTPHeaders: { Authorization: \`Bearer \${userAToken}\` },
-});
-
-const res = await asUserA.get("/api/orders/99"); // belongs to user B
-expect(res.status()).toBe(403);                  // forbidden, NOT 200
-
-// No token at all → 401 (never a 500 or a silent 200).
-const anon = await request.get("/api/orders/99");
-expect(anon.status()).toBe(401);`,
-  },
-  securityInjection: {
-    lang: "JavaScript",
-    code: `// Security — the app must NEUTRALIZE malicious input, not run it.
-const payloads = [
-  "<script>alert(1)</script>",  // XSS
-  "'; DROP TABLE orders;--",     // SQL injection
-];
-
-for (const p of payloads) {
-  await page.getByLabel("Search").fill(p);
-  await page.getByRole("button", { name: "Search" }).click();
-
-  // The payload is shown as TEXT (escaped), never executed; nothing breaks.
-  await expect(page.getByText(p)).toBeVisible();
-  await expect(page.locator(".results")).toBeVisible();
-}`,
   },
 
   /* ================================================================== *

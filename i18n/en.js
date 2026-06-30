@@ -27,8 +27,6 @@ I18n.register("en", {
   "ui.ai": "With AI",
   "ui.philosophy": "Philosophy",
   "ui.when": "When to use it",
-  "ui.setup": "Setup",
-  "ui.firstTest": "First test",
   "ui.path": "Learning path",
   "ui.prev": "Previous",
   "ui.next": "Next",
@@ -399,7 +397,6 @@ I18n.register("en", {
   "nav.components": "Key components",
   "nav.keyterms": "Key terms",
   "nav.biblio": "References",
-  "home.components": "How to test the most common UI components: forms, selects, modals, tables, toasts.",
   "home.key-terms": "A glossary of key QA terms for interviews, grouped by category.",
   "home.bibliography": "Official sources for Selenium, Cypress, Playwright and AI.",
 
@@ -458,10 +455,6 @@ I18n.register("en", {
   /* ====================================================================
      KEY COMPONENTS
      ==================================================================== */
-  "comp.lead":
-    "<p>A screen is the sum of many <strong>components</strong>. Here are the ones tested most, with the code to test them in Playwright and the screen they affect. Notice how you almost always reach the element by its <strong>accessible role</strong>.</p>",
-  "comp.callout":
-    "<strong>Common pattern:</strong> locate by role/label (what the user sees), act, and assert with a <em>web-first assertion</em>. It works the same for buttons, inputs, selects, modals or tables.",
   "comp.validation.label": "Form with validation",
   "comp.validation.body":
     "<p>You check that the error message shows and the submit button stays disabled while the input is invalid.</p>",
@@ -480,9 +473,6 @@ I18n.register("en", {
   "comp.toast.label": "Toast / alert",
   "comp.toast.body":
     "<p>You assert it appears (role <code>alert</code>) and then disappears on its own.</p>",
-  "comp.api.label": "API testing",
-  "comp.api.body":
-    "<p>No browser: hit the endpoint directly, assert the <strong>status</strong> and the response body. Faster and more stable than the UI; great for data setup and validating contracts.</p>",
   "comp.a11y.label": "Accessibility (a11y)",
   "comp.a11y.body":
     "<p>Scan the page with <code>axe</code> and assert zero violations. Bonus: querying by role and name makes your tests resilient <em>and</em> accessible.</p>",
@@ -590,29 +580,15 @@ I18n.register("en", {
   /* ====================================================================
      CRITICAL CASES (accounts, payments, values, security)
      ==================================================================== */
-  "nav.critical": "Critical cases",
-  "home.critical": "API, accounts, payment receipts, value validation and security tests — the most critical stuff.",
-  "crit.lead":
-    "<p>The costliest bugs live here: <strong>money</strong> and <strong>security</strong>. A wrong total or a missed permission check costs money and trust. This section gathers the tests you <em>always</em> want to have.</p>",
-  "crit.callout":
-    "<strong>Golden rule with money:</strong> never use <code>float</code> for amounts — work in <strong>cents</strong> (integers). <code>0.1 + 0.2</code> is not <code>0.3</code> in JavaScript.",
   "crit.api.label": "API testing (CRUD + auth)",
   "crit.api.body":
     "<p>You test the API directly: create (POST → 201), read (GET → 200) and validate the response <strong>contract</strong>. And you check auth: with no token, <code>401</code>; never a silent 200.</p>",
   "crit.receipt.label": "Accounts & payment receipts",
   "crit.receipt.body":
     "<p>The receipt math must <em>always</em> add up: sum of items = subtotal, exact tax, and subtotal + tax = total. Plus invariants: never negative, status consistent with the amount paid.</p>",
-  "crit.value.label": "Value validation",
-  "crit.value.body":
-    "<p>Where bugs sneak in most: decimal precision, rounding and <strong>boundaries</strong>. Test inputs the form must reject (negatives, zero, text, too many decimals) and confirm the currency format.</p>",
   "crit.authz.label": "Security: authorization & IDOR",
   "crit.authz.body":
     "<p>Access control is critical: user A must not be able to read user B's order just by changing the <code>id</code> in the URL (that's an <strong>IDOR</strong>). It must return <code>403</code>, not <code>200</code>.</p>",
-  "crit.injection.label": "Security: injection & input validation",
-  "crit.injection.body":
-    "<p>The app must <strong>neutralize</strong> malicious input, not run it. You test <strong>XSS</strong> and <strong>SQL injection</strong> payloads: the text must render escaped (as literal text) and nothing should break.</p>",
-  "crit.injection.callout":
-    "<strong>Heads up:</strong> only test security on your own apps or with explicit authorization. On third-party systems, without permission, it's illegal.",
 
   /* ---- Glossary: Security category ---- */
   "kt.cat.security": "Security",
@@ -655,6 +631,4 @@ I18n.register("en", {
     "<li><strong>Timely</strong>: written close to the code it tests.</li></ul>",
 
   /* ---- Footer ---- */
-  "footer.text":
-    "Made with ♥ for the QA community · Open-source project — contributions welcome (see <code>CONTRIBUTING.md</code>).",
 });

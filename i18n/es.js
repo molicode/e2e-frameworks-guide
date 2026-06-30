@@ -28,8 +28,6 @@ I18n.register("es", {
   "ui.ai": "Con AI",
   "ui.philosophy": "Filosofía",
   "ui.when": "Cuándo usarlo",
-  "ui.setup": "Instalación",
-  "ui.firstTest": "Primer test",
   "ui.path": "Ruta de aprendizaje",
   "ui.prev": "Anterior",
   "ui.next": "Siguiente",
@@ -400,7 +398,6 @@ I18n.register("es", {
   "nav.components": "Componentes clave",
   "nav.keyterms": "Conceptos clave",
   "nav.biblio": "Bibliografía",
-  "home.components": "Cómo testear los componentes de UI más comunes: formularios, selects, modales, tablas, toasts.",
   "home.key-terms": "Glosario de términos clave de QA para entrevistas, ordenado por categoría.",
   "home.bibliography": "Fuentes oficiales de Selenium, Cypress, Playwright y AI.",
 
@@ -459,10 +456,6 @@ I18n.register("es", {
   /* ====================================================================
      COMPONENTES CLAVE
      ==================================================================== */
-  "comp.lead":
-    "<p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá están los que más se testean, con el código para probarlos en Playwright y la pantalla que afectan. Fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p>",
-  "comp.callout":
-    "<strong>Patrón común:</strong> localizá por rol/etiqueta (lo que ve el usuario), accioná y afirmá con una <em>web-first assertion</em>. Sirve igual para botones, inputs, selects, modales o tablas.",
   "comp.validation.label": "Formulario con validación",
   "comp.validation.body":
     "<p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p>",
@@ -481,9 +474,6 @@ I18n.register("es", {
   "comp.toast.label": "Toast / alerta",
   "comp.toast.body":
     "<p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p>",
-  "comp.api.label": "API testing",
-  "comp.api.body":
-    "<p>Sin navegador: pegás directo al endpoint, verificás el <strong>status</strong> y el cuerpo de la respuesta. Más rápido y estable que la UI; ideal para preparar datos y validar contratos.</p>",
   "comp.a11y.label": "Accesibilidad (a11y)",
   "comp.a11y.body":
     "<p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p>",
@@ -591,29 +581,15 @@ I18n.register("es", {
   /* ====================================================================
      CASOS CRÍTICOS (cuentas, pagos, valores, seguridad)
      ==================================================================== */
-  "nav.critical": "Casos críticos",
-  "home.critical": "Pruebas de API, cuentas, recibos de pago, validación de valores y seguridad — lo más crítico.",
-  "crit.lead":
-    "<p>Los bugs más caros viven acá: <strong>plata</strong> y <strong>seguridad</strong>. Un total mal calculado o un permiso mal chequeado cuesta dinero y confianza. Esta sección reúne las pruebas que <em>siempre</em> conviene tener.</p>",
-  "crit.callout":
-    "<strong>Regla de oro con dinero:</strong> nunca uses <code>float</code> para montos — trabajá en <strong>centavos</strong> (enteros). <code>0.1 + 0.2</code> no es <code>0.3</code> en JavaScript.",
   "crit.api.label": "API testing (CRUD + auth)",
   "crit.api.body":
     "<p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p>",
   "crit.receipt.label": "Cuentas y recibos de pago",
   "crit.receipt.body":
     "<p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p>",
-  "crit.value.label": "Validación de valores",
-  "crit.value.body":
-    "<p>Donde más se cuela un bug: precisión decimal, redondeo y <strong>límites</strong>. Probá entradas que el formulario debe rechazar (negativos, cero, texto, demasiados decimales) y confirmá el formato de moneda.</p>",
   "crit.authz.label": "Seguridad: autorización e IDOR",
   "crit.authz.body":
     "<p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p>",
-  "crit.injection.label": "Seguridad: inyección y validación de entrada",
-  "crit.injection.body":
-    "<p>La app tiene que <strong>neutralizar</strong> la entrada maliciosa, no ejecutarla. Probás payloads de <strong>XSS</strong> y <strong>SQL injection</strong>: el texto debe mostrarse escapado (como texto literal) y nada debe romperse.</p>",
-  "crit.injection.callout":
-    "<strong>Ojo:</strong> probá seguridad solo en apps propias o con autorización explícita. En sistemas de terceros, sin permiso, es ilegal.",
 
   /* ---- Glosario: categoría Seguridad ---- */
   "kt.cat.security": "Seguridad",
@@ -656,6 +632,4 @@ I18n.register("es", {
     "<li><strong>Timely</strong>: escrito cerca del código que prueba.</li></ul>",
 
   /* ---- Pie de página ---- */
-  "footer.text":
-    "Hecho con ♥ para la comunidad de QA · Proyecto open source — las contribuciones son bienvenidas (mirá <code>CONTRIBUTING.md</code>).",
 });
