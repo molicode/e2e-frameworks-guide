@@ -154,9 +154,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-bdd)">BDD · Gherkin</span></div>
-        <h2 class="section__title" data-i18n="bdd.page.gherkin">La sintaxis Gherkin</h2>
+        <h1 class="section__title" data-i18n="bdd.page.gherkin">La sintaxis Gherkin</h1>
         <div class="prose" data-i18n-html="bdd.gherkin.lead"><p><strong>Gherkin</strong> es el lenguaje en el que se escriben los escenarios: texto plano con unas pocas palabras clave. Vive en archivos <code>.feature</code>.</p></div>
-        <h3 class="block-label" data-i18n="bdd.gherkin.label">Feature y Scenario</h3>
+        <h2 class="block-label" data-i18n="bdd.gherkin.label">Feature y Scenario</h2>
         <div class="prose" data-i18n-html="bdd.gherkin.body"><p>Un <code>Feature</code> agrupa escenarios relacionados. Cada <code>Scenario</code> es un ejemplo con tres pasos clave: <strong>Given</strong> (el contexto inicial), <strong>When</strong> (la acción) y <strong>Then</strong> (el resultado esperado). Sumás pasos con <code>And</code> y <code>But</code>. Se lee como una historia.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -210,7 +210,7 @@ Feature<span class="tok-punctuation">:</span> Checkout
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="bdd.outline.label">Background, Outline y tags</h3>
+        <h2 class="block-label" data-i18n="bdd.outline.label">Background, Outline y tags</h2>
         <div class="prose" data-i18n-html="bdd.outline.body"><p>El <code>Background</code> corre antes de <em>cada</em> escenario (setup común). El <code>Scenario Outline</code> + <code>Examples</code> es <strong>data-driven</strong>: el mismo escenario se ejecuta una vez por fila de la tabla, reemplazando los <code>&lt;placeholders&gt;</code>. Con <strong>tags</strong> (<code>@smoke</code>) filtrás qué corrés.</p></div>
         <div class="code-block">
           <div class="code-block__head">

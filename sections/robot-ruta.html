@@ -160,8 +160,8 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
-        <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
-        <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
+        <h1 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h1>
+        <h2 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h2>
         <ol class="steps roadmap">
             <li>
               <a class="roadmap__link" href="#rf-rung-2" data-i18n="rf.rung2.title">Keywords y estructura</a>
@@ -189,7 +189,7 @@
               <span data-i18n="rf.rung6.desc">Resource files como Page Objects; robot --variable y --outputdir en CI.</span>
             </li>
         </ol>
-        <h3 class="block-label" id="rf-rung-2" data-i18n="rf.rung2.title">Keywords y estructura</h3>
+        <h2 class="block-label" id="rf-rung-2" data-i18n="rf.rung2.title">Keywords y estructura</h2>
         <div class="prose" data-i18n-html="rf.rung2.body"><p>Un test es una lista de <strong>keywords</strong>. Las traés de una librería (<code>Library SeleniumLibrary</code>) o creás los tuyos en la sección <code>*** Keywords ***</code> con <code>[Arguments]</code>. Las variables viven en <code>*** Variables ***</code> y se usan como <code>${VAR}</code>. Encapsular flujos en keywords propios es lo que hace la suite legible y mantenible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -234,7 +234,7 @@ Login With
     Input Text      id<span class="tok-punctuation">=</span>password    $<span class="tok-punctuation">{</span><span class="tok-keyword">pass</span><span class="tok-punctuation">}</span>
     Click Button    Sign <span class="tok-keyword">in</span></code></pre>
         </div>
-        <h3 class="block-label" id="rf-rung-3" data-i18n="rf.rung3.title">Localizar elementos</h3>
+        <h2 class="block-label" id="rf-rung-3" data-i18n="rf.rung3.title">Localizar elementos</h2>
         <div class="prose" data-i18n-html="rf.rung3.body"><p>Con SeleniumLibrary los locators usan la forma <strong>estrategia=valor</strong>: <code>id=submit</code>, <code>css=.order-total</code>, <code>xpath=//button[...]</code>. Las acciones (<code>Click Button</code>, <code>Input Text</code>) y las aserciones (<code>Element Should Be Visible</code>, <code>Element Text Should Be</code>) son todas keywords. Regla: preferí <code>id</code>/<code>css</code> sobre <code>xpath</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -268,7 +268,7 @@ Element Text Should Be       css<span class="tok-punctuation">=.</span><span cla
           <div class="mock__body">
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Order #42</h4>
+                <p class="mock-h">Order #42</p>
                 <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
               </div>
               <div class="mock-total">
@@ -291,7 +291,7 @@ Element Text Should Be       css<span class="tok-punctuation">=.</span><span cla
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="rf-rung-4" data-i18n="rf.rung4.title">Esperas explícitas</h3>
+        <h2 class="block-label" id="rf-rung-4" data-i18n="rf.rung4.title">Esperas explícitas</h2>
         <div class="prose" data-i18n-html="rf.rung4.body"><p>Como en Selenium, nunca uses un <code>Sleep</code> fijo: es la causa número uno de flakiness. Usá los keywords <code>Wait Until Element Is Visible</code>, <code>Wait Until Page Contains</code> o <code>Wait Until Element Is Enabled</code> con un <code>timeout</code>. Esperás la <strong>condición</strong>, no un tiempo arbitrario.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -322,7 +322,7 @@ Wait Until Element Is Enabled    id<span class="tok-punctuation">=</span>pay
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-order-head"><p class="mock-h">Order #42</p></div>
               <div class="mock-total">
                 <span>Total</span>
                 <span class="mock-spinner" aria-hidden="true"></span>
@@ -338,7 +338,7 @@ Wait Until Element Is Enabled    id<span class="tok-punctuation">=</span>pay
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="rf-rung-5" data-i18n="rf.rung5.title">APIs con RequestsLibrary</h3>
+        <h2 class="block-label" id="rf-rung-5" data-i18n="rf.rung5.title">APIs con RequestsLibrary</h2>
         <div class="prose" data-i18n-html="rf.rung5.body"><p>Para testear APIs sin navegador usás <code>RequestsLibrary</code>: abrís una sesión con <code>Create Session</code> y disparás <code>GET/POST/PATCH/DELETE On Session</code>. Verificás el status con <code>Status Should Be</code> (o el parámetro <code>expected_status</code>) y la forma del body con <code>Should Be Equal As Strings</code>. Mismo contrato CRUD que en los otros frameworks.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -366,7 +366,7 @@ Read an order over HTTP
           <div class="mock__body">
             <div class="mock-card mock-card--error">
               <div class="mock-error-icon">⚠️</div>
-              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
               <div class="mock-tags-row">
@@ -378,7 +378,7 @@ Read an order over HTTP
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" id="rf-rung-6" data-i18n="rf.rung6.title">Resource files (POM) y CI</h3>
+        <h2 class="block-label" id="rf-rung-6" data-i18n="rf.rung6.title">Resource files (POM) y CI</h2>
         <div class="prose" data-i18n-html="rf.rung6.body"><p>El <strong>Page Object Model</strong> en Robot son los <strong>resource files</strong>: archivos <code>.resource</code> con keywords compartidos que importás con <code>Resource</code>. Encapsulás selectores y acciones de una página en un solo lugar. En CI corrés <code>robot --variable BROWSER:headlesschrome --outputdir results tests/</code> y publicás el <code>report.html</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -419,7 +419,7 @@ Order Total Should Be
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Users</h4>
+              <p class="mock-h">Users</p>
               <table class="mock-table">
                 <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
                 <tbody>

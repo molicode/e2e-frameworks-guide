@@ -154,33 +154,33 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-perf)">Performance</span></div>
-        <h2 class="section__title" data-i18n="perf.page.intro">Qué es y qué se mide</h2>
+        <h1 class="section__title" data-i18n="perf.page.intro">Qué es y qué se mide</h1>
         <div class="prose" data-i18n-html="perf.lead"><p>El testing funcional pregunta <em>“¿hace lo correcto?”</em>; el <strong>performance testing</strong> pregunta <em>“¿lo hace rápido y estable bajo carga?”</em>. Simulás muchos usuarios en paralelo y medís cómo responde el sistema: velocidad, estabilidad y escalabilidad.</p></div>
-        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
+        <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
         <div class="prose" data-i18n-html="perf.why"><p>No es un solo tipo de prueba. Según cómo apliques la carga, hablás de <strong>load</strong> (carga esperada), <strong>stress</strong> (hasta romperlo), <strong>spike</strong> (picos bruscos) o <strong>soak</strong> (carga sostenida por horas, para detectar memory leaks). Cada uno responde una pregunta distinta sobre el sistema.</p></div>
         <div class="tile-grid">
             <div class="tile">
               <div class="tile__icon">📈</div>
-              <h4 data-i18n="perf.t1.title">Load</h4>
+              <h3 data-i18n="perf.t1.title">Load</h3>
               <p data-i18n="perf.t1.body">Carga esperada (los usuarios de un día normal): ¿cumple los tiempos objetivo?</p>
             </div>
             <div class="tile">
               <div class="tile__icon">🔥</div>
-              <h4 data-i18n="perf.t2.title">Stress</h4>
+              <h3 data-i18n="perf.t2.title">Stress</h3>
               <p data-i18n="perf.t2.body">Subís la carga hasta que algo se rompe, para encontrar el límite y ver cómo falla.</p>
             </div>
             <div class="tile">
               <div class="tile__icon">⚡</div>
-              <h4 data-i18n="perf.t3.title">Spike</h4>
+              <h3 data-i18n="perf.t3.title">Spike</h3>
               <p data-i18n="perf.t3.body">Un pico brusco y repentino (una promo, un viral): ¿aguanta y se recupera?</p>
             </div>
             <div class="tile">
               <div class="tile__icon">⏳</div>
-              <h4 data-i18n="perf.t4.title">Soak / endurance</h4>
+              <h3 data-i18n="perf.t4.title">Soak / endurance</h3>
               <p data-i18n="perf.t4.body">Carga moderada sostenida por horas: detecta fugas de memoria y degradación lenta.</p>
             </div>
         </div>
-        <h3 class="block-label" data-i18n="perf.metrics.label">Las métricas que importan</h3>
+        <h2 class="block-label" data-i18n="perf.metrics.label">Las métricas que importan</h2>
         <div class="prose" data-i18n-html="perf.metrics.body"><p>El promedio engaña: si el 95% de los usuarios espera 200ms pero el 5% espera 8s, el promedio se ve bien y la experiencia es mala. Por eso se miran <strong>percentiles</strong> (p95, p99), no medias.</p></div>
         <div class="cmp-table-wrap">
           <table class="cmp">

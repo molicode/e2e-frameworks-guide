@@ -12,7 +12,8 @@ whole new section.
 ## Ground rules
 
 - **Be accurate.** This is a learning resource. If you add a technical claim
-  about Selenium/Cypress/Playwright/AI, make sure it's correct and current.
+  about any framework or topic it covers (Selenium, Cypress, Playwright, Robot
+  Framework, BDD, performance, CI/CD, AI, …), make sure it's correct and current.
 - **Keep it framework-light.** The site is intentionally vanilla HTML/CSS/JS
   with **no runtime dependencies**. The only "build" is a small dependency-free
   Node generator (`scripts/build.mjs`) that bakes the content into static HTML.
@@ -77,6 +78,22 @@ Code samples are language-neutral and live in the `SAMPLES` object in
 `scripts/lib/model.mjs`. Keep them runnable and idiomatic. Prefer realistic,
 minimal examples over clever ones. Rebuild with `npm run build`.
 
+To localize the **comments** of a sample, add a twin file at
+`scripts/lib/samples.es/<sample-id>.txt` with the *same code* and only the
+comments translated to Spanish. The build bakes both variants and shows the one
+matching the active language; the copy button copies the visible one. Keep the
+code byte-identical between the two — only comments may differ.
+
+### Add or edit a visual mock
+
+Mocks are the fake screens that illustrate a concept (a login form, an order, an
+API/verbs console, a phone screen, a Gherkin panel). They live in the `SCREENS`
+registry of `scripts/lib/mocks.mjs` and are referenced from the model with a
+`{ type: "mock", screen: "<name>" }` block. **Mock text is language-neutral** —
+it must match the code/assertions verbatim, so it is never translated. Style
+mocks with the `.mock-*` classes in `css/components.css`; don't use document
+headings (`<h1>`–`<h6>`) inside a mock, so the page keeps a clean outline.
+
 ---
 
 ## Pull request checklist
@@ -84,6 +101,7 @@ minimal examples over clever ones. Rebuild with `npm run build`.
 - [ ] `npm run check:i18n` passes (all dictionaries share the same keys).
 - [ ] `npm run build` was run and the regenerated `index.html` / `sections/*.html` are committed.
 - [ ] Text changes applied to **every** language.
+- [ ] If you touched a code sample, its `samples.es/*.txt` twin still matches the code.
 - [ ] Verified in **light and dark** themes.
 - [ ] Verified on a **narrow viewport** (mobile drawer, stacked columns).
 - [ ] No new runtime dependencies introduced.

@@ -154,7 +154,7 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-ci)">CI/CD</span></div>
-        <h2 class="section__title" data-i18n="ci.page.pipeline">Un pipeline de ejemplo</h2>
+        <h1 class="section__title" data-i18n="ci.page.pipeline">Un pipeline de ejemplo</h1>
         <div class="prose" data-i18n-html="ci.pipe.lead"><p>Un pipeline es una secuencia de <strong>jobs</strong> y <strong>steps</strong> que corre en un runner limpio. Para QA, el corazón es: traer el código, instalar dependencias, lint, tests (unit → integración → e2e) y guardar los resultados.</p></div>
         <div class="prose" data-i18n-html="ci.pipe.body"><p>Acá, un workflow de <strong>GitHub Actions</strong> que se dispara en cada <code>push</code> y <code>pull_request</code>. Ordenado para <strong>fallar rápido</strong> (lint antes que e2e) y subir los artefactos <strong>siempre</strong> (<code>if: always()</code>), también cuando falla — que es justo cuando los necesitás.</p></div>
         <div class="code-block">

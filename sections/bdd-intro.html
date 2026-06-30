@@ -154,28 +154,28 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-bdd)">BDD · Gherkin</span></div>
-        <h2 class="section__title" data-i18n="bdd.page.intro">Qué es BDD y por qué</h2>
+        <h1 class="section__title" data-i18n="bdd.page.intro">Qué es BDD y por qué</h1>
         <div class="prose" data-i18n-html="bdd.lead"><p><strong>BDD</strong> (Behavior-Driven Development) no es un framework: es una <strong>técnica</strong> para describir el comportamiento esperado en un lenguaje que <em>todo el equipo</em> entiende — negocio, QA y desarrollo. Le da <strong>contexto</strong> a las pruebas antes de escribir una línea de código.</p></div>
-        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
+        <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
         <div class="prose" data-i18n-html="bdd.why"><p>La idea: en vez de empezar por el código, arrancás por <strong>ejemplos concretos</strong> del comportamiento, escritos en <strong>Gherkin</strong> (<code>Given</code> / <code>When</code> / <code>Then</code>). Esos ejemplos son a la vez la <strong>especificación</strong>, la <strong>documentación viva</strong> y la base de los tests automatizados. Nace de la conversación de los "tres amigos" (negocio, dev, QA) y usa un <strong>lenguaje ubicuo</strong>: las mismas palabras para todos.</p></div>
         <div class="tile-grid">
             <div class="tile">
               <div class="tile__icon">🗣️</div>
-              <h4 data-i18n="bdd.t1.title">Lenguaje compartido</h4>
+              <h3 data-i18n="bdd.t1.title">Lenguaje compartido</h3>
               <p data-i18n="bdd.t1.body">Negocio, QA y dev hablan el mismo idioma: menos malentendidos sobre qué hay que construir.</p>
             </div>
             <div class="tile">
               <div class="tile__icon">🤝</div>
-              <h4 data-i18n="bdd.t2.title">Tres amigos</h4>
+              <h3 data-i18n="bdd.t2.title">Tres amigos</h3>
               <p data-i18n="bdd.t2.body">Una charla corta entre product, dev y QA define ejemplos antes de codear. Shift-left puro.</p>
             </div>
             <div class="tile">
               <div class="tile__icon">📋</div>
-              <h4 data-i18n="bdd.t3.title">Documentación viva</h4>
+              <h3 data-i18n="bdd.t3.title">Documentación viva</h3>
               <p data-i18n="bdd.t3.body">Los .feature son especificación Y tests: si pasan, la doc está al día por definición.</p>
             </div>
         </div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
+        <h2 class="block-label" data-i18n="ui.when">Cuándo usarlo</h2>
         <div class="prose" data-i18n-html="bdd.when"><p>Usá BDD cuando el <strong>valor de negocio</strong> y la colaboración importan: reglas complejas, equipos con stakeholders no técnicos, criterios de aceptación que conviene acordar antes. No es gratis: mantener los step definitions tiene costo, así que no apliques BDD a <em>todo</em> — reservalo para los flujos donde el lenguaje compartido paga.</p></div>
         <div class="callout callout--warn" data-i18n-html="bdd.callout"><strong>Ojo:</strong> BDD no es "escribir tests en inglés". Si nadie del negocio lee los <code>.feature</code>, estás pagando el costo de Gherkin sin recibir su beneficio. El valor está en la <em>conversación</em>, no en la sintaxis.</div>
         <nav class="page-nav" aria-label="Pagination">

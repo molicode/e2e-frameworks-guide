@@ -371,7 +371,7 @@ html[lang="en"] .code-i18n--en { display: block; }
   color: var(--accent);
   margin-bottom: var(--space-2);
 }
-.tile h4 { margin: 0 0 var(--space-2); font-size: var(--fs-base); }
+.tile h3 { margin: 0 0 var(--space-2); font-size: var(--fs-base); }
 .tile p { margin: 0; font-size: var(--fs-sm); color: var(--text-soft); }
 
 /* Framework header chip */

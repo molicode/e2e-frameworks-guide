@@ -160,9 +160,9 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
-        <h2 class="section__title" data-i18n="page.components">Componentes clave</h2>
+        <h1 class="section__title" data-i18n="page.components">Componentes clave</h1>
         <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
-        <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
+        <h2 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h2>
         <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -189,7 +189,7 @@ driver.find_element(By.CSS_SELECTOR, "</span>button<span class="tok-punctuation"
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Create account</h4>
+              <p class="mock-h">Create account</p>
               <div class="mock-field mock-field--col">
                 <span class="mock-field__label">Email</span>
                 <span class="mock-input mock-input--bad">not-an-email</span>
@@ -204,7 +204,7 @@ driver.find_element(By.CSS_SELECTOR, "</span>button<span class="tok-punctuation"
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="comp.select.label">Select / dropdown</h3>
+        <h2 class="block-label" data-i18n="comp.select.label">Select / dropdown</h2>
         <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -233,7 +233,7 @@ assert country.first_selected_option.get_attribute("</span>value<span class="tok
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Shipping</h4>
+              <p class="mock-h">Shipping</p>
               <div class="mock-field mock-field--col">
                 <span class="mock-field__label">Country</span>
                 <span class="mock-select">Argentina <i>▾</i></span>
@@ -248,7 +248,7 @@ assert country.first_selected_option.get_attribute("</span>value<span class="tok
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="comp.checkbox.label">Checkbox / toggle</h3>
+        <h2 class="block-label" data-i18n="comp.checkbox.label">Checkbox / toggle</h2>
         <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -275,7 +275,7 @@ opt_in <span class="tok-punctuation">=</span> driver<span class="tok-punctuation
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Preferences</h4>
+              <p class="mock-h">Preferences</p>
               <label class="mock-check">
                 <span class="mock-box mock-box--on">✓</span>
                 <span>Email me about updates</span>
@@ -291,7 +291,7 @@ opt_in <span class="tok-punctuation">=</span> driver<span class="tok-punctuation
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="comp.modal.label">Modal / diálogo</h3>
+        <h2 class="block-label" data-i18n="comp.modal.label">Modal / diálogo</h2>
         <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -329,7 +329,7 @@ dialog<span class="tok-punctuation">.</span><span class="tok-function">find_elem
           <div class="mock__body">
             <div class="mock-stage">
               <div class="mock-dialog" role="dialog">
-                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-h">Delete order?</p>
                 <p class="mock-error-msg">This action can't be undone.</p>
                 <div class="mock-btn-row">
                   <span class="mock-btn mock-btn--ghost">Cancel</span>
@@ -345,7 +345,7 @@ dialog<span class="tok-punctuation">.</span><span class="tok-function">find_elem
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="comp.table.label">Tabla de datos</h3>
+        <h2 class="block-label" data-i18n="comp.table.label">Tabla de datos</h2>
         <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -372,7 +372,7 @@ cell <span class="tok-punctuation">=</span> driver<span class="tok-punctuation">
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Users</h4>
+              <p class="mock-h">Users</p>
               <table class="mock-table">
                 <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
                 <tbody>
@@ -391,7 +391,7 @@ cell <span class="tok-punctuation">=</span> driver<span class="tok-punctuation">
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="comp.toast.label">Toast / alerta</h3>
+        <h2 class="block-label" data-i18n="comp.toast.label">Toast / alerta</h2>
         <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -442,7 +442,7 @@ toast <span class="tok-punctuation">=</span> <span class="tok-function">WebDrive
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="comp.a11y.label">Accesibilidad (a11y)</h3>
+        <h2 class="block-label" data-i18n="comp.a11y.label">Accesibilidad (a11y)</h2>
         <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -473,7 +473,7 @@ results <span class="tok-punctuation">=</span> axe<span class="tok-punctuation">
           </div>
           <div class="mock__body">
             <div class="mock-card">
-              <h4 class="mock-h">Accessibility scan</h4>
+              <p class="mock-h">Accessibility scan</p>
               <ul class="mock-a11y-list">
                 <li class="mock-a11y-ok">Buttons have an accessible name</li>
                 <li class="mock-a11y-ok">Form inputs have labels</li>

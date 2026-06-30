@@ -29,7 +29,7 @@ function loginScreen() {
     "example.com/login",
     `
             <div class="mock-card">
-              <h4 class="mock-h">Sign in</h4>
+              <p class="mock-h">Sign in</p>
               <div class="mock-field">
                 <span class="mock-field__label">Email</span>
                 <span class="mock-input">demo@acme.test</span>
@@ -57,7 +57,7 @@ function orderScreen() {
     `
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Order #42</h4>
+                <p class="mock-h">Order #42</p>
                 <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
               </div>
               <div class="mock-total">
@@ -85,7 +85,7 @@ function validationScreen() {
     "app.example.com/signup",
     `
             <div class="mock-card">
-              <h4 class="mock-h">Create account</h4>
+              <p class="mock-h">Create account</p>
               <div class="mock-field mock-field--col">
                 <span class="mock-field__label">Email</span>
                 <span class="mock-input mock-input--bad">not-an-email</span>
@@ -105,7 +105,7 @@ function selectScreen() {
     "shop.example.com/checkout",
     `
             <div class="mock-card">
-              <h4 class="mock-h">Shipping</h4>
+              <p class="mock-h">Shipping</p>
               <div class="mock-field mock-field--col">
                 <span class="mock-field__label">Country</span>
                 <span class="mock-select">Argentina <i>▾</i></span>
@@ -125,7 +125,7 @@ function checkboxScreen() {
     "app.example.com/settings",
     `
             <div class="mock-card">
-              <h4 class="mock-h">Preferences</h4>
+              <p class="mock-h">Preferences</p>
               <label class="mock-check">
                 <span class="mock-box mock-box--on">✓</span>
                 <span>Email me about updates</span>
@@ -147,7 +147,7 @@ function modalScreen() {
     `
             <div class="mock-stage">
               <div class="mock-dialog" role="dialog">
-                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-h">Delete order?</p>
                 <p class="mock-error-msg">This action can't be undone.</p>
                 <div class="mock-btn-row">
                   <span class="mock-btn mock-btn--ghost">Cancel</span>
@@ -168,7 +168,7 @@ function tableScreen() {
     "admin.example.com/users",
     `
             <div class="mock-card">
-              <h4 class="mock-h">Users</h4>
+              <p class="mock-h">Users</p>
               <table class="mock-table">
                 <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
                 <tbody>
@@ -212,7 +212,7 @@ function errorScreen() {
     `
             <div class="mock-card mock-card--error">
               <div class="mock-error-icon">⚠️</div>
-              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
               <div class="mock-tags-row">
@@ -229,7 +229,7 @@ function flakyScreen() {
     "shop.example.com/orders/42",
     `
             <div class="mock-card">
-              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-order-head"><p class="mock-h">Order #42</p></div>
               <div class="mock-total">
                 <span>Total</span>
                 <span class="mock-spinner" aria-hidden="true"></span>
@@ -274,7 +274,7 @@ function a11yScreen() {
     "app.example.com",
     `
             <div class="mock-card">
-              <h4 class="mock-h">Accessibility scan</h4>
+              <p class="mock-h">Accessibility scan</p>
               <ul class="mock-a11y-list">
                 <li class="mock-a11y-ok">Buttons have an accessible name</li>
                 <li class="mock-a11y-ok">Form inputs have labels</li>
@@ -298,7 +298,7 @@ function receiptScreen() {
     `
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Receipt #9087</h4>
+                <p class="mock-h">Receipt #9087</p>
                 <span class="mock-badge">PAID</span>
               </div>
               <ul class="mock-receipt">
@@ -324,7 +324,7 @@ function forbiddenScreen() {
     `
             <div class="mock-card mock-card--error">
               <div class="mock-error-icon">🔒</div>
-              <h4 class="mock-h">403 — Forbidden</h4>
+              <p class="mock-h">403 — Forbidden</p>
               <p class="mock-error-msg">You don't have permission to view this order.</p>
               <div class="mock-http">GET /api/orders/99 → 403</div>
               <div class="mock-tags-row">
@@ -342,7 +342,7 @@ function documentScreen() {
     `
             <div class="mock-card">
               <div class="mock-order-head">
-                <h4 class="mock-h">Invoice INV-2026-0042</h4>
+                <p class="mock-h">Invoice INV-2026-0042</p>
                 <span class="mock-badge">SIGNED</span>
               </div>
               <div class="mock-doc-grid">
@@ -398,7 +398,7 @@ function mobileScreen() {
           <div class="mock-phone">
             <span class="mock-phone__notch"></span>
             <div class="mock-phone__screen">
-              <h4 class="mock-h">Shop</h4>
+              <p class="mock-h">Shop</p>
               <div class="mock-field mock-field--col">
                 <span class="mock-input">demo</span>
                 <code class="mock-tag">ACCESSIBILITY_ID "username"</code>
