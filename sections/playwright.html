@@ -85,28 +85,24 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link" href="components.html">
-          <span class="nav-link__num">07</span>
-          <span data-i18n="nav.components">Componentes clave</span>
-        </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">07</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">10</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">11</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
@@ -123,37 +119,37 @@
         <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
         <ol class="steps roadmap">
             <li>
-              <strong data-i18n="pw.rung1.title">Setup y primer test</strong>
+              <a class="roadmap__link" href="#pw-rung-1" data-i18n="pw.rung1.title">Setup y primer test</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="pw.rung1.desc">Instalá, corré el ejemplo en modo --ui y entendé la estructura test().</span>
             </li>
             <li>
-              <strong data-i18n="pw.rung2.title">Locators y acciones</strong>
+              <a class="roadmap__link" href="#pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="pw.rung2.desc">Dominá getByRole/Label/Text. Filtrá, encadená y manejá listas con .nth().</span>
             </li>
             <li>
-              <strong data-i18n="pw.rung3.title">Assertions y auto-waiting</strong>
+              <a class="roadmap__link" href="#pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="pw.rung3.desc">Aprendé las web-first assertions y por qué casi nunca esperás a mano.</span>
             </li>
             <li>
-              <strong data-i18n="pw.rung4.title">Fixtures y organización</strong>
+              <a class="roadmap__link" href="#pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="pw.rung4.desc">Hooks, fixtures propias y Page Object Model para suites que escalan.</span>
             </li>
             <li>
-              <strong data-i18n="pw.rung5.title">Network y auth</strong>
+              <a class="roadmap__link" href="#pw-rung-5" data-i18n="pw.rung5.title">Network y auth</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="pw.rung5.desc">Interceptá con page.route(), mockeá APIs y reusá sesión con storageState.</span>
             </li>
             <li>
-              <strong data-i18n="pw.rung6.title">CI + trace viewer</strong>
+              <a class="roadmap__link" href="#pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="pw.rung6.desc">Integralo al pipeline, activá traces y reportes. Acá es donde brilla.</span>
             </li>
         </ol>
-        <h3 class="block-label" data-i18n="pw.rung1.title">Setup y primer test</h3>
+        <h3 class="block-label" id="pw-rung-1" data-i18n="pw.rung1.title">Setup y primer test</h3>
         <div class="prose" data-i18n-html="pw.rung1.body"><p>Con <code>npm init playwright@latest</code> tenés config, tests de ejemplo y workflow de CI en un comando. Cada test es una función <code>test('nombre', async ({ page }) =&gt; { … })</code>. Corré <code>npx playwright test --ui</code> para el modo interactivo con watch y time-travel.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -224,7 +220,7 @@ test("</span>greets the user after a valid login<span class="tok-string">", asyn
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="pw.rung2.title">Locators y acciones</h3>
+        <h3 class="block-label" id="pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</h3>
         <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first()</code>/<code>.last()</code> y encadenás para llegar al elemento exacto.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -279,7 +275,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="pw.rung3.title">Assertions y auto-waiting</h3>
+        <h3 class="block-label" id="pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</h3>
         <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, <code>expect(valor).toBe(...)</code> no reintenta.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -326,7 +322,7 @@ await expect(page.getByText("</span>Payment confirmed<span class="tok-punctuatio
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="pw.rung4.title">Fixtures y organización</h3>
+        <h3 class="block-label" id="pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</h3>
         <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>hooks</strong> (<code>beforeEach</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una <strong>fixture</strong> propia con <code>base.extend()</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -361,7 +357,7 @@ test("</span>VerifyOrder<span class="tok-string">", async ({ orderPage }) =&gt; 
   await expect(orderPage.status).toHaveText("</span>PAID<span class="tok-punctuation">");</span>
 <span class="tok-punctuation">});</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="pw.rung5.title">Network y auth</h3>
+        <h3 class="block-label" id="pw-rung-5" data-i18n="pw.rung5.title">Network y auth</h3>
         <div class="prose" data-i18n-html="pw.rung5.body"><p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storageState</code> y la reusás en la config. Menos flakiness, más velocidad.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -406,7 +402,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="pw.rung6.title">CI + trace viewer</h3>
+        <h3 class="block-label" id="pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</h3>
         <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>playwright.config.js</code> activás <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) y reportes HTML. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>npx playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -443,6 +439,287 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
     path<span class="tok-punctuation">:</span> playwright<span class="tok-punctuation">-</span>report<span class="tok-punctuation">/</span>
 <span class="tok-comment"># Locally, inspect a failure: npx playwright show-trace trace.zip</span></code></pre>
         </div>
+        <h3 class="block-label" data-i18n="nav.components">Componentes clave</h3>
+        <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
+        <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
+        <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Form validation — the inline error shows and submit stays disabled.</span>
+<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByLabel</span><span class="tok-punctuation">("</span>Email<span class="tok-string">").fill("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
+await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Sign up<span class="tok-string">" }).click();
+await expect(page.getByText("</span>Enter a valid email<span class="tok-string">")).toBeVisible();
+await expect(page.getByRole("</span>button<span class="tok-string">", { name: "</span>Sign up<span class="tok-punctuation">"</span> <span class="tok-punctuation">})).</span><span class="tok-function">toBeDisabled</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/signup</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Create account</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input mock-input--bad">not-an-email</span>
+                <span class="mock-err">Enter a valid email<code class="mock-tag">getByText("valid email")</code></span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn mock-btn--off">Sign up</span>
+                <code class="mock-tag">toBeDisabled()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.select.label">Select / dropdown</h3>
+        <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Select / dropdown — choose an option and assert the value.</span>
+<span class="tok-keyword">const</span> country <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>combobox<span class="tok-string">", { name: "</span>Country<span class="tok-string">" });
+await country.selectOption("</span>AR<span class="tok-string">");
+await expect(country).toHaveValue("</span>AR<span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/checkout</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Shipping</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Country</span>
+                <span class="mock-select">Argentina <i>▾</i></span>
+                <code class="mock-tag">selectOption("AR")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("combobox")</code>
+                <code class="mock-tag">toHaveValue("AR")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.checkbox.label">Checkbox / toggle</h3>
+        <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Checkbox / toggle — check it and assert its state.</span>
+<span class="tok-keyword">const</span> optIn <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>checkbox<span class="tok-string">", { name: "</span>Email me about updates<span class="tok-punctuation">"</span> <span class="tok-punctuation">});</span>
+<span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">check</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>optIn<span class="tok-punctuation">).</span><span class="tok-function">toBeChecked</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/settings</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Preferences</h4>
+              <label class="mock-check">
+                <span class="mock-box mock-box--on">✓</span>
+                <span>Email me about updates</span>
+                <code class="mock-tag">getByRole("checkbox")</code>
+              </label>
+              <div class="mock-toggle-row">
+                <span>Dark mode</span>
+                <span class="mock-switch mock-switch--on"><i></i></span>
+                <code class="mock-tag">toBeChecked()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.modal.label">Modal / diálogo</h3>
+        <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.</span>
+<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-string">", { name: "</span>Delete order<span class="tok-string">" }).click();
+const dialog = page.getByRole("</span>dialog<span class="tok-string">");
+await expect(dialog).toBeVisible();
+await dialog.getByRole("</span>button<span class="tok-string">", { name: "</span>Delete<span class="tok-punctuation">"</span> <span class="tok-punctuation">}).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>dialog<span class="tok-punctuation">).</span><span class="tok-function">toBeHidden</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage">
+              <div class="mock-dialog" role="dialog">
+                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-error-msg">This action can't be undone.</p>
+                <div class="mock-btn-row">
+                  <span class="mock-btn mock-btn--ghost">Cancel</span>
+                  <span class="mock-btn mock-btn--danger">Delete</span>
+                </div>
+                <div class="mock-tags-row">
+                  <code class="mock-tag">getByRole("dialog")</code>
+                  <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.table.label">Tabla de datos</h3>
+        <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Data table — assert the row count and a specific cell.</span>
+<span class="tok-keyword">const</span> rows <span class="tok-punctuation">=</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>row<span class="tok-string">");
+await expect(rows).toHaveCount(4); // 1 header + 3 data rows
+await expect(page.getByRole("</span>cell<span class="tok-string">", { name: "</span>Ada Lovelace<span class="tok-punctuation">"</span> <span class="tok-punctuation">})).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">admin.example.com/users</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Users</h4>
+              <table class="mock-table">
+                <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Ada Lovelace</td><td>Admin</td><td>Active</td></tr>
+                  <tr><td>Alan Turing</td><td>Editor</td><td>Active</td></tr>
+                  <tr><td>Grace Hopper</td><td>Viewer</td><td>Invited</td></tr>
+                </tbody>
+              </table>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(4)</code>
+                <code class="mock-tag">getByRole("cell", { name: "Admin" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.toast.label">Toast / alerta</h3>
+        <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Toast / alert — assert it appears, then disappears on its own.</span>
+<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-string">", { name: "</span>Save<span class="tok-string">" }).click();
+const toast = page.getByRole("</span>alert<span class="tok-string">");
+await expect(toast).toContainText("</span>saved successfully<span class="tok-punctuation">");</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>toast<span class="tok-punctuation">).</span><span class="tok-function">toBeHidden</span><span class="tok-punctuation">({</span> timeout<span class="tok-punctuation">:</span> <span class="tok-number">6000</span> <span class="tok-punctuation">});</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage mock-stage--top">
+              <div class="mock-toast" role="alert">
+                <span class="mock-toast__icon">✓</span>
+                <span>Order saved successfully</span>
+                <code class="mock-tag">getByRole("alert")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">toBeVisible()</code>
+                <code class="mock-tag">toContainText("saved")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.a11y.label">Accesibilidad (a11y)</h3>
+        <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Accessibility — scan the page with axe and assert zero violations.</span>
+<span class="tok-keyword">import</span> AxeBuilder <span class="tok-keyword">from</span> <span class="tok-string">"@axe-core/playwright"</span><span class="tok-punctuation">;</span>
+
+<span class="tok-function">test</span><span class="tok-punctuation">("</span>home page has no a11y violations<span class="tok-string">", async ({ page }) =&gt; {
+  await page.goto("</span><span class="tok-punctuation">/");</span>
+  <span class="tok-keyword">const</span> results <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-keyword">new</span> <span class="tok-function">AxeBuilder</span><span class="tok-punctuation">({</span> page <span class="tok-punctuation">}).</span><span class="tok-function">analyze</span><span class="tok-punctuation">();</span>
+  <span class="tok-function">expect</span><span class="tok-punctuation">(</span>results<span class="tok-punctuation">.</span><span class="tok-property">violations</span><span class="tok-punctuation">).</span><span class="tok-function">toEqual</span><span class="tok-punctuation">([]);</span>
+<span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// Bonus: querying by role + name makes tests resilient AND accessible.</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-string">", { name: "</span>Sign <span class="tok-keyword">in</span><span class="tok-punctuation">"</span> <span class="tok-punctuation">})).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Accessibility scan</h4>
+              <ul class="mock-a11y-list">
+                <li class="mock-a11y-ok">Buttons have an accessible name</li>
+                <li class="mock-a11y-ok">Form inputs have labels</li>
+                <li class="mock-a11y-bad">Image missing alt text <code>img.logo</code></li>
+                <li class="mock-a11y-ok">Color contrast &ge; 4.5:1</li>
+              </ul>
+              <div class="mock-a11y-score">1 violation</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">@axe-core/playwright</code>
+                <code class="mock-tag">expect(violations).toEqual([])</code>
+                <code class="mock-tag">getByRole("button", { name })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="ui.cases">Casos críticos</h3>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
