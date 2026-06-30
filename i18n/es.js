@@ -481,6 +481,12 @@ I18n.register("es", {
   "comp.toast.label": "Toast / alerta",
   "comp.toast.body":
     "<p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p>",
+  "comp.api.label": "API testing",
+  "comp.api.body":
+    "<p>Sin navegador: pegás directo al endpoint, verificás el <strong>status</strong> y el cuerpo de la respuesta. Más rápido y estable que la UI; ideal para preparar datos y validar contratos.</p>",
+  "comp.a11y.label": "Accesibilidad (a11y)",
+  "comp.a11y.body":
+    "<p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p>",
 
   /* ====================================================================
      CONCEPTOS CLAVE (glosario)

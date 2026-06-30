@@ -253,6 +253,38 @@ await driver.findElement(By.css("</span><span class="tok-punctuation">[</span>da
 // XPath is powerful but brittle — reserve it for "</span>match by visible text<span class="tok-string">":
 await driver.findElement(By.xpath("</span><span class="tok-comment">//button[text()='Pay']"));</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Order #42</h4>
+                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
+              </div>
+              <div class="mock-total">
+                <span>Total</span><strong>250</strong>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <ul class="mock-list">
+                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
+              </ul>
+              <div class="mock-tags-row">
+                <code class="mock-tag">.order-items li</code>
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(3)</code>
+                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="sel.rung3.title">Esperas explícitas</h3>
         <div class="prose" data-i18n-html="sel.rung3.body"><p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en JS, <code>driver.wait(until.…)</code>; en Java, <code>WebDriverWait</code> + <code>ExpectedConditions</code>. Nunca uses un <code>Thread.sleep</code> fijo: es la causa número uno de flakiness.</p></div>
         <div class="code-block">
@@ -286,6 +318,30 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
 <span class="tok-comment">// Never do this — a blind sleep is the #1 cause of flaky Selenium suites:</span>
 <span class="tok-comment">// Thread.sleep(5000);</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head"><h4 class="mock-h">Order #42</h4></div>
+              <div class="mock-total">
+                <span>Total</span>
+                <span class="mock-spinner" aria-hidden="true"></span>
+                <span class="mock-loading">loading…</span>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--bad">✗ sleep(1000) → flaky</code>
+                <code class="mock-tag mock-tag--good">✓ toHaveText("250") → auto-retry</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="sel.rung4.title">Runner + assertions</h3>
         <div class="prose" data-i18n-html="sel.rung4.body"><p>Selenium solo <em>conduce</em> el navegador; las afirmaciones las pone un <strong>test runner</strong>. En Java se combina con <strong>JUnit 5</strong> o <strong>TestNG</strong>; en Python con <strong>pytest</strong>. El runner aporta estructura (setup/teardown), assertions y reportes.</p></div>
         <div class="code-block">
@@ -342,6 +398,33 @@ const order = new OrderPage(driver);
 await order.open(42);
 assert.strictEqual(await order.total(), "</span><span class="tok-number">250</span><span class="tok-punctuation">");</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">admin.example.com/users</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Users</h4>
+              <table class="mock-table">
+                <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Ada Lovelace</td><td>Admin</td><td>Active</td></tr>
+                  <tr><td>Alan Turing</td><td>Editor</td><td>Active</td></tr>
+                  <tr><td>Grace Hopper</td><td>Viewer</td><td>Invited</td></tr>
+                </tbody>
+              </table>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(4)</code>
+                <code class="mock-tag">getByRole("cell", { name: "Admin" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="sel.rung6.title">Grid y CI</h3>
         <div class="prose" data-i18n-html="sel.rung6.body"><p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: apuntás el driver a un hub con <code>usingServer(...)</code> en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p></div>
         <div class="code-block">

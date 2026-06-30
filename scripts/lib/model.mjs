@@ -572,6 +572,33 @@ const toast = page.getByRole("alert");
 await expect(toast).toContainText("saved successfully");
 await expect(toast).toBeHidden({ timeout: 6000 });`,
   },
+  apiTest: {
+    lang: "JavaScript",
+    code: `// API testing — no browser/UI: hit the endpoint and assert the response.
+// Playwright's "request" fixture sends real HTTP requests.
+const res = await request.get("https://api.example.com/orders/42");
+await expect(res).toBeOK();           // status in the 200–299 range
+const body = await res.json();
+expect(body.total).toBe(250);
+expect(body.status).toBe("PAID");
+expect(body.items).toContain("book");
+
+// Faster and more stable than the UI — great for data setup and contracts.`,
+  },
+  a11yTest: {
+    lang: "JavaScript",
+    code: `// Accessibility — scan the page with axe and assert zero violations.
+import AxeBuilder from "@axe-core/playwright";
+
+test("home page has no a11y violations", async ({ page }) => {
+  await page.goto("/");
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
+// Bonus: querying by role + name makes tests resilient AND accessible.
+await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();`,
+  },
 
   /* ---- AI tooling: MCP, Skills, Agents ---- */
   mcpConfig: {
@@ -740,10 +767,10 @@ export const SECTIONS = [
   frameworkSection("selenium", "nav.selenium", "sel",
     { label: "Selenium", color: "var(--fw-selenium)" }, [
       { codes: ["seleniumSetup", "seleniumFirst"], mock: "login" }, // 1 WebDriver & navigation
-      { codes: ["selLocate"] },                       // 2 Locating elements
-      { codes: ["selWaitsJs", "selWaitsJava"] },      // 3 Explicit waits
+      { codes: ["selLocate"], mock: "order" },        // 2 Locating elements
+      { codes: ["selWaitsJs", "selWaitsJava"], mock: "flaky" }, // 3 Explicit waits
       { codes: ["selRunnerJava", "selRunnerPy"] },    // 4 Runner + assertions
-      { codes: ["selPOM"] },                          // 5 Page Object Model
+      { codes: ["selPOM"], mock: "table" },           // 5 Page Object Model
       { codes: ["selGrid"] },                         // 6 Grid & CI
     ]),
 
@@ -751,17 +778,17 @@ export const SECTIONS = [
     { label: "Cypress", color: "var(--fw-cypress)" }, [
       { codes: ["cypressSetup", "cypressFirst"], mock: "login" }, // 1 Interactive runner
       { codes: ["cypChain"] },                        // 2 Commands & async chain
-      { codes: ["cypAssertions"] },                   // 3 Assertions & selectors
+      { codes: ["cypAssertions"], mock: "order" },    // 3 Assertions & selectors
       { codes: ["cypIntercept"], mock: "error" },     // 4 Network with cy.intercept()
       { codes: ["cypCommands"] },                     // 5 Custom commands & fixtures
-      { codes: ["cypComponent"] },                    // 6 Component testing + CI
+      { codes: ["cypComponent"], mock: "modal" },     // 6 Component testing + CI
     ]),
 
   frameworkSection("playwright", "nav.playwright", "pw",
     { label: "Playwright", color: "var(--fw-playwright)" }, [
       { codes: ["playwrightSetup", "playwrightFirst"], mock: "login" }, // 1 Setup & first test
       { codes: ["pwLocators"], mock: "order" },           // 2 Locators & actions
-      { codes: ["pwAssertions"] },                        // 3 Assertions & auto-waiting
+      { codes: ["pwAssertions"], mock: "flaky" },         // 3 Assertions & auto-waiting
       { codes: ["pwFixtures"] },                          // 4 Fixtures & organization
       { codes: ["pwNetwork"], mock: "error" },            // 5 Network & auth
       { codes: ["pwConfig", "pwCIyml"] },                 // 6 CI + trace viewer
@@ -829,6 +856,16 @@ export const SECTIONS = [
       { type: "prose", html: "comp.toast.body" },
       { type: "code", sample: "toastTest" },
       { type: "mock", screen: "toast" },
+
+      { type: "label", text: "comp.api.label" },
+      { type: "prose", html: "comp.api.body" },
+      { type: "code", sample: "apiTest" },
+      { type: "mock", screen: "api" },
+
+      { type: "label", text: "comp.a11y.label" },
+      { type: "prose", html: "comp.a11y.body" },
+      { type: "code", sample: "a11yTest" },
+      { type: "mock", screen: "a11y" },
     ],
   },
 

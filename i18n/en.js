@@ -480,6 +480,12 @@ I18n.register("en", {
   "comp.toast.label": "Toast / alert",
   "comp.toast.body":
     "<p>You assert it appears (role <code>alert</code>) and then disappears on its own.</p>",
+  "comp.api.label": "API testing",
+  "comp.api.body":
+    "<p>No browser: hit the endpoint directly, assert the <strong>status</strong> and the response body. Faster and more stable than the UI; great for data setup and validating contracts.</p>",
+  "comp.a11y.label": "Accessibility (a11y)",
+  "comp.a11y.body":
+    "<p>Scan the page with <code>axe</code> and assert zero violations. Bonus: querying by role and name makes your tests resilient <em>and</em> accessible.</p>",
 
   /* ====================================================================
      KEY TERMS (glossary)
