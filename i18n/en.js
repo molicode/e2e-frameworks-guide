@@ -54,6 +54,7 @@ I18n.register("en", {
   "nav.airole": "The role of AI",
   "nav.prompts": "AI examples",
   "nav.best": "Best practices",
+  "nav.skills": "QA skills",
   "nav.home": "Home",
 
   /* ---- Landing / index ---- */
@@ -76,6 +77,7 @@ I18n.register("en", {
   "home.ai-role": "How AI complements each stage of testing.",
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
   "home.best-practices": "Principles that endure and your next steps.",
+  "home.skills": "Cross-cutting QA skills: SQL, Git and mobile testing with Appium.",
 
   /* ====================================================================
      1. INTRODUCTION
@@ -691,6 +693,69 @@ I18n.register("en", {
     "<strong>Contribute to this guide:</strong> it's open source. Add a language, a section or an example (see the README).",
   "best.callout":
     "<strong>The point:</strong> automation isn't about zero bugs, it's about <em>confidence to ship often</em>. Start small, keep it green, and grow from there.",
+
+  /* ====================================================================
+     6b. QA SKILLS (SQL, Git, Appium)
+     ==================================================================== */
+  "skills.page.intro": "Why these skills",
+  "skills.page.sql": "SQL for QA",
+  "skills.page.git": "Git for QA",
+  "skills.page.appium": "Appium (mobile)",
+
+  "skills.lead":
+    "<p>A good QA is more than a framework. Three <strong>cross-cutting</strong> skills show up in almost every interview and every day on the job: <strong>SQL</strong> to validate the data, <strong>Git</strong> to version your work, and <strong>mobile testing</strong> (Appium) for native apps.</p>",
+  "skills.why":
+    "<p>The UI can lie: it shows \"PAID\", but did it really persist? With <strong>SQL</strong> you check at the source. Your test code lives in a repo: without <strong>Git</strong> you can't collaborate or join a pipeline. And more and more product is <strong>mobile</strong>: <strong>Appium</strong> is the Selenium of phones. Mastering these three makes you a complete QA, not just \"the one who automates the web\".</p>",
+  "skills.t1.title": "SQL",
+  "skills.t1.body": "Query the database to validate the data landed as expected. The truth lives in the DB.",
+  "skills.t2.title": "Git",
+  "skills.t2.body": "Version your tests, work in branches, open PRs and resolve conflicts without fear.",
+  "skills.t3.title": "Appium",
+  "skills.t3.body": "Automate native Android/iOS apps with a Selenium-like API. Mobile gets tested too.",
+  "skills.callout":
+    "<strong>Interview tip:</strong> these three come up constantly. \"How do you confirm a payment was recorded?\" → a SQL query. \"How do you deliver your test?\" → a PR in Git. Having them sharp sets you apart.",
+
+  "skills.sql.lead":
+    "<p>Testing is validating data, and a lot of it lives in a relational database. Just knowing how to <strong>read</strong> (you don't need to be a DBA) already verifies a lot: that a payment saved, that there are no duplicates, that the amounts add up.</p>",
+  "skills.sql.basics.label": "Reading data: SELECT",
+  "skills.sql.basics.body":
+    "<p>90% of SQL for QA is reading. <code>SELECT</code> picks columns, <code>FROM</code> the table, <code>WHERE</code> filters rows, <code>ORDER BY</code> sorts and <code>LIMIT</code> caps. With that you can inspect whatever your test left in the database.</p>",
+  "skills.sql.join.label": "Joining tables: JOIN & aggregates",
+  "skills.sql.join.body":
+    "<p>Data is spread across related tables. A <code>JOIN</code> matches them by their key. Add <code>COUNT</code>, <code>SUM</code>, <code>GROUP BY</code> and <code>HAVING</code> to find problems: duplicate users, totals that don't add up, orphaned orders.</p>",
+  "skills.sql.validate.label": "Validating the DB from a test",
+  "skills.sql.validate.body":
+    "<p>The most powerful trick: after a UI action, <strong>check the database directly</strong>. The UI may show \"PAID\" because of a cache or a visual bug; the row in the table doesn't lie. A query inside the test closes the loop.</p>",
+  "skills.sql.callout":
+    "<strong>Mind the test database:</strong> query test data, never production, and prefer transactions or seeded data you can clean up. A <code>SELECT</code> is harmless; a <code>DELETE</code> with no <code>WHERE</code> is not.",
+
+  "skills.git.lead":
+    "<p>Your tests are code: they live in a repository and get reviewed like any change. <strong>Git</strong> is the standard version-control tool — without it you can't collaborate or plug into a CI pipeline.</p>",
+  "skills.git.basics.label": "The basic flow",
+  "skills.git.basics.body":
+    "<p>The everyday cycle: <code>clone</code> the repo, create your own <strong>branch</strong> (never touch <code>main</code> directly), <code>add</code> + <code>commit</code> with a clear message and <code>push</code>. A good commit message explains the <em>why</em>, not just the what.</p>",
+  "skills.git.flow.label": "Updating & resolving conflicts",
+  "skills.git.flow.body":
+    "<p>Before opening a PR, pull the latest <code>main</code> with <code>pull --rebase</code>. If there's a <strong>conflict</strong>, edit the file, <code>git add</code> and <code>git rebase --continue</code> (or <code>--abort</code> to back out). <code>git stash</code> parks half-done changes so you can switch tasks without committing.</p>",
+  "skills.git.callout":
+    "<strong>Golden rule:</strong> small, frequent commits, a branch per feature, and never rewrite the history of a shared branch with <code>--force</code> unless you know exactly what you're doing.",
+
+  "skills.appium.lead":
+    "<p>More and more product lives on the phone. <strong>Appium</strong> is the standard for automating <strong>native and hybrid</strong> Android and iOS apps, with an API almost identical to Selenium WebDriver — so what you already know transfers.</p>",
+  "skills.appium.setup.label": "Setup",
+  "skills.appium.setup.body":
+    "<p>Appium is a <strong>server</strong> between your test and the device. You install the client (<code>Appium-Python-Client</code>), start the server with <code>appium</code>, and you need an emulator/simulator or a real device, plus the OS driver (UiAutomator2 for Android, XCUITest for iOS).</p>",
+  "skills.appium.test.label": "Your first mobile test",
+  "skills.appium.test.body":
+    "<p>You define the <strong>capabilities</strong> (which app, which platform), open a <code>webdriver.Remote</code> pointing at the server, and locate elements. On mobile, the <code>accessibility id</code> is the most robust selector (the equivalent of a <code>data-testid</code>). From there, it's just like Selenium.</p>",
+  "skills.appium.manual.title": "By hand",
+  "skills.appium.manual.body":
+    "<p>You configure capabilities, manage emulators and write each interaction. Mobile adds friction (devices, gestures, permissions), but the pattern is the same as on the web.</p>",
+  "skills.appium.ai.title": "With AI",
+  "skills.appium.ai.body":
+    "<p>AI scaffolds the test, remembers each platform's typical capabilities, and translates a web flow into its mobile equivalent (gestures, scrolling, waits).</p>",
+  "skills.appium.callout":
+    "<strong>Next step:</strong> start with the most critical mobile smoke test (login, purchase) on an emulator, wire it into CI with a device farm, and reuse your Page Objects: the strategy you learned on the web applies just the same.",
 
   /* ---- Navigation / index for the new sections ---- */
   "nav.keyterms": "Key terms",

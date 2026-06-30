@@ -1,0 +1,18 @@
+# test_login_mobile.py — manejá una app nativa con Appium (API similar a Selenium).
+from appium import webdriver
+from appium.options.android import UiAutomator2Options
+from appium.webdriver.common.appiumby import AppiumBy
+
+
+def test_login_on_android():
+    options = UiAutomator2Options()
+    options.app = "/apps/shop.apk"            # la app bajo prueba
+    driver = webdriver.Remote("http://localhost:4723", options=options)
+    try:
+        driver.find_element(AppiumBy.ACCESSIBILITY_ID, "username").send_keys("demo")
+        driver.find_element(AppiumBy.ACCESSIBILITY_ID, "password").send_keys("secret")
+        driver.find_element(AppiumBy.ACCESSIBILITY_ID, "signin").click()
+        banner = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "welcome")
+        assert banner.text == "Welcome, demo"
+    finally:
+        driver.quit()

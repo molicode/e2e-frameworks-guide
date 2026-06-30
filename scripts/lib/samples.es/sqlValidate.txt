@@ -1,0 +1,13 @@
+# Validá el estado de la BASE DE DATOS después de una acción — la UI puede mentir, los datos no.
+import sqlite3
+
+
+def test_payment_persists_in_db():
+    conn = sqlite3.connect("shop.db")
+    row = conn.execute(
+        "SELECT status, total FROM orders WHERE id = ?", (42,)
+    ).fetchone()
+    conn.close()
+
+    # Lo que la UI mostró como PAID debe estar realmente como PAID en la base de datos.
+    assert row == ("PAID", 250)

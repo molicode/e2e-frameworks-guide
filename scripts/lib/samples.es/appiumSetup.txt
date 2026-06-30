@@ -1,0 +1,7 @@
+# Appium automatiza apps móviles REALES (Android/iOS) — como Selenium para teléfonos.
+pip install Appium-Python-Client pytest
+
+# Levantá el servidor de Appium (necesitás Node + los drivers UiAutomator2 / XCUITest):
+appium
+
+# También necesitás un emulador/simulador o un dispositivo real conectado.

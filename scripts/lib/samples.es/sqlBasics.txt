@@ -1,0 +1,6 @@
+-- Leé datos para verificar lo que creó tu test. Empezá simple.
+SELECT id, status, total
+FROM orders
+WHERE status = 'PAID'          -- filtrá filas
+ORDER BY total DESC            -- primero las más grandes
+LIMIT 10;                      -- solo las 10 primeras
