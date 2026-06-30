@@ -1,0 +1,9 @@
+# Verificá que tengas Python 3 (3.9+ es una buena base para trabajo de QA):
+python3 --version
+
+# Creá un entorno virtual aislado para tu proyecto de tests:
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# Instalá las herramientas que más usa quien hace testing:
+pip install pytest requests

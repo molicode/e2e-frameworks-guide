@@ -43,6 +43,7 @@ I18n.register("en", {
   /* ---- Navigation ---- */
   "nav.intro": "Introduction",
   "nav.fundamentals": "Fundamentals",
+  "nav.pyqa": "Python for QA",
   "nav.selenium": "Selenium",
   "nav.cypress": "Cypress",
   "nav.playwright": "Playwright",
@@ -61,6 +62,7 @@ I18n.register("en", {
   "home.toc": "Contents",
   "home.intro": "What QA & automation are, why they matter, manual vs automated.",
   "home.fundamentals": "Test types, the pyramid, assertions, selectors and flaky tests.",
+  "home.python": "Python from zero to hero for QA: syntax, collections, pytest and your first test.",
   "home.selenium": "The W3C WebDriver standard: a 6-step learning path.",
   "home.cypress": "The best DX, visual runner and auto-retry: a 6-step path.",
   "home.playwright": "Cross-browser, auto-wait and traces: a 6-step path.",
@@ -141,6 +143,96 @@ I18n.register("en", {
   "fund.ai.body":
     "<p>You ask the AI to propose scenarios you missed, to suggest robust selectors from the HTML, and to analyze why a test is flaky.</p>" +
     "<ul><li>“List 5 edge cases missing for this form.”</li><li>“Turn this brittle <code>xpath</code> into a role-based selector.”</li></ul>",
+
+  /* ====================================================================
+     2b. PYTHON FOR QA (zero to hero)
+     ==================================================================== */
+  "pyqa.page.intro": "Why Python for QA",
+  "pyqa.page.hola": "Install & Hello world",
+  "pyqa.page.fund": "Language fundamentals",
+  "pyqa.page.datos": "Collections & JSON",
+  "pyqa.page.pytest": "pytest: your first test",
+  "pyqa.page.comp": "Your first tested component",
+
+  "pyqa.lead":
+    "<p><strong>Python</strong> is the friendliest language to get into automation: readable, low-ceremony, with a huge testing ecosystem. It's what we use for <strong>Selenium</strong> and <strong>Playwright</strong> in this guide, so getting comfortable with it opens both doors.</p>",
+  "pyqa.why":
+    "<p>Python reads almost like English pseudocode: little syntax, indentation instead of braces, batteries included. For QA that means less time fighting the language and more time writing checks. And the tools you'll lean on most — <code>pytest</code>, <code>requests</code>, Selenium and Playwright — are all first-class in Python.</p>",
+  "pyqa.t1.title": "Readable",
+  "pyqa.t1.body": "Indentation instead of braces; code reads like a recipe. Ideal for getting started.",
+  "pyqa.t2.title": "pytest",
+  "pyqa.t2.body": "The most-used test runner: plain asserts, fixtures and parametrization with very little code.",
+  "pyqa.t3.title": "Web + API",
+  "pyqa.t3.body": "Selenium and Playwright drive the browser; requests hits APIs. All from Python.",
+  "pyqa.t4.title": "AI-friendly",
+  "pyqa.t4.body": "It's the language AI assistants generate best: ready-to-review Python tests on demand.",
+  "pyqa.when":
+    "<p>Reach for Python for QA when you want a gentle learning curve, want to automate APIs and UI from one codebase, or work on teams where Python is already around (data, backend, scripting). If your stack is 100% front-end and Cypress, see the TypeScript section; for everything else, Python is a safe bet.</p>",
+  "pyqa.callout":
+    "<strong>How to follow this section:</strong> it goes zero to hero in order. Install Python, write your first script, learn the essential syntax, and finish by writing your first real test. Then jump to Selenium or Playwright on solid ground.",
+
+  "pyqa.hola.lead":
+    "<p>First things first: have Python installed, create an isolated environment, and run a script. You don't need a heavy IDE — an editor and the terminal are enough.</p>",
+  "pyqa.install.label": "Install & environment",
+  "pyqa.install.body":
+    "<p>Check your version with <code>python3 --version</code>. For each project create a <strong>virtual environment</strong> (<code>venv</code>): it isolates dependencies so they don't clash across projects. With it activated, you install libraries with <code>pip</code>.</p>",
+  "pyqa.hello.label": "Your first script",
+  "pyqa.hello.body":
+    "<p>A <code>.py</code> file with a <code>print</code> is already a program. The <code>if __name__ == \"__main__\":</code> idiom makes some code run only when you execute the file directly (not when another file imports it).</p>",
+  "pyqa.hola.callout":
+    "<strong>Done!</strong> If you saw <code>Hello, QA!</code> in the terminal, Python is running. That's 80% of the battle when you're just starting.",
+
+  "pyqa.fund.lead":
+    "<p>The essential syntax you'll use in every test: variables and types, conditionals and loops, and functions. With this you can already read and write most automation code.</p>",
+  "pyqa.vars.label": "Variables & types",
+  "pyqa.vars.body":
+    "<p>You don't declare types: Python infers them from the value. The basics are <code>str</code> (text), <code>int</code>, <code>float</code>, <code>bool</code> and <code>None</code>. <strong>f-strings</strong> (<code>f\"...\"</code>) interpolate variables inside text and are your daily tool for messages and URLs.</p>",
+  "pyqa.control.label": "Conditionals & loops",
+  "pyqa.control.body":
+    "<p>Control flow uses <strong>indentation</strong> (4 spaces), not braces. <code>if/elif/else</code> to decide; <code>for</code> to walk any iterable and <code>while</code> to repeat while a condition holds. <code>continue</code> skips one pass and <code>break</code> exits the loop.</p>",
+  "pyqa.funcs.label": "Functions",
+  "pyqa.funcs.body":
+    "<p>You define functions with <code>def</code>, with parameters (which can have defaults) and a <code>return</code>. In Python functions are <strong>values</strong>: you can pass them as arguments, which is the basis of fixtures and hooks in testing frameworks.</p>",
+
+  "pyqa.datos.lead":
+    "<p>Testing is, in large part, handling data: lists of elements, dicts holding an API response, and JSON going back and forth. These structures are your bread and butter.</p>",
+  "pyqa.coll.label": "Lists & dicts",
+  "pyqa.coll.body":
+    "<p>A <strong>list</strong> is an ordered, mutable sequence (<code>items[0]</code>, <code>items[-1]</code>, <code>len(items)</code>). A <strong>dict</strong> maps keys to values (<code>order[\"status\"]</code>) and is the natural mirror of a JSON object. <strong>Tuples</strong> are immutable and <strong>sets</strong> drop duplicates.</p>",
+  "pyqa.comp.label": "Comprehensions",
+  "pyqa.comp.body":
+    "<p>A <strong>comprehension</strong> builds a list or dict in one readable line, with an optional filter. Combined with <code>all(...)</code> and <code>any(...)</code> it's ideal for asserting over a whole collection (\"all prices are positive\").</p>",
+  "pyqa.json.label": "JSON",
+  "pyqa.json.body":
+    "<p>APIs speak JSON. The <code>json</code> module turns JSON text into <code>dict</code>/<code>list</code> with <code>json.loads</code> and back with <code>json.dumps</code>. In practice, <code>requests</code> already hands you the parsed body via <code>response.json()</code>.</p>",
+
+  "pyqa.pytest.lead":
+    "<p><strong>pytest</strong> is the go-to test runner in Python. Its superpower: you use the language's plain <code>assert</code> and pytest shows the values when it fails. Zero boilerplate to get going.</p>",
+  "pyqa.pyfirst.label": "Your first test",
+  "pyqa.pyfirst.body":
+    "<p>pytest <strong>auto-discovers</strong> <code>test_*.py</code> files and <code>test_*</code> functions. Each function with an <code>assert</code> is a test. Run everything with <code>pytest -q</code> and see green/red what happened.</p>",
+  "pyqa.fixtures.label": "Fixtures & parametrization",
+  "pyqa.fixtures.body":
+    "<p>A <strong>fixture</strong> (<code>@pytest.fixture</code>) prepares reusable data or resources: any test that asks for that name as a parameter gets it ready. With <code>@pytest.mark.parametrize</code> you run the same test over many cases without repeating code.</p>",
+  "pyqa.pytest.callout":
+    "<strong>AAA pattern:</strong> even the simplest test follows <em>Arrange</em>, <em>Act</em> and <em>Assert</em>. Fixtures are the natural home for the Arrange step.",
+
+  "pyqa.comp2.lead":
+    "<p>Time to put it all together: your first \"real\" test. First against an <strong>API</strong> with <code>requests</code> + pytest, then against a real <strong>UI</strong> with Playwright. Same pattern, two worlds.</p>",
+  "pyqa.api.label": "Testing an API",
+  "pyqa.api.body":
+    "<p>An API test needs no browser: you hit the endpoint and check the <strong>status</strong> and the <strong>shape</strong> of the response. It's the fastest way to start automating for real.</p>",
+  "pyqa.ui.label": "Testing a UI component",
+  "pyqa.ui.body":
+    "<p>The same Arrange-Act-Assert pattern, now against the browser with Playwright. <strong>Web-first assertions</strong> (<code>expect(...).to_be_visible()</code>) auto-wait, so your first UI test is born free of flakiness.</p>",
+  "pyqa.manual.title": "By hand",
+  "pyqa.manual.body":
+    "<p>You learn the syntax and write each test step by step. It's the best way to understand what every line does before delegating anything.</p>",
+  "pyqa.ai.title": "With AI",
+  "pyqa.ai.body":
+    "<p>Once you understand the basics, AI speeds you up: it scaffolds the Python test, suggests cases and explains errors. You review and decide what lands in the repo.</p>",
+  "pyqa.comp2.callout":
+    "<strong>Next step:</strong> with Python and pytest under your belt, pick <strong>Selenium</strong> or <strong>Playwright</strong> in the nav and build full suites. You've got the foundation.",
 
   /* ====================================================================
      3a. SELENIUM

@@ -1014,6 +1014,200 @@ Multi-agent variant (higher confidence):
   - Reviewer agent -> tries to REFUTE it: "can this pass even if the app is
     broken?" Only tests that survive the review get committed.`,
   },
+
+  /* ---- Python para QA: de 0 a hero ---- */
+  pySetup: {
+    lang: "Bash",
+    code: `# Check you have Python 3 (3.9+ is a good baseline for QA work):
+python3 --version
+
+# Create an isolated virtual environment for your test project:
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\\Scripts\\activate
+
+# Install the tools a tester reaches for most:
+pip install pytest requests`,
+  },
+  pyHello: {
+    lang: "Python",
+    code: `# hello.py — your first Python script.
+def main():
+    name = "QA"
+    # f-strings interpolate variables right inside the { }:
+    print(f"Hello, {name}! Ready to automate.")
+
+
+# This block runs only when you execute the file directly:
+if __name__ == "__main__":
+    main()
+
+# Run it from the terminal:  python hello.py`,
+  },
+  pyVars: {
+    lang: "Python",
+    code: `# Python infers the type from the value — no declarations needed.
+name = "Ada"          # str
+attempts = 3          # int
+price = 19.99         # float
+is_active = True      # bool
+nothing = None        # the "no value" value
+
+# Types are dynamic but strong: it won't silently mix them.
+print(type(name), type(attempts))   # <class 'str'> <class 'int'>
+total = price * attempts             # 59.97
+label = f"{name} has {attempts} attempts"   # f-string`,
+  },
+  pyControl: {
+    lang: "Python",
+    code: `# Conditionals use indentation (no braces) — 4 spaces is the convention.
+status = "PAID"
+if status == "PAID":
+    print("Charged")
+elif status == "NEW":
+    print("Pending")
+else:
+    print("Other state")
+
+# Loops: for-each over any iterable, while for a condition.
+for i in range(3):          # 0, 1, 2
+    print("attempt", i)
+
+names = ["Ada", "Linus", "Grace"]
+for n in names:
+    if n == "Linus":
+        continue            # skip this one
+    print(n)`,
+  },
+  pyFuncs: {
+    lang: "Python",
+    code: `# Functions: def, optional default params, a return value.
+def total_cents(price, qty=1):
+    """Return price * quantity as integer cents."""
+    return round(price * qty * 100)
+
+
+# Call by position or by keyword:
+print(total_cents(19.99))          # 1999
+print(total_cents(19.99, qty=3))   # 5997
+
+# Functions are values — you can pass them around (handy for fixtures/hooks).
+def apply(fn, value):
+    return fn(value)`,
+  },
+  pyCollections: {
+    lang: "Python",
+    code: `# Lists (ordered, mutable) and dicts (key -> value) are your daily tools.
+items = ["book", "pen", "mug"]
+items.append("lamp")
+print(items[0], items[-1], len(items))   # book lamp 4
+
+order = {"id": 42, "status": "PAID", "total": 250}
+print(order["status"])                   # PAID
+order["status"] = "REFUNDED"             # update a value
+print("total" in order)                  # True
+
+# Tuples are immutable; sets drop duplicates.
+point = (10, 20)
+unique = set([1, 1, 2, 3])               # {1, 2, 3}`,
+  },
+  pyComprehensions: {
+    lang: "Python",
+    code: `# A comprehension builds a collection in one readable line.
+prices = [10, 25, 7, 50]
+with_tax = [round(p * 1.21, 2) for p in prices]   # [12.1, 30.25, 8.47, 60.5]
+expensive = [p for p in prices if p > 20]         # [25, 50]
+
+# Dict comprehension: id -> name
+users = [{"id": 1, "name": "Ada"}, {"id": 2, "name": "Grace"}]
+by_id = {u["id"]: u["name"] for u in users}       # {1: "Ada", 2: "Grace"}
+
+# any() / all() read like English in assertions over a collection.
+assert all(p > 0 for p in prices)`,
+  },
+  pyJson: {
+    lang: "Python",
+    code: `# APIs speak JSON; the json module maps it to dicts/lists and back.
+import json
+
+raw = '{"id": 42, "items": ["book"], "total": 250}'
+order = json.loads(raw)        # JSON text -> dict
+print(order["items"][0])       # book
+
+# dict -> JSON text (indent makes test diffs readable)
+payload = json.dumps({"status": "PAID"}, indent=2)
+
+# requests does this for you: response.json() returns the parsed body.`,
+  },
+  pyPytestFirst: {
+    lang: "Python",
+    code: `# test_money.py — pytest discovers test_*.py files and test_* functions.
+def to_cents(amount):
+    return round(amount * 100)
+
+
+def test_converts_to_integer_cents():
+    # A plain assert is all pytest needs — it prints the values on failure.
+    assert to_cents(19.99) == 1999
+
+
+def test_handles_zero():
+    assert to_cents(0) == 0
+
+# Run the whole suite:  pytest -q`,
+  },
+  pyFixtures: {
+    lang: "Python",
+    code: `# Fixtures give reusable setup; parametrize runs one test on many inputs.
+import pytest
+
+
+@pytest.fixture
+def order():
+    # Arrange once; any test that asks for "order" gets a fresh copy.
+    return {"id": 42, "status": "PAID", "total": 250}
+
+
+def test_order_is_paid(order):
+    assert order["status"] == "PAID"
+
+
+@pytest.mark.parametrize("amount,cents", [(1.0, 100), (19.99, 1999), (0, 0)])
+def test_to_cents(amount, cents):
+    assert round(amount * 100) == cents`,
+  },
+  pyFirstApiTest: {
+    lang: "Python",
+    code: `# test_orders_api.py — your first real test: hit an API, check the contract.
+import requests
+
+BASE = "https://api.example.com"
+
+
+def test_order_42_is_paid():
+    res = requests.get(f"{BASE}/orders/42", timeout=10)
+
+    # Status first, then the body's shape.
+    assert res.status_code == 200
+    body = res.json()
+    assert body["status"] == "PAID"
+    assert body["total"] == 250
+    assert "book" in body["items"]`,
+  },
+  pyFirstUiTest: {
+    lang: "Python",
+    code: `# test_login_ui.py — the same idea against a real browser, with Playwright.
+from playwright.sync_api import Page, expect
+
+
+def test_login_greets_the_user(page: Page):
+    page.goto("https://example.com/login")
+    page.get_by_label("Username").fill("demo")
+    page.get_by_label("Password").fill("secret")
+    page.get_by_role("button", name="Sign in").click()
+
+    # Web-first assertion: auto-waits until the text shows or it times out.
+    expect(page.get_by_text("Welcome, demo")).to_be_visible()`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -1141,6 +1335,89 @@ function frameworkCases(api, money, docs, security) {
   ];
 }
 
+// "Python para QA: de 0 a hero" — a language primer as a GROUP of sub-pages,
+// using the same nested-menu architecture as the frameworks. Selenium and
+// Playwright are written in Python here, so this is the on-ramp for them.
+function pythonGroup() {
+  const grp = { group: "python", groupKey: "nav.pyqa", chip: { label: "Python", color: "var(--fw-python)" } };
+  return [
+    { ...grp, id: "python-intro", navKey: "pyqa.page.intro", blocks: [
+      { type: "prose", html: "pyqa.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "pyqa.why" },
+      { type: "tiles", items: [
+        { icon: "📖", title: "pyqa.t1.title", body: "pyqa.t1.body" },
+        { icon: "🧪", title: "pyqa.t2.title", body: "pyqa.t2.body" },
+        { icon: "🌐", title: "pyqa.t3.title", body: "pyqa.t3.body" },
+        { icon: "🤖", title: "pyqa.t4.title", body: "pyqa.t4.body" },
+      ] },
+      { type: "label", text: "ui.when" },
+      { type: "prose", html: "pyqa.when" },
+      { type: "callout", variant: "", html: "pyqa.callout" },
+    ] },
+    { ...grp, id: "python-hola", navKey: "pyqa.page.hola", blocks: [
+      { type: "prose", html: "pyqa.hola.lead" },
+      { type: "label", text: "pyqa.install.label" },
+      { type: "prose", html: "pyqa.install.body" },
+      { type: "code", sample: "pySetup" },
+      { type: "label", text: "pyqa.hello.label" },
+      { type: "prose", html: "pyqa.hello.body" },
+      { type: "code", sample: "pyHello" },
+      { type: "callout", variant: "ok", html: "pyqa.hola.callout" },
+    ] },
+    { ...grp, id: "python-fundamentos", navKey: "pyqa.page.fund", blocks: [
+      { type: "prose", html: "pyqa.fund.lead" },
+      { type: "label", text: "pyqa.vars.label" },
+      { type: "prose", html: "pyqa.vars.body" },
+      { type: "code", sample: "pyVars" },
+      { type: "label", text: "pyqa.control.label" },
+      { type: "prose", html: "pyqa.control.body" },
+      { type: "code", sample: "pyControl" },
+      { type: "label", text: "pyqa.funcs.label" },
+      { type: "prose", html: "pyqa.funcs.body" },
+      { type: "code", sample: "pyFuncs" },
+    ] },
+    { ...grp, id: "python-datos", navKey: "pyqa.page.datos", blocks: [
+      { type: "prose", html: "pyqa.datos.lead" },
+      { type: "label", text: "pyqa.coll.label" },
+      { type: "prose", html: "pyqa.coll.body" },
+      { type: "code", sample: "pyCollections" },
+      { type: "label", text: "pyqa.comp.label" },
+      { type: "prose", html: "pyqa.comp.body" },
+      { type: "code", sample: "pyComprehensions" },
+      { type: "label", text: "pyqa.json.label" },
+      { type: "prose", html: "pyqa.json.body" },
+      { type: "code", sample: "pyJson" },
+    ] },
+    { ...grp, id: "python-pytest", navKey: "pyqa.page.pytest", blocks: [
+      { type: "prose", html: "pyqa.pytest.lead" },
+      { type: "label", text: "pyqa.pyfirst.label" },
+      { type: "prose", html: "pyqa.pyfirst.body" },
+      { type: "code", sample: "pyPytestFirst" },
+      { type: "label", text: "pyqa.fixtures.label" },
+      { type: "prose", html: "pyqa.fixtures.body" },
+      { type: "code", sample: "pyFixtures" },
+      { type: "callout", variant: "", html: "pyqa.pytest.callout" },
+    ] },
+    { ...grp, id: "python-componente", navKey: "pyqa.page.comp", blocks: [
+      { type: "prose", html: "pyqa.comp2.lead" },
+      { type: "label", text: "pyqa.api.label" },
+      { type: "prose", html: "pyqa.api.body" },
+      { type: "code", sample: "pyFirstApiTest" },
+      { type: "mock", screen: "order" },
+      { type: "label", text: "pyqa.ui.label" },
+      { type: "prose", html: "pyqa.ui.body" },
+      { type: "code", sample: "pyFirstUiTest" },
+      { type: "mock", screen: "login" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "pyqa.manual.title", body: "pyqa.manual.body" },
+        ai: { title: "pyqa.ai.title", body: "pyqa.ai.body" } },
+      { type: "callout", variant: "ok", html: "pyqa.comp2.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -1227,6 +1504,8 @@ export const SECTIONS = [
       },
     ],
   },
+
+  ...pythonGroup(),
 
   ...frameworkGroup("selenium", "nav.selenium", "sel",
     { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" }, [

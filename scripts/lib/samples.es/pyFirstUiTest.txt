@@ -1,0 +1,12 @@
+# test_login_ui.py — la misma idea contra un browser real, con Playwright.
+from playwright.sync_api import Page, expect
+
+
+def test_login_greets_the_user(page: Page):
+    page.goto("https://example.com/login")
+    page.get_by_label("Username").fill("demo")
+    page.get_by_label("Password").fill("secret")
+    page.get_by_role("button", name="Sign in").click()
+
+    # Aserción web-first: auto-espera hasta que aparezca el texto o se agote el tiempo.
+    expect(page.get_by_text("Welcome, demo")).to_be_visible()

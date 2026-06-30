@@ -1,0 +1,13 @@
+# Las listas (ordenadas, mutables) y los dicts (clave -> valor) son tu día a día.
+items = ["book", "pen", "mug"]
+items.append("lamp")
+print(items[0], items[-1], len(items))   # book lamp 4
+
+order = {"id": 42, "status": "PAID", "total": 250}
+print(order["status"])                   # PAID
+order["status"] = "REFUNDED"             # actualizá un valor
+print("total" in order)                  # True
+
+# Las tuplas son inmutables; los sets descartan duplicados.
+point = (10, 20)
+unique = set([1, 1, 2, 3])               # {1, 2, 3}

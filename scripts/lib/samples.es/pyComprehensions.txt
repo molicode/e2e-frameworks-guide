@@ -1,0 +1,11 @@
+# Una comprensión construye una colección en una línea legible.
+prices = [10, 25, 7, 50]
+with_tax = [round(p * 1.21, 2) for p in prices]   # [12.1, 30.25, 8.47, 60.5]
+expensive = [p for p in prices if p > 20]         # [25, 50]
+
+# Comprensión de dict: id -> name
+users = [{"id": 1, "name": "Ada"}, {"id": 2, "name": "Grace"}]
+by_id = {u["id"]: u["name"] for u in users}       # {1: "Ada", 2: "Grace"}
+
+# any() / all() se leen como en inglés en asserts sobre una colección.
+assert all(p > 0 for p in prices)

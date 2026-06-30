@@ -1,0 +1,18 @@
+# Los condicionales usan indentación (sin llaves) — la convención es 4 espacios.
+status = "PAID"
+if status == "PAID":
+    print("Charged")
+elif status == "NEW":
+    print("Pending")
+else:
+    print("Other state")
+
+# Bucles: for-each sobre cualquier iterable, while para una condición.
+for i in range(3):          # 0, 1, 2
+    print("attempt", i)
+
+names = ["Ada", "Linus", "Grace"]
+for n in names:
+    if n == "Linus":
+        continue            # salteá este
+    print(n)

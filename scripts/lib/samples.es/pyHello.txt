@@ -1,0 +1,12 @@
+# hello.py — tu primer script de Python.
+def main():
+    name = "QA"
+    # Las f-strings interpolan variables dentro de las { }:
+    print(f"Hello, {name}! Ready to automate.")
+
+
+# Este bloque corre solo cuando ejecutás el archivo directamente:
+if __name__ == "__main__":
+    main()
+
+# Correlo desde la terminal:  python hello.py

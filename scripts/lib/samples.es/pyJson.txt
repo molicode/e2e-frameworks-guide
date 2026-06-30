@@ -1,0 +1,11 @@
+# Las APIs hablan JSON; el módulo json lo mapea a dicts/lists y viceversa.
+import json
+
+raw = '{"id": 42, "items": ["book"], "total": 250}'
+order = json.loads(raw)        # texto JSON -> dict
+print(order["items"][0])       # book
+
+# dict -> texto JSON (indent hace legibles los diffs de los tests)
+payload = json.dumps({"status": "PAID"}, indent=2)
+
+# requests hace esto por vos: response.json() devuelve el body parseado.
