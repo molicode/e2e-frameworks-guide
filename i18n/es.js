@@ -30,6 +30,9 @@ I18n.register("es", {
   "ui.when": "Cuándo usarlo",
   "ui.setup": "Instalación",
   "ui.firstTest": "Primer test",
+  "ui.path": "Ruta de aprendizaje",
+  "ui.prev": "Anterior",
+  "ui.next": "Siguiente",
 
   /* ---- Navegación ---- */
   "nav.intro": "Introducción",
@@ -41,6 +44,24 @@ I18n.register("es", {
   "nav.airole": "El rol de la AI",
   "nav.prompts": "Ejemplos con AI",
   "nav.best": "Buenas prácticas",
+  "nav.home": "Inicio",
+
+  /* ---- Landing / índice ---- */
+  "home.eyebrow": "Guía interactiva · open source",
+  "home.title": "Aprendé QA Automation, de cero a tests automáticos",
+  "home.lead":
+    "Una guía bilingüe para dominar el testing automatizado: fundamentos, Selenium, Cypress y Playwright. Cada tema explicado a mano y potenciado con AI.",
+  "home.cta": "Empezar por la introducción →",
+  "home.toc": "Contenido",
+  "home.intro": "Qué es QA y automation, por qué importan, manual vs automatizado.",
+  "home.fundamentals": "Tipos de tests, la pirámide, assertions, selectores y flaky tests.",
+  "home.selenium": "El estándar W3C WebDriver: ruta de aprendizaje de 6 pasos.",
+  "home.cypress": "La mejor DX, runner visual y auto-retry: ruta de 6 pasos.",
+  "home.playwright": "Multi-navegador, auto-wait y trazas: ruta de 6 pasos.",
+  "home.comparison": "El mismo test VerifyOrder resuelto en los 3 frameworks.",
+  "home.ai-role": "Cómo la AI complementa cada etapa del testing.",
+  "home.prompts": "Prompts concretos, cómo iterar y cómo validar el output.",
+  "home.best-practices": "Principios que perduran y tus próximos pasos.",
 
   /* ====================================================================
      1. INTRODUCCIÓN
@@ -131,6 +152,31 @@ I18n.register("es", {
   "sel.ai.body":
     "<p>La AI te ahorra el boilerplate: genera el esqueleto del driver, te recuerda agregar <code>driver.wait(...)</code> antes de cada assertion y traduce un test de Java a JavaScript si cambiás de stack.</p>",
 
+  "sel.rung1.title": "WebDriver y navegación",
+  "sel.rung1.desc": "Levantá un driver, abrí una página y cerrá con quit(). Entendé el ciclo de vida.",
+  "sel.rung1.body":
+    "<p>Todo test de Selenium empieza creando un <strong>driver</strong> (la sesión del navegador) y termina con <code>driver.quit()</code> para liberarla. En el medio navegás con <code>driver.get(url)</code>. Pensá el driver como el control remoto del navegador: si no lo apagás, queda consumiendo recursos.</p>",
+  "sel.rung2.title": "Localizar elementos",
+  "sel.rung2.desc": "Dominá los By: CSS sobre XPath siempre que puedas. Practicá selectores robustos.",
+  "sel.rung2.body":
+    "<p>Selenium localiza elementos con la clase <code>By</code>: <code>By.id</code>, <code>By.css</code>, <code>By.xpath</code>… Usá <code>findElement</code> para uno y <code>findElements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p>",
+  "sel.rung3.title": "Esperas explícitas",
+  "sel.rung3.desc": "El concepto más importante. WebDriverWait + ExpectedConditions. Evitá Thread.sleep.",
+  "sel.rung3.body":
+    "<p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en JS, <code>driver.wait(until.…)</code>; en Java, <code>WebDriverWait</code> + <code>ExpectedConditions</code>. Nunca uses un <code>Thread.sleep</code> fijo: es la causa número uno de flakiness.</p>",
+  "sel.rung4.title": "Runner + assertions",
+  "sel.rung4.desc": "Integralo con JUnit5/TestNG (Java) o pytest (Python). Selenium conduce, no testea.",
+  "sel.rung4.body":
+    "<p>Selenium solo <em>conduce</em> el navegador; las afirmaciones las pone un <strong>test runner</strong>. En Java se combina con <strong>JUnit 5</strong> o <strong>TestNG</strong>; en Python con <strong>pytest</strong>. El runner aporta estructura (setup/teardown), assertions y reportes.</p>",
+  "sel.rung5.title": "Page Object Model",
+  "sel.rung5.desc": "Refactorizá a POM antes de que la suite crezca. La diferencia entre mantenible e infierno.",
+  "sel.rung5.body":
+    "<p>El <strong>Page Object Model (POM)</strong> encapsula los selectores y acciones de una página en una clase con métodos que revelan intención (<code>order.total()</code> en vez de un <code>css</code> suelto). Cuando el HTML cambia, tocás un solo lugar. Es la diferencia entre una suite mantenible y un infierno de selectores repetidos.</p>",
+  "sel.rung6.title": "Grid y CI",
+  "sel.rung6.desc": "Corré en paralelo con Selenium Grid o un servicio cloud, e integralo al pipeline.",
+  "sel.rung6.body":
+    "<p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: apuntás el driver a un hub con <code>usingServer(...)</code> en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p>",
+
   /* ====================================================================
      3b. CYPRESS
      ==================================================================== */
@@ -147,6 +193,31 @@ I18n.register("es", {
   "cyp.ai.body":
     "<p>La AI convierte un caso en lenguaje natural a comandos <code>cy.*</code>, sugiere el <code>.should()</code> correcto para cada verificación y propone <code>data-cy</code> como selectores estables.</p>",
 
+  "cyp.rung1.title": "El runner interactivo",
+  "cyp.rung1.desc": "Corré cypress open, mirá el time-travel y entendé describe / it.",
+  "cyp.rung1.body":
+    "<p>Cypress trae un <strong>runner visual</strong>: con <code>cypress open</code> ves cada comando ejecutarse en vivo y podés viajar en el tiempo a cualquier paso (<em>time-travel</em>). Los tests se organizan con <code>describe()</code> (un grupo) e <code>it()</code> (un caso), igual que en muchos frameworks de JS.</p>",
+  "cyp.rung2.title": "Comandos y la cadena async",
+  "cyp.rung2.desc": "cy.get() no devuelve un valor directo: encadenás. Esto es lo que más cuesta al principio.",
+  "cyp.rung2.body":
+    "<p>El concepto que más cuesta: los comandos <code>cy.*</code> <strong>no son promesas</strong> y no devuelven un valor directo — se <strong>encolan</strong> y se encadenan. Si necesitás el valor de un elemento usás <code>.then()</code>, pero conviene evitarlo. Con <code>.as()</code> creás un alias y lo reusás con <code>@nombre</code>.</p>",
+  "cyp.rung3.title": "Assertions y selectores",
+  "cyp.rung3.desc": "Las .should() implícitas y explícitas; la convención data-cy.",
+  "cyp.rung3.body":
+    "<p>Las assertions de Cypress son <strong>implícitas</strong>: <code>.should()</code> reintenta el comando anterior hasta que se cumple. Encadenás más condiciones con <code>.and()</code>, o usás <code>expect()</code> dentro de un callback para casos explícitos. Para selectores estables, la comunidad usa la convención <code>data-cy</code>.</p>",
+  "cyp.rung4.title": "Network con cy.intercept()",
+  "cyp.rung4.desc": "Mockeá APIs, esperá requests con alias y testeá estados de error.",
+  "cyp.rung4.body":
+    "<p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p>",
+  "cyp.rung5.title": "Custom commands y fixtures",
+  "cyp.rung5.desc": "Encapsulá el login y los datos en fixtures JSON para tests limpios.",
+  "cyp.rung5.body":
+    "<p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p>",
+  "cyp.rung6.title": "Component testing + CI",
+  "cyp.rung6.desc": "Probá componentes aislados y armá la corrida en el pipeline.",
+  "cyp.rung6.body":
+    "<p>Además de E2E, Cypress hace <strong>component testing</strong>: montás un componente aislado con <code>cy.mount()</code> y lo probás sin levantar toda la app. En CI corrés <code>cypress run</code> (headless), con <code>--component</code> o <code>--e2e</code> según el tipo.</p>",
+
   /* ====================================================================
      3c. PLAYWRIGHT
      ==================================================================== */
@@ -162,6 +233,31 @@ I18n.register("es", {
   "pw.ai.title": "Con AI",
   "pw.ai.body":
     "<p>La AI genera el test completo desde una descripción, recomienda locators accesibles (por rol/etiqueta) y, ante un fallo, lee la traza y te explica la causa probable.</p>",
+
+  "pw.rung1.title": "Setup y primer test",
+  "pw.rung1.desc": "Instalá, corré el ejemplo en modo --ui y entendé la estructura test().",
+  "pw.rung1.body":
+    "<p>Con <code>npm init playwright@latest</code> tenés config, tests de ejemplo y workflow de CI en un comando. Cada test es una función <code>test('nombre', async ({ page }) =&gt; { … })</code>. Corré <code>npx playwright test --ui</code> para el modo interactivo con watch y time-travel.</p>",
+  "pw.rung2.title": "Locators y acciones",
+  "pw.rung2.desc": "Dominá getByRole/Label/Text. Filtrá, encadená y manejá listas con .nth().",
+  "pw.rung2.body":
+    "<p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first()</code>/<code>.last()</code> y encadenás para llegar al elemento exacto.</p>",
+  "pw.rung3.title": "Assertions y auto-waiting",
+  "pw.rung3.desc": "Aprendé las web-first assertions y por qué casi nunca esperás a mano.",
+  "pw.rung3.body":
+    "<p>Las <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, <code>expect(valor).toBe(...)</code> no reintenta.</p>",
+  "pw.rung4.title": "Fixtures y organización",
+  "pw.rung4.desc": "Hooks, fixtures propias y Page Object Model para suites que escalan.",
+  "pw.rung4.body":
+    "<p>Para que la suite escale: usá <strong>hooks</strong> (<code>beforeEach</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una <strong>fixture</strong> propia con <code>base.extend()</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p>",
+  "pw.rung5.title": "Network y auth",
+  "pw.rung5.desc": "Interceptá con page.route(), mockeá APIs y reusá sesión con storageState.",
+  "pw.rung5.body":
+    "<p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storageState</code> y la reusás en la config. Menos flakiness, más velocidad.</p>",
+  "pw.rung6.title": "CI + trace viewer",
+  "pw.rung6.desc": "Integralo al pipeline, activá traces y reportes. Acá es donde brilla.",
+  "pw.rung6.body":
+    "<p>Donde Playwright brilla: en <code>playwright.config.js</code> activás <strong>traces</strong> (<code>trace: 'on-first-retry'</code>) y reportes HTML. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>npx playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p>",
 
   /* ====================================================================
      4. COMPARATIVA

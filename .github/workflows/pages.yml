@@ -1,0 +1,56 @@
+name: Deploy to GitHub Pages
+
+# Publishes the static site so it can be browsed at a public URL — no clone
+# needed. Runs on every push to main, and can be triggered manually.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissions required by the official Pages deploy actions.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment; let an in-progress run finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Regenerate the static HTML from the model + dictionaries so the
+      # published pages are always in sync with the source of truth.
+      - name: Build static site
+        run: node scripts/build.mjs
+
+      # Fail the build if the i18n dictionaries are out of sync.
+      - name: Check i18n parity
+        run: node scripts/check-i18n.mjs
+
+      - uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -4,12 +4,17 @@
 > scratch — every topic explained twice: how it's done **manually** and how it's
 > **complemented with AI**.
 
-A modern static site (vanilla **HTML + CSS + JS**, no backend, no build step)
-covering the fundamentals of test automation and the three big E2E frameworks:
-**Selenium**, **Cypress** and **Playwright**. Open source and built to be
-extended by the community.
+### 🌐 **[Open the live guide → molicode.github.io/e2e-frameworks-guide](https://molicode.github.io/e2e-frameworks-guide/)**
 
-[➡️ **Read the guide in English below**](#-english) · [➡️ **Leé la guía en español más abajo**](#-español)
+*(Tip: <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+click to open it in a new tab.)*
+
+A modern **static, multi-page** site (plain **HTML + CSS + a little JS**, no
+backend, no build needed to view it) covering the fundamentals of test
+automation and the three big E2E frameworks — **Selenium**, **Cypress** and
+**Playwright** — each with a full **6-step learning path**. Open source and built
+to be extended by the community.
+
+[➡️ **English**](#-english) · [➡️ **Español**](#-español)
 
 ---
 
@@ -20,133 +25,121 @@ extended by the community.
 
 1. **Introduction** — what QA & automation are, why they matter, manual vs automated.
 2. **Fundamentals** — test types, the testing pyramid, assertions, selectors, flaky tests.
-3. **The 3 frameworks** — Selenium, Cypress and Playwright (philosophy, when to use, setup, first test, key syntax).
-4. **Side-by-side comparison** — the same `VerifyOrder` test in all three frameworks.
-5. **The role of AI in QA** — how AI complements each stage, manual vs AI-assisted flow.
-6. **Hands-on AI examples** — concrete prompts, how to iterate, how to validate the output.
-7. **Best practices & next steps.**
+3–5. **Selenium · Cypress · Playwright** — philosophy, when to use, and a **6-rung learning path** each (e.g. for Playwright: setup → locators & actions → assertions & auto-waiting → fixtures & POM → network & auth → CI + trace viewer).
+6. **Side-by-side comparison** — the same `VerifyOrder` test in all three frameworks.
+7. **The role of AI in QA** — how AI complements each stage, manual vs AI-assisted flow.
+8. **Hands-on AI examples** — concrete prompts, how to iterate, how to validate the output.
+9. **Best practices & next steps.**
 
-Every section has a **Theory** block, a **code example** with syntax
-highlighting and a copy button, and a **Manual vs AI** two-column comparison.
+Every section has a **Theory** block, **copyable, syntax-highlighted code**, and a
+**Manual vs AI** two-column comparison. Each topic is its own page, connected by a
+landing **index** and prev/next links.
 
 ### Global features
 
 - 🌗 **Light/dark theme toggle** — persisted in `localStorage`, respects
-  `prefers-color-scheme` on first visit.
-- 🌐 **Spanish/English toggle** — all content switches live (no reload),
+  `prefers-color-scheme` on first visit, kept across page navigation.
+- 🌐 **Spanish/English toggle** — switches the whole site live (no reload),
   persisted in `localStorage`, powered by a simple key-based i18n system.
-- 📊 Reading-progress bar, scroll-spy side navigation, responsive (mobile-first)
-  layout with a slide-in drawer.
+- 📊 Reading-progress bar, scroll-spy-free per-page navigation, responsive
+  (mobile-first) layout with a slide-in drawer.
 
 ### Run it locally
 
-No build step and no dependencies are required — it's plain static files. Pick
-any static server:
+The published pages are **plain static HTML**, so you have options:
 
 ```bash
-# Option 1 — Python (no install needed on most systems)
-python3 -m http.server 8080
-# then open http://localhost:8080
+# Easiest: just open the file in a browser
+#   double-click index.html      (works straight from disk)
 
-# Option 2 — Node's "serve"
+# Or serve it (recommended for clean relative paths):
+python3 -m http.server 8080      # then open http://localhost:8080
+# or
 npx --yes serve .
-
-# Option 3 — npm script shortcut (see package.json)
-npm start
 ```
 
-> You can also just open `index.html` directly, but a server is recommended so
-> the relative `<script>`/`<link>` paths resolve consistently across browsers.
+If you **edit the content** (the model or the dictionaries), regenerate the
+static pages:
 
-### Project structure
+```bash
+npm run build        # node scripts/build.mjs  → writes index.html + sections/*.html
+```
+
+### How it's built (architecture)
+
+The site is **generated** from a single source of truth and the output is
+committed as static HTML, so visitors/hosts need **no build step**:
+
+- **Content model** — `scripts/lib/model.mjs` defines the sections, blocks and
+  code samples (structure + language-neutral code).
+- **Text** — `i18n/es.js` (source of truth) and `i18n/en.js` hold every string,
+  keyed. Nothing is hardcoded in the markup.
+- **Generator** — `scripts/build.mjs` bakes the model + the default-language
+  text into real HTML pages (Spanish visible even with JS off), tagging each
+  text node with a `data-i18n` key so the runtime toggle can swap to English.
+- **Runtime** — `js/page.js` is a tiny script that applies translations, wires
+  the theme/language toggles, the copy buttons, the progress bar and the mobile
+  drawer. No content rendering and no highlighter run in the browser.
 
 ```
 e2e-frameworks-guide/
-├── index.html              # Page skeleton: header, sidebar, main mount points
-├── css/
-│   ├── variables.css       # Design tokens for BOTH themes (edit colors here)
-│   ├── base.css            # Reset, typography, layout (header/sidebar/content)
-│   ├── components.css      # Cards, toggles, code blocks, MANUAL-vs-AI grid…
-│   └── responsive.css      # Mobile-first breakpoints (drawer, stacking)
+├── index.html              # GENERATED landing page / table of contents
+├── sections/               # GENERATED one .html page per section
+│   ├── intro.html  fundamentals.html  selenium.html  cypress.html …
+├── css/                    # variables (themes) · base · components · responsive
 ├── js/
-│   ├── i18n.js             # Tiny i18n engine (register / t / apply / setLang)
-│   ├── highlight.js        # Dependency-free syntax highlighter
-│   ├── content.js          # CONTENT MODEL + renderer (structure + code samples)
-│   ├── theme.js            # Light/dark toggle + persistence
-│   ├── nav.js              # Sidebar build, scroll-spy, progress bar, drawer
-│   └── app.js              # Bootstrap: render → translate → wire interactions
+│   ├── i18n.js             # tiny i18n engine (register / t / apply / setLang)
+│   ├── theme.js            # light/dark toggle + persistence
+│   └── page.js             # runtime bootstrap (toggles, copy, progress, drawer)
 ├── i18n/
 │   ├── es.js               # Spanish dictionary (source of truth)
 │   └── en.js               # English dictionary
 ├── scripts/
-│   └── check-i18n.mjs      # CI helper: verifies all dictionaries share keys
-├── assets/favicon.svg
-├── package.json            # Convenience scripts only (no runtime deps)
-├── CONTRIBUTING.md
-└── README.md
+│   ├── build.mjs           # static-site generator
+│   ├── check-i18n.mjs      # CI gate: all dictionaries share the same keys
+│   └── lib/
+│       ├── model.mjs       # CONTENT MODEL (sections + code samples)
+│       ├── render.mjs      # block → HTML string renderer + page layout
+│       └── highlight.mjs   # build-time syntax highlighter
+├── .github/workflows/pages.yml   # builds + deploys to GitHub Pages
+└── assets/favicon.svg
 ```
 
-**How it fits together:** the *structure* of each section lives in
-`js/content.js`; the *text* lives in the `i18n/*.js` dictionaries (referenced by
-key); the *code samples* are language-neutral and also live in `content.js`. The
-renderer tags every text node with a `data-i18n` key so switching language just
-re-fills the DOM — it never re-renders, so scroll position and copy state are
-preserved.
+### Deploying (GitHub Pages)
+
+A workflow at `.github/workflows/pages.yml` builds the site and deploys it to
+GitHub Pages on every push to `main`. To enable it on a fork:
+
+1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push to `main` (or run the workflow manually from the **Actions** tab).
+3. The site goes live at `https://<user>.github.io/<repo>/`.
 
 ### How to add a new language
 
-The i18n system is key-based, so adding a language is a copy-and-translate job —
-no markup changes.
-
-1. **Copy** `i18n/es.js` to `i18n/<code>.js` (e.g. `i18n/pt.js` for Portuguese).
-2. **Translate the values only** — never change the keys. Values used in
-   `data-i18n-html` blocks may contain inline HTML (`<strong>`, `<ul>`, …);
-   keep the tags and translate the words.
-3. **Register** it with the right code — the first argument of `I18n.register`:
-   ```js
-   I18n.register("pt", { /* …translated values… */ });
-   ```
-4. **Declare it as supported** in `js/i18n.js`:
-   ```js
-   var SUPPORTED = ["es", "en", "pt"];
-   ```
-5. **Add a toggle button** in `index.html` inside `.seg-toggle`:
-   ```html
-   <button class="seg-toggle__btn" data-lang="pt" type="button">PT</button>
-   ```
-6. **Load the file** in `index.html` next to the others:
-   ```html
-   <script src="i18n/pt.js"></script>
-   ```
-7. **Verify key parity** before opening a PR:
+1. **Copy** `i18n/es.js` to `i18n/<code>.js` (e.g. `i18n/pt.js`) and translate
+   the **values** only — never the keys.
+2. **Register** it: `I18n.register("pt", { … });`.
+3. **Declare it supported** in `js/i18n.js`'s `SUPPORTED` array.
+4. **Add a toggle button** in the header — note the header is generated, so add
+   the button in `scripts/lib/render.mjs` (the `.seg-toggle` block) and load the
+   new `<script src="…i18n/pt.js">` there too.
+5. **Verify parity** and **rebuild**:
    ```bash
-   npm run check:i18n   # or: node scripts/check-i18n.mjs
+   npm run check:i18n   # all dictionaries must share the same keys
+   npm run build
    ```
-   It fails if any language is missing or has extra keys versus the reference
-   (`es`).
 
 ### How to add a new section
 
-1. Add an entry to the `SECTIONS` array in `js/content.js`. Give it an `id`, a
-   `navKey`, and a list of `blocks`. Available block types:
-
-   | Type       | Purpose                                   |
-   |------------|-------------------------------------------|
-   | `prose`    | Rich text paragraph(s) (`html` → key)     |
-   | `label`    | Small section sub-heading (`text` → key)  |
-   | `code`     | Code block (`sample` → id in `SAMPLES`)   |
-   | `callout`  | Tip/warn/danger/ok box (`html` → key)     |
-   | `tiles`    | Grid of icon tiles                        |
-   | `vs`       | MANUAL-vs-AI two columns                  |
-   | `fwblock`  | Framework chip + note + code              |
-   | `table`    | Comparison table                          |
-   | `steps`    | Numbered steps                            |
-
-2. If your section needs new code, add it to the `SAMPLES` object (same file)
-   with a `lang` label and the `code` string.
-3. Add **every new key** to **all** `i18n/*.js` dictionaries.
-4. Run `npm run check:i18n`, then reload the page — the sidebar link, scroll-spy
-   and progress bar update automatically (they're generated from the model).
+1. Add an entry to `SECTIONS` in `scripts/lib/model.mjs` (an `id`, a `navKey`,
+   and a list of `blocks`). Block types: `prose`, `label`, `code`, `callout`,
+   `tiles`, `vs`, `fwblock`, `table`, `steps`, `roadmap`. For a framework
+   section, use the `frameworkSection(...)` helper to get a roadmap + rungs.
+2. If it needs new code, add it to `SAMPLES` (same file).
+3. Add **every new key** to **all** `i18n/*.js` dictionaries, plus a
+   `home.<id>` one-liner for the landing card.
+4. `npm run check:i18n && npm run build` — the new page, the index card, the
+   sidebar link and the prev/next pager are all generated for you.
 
 See `CONTRIBUTING.md` for the full workflow.
 
@@ -155,85 +148,85 @@ See `CONTRIBUTING.md` for the full workflow.
 <a id="-español"></a>
 ## 🇪🇸 Español
 
+### 🌐 **[Abrir la guía en vivo → molicode.github.io/e2e-frameworks-guide](https://molicode.github.io/e2e-frameworks-guide/)**
+
+*(Tip: <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+clic para abrirla en otra pestaña.)*
+
 ### Qué incluye
 
 1. **Introducción** — qué es QA y automation, por qué importan, manual vs automatizado.
 2. **Fundamentos** — tipos de tests, la pirámide, assertions, selectores, tests flaky.
-3. **Los 3 frameworks** — Selenium, Cypress y Playwright (filosofía, cuándo usarlo, instalación, primer test, sintaxis clave).
-4. **Comparativa lado a lado** — el mismo test `VerifyOrder` en los tres frameworks.
-5. **El rol de la AI en QA** — cómo la AI complementa cada etapa, flujo manual vs asistido por AI.
-6. **Ejemplos prácticos con AI** — prompts concretos, cómo iterar, cómo validar el output.
-7. **Buenas prácticas y próximos pasos.**
+3–5. **Selenium · Cypress · Playwright** — filosofía, cuándo usarlo y una **ruta de aprendizaje de 6 pasos** en cada uno.
+6. **Comparativa lado a lado** — el mismo test `VerifyOrder` en los tres frameworks.
+7. **El rol de la AI en QA** — cómo la AI complementa cada etapa, flujo manual vs asistido por AI.
+8. **Ejemplos prácticos con AI** — prompts concretos, cómo iterar, cómo validar el output.
+9. **Buenas prácticas y próximos pasos.**
 
-Cada sección tiene un bloque de **Teoría**, un **ejemplo de código** con
-resaltado de sintaxis y botón de copiar, y una comparación **Manual vs AI** en
-dos columnas.
+Cada sección tiene **Teoría**, un **ejemplo de código** copiable con resaltado, y
+una comparación **Manual vs AI**. Cada tema es su propia página, conectadas por un
+**índice** y enlaces anterior/siguiente.
 
 ### Funciones globales
 
-- 🌗 **Toggle de tema claro/oscuro** — persiste en `localStorage` y respeta
-  `prefers-color-scheme` en la primera visita.
-- 🌐 **Toggle de idioma español/inglés** — todo el contenido cambia en vivo (sin
-  recargar), persiste en `localStorage`, con un sistema de i18n simple basado en
-  claves.
-- 📊 Barra de progreso de lectura, navegación lateral con scroll-spy y diseño
-  responsive (mobile-first) con drawer deslizable.
+- 🌗 **Toggle de tema claro/oscuro** — persiste en `localStorage`, respeta
+  `prefers-color-scheme` en la primera visita y se mantiene al navegar.
+- 🌐 **Toggle de idioma español/inglés** — cambia todo el sitio en vivo (sin
+  recargar), persiste en `localStorage`, con un i18n simple basado en claves.
+- 📊 Barra de progreso de lectura, navegación entre páginas y diseño responsive
+  (mobile-first) con drawer.
 
 ### Cómo correrlo localmente
 
-No hace falta build ni dependencias: son archivos estáticos. Elegí cualquier
-servidor estático:
+Las páginas publicadas son **HTML estático puro**:
 
 ```bash
-# Opción 1 — Python (suele venir instalado)
-python3 -m http.server 8080
-# abrí http://localhost:8080
+# Lo más fácil: abrí el archivo en el navegador
+#   doble clic en index.html      (funciona directo desde el disco)
 
-# Opción 2 — "serve" de Node
+# O serví el sitio (recomendado para que las rutas relativas resuelvan):
+python3 -m http.server 8080      # abrí http://localhost:8080
+# o
 npx --yes serve .
-
-# Opción 3 — atajo por npm (ver package.json)
-npm start
 ```
 
-> También podés abrir `index.html` directo, pero se recomienda un servidor para
-> que las rutas relativas resuelvan igual en todos los navegadores.
+Si **editás el contenido** (el modelo o los diccionarios), regenerá las páginas:
 
-### Cómo agregar un idioma nuevo
+```bash
+npm run build        # genera index.html + sections/*.html
+```
 
-El i18n se basa en claves, así que agregar un idioma es copiar y traducir, sin
-tocar el markup.
+### Cómo está construido
 
-1. **Copiá** `i18n/es.js` a `i18n/<código>.js` (ej. `i18n/pt.js`).
-2. **Traducí solo los valores** — nunca las claves. Los valores de bloques
-   `data-i18n-html` pueden tener HTML inline (`<strong>`, `<ul>`, …): mantené las
-   etiquetas y traducí las palabras.
-3. **Registralo** con el código correcto (primer argumento de `I18n.register`):
-   `I18n.register("pt", { /* … */ });`
-4. **Declaralo como soportado** en `js/i18n.js`: `var SUPPORTED = ["es", "en", "pt"];`
-5. **Agregá el botón** del toggle en `index.html`, dentro de `.seg-toggle`.
-6. **Cargá el archivo** en `index.html` junto a los otros `<script src="i18n/…">`.
-7. **Verificá la paridad de claves**: `npm run check:i18n`.
+El sitio se **genera** desde una única fuente de verdad y la salida se commitea
+como HTML estático, así que para verlo o publicarlo **no hace falta build**:
 
-### Cómo agregar una sección nueva
+- **Modelo de contenido** — `scripts/lib/model.mjs`: secciones, bloques y código.
+- **Texto** — `i18n/es.js` (fuente de verdad) y `i18n/en.js`, por claves.
+- **Generador** — `scripts/build.mjs` hornea el modelo + el texto en español en
+  HTML real (visible aún sin JS) con claves `data-i18n` para el toggle.
+- **Runtime** — `js/page.js`: aplica traducciones y conecta los toggles, el copy,
+  la barra de progreso y el drawer. No se renderiza contenido ni se resalta en el
+  navegador.
 
-1. Sumá una entrada al array `SECTIONS` en `js/content.js` (con `id`, `navKey` y
-   `blocks`). Los tipos de bloque disponibles están en la tabla de la sección en
-   inglés (`prose`, `label`, `code`, `callout`, `tiles`, `vs`, `fwblock`,
-   `table`, `steps`).
-2. Si necesitás código nuevo, agregalo al objeto `SAMPLES` (mismo archivo).
-3. Agregá **todas las claves nuevas** a **todos** los diccionarios `i18n/*.js`.
-4. Corré `npm run check:i18n` y recargá: el link del sidebar, el scroll-spy y la
-   barra de progreso se actualizan solos (se generan desde el modelo).
+La estructura de archivos está en la sección en inglés de arriba.
 
-Mirá `CONTRIBUTING.md` para el flujo completo.
+### Desplegar (GitHub Pages)
+
+El workflow `.github/workflows/pages.yml` construye y publica el sitio en cada
+push a `main`. Para activarlo en un fork: **Settings → Pages → Source: GitHub
+Actions**, y pusheá a `main`. Queda en `https://<usuario>.github.io/<repo>/`.
+
+### Cómo agregar un idioma o una sección
+
+Mismos pasos que en la sección en inglés (**“How to add a new language / section”**):
+editás `i18n/*.js` y/o `scripts/lib/model.mjs`, corrés `npm run check:i18n` y
+`npm run build`. El índice, el sidebar y el paginador se generan solos.
 
 ---
 
 ## Contributing / Contribuir
 
-Contributions are very welcome — this is a community resource. Whether it's a
-typo, a new language, a clearer analogy or a whole new section, please read
+Contributions are very welcome — this is a community resource. Read
 [`CONTRIBUTING.md`](CONTRIBUTING.md) and open a pull request.
 
 ## License / Licencia

@@ -14,8 +14,9 @@ whole new section.
 - **Be accurate.** This is a learning resource. If you add a technical claim
   about Selenium/Cypress/Playwright/AI, make sure it's correct and current.
 - **Keep it framework-light.** The site is intentionally vanilla HTML/CSS/JS
-  with **no build step and no runtime dependencies**. Please don't add a
-  bundler, a framework, or npm runtime packages.
+  with **no runtime dependencies**. The only "build" is a small dependency-free
+  Node generator (`scripts/build.mjs`) that bakes the content into static HTML.
+  Please don't add a bundler, a framework, or npm runtime packages.
 - **Keep both languages in sync.** Every text change must exist in *all*
   language dictionaries (`i18n/*.js`). The key sets must match exactly.
 - **Match the surrounding style.** Comments and code follow the conventions
@@ -29,15 +30,17 @@ whole new section.
 git clone https://github.com/molicode/e2e-frameworks-guide.git
 cd e2e-frameworks-guide
 
-# Serve it (any static server works)
+# Build the static pages, then serve them (any static server works)
+npm run build                 # node scripts/build.mjs
 python3 -m http.server 8080   # or: npx --yes serve .
 # open http://localhost:8080
 ```
 
-Before opening a pull request, run the i18n parity check:
+Before opening a pull request, run the i18n parity check and rebuild:
 
 ```bash
-npm run check:i18n   # node scripts/check-i18n.mjs
+npm run check:i18n   # all dictionaries must share the same keys
+npm run build        # regenerate index.html + sections/*.html
 ```
 
 It exits non-zero if any dictionary is missing keys or has extra ones compared
@@ -64,24 +67,26 @@ and a `<script>` tag in `index.html`, then run `npm run check:i18n`.
 ### Add or edit a section
 
 See **“How to add a new section”** in the [README](README.md). Sections are data
-in the `SECTIONS` array of `js/content.js`; the sidebar, scroll-spy and progress
-bar are generated from that model, so you don't touch the markup.
+in the `SECTIONS` array of `scripts/lib/model.mjs`; the page, the landing index
+card, the sidebar link and the prev/next pager are all generated from that
+model, so you don't hand-write the markup. Run `npm run build` to regenerate.
 
 ### Add or edit a code sample
 
 Code samples are language-neutral and live in the `SAMPLES` object in
-`js/content.js`. Keep them runnable and idiomatic. Prefer realistic, minimal
-examples over clever ones.
+`scripts/lib/model.mjs`. Keep them runnable and idiomatic. Prefer realistic,
+minimal examples over clever ones. Rebuild with `npm run build`.
 
 ---
 
 ## Pull request checklist
 
 - [ ] `npm run check:i18n` passes (all dictionaries share the same keys).
+- [ ] `npm run build` was run and the regenerated `index.html` / `sections/*.html` are committed.
 - [ ] Text changes applied to **every** language.
 - [ ] Verified in **light and dark** themes.
 - [ ] Verified on a **narrow viewport** (mobile drawer, stacked columns).
-- [ ] No new runtime dependencies / no build step introduced.
+- [ ] No new runtime dependencies introduced.
 - [ ] Commit messages are clear and descriptive.
 
 ---

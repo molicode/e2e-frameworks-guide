@@ -4,7 +4,8 @@
   "description": "Interactive, bilingual guide to QA Automation — learn each topic manually and AI-powered. Static site (vanilla HTML/CSS/JS), no build step.",
   "type": "module",
   "scripts": {
-    "start": "python3 -m http.server 8080",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/build.mjs && python3 -m http.server 8080",
     "serve": "npx --yes serve .",
     "check:i18n": "node scripts/check-i18n.mjs"
   },

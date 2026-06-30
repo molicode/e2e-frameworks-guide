@@ -3,99 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" data-i18n="meta.description"
-        content="Guía interactiva para aprender QA Automation desde cero: manual y potenciado con AI." />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="meta.title">QA Automation Guide</title>
-
-  <!--
-    Apply the saved (or system) theme BEFORE the first paint to avoid a
-    flash of the wrong colors. Kept tiny and inline on purpose.
-  -->
+  <title data-i18n="meta.title">Guía de QA Automation — manual y con AI</title>
   <script>
     (function () {
       try {
         var saved = localStorage.getItem('qaguide-theme');
         var prefersDark = window.matchMedia &&
           window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = saved || (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
       } catch (e) {
         document.documentElement.setAttribute('data-theme', 'light');
       }
     })();
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body>
-  <!-- Reading progress bar (filled by js/nav.js on scroll) -->
+<body class="page--home">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
 
   <header class="site-header">
     <div class="site-header__inner">
-      <button class="icon-btn menu-btn" id="menu-toggle"
-              aria-label="Menu" data-i18n-attr="aria-label:ui.menu">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
-        </svg>
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
       </button>
-
-      <a class="brand" href="#intro">
+      <a class="brand" href="index.html">
         <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
         <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
       </a>
-
       <div class="site-header__actions">
-        <!-- Language toggle -->
-        <div class="seg-toggle" role="group"
-             aria-label="Language" data-i18n-attr="aria-label:ui.lang">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
           <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
           <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
         </div>
-
-        <!-- Theme toggle -->
         <button class="icon-btn theme-btn" id="theme-toggle" type="button"
-                aria-label="Toggle theme" data-i18n-attr="aria-label:ui.theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-            <path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" />
-          </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-            <path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" />
-          </svg>
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
         </button>
       </div>
     </div>
   </header>
 
   <div class="layout">
-    <!-- Backdrop for the mobile drawer -->
     <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
-
-    <!-- Side navigation (built by js/nav.js from the content model) -->
-    <aside class="sidebar" id="sidebar" aria-label="Sections">
-      <nav class="sidebar__nav" id="sidebar-nav"></nav>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="sections/intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="sections/fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link" href="sections/selenium.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link" href="sections/cypress.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link" href="sections/playwright.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="sections/comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="sections/ai-role.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="sections/prompts.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="sections/best-practices.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+      </nav>
     </aside>
-
-    <!-- Main content (rendered by js/content.js from the content model) -->
-    <main class="content" id="main-content"></main>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="hero hero--home">
+          <span class="section__eyebrow" data-i18n="home.eyebrow">Guía interactiva · open source</span>
+          <h1 class="hero__title" data-i18n="home.title">Aprendé QA Automation, de cero a tests automáticos</h1>
+          <p class="hero__lead" data-i18n="home.lead">Una guía bilingüe para dominar el testing automatizado: fundamentos, Selenium, Cypress y Playwright. Cada tema explicado a mano y potenciado con AI.</p>
+          <a class="cta-btn" href="sections/intro.html" data-i18n="home.cta">Empezar por la introducción →</a>
+        </div>
+        <h3 class="block-label" data-i18n="home.toc">Contenido</h3>
+        <div class="toc-grid">
+          <a class="toc-card" href="sections/intro.html">
+            <span class="toc-card__num">01</span>
+            <span class="toc-card__title" data-i18n="nav.intro">Introducción</span>
+            <span class="toc-card__desc" data-i18n="home.intro">Qué es QA y automation, por qué importan, manual vs automatizado.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/fundamentals.html">
+            <span class="toc-card__num">02</span>
+            <span class="toc-card__title" data-i18n="nav.fundamentals">Fundamentos</span>
+            <span class="toc-card__desc" data-i18n="home.fundamentals">Tipos de tests, la pirámide, assertions, selectores y flaky tests.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/selenium.html">
+            <span class="toc-card__num">03</span>
+            <span class="toc-card__title" data-i18n="nav.selenium">Selenium</span>
+            <span class="toc-card__desc" data-i18n="home.selenium">El estándar W3C WebDriver: ruta de aprendizaje de 6 pasos.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/cypress.html">
+            <span class="toc-card__num">04</span>
+            <span class="toc-card__title" data-i18n="nav.cypress">Cypress</span>
+            <span class="toc-card__desc" data-i18n="home.cypress">La mejor DX, runner visual y auto-retry: ruta de 6 pasos.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/playwright.html">
+            <span class="toc-card__num">05</span>
+            <span class="toc-card__title" data-i18n="nav.playwright">Playwright</span>
+            <span class="toc-card__desc" data-i18n="home.playwright">Multi-navegador, auto-wait y trazas: ruta de 6 pasos.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/comparison.html">
+            <span class="toc-card__num">06</span>
+            <span class="toc-card__title" data-i18n="nav.comparison">Comparativa</span>
+            <span class="toc-card__desc" data-i18n="home.comparison">El mismo test VerifyOrder resuelto en los 3 frameworks.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/ai-role.html">
+            <span class="toc-card__num">07</span>
+            <span class="toc-card__title" data-i18n="nav.airole">El rol de la AI</span>
+            <span class="toc-card__desc" data-i18n="home.ai-role">Cómo la AI complementa cada etapa del testing.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/prompts.html">
+            <span class="toc-card__num">08</span>
+            <span class="toc-card__title" data-i18n="nav.prompts">Ejemplos con AI</span>
+            <span class="toc-card__desc" data-i18n="home.prompts">Prompts concretos, cómo iterar y cómo validar el output.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="toc-card" href="sections/best-practices.html">
+            <span class="toc-card__num">09</span>
+            <span class="toc-card__title" data-i18n="nav.best">Buenas prácticas</span>
+            <span class="toc-card__desc" data-i18n="home.best-practices">Principios que perduran y tus próximos pasos.</span>
+            <span class="toc-card__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- Order matters: engines first, then data, then bootstrap. -->
   <script src="js/i18n.js"></script>
   <script src="i18n/es.js"></script>
   <script src="i18n/en.js"></script>
-  <script src="js/highlight.js"></script>
-  <script src="js/content.js"></script>
   <script src="js/theme.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/page.js"></script>
 </body>
 </html>
