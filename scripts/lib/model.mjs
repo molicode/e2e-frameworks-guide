@@ -2213,6 +2213,59 @@ function skillsGroup() {
   ];
 }
 
+// "Estrategia y madurez de QA" — QA as a strategic function: a maturity roadmap,
+// KPIs, maturity models and ISTQB certifications. A GROUP of sub-pages.
+function maturityGroup() {
+  const grp = { group: "maturity", groupKey: "nav.maturity", chip: { label: "Estrategia QA", color: "var(--fw-maturity)" } };
+  return [
+    { ...grp, id: "maturity-intro", navKey: "mat.page.intro", blocks: [
+      { type: "prose", html: "mat.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "mat.why" },
+      { type: "tiles", items: [
+        { icon: "📐", title: "mat.t1.title", body: "mat.t1.body" },
+        { icon: "📊", title: "mat.t2.title", body: "mat.t2.body" },
+        { icon: "🌱", title: "mat.t3.title", body: "mat.t3.body" },
+      ] },
+      { type: "callout", variant: "", html: "mat.callout" },
+    ] },
+    { ...grp, id: "maturity-roadmap", navKey: "mat.page.roadmap", blocks: [
+      { type: "prose", html: "mat.road.lead" },
+      { type: "steps", items: ["mat.phase1", "mat.phase2", "mat.phase3", "mat.phase4"] },
+      { type: "callout", variant: "warn", html: "mat.road.callout" },
+    ] },
+    { ...grp, id: "maturity-kpis", navKey: "mat.page.kpis", blocks: [
+      { type: "prose", html: "mat.kpi.lead" },
+      { type: "table",
+        head: ["mat.kpi.th.name", "mat.kpi.th.measures", "mat.kpi.th.calc"],
+        rows: [
+          ["mat.kpi.dd.n", "mat.kpi.dd.m", "mat.kpi.dd.c"],
+          ["mat.kpi.cov.n", "mat.kpi.cov.m", "mat.kpi.cov.c"],
+          ["mat.kpi.mttr.n", "mat.kpi.mttr.m", "mat.kpi.mttr.c"],
+          ["mat.kpi.esc.n", "mat.kpi.esc.m", "mat.kpi.esc.c"],
+          ["mat.kpi.auto.n", "mat.kpi.auto.m", "mat.kpi.auto.c"],
+        ] },
+      { type: "label", text: "mat.models.label" },
+      { type: "prose", html: "mat.models.body" },
+      { type: "callout", variant: "", html: "mat.kpi.callout" },
+    ] },
+    { ...grp, id: "maturity-istqb", navKey: "mat.page.istqb", blocks: [
+      { type: "prose", html: "mat.istqb.lead" },
+      { type: "label", text: "mat.istqb.levels.label" },
+      { type: "prose", html: "mat.istqb.levels.body" },
+      { type: "label", text: "mat.istqb.certs.label" },
+      { type: "biblio", items: [
+        { title: "ISTQB — Certified Tester Foundation Level (CTFL)", url: "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl", desc: "mat.istqb.ref.ctfl" },
+        { title: "ISTQB — Advanced Test Analyst (CTAL-TA)", url: "https://www.istqb.org/certifications/certified-tester-test-analyst", desc: "mat.istqb.ref.ta" },
+        { title: "ISTQB — Test Automation Engineer (CT-TAE)", url: "https://www.istqb.org/certifications/certified-tester-test-automation-engineer", desc: "mat.istqb.ref.tae" },
+        { title: "ISTQB — Certified Tester Finance Testing (CT-FT)", url: "https://www.istqb.org/certifications/certified-tester-finance-testing-ct-ft", desc: "mat.istqb.ref.ft" },
+        { title: "ISTQB — AI Testing (CT-AI)", url: "https://www.istqb.org/certifications/certified-tester-ai-testing", desc: "mat.istqb.ref.ai" },
+      ] },
+      { type: "callout", variant: "ok", html: "mat.istqb.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2461,6 +2514,8 @@ export const SECTIONS = [
   },
 
   ...skillsGroup(),
+
+  ...maturityGroup(),
 
   {
     id: "key-terms",

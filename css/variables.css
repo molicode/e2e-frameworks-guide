@@ -99,6 +99,7 @@
   --fw-robot: #00c0b5;
   --fw-bdd: #23d96c;
   --fw-skills: #f59e0b;
+  --fw-maturity: #8b5cf6;
 }
 
 /* --------------------------------------------------------------------------
@@ -150,4 +151,5 @@
   --fw-robot: #2dd4cf;
   --fw-bdd: #4ade80;
   --fw-skills: #fbbf24;
+  --fw-maturity: #a78bfa;
 }

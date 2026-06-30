@@ -55,6 +55,7 @@ I18n.register("en", {
   "nav.prompts": "AI examples",
   "nav.best": "Best practices",
   "nav.skills": "QA skills",
+  "nav.maturity": "QA strategy & maturity",
   "nav.home": "Home",
 
   /* ---- Landing / index ---- */
@@ -78,6 +79,7 @@ I18n.register("en", {
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
   "home.best-practices": "Principles that endure and your next steps.",
   "home.skills": "Cross-cutting QA skills: SQL, Git and mobile testing with Appium.",
+  "home.maturity": "QA as strategy: a 4-phase maturity roadmap, KPIs, models and ISTQB.",
 
   /* ====================================================================
      1. INTRODUCTION
@@ -756,6 +758,80 @@ I18n.register("en", {
     "<p>AI scaffolds the test, remembers each platform's typical capabilities, and translates a web flow into its mobile equivalent (gestures, scrolling, waits).</p>",
   "skills.appium.callout":
     "<strong>Next step:</strong> start with the most critical mobile smoke test (login, purchase) on an emulator, wire it into CI with a device farm, and reuse your Page Objects: the strategy you learned on the web applies just the same.",
+
+  /* ====================================================================
+     6c. QA STRATEGY & MATURITY
+     ==================================================================== */
+  "mat.page.intro": "QA as strategy",
+  "mat.page.roadmap": "Maturity roadmap (4 phases)",
+  "mat.page.kpis": "KPIs & maturity models",
+  "mat.page.istqb": "ISTQB & certifications",
+
+  "mat.lead":
+    "<p>Automating tests is tactics; making quality <strong>part of the strategy</strong> is another league. This section looks at QA from above: how to assess where you are, what to measure, and how to move a team from \"firefighting\" to a <strong>quality culture</strong>.</p>",
+  "mat.why":
+    "<p>The key leap is going from <em>\"finding bugs\"</em> to <em>\"building quality\"</em>. That takes three things: <strong>standards</strong> (agree on what \"quality\" means here), <strong>metrics</strong> (measure to improve, not to punish) and <strong>culture</strong> (quality is the whole team's job, not just QA's). A phased roadmap keeps you from trying to do it all at once.</p>",
+  "mat.t1.title": "Standards",
+  "mat.t1.body": "Define what \"quality\" means in your context and document the critical processes. No agreement, no north star.",
+  "mat.t2.title": "Metrics",
+  "mat.t2.body": "Measure with actionable KPIs (defect density, coverage, MTTR). What isn't measured isn't improved.",
+  "mat.t3.title": "Culture",
+  "mat.t3.body": "Shift-left, three amigos, visible dashboards: quality is the whole team's, not just QA's.",
+  "mat.callout":
+    "<strong>The underlying idea:</strong> maturity isn't bought with a tool. It's built in phases, measuring and adjusting. A good QA strategy speeds delivery <em>and</em> raises confidence.",
+
+  "mat.road.lead":
+    "<p>A realistic path to raise QA maturity, in four phases. Each has an objective, concrete actions and typical tools. Don't skip phases: each one supports the next.</p>",
+  "mat.phase1":
+    "<strong>Phase 1 — Diagnosis & standards.</strong> <em>Objective:</em> assess the current state and define quality standards. <em>Actions:</em> a maturity assessment (ISO 9001, TMMi, CMMI), document critical processes and current metrics, define KPIs (defect density, test coverage, MTTR). <em>Tools:</em> Jira, Azure DevOps Test Plans, Power BI.",
+  "mat.phase2":
+    "<strong>Phase 2 — Automation & efficiency.</strong> <em>Objective:</em> reduce human error and speed up testing. <em>Actions:</em> automate functional and regression tests (Selenium, Playwright, Robot), integrate QA into CI/CD pipelines, build bots for repetitive tasks. <em>Tools:</em> Postman, Azure DevOps, Power Automate.",
+  "mat.phase3":
+    "<strong>Phase 3 — Quality culture.</strong> <em>Objective:</em> involve the whole team in quality. <em>Actions:</em> training in agile testing and shift-left, bring QA into user stories (BDD with Cucumber/Gherkin), quality dashboards visible to everyone. <em>Tools:</em> Confluence, Miro, Power BI.",
+  "mat.phase4":
+    "<strong>Phase 4 — Total quality.</strong> <em>Objective:</em> QA as a strategic function, not just operational. <em>Actions:</em> use AI for predictive testing and risk analysis, continuous testing and production monitoring, certify the process (ISO 9001 / TMMi level 3+). <em>Tools:</em> Azure Monitor, Application Insights, AI copilots.",
+  "mat.road.callout":
+    "<strong>Beware skipping phases:</strong> automating (Phase 2) without standards (Phase 1) creates brittle suites nobody maintains; and AI (Phase 4) without culture (Phase 3) is an expensive tool the team ignores.",
+
+  "mat.kpi.lead":
+    "<p>What isn't measured isn't improved — but measuring badly is worse than not measuring. These KPIs are <strong>actionable</strong>: they tell you where to look, not who to blame. Use them as a trend over time, not as an isolated number.</p>",
+  "mat.kpi.th.name": "KPI",
+  "mat.kpi.th.measures": "What it measures",
+  "mat.kpi.th.calc": "How it's computed",
+  "mat.kpi.dd.n": "Defect density",
+  "mat.kpi.dd.m": "Defects relative to module size",
+  "mat.kpi.dd.c": "Number of defects ÷ size (KLOC or function points)",
+  "mat.kpi.cov.n": "Test coverage",
+  "mat.kpi.cov.m": "What share of code/requirements is tested",
+  "mat.kpi.cov.c": "Lines (or requirements) covered ÷ total × 100",
+  "mat.kpi.mttr.n": "MTTR",
+  "mat.kpi.mttr.m": "Mean time to repair a failure",
+  "mat.kpi.mttr.c": "Sum of repair times ÷ number of failures",
+  "mat.kpi.esc.n": "Defect escape rate",
+  "mat.kpi.esc.m": "Bugs that reached production (filter quality)",
+  "mat.kpi.esc.c": "Defects in prod ÷ total defects × 100",
+  "mat.kpi.auto.n": "Automation rate",
+  "mat.kpi.auto.m": "Share of the regression that runs itself",
+  "mat.kpi.auto.c": "Automated cases ÷ automatable cases × 100",
+  "mat.models.label": "Maturity models",
+  "mat.models.body":
+    "<p>Reference frameworks give you a map to assess yourself: <strong>ISO 9001</strong> (generic, certifiable quality management), <strong>TMMi</strong> (Test Maturity Model integration: 5 testing-specific levels) and <strong>CMMI</strong> (development-process maturity, 5 levels). You don't have to certify to use them: they work as a \"what are we missing\" checklist.</p>",
+  "mat.kpi.callout":
+    "<strong>Antipattern:</strong> turning a KPI into a target (\"get coverage to 90%\") usually produces useless tests that cover lines without verifying anything. Measure to <em>learn</em>, not to hit a number.",
+
+  "mat.istqb.lead":
+    "<p><strong>ISTQB</strong> (International Software Testing Qualifications Board) is the global standard for testing certification. It doesn't make you a better tester on its own, but it gives a <strong>shared vocabulary</strong> and is highly valued in interviews and by companies.</p>",
+  "mat.istqb.levels.label": "Levels",
+  "mat.istqb.levels.body":
+    "<p>The scheme runs by levels: <strong>Foundation</strong> (CTFL, the base everyone starts with), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) and <strong>Expert</strong>. There are also <strong>specialties</strong> by domain or technology: AI Testing, Performance, Mobile, Security and — the one our QA mentioned — <strong>Finance Testing (CT-FT)</strong>.</p>",
+  "mat.istqb.certs.label": "Certifications (official links)",
+  "mat.istqb.ref.ctfl": "The entry level: vocabulary, the testing process, test-design techniques and management. Where everyone starts.",
+  "mat.istqb.ref.ta": "Advanced level for designing and executing tests based on formal techniques and risk analysis.",
+  "mat.istqb.ref.tae": "Advanced, focused on the architecture, implementation and maintenance of automation.",
+  "mat.istqb.ref.ft": "A specialty in finance-domain testing: regulations, amount accuracy, auditability. The one the QA recommended.",
+  "mat.istqb.ref.ai": "A specialty in testing of (and with) AI systems: bias, data, model-specific metrics.",
+  "mat.istqb.callout":
+    "<strong>Advice:</strong> start with the <strong>CTFL</strong> for the shared vocabulary, then pick a specialty aligned with your industry (finance, AI, performance). The certification opens doors; practice makes you good.",
 
   /* ---- Navigation / index for the new sections ---- */
   "nav.keyterms": "Key terms",
