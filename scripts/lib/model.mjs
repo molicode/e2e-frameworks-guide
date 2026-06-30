@@ -544,6 +544,8 @@ function rungBlocks(prefix, rungs) {
     blocks.push({ type: "label", text: `${prefix}.rung${n}.title` });
     blocks.push({ type: "prose", html: `${prefix}.rung${n}.body` });
     rung.codes.forEach((sample) => blocks.push({ type: "code", sample }));
+    // Optional fictitious screen so the learner SEES what the code targets.
+    if (rung.mock) blocks.push({ type: "mock", screen: rung.mock });
   });
   return blocks;
 }
@@ -616,6 +618,7 @@ export const SECTIONS = [
       { type: "label", text: "fund.selectors.label" },
       { type: "prose", html: "fund.selectors.body" },
       { type: "code", sample: "selectors" },
+      { type: "mock", screen: "login" },
       { type: "label", text: "fund.flaky.label" },
       { type: "prose", html: "fund.flaky.body" },
       { type: "code", sample: "flaky" },
@@ -630,7 +633,7 @@ export const SECTIONS = [
 
   frameworkSection("selenium", "nav.selenium", "sel",
     { label: "Selenium", color: "var(--fw-selenium)" }, [
-      { codes: ["seleniumSetup", "seleniumFirst"] }, // 1 WebDriver & navigation
+      { codes: ["seleniumSetup", "seleniumFirst"], mock: "login" }, // 1 WebDriver & navigation
       { codes: ["selLocate"] },                       // 2 Locating elements
       { codes: ["selWaitsJs", "selWaitsJava"] },      // 3 Explicit waits
       { codes: ["selRunnerJava", "selRunnerPy"] },    // 4 Runner + assertions
@@ -640,7 +643,7 @@ export const SECTIONS = [
 
   frameworkSection("cypress", "nav.cypress", "cyp",
     { label: "Cypress", color: "var(--fw-cypress)" }, [
-      { codes: ["cypressSetup", "cypressFirst"] },    // 1 Interactive runner
+      { codes: ["cypressSetup", "cypressFirst"], mock: "login" }, // 1 Interactive runner
       { codes: ["cypChain"] },                        // 2 Commands & async chain
       { codes: ["cypAssertions"] },                   // 3 Assertions & selectors
       { codes: ["cypIntercept"] },                    // 4 Network with cy.intercept()
@@ -650,8 +653,8 @@ export const SECTIONS = [
 
   frameworkSection("playwright", "nav.playwright", "pw",
     { label: "Playwright", color: "var(--fw-playwright)" }, [
-      { codes: ["playwrightSetup", "playwrightFirst"] }, // 1 Setup & first test
-      { codes: ["pwLocators"] },                          // 2 Locators & actions
+      { codes: ["playwrightSetup", "playwrightFirst"], mock: "login" }, // 1 Setup & first test
+      { codes: ["pwLocators"], mock: "order" },           // 2 Locators & actions
       { codes: ["pwAssertions"] },                        // 3 Assertions & auto-waiting
       { codes: ["pwFixtures"] },                          // 4 Fixtures & organization
       { codes: ["pwNetwork"] },                           // 5 Network & auth
@@ -664,6 +667,7 @@ export const SECTIONS = [
     blocks: [
       { type: "prose", html: "cmp.lead" },
       { type: "callout", variant: "", html: "cmp.case" },
+      { type: "mock", screen: "order" },
       { type: "fwblock", chip: { label: "Selenium", color: "var(--fw-selenium)" }, note: "cmp.sel.note", sample: "verifySelenium" },
       { type: "fwblock", chip: { label: "Cypress", color: "var(--fw-cypress)" }, note: "cmp.cyp.note", sample: "verifyCypress" },
       { type: "fwblock", chip: { label: "Playwright", color: "var(--fw-playwright)" }, note: "cmp.pw.note", sample: "verifyPlaywright" },

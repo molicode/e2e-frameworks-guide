@@ -193,6 +193,36 @@ const assert = require("</span><span class="tok-keyword">assert</span><span clas
   <span class="tok-punctuation">}</span>
 <span class="tok-punctuation">})();</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">example.com/login</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Sign in</h4>
+              <div class="mock-field">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input">demo@acme.test</span>
+                <code class="mock-tag">getByLabel("Email")</code>
+              </div>
+              <div class="mock-field">
+                <span class="mock-field__label">Password</span>
+                <span class="mock-input">••••••••</span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn">Sign in</span>
+                <code class="mock-tag">getByRole("button", { name: "Sign in" })</code>
+              </div>
+              <p class="mock-after">after login → <strong>Welcome, demo</strong>
+                <code class="mock-tag">getByText("Welcome")</code>
+              </p>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="sel.rung2.title">Localizar elementos</h3>
         <div class="prose" data-i18n-html="sel.rung2.body"><p>Selenium localiza elementos con la clase <code>By</code>: <code>By.id</code>, <code>By.css</code>, <code>By.xpath</code>… Usá <code>findElement</code> para uno y <code>findElements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p></div>
         <div class="code-block">

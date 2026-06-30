@@ -182,6 +182,36 @@ test("</span>greets the user after a valid login<span class="tok-string">", asyn
   await expect(page.getByText("</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span>
 <span class="tok-punctuation">});</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">example.com/login</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Sign in</h4>
+              <div class="mock-field">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input">demo@acme.test</span>
+                <code class="mock-tag">getByLabel("Email")</code>
+              </div>
+              <div class="mock-field">
+                <span class="mock-field__label">Password</span>
+                <span class="mock-input">••••••••</span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn">Sign in</span>
+                <code class="mock-tag">getByRole("button", { name: "Sign in" })</code>
+              </div>
+              <p class="mock-after">after login → <strong>Welcome, demo</strong>
+                <code class="mock-tag">getByText("Welcome")</code>
+              </p>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="pw.rung2.title">Locators y acciones</h3>
         <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>getByRole</code>, <code>getByLabel</code>, <code>getByText</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first()</code>/<code>.last()</code> y encadenás para llegar al elemento exacto.</p></div>
         <div class="code-block">
@@ -205,6 +235,38 @@ await rows.filter({ hasText: "</span>book<span class="tok-string">" }).getByRole
 await page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").nth(2).click();
 await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-punctuation">")).</span><span class="tok-function">toHaveCount</span><span class="tok-punctuation">(</span><span class="tok-number">3</span><span class="tok-punctuation">);</span></code></pre>
         </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Order #42</h4>
+                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
+              </div>
+              <div class="mock-total">
+                <span>Total</span><strong>250</strong>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <ul class="mock-list">
+                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
+              </ul>
+              <div class="mock-tags-row">
+                <code class="mock-tag">.order-items li</code>
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(3)</code>
+                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="pw.rung3.title">Assertions y auto-waiting</h3>
         <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).toHaveText(...)</code>, <code>toBeVisible()</code>, <code>toHaveCount()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, <code>expect(valor).toBe(...)</code> no reintenta.</p></div>
         <div class="code-block">

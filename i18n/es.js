@@ -33,6 +33,7 @@ I18n.register("es", {
   "ui.path": "Ruta de aprendizaje",
   "ui.prev": "Anterior",
   "ui.next": "Siguiente",
+  "ui.mockCaption": "👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.",
 
   /* ---- Navegación ---- */
   "nav.intro": "Introducción",

@@ -32,6 +32,7 @@ I18n.register("en", {
   "ui.path": "Learning path",
   "ui.prev": "Previous",
   "ui.next": "Next",
+  "ui.mockCaption": "👆 Mock screen: this is what the code above tests. The chips show which selector targets each element.",
 
   /* ---- Navigation ---- */
   "nav.intro": "Introduction",
