@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="page.philosophy">Filosofía y cuándo usarlo</title>
+  <title data-i18n="verbs.page.intro">Los verbos y cómo se testean</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--robot-filosofia">
+<body class="page--section page--verbs-intro">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -89,25 +89,10 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
+        <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="robot-filosofia.html" aria-current="page">
-            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
-            <span data-i18n="page.hello">Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-ruta.html">
-            <span data-i18n="page.path">Ruta de aprendizaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-componentes.html">
-            <span data-i18n="page.components">Componentes clave</span>
-          </a>
-          <a class="nav-link nav-sublink" href="robot-criticos.html">
-            <span data-i18n="page.cases">Casos críticos</span>
-          </a>
         <a class="nav-link nav-group" href="bdd-intro.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
@@ -116,10 +101,25 @@
           <span class="nav-link__num">10</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link nav-group" href="verbs-intro.html">
+        <a class="nav-link nav-group is-active-group" href="verbs-intro.html">
           <span class="nav-link__num">11</span>
           <span data-i18n="nav.verbs">Verbos HTTP</span>
         </a>
+          <a class="nav-link nav-sublink is-active" href="verbs-intro.html" aria-current="page">
+            <span data-i18n="verbs.page.intro">Los verbos y cómo se testean</span>
+          </a>
+          <a class="nav-link nav-sublink" href="verbs-python.html">
+            <span data-i18n="verbs.page.python">Con Python (requests)</span>
+          </a>
+          <a class="nav-link nav-sublink" href="verbs-cypress.html">
+            <span data-i18n="verbs.page.cypress">Con Cypress</span>
+          </a>
+          <a class="nav-link nav-sublink" href="verbs-playwright.html">
+            <span data-i18n="verbs.page.playwright">Con Playwright</span>
+          </a>
+          <a class="nav-link nav-sublink" href="verbs-robot.html">
+            <span data-i18n="verbs.page.robot">Con Robot Framework</span>
+          </a>
         <a class="nav-link" href="ai-role.html">
           <span class="nav-link__num">12</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
@@ -152,40 +152,35 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
-        <h2 class="section__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</h2>
-        <div class="prose" data-i18n-html="rf.lead"><p><strong>Robot Framework</strong> es un framework de automatización <strong>keyword-driven</strong>, open-source y basado en Python. En vez de programar, armás los tests con <strong>palabras clave</strong> legibles, casi en lenguaje natural — ideal para acceptance testing, ATDD/BDD y hasta RPA.</p></div>
-        <h3 class="block-label" data-i18n="ui.philosophy">Filosofía</h3>
-        <div class="prose" data-i18n-html="rf.philosophy"><p>Robot Framework no maneja el navegador por sí mismo: es una <strong>capa de keywords</strong> por encima de librerías. <code>SeleniumLibrary</code> usa Selenium, <code>Browser</code> usa Playwright y <code>RequestsLibrary</code> pega a las APIs. Un test es una secuencia de keywords (<code>Open Browser</code>, <code>Input Text</code>, <code>Page Should Contain</code>) que se lee como una receta. Cuando un keyword no existe, te lo escribís en Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="rf.when"><p>Elegí Robot Framework cuando querés tests <strong>muy legibles</strong> (que pueda leer QA no-programador o gente de negocio), un enfoque <strong>keyword-driven</strong> reutilizable, reportes HTML de fábrica, o cuando hacés también <strong>RPA</strong>. El costo: la sintaxis tabular se siente rara al principio y, para lógica compleja, igual bajás a Python.</p></div>
-        <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
-        <div class="vs-grid">
-          <div class="vs-card vs-card--manual">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
-              <span data-i18n="rf.manual.title">A mano</span>
-            </div>
-            <div data-i18n-html="rf.manual.body"><p>Componés cada test con keywords y los agrupás en <strong>resource files</strong> reutilizables. Tenés control total y máxima legibilidad, pero vos elegís los locators y las esperas.</p></div>
-            
-          </div>
-          <div class="vs-card vs-card--ai">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
-              <span data-i18n="rf.ai.title">Con AI</span>
-            </div>
-            <div data-i18n-html="rf.ai.body"><p>La AI traduce un caso en lenguaje natural a keywords de Robot, te sugiere el keyword correcto de la librería y te arma resource files (POM) para que el test quede limpio.</p></div>
-            
-          </div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-verbs)">Verbos HTTP</span></div>
+        <h2 class="section__title" data-i18n="verbs.page.intro">Los verbos y cómo se testean</h2>
+        <div class="prose" data-i18n-html="verbs.lead"><p>Una API REST se maneja con <strong>verbos HTTP</strong>: cada uno declara una intención (leer, crear, reemplazar, borrar…). Testear una API es, en gran parte, disparar el verbo correcto y verificar el <strong>código de estado</strong> y el cuerpo de la respuesta. Acá los ves todos, en cada framework de la guía.</p></div>
+        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
+        <div class="prose" data-i18n-html="verbs.why"><p>Dos conceptos que toda entrevista pregunta: el <strong>código de estado</strong> (2xx ok, 4xx error del cliente, 5xx error del servidor) y la <strong>idempotencia</strong> — si repetir la misma llamada deja el sistema igual. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes; <code>POST</code> no (cada llamada crea algo nuevo). <code>PATCH</code> suele serlo, pero depende de cómo lo implementes.</p></div>
+        <h3 class="block-label" data-i18n="verbs.table.label">Los verbos de un vistazo</h3>
+        <div class="cmp-table-wrap">
+          <table class="cmp">
+            <thead><tr><th data-i18n="verbs.th.verb">Verbo</th><th data-i18n="verbs.th.purpose">Qué hace</th><th data-i18n="verbs.th.idem">Idempotente</th><th data-i18n="verbs.th.status">Status típico</th></tr></thead>
+            <tbody>
+              <tr><td data-i18n="verbs.get.v">GET</td><td data-i18n="verbs.get.p">Leer un recurso (no lo modifica)</td><td data-i18n="verbs.get.i">Sí</td><td data-i18n="verbs.get.s">200</td></tr>
+              <tr><td data-i18n="verbs.post.v">POST</td><td data-i18n="verbs.post.p">Crear un recurso nuevo</td><td data-i18n="verbs.post.i">No</td><td data-i18n="verbs.post.s">201</td></tr>
+              <tr><td data-i18n="verbs.put.v">PUT</td><td data-i18n="verbs.put.p">Reemplazar el recurso completo</td><td data-i18n="verbs.put.i">Sí</td><td data-i18n="verbs.put.s">200 / 204</td></tr>
+              <tr><td data-i18n="verbs.patch.v">PATCH</td><td data-i18n="verbs.patch.p">Actualizar parte del recurso</td><td data-i18n="verbs.patch.i">Suele serlo</td><td data-i18n="verbs.patch.s">200</td></tr>
+              <tr><td data-i18n="verbs.delete.v">DELETE</td><td data-i18n="verbs.delete.p">Eliminar el recurso</td><td data-i18n="verbs.delete.i">Sí</td><td data-i18n="verbs.delete.s">204</td></tr>
+              <tr><td data-i18n="verbs.head.v">HEAD</td><td data-i18n="verbs.head.p">Como GET pero solo headers (sin cuerpo)</td><td data-i18n="verbs.head.i">Sí</td><td data-i18n="verbs.head.s">200</td></tr>
+              <tr><td data-i18n="verbs.options.v">OPTIONS</td><td data-i18n="verbs.options.p">Qué métodos permite el recurso (CORS)</td><td data-i18n="verbs.options.i">Sí</td><td data-i18n="verbs.options.s">200 / 204</td></tr>
+            </tbody>
+          </table>
         </div>
+        <div class="callout" data-i18n-html="verbs.callout"><strong>Regla práctica:</strong> verificá <em>primero</em> el status y <em>después</em> el cuerpo. Y testeá los caminos infelices: sin token → <code>401</code>, recurso de otro usuario → <code>403</code>, id inexistente → <code>404</code>. Un 200 que debería ser un 404 es un bug.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="playwright-criticos.html">
+          <a class="page-nav__link page-nav__prev" href="comparison.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
+            <span class="page-nav__title" data-i18n="nav.comparison">Comparativa</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="robot-hola-mundo.html">
+          <a class="page-nav__link page-nav__next" href="verbs-python.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
+            <span class="page-nav__title" data-i18n="verbs.page.python">Con Python (requests)</span>
           </a>
         </nav>
       </div>

@@ -52,6 +52,7 @@ I18n.register("es", {
   "nav.robot": "Robot Framework",
   "nav.bdd": "BDD: Gherkin y Cucumber",
   "nav.comparison": "Comparativa",
+  "nav.verbs": "Verbos HTTP",
   "nav.airole": "El rol de la AI",
   "nav.prompts": "Ejemplos con AI",
   "nav.best": "Buenas prácticas",
@@ -76,6 +77,7 @@ I18n.register("es", {
   "home.robot": "Keyword-driven y legible: tests en lenguaje casi natural con librerías Python.",
   "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) y Cucumber para dar contexto.",
   "home.comparison": "El mismo test VerifyOrder resuelto en los 3 frameworks.",
+  "home.verbs": "Cómo testear cada verbo HTTP (GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS) en cada framework.",
   "home.ai-role": "Cómo la AI complementa cada etapa del testing.",
   "home.prompts": "Prompts concretos, cómo iterar y cómo validar el output.",
   "home.best-practices": "Principios que perduran y tus próximos pasos.",
@@ -604,6 +606,72 @@ I18n.register("es", {
   "cmp.r6.c": "DX y SPAs modernas",
   "cmp.r6.p": "Suites grandes, CI veloz",
   "cmp.r6.r": "Legibilidad, ATDD/BDD, RPA",
+
+  /* ====================================================================
+     4b. VERBOS HTTP EN CADA FRAMEWORK
+     ==================================================================== */
+  "verbs.page.intro": "Los verbos y cómo se testean",
+  "verbs.page.python": "Con Python (requests)",
+  "verbs.page.cypress": "Con Cypress",
+  "verbs.page.playwright": "Con Playwright",
+  "verbs.page.robot": "Con Robot Framework",
+
+  "verbs.lead":
+    "<p>Una API REST se maneja con <strong>verbos HTTP</strong>: cada uno declara una intención (leer, crear, reemplazar, borrar…). Testear una API es, en gran parte, disparar el verbo correcto y verificar el <strong>código de estado</strong> y el cuerpo de la respuesta. Acá los ves todos, en cada framework de la guía.</p>",
+  "verbs.why":
+    "<p>Dos conceptos que toda entrevista pregunta: el <strong>código de estado</strong> (2xx ok, 4xx error del cliente, 5xx error del servidor) y la <strong>idempotencia</strong> — si repetir la misma llamada deja el sistema igual. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes; <code>POST</code> no (cada llamada crea algo nuevo). <code>PATCH</code> suele serlo, pero depende de cómo lo implementes.</p>",
+  "verbs.table.label": "Los verbos de un vistazo",
+  "verbs.th.verb": "Verbo",
+  "verbs.th.purpose": "Qué hace",
+  "verbs.th.idem": "Idempotente",
+  "verbs.th.status": "Status típico",
+  "verbs.get.v": "GET",
+  "verbs.get.p": "Leer un recurso (no lo modifica)",
+  "verbs.get.i": "Sí",
+  "verbs.get.s": "200",
+  "verbs.post.v": "POST",
+  "verbs.post.p": "Crear un recurso nuevo",
+  "verbs.post.i": "No",
+  "verbs.post.s": "201",
+  "verbs.put.v": "PUT",
+  "verbs.put.p": "Reemplazar el recurso completo",
+  "verbs.put.i": "Sí",
+  "verbs.put.s": "200 / 204",
+  "verbs.patch.v": "PATCH",
+  "verbs.patch.p": "Actualizar parte del recurso",
+  "verbs.patch.i": "Suele serlo",
+  "verbs.patch.s": "200",
+  "verbs.delete.v": "DELETE",
+  "verbs.delete.p": "Eliminar el recurso",
+  "verbs.delete.i": "Sí",
+  "verbs.delete.s": "204",
+  "verbs.head.v": "HEAD",
+  "verbs.head.p": "Como GET pero solo headers (sin cuerpo)",
+  "verbs.head.i": "Sí",
+  "verbs.head.s": "200",
+  "verbs.options.v": "OPTIONS",
+  "verbs.options.p": "Qué métodos permite el recurso (CORS)",
+  "verbs.options.i": "Sí",
+  "verbs.options.s": "200 / 204",
+  "verbs.callout":
+    "<strong>Regla práctica:</strong> verificá <em>primero</em> el status y <em>después</em> el cuerpo. Y testeá los caminos infelices: sin token → <code>401</code>, recurso de otro usuario → <code>403</code>, id inexistente → <code>404</code>. Un 200 que debería ser un 404 es un bug.",
+
+  "verbs.py.lead":
+    "<p>En proyectos Python (incluido Selenium) la librería <code>requests</code> es el estándar para la capa de API. Tiene un método por verbo: <code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, <code>delete</code>, <code>head</code>, <code>options</code>.</p>",
+  "verbs.py.body":
+    "<p>Cada llamada devuelve una respuesta con <code>.status_code</code>, <code>.json()</code> y <code>.headers</code>. Para <code>OPTIONS</code>, los métodos permitidos vienen en el header <code>Allow</code>.</p>",
+  "verbs.cy.lead":
+    "<p>Cypress trae <code>cy.request()</code>, que pega a la API sin pasar por la UI. Le pasás un objeto con <code>method</code>, <code>url</code>, <code>headers</code> y <code>body</code>.</p>",
+  "verbs.cy.body":
+    "<p>Acordate de encadenar con <code>.then()</code> cuando necesitás el <code>id</code> de la respuesta para las llamadas siguientes, y de <code>.its(\"status\")</code> para afirmar el código. Para probar errores, sumá <code>failOnStatusCode: false</code>.</p>",
+  "verbs.pw.lead":
+    "<p>Playwright tiene un <strong>request context</strong> independiente del navegador, con un método por verbo (<code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, <code>delete</code>, <code>head</code>) y <code>fetch</code> genérico para el resto.</p>",
+  "verbs.pw.body":
+    "<p>La respuesta expone <code>.status</code>, <code>.json()</code>, <code>.ok</code> y <code>.headers</code>. Para <code>OPTIONS</code> usás <code>fetch(url, method=\"OPTIONS\")</code> porque no hay un atajo dedicado.</p>",
+  "verbs.rf.lead":
+    "<p>En Robot Framework, <code>RequestsLibrary</code> expone un keyword por verbo: <code>GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS On Session</code>. Primero abrís la sesión con <code>Create Session</code>.</p>",
+  "verbs.rf.body":
+    "<p>Cada keyword falla solo si el status no es 2xx; si esperás otro (por ejemplo un <code>204</code> o un error), lo declarás con <code>expected_status</code>. El cuerpo lo leés con <code>${r.json()}</code>.</p>",
 
   /* ====================================================================
      5. EL ROL DE LA AI EN QA

@@ -277,6 +277,13 @@
 .code-i18n { display: none; }
 html[lang="es"] .code-i18n--es,
 html[lang="en"] .code-i18n--en { display: block; }
+/* A single (non-bilingual) code block must also be block-level so a long line
+   scrolls inside the <pre> instead of widening the page. */
+.code-block pre code:only-child { display: block; }
+/* Long inline <code> (e.g. a slash-separated keyword list) must wrap instead of
+   overflowing narrow screens. The block <code> inside .code-block keeps <pre>. */
+.prose code, .callout code, .vs-card code, table.cmp td code, .gloss__def code,
+.tile code, .ref__desc code, .steps code { overflow-wrap: anywhere; }
 
 /* Syntax-highlight token colors (set by js/highlight.js spans) */
 .tok-comment { color: var(--tok-comment); font-style: italic; }

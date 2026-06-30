@@ -1,0 +1,21 @@
+*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Every HTTP verb
+    Create Session    api    https://api.example.com    headers=${AUTH}
+    # GET — leer (seguro, idempotente)
+    GET On Session    api    /orders/42
+    # POST — crear (NO idempotente)
+    ${r}=    POST On Session    api    /orders    json={"items": ["book"]}
+    ${id}=    Set Variable    ${r.json()}[id]
+    # PUT — reemplazar el recurso entero (idempotente)
+    PUT On Session    api    /orders/${id}    json={"items": ["pen"], "status": "NEW"}
+    # PATCH — actualización parcial
+    PATCH On Session    api    /orders/${id}    json={"status": "PAID"}
+    # DELETE — eliminar (idempotente)
+    DELETE On Session    api    /orders/${id}    expected_status=204
+    # HEAD — solo headers, sin body
+    HEAD On Session    api    /orders/42
+    # OPTIONS — qué métodos están permitidos
+    OPTIONS On Session    api    /orders
