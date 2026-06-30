@@ -1,0 +1,11 @@
+# checkout.feature — lenguaje natural, legible por todo el equipo.
+Feature: Checkout
+  As a shopper
+  I want to pay for my cart
+  So that my order is confirmed
+
+  Scenario: Successful payment
+    Given I have a book in my cart
+    When I pay with a valid card
+    Then the order status should be "PAID"
+    And I should see "Payment confirmed"

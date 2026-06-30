@@ -1623,6 +1623,104 @@ VerifyOrder
     Page Should Contain Element    css=.order-items li
     [Teardown]    Close Browser`,
   },
+
+  /* ---- BDD: Gherkin & Cucumber ---- */
+  gherkinFeature: {
+    lang: "Gherkin",
+    code: `# checkout.feature — plain language, readable by the whole team.
+Feature: Checkout
+  As a shopper
+  I want to pay for my cart
+  So that my order is confirmed
+
+  Scenario: Successful payment
+    Given I have a book in my cart
+    When I pay with a valid card
+    Then the order status should be "PAID"
+    And I should see "Payment confirmed"`,
+  },
+  gherkinOutline: {
+    lang: "Gherkin",
+    code: `Feature: Cart totals
+
+  # Background runs before EACH scenario in the feature:
+  Background:
+    Given I am logged in as "demo"
+
+  # A Scenario Outline runs once per row of Examples — data-driven.
+  @smoke
+  Scenario Outline: Totals by quantity
+    Given a book that costs 10
+    When I add <qty> of them
+    Then the total should be <total>
+
+    Examples:
+      | qty | total |
+      | 1   | 10    |
+      | 3   | 30    |`,
+  },
+  cucumberSteps: {
+    lang: "JavaScript",
+    code: `// steps/checkout.steps.js — "glue" that maps each Gherkin step to actions.
+const { Given, When, Then } = require("@cucumber/cucumber");
+const { expect } = require("@playwright/test");
+
+Given("I have a book in my cart", async function () {
+  await this.page.goto("/cart?items=book");
+});
+
+When("I pay with a valid card", async function () {
+  await this.page.getByRole("button", { name: "Pay" }).click();
+});
+
+// {string} captures the quoted value from the step and passes it as an argument.
+Then("the order status should be {string}", async function (status) {
+  await expect(this.page.locator(".order-status")).toHaveText(status);
+});`,
+  },
+  pytestBdd: {
+    lang: "Python",
+    code: `# test_checkout.py — the same feature wired up with pytest-bdd.
+from pytest_bdd import scenarios, given, when, then
+from playwright.sync_api import Page, expect
+
+scenarios("checkout.feature")   # bind every scenario in the file
+
+
+@given("I have a book in my cart")
+def add_book(page: Page):
+    page.goto("/cart?items=book")
+
+
+@when("I pay with a valid card")
+def pay(page: Page):
+    page.get_by_role("button", name="Pay").click()
+
+
+@then('the order status should be "PAID"')
+def status_paid(page: Page):
+    expect(page.locator(".order-status")).to_have_text("PAID")`,
+  },
+  bddRobot: {
+    lang: "Robot Framework",
+    code: `*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+Successful payment
+    # Robot speaks Given/When/Then natively — the prefix is just sugar.
+    Given I have a book in my cart
+    When I pay with a valid card
+    Then the order status should be "PAID"
+
+*** Keywords ***
+I have a book in my cart
+    Go To    https://shop.example.com/cart?items=book
+I pay with a valid card
+    Click Button    Pay
+The order status should be "\${status}"
+    Element Text Should Be    css=.order-status    \${status}`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -1915,6 +2013,58 @@ function typescriptGroup() {
   ];
 }
 
+// "BDD: Gherkin y Cucumber" — a technique (not a framework) that gives tests
+// shared, business-readable context. A GROUP of sub-pages.
+function bddGroup() {
+  const grp = { group: "bdd", groupKey: "nav.bdd", chip: { label: "BDD · Gherkin", color: "var(--fw-bdd)" } };
+  return [
+    { ...grp, id: "bdd-intro", navKey: "bdd.page.intro", blocks: [
+      { type: "prose", html: "bdd.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "bdd.why" },
+      { type: "tiles", items: [
+        { icon: "🗣️", title: "bdd.t1.title", body: "bdd.t1.body" },
+        { icon: "🤝", title: "bdd.t2.title", body: "bdd.t2.body" },
+        { icon: "📋", title: "bdd.t3.title", body: "bdd.t3.body" },
+      ] },
+      { type: "label", text: "ui.when" },
+      { type: "prose", html: "bdd.when" },
+      { type: "callout", variant: "warn", html: "bdd.callout" },
+    ] },
+    { ...grp, id: "bdd-gherkin", navKey: "bdd.page.gherkin", blocks: [
+      { type: "prose", html: "bdd.gherkin.lead" },
+      { type: "label", text: "bdd.gherkin.label" },
+      { type: "prose", html: "bdd.gherkin.body" },
+      { type: "code", sample: "gherkinFeature" },
+      { type: "mock", screen: "order" },
+      { type: "label", text: "bdd.outline.label" },
+      { type: "prose", html: "bdd.outline.body" },
+      { type: "code", sample: "gherkinOutline" },
+    ] },
+    { ...grp, id: "bdd-cucumber", navKey: "bdd.page.cucumber", blocks: [
+      { type: "prose", html: "bdd.cuke.lead" },
+      { type: "label", text: "bdd.cuke.js.label" },
+      { type: "prose", html: "bdd.cuke.js.body" },
+      { type: "code", sample: "cucumberSteps" },
+      { type: "label", text: "bdd.cuke.py.label" },
+      { type: "prose", html: "bdd.cuke.py.body" },
+      { type: "code", sample: "pytestBdd" },
+      { type: "callout", variant: "", html: "bdd.cuke.callout" },
+    ] },
+    { ...grp, id: "bdd-practica", navKey: "bdd.page.practica", blocks: [
+      { type: "prose", html: "bdd.prac.lead" },
+      { type: "label", text: "bdd.prac.robot.label" },
+      { type: "prose", html: "bdd.prac.robot.body" },
+      { type: "code", sample: "bddRobot" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "bdd.manual.title", body: "bdd.manual.body" },
+        ai: { title: "bdd.ai.title", body: "bdd.ai.body" } },
+      { type: "callout", variant: "ok", html: "bdd.prac.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2052,6 +2202,8 @@ export const SECTIONS = [
       { codes: ["rfResource"], mock: "table" },         // 6 Resource files (POM) & CI
     ], frameworkCases("rfApiCase", "rfMoney", "rfDocs", "rfSecurity"),
        frameworkComponents((k) => "rf" + k)),
+
+  ...bddGroup(),
 
   {
     id: "comparison",

@@ -1,0 +1,17 @@
+*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+Successful payment
+    # Robot habla Given/When/Then de forma nativa — el prefijo es solo azúcar.
+    Given I have a book in my cart
+    When I pay with a valid card
+    Then the order status should be "PAID"
+
+*** Keywords ***
+I have a book in my cart
+    Go To    https://shop.example.com/cart?items=book
+I pay with a valid card
+    Click Button    Pay
+The order status should be "${status}"
+    Element Text Should Be    css=.order-status    ${status}

@@ -1,0 +1,16 @@
+// steps/checkout.steps.js — el "pegamento" que mapea cada paso de Gherkin a acciones.
+const { Given, When, Then } = require("@cucumber/cucumber");
+const { expect } = require("@playwright/test");
+
+Given("I have a book in my cart", async function () {
+  await this.page.goto("/cart?items=book");
+});
+
+When("I pay with a valid card", async function () {
+  await this.page.getByRole("button", { name: "Pay" }).click();
+});
+
+// {string} captura el valor entre comillas del paso y lo pasa como argumento.
+Then("the order status should be {string}", async function (status) {
+  await expect(this.page.locator(".order-status")).toHaveText(status);
+});
