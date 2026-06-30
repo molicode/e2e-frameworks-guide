@@ -39,6 +39,7 @@ I18n.register("en", {
   "page.path": "Learning path",
   "page.components": "Key components",
   "page.cases": "Critical scenarios",
+  "page.verbs": "HTTP verbs",
 
   /* ---- Navigation ---- */
   "nav.intro": "Introduction",
@@ -51,7 +52,6 @@ I18n.register("en", {
   "nav.robot": "Robot Framework",
   "nav.bdd": "BDD: Gherkin & Cucumber",
   "nav.comparison": "Comparison",
-  "nav.verbs": "HTTP verbs",
   "nav.airole": "The role of AI",
   "nav.prompts": "AI examples",
   "nav.best": "Best practices",
@@ -76,7 +76,6 @@ I18n.register("en", {
   "home.robot": "Keyword-driven and readable: tests in near-natural language with Python libraries.",
   "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) and Cucumber to give context.",
   "home.comparison": "The same VerifyOrder test solved in all 3 frameworks.",
-  "home.verbs": "How to test every HTTP verb (GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS) in each framework.",
   "home.ai-role": "How AI complements each stage of testing.",
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
   "home.best-practices": "Principles that endure and your next steps.",
@@ -609,14 +608,8 @@ I18n.register("en", {
   /* ====================================================================
      4b. HTTP VERBS IN EACH FRAMEWORK
      ==================================================================== */
-  "verbs.page.intro": "The verbs & how to test them",
-  "verbs.page.python": "With Python (requests)",
-  "verbs.page.cypress": "With Cypress",
-  "verbs.page.playwright": "With Playwright",
-  "verbs.page.robot": "With Robot Framework",
-
   "verbs.lead":
-    "<p>A REST API is driven by <strong>HTTP verbs</strong>: each one declares an intent (read, create, replace, delete…). Testing an API is, in large part, firing the right verb and checking the <strong>status code</strong> and the response body. Here they all are, in each framework in this guide.</p>",
+    "<p>A REST API is driven by <strong>HTTP verbs</strong>: each one declares an intent (read, create, replace, delete…). Testing an API is, in large part, firing the right verb and checking the <strong>status code</strong> and the response body. Here they all are, in this framework's idiom.</p>",
   "verbs.why":
     "<p>Two concepts every interview asks about: the <strong>status code</strong> (2xx ok, 4xx client error, 5xx server error) and <strong>idempotency</strong> — whether repeating the same call leaves the system unchanged. <code>GET</code>, <code>PUT</code> and <code>DELETE</code> are idempotent; <code>POST</code> isn't (each call creates something new). <code>PATCH</code> usually is, but it depends on how you implement it.</p>",
   "verbs.table.label": "The verbs at a glance",
