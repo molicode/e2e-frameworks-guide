@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="tsqa.page.intro">Por qué TypeScript para QA</title>
+  <title data-i18n="mat.page.istqb">ISTQB y certificaciones</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--ts-intro">
+<body class="page--section page--maturity-istqb">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -73,28 +73,10 @@
           <span class="nav-link__num">03</span>
           <span data-i18n="nav.pyqa">Python para QA</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="ts-intro.html">
+        <a class="nav-link nav-group" href="ts-intro.html">
           <span class="nav-link__num">04</span>
           <span data-i18n="nav.tsqa">TypeScript para QA</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="ts-intro.html" aria-current="page">
-            <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-hola.html">
-            <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-fundamentos.html">
-            <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-tipos.html">
-            <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-pruebas.html">
-            <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-componente.html">
-            <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
-          </a>
         <a class="nav-link nav-group" href="selenium-filosofia.html">
           <span class="nav-link__num">05</span>
           <span data-i18n="nav.selenium">Selenium</span>
@@ -135,10 +117,22 @@
           <span class="nav-link__num">14</span>
           <span data-i18n="nav.skills">Habilidades del QA</span>
         </a>
-        <a class="nav-link nav-group" href="maturity-intro.html">
+        <a class="nav-link nav-group is-active-group" href="maturity-intro.html">
           <span class="nav-link__num">15</span>
           <span data-i18n="nav.maturity">Estrategia y madurez de QA</span>
         </a>
+          <a class="nav-link nav-sublink" href="maturity-intro.html">
+            <span data-i18n="mat.page.intro">QA como estrategia</span>
+          </a>
+          <a class="nav-link nav-sublink" href="maturity-roadmap.html">
+            <span data-i18n="mat.page.roadmap">Roadmap de madurez (4 fases)</span>
+          </a>
+          <a class="nav-link nav-sublink" href="maturity-kpis.html">
+            <span data-i18n="mat.page.kpis">KPIs y modelos de madurez</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="maturity-istqb.html" aria-current="page">
+            <span data-i18n="mat.page.istqb">ISTQB y certificaciones</span>
+          </a>
         <a class="nav-link" href="key-terms.html">
           <span class="nav-link__num">16</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
@@ -151,44 +145,43 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
-        <h2 class="section__title" data-i18n="tsqa.page.intro">Por qué TypeScript para QA</h2>
-        <div class="prose" data-i18n-html="tsqa.lead"><p><strong>TypeScript</strong> es JavaScript con tipos: te avisa de los errores <em>antes</em> de correr el test y te da autocompletado en todo el editor. Es el lenguaje de <strong>Cypress</strong> (y también funciona de diez con Playwright), así que es tu puerta de entrada al testing del front moderno.</p></div>
-        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
-        <div class="prose" data-i18n-html="tsqa.why"><p>JavaScript es el idioma del navegador; TypeScript le agrega una capa de <strong>tipos</strong> que el compilador chequea. Para QA eso significa menos errores tontos (un campo mal escrito, un valor del tipo equivocado) y tests que se auto-documentan. Las herramientas clave — <code>Vitest</code>/<code>Jest</code>, Cypress y Playwright — son TypeScript de primera.</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon">🛡️</div>
-              <h4 data-i18n="tsqa.t1.title">Tipado</h4>
-              <p data-i18n="tsqa.t1.body">El compilador caza errores antes de ejecutar: menos sorpresas en runtime.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">💡</div>
-              <h4 data-i18n="tsqa.t2.title">Autocompletado</h4>
-              <p data-i18n="tsqa.t2.body">El editor conoce la forma de tus datos y comandos: escribís más rápido y con menos typos.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🌐</div>
-              <h4 data-i18n="tsqa.t3.title">Cypress &amp; Playwright</h4>
-              <p data-i18n="tsqa.t3.body">El lenguaje nativo de Cypress y un ciudadano de primera en Playwright. Web testing puro.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🤖</div>
-              <h4 data-i18n="tsqa.t4.title">AI-friendly</h4>
-              <p data-i18n="tsqa.t4.body">Los asistentes de AI generan TypeScript con tipos que vos revisás y el compilador valida.</p>
-            </div>
-        </div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="tsqa.when"><p>Elegí TypeScript para QA cuando trabajás sobre apps web modernas (sobre todo con Cypress), cuando el equipo de front ya usa TS, o cuando querés que el compilador te cubra la espalda. Si tu foco es testing de APIs y multi-lenguaje, mirá la sección de Python; para el front, TypeScript es la apuesta natural.</p></div>
-        <div class="callout" data-i18n-html="tsqa.callout"><strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Node y TypeScript, escribí tu primer archivo, aprendé tipos y sintaxis, y terminá escribiendo tu primer test. Después saltá a Cypress con base sólida.</div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-maturity)">Estrategia QA</span></div>
+        <h2 class="section__title" data-i18n="mat.page.istqb">ISTQB y certificaciones</h2>
+        <div class="prose" data-i18n-html="mat.istqb.lead"><p><strong>ISTQB</strong> (International Software Testing Qualifications Board) es el estándar global de certificación en testing. No te hace mejor tester por sí solo, pero da un <strong>vocabulario común</strong> y es muy valorado en entrevistas y por las empresas.</p></div>
+        <h3 class="block-label" data-i18n="mat.istqb.levels.label">Niveles</h3>
+        <div class="prose" data-i18n-html="mat.istqb.levels.body"><p>El esquema va por niveles: <strong>Foundation</strong> (CTFL, la base que todos arrancan), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) y <strong>Expert</strong>. Además hay <strong>especialidades</strong> por dominio o tecnología: AI Testing, Performance, Mobile, Security y — la que mencionó nuestro QA — <strong>Finance Testing (CT-FT)</strong>.</p></div>
+        <h3 class="block-label" data-i18n="mat.istqb.certs.label">Certificaciones (enlaces oficiales)</h3>
+        <ul class="ref-list">
+            <li class="ref">
+              <a class="ref__link" href="https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl" target="_blank" rel="noopener noreferrer">ISTQB — Certified Tester Foundation Level (CTFL)</a>
+              <span class="ref__desc" data-i18n="mat.istqb.ref.ctfl">El nivel de entrada: vocabulario, el proceso de testing, técnicas de diseño y gestión. Por donde todos empiezan.</span>
+            </li>
+            <li class="ref">
+              <a class="ref__link" href="https://www.istqb.org/certifications/certified-tester-test-analyst" target="_blank" rel="noopener noreferrer">ISTQB — Advanced Test Analyst (CTAL-TA)</a>
+              <span class="ref__desc" data-i18n="mat.istqb.ref.ta">Nivel avanzado para diseñar y ejecutar pruebas basadas en técnicas formales y análisis de riesgo.</span>
+            </li>
+            <li class="ref">
+              <a class="ref__link" href="https://www.istqb.org/certifications/certified-tester-test-automation-engineer" target="_blank" rel="noopener noreferrer">ISTQB — Test Automation Engineer (CT-TAE)</a>
+              <span class="ref__desc" data-i18n="mat.istqb.ref.tae">Avanzado, enfocado en arquitectura, implementación y mantenimiento de la automatización.</span>
+            </li>
+            <li class="ref">
+              <a class="ref__link" href="https://www.istqb.org/certifications/certified-tester-finance-testing-ct-ft" target="_blank" rel="noopener noreferrer">ISTQB — Certified Tester Finance Testing (CT-FT)</a>
+              <span class="ref__desc" data-i18n="mat.istqb.ref.ft">Especialidad en testing del dominio financiero: regulaciones, exactitud de montos, auditoría. La que recomendó el QA.</span>
+            </li>
+            <li class="ref">
+              <a class="ref__link" href="https://www.istqb.org/certifications/certified-tester-ai-testing" target="_blank" rel="noopener noreferrer">ISTQB — AI Testing (CT-AI)</a>
+              <span class="ref__desc" data-i18n="mat.istqb.ref.ai">Especialidad en testing de (y con) sistemas de IA: sesgos, datos, métricas específicas de modelos.</span>
+            </li>
+        </ul>
+        <div class="callout callout--ok" data-i18n-html="mat.istqb.callout"><strong>Consejo:</strong> arrancá por el <strong>CTFL</strong> para el vocabulario común, y después elegí una especialidad alineada con tu industria (finanzas, IA, performance). La certificación abre puertas; la práctica te hace bueno.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="python-componente.html">
+          <a class="page-nav__link page-nav__prev" href="maturity-kpis.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+            <span class="page-nav__title" data-i18n="mat.page.kpis">KPIs y modelos de madurez</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="ts-hola.html">
+          <a class="page-nav__link page-nav__next" href="key-terms.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+            <span class="page-nav__title" data-i18n="nav.keyterms">Conceptos clave</span>
           </a>
         </nav>
       </div>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="tsqa.page.intro">Por qué TypeScript para QA</title>
+  <title data-i18n="mat.page.roadmap">Roadmap de madurez (4 fases)</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--ts-intro">
+<body class="page--section page--maturity-roadmap">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -73,28 +73,10 @@
           <span class="nav-link__num">03</span>
           <span data-i18n="nav.pyqa">Python para QA</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="ts-intro.html">
+        <a class="nav-link nav-group" href="ts-intro.html">
           <span class="nav-link__num">04</span>
           <span data-i18n="nav.tsqa">TypeScript para QA</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="ts-intro.html" aria-current="page">
-            <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-hola.html">
-            <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-fundamentos.html">
-            <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-tipos.html">
-            <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-pruebas.html">
-            <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ts-componente.html">
-            <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
-          </a>
         <a class="nav-link nav-group" href="selenium-filosofia.html">
           <span class="nav-link__num">05</span>
           <span data-i18n="nav.selenium">Selenium</span>
@@ -135,10 +117,22 @@
           <span class="nav-link__num">14</span>
           <span data-i18n="nav.skills">Habilidades del QA</span>
         </a>
-        <a class="nav-link nav-group" href="maturity-intro.html">
+        <a class="nav-link nav-group is-active-group" href="maturity-intro.html">
           <span class="nav-link__num">15</span>
           <span data-i18n="nav.maturity">Estrategia y madurez de QA</span>
         </a>
+          <a class="nav-link nav-sublink" href="maturity-intro.html">
+            <span data-i18n="mat.page.intro">QA como estrategia</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="maturity-roadmap.html" aria-current="page">
+            <span data-i18n="mat.page.roadmap">Roadmap de madurez (4 fases)</span>
+          </a>
+          <a class="nav-link nav-sublink" href="maturity-kpis.html">
+            <span data-i18n="mat.page.kpis">KPIs y modelos de madurez</span>
+          </a>
+          <a class="nav-link nav-sublink" href="maturity-istqb.html">
+            <span data-i18n="mat.page.istqb">ISTQB y certificaciones</span>
+          </a>
         <a class="nav-link" href="key-terms.html">
           <span class="nav-link__num">16</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
@@ -151,44 +145,24 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
-        <h2 class="section__title" data-i18n="tsqa.page.intro">Por qué TypeScript para QA</h2>
-        <div class="prose" data-i18n-html="tsqa.lead"><p><strong>TypeScript</strong> es JavaScript con tipos: te avisa de los errores <em>antes</em> de correr el test y te da autocompletado en todo el editor. Es el lenguaje de <strong>Cypress</strong> (y también funciona de diez con Playwright), así que es tu puerta de entrada al testing del front moderno.</p></div>
-        <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
-        <div class="prose" data-i18n-html="tsqa.why"><p>JavaScript es el idioma del navegador; TypeScript le agrega una capa de <strong>tipos</strong> que el compilador chequea. Para QA eso significa menos errores tontos (un campo mal escrito, un valor del tipo equivocado) y tests que se auto-documentan. Las herramientas clave — <code>Vitest</code>/<code>Jest</code>, Cypress y Playwright — son TypeScript de primera.</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon">🛡️</div>
-              <h4 data-i18n="tsqa.t1.title">Tipado</h4>
-              <p data-i18n="tsqa.t1.body">El compilador caza errores antes de ejecutar: menos sorpresas en runtime.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">💡</div>
-              <h4 data-i18n="tsqa.t2.title">Autocompletado</h4>
-              <p data-i18n="tsqa.t2.body">El editor conoce la forma de tus datos y comandos: escribís más rápido y con menos typos.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🌐</div>
-              <h4 data-i18n="tsqa.t3.title">Cypress &amp; Playwright</h4>
-              <p data-i18n="tsqa.t3.body">El lenguaje nativo de Cypress y un ciudadano de primera en Playwright. Web testing puro.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🤖</div>
-              <h4 data-i18n="tsqa.t4.title">AI-friendly</h4>
-              <p data-i18n="tsqa.t4.body">Los asistentes de AI generan TypeScript con tipos que vos revisás y el compilador valida.</p>
-            </div>
-        </div>
-        <h3 class="block-label" data-i18n="ui.when">Cuándo usarlo</h3>
-        <div class="prose" data-i18n-html="tsqa.when"><p>Elegí TypeScript para QA cuando trabajás sobre apps web modernas (sobre todo con Cypress), cuando el equipo de front ya usa TS, o cuando querés que el compilador te cubra la espalda. Si tu foco es testing de APIs y multi-lenguaje, mirá la sección de Python; para el front, TypeScript es la apuesta natural.</p></div>
-        <div class="callout" data-i18n-html="tsqa.callout"><strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Node y TypeScript, escribí tu primer archivo, aprendé tipos y sintaxis, y terminá escribiendo tu primer test. Después saltá a Cypress con base sólida.</div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-maturity)">Estrategia QA</span></div>
+        <h2 class="section__title" data-i18n="mat.page.roadmap">Roadmap de madurez (4 fases)</h2>
+        <div class="prose" data-i18n-html="mat.road.lead"><p>Un camino realista para subir la madurez de QA, en cuatro fases. Cada una tiene un objetivo, acciones concretas y herramientas típicas. No saltees fases: cada una apoya a la siguiente.</p></div>
+        <ol class="steps">
+            <li data-i18n-html="mat.phase1"><strong>Fase 1 — Diagnóstico y estándares.</strong> <em>Objetivo:</em> evaluar el estado actual y definir estándares de calidad. <em>Acciones:</em> assessment de madurez (ISO 9001, TMMi, CMMI), documentar procesos críticos y métricas actuales, definir KPIs (defect density, test coverage, MTTR). <em>Herramientas:</em> Jira, Azure DevOps Test Plans, Power BI.</li>
+            <li data-i18n-html="mat.phase2"><strong>Fase 2 — Automatización y eficiencia.</strong> <em>Objetivo:</em> reducir el error humano y acelerar las pruebas. <em>Acciones:</em> automatizar funcionales y regresión (Selenium, Playwright, Robot), integrar QA en pipelines CI/CD, crear bots para tareas repetitivas. <em>Herramientas:</em> Postman, Azure DevOps, Power Automate.</li>
+            <li data-i18n-html="mat.phase3"><strong>Fase 3 — Cultura de calidad.</strong> <em>Objetivo:</em> involucrar a todo el equipo en la calidad. <em>Acciones:</em> capacitación en testing ágil y shift-left, llevar QA a las historias de usuario (BDD con Cucumber/Gherkin), tableros de calidad visibles para todos. <em>Herramientas:</em> Confluence, Miro, Power BI.</li>
+            <li data-i18n-html="mat.phase4"><strong>Fase 4 — Calidad total.</strong> <em>Objetivo:</em> QA como parte estratégica, no solo operativa. <em>Acciones:</em> usar IA para pruebas predictivas y análisis de riesgo, continuous testing y monitoreo en producción, certificar el proceso (ISO 9001 / TMMi nivel 3+). <em>Herramientas:</em> Azure Monitor, Application Insights, AI copilots.</li>
+        </ol>
+        <div class="callout callout--warn" data-i18n-html="mat.road.callout"><strong>Cuidado con saltar fases:</strong> automatizar (Fase 2) sin estándares (Fase 1) crea suites frágiles que nadie mantiene; y la IA (Fase 4) sin cultura (Fase 3) es una herramienta cara que el equipo ignora.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="python-componente.html">
+          <a class="page-nav__link page-nav__prev" href="maturity-intro.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+            <span class="page-nav__title" data-i18n="mat.page.intro">QA como estrategia</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="ts-hola.html">
+          <a class="page-nav__link page-nav__next" href="maturity-kpis.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+            <span class="page-nav__title" data-i18n="mat.page.kpis">KPIs y modelos de madurez</span>
           </a>
         </nav>
       </div>

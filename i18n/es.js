@@ -56,6 +56,7 @@ I18n.register("es", {
   "nav.prompts": "Ejemplos con AI",
   "nav.best": "Buenas prácticas",
   "nav.skills": "Habilidades del QA",
+  "nav.maturity": "Estrategia y madurez de QA",
   "nav.home": "Inicio",
 
   /* ---- Landing / índice ---- */
@@ -79,6 +80,7 @@ I18n.register("es", {
   "home.prompts": "Prompts concretos, cómo iterar y cómo validar el output.",
   "home.best-practices": "Principios que perduran y tus próximos pasos.",
   "home.skills": "Habilidades transversales del QA: SQL, Git y testing mobile con Appium.",
+  "home.maturity": "QA como estrategia: roadmap de madurez en 4 fases, KPIs, modelos e ISTQB.",
 
   /* ====================================================================
      1. INTRODUCCIÓN
@@ -757,6 +759,80 @@ I18n.register("es", {
     "<p>La AI te arma el esqueleto del test, recuerda las capabilities típicas de cada plataforma y traduce un flujo web a su equivalente mobile (gestos, scroll, esperas).</p>",
   "skills.appium.callout":
     "<strong>Próximo paso:</strong> empezá por el smoke test mobile más crítico (login, compra) en un emulador, integralo a CI con un device farm, y reusá tus Page Objects: la estrategia que aprendiste en web aplica igual.",
+
+  /* ====================================================================
+     6c. ESTRATEGIA Y MADUREZ DE QA
+     ==================================================================== */
+  "mat.page.intro": "QA como estrategia",
+  "mat.page.roadmap": "Roadmap de madurez (4 fases)",
+  "mat.page.kpis": "KPIs y modelos de madurez",
+  "mat.page.istqb": "ISTQB y certificaciones",
+
+  "mat.lead":
+    "<p>Automatizar tests es táctica; hacer que la calidad sea <strong>parte de la estrategia</strong> es otra liga. Esta sección mira el QA desde arriba: cómo evaluar dónde estás, qué medir, y cómo llevar a un equipo de \"apagar incendios\" a una <strong>cultura de calidad</strong>.</p>",
+  "mat.why":
+    "<p>El salto clave es pasar de <em>\"encontrar bugs\"</em> a <em>\"construir calidad\"</em>. Eso requiere tres cosas: <strong>estándares</strong> (acordar qué significa \"calidad\" acá), <strong>métricas</strong> (medir para mejorar, no para castigar) y <strong>cultura</strong> (que la calidad sea responsabilidad de todo el equipo, no solo de QA). Un roadmap por fases evita querer hacer todo de golpe.</p>",
+  "mat.t1.title": "Estándares",
+  "mat.t1.body": "Definí qué es \"calidad\" en tu contexto y documentá los procesos críticos. Sin acuerdo no hay norte.",
+  "mat.t2.title": "Métricas",
+  "mat.t2.body": "Medí con KPIs accionables (defect density, coverage, MTTR). Lo que no se mide, no se mejora.",
+  "mat.t3.title": "Cultura",
+  "mat.t3.body": "Shift-left, tres amigos, tableros visibles: la calidad es de todo el equipo, no solo de QA.",
+  "mat.callout":
+    "<strong>Idea de fondo:</strong> la madurez no se compra con una herramienta. Se construye por fases, midiendo y ajustando. Una buena estrategia de QA acelera la entrega <em>y</em> sube la confianza.",
+
+  "mat.road.lead":
+    "<p>Un camino realista para subir la madurez de QA, en cuatro fases. Cada una tiene un objetivo, acciones concretas y herramientas típicas. No saltees fases: cada una apoya a la siguiente.</p>",
+  "mat.phase1":
+    "<strong>Fase 1 — Diagnóstico y estándares.</strong> <em>Objetivo:</em> evaluar el estado actual y definir estándares de calidad. <em>Acciones:</em> assessment de madurez (ISO 9001, TMMi, CMMI), documentar procesos críticos y métricas actuales, definir KPIs (defect density, test coverage, MTTR). <em>Herramientas:</em> Jira, Azure DevOps Test Plans, Power BI.",
+  "mat.phase2":
+    "<strong>Fase 2 — Automatización y eficiencia.</strong> <em>Objetivo:</em> reducir el error humano y acelerar las pruebas. <em>Acciones:</em> automatizar funcionales y regresión (Selenium, Playwright, Robot), integrar QA en pipelines CI/CD, crear bots para tareas repetitivas. <em>Herramientas:</em> Postman, Azure DevOps, Power Automate.",
+  "mat.phase3":
+    "<strong>Fase 3 — Cultura de calidad.</strong> <em>Objetivo:</em> involucrar a todo el equipo en la calidad. <em>Acciones:</em> capacitación en testing ágil y shift-left, llevar QA a las historias de usuario (BDD con Cucumber/Gherkin), tableros de calidad visibles para todos. <em>Herramientas:</em> Confluence, Miro, Power BI.",
+  "mat.phase4":
+    "<strong>Fase 4 — Calidad total.</strong> <em>Objetivo:</em> QA como parte estratégica, no solo operativa. <em>Acciones:</em> usar IA para pruebas predictivas y análisis de riesgo, continuous testing y monitoreo en producción, certificar el proceso (ISO 9001 / TMMi nivel 3+). <em>Herramientas:</em> Azure Monitor, Application Insights, AI copilots.",
+  "mat.road.callout":
+    "<strong>Cuidado con saltar fases:</strong> automatizar (Fase 2) sin estándares (Fase 1) crea suites frágiles que nadie mantiene; y la IA (Fase 4) sin cultura (Fase 3) es una herramienta cara que el equipo ignora.",
+
+  "mat.kpi.lead":
+    "<p>Lo que no se mide, no se mejora — pero medir mal es peor que no medir. Estos KPIs son <strong>accionables</strong>: te dicen dónde mirar, no a quién culpar. Usalos como tendencia en el tiempo, no como número aislado.</p>",
+  "mat.kpi.th.name": "KPI",
+  "mat.kpi.th.measures": "Qué mide",
+  "mat.kpi.th.calc": "Cómo se calcula",
+  "mat.kpi.dd.n": "Defect density",
+  "mat.kpi.dd.m": "Densidad de defectos por tamaño del módulo",
+  "mat.kpi.dd.c": "Nº de defectos ÷ tamaño (KLOC o puntos de función)",
+  "mat.kpi.cov.n": "Test coverage",
+  "mat.kpi.cov.m": "Qué porción del código/requisitos se prueba",
+  "mat.kpi.cov.c": "Líneas (o requisitos) cubiertos ÷ total × 100",
+  "mat.kpi.mttr.n": "MTTR",
+  "mat.kpi.mttr.m": "Tiempo medio para reparar un fallo",
+  "mat.kpi.mttr.c": "Suma de tiempos de reparación ÷ Nº de fallos",
+  "mat.kpi.esc.n": "Defect escape rate",
+  "mat.kpi.esc.m": "Bugs que llegaron a producción (calidad del filtro)",
+  "mat.kpi.esc.c": "Defectos en prod ÷ defectos totales × 100",
+  "mat.kpi.auto.n": "Automation rate",
+  "mat.kpi.auto.m": "Porción de la regresión que corre sola",
+  "mat.kpi.auto.c": "Casos automatizados ÷ casos automatizables × 100",
+  "mat.models.label": "Modelos de madurez",
+  "mat.models.body":
+    "<p>Los marcos de referencia te dan un mapa para evaluarte: <strong>ISO 9001</strong> (gestión de calidad genérica, certificable), <strong>TMMi</strong> (Test Maturity Model integration: 5 niveles específicos de testing) y <strong>CMMI</strong> (madurez de procesos de desarrollo, 5 niveles). No hace falta certificar para usarlos: sirven como checklist de \"qué nos falta\".</p>",
+  "mat.kpi.callout":
+    "<strong>Antipatrón:</strong> convertir un KPI en objetivo (\"subí coverage a 90%\") suele generar tests inútiles que cubren líneas sin verificar nada. Medí para <em>aprender</em>, no para llegar a un número.",
+
+  "mat.istqb.lead":
+    "<p><strong>ISTQB</strong> (International Software Testing Qualifications Board) es el estándar global de certificación en testing. No te hace mejor tester por sí solo, pero da un <strong>vocabulario común</strong> y es muy valorado en entrevistas y por las empresas.</p>",
+  "mat.istqb.levels.label": "Niveles",
+  "mat.istqb.levels.body":
+    "<p>El esquema va por niveles: <strong>Foundation</strong> (CTFL, la base que todos arrancan), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) y <strong>Expert</strong>. Además hay <strong>especialidades</strong> por dominio o tecnología: AI Testing, Performance, Mobile, Security y — la que mencionó nuestro QA — <strong>Finance Testing (CT-FT)</strong>.</p>",
+  "mat.istqb.certs.label": "Certificaciones (enlaces oficiales)",
+  "mat.istqb.ref.ctfl": "El nivel de entrada: vocabulario, el proceso de testing, técnicas de diseño y gestión. Por donde todos empiezan.",
+  "mat.istqb.ref.ta": "Nivel avanzado para diseñar y ejecutar pruebas basadas en técnicas formales y análisis de riesgo.",
+  "mat.istqb.ref.tae": "Avanzado, enfocado en arquitectura, implementación y mantenimiento de la automatización.",
+  "mat.istqb.ref.ft": "Especialidad en testing del dominio financiero: regulaciones, exactitud de montos, auditoría. La que recomendó el QA.",
+  "mat.istqb.ref.ai": "Especialidad en testing de (y con) sistemas de IA: sesgos, datos, métricas específicas de modelos.",
+  "mat.istqb.callout":
+    "<strong>Consejo:</strong> arrancá por el <strong>CTFL</strong> para el vocabulario común, y después elegí una especialidad alineada con tu industria (finanzas, IA, performance). La certificación abre puertas; la práctica te hace bueno.",
 
   /* ---- Navegación / índice de las secciones nuevas ---- */
   "nav.keyterms": "Conceptos clave",
