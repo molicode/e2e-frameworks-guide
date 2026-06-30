@@ -784,13 +784,13 @@ I18n.register("es", {
   "mat.road.lead":
     "<p>Un camino realista para subir la madurez de QA, en cuatro fases. Cada una tiene un objetivo, acciones concretas y herramientas típicas. No saltees fases: cada una apoya a la siguiente.</p>",
   "mat.phase1":
-    "<strong>Fase 1 — Diagnóstico y estándares.</strong> <em>Objetivo:</em> evaluar el estado actual y definir estándares de calidad. <em>Acciones:</em> assessment de madurez (ISO 9001, TMMi, CMMI), documentar procesos críticos y métricas actuales, definir KPIs (defect density, test coverage, MTTR). <em>Herramientas:</em> Jira, Azure DevOps Test Plans, Power BI.",
+    "<strong>Fase 1 — Diagnóstico y estándares.</strong> <em>Objetivo:</em> evaluar el estado actual y definir estándares de calidad. <em>Acciones:</em> assessment de madurez (ISO 9001, TMMi, CMMI), documentar procesos críticos y métricas actuales, definir KPIs (defect density, test coverage, MTTR). <em>Herramientas:</em> un gestor de incidencias, una suite de gestión de casos de prueba y una herramienta de reportes/BI.",
   "mat.phase2":
-    "<strong>Fase 2 — Automatización y eficiencia.</strong> <em>Objetivo:</em> reducir el error humano y acelerar las pruebas. <em>Acciones:</em> automatizar funcionales y regresión (Selenium, Playwright, Robot), integrar QA en pipelines CI/CD, crear bots para tareas repetitivas. <em>Herramientas:</em> Postman, Azure DevOps, Power Automate.",
+    "<strong>Fase 2 — Automatización y eficiencia.</strong> <em>Objetivo:</em> reducir el error humano y acelerar las pruebas. <em>Acciones:</em> automatizar funcionales y regresión (Selenium, Playwright, Robot), integrar QA en pipelines CI/CD, crear bots para tareas repetitivas. <em>Herramientas:</em> un cliente de APIs, tu plataforma de CI/CD y herramientas de automatización de flujos (RPA).",
   "mat.phase3":
-    "<strong>Fase 3 — Cultura de calidad.</strong> <em>Objetivo:</em> involucrar a todo el equipo en la calidad. <em>Acciones:</em> capacitación en testing ágil y shift-left, llevar QA a las historias de usuario (BDD con Cucumber/Gherkin), tableros de calidad visibles para todos. <em>Herramientas:</em> Confluence, Miro, Power BI.",
+    "<strong>Fase 3 — Cultura de calidad.</strong> <em>Objetivo:</em> involucrar a todo el equipo en la calidad. <em>Acciones:</em> capacitación en testing ágil y shift-left, llevar QA a las historias de usuario (BDD con Cucumber/Gherkin), tableros de calidad visibles para todos. <em>Herramientas:</em> una base de conocimiento/wiki, una pizarra colaborativa y tableros de BI.",
   "mat.phase4":
-    "<strong>Fase 4 — Calidad total.</strong> <em>Objetivo:</em> QA como parte estratégica, no solo operativa. <em>Acciones:</em> usar IA para pruebas predictivas y análisis de riesgo, continuous testing y monitoreo en producción, certificar el proceso (ISO 9001 / TMMi nivel 3+). <em>Herramientas:</em> Azure Monitor, Application Insights, AI copilots.",
+    "<strong>Fase 4 — Calidad total.</strong> <em>Objetivo:</em> QA como parte estratégica, no solo operativa. <em>Acciones:</em> usar IA para pruebas predictivas y análisis de riesgo, continuous testing y monitoreo en producción, certificar el proceso (ISO 9001 / TMMi nivel 3+). <em>Herramientas:</em> observabilidad y monitoreo en producción, telemetría de la aplicación y asistentes de IA.",
   "mat.road.callout":
     "<strong>Cuidado con saltar fases:</strong> automatizar (Fase 2) sin estándares (Fase 1) crea suites frágiles que nadie mantiene; y la IA (Fase 4) sin cultura (Fase 3) es una herramienta cara que el equipo ignora.",
 
@@ -824,12 +824,12 @@ I18n.register("es", {
     "<p><strong>ISTQB</strong> (International Software Testing Qualifications Board) es el estándar global de certificación en testing. No te hace mejor tester por sí solo, pero da un <strong>vocabulario común</strong> y es muy valorado en entrevistas y por las empresas.</p>",
   "mat.istqb.levels.label": "Niveles",
   "mat.istqb.levels.body":
-    "<p>El esquema va por niveles: <strong>Foundation</strong> (CTFL, la base que todos arrancan), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) y <strong>Expert</strong>. Además hay <strong>especialidades</strong> por dominio o tecnología: AI Testing, Performance, Mobile, Security y — la que mencionó nuestro QA — <strong>Finance Testing (CT-FT)</strong>.</p>",
+    "<p>El esquema va por niveles: <strong>Foundation</strong> (CTFL, la base que todos arrancan), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) y <strong>Expert</strong>. Además hay <strong>especialidades</strong> por dominio o tecnología: AI Testing, Performance, Mobile, Security y <strong>Finance Testing (CT-FT)</strong>.</p>",
   "mat.istqb.certs.label": "Certificaciones (enlaces oficiales)",
   "mat.istqb.ref.ctfl": "El nivel de entrada: vocabulario, el proceso de testing, técnicas de diseño y gestión. Por donde todos empiezan.",
   "mat.istqb.ref.ta": "Nivel avanzado para diseñar y ejecutar pruebas basadas en técnicas formales y análisis de riesgo.",
   "mat.istqb.ref.tae": "Avanzado, enfocado en arquitectura, implementación y mantenimiento de la automatización.",
-  "mat.istqb.ref.ft": "Especialidad en testing del dominio financiero: regulaciones, exactitud de montos, auditoría. La que recomendó el QA.",
+  "mat.istqb.ref.ft": "Especialidad en testing del dominio financiero: regulaciones, exactitud de montos, auditoría.",
   "mat.istqb.ref.ai": "Especialidad en testing de (y con) sistemas de IA: sesgos, datos, métricas específicas de modelos.",
   "mat.istqb.callout":
     "<strong>Consejo:</strong> arrancá por el <strong>CTFL</strong> para el vocabulario común, y después elegí una especialidad alineada con tu industria (finanzas, IA, performance). La certificación abre puertas; la práctica te hace bueno.",
