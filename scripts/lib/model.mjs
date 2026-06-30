@@ -835,6 +835,116 @@ await expect(page.getByText("<script>alert(1)</script>")).toBeVisible();
 await expect(page.locator(".results")).toBeVisible();`,
   },
 
+  /* ================================================================== *
+   * Per-framework UI components (same components, each idiom)            *
+   * ================================================================== */
+
+  /* ---- Selenium ---- */
+  selValidation: {
+    lang: "JavaScript",
+    code: `// Form validation (Selenium) — error shows, submit stays disabled.
+await driver.findElement(By.id("email")).sendKeys("not-an-email");
+await driver.findElement(By.css("button[type=submit]")).click();
+assert.ok((await driver.findElement(By.css(".error")).getText()).includes("valid email"));
+assert.ok(await driver.findElement(By.css("button[type=submit]")).getAttribute("disabled"));`,
+  },
+  selSelect: {
+    lang: "JavaScript",
+    code: `// Select / dropdown (Selenium) — Java has the Select helper; in JS click the option.
+const country = await driver.findElement(By.id("country"));
+await country.findElement(By.css("option[value=AR]")).click();
+assert.strictEqual(await country.getAttribute("value"), "AR");`,
+  },
+  selCheckbox: {
+    lang: "JavaScript",
+    code: `// Checkbox (Selenium) — click and assert state.
+const optIn = await driver.findElement(By.css("input[name=optIn]"));
+if (!(await optIn.isSelected())) await optIn.click();
+assert.ok(await optIn.isSelected());`,
+  },
+  selModal: {
+    lang: "JavaScript",
+    code: `// Modal / dialog (Selenium) — open, confirm, assert it's gone.
+await driver.findElement(By.css("[data-action=delete]")).click();
+const dialog = await driver.wait(
+  until.elementIsVisible(driver.findElement(By.css("[role=dialog]"))), 5000);
+await dialog.findElement(By.xpath(".//button[text()='Delete']")).click();
+await driver.wait(until.stalenessOf(dialog), 5000); // dialog closed`,
+  },
+  selTable: {
+    lang: "JavaScript",
+    code: `// Data table (Selenium) — assert the row count and a specific cell.
+const rows = await driver.findElements(By.css("table tbody tr"));
+assert.strictEqual(rows.length, 3);
+const cell = await driver.findElement(
+  By.xpath("//td[normalize-space()='Ada Lovelace']"));
+assert.ok(await cell.isDisplayed());`,
+  },
+  selToast: {
+    lang: "JavaScript",
+    code: `// Toast / alert (Selenium) — appears, then disappears on its own.
+await driver.findElement(By.css("[data-action=save]")).click();
+const toast = await driver.wait(until.elementLocated(By.css("[role=alert]")), 5000);
+assert.ok((await toast.getText()).includes("saved"));
+await driver.wait(until.stalenessOf(toast), 8000); // auto-dismissed`,
+  },
+  selA11y: {
+    lang: "JavaScript",
+    code: `// Accessibility (Selenium) — run axe-core via @axe-core/webdriverjs.
+import AxeBuilder from "@axe-core/webdriverjs";
+
+const results = await new AxeBuilder(driver).analyze();
+assert.strictEqual(results.violations.length, 0);`,
+  },
+
+  /* ---- Cypress ---- */
+  cypValidation: {
+    lang: "JavaScript",
+    code: `// Form validation (Cypress) — error shows, submit stays disabled.
+cy.get("#email").type("not-an-email");
+cy.get("button[type=submit]").click();
+cy.contains(".error", "valid email").should("be.visible");
+cy.get("button[type=submit]").should("be.disabled");`,
+  },
+  cypSelect: {
+    lang: "JavaScript",
+    code: `// Select / dropdown (Cypress) — .select() picks the option.
+cy.get("#country").select("AR");
+cy.get("#country").should("have.value", "AR");`,
+  },
+  cypCheckbox: {
+    lang: "JavaScript",
+    code: `// Checkbox (Cypress) — check and assert state.
+cy.get("[name=optIn]").check().should("be.checked");`,
+  },
+  cypModal: {
+    lang: "JavaScript",
+    code: `// Modal / dialog (Cypress) — open, confirm, assert it's gone.
+cy.get("[data-action=delete]").click();
+cy.get("[role=dialog]").as("dlg").should("be.visible");
+cy.get("@dlg").contains("button", "Delete").click();
+cy.get("[role=dialog]").should("not.exist");`,
+  },
+  cypTable: {
+    lang: "JavaScript",
+    code: `// Data table (Cypress) — assert the row count and a specific cell.
+cy.get("table tbody tr").should("have.length", 3);
+cy.get("table").contains("td", "Ada Lovelace").should("be.visible");`,
+  },
+  cypToast: {
+    lang: "JavaScript",
+    code: `// Toast / alert (Cypress) — appears, then disappears on its own.
+cy.get("[data-action=save]").click();
+cy.get("[role=alert]").should("contain", "saved");
+cy.get("[role=alert]").should("not.exist"); // auto-dismissed`,
+  },
+  cypA11y: {
+    lang: "JavaScript",
+    code: `// Accessibility (Cypress) — cypress-axe runs axe in the browser.
+cy.injectAxe();
+cy.checkA11y(); // fails the test on any violation`,
+  },
+
   /* ---- Fundamentals: anatomy of a test ---- */
   aaaTest: {
     lang: "JavaScript",
@@ -899,7 +1009,12 @@ Multi-agent variant (higher confidence):
 function roadmapItems(prefix, count) {
   const items = [];
   for (let i = 1; i <= count; i++) {
-    items.push({ title: `${prefix}.rung${i}.title`, desc: `${prefix}.rung${i}.desc` });
+    // anchor links the roadmap entry to that rung's detailed heading below.
+    items.push({
+      title: `${prefix}.rung${i}.title`,
+      desc: `${prefix}.rung${i}.desc`,
+      anchor: `${prefix}-rung-${i}`,
+    });
   }
   return items;
 }
@@ -908,7 +1023,7 @@ function rungBlocks(prefix, rungs) {
   const blocks = [];
   rungs.forEach((rung, i) => {
     const n = i + 1;
-    blocks.push({ type: "label", text: `${prefix}.rung${n}.title` });
+    blocks.push({ type: "label", text: `${prefix}.rung${n}.title`, anchor: `${prefix}-rung-${n}` });
     blocks.push({ type: "prose", html: `${prefix}.rung${n}.body` });
     rung.codes.forEach((sample) => blocks.push({ type: "code", sample }));
     // Optional fictitious screen so the learner SEES what the code targets.
@@ -934,7 +1049,43 @@ function casesBlocks(cases) {
   return blocks;
 }
 
-function frameworkSection(id, navKey, prefix, chip, rungs, cases) {
+// The common UI components every framework should test. Labels/bodies are
+// shared (comp.* keys); only the code sample differs per framework.
+const COMPONENT_DEFS = [
+  { labelKey: "comp.validation.label", bodyKey: "comp.validation.body", mock: "validation", key: "Validation" },
+  { labelKey: "comp.select.label", bodyKey: "comp.select.body", mock: "select", key: "Select" },
+  { labelKey: "comp.checkbox.label", bodyKey: "comp.checkbox.body", mock: "checkbox", key: "Checkbox" },
+  { labelKey: "comp.modal.label", bodyKey: "comp.modal.body", mock: "modal", key: "Modal" },
+  { labelKey: "comp.table.label", bodyKey: "comp.table.body", mock: "table", key: "Table" },
+  { labelKey: "comp.toast.label", bodyKey: "comp.toast.body", mock: "toast", key: "Toast" },
+  { labelKey: "comp.a11y.label", bodyKey: "comp.a11y.body", mock: "a11y", key: "A11y" },
+];
+
+// sampleFor maps a component key (e.g. "Modal") to this framework's sample id.
+function frameworkComponents(sampleFor) {
+  return COMPONENT_DEFS.map((d) => ({
+    labelKey: d.labelKey,
+    bodyKey: d.bodyKey,
+    mock: d.mock,
+    sample: sampleFor(d.key),
+  }));
+}
+
+function componentsBlocks(components) {
+  const blocks = [
+    { type: "label", text: "nav.components" },
+    { type: "prose", html: "components.intro" },
+  ];
+  components.forEach((c) => {
+    blocks.push({ type: "label", text: c.labelKey });
+    blocks.push({ type: "prose", html: c.bodyKey });
+    blocks.push({ type: "code", sample: c.sample });
+    if (c.mock) blocks.push({ type: "mock", screen: c.mock });
+  });
+  return blocks;
+}
+
+function frameworkSection(id, navKey, prefix, chip, rungs, cases, components) {
   return {
     id,
     navKey,
@@ -948,6 +1099,7 @@ function frameworkSection(id, navKey, prefix, chip, rungs, cases) {
       { type: "label", text: "ui.path" },
       { type: "roadmap", items: roadmapItems(prefix, rungs.length) },
       ...rungBlocks(prefix, rungs),
+      ...componentsBlocks(components),
       ...casesBlocks(cases),
       { type: "label", text: "ui.vs" },
       {
@@ -1064,7 +1216,8 @@ export const SECTIONS = [
       { codes: ["selRunnerJava", "selRunnerPy"] },    // 4 Runner + assertions
       { codes: ["selPOM"], mock: "table" },           // 5 Page Object Model
       { codes: ["selGrid"] },                         // 6 Grid & CI
-    ], frameworkCases("selApi", "selMoney", "selDocs", "selSecurity")),
+    ], frameworkCases("selApi", "selMoney", "selDocs", "selSecurity"),
+       frameworkComponents((k) => "sel" + k)),
 
   frameworkSection("cypress", "nav.cypress", "cyp",
     { label: "Cypress", color: "var(--fw-cypress)" }, [
@@ -1074,7 +1227,8 @@ export const SECTIONS = [
       { codes: ["cypIntercept"], mock: "error" },     // 4 Network with cy.intercept()
       { codes: ["cypCommands"] },                     // 5 Custom commands & fixtures
       { codes: ["cypComponent"], mock: "modal" },     // 6 Component testing + CI
-    ], frameworkCases("cypApi", "cypMoney", "cypDocs", "cypSecurity")),
+    ], frameworkCases("cypApi", "cypMoney", "cypDocs", "cypSecurity"),
+       frameworkComponents((k) => "cyp" + k)),
 
   frameworkSection("playwright", "nav.playwright", "pw",
     { label: "Playwright", color: "var(--fw-playwright)" }, [
@@ -1084,7 +1238,11 @@ export const SECTIONS = [
       { codes: ["pwFixtures"] },                          // 4 Fixtures & organization
       { codes: ["pwNetwork"], mock: "error" },            // 5 Network & auth
       { codes: ["pwConfig", "pwCIyml"] },                 // 6 CI + trace viewer
-    ], frameworkCases("apiCrud", "receiptTest", "pwDocs", "pwSecurity")),
+    ], frameworkCases("apiCrud", "receiptTest", "pwDocs", "pwSecurity"),
+       frameworkComponents((k) => ({
+         Validation: "validationTest", Select: "selectTest", Checkbox: "checkboxTest",
+         Modal: "modalTest", Table: "tableTest", Toast: "toastTest", A11y: "a11yTest",
+       }[k]))),
 
   {
     id: "comparison",
@@ -1109,55 +1267,6 @@ export const SECTIONS = [
           ["cmp.r6.f", "cmp.r6.s", "cmp.r6.c", "cmp.r6.p"],
         ],
       },
-    ],
-  },
-
-  {
-    id: "components",
-    navKey: "nav.components",
-    blocks: [
-      { type: "prose", html: "comp.lead" },
-      { type: "callout", variant: "", html: "comp.callout" },
-
-      { type: "label", text: "comp.validation.label" },
-      { type: "prose", html: "comp.validation.body" },
-      { type: "code", sample: "validationTest" },
-      { type: "mock", screen: "validation" },
-
-      { type: "label", text: "comp.select.label" },
-      { type: "prose", html: "comp.select.body" },
-      { type: "code", sample: "selectTest" },
-      { type: "mock", screen: "select" },
-
-      { type: "label", text: "comp.checkbox.label" },
-      { type: "prose", html: "comp.checkbox.body" },
-      { type: "code", sample: "checkboxTest" },
-      { type: "mock", screen: "checkbox" },
-
-      { type: "label", text: "comp.modal.label" },
-      { type: "prose", html: "comp.modal.body" },
-      { type: "code", sample: "modalTest" },
-      { type: "mock", screen: "modal" },
-
-      { type: "label", text: "comp.table.label" },
-      { type: "prose", html: "comp.table.body" },
-      { type: "code", sample: "tableTest" },
-      { type: "mock", screen: "table" },
-
-      { type: "label", text: "comp.toast.label" },
-      { type: "prose", html: "comp.toast.body" },
-      { type: "code", sample: "toastTest" },
-      { type: "mock", screen: "toast" },
-
-      { type: "label", text: "comp.api.label" },
-      { type: "prose", html: "comp.api.body" },
-      { type: "code", sample: "apiTest" },
-      { type: "mock", screen: "api" },
-
-      { type: "label", text: "comp.a11y.label" },
-      { type: "prose", html: "comp.a11y.body" },
-      { type: "code", sample: "a11yTest" },
-      { type: "mock", screen: "a11y" },
     ],
   },
 

@@ -438,6 +438,11 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .roadmap li { color: var(--text-muted); }
 .roadmap strong { color: var(--text); font-weight: 650; }
 .roadmap__sep { color: var(--border-strong); }
+.roadmap__link { color: var(--accent); font-weight: 650; }
+.roadmap__link:hover { text-decoration: underline; }
+
+/* Anchored headings land below the sticky header when jumped to. */
+.block-label[id] { scroll-margin-top: calc(var(--header-h) + var(--space-5)); }
 
 /* Framework block in the comparison section */
 .fw-block { margin: var(--space-5) 0; }

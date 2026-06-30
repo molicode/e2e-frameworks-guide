@@ -85,28 +85,24 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link" href="components.html">
-          <span class="nav-link__num">07</span>
-          <span data-i18n="nav.components">Componentes clave</span>
-        </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">07</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">10</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">11</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
@@ -123,37 +119,37 @@
         <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
         <ol class="steps roadmap">
             <li>
-              <strong data-i18n="cyp.rung1.title">El runner interactivo</strong>
+              <a class="roadmap__link" href="#cyp-rung-1" data-i18n="cyp.rung1.title">El runner interactivo</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="cyp.rung1.desc">Corré cypress open, mirá el time-travel y entendé describe / it.</span>
             </li>
             <li>
-              <strong data-i18n="cyp.rung2.title">Comandos y la cadena async</strong>
+              <a class="roadmap__link" href="#cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="cyp.rung2.desc">cy.get() no devuelve un valor directo: encadenás. Esto es lo que más cuesta al principio.</span>
             </li>
             <li>
-              <strong data-i18n="cyp.rung3.title">Assertions y selectores</strong>
+              <a class="roadmap__link" href="#cyp-rung-3" data-i18n="cyp.rung3.title">Assertions y selectores</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="cyp.rung3.desc">Las .should() implícitas y explícitas; la convención data-cy.</span>
             </li>
             <li>
-              <strong data-i18n="cyp.rung4.title">Network con cy.intercept()</strong>
+              <a class="roadmap__link" href="#cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="cyp.rung4.desc">Mockeá APIs, esperá requests con alias y testeá estados de error.</span>
             </li>
             <li>
-              <strong data-i18n="cyp.rung5.title">Custom commands y fixtures</strong>
+              <a class="roadmap__link" href="#cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="cyp.rung5.desc">Encapsulá el login y los datos en fixtures JSON para tests limpios.</span>
             </li>
             <li>
-              <strong data-i18n="cyp.rung6.title">Component testing + CI</strong>
+              <a class="roadmap__link" href="#cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="cyp.rung6.desc">Probá componentes aislados y armá la corrida en el pipeline.</span>
             </li>
         </ol>
-        <h3 class="block-label" data-i18n="cyp.rung1.title">El runner interactivo</h3>
+        <h3 class="block-label" id="cyp-rung-1" data-i18n="cyp.rung1.title">El runner interactivo</h3>
         <div class="prose" data-i18n-html="cyp.rung1.body"><p>Cypress trae un <strong>runner visual</strong>: con <code>cypress open</code> ves cada comando ejecutarse en vivo y podés viajar en el tiempo a cualquier paso (<em>time-travel</em>). Los tests se organizan con <code>describe()</code> (un grupo) e <code>it()</code> (un caso), igual que en muchos frameworks de JS.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -224,7 +220,7 @@ npx cypress run</code></pre>
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="cyp.rung2.title">Comandos y la cadena async</h3>
+        <h3 class="block-label" id="cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</h3>
         <div class="prose" data-i18n-html="cyp.rung2.body"><p>El concepto que más cuesta: los comandos <code>cy.*</code> <strong>no son promesas</strong> y no devuelven un valor directo — se <strong>encolan</strong> y se encadenan. Si necesitás el valor de un elemento usás <code>.then()</code>, pero conviene evitarlo. Con <code>.as()</code> creás un alias y lo reusás con <code>@nombre</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -246,7 +242,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><sp
 cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").as("</span>items<span class="tok-string">");
 cy.get("</span><span class="tok-punctuation">@</span>items<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-punctuation">",</span> <span class="tok-number">3</span><span class="tok-punctuation">);</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="cyp.rung3.title">Assertions y selectores</h3>
+        <h3 class="block-label" id="cyp-rung-3" data-i18n="cyp.rung3.title">Assertions y selectores</h3>
         <div class="prose" data-i18n-html="cyp.rung3.body"><p>Las assertions de Cypress son <strong>implícitas</strong>: <code>.should()</code> reintenta el comando anterior hasta que se cumple. Encadenás más condiciones con <code>.and()</code>, o usás <code>expect()</code> dentro de un callback para casos explícitos. Para selectores estables, la comunidad usa la convención <code>data-cy</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -300,7 +296,7 @@ cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctu
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="cyp.rung4.title">Network con cy.intercept()</h3>
+        <h3 class="block-label" id="cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</h3>
         <div class="prose" data-i18n-html="cyp.rung4.body"><p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -343,7 +339,7 @@ cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-pun
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="cyp.rung5.title">Custom commands y fixtures</h3>
+        <h3 class="block-label" id="cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</h3>
         <div class="prose" data-i18n-html="cyp.rung5.body"><p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -368,7 +364,7 @@ cy.fixture("</span>order<span class="tok-string">").then((order) =&gt; {
   cy.intercept("</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">",</span> order<span class="tok-punctuation">);</span>
 <span class="tok-punctuation">});</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="cyp.rung6.title">Component testing + CI</h3>
+        <h3 class="block-label" id="cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</h3>
         <div class="prose" data-i18n-html="cyp.rung6.body"><p>Además de E2E, Cypress hace <strong>component testing</strong>: montás un componente aislado con <code>cy.mount()</code> y lo probás sin levantar toda la app. En CI corrés <code>cypress run</code> (headless), con <code>--component</code> o <code>--e2e</code> según el tipo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -408,6 +404,273 @@ cy.fixture("</span>order<span class="tok-string">").then((order) =&gt; {
                   <code class="mock-tag">getByRole("dialog")</code>
                   <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="nav.components">Componentes clave</h3>
+        <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
+        <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
+        <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Form validation (Cypress) — error shows, submit stays disabled.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>email<span class="tok-string">").type("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">contains</span><span class="tok-punctuation">(".</span><span class="tok-property">error</span><span class="tok-string">", "</span>valid email<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">disabled</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/signup</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Create account</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input mock-input--bad">not-an-email</span>
+                <span class="mock-err">Enter a valid email<code class="mock-tag">getByText("valid email")</code></span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn mock-btn--off">Sign up</span>
+                <code class="mock-tag">toBeDisabled()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.select.label">Select / dropdown</h3>
+        <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Select / dropdown (Cypress) — .select() picks the option.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>country<span class="tok-string">").select("</span>AR<span class="tok-string">");
+cy.get("</span><span class="tok-comment">#country").should("have.value", "AR");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/checkout</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Shipping</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Country</span>
+                <span class="mock-select">Argentina <i>▾</i></span>
+                <code class="mock-tag">selectOption("AR")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("combobox")</code>
+                <code class="mock-tag">toHaveValue("AR")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.checkbox.label">Checkbox / toggle</h3>
+        <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Checkbox (Cypress) — check and assert state.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>name<span class="tok-punctuation">=</span>optIn<span class="tok-punctuation">]").</span><span class="tok-function">check</span><span class="tok-punctuation">().</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>be<span class="tok-punctuation">.</span><span class="tok-property">checked</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/settings</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Preferences</h4>
+              <label class="mock-check">
+                <span class="mock-box mock-box--on">✓</span>
+                <span>Email me about updates</span>
+                <code class="mock-tag">getByRole("checkbox")</code>
+              </label>
+              <div class="mock-toggle-row">
+                <span>Dark mode</span>
+                <span class="mock-switch mock-switch--on"><i></i></span>
+                <code class="mock-tag">toBeChecked()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.modal.label">Modal / diálogo</h3>
+        <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Modal / dialog (Cypress) — open, confirm, assert it's gone.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span><span class="tok-keyword">delete</span><span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-keyword">as</span><span class="tok-punctuation">("</span>dlg<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">@</span>dlg<span class="tok-string">").contains("</span>button<span class="tok-string">", "</span>Delete<span class="tok-string">").click();
+cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage">
+              <div class="mock-dialog" role="dialog">
+                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-error-msg">This action can't be undone.</p>
+                <div class="mock-btn-row">
+                  <span class="mock-btn mock-btn--ghost">Cancel</span>
+                  <span class="mock-btn mock-btn--danger">Delete</span>
+                </div>
+                <div class="mock-tags-row">
+                  <code class="mock-tag">getByRole("dialog")</code>
+                  <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.table.label">Tabla de datos</h3>
+        <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Data table (Cypress) — assert the row count and a specific cell.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>table tbody tr<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-string">", 3);
+cy.get("</span>table<span class="tok-string">").contains("</span>td<span class="tok-string">", "</span>Ada Lovelace<span class="tok-string">").should("</span>be<span class="tok-punctuation">.</span><span class="tok-property">visible</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">admin.example.com/users</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Users</h4>
+              <table class="mock-table">
+                <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Ada Lovelace</td><td>Admin</td><td>Active</td></tr>
+                  <tr><td>Alan Turing</td><td>Editor</td><td>Active</td></tr>
+                  <tr><td>Grace Hopper</td><td>Viewer</td><td>Invited</td></tr>
+                </tbody>
+              </table>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(4)</code>
+                <code class="mock-tag">getByRole("cell", { name: "Admin" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.toast.label">Toast / alerta</h3>
+        <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Toast / alert (Cypress) — appears, then disappears on its own.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span>save<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>contain<span class="tok-string">", "</span>saved<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]").</span><span class="tok-function">should</span><span class="tok-punctuation">("</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-property">exist</span><span class="tok-punctuation">");</span> <span class="tok-comment">// auto-dismissed</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage mock-stage--top">
+              <div class="mock-toast" role="alert">
+                <span class="mock-toast__icon">✓</span>
+                <span>Order saved successfully</span>
+                <code class="mock-tag">getByRole("alert")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">toBeVisible()</code>
+                <code class="mock-tag">toContainText("saved")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.a11y.label">Accesibilidad (a11y)</h3>
+        <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Accessibility (Cypress) — cypress-axe runs axe in the browser.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">injectAxe</span><span class="tok-punctuation">();</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">checkA11y</span><span class="tok-punctuation">();</span> <span class="tok-comment">// fails the test on any violation</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Accessibility scan</h4>
+              <ul class="mock-a11y-list">
+                <li class="mock-a11y-ok">Buttons have an accessible name</li>
+                <li class="mock-a11y-ok">Form inputs have labels</li>
+                <li class="mock-a11y-bad">Image missing alt text <code>img.logo</code></li>
+                <li class="mock-a11y-ok">Color contrast &ge; 4.5:1</li>
+              </ul>
+              <div class="mock-a11y-score">1 violation</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">@axe-core/playwright</code>
+                <code class="mock-tag">expect(violations).toEqual([])</code>
+                <code class="mock-tag">getByRole("button", { name })</code>
               </div>
             </div>
           </div>

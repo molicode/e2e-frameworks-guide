@@ -632,6 +632,8 @@ I18n.register("en", {
   "crit.docs.label": "Legal document validation",
   "crit.docs.body":
     "<p>Invoices, contracts or receipts: you validate the <strong>required fields</strong>, the number <strong>format</strong>, the status (signed) and that the date isn't in the future.</p>",
+  "components.intro":
+    "<p>A screen is the sum of many <strong>components</strong>. Here's how to test the most common ones in this framework — notice how you almost always reach the element by its <strong>accessible role</strong>.</p>",
 
   /* ---- Fundamentals (deeper) ---- */
   "fund.tile.unit.title": "Unit",

@@ -633,6 +633,8 @@ I18n.register("es", {
   "crit.docs.label": "Validación de documentos legales",
   "crit.docs.body":
     "<p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p>",
+  "components.intro":
+    "<p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p>",
 
   /* ---- Fundamentos (más profundo) ---- */
   "fund.tile.unit.title": "Unit",

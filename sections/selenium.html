@@ -85,28 +85,24 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.comparison">Comparativa</span>
         </a>
-        <a class="nav-link" href="components.html">
-          <span class="nav-link__num">07</span>
-          <span data-i18n="nav.components">Componentes clave</span>
-        </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">08</span>
+          <span class="nav-link__num">07</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">10</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">11</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
@@ -123,37 +119,37 @@
         <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
         <ol class="steps roadmap">
             <li>
-              <strong data-i18n="sel.rung1.title">WebDriver y navegación</strong>
+              <a class="roadmap__link" href="#sel-rung-1" data-i18n="sel.rung1.title">WebDriver y navegación</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="sel.rung1.desc">Levantá un driver, abrí una página y cerrá con quit(). Entendé el ciclo de vida.</span>
             </li>
             <li>
-              <strong data-i18n="sel.rung2.title">Localizar elementos</strong>
+              <a class="roadmap__link" href="#sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="sel.rung2.desc">Dominá los By: CSS sobre XPath siempre que puedas. Practicá selectores robustos.</span>
             </li>
             <li>
-              <strong data-i18n="sel.rung3.title">Esperas explícitas</strong>
+              <a class="roadmap__link" href="#sel-rung-3" data-i18n="sel.rung3.title">Esperas explícitas</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="sel.rung3.desc">El concepto más importante. WebDriverWait + ExpectedConditions. Evitá Thread.sleep.</span>
             </li>
             <li>
-              <strong data-i18n="sel.rung4.title">Runner + assertions</strong>
+              <a class="roadmap__link" href="#sel-rung-4" data-i18n="sel.rung4.title">Runner + assertions</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="sel.rung4.desc">Integralo con JUnit5/TestNG (Java) o pytest (Python). Selenium conduce, no testea.</span>
             </li>
             <li>
-              <strong data-i18n="sel.rung5.title">Page Object Model</strong>
+              <a class="roadmap__link" href="#sel-rung-5" data-i18n="sel.rung5.title">Page Object Model</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="sel.rung5.desc">Refactorizá a POM antes de que la suite crezca. La diferencia entre mantenible e infierno.</span>
             </li>
             <li>
-              <strong data-i18n="sel.rung6.title">Grid y CI</strong>
+              <a class="roadmap__link" href="#sel-rung-6" data-i18n="sel.rung6.title">Grid y CI</a>
               <span class="roadmap__sep"> — </span>
               <span data-i18n="sel.rung6.desc">Corré en paralelo con Selenium Grid o un servicio cloud, e integralo al pipeline.</span>
             </li>
         </ol>
-        <h3 class="block-label" data-i18n="sel.rung1.title">WebDriver y navegación</h3>
+        <h3 class="block-label" id="sel-rung-1" data-i18n="sel.rung1.title">WebDriver y navegación</h3>
         <div class="prose" data-i18n-html="sel.rung1.body"><p>Todo test de Selenium empieza creando un <strong>driver</strong> (la sesión del navegador) y termina con <code>driver.quit()</code> para liberarla. En el medio navegás con <code>driver.get(url)</code>. Pensá el driver como el control remoto del navegador: si no lo apagás, queda consumiendo recursos.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -235,7 +231,7 @@ const assert = require("</span><span class="tok-keyword">assert</span><span clas
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="sel.rung2.title">Localizar elementos</h3>
+        <h3 class="block-label" id="sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</h3>
         <div class="prose" data-i18n-html="sel.rung2.body"><p>Selenium localiza elementos con la clase <code>By</code>: <code>By.id</code>, <code>By.css</code>, <code>By.xpath</code>… Usá <code>findElement</code> para uno y <code>findElements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -285,7 +281,7 @@ await driver.findElement(By.xpath("</span><span class="tok-comment">//button[tex
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="sel.rung3.title">Esperas explícitas</h3>
+        <h3 class="block-label" id="sel-rung-3" data-i18n="sel.rung3.title">Esperas explícitas</h3>
         <div class="prose" data-i18n-html="sel.rung3.body"><p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en JS, <code>driver.wait(until.…)</code>; en Java, <code>WebDriverWait</code> + <code>ExpectedConditions</code>. Nunca uses un <code>Thread.sleep</code> fijo: es la causa número uno de flakiness.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -342,7 +338,7 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="sel.rung4.title">Runner + assertions</h3>
+        <h3 class="block-label" id="sel-rung-4" data-i18n="sel.rung4.title">Runner + assertions</h3>
         <div class="prose" data-i18n-html="sel.rung4.body"><p>Selenium solo <em>conduce</em> el navegador; las afirmaciones las pone un <strong>test runner</strong>. En Java se combina con <strong>JUnit 5</strong> o <strong>TestNG</strong>; en Python con <strong>pytest</strong>. El runner aporta estructura (setup/teardown), assertions y reportes.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -374,7 +370,7 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
     total = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").text
     assert total == "</span><span class="tok-number">250</span><span class="tok-punctuation">"</span></code></pre>
         </div>
-        <h3 class="block-label" data-i18n="sel.rung5.title">Page Object Model</h3>
+        <h3 class="block-label" id="sel-rung-5" data-i18n="sel.rung5.title">Page Object Model</h3>
         <div class="prose" data-i18n-html="sel.rung5.body"><p>El <strong>Page Object Model (POM)</strong> encapsula los selectores y acciones de una página en una clase con métodos que revelan intención (<code>order.total()</code> en vez de un <code>css</code> suelto). Cuando el HTML cambia, tocás un solo lugar. Es la diferencia entre una suite mantenible y un infierno de selectores repetidos.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -425,7 +421,7 @@ assert.strictEqual(await order.total(), "</span><span class="tok-number">250</sp
         </div>
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
-        <h3 class="block-label" data-i18n="sel.rung6.title">Grid y CI</h3>
+        <h3 class="block-label" id="sel-rung-6" data-i18n="sel.rung6.title">Grid y CI</h3>
         <div class="prose" data-i18n-html="sel.rung6.body"><p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: apuntás el driver a un hub con <code>usingServer(...)</code> en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p></div>
         <div class="code-block">
           <div class="code-block__head">
@@ -445,6 +441,283 @@ const driver = await new Builder()
 <span class="tok-comment">// In CI you usually start the Grid with Docker first:</span>
 <span class="tok-comment">//   docker run -d -p 4444:4444 selenium/standalone-chrome</span></code></pre>
         </div>
+        <h3 class="block-label" data-i18n="nav.components">Componentes clave</h3>
+        <div class="prose" data-i18n-html="components.intro"><p>Una pantalla es la suma de muchos <strong>componentes</strong>. Acá tenés cómo testear los más comunes en este framework — fijate cómo casi siempre alcanzás el elemento por su <strong>rol accesible</strong>.</p></div>
+        <h3 class="block-label" data-i18n="comp.validation.label">Formulario con validación</h3>
+        <div class="prose" data-i18n-html="comp.validation.body"><p>Verificás que aparezca el mensaje de error y que el botón de submit quede deshabilitado mientras el dato es inválido.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Form validation (Selenium) — error shows, submit stays disabled.</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>email<span class="tok-string">")).sendKeys("</span><span class="tok-keyword">not</span><span class="tok-punctuation">-</span>an<span class="tok-punctuation">-</span>email<span class="tok-string">");
+await driver.findElement(By.css("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">((</span><span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">(".</span><span class="tok-property">error</span><span class="tok-string">")).getText()).includes("</span>valid email<span class="tok-string">"));
+assert.ok(await driver.findElement(By.css("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]")).</span><span class="tok-function">getAttribute</span><span class="tok-punctuation">("</span>disabled<span class="tok-punctuation">"));</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/signup</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Create account</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Email</span>
+                <span class="mock-input mock-input--bad">not-an-email</span>
+                <span class="mock-err">Enter a valid email<code class="mock-tag">getByText("valid email")</code></span>
+              </div>
+              <div class="mock-btn-row">
+                <span class="mock-btn mock-btn--off">Sign up</span>
+                <code class="mock-tag">toBeDisabled()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.select.label">Select / dropdown</h3>
+        <div class="prose" data-i18n-html="comp.select.body"><p>Elegís una opción con <code>selectOption()</code> y afirmás el valor seleccionado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Select / dropdown (Selenium) — Java has the Select helper; in JS click the option.</span>
+<span class="tok-keyword">const</span> country <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>country<span class="tok-string">"));
+await country.findElement(By.css("</span>option<span class="tok-punctuation">[</span>value<span class="tok-punctuation">=</span>AR<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> country<span class="tok-punctuation">.</span><span class="tok-function">getAttribute</span><span class="tok-punctuation">("</span>value<span class="tok-string">"), "</span>AR<span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/checkout</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Shipping</h4>
+              <div class="mock-field mock-field--col">
+                <span class="mock-field__label">Country</span>
+                <span class="mock-select">Argentina <i>▾</i></span>
+                <code class="mock-tag">selectOption("AR")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("combobox")</code>
+                <code class="mock-tag">toHaveValue("AR")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.checkbox.label">Checkbox / toggle</h3>
+        <div class="prose" data-i18n-html="comp.checkbox.body"><p>Lo marcás con <code>check()</code> y verificás el estado con <code>toBeChecked()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Checkbox (Selenium) — click and assert state.</span>
+<span class="tok-keyword">const</span> optIn <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("</span>input<span class="tok-punctuation">[</span>name<span class="tok-punctuation">=</span>optIn<span class="tok-punctuation">]"));</span>
+<span class="tok-keyword">if</span> <span class="tok-punctuation">(!(</span><span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">isSelected</span><span class="tok-punctuation">()))</span> <span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> optIn<span class="tok-punctuation">.</span><span class="tok-function">isSelected</span><span class="tok-punctuation">());</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/settings</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Preferences</h4>
+              <label class="mock-check">
+                <span class="mock-box mock-box--on">✓</span>
+                <span>Email me about updates</span>
+                <code class="mock-tag">getByRole("checkbox")</code>
+              </label>
+              <div class="mock-toggle-row">
+                <span>Dark mode</span>
+                <span class="mock-switch mock-switch--on"><i></i></span>
+                <code class="mock-tag">toBeChecked()</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.modal.label">Modal / diálogo</h3>
+        <div class="prose" data-i18n-html="comp.modal.body"><p>Lo abrís, acotás las búsquedas al <code>dialog</code>, confirmás y verificás que se haya cerrado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Modal / dialog (Selenium) — open, confirm, assert it's gone.</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span><span class="tok-keyword">delete</span><span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">const</span> dialog <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>
+  until<span class="tok-punctuation">.</span><span class="tok-function">elementIsVisible</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>dialog<span class="tok-punctuation">]"))),</span> <span class="tok-number">5000</span><span class="tok-punctuation">);</span>
+<span class="tok-keyword">await</span> dialog<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">xpath</span><span class="tok-punctuation">(".//</span>button<span class="tok-punctuation">[</span><span class="tok-function">text</span><span class="tok-punctuation">()='</span>Delete<span class="tok-punctuation">']")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>until<span class="tok-punctuation">.</span><span class="tok-function">stalenessOf</span><span class="tok-punctuation">(</span>dialog<span class="tok-punctuation">),</span> <span class="tok-number">5000</span><span class="tok-punctuation">);</span> <span class="tok-comment">// dialog closed</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage">
+              <div class="mock-dialog" role="dialog">
+                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-error-msg">This action can't be undone.</p>
+                <div class="mock-btn-row">
+                  <span class="mock-btn mock-btn--ghost">Cancel</span>
+                  <span class="mock-btn mock-btn--danger">Delete</span>
+                </div>
+                <div class="mock-tags-row">
+                  <code class="mock-tag">getByRole("dialog")</code>
+                  <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.table.label">Tabla de datos</h3>
+        <div class="prose" data-i18n-html="comp.table.body"><p>Afirmás la cantidad de filas y el contenido de una celda puntual.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Data table (Selenium) — assert the row count and a specific cell.</span>
+<span class="tok-keyword">const</span> rows <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElements</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("</span>table tbody tr<span class="tok-string">"));
+assert.strictEqual(rows.length, 3);
+const cell = await driver.findElement(
+  By.xpath("</span><span class="tok-comment">//td[normalize-space()='Ada Lovelace']"));</span>
+<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">(</span><span class="tok-keyword">await</span> cell<span class="tok-punctuation">.</span><span class="tok-function">isDisplayed</span><span class="tok-punctuation">());</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">admin.example.com/users</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Users</h4>
+              <table class="mock-table">
+                <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Ada Lovelace</td><td>Admin</td><td>Active</td></tr>
+                  <tr><td>Alan Turing</td><td>Editor</td><td>Active</td></tr>
+                  <tr><td>Grace Hopper</td><td>Viewer</td><td>Invited</td></tr>
+                </tbody>
+              </table>
+              <div class="mock-tags-row">
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(4)</code>
+                <code class="mock-tag">getByRole("cell", { name: "Admin" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.toast.label">Toast / alerta</h3>
+        <div class="prose" data-i18n-html="comp.toast.body"><p>Verificás que aparezca (rol <code>alert</code>) y que luego desaparezca solo.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Toast / alert (Selenium) — appears, then disappears on its own.</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>action<span class="tok-punctuation">=</span>save<span class="tok-punctuation">]")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">const</span> toast <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>until<span class="tok-punctuation">.</span><span class="tok-function">elementLocated</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">css</span><span class="tok-punctuation">("[</span>role<span class="tok-punctuation">=</span>alert<span class="tok-punctuation">]")),</span> <span class="tok-number">5000</span><span class="tok-punctuation">);</span>
+<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">ok</span><span class="tok-punctuation">((</span><span class="tok-keyword">await</span> toast<span class="tok-punctuation">.</span><span class="tok-function">getText</span><span class="tok-punctuation">()).</span><span class="tok-function">includes</span><span class="tok-punctuation">("</span>saved<span class="tok-punctuation">"));</span>
+<span class="tok-keyword">await</span> driver<span class="tok-punctuation">.</span><span class="tok-function">wait</span><span class="tok-punctuation">(</span>until<span class="tok-punctuation">.</span><span class="tok-function">stalenessOf</span><span class="tok-punctuation">(</span>toast<span class="tok-punctuation">),</span> <span class="tok-number">8000</span><span class="tok-punctuation">);</span> <span class="tok-comment">// auto-dismissed</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage mock-stage--top">
+              <div class="mock-toast" role="alert">
+                <span class="mock-toast__icon">✓</span>
+                <span>Order saved successfully</span>
+                <code class="mock-tag">getByRole("alert")</code>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">toBeVisible()</code>
+                <code class="mock-tag">toContainText("saved")</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="comp.a11y.label">Accesibilidad (a11y)</h3>
+        <div class="prose" data-i18n-html="comp.a11y.body"><p>Escaneás la página con <code>axe</code> y afirmás cero violaciones. Bonus: buscar por rol y nombre hace tus tests resilientes <em>y</em> accesibles.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Accessibility (Selenium) — run axe-core via @axe-core/webdriverjs.</span>
+<span class="tok-keyword">import</span> AxeBuilder <span class="tok-keyword">from</span> <span class="tok-string">"@axe-core/webdriverjs"</span><span class="tok-punctuation">;</span>
+
+<span class="tok-keyword">const</span> results <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-keyword">new</span> <span class="tok-function">AxeBuilder</span><span class="tok-punctuation">(</span>driver<span class="tok-punctuation">).</span><span class="tok-function">analyze</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">assert</span><span class="tok-punctuation">.</span><span class="tok-function">strictEqual</span><span class="tok-punctuation">(</span>results<span class="tok-punctuation">.</span><span class="tok-property">violations</span><span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-punctuation">,</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <h4 class="mock-h">Accessibility scan</h4>
+              <ul class="mock-a11y-list">
+                <li class="mock-a11y-ok">Buttons have an accessible name</li>
+                <li class="mock-a11y-ok">Form inputs have labels</li>
+                <li class="mock-a11y-bad">Image missing alt text <code>img.logo</code></li>
+                <li class="mock-a11y-ok">Color contrast &ge; 4.5:1</li>
+              </ul>
+              <div class="mock-a11y-score">1 violation</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">@axe-core/playwright</code>
+                <code class="mock-tag">expect(violations).toEqual([])</code>
+                <code class="mock-tag">getByRole("button", { name })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="ui.cases">Casos críticos</h3>
         <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
         <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>

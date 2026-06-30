@@ -63,8 +63,10 @@ function renderBlock(block, dict) {
     case "prose":
       return `\n        <div class="prose" data-i18n-html="${block.html}">${t(dict, block.html)}</div>`;
 
-    case "label":
-      return `\n        <h3 class="block-label" data-i18n="${block.text}">${escText(t(dict, block.text))}</h3>`;
+    case "label": {
+      const idAttr = block.anchor ? ` id="${escAttr(block.anchor)}"` : "";
+      return `\n        <h3 class="block-label"${idAttr} data-i18n="${block.text}">${escText(t(dict, block.text))}</h3>`;
+    }
 
     case "code":
       return codeBlock(block.sample, dict);
@@ -108,14 +110,17 @@ function renderBlock(block, dict) {
 
     case "roadmap": {
       const items = block.items
-        .map(
-          (it) => `
+        .map((it) => {
+          const title = it.anchor
+            ? `<a class="roadmap__link" href="#${escAttr(it.anchor)}" data-i18n="${it.title}">${escText(t(dict, it.title))}</a>`
+            : `<strong data-i18n="${it.title}">${escText(t(dict, it.title))}</strong>`;
+          return `
             <li>
-              <strong data-i18n="${it.title}">${escText(t(dict, it.title))}</strong>
+              ${title}
               <span class="roadmap__sep"> — </span>
               <span data-i18n="${it.desc}">${escText(t(dict, it.desc))}</span>
-            </li>`
-        )
+            </li>`;
+        })
         .join("");
       return `\n        <ol class="steps roadmap">${items}\n        </ol>`;
     }
