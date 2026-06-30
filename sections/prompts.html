@@ -121,7 +121,21 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code>You are a senior QA engineer<span class="tok-punctuation">.</span> Write a Playwright test <span class="tok-keyword">in</span> Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
+          <pre><code class="code-i18n code-i18n--es">Sos un ingeniero QA senior<span class="tok-punctuation">.</span> Escrib<span class="tok-punctuation">í</span> un test de Playwright en Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
+
+Contexto<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> P<span class="tok-punctuation">á</span>gina<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>un resumen de orden<span class="tok-punctuation">)</span>
+<span class="tok-punctuation">-</span> Selectores estables<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+
+El test <span class="tok-string">"test_verify_order"</span> debe afirmar<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      tiene el texto <span class="tok-string">"250"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     tiene el texto <span class="tok-string">"PAID"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contiene un <span class="tok-punctuation">í</span>tem cuyo texto incluye <span class="tok-string">"book"</span>
+
+Requisitos<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Us<span class="tok-punctuation">á</span> aserciones web<span class="tok-punctuation">-</span>first <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
+<span class="tok-punctuation">-</span> Sin esperas fijas<span class="tok-punctuation">.</span> Sin l<span class="tok-punctuation">ó</span>gica condicional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> en el test<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Un comentario corto sobre cada aserci<span class="tok-punctuation">ó</span>n explicando la intenci<span class="tok-punctuation">ó</span>n<span class="tok-punctuation">.</span></code><code class="code-i18n code-i18n--en">You are a senior QA engineer<span class="tok-punctuation">.</span> Write a Playwright test <span class="tok-keyword">in</span> Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
 
 Context<span class="tok-punctuation">:</span>
 <span class="tok-punctuation">-</span> Page<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>an order summary<span class="tok-punctuation">)</span>
@@ -148,7 +162,22 @@ Requirements<span class="tok-punctuation">:</span>
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># AI output — review it the way you would a junior dev's pull request.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Salida de la IA — revisala como lo harías con el pull request de un dev junior.</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span>
+
+
+<span class="tok-comment"># Checklist antes de confiar en ella:</span>
+<span class="tok-comment">#  - Los selectores realmente existen en la app (no lo asumas).</span>
+<span class="tok-comment">#  - Las aserciones coinciden con los CRITERIOS DE ACEPTACIÓN, no solo el happy path.</span>
+<span class="tok-comment">#  - Sin esperas/sleeps ocultos, sin tests que nunca puedan fallar.</span>
+<span class="tok-comment">#  - Falla cuando debe: rompé temporalmente la app y volvé a correr.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># AI output — review it the way you would a junior dev's pull request.</span>
 <span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
 
 

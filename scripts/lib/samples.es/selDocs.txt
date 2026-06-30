@@ -1,0 +1,11 @@
+# Validación de documento legal (Selenium) — campos requeridos y formato de una factura.
+import re
+from datetime import date
+
+driver.get("https://app.example.com/invoices/INV-2026-0042")
+text = lambda sel: driver.find_element(By.CSS_SELECTOR, sel).text.strip()
+
+assert re.match(r"^INV-\d{4}-\d{4}$", text(".invoice-number"))  # formato del ID
+assert len(text(".tax-id")) > 0                                  # presente
+assert text(".doc-status") == "SIGNED"                           # firmado
+assert date.fromisoformat(text(".issued-date")) <= date.today()  # no futura

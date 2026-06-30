@@ -1,0 +1,8 @@
+// Validación de documento legal (Cypress) — campos requeridos y formato de la factura.
+cy.visit("/invoices/INV-2026-0042");
+cy.get(".invoice-number").invoke("text").should("match", /^INV-\d{4}-\d{4}$/);
+cy.get(".tax-id").should("not.be.empty");
+cy.get(".doc-status").should("have.text", "SIGNED");
+cy.get(".issued-date").invoke("text").then((d) => {
+  expect(new Date(d) <= new Date()).to.be.true; // no en el futuro
+});

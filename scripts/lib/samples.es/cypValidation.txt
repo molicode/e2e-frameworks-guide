@@ -1,0 +1,5 @@
+// Validación de formulario (Cypress) — aparece el error, submit queda deshabilitado.
+cy.get("#email").type("not-an-email");
+cy.get("button[type=submit]").click();
+cy.contains(".error", "valid email").should("be.visible");
+cy.get("button[type=submit]").should("be.disabled");

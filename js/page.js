@@ -41,7 +41,12 @@
       var btn = e.target.closest && e.target.closest(".copy-btn");
       if (!btn) return;
       var block = btn.closest(".code-block");
-      var codeEl = block && block.querySelector("pre code");
+      if (!block) return;
+      // Copy the variant that's currently visible (matches the active language).
+      var lang = global.I18n.getLang();
+      var codeEl =
+        block.querySelector("pre code.code-i18n--" + lang) ||
+        block.querySelector("pre code");
       if (!codeEl) return;
 
       // textContent of the highlighted <code> is exactly the original source.

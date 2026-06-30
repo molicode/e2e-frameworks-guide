@@ -1,0 +1,15 @@
+# Recibo de pago — la cuenta del dinero SIEMPRE debe cuadrar.
+# Trabajá en centavos enteros para evitar errores de punto flotante.
+r = api.get("/api/receipts/9087").json()
+
+# La suma de los ítems es igual al subtotal.
+items_total = sum(it["cents"] for it in r["items"])
+assert items_total == r["subtotalCents"]                  # 9000
+
+# El impuesto y el total son exactos.
+assert r["taxCents"] == round(r["subtotalCents"] * 0.21)  # 1890
+assert r["totalCents"] == r["subtotalCents"] + r["taxCents"]  # 10890
+
+# Invariantes: nunca negativo, estado consistente con el monto pagado.
+assert r["totalCents"] > 0
+assert r["status"] == "PAID"

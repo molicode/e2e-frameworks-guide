@@ -1,0 +1,29 @@
+# order_page.py — un Page Object encapsula selectores + acciones.
+class OrderPage:
+    def __init__(self, page):
+        self.page = page
+        self.total = page.locator(".order-total")
+        self.status = page.locator(".order-status")
+
+    def goto(self, order_id):
+        self.page.goto(f"/orders/{order_id}")
+
+
+# conftest.py — exponé el Page Object como una fixture.
+import pytest
+from order_page import OrderPage
+
+
+@pytest.fixture
+def order_page(page):
+    return OrderPage(page)
+
+
+# test_order.py — la fixture mantiene los tests limpios.
+from playwright.sync_api import expect
+
+
+def test_verify_order(order_page):
+    order_page.goto(42)
+    expect(order_page.total).to_have_text("250")
+    expect(order_page.status).to_have_text("PAID")

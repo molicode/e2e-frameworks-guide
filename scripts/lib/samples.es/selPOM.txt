@@ -1,0 +1,22 @@
+# order_page.py — un Page Object esconde los selectores tras métodos que revelan la intención.
+from selenium.webdriver.common.by import By
+
+
+class OrderPage:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def open(self, order_id):
+        self.driver.get(f"https://shop.example.com/orders/{order_id}")
+
+    def total(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".order-total").text
+
+    def status(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".order-status").text
+
+
+# El test se lee como una oración y sobrevive a los cambios del DOM:
+order = OrderPage(driver)
+order.open(42)
+assert order.total() == "250"

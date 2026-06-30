@@ -1,0 +1,4 @@
+# Select / dropdown — elegí una opción y aseverá el valor.
+country = page.get_by_role("combobox", name="Country")
+country.select_option("AR")
+expect(country).to_have_value("AR")

@@ -1,0 +1,11 @@
+// Anatomía de un test — Arrange, Act, Assert (AAA).
+test("paying an order shows the PAID badge", async ({ page }) => {
+  // Arrange — poné el sistema en un estado conocido.
+  await page.goto("/orders/42");
+
+  // Act — hacé la ÚNICA cosa bajo prueba.
+  await page.getByRole("button", { name: "Pay" }).click();
+
+  // Assert — verificá el resultado esperado (una intención por test).
+  await expect(page.getByText("PAID")).toBeVisible();
+});

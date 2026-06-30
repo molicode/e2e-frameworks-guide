@@ -1,0 +1,8 @@
+# Selenium ofrece muchas estrategias de localización vía By. Preferí CSS sobre XPath.
+driver.find_element(By.ID, "username")                    # por id
+driver.find_element(By.CSS_SELECTOR, ".order-total")      # por CSS (preferido)
+driver.find_element(By.CSS_SELECTOR, "[data-testid=pay]") # por atributo de test
+driver.find_elements(By.CSS_SELECTOR, ".order-items li")  # una lista (¡plural!)
+
+# XPath es potente pero frágil — reservalo para "buscar por texto visible":
+driver.find_element(By.XPATH, "//button[text()='Pay']")

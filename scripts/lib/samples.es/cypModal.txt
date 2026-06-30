@@ -1,0 +1,5 @@
+// Modal / diálogo (Cypress) — abrí, confirmá, verificá que desapareció.
+cy.get("[data-action=delete]").click();
+cy.get("[role=dialog]").as("dlg").should("be.visible");
+cy.get("@dlg").contains("button", "Delete").click();
+cy.get("[role=dialog]").should("not.exist");

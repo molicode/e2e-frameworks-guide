@@ -1,0 +1,4 @@
+// Toast / alerta (Cypress) — aparece y luego desaparece solo.
+cy.get("[data-action=save]").click();
+cy.get("[role=alert]").should("contain", "saved");
+cy.get("[role=alert]").should("not.exist"); // auto-descartado

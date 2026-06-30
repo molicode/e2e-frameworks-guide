@@ -1,0 +1,12 @@
+// Las aserciones implícitas reintentan el comando anterior hasta que pasan:
+cy.get(".order-status").should("have.text", "PAID");
+cy.get(".order-items li").should("have.length", 3).and("contain", "book");
+
+// Aserciones explícitas con expect() dentro de un callback de .should():
+cy.get(".order-total").should(($el: JQuery<HTMLElement>) => {
+  expect($el.text().trim()).to.eq("250");
+});
+
+// Preferí un atributo de test dedicado en vez de css frágil:
+//   <button data-cy="pay">Pay</button>
+cy.get("[data-cy=pay]").click();

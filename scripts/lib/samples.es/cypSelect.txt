@@ -1,0 +1,3 @@
+// Select / dropdown (Cypress) — .select() elige la opción.
+cy.get("#country").select("AR");
+cy.get("#country").should("have.value", "AR");

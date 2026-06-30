@@ -1,0 +1,6 @@
+# Modal / diálogo — abrilo, acotá las consultas al diálogo, confirmá, aseverá que cerró.
+page.get_by_role("button", name="Delete order").click()
+dialog = page.get_by_role("dialog")
+expect(dialog).to_be_visible()
+dialog.get_by_role("button", name="Delete").click()
+expect(dialog).to_be_hidden()

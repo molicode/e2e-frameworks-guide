@@ -1,0 +1,8 @@
+// Dale a la IA herramientas reales vía servidores MCP (puede manejar un navegador, leer
+// el DOM/árbol de accesibilidad en vivo, abrir PRs, consultar tu issue tracker).
+{
+  "mcpServers": {
+    "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] },
+    "github": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-github"] }
+  }
+}

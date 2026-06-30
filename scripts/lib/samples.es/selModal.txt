@@ -1,0 +1,10 @@
+# Modal / diálogo (Selenium) — abrí, confirmá, verificá que desapareció.
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver.find_element(By.CSS_SELECTOR, "[data-action=delete]").click()
+dialog = WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located((By.CSS_SELECTOR, "[role=dialog]"))
+)
+dialog.find_element(By.XPATH, ".//button[text()='Delete']").click()
+WebDriverWait(driver, 5).until(EC.staleness_of(dialog))  # diálogo cerrado

@@ -1,0 +1,3 @@
+// Tabla de datos (Cypress) — verificá la cantidad de filas y una celda específica.
+cy.get("table tbody tr").should("have.length", 3);
+cy.get("table").contains("td", "Ada Lovelace").should("be.visible");

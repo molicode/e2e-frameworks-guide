@@ -1,0 +1,7 @@
+// Una aserción compara el resultado REAL contra el ESPERADO.
+// Si difieren, el test falla y reporta exactamente por qué.
+expect(sum(2, 3)).toBe(5);          // pasa
+expect(order.status).toBe("PAID");  // falla si status !== "PAID"
+
+// Un test sin aserciones no es un test: nunca puede fallar,
+// así que nunca puede atrapar una regresión.

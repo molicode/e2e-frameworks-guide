@@ -1,0 +1,7 @@
+# Accesibilidad (Selenium) — ejecutá axe-core con axe-selenium-python.
+from axe_selenium_python import Axe
+
+axe = Axe(driver)
+axe.inject()
+results = axe.run()
+assert len(results["violations"]) == 0

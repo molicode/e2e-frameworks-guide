@@ -156,7 +156,24 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># VerifyOrder — Selenium WebDriver (Python)</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># VerifyOrder — Selenium WebDriver (Python)</span>
+<span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
+<span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
+
+driver <span class="tok-punctuation">=</span> webdriver<span class="tok-punctuation">.</span><span class="tok-function">Chrome</span><span class="tok-punctuation">()</span>
+driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+
+# Leé cada valor primero, luego afirmá a mano.
+total = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").text
+status = driver.find_element(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">").text
+items = driver.find_elements(By.CSS_SELECTOR, "</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")
+texts = [el.text for el in items]
+
+assert total == "</span><span class="tok-number">250</span><span class="tok-string">"
+assert status == "</span>PAID<span class="tok-string">"
+assert any("</span>book<span class="tok-punctuation">"</span> <span class="tok-keyword">in</span> t <span class="tok-keyword">for</span> t <span class="tok-keyword">in</span> texts<span class="tok-punctuation">)</span>
+
+driver<span class="tok-punctuation">.</span><span class="tok-function">quit</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># VerifyOrder — Selenium WebDriver (Python)</span>
 <span class="tok-keyword">from</span> selenium <span class="tok-keyword">import</span> webdriver
 <span class="tok-keyword">from</span> selenium<span class="tok-punctuation">.</span><span class="tok-property">webdriver</span><span class="tok-punctuation">.</span><span class="tok-property">common</span><span class="tok-punctuation">.</span><span class="tok-property">by</span> <span class="tok-keyword">import</span> By
 
@@ -187,7 +204,13 @@ driver<span class="tok-punctuation">.</span><span class="tok-function">quit</spa
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// VerifyOrder — Cypress with TypeScript</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// VerifyOrder — Cypress con TypeScript</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">visit</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+
+// Cada .should() reintenta automáticamente hasta que pasa o se agota el tiempo.
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span><span class="tok-number">250</span><span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span>PAID<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").should("</span>contain<span class="tok-string">", "</span>book<span class="tok-punctuation">");</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// VerifyOrder — Cypress with TypeScript</span>
 cy<span class="tok-punctuation">.</span><span class="tok-function">visit</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
 
 // Each .should() retries automatically until it passes or times out.
@@ -207,7 +230,17 @@ cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># VerifyOrder — pytest-playwright</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># VerifyOrder — pytest-playwright</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+
+    # Las aserciones web-first auto-esperan y reintentan — sin lecturas manuales.
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># VerifyOrder — pytest-playwright</span>
 <span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
 
 

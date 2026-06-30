@@ -169,7 +169,14 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment">// Give the AI real tools via MCP servers (it can drive a browser, read</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Dale a la IA herramientas reales vía servidores MCP (puede manejar un navegador, leer</span>
+<span class="tok-comment">// el DOM/árbol de accesibilidad en vivo, abrir PRs, consultar tu issue tracker).</span>
+<span class="tok-punctuation">{</span>
+  <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
+    <span class="tok-string">"playwright"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx"</span><span class="tok-punctuation">,</span> <span class="tok-string">"args"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">["@</span>playwright<span class="tok-punctuation">/</span>mcp<span class="tok-punctuation">@</span>latest<span class="tok-string">"] },
+    "</span>github<span class="tok-string">": { "</span>command<span class="tok-string">": "</span>npx<span class="tok-string">", "</span>args<span class="tok-string">": ["</span><span class="tok-punctuation">-</span>y<span class="tok-string">", "</span><span class="tok-punctuation">@</span>modelcontextprotocol<span class="tok-punctuation">/</span>server<span class="tok-punctuation">-</span>github<span class="tok-punctuation">"]</span> <span class="tok-punctuation">}</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">}</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Give the AI real tools via MCP servers (it can drive a browser, read</span>
 <span class="tok-comment">// the live DOM/accessibility tree, open PRs, query your issue tracker).</span>
 <span class="tok-punctuation">{</span>
   <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
@@ -186,7 +193,16 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Skill: generate-e2e  (your team's conventions, reused every time)</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Skill: generate-e2e  (las convenciones de tu equipo, reutilizadas cada vez)</span>
+
+Cuando te pidan escribir un test end<span class="tok-punctuation">-</span>to<span class="tok-punctuation">-</span>end<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Us<span class="tok-punctuation">á</span> Playwright <span class="tok-punctuation">+</span> los Page Objects en src<span class="tok-punctuation">/</span>pages<span class="tok-punctuation">/.</span>
+<span class="tok-punctuation">-</span> Selectores<span class="tok-punctuation">:</span> getByRole <span class="tok-punctuation">/</span> getByTestId solamente <span class="tok-punctuation">—</span> nunca CSS ni XPath<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Una intenci<span class="tok-punctuation">ó</span>n por test<span class="tok-punctuation">,</span> aserciones web<span class="tok-punctuation">-</span>first<span class="tok-punctuation">,</span> cero esperas fijas<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Mocke<span class="tok-punctuation">á</span> la red con page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">();</span> nunca pegues al backend real<span class="tok-punctuation">.</span>
+
+<span class="tok-comment"># Un skill empaqueta este know-how para que cada test generado siga los</span>
+<span class="tok-comment"># mismos estándares — sin necesidad de re-explicarlos en cada prompt.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Skill: generate-e2e  (your team's conventions, reused every time)</span>
 
 When asked to write an end<span class="tok-punctuation">-</span>to<span class="tok-punctuation">-</span>end test<span class="tok-punctuation">:</span>
 <span class="tok-punctuation">-</span> Use Playwright <span class="tok-punctuation">+</span> the Page Objects <span class="tok-keyword">in</span> src<span class="tok-punctuation">/</span>pages<span class="tok-punctuation">/.</span>
@@ -205,7 +221,18 @@ When asked to write an end<span class="tok-punctuation">-</span>to<span class="t
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code>Agent loop <span class="tok-punctuation">—</span> autonomous <span class="tok-string">"write → run → read failure → fix"</span><span class="tok-punctuation">:</span>
+          <pre><code class="code-i18n code-i18n--es">Bucle de agente <span class="tok-punctuation">—</span> aut<span class="tok-punctuation">ó</span>nomo <span class="tok-string">"escribir → correr → leer la falla → corregir"</span><span class="tok-punctuation">:</span>
+
+  <span class="tok-number">1</span><span class="tok-punctuation">.</span> Le<span class="tok-punctuation">é</span> la historia de usuario <span class="tok-punctuation">+</span> criterios de aceptaci<span class="tok-punctuation">ó</span>n<span class="tok-punctuation">.</span>
+  <span class="tok-number">2</span><span class="tok-punctuation">.</span> Gener<span class="tok-punctuation">á</span> el test de Playwright <span class="tok-punctuation">(</span>usando el Skill del equipo de arriba<span class="tok-punctuation">).</span>
+  <span class="tok-number">3</span><span class="tok-punctuation">.</span> Corr<span class="tok-punctuation">é</span>lo v<span class="tok-punctuation">í</span>a el servidor MCP de Playwright<span class="tok-punctuation">.</span>
+  <span class="tok-number">4</span><span class="tok-punctuation">.</span> Si falla<span class="tok-punctuation">:</span> le<span class="tok-punctuation">é</span> el error <span class="tok-punctuation">+</span> traza<span class="tok-punctuation">,</span> ubic<span class="tok-punctuation">á</span> la causa<span class="tok-punctuation">,</span> parche<span class="tok-punctuation">á</span> el test<span class="tok-punctuation">.</span>
+  <span class="tok-number">5</span><span class="tok-punctuation">.</span> Repet<span class="tok-punctuation">í</span> hasta que est<span class="tok-punctuation">é</span> en verde<span class="tok-punctuation">,</span> luego abr<span class="tok-punctuation">í</span> un PR<span class="tok-punctuation">.</span>
+
+Variante multi<span class="tok-punctuation">-</span>agente <span class="tok-punctuation">(</span>mayor confianza<span class="tok-punctuation">):</span>
+  <span class="tok-punctuation">-</span> Agente Escritor  <span class="tok-punctuation">-&gt;</span> redacta el test<span class="tok-punctuation">.</span>
+  <span class="tok-punctuation">-</span> Agente Revisor <span class="tok-punctuation">-&gt;</span> intenta REFUTARLO<span class="tok-punctuation">:</span> <span class="tok-string">"¿puede pasar incluso si la app está
+    rota?"</span> Solo los tests que sobreviven la revisi<span class="tok-punctuation">ó</span>n se commitean<span class="tok-punctuation">.</span></code><code class="code-i18n code-i18n--en">Agent loop <span class="tok-punctuation">—</span> autonomous <span class="tok-string">"write → run → read failure → fix"</span><span class="tok-punctuation">:</span>
 
   <span class="tok-number">1</span><span class="tok-punctuation">.</span> Read the user story <span class="tok-punctuation">+</span> acceptance criteria<span class="tok-punctuation">.</span>
   <span class="tok-number">2</span><span class="tok-punctuation">.</span> Generate the Playwright test <span class="tok-punctuation">(</span>using the team Skill above<span class="tok-punctuation">).</span>
@@ -234,7 +261,12 @@ Multi<span class="tok-punctuation">-</span>agent variant <span class="tok-punctu
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code>Test <span class="tok-keyword">case</span> <span class="tok-punctuation">(</span>written by hand<span class="tok-punctuation">):</span>
+          <pre><code class="code-i18n code-i18n--es">Caso de prueba <span class="tok-punctuation">(</span>escrito a mano<span class="tok-punctuation">):</span>
+
+  T<span class="tok-punctuation">í</span>tulo<span class="tok-punctuation">:</span>   La orden <span class="tok-number">42</span> est<span class="tok-punctuation">á</span> pagada y contiene un libro
+  Pasos<span class="tok-punctuation">:</span>    <span class="tok-number">1</span><span class="tok-punctuation">.</span> Abrir <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>
+            <span class="tok-number">2</span><span class="tok-punctuation">.</span> Leer el total<span class="tok-punctuation">,</span> el estado y la lista de <span class="tok-punctuation">í</span>tems
+  Esperado<span class="tok-punctuation">:</span> total <span class="tok-punctuation">=</span> <span class="tok-number">250</span><span class="tok-punctuation">,</span> status <span class="tok-punctuation">=</span> PAID<span class="tok-punctuation">,</span> items include <span class="tok-string">"book"</span></code><code class="code-i18n code-i18n--en">Test <span class="tok-keyword">case</span> <span class="tok-punctuation">(</span>written by hand<span class="tok-punctuation">):</span>
 
   Title<span class="tok-punctuation">:</span>    Order <span class="tok-number">42</span> is paid <span class="tok-keyword">and</span> contains a book
   Steps<span class="tok-punctuation">:</span>    <span class="tok-number">1</span><span class="tok-punctuation">.</span> Open <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>
@@ -256,7 +288,14 @@ Multi<span class="tok-punctuation">-</span>agent variant <span class="tok-punctu
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code>You are a senior QA engineer<span class="tok-punctuation">.</span> Generate test CASES <span class="tok-punctuation">(</span><span class="tok-keyword">not</span> code<span class="tok-punctuation">)</span> <span class="tok-keyword">for</span> the
+          <pre><code class="code-i18n code-i18n--es">Sos un ingeniero QA senior<span class="tok-punctuation">.</span> Gener<span class="tok-punctuation">á</span> CASOS de prueba <span class="tok-punctuation">(</span>no c<span class="tok-punctuation">ó</span>digo<span class="tok-punctuation">)</span> para la
+p<span class="tok-punctuation">á</span>gina de resumen de orden de abajo<span class="tok-punctuation">.</span> Cubr<span class="tok-punctuation">í</span> happy path<span class="tok-punctuation">,</span> casos l<span class="tok-punctuation">í</span>mite y estados de error<span class="tok-punctuation">.</span>
+
+P<span class="tok-punctuation">á</span>gina<span class="tok-punctuation">:</span> resumen de orden en <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/:</span>id
+Campos mostrados<span class="tok-punctuation">:</span> total <span class="tok-punctuation">(</span>n<span class="tok-punctuation">ú</span>mero<span class="tok-punctuation">),</span> status <span class="tok-punctuation">(</span>NEW <span class="tok-punctuation">|</span> PAID <span class="tok-punctuation">|</span> REFUNDED<span class="tok-punctuation">),</span> lista de <span class="tok-punctuation">í</span>tems<span class="tok-punctuation">.</span>
+
+Devolv<span class="tok-punctuation">é</span> una tabla<span class="tok-punctuation">:</span> id <span class="tok-punctuation">|</span> t<span class="tok-punctuation">í</span>tulo <span class="tok-punctuation">|</span> precondiciones <span class="tok-punctuation">|</span> pasos <span class="tok-punctuation">|</span> resultado esperado<span class="tok-punctuation">.</span>
+Marc<span class="tok-punctuation">á</span> qu<span class="tok-punctuation">é</span> casos son buenos candidatos para automatizaci<span class="tok-punctuation">ó</span>n y por qu<span class="tok-punctuation">é.</span></code><code class="code-i18n code-i18n--en">You are a senior QA engineer<span class="tok-punctuation">.</span> Generate test CASES <span class="tok-punctuation">(</span><span class="tok-keyword">not</span> code<span class="tok-punctuation">)</span> <span class="tok-keyword">for</span> the
 order<span class="tok-punctuation">-</span>summary page below<span class="tok-punctuation">.</span> Cover happy path<span class="tok-punctuation">,</span> edge cases <span class="tok-keyword">and</span> error states<span class="tok-punctuation">.</span>
 
 Page<span class="tok-punctuation">:</span> order summary at <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/:</span>id

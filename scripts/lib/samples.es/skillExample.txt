@@ -1,0 +1,10 @@
+# Skill: generate-e2e  (las convenciones de tu equipo, reutilizadas cada vez)
+
+Cuando te pidan escribir un test end-to-end:
+- Usá Playwright + los Page Objects en src/pages/.
+- Selectores: getByRole / getByTestId solamente — nunca CSS ni XPath.
+- Una intención por test, aserciones web-first, cero esperas fijas.
+- Mockeá la red con page.route(); nunca pegues al backend real.
+
+# Un skill empaqueta este know-how para que cada test generado siga los
+# mismos estándares — sin necesidad de re-explicarlos en cada prompt.

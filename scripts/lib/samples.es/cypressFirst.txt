@@ -1,0 +1,15 @@
+// cypress/e2e/login.cy.ts — Cypress con TypeScript
+describe("Login", () => {
+  it("greets the user after a valid login", () => {
+    cy.visit("https://example.com/login");
+
+    // Los comandos se encolan y se reintentan automáticamente hasta que pasan
+    // o expiran — rara vez escribís una espera explícita.
+    cy.get("#username").type("demo");
+    cy.get("#password").type("secret");
+    cy.get("button[type=submit]").click();
+
+    // .should() vuelve a consultar el DOM hasta que la aserción se cumple.
+    cy.get(".welcome").should("have.text", "Welcome, demo");
+  });
+});

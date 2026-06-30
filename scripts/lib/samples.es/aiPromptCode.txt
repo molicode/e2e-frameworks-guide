@@ -1,0 +1,15 @@
+Sos un ingeniero QA senior. Escribí un test de Playwright en Python (pytest).
+
+Contexto:
+- Página: https://shop.example.com/orders/42  (un resumen de orden)
+- Selectores estables: .order-total, .order-status, .order-items li
+
+El test "test_verify_order" debe afirmar:
+- .order-total      tiene el texto "250"
+- .order-status     tiene el texto "PAID"
+- .order-items      contiene un ítem cuyo texto incluye "book"
+
+Requisitos:
+- Usá aserciones web-first (expect(...).to_have_text / to_contain_text).
+- Sin esperas fijas. Sin lógica condicional (if/else) en el test.
+- Un comentario corto sobre cada aserción explicando la intención.

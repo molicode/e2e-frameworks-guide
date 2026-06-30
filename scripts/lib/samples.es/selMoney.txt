@@ -1,0 +1,13 @@
+# Montos (Selenium) — leé los campos de dinero y verificá la cuenta en centavos.
+import re
+
+driver.get("https://pay.example.com/receipts/9087")
+cents = lambda s: round(float(re.sub(r"[^0-9.]", "", s)) * 100)
+
+sub = cents(driver.find_element(By.CSS_SELECTOR, ".subtotal").text)
+tax = cents(driver.find_element(By.CSS_SELECTOR, ".tax").text)
+total = cents(driver.find_element(By.CSS_SELECTOR, ".total").text)
+
+assert tax == round(sub * 0.21)  # impuesto exacto
+assert total == sub + tax        # subtotal + impuesto = total
+assert total > 0                 # nunca negativo

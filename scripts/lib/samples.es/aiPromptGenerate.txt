@@ -1,0 +1,8 @@
+Sos un ingeniero QA senior. Generá CASOS de prueba (no código) para la
+página de resumen de orden de abajo. Cubrí happy path, casos límite y estados de error.
+
+Página: resumen de orden en /orders/:id
+Campos mostrados: total (número), status (NEW | PAID | REFUNDED), lista de ítems.
+
+Devolvé una tabla: id | título | precondiciones | pasos | resultado esperado.
+Marcá qué casos son buenos candidatos para automatización y por qué.

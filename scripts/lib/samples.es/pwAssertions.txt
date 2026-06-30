@@ -1,0 +1,13 @@
+# Las aserciones web-first reintentan hasta pasar o alcanzar el timeout.
+# Casi nunca esperás de forma manual.
+expect(page.get_by_role("heading")).to_have_text("Order #42")
+expect(page.locator(".order-status")).to_have_text("PAID")
+expect(page.locator(".order-items li")).to_have_count(3)
+expect(page.get_by_test_id("pay-btn")).to_be_disabled()
+
+# Un assert simple es para valores no-DOM (no reintenta):
+assert 1 + 1 == 2
+
+# ¿Necesitás un estado específico? Esperá la CONDICIÓN, no un sleep:
+page.get_by_role("button", name="Pay").click()
+expect(page.get_by_text("Payment confirmed")).to_be_visible()

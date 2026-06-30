@@ -1,0 +1,8 @@
+# pytest.ini — URL base, tracing y reintentos en CI para pytest-playwright.
+[pytest]
+addopts =
+    --base-url http://localhost:3000
+    --tracing retain-on-failure
+    --output test-results
+# Reejecutá tests flaky en CI (necesita el plugin pytest-rerunfailures):
+#   --reruns 2

@@ -1,0 +1,5 @@
+# Validación de formulario (Selenium) — el error aparece, el submit queda deshabilitado.
+driver.find_element(By.ID, "email").send_keys("not-an-email")
+driver.find_element(By.CSS_SELECTOR, "button[type=submit]").click()
+assert "valid email" in driver.find_element(By.CSS_SELECTOR, ".error").text
+assert driver.find_element(By.CSS_SELECTOR, "button[type=submit]").get_attribute("disabled")

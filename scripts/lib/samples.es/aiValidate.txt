@@ -1,0 +1,16 @@
+# Salida de la IA — revisala como lo harías con el pull request de un dev junior.
+from playwright.sync_api import Page, expect
+
+
+def test_verify_order(page: Page):
+    page.goto("https://shop.example.com/orders/42")
+    expect(page.locator(".order-total")).to_have_text("250")
+    expect(page.locator(".order-status")).to_have_text("PAID")
+    expect(page.locator(".order-items li")).to_contain_text("book")
+
+
+# Checklist antes de confiar en ella:
+#  - Los selectores realmente existen en la app (no lo asumas).
+#  - Las aserciones coinciden con los CRITERIOS DE ACEPTACIÓN, no solo el happy path.
+#  - Sin esperas/sleeps ocultos, sin tests que nunca puedan fallar.
+#  - Falla cuando debe: rompé temporalmente la app y volvé a correr.

@@ -135,7 +135,15 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Install pytest-playwright (the official Python test plugin):</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Instalá pytest-playwright (el plugin oficial de testing para Python):</span>
+pip install pytest<span class="tok-punctuation">-</span>playwright
+playwright install        <span class="tok-comment"># descarga los binarios del navegador</span>
+
+<span class="tok-comment"># Ejecutá la suite (Chromium headless por defecto):</span>
+pytest
+
+<span class="tok-comment"># Ejecutá en los tres motores, con interfaz gráfica:</span>
+pytest <span class="tok-punctuation">--</span>browser chromium <span class="tok-punctuation">--</span>browser firefox <span class="tok-punctuation">--</span>browser webkit <span class="tok-punctuation">--</span>headed</code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Install pytest-playwright (the official Python test plugin):</span>
 pip install pytest<span class="tok-punctuation">-</span>playwright
 playwright install        <span class="tok-comment"># downloads the browser binaries</span>
 
@@ -152,7 +160,20 @@ pytest <span class="tok-punctuation">--</span>browser chromium <span class="tok-
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># test_login.py — pytest-playwright</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># test_login.py — pytest-playwright</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_greets_the_user_after_login</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">")
+
+    # Los locators son lazy y autoesperan a que el elemento sea accionable.
+    page.get_by_label("</span>Username<span class="tok-string">").fill("</span>demo<span class="tok-string">")
+    page.get_by_label("</span>Password<span class="tok-string">").fill("</span>secret<span class="tok-string">")
+    page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign <span class="tok-keyword">in</span><span class="tok-string">").click()
+
+    # Las aserciones web-first reintentan hasta pasar o agotar el timeout.
+    expect(page.get_by_text("</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># test_login.py — pytest-playwright</span>
 <span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
 
 

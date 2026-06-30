@@ -136,7 +136,25 @@
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># API CRUD with auth — create, read, assert the contract. No UI.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># CRUD de API con auth — creá, leé, aseverá el contrato. Sin UI.</span>
+api <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">(</span>
+    base_url<span class="tok-punctuation">="</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-string">",
+    extra_http_headers={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
+<span class="tok-punctuation">)</span>
+
+<span class="tok-comment"># CREATE</span>
+created <span class="tok-punctuation">=</span> api<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">("/</span>orders<span class="tok-string">", data={"</span>items<span class="tok-string">": ["</span>book<span class="tok-string">"]})
+assert created.status == 201
+order_id = created.json()["</span>id<span class="tok-string">"]
+
+# READ + aseverá la forma de la respuesta
+res = api.get(f"</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}")</span>
+<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-property">ok</span>
+<span class="tok-keyword">assert</span> res<span class="tok-punctuation">.</span><span class="tok-function">json</span><span class="tok-punctuation">()["</span>status<span class="tok-string">"] == "</span>NEW<span class="tok-string">"
+
+# Sin un token -&gt; 401 (no un 200 silencioso ni un 500)
+anon = playwright.request.new_context()
+assert anon.get(f"</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/{</span>order_id<span class="tok-punctuation">}").</span><span class="tok-property">status</span> <span class="tok-punctuation">==</span> <span class="tok-number">401</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># API CRUD with auth — create, read, assert the contract. No UI.</span>
 api <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">(</span>
     base_url<span class="tok-punctuation">="</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-string">",
     extra_http_headers={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>token<span class="tok-punctuation">}"},</span>
@@ -187,7 +205,21 @@ assert anon.get(f"</span>https<span class="tok-punctuation">://</span>api<span c
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Payment receipt — the money math must ALWAYS add up.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Recibo de pago — la cuenta del dinero SIEMPRE debe cuadrar.</span>
+<span class="tok-comment"># Trabajá en centavos enteros para evitar errores de punto flotante.</span>
+r <span class="tok-punctuation">=</span> api<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span><span class="tok-string">").json()
+
+# La suma de los ítems es igual al subtotal.
+items_total = sum(it["</span>cents<span class="tok-string">"] for it in r["</span>items<span class="tok-string">"])
+assert items_total == r["</span>subtotalCents<span class="tok-string">"]                  # 9000
+
+# El impuesto y el total son exactos.
+assert r["</span>taxCents<span class="tok-string">"] == round(r["</span>subtotalCents<span class="tok-string">"] * 0.21)  # 1890
+assert r["</span>totalCents<span class="tok-string">"] == r["</span>subtotalCents<span class="tok-string">"] + r["</span>taxCents<span class="tok-string">"]  # 10890
+
+# Invariantes: nunca negativo, estado consistente con el monto pagado.
+assert r["</span>totalCents<span class="tok-string">"] &gt; 0
+assert r["</span>status<span class="tok-string">"] == "</span>PAID<span class="tok-punctuation">"</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Payment receipt — the money math must ALWAYS add up.</span>
 <span class="tok-comment"># Work in integer cents to avoid floating-point errors.</span>
 r <span class="tok-punctuation">=</span> api<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span><span class="tok-string">").json()
 
@@ -241,7 +273,16 @@ assert r["</span>status<span class="tok-string">"] == "</span>PAID<span class="t
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Legal document validation (Playwright) — invoice required fields &amp; format.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Validación de documento legal (Playwright) — campos requeridos y formato de la factura.</span>
+<span class="tok-keyword">import</span> re
+<span class="tok-keyword">from</span> datetime <span class="tok-keyword">import</span> date
+
+page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0042</span><span class="tok-string">")
+expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">invoice</span><span class="tok-punctuation">-</span>number<span class="tok-string">")).to_have_text(re.compile(r"</span><span class="tok-punctuation">^</span>INV<span class="tok-punctuation">-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}-\</span>d<span class="tok-punctuation">{</span><span class="tok-number">4</span><span class="tok-punctuation">}</span>$<span class="tok-string">"))
+expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">tax</span><span class="tok-punctuation">-</span>id<span class="tok-string">")).not_to_be_empty()
+expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">doc</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>SIGNED<span class="tok-string">")
+issued = page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">issued</span><span class="tok-punctuation">-</span>date<span class="tok-punctuation">").</span><span class="tok-function">text_content</span><span class="tok-punctuation">()</span>
+<span class="tok-keyword">assert</span> date<span class="tok-punctuation">.</span><span class="tok-function">fromisoformat</span><span class="tok-punctuation">(</span>issued<span class="tok-punctuation">)</span> <span class="tok-punctuation">&lt;=</span> date<span class="tok-punctuation">.</span><span class="tok-function">today</span><span class="tok-punctuation">()</span>  <span class="tok-comment"># no futura</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Legal document validation (Playwright) — invoice required fields &amp; format.</span>
 <span class="tok-keyword">import</span> re
 <span class="tok-keyword">from</span> datetime <span class="tok-keyword">import</span> date
 
@@ -289,7 +330,18 @@ issued = page.locator("</span><span class="tok-punctuation">.</span><span class=
               <span data-i18n="ui.copy">Copiar</span>
             </button>
           </div>
-          <pre><code><span class="tok-comment"># Security (Playwright) — authorization/IDOR + XSS.</span>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Seguridad (Playwright) — autorización/IDOR + XSS.</span>
+<span class="tok-comment"># El usuario A NO debe leer la factura del usuario B cambiando el id.</span>
+as_user_a <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">(</span>
+    extra_http_headers<span class="tok-punctuation">={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>user_a_token<span class="tok-punctuation">}"},</span>
+<span class="tok-punctuation">)</span>
+res <span class="tok-punctuation">=</span> as_user_a<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0099</span><span class="tok-string">")
+assert res.status == 403  # prohibido, NO 200
+
+# XSS: el payload se renderiza como texto, nunca se ejecuta.
+page.goto("</span><span class="tok-punctuation">/</span>search<span class="tok-punctuation">?</span>q<span class="tok-punctuation">=&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;")</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">get_by_text</span><span class="tok-punctuation">("&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">results</span><span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Security (Playwright) — authorization/IDOR + XSS.</span>
 <span class="tok-comment"># User A must NOT read user B's invoice by changing the id.</span>
 as_user_a <span class="tok-punctuation">=</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">request</span><span class="tok-punctuation">.</span><span class="tok-function">new_context</span><span class="tok-punctuation">(</span>
     extra_http_headers<span class="tok-punctuation">={"</span>Authorization<span class="tok-string">": f"</span>Bearer <span class="tok-punctuation">{</span>user_a_token<span class="tok-punctuation">}"},</span>

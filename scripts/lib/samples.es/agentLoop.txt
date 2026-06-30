@@ -1,0 +1,12 @@
+Bucle de agente — autónomo "escribir → correr → leer la falla → corregir":
+
+  1. Leé la historia de usuario + criterios de aceptación.
+  2. Generá el test de Playwright (usando el Skill del equipo de arriba).
+  3. Corrélo vía el servidor MCP de Playwright.
+  4. Si falla: leé el error + traza, ubicá la causa, parcheá el test.
+  5. Repetí hasta que esté en verde, luego abrí un PR.
+
+Variante multi-agente (mayor confianza):
+  - Agente Escritor  -> redacta el test.
+  - Agente Revisor -> intenta REFUTARLO: "¿puede pasar incluso si la app está
+    rota?" Solo los tests que sobreviven la revisión se commitean.

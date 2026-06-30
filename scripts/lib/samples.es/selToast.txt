@@ -1,0 +1,10 @@
+# Toast / aviso (Selenium) — aparece y después desaparece solo.
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver.find_element(By.CSS_SELECTOR, "[data-action=save]").click()
+toast = WebDriverWait(driver, 5).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "[role=alert]"))
+)
+assert "saved" in toast.text
+WebDriverWait(driver, 8).until(EC.staleness_of(toast))  # auto-descartado

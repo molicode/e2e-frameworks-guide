@@ -1,0 +1,6 @@
+# Selenium necesita dos cosas: la librería cliente y un navegador.
+# Desde Selenium 4.6, Selenium Manager descarga el driver que corresponde.
+pip install selenium pytest
+
+# Ejecutá tus tests con pytest:
+pytest test_login.py

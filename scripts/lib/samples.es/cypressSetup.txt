@@ -1,0 +1,9 @@
+npm init -y
+npm install --save-dev cypress typescript
+
+# Cypress tiene soporte de TypeScript integrado — solo nombrá tus specs como *.cy.ts.
+# Abrí el runner interactivo (ideal mientras escribís tests)...
+npx cypress open
+
+# ...o ejecutalo en modo headless, por ejemplo en CI:
+npx cypress run
