@@ -1109,6 +1109,32 @@ I18n.register("es", {
   "kt.sec.leastpriv": "Principio de mínimo privilegio: cada usuario/servicio tiene solo los permisos que necesita, nada más.",
   "kt.sec.sensitive": "Exposición de datos sensibles: tokens, contraseñas o tarjetas filtrados en respuestas, logs o URLs.",
 
+  /* ---- Glosario: términos nuevos (proceso, automation, API/HTTP, madurez) ---- */
+  "kt.proc.gwt": "El formato de un escenario BDD: <strong>Given</strong> (contexto inicial), <strong>When</strong> (la acción) y <strong>Then</strong> (el resultado esperado).",
+  "kt.proc.amigos": "La charla corta entre <strong>negocio, desarrollo y QA</strong> que define ejemplos/criterios de aceptación antes de codear. La esencia del BDD.",
+  "kt.proc.keyword": "Estilo de automatización donde el test se arma con <strong>palabras clave</strong> legibles (acciones reutilizables) en vez de código. Es el enfoque de Robot Framework.",
+  "kt.proc.ct": "<strong>Continuous testing</strong>: ejecutar pruebas automáticamente en cada cambio del pipeline (y monitorear en producción) para tener feedback constante.",
+
+  "kt.auto.mobile": "Automatizar apps <strong>nativas/híbridas</strong> de Android e iOS. <strong>Appium</strong> es el estándar: misma API estilo Selenium WebDriver para celulares.",
+
+  "kt.cat.api": "API, HTTP y datos",
+  "kt.api.methods": "Los <strong>verbos HTTP</strong> declaran la intención: <code>GET</code> (leer), <code>POST</code> (crear), <code>PUT</code> (reemplazar), <code>PATCH</code> (actualizar parte), <code>DELETE</code> (borrar), <code>HEAD</code> (solo headers), <code>OPTIONS</code> (métodos permitidos).",
+  "kt.api.idempotency": "<strong>Idempotencia</strong>: una operación es idempotente si repetirla N veces deja el sistema en el <em>mismo</em> estado que hacerla una sola vez. En HTTP, <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes (borrar dos veces igual termina “borrado”); <code>POST</code> <strong>no</strong> (cada llamada crea un recurso nuevo). El error típico: confundirla con “seguro” → un <code>DELETE</code> es idempotente aunque sí modifica.",
+  "kt.api.safe": "Un método es <strong>seguro</strong> (safe) si <em>no modifica</em> el estado del servidor: <code>GET</code>, <code>HEAD</code> y <code>OPTIONS</code>. Todo método seguro es idempotente, pero no al revés (<code>DELETE</code> es idempotente y NO seguro).",
+  "kt.api.status": "<strong>Códigos de estado</strong>: <code>2xx</code> ok (200, 201, 204), <code>3xx</code> redirección, <code>4xx</code> error del cliente (400, 401, 403, 404), <code>5xx</code> error del servidor. Lo primero que verificás en un test de API.",
+  "kt.api.rest": "<strong>REST</strong>: estilo de arquitectura para APIs donde cada <em>recurso</em> tiene una URL y se opera con verbos HTTP. Sin estado entre requests (stateless).",
+  "kt.api.crud": "<strong>CRUD</strong> = Create, Read, Update, Delete. Mapea a los verbos: <code>POST</code> / <code>GET</code> / <code>PUT</code>–<code>PATCH</code> / <code>DELETE</code>.",
+  "kt.api.cors": "<strong>CORS</strong>: reglas que controlan qué orígenes pueden llamar a una API desde el navegador. El navegador manda primero un <code>OPTIONS</code> (preflight) para chequear permisos.",
+  "kt.api.sql": "<strong>SQL</strong> consulta bases relacionales (<code>SELECT … WHERE</code>). Un <strong>JOIN</strong> cruza tablas por su clave. Clave para QA: validar en la base lo que la UI dice.",
+
+  "kt.cat.maturity": "Métricas, madurez y certificación",
+  "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
+  "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
+  "kt.mat.escape": "<strong>Defect escape rate</strong>: porcentaje de bugs que llegaron a producción (escaparon al filtro de testing). Cuanto más bajo, mejor.",
+  "kt.mat.models": "Marcos de madurez de procesos: <strong>TMMi</strong> (específico de testing, 5 niveles) y <strong>CMMI</strong> (desarrollo en general). Sirven como mapa de “qué nos falta”.",
+  "kt.mat.iso": "<strong>ISO 9001</strong>: norma genérica de gestión de calidad, certificable. No es de testing en sí, pero ordena procesos y responsabilidades.",
+  "kt.mat.istqb": "<strong>ISTQB</strong>: el estándar global de certificación en testing (Foundation, Advanced, Expert y especialidades). Da un vocabulario común muy valorado en entrevistas.",
+
   /* ---- Casos críticos por framework (compartidos) ---- */
   "cases.intro":
     "<p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p>",

@@ -159,8 +159,24 @@
               <span class="gloss__def" data-i18n-html="kt.proc.bdd">Describís el comportamiento en lenguaje Given/When/Then (Gherkin); herramientas como Cucumber lo conectan al código.</span>
             </div>
             <div class="gloss">
+              <span class="gloss__term">Given / When / Then</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.gwt">El formato de un escenario BDD: <strong>Given</strong> (contexto inicial), <strong>When</strong> (la acción) y <strong>Then</strong> (el resultado esperado).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Three amigos</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.amigos">La charla corta entre <strong>negocio, desarrollo y QA</strong> que define ejemplos/criterios de aceptación antes de codear. La esencia del BDD.</span>
+            </div>
+            <div class="gloss">
               <span class="gloss__term">ATDD</span>
               <span class="gloss__def" data-i18n-html="kt.proc.atdd">Acceptance Test-Driven: el equipo define juntos los criterios de aceptación como tests antes de desarrollar.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Keyword-driven testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.keyword">Estilo de automatización donde el test se arma con <strong>palabras clave</strong> legibles (acciones reutilizables) en vez de código. Es el enfoque de Robot Framework.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Continuous testing</span>
+              <span class="gloss__def" data-i18n-html="kt.proc.ct"><strong>Continuous testing</strong>: ejecutar pruebas automáticamente en cada cambio del pipeline (y monitorear en producción) para tener feedback constante.</span>
             </div>
             <div class="gloss">
               <span class="gloss__term">Regression testing</span>
@@ -296,7 +312,7 @@
               <span class="gloss__def" data-i18n-html="kt.auto.cicd">Correr la suite automáticamente en cada cambio; un <em>quality gate</em> bloquea el merge si algo está rojo.</span>
             </div>
             <div class="gloss">
-              <span class="gloss__term">Test isolation / idempotency</span>
+              <span class="gloss__term">Test isolation</span>
               <span class="gloss__def" data-i18n-html="kt.auto.isolation">Cada test crea y limpia sus datos y no depende de otros; corre igual solo o en cualquier orden.</span>
             </div>
             <div class="gloss">
@@ -314,6 +330,45 @@
             <div class="gloss">
               <span class="gloss__term">API testing</span>
               <span class="gloss__def" data-i18n-html="kt.auto.api">Probar la API directamente (sin UI): status codes, contratos y payloads; más rápido y estable.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Mobile testing (Appium)</span>
+              <span class="gloss__def" data-i18n-html="kt.auto.mobile">Automatizar apps <strong>nativas/híbridas</strong> de Android e iOS. <strong>Appium</strong> es el estándar: misma API estilo Selenium WebDriver para celulares.</span>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="kt.cat.api">API, HTTP y datos</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">HTTP methods / verbs</span>
+              <span class="gloss__def" data-i18n-html="kt.api.methods">Los <strong>verbos HTTP</strong> declaran la intención: <code>GET</code> (leer), <code>POST</code> (crear), <code>PUT</code> (reemplazar), <code>PATCH</code> (actualizar parte), <code>DELETE</code> (borrar), <code>HEAD</code> (solo headers), <code>OPTIONS</code> (métodos permitidos).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Idempotency</span>
+              <span class="gloss__def" data-i18n-html="kt.api.idempotency"><strong>Idempotencia</strong>: una operación es idempotente si repetirla N veces deja el sistema en el <em>mismo</em> estado que hacerla una sola vez. En HTTP, <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes (borrar dos veces igual termina “borrado”); <code>POST</code> <strong>no</strong> (cada llamada crea un recurso nuevo). El error típico: confundirla con “seguro” → un <code>DELETE</code> es idempotente aunque sí modifica.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Safe method</span>
+              <span class="gloss__def" data-i18n-html="kt.api.safe">Un método es <strong>seguro</strong> (safe) si <em>no modifica</em> el estado del servidor: <code>GET</code>, <code>HEAD</code> y <code>OPTIONS</code>. Todo método seguro es idempotente, pero no al revés (<code>DELETE</code> es idempotente y NO seguro).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">HTTP status codes</span>
+              <span class="gloss__def" data-i18n-html="kt.api.status"><strong>Códigos de estado</strong>: <code>2xx</code> ok (200, 201, 204), <code>3xx</code> redirección, <code>4xx</code> error del cliente (400, 401, 403, 404), <code>5xx</code> error del servidor. Lo primero que verificás en un test de API.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">REST</span>
+              <span class="gloss__def" data-i18n-html="kt.api.rest"><strong>REST</strong>: estilo de arquitectura para APIs donde cada <em>recurso</em> tiene una URL y se opera con verbos HTTP. Sin estado entre requests (stateless).</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">CRUD</span>
+              <span class="gloss__def" data-i18n-html="kt.api.crud"><strong>CRUD</strong> = Create, Read, Update, Delete. Mapea a los verbos: <code>POST</code> / <code>GET</code> / <code>PUT</code>–<code>PATCH</code> / <code>DELETE</code>.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">CORS / preflight</span>
+              <span class="gloss__def" data-i18n-html="kt.api.cors"><strong>CORS</strong>: reglas que controlan qué orígenes pueden llamar a una API desde el navegador. El navegador manda primero un <code>OPTIONS</code> (preflight) para chequear permisos.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">SQL / JOIN</span>
+              <span class="gloss__def" data-i18n-html="kt.api.sql"><strong>SQL</strong> consulta bases relacionales (<code>SELECT … WHERE</code>). Un <strong>JOIN</strong> cruza tablas por su clave. Clave para QA: validar en la base lo que la UI dice.</span>
             </div>
         </div>
         <h3 class="block-label" data-i18n="kt.cat.ai">AI en QA</h3>
@@ -392,6 +447,33 @@
             <div class="gloss">
               <span class="gloss__term">Sensitive data exposure</span>
               <span class="gloss__def" data-i18n-html="kt.sec.sensitive">Exposición de datos sensibles: tokens, contraseñas o tarjetas filtrados en respuestas, logs o URLs.</span>
+            </div>
+        </div>
+        <h3 class="block-label" data-i18n="kt.cat.maturity">Métricas, madurez y certificación</h3>
+        <div class="gloss-list">
+            <div class="gloss">
+              <span class="gloss__term">Defect density</span>
+              <span class="gloss__def" data-i18n-html="kt.mat.dd"><strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">MTTR</span>
+              <span class="gloss__def" data-i18n-html="kt.mat.mttr"><strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Defect escape rate</span>
+              <span class="gloss__def" data-i18n-html="kt.mat.escape"><strong>Defect escape rate</strong>: porcentaje de bugs que llegaron a producción (escaparon al filtro de testing). Cuanto más bajo, mejor.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">Maturity models (TMMi / CMMI)</span>
+              <span class="gloss__def" data-i18n-html="kt.mat.models">Marcos de madurez de procesos: <strong>TMMi</strong> (específico de testing, 5 niveles) y <strong>CMMI</strong> (desarrollo en general). Sirven como mapa de “qué nos falta”.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">ISO 9001</span>
+              <span class="gloss__def" data-i18n-html="kt.mat.iso"><strong>ISO 9001</strong>: norma genérica de gestión de calidad, certificable. No es de testing en sí, pero ordena procesos y responsabilidades.</span>
+            </div>
+            <div class="gloss">
+              <span class="gloss__term">ISTQB</span>
+              <span class="gloss__def" data-i18n-html="kt.mat.istqb"><strong>ISTQB</strong>: el estándar global de certificación en testing (Foundation, Advanced, Expert y especialidades). Da un vocabulario común muy valorado en entrevistas.</span>
             </div>
         </div>
         <div class="callout" data-i18n-html="kt.callout"><strong>Tip de entrevista:</strong> no alcanza con definir — tené un <em>ejemplo</em> de cada término. “Un test flaky es… por ejemplo, cuando usás un <code>sleep</code> fijo y la red tarda más de la cuenta.”</div>
