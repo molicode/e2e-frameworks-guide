@@ -587,6 +587,44 @@ I18n.register("en", {
   "biblio.ai.peg": "An open prompt-engineering guide with techniques and examples.",
   "biblio.ai.openai": "OpenAI's prompt engineering guide.",
 
+  /* ====================================================================
+     CRITICAL CASES (accounts, payments, values, security)
+     ==================================================================== */
+  "nav.critical": "Critical cases",
+  "home.critical": "API, accounts, payment receipts, value validation and security tests — the most critical stuff.",
+  "crit.lead":
+    "<p>The costliest bugs live here: <strong>money</strong> and <strong>security</strong>. A wrong total or a missed permission check costs money and trust. This section gathers the tests you <em>always</em> want to have.</p>",
+  "crit.callout":
+    "<strong>Golden rule with money:</strong> never use <code>float</code> for amounts — work in <strong>cents</strong> (integers). <code>0.1 + 0.2</code> is not <code>0.3</code> in JavaScript.",
+  "crit.api.label": "API testing (CRUD + auth)",
+  "crit.api.body":
+    "<p>You test the API directly: create (POST → 201), read (GET → 200) and validate the response <strong>contract</strong>. And you check auth: with no token, <code>401</code>; never a silent 200.</p>",
+  "crit.receipt.label": "Accounts & payment receipts",
+  "crit.receipt.body":
+    "<p>The receipt math must <em>always</em> add up: sum of items = subtotal, exact tax, and subtotal + tax = total. Plus invariants: never negative, status consistent with the amount paid.</p>",
+  "crit.value.label": "Value validation",
+  "crit.value.body":
+    "<p>Where bugs sneak in most: decimal precision, rounding and <strong>boundaries</strong>. Test inputs the form must reject (negatives, zero, text, too many decimals) and confirm the currency format.</p>",
+  "crit.authz.label": "Security: authorization & IDOR",
+  "crit.authz.body":
+    "<p>Access control is critical: user A must not be able to read user B's order just by changing the <code>id</code> in the URL (that's an <strong>IDOR</strong>). It must return <code>403</code>, not <code>200</code>.</p>",
+  "crit.injection.label": "Security: injection & input validation",
+  "crit.injection.body":
+    "<p>The app must <strong>neutralize</strong> malicious input, not run it. You test <strong>XSS</strong> and <strong>SQL injection</strong> payloads: the text must render escaped (as literal text) and nothing should break.</p>",
+  "crit.injection.callout":
+    "<strong>Heads up:</strong> only test security on your own apps or with explicit authorization. On third-party systems, without permission, it's illegal.",
+
+  /* ---- Glossary: Security category ---- */
+  "kt.cat.security": "Security",
+  "kt.sec.authn": "<strong>Authentication</strong> = who you are (login); <strong>Authorization</strong> = what you may do (permissions). Tested differently.",
+  "kt.sec.idor": "Insecure Direct Object Reference: reaching someone else's resource by changing an id/param. Must return 403, not 200.",
+  "kt.sec.xss": "Cross-Site Scripting: injecting scripts the browser executes. Defense: escape/sanitize the output.",
+  "kt.sec.sqli": "SQL injection via unsanitized input. Defense: parameterized queries, never concatenate SQL.",
+  "kt.sec.csrf": "Cross-Site Request Forgery: forcing actions on behalf of a logged-in user. Defense: anti-CSRF tokens.",
+  "kt.sec.ratelimit": "Capping requests per time window to stop brute force and abuse (e.g. login).",
+  "kt.sec.leastpriv": "Principle of least privilege: each user/service gets only the permissions it needs, nothing more.",
+  "kt.sec.sensitive": "Sensitive data exposure: tokens, passwords or cards leaked in responses, logs or URLs.",
+
   /* ---- Footer ---- */
   "footer.text":
     "Made with ♥ for the QA community · Open-source project — contributions welcome (see <code>CONTRIBUTING.md</code>).",

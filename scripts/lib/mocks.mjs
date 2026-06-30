@@ -291,11 +291,57 @@ function a11yScreen() {
   );
 }
 
+/** A payment receipt — used by the accounts/payments value validation. */
+function receiptScreen() {
+  return browser(
+    "pay.example.com/receipts/9087",
+    `
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Receipt #9087</h4>
+                <span class="mock-badge">PAID</span>
+              </div>
+              <ul class="mock-receipt">
+                <li><span>The Pragmatic Programmer <em>(book)</em></span><span>$40.00</span></li>
+                <li><span>Wireless Mouse</span><span>$25.00</span></li>
+                <li><span>USB-C Cable × 5</span><span>$25.00</span></li>
+              </ul>
+              <div class="mock-receipt-row"><span>Subtotal</span><span>$90.00</span><code class="mock-tag">.subtotal</code></div>
+              <div class="mock-receipt-row"><span>Tax (21%)</span><span>$18.90</span><code class="mock-tag">.tax</code></div>
+              <div class="mock-receipt-row mock-receipt-total"><span>Total</span><span>$108.90</span><code class="mock-tag">.total</code></div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ items = subtotal</code>
+                <code class="mock-tag mock-tag--good">✓ subtotal + tax = total</code>
+              </div>
+            </div>`
+  );
+}
+
+/** A 403 / access-denied state — used by the authorization / IDOR example. */
+function forbiddenScreen() {
+  return browser(
+    "app.example.com/orders/99",
+    `
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">🔒</div>
+              <h4 class="mock-h">403 — Forbidden</h4>
+              <p class="mock-error-msg">You don't have permission to view this order.</p>
+              <div class="mock-http">GET /api/orders/99 → 403</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">expect(res.status()).toBe(403)</code>
+                <code class="mock-tag mock-tag--bad">✗ IDOR if it returned 200</code>
+              </div>
+            </div>`
+  );
+}
+
 const SCREENS = {
   login: loginScreen,
   order: orderScreen,
   api: apiScreen,
   a11y: a11yScreen,
+  receipt: receiptScreen,
+  forbidden: forbiddenScreen,
   validation: validationScreen,
   select: selectScreen,
   checkbox: checkboxScreen,

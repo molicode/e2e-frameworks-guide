@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="nav.critical">Casos críticos</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--critical">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link" href="selenium.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link" href="cypress.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link" href="playwright.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="components.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.components">Componentes clave</span>
+        </a>
+        <a class="nav-link is-active" href="critical.html" aria-current="page">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.critical">Casos críticos</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">13</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <span class="section__eyebrow">08</span>
+        <h2 class="section__title" data-i18n="nav.critical">Casos críticos</h2>
+        <div class="prose" data-i18n-html="crit.lead"><p>Los bugs más caros viven acá: <strong>plata</strong> y <strong>seguridad</strong>. Un total mal calculado o un permiso mal chequeado cuesta dinero y confianza. Esta sección reúne las pruebas que <em>siempre</em> conviene tener.</p></div>
+        <div class="callout callout--warn" data-i18n-html="crit.callout"><strong>Regla de oro con dinero:</strong> nunca uses <code>float</code> para montos — trabajá en <strong>centavos</strong> (enteros). <code>0.1 + 0.2</code> no es <code>0.3</code> en JavaScript.</div>
+        <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
+        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// API CRUD with auth — create, read, assert the contract. No UI.</span>
+<span class="tok-keyword">const</span> api <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">newContext</span><span class="tok-punctuation">({</span>
+  baseURL<span class="tok-punctuation">:</span> <span class="tok-string">"https://api.example.com"</span><span class="tok-punctuation">,</span>
+  extraHTTPHeaders<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${token}`</span> <span class="tok-punctuation">},</span>
+<span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// CREATE</span>
+<span class="tok-keyword">const</span> created <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> api<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">("/</span>orders<span class="tok-string">", { data: { items: ["</span>book<span class="tok-string">"] } });
+expect(created.status()).toBe(201);
+const { id } = await created.json();
+
+// READ + assert the response shape
+const res = await api.get(`/orders/${id}`);
+await expect(res).toBeOK();
+expect(await res.json()).toMatchObject({ id, status: "</span>NEW<span class="tok-punctuation">"</span> <span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// Without a token → 401 (not a silent 200 or a 500)</span>
+<span class="tok-keyword">const</span> anon <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(`</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span>$<span class="tok-punctuation">{</span>id<span class="tok-punctuation">}`);</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>anon<span class="tok-punctuation">.</span><span class="tok-function">status</span><span class="tok-punctuation">()).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">401</span><span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="crit.receipt.label">Cuentas y recibos de pago</h3>
+        <div class="prose" data-i18n-html="crit.receipt.body"><p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Payment receipt — the money math must ALWAYS add up.</span>
+<span class="tok-comment">// Work in integer cents to avoid floating-point errors.</span>
+<span class="tok-keyword">const</span> r <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-punctuation">(</span><span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span><span class="tok-string">")).json();
+
+// Sum of line items equals the subtotal.
+const itemsTotal = r.items.reduce((sum, it) =&gt; sum + it.cents, 0);
+expect(itemsTotal).toBe(r.subtotalCents);                 // 9000
+
+// Tax and total are exact.
+expect(r.taxCents).toBe(Math.round(r.subtotalCents * 0.21)); // 1890
+expect(r.totalCents).toBe(r.subtotalCents + r.taxCents);     // 10890
+
+// Invariants: never negative, status consistent with the amount paid.
+expect(r.totalCents).toBeGreaterThan(0);
+expect(r.status).toBe("</span>PAID<span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">pay.example.com/receipts/9087</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Receipt #9087</h4>
+                <span class="mock-badge">PAID</span>
+              </div>
+              <ul class="mock-receipt">
+                <li><span>The Pragmatic Programmer <em>(book)</em></span><span>$40.00</span></li>
+                <li><span>Wireless Mouse</span><span>$25.00</span></li>
+                <li><span>USB-C Cable × 5</span><span>$25.00</span></li>
+              </ul>
+              <div class="mock-receipt-row"><span>Subtotal</span><span>$90.00</span><code class="mock-tag">.subtotal</code></div>
+              <div class="mock-receipt-row"><span>Tax (21%)</span><span>$18.90</span><code class="mock-tag">.tax</code></div>
+              <div class="mock-receipt-row mock-receipt-total"><span>Total</span><span>$108.90</span><code class="mock-tag">.total</code></div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ items = subtotal</code>
+                <code class="mock-tag mock-tag--good">✓ subtotal + tax = total</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.value.label">Validación de valores</h3>
+        <div class="prose" data-i18n-html="crit.value.body"><p>Donde más se cuela un bug: precisión decimal, redondeo y <strong>límites</strong>. Probá entradas que el formulario debe rechazar (negativos, cero, texto, demasiados decimales) y confirmá el formato de moneda.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Value validation — the classic money pitfalls QA must catch.</span>
+
+<span class="tok-comment">// 1) Never trust floats for money — work in integer cents.</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-number">0.1</span> <span class="tok-punctuation">+</span> <span class="tok-number">0.2</span><span class="tok-punctuation">).</span><span class="tok-keyword">not</span><span class="tok-punctuation">.</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">0.3</span><span class="tok-punctuation">);</span>   <span class="tok-comment">// 0.30000000000000004 !</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-number">10</span> <span class="tok-punctuation">+</span> <span class="tok-number">20</span><span class="tok-punctuation">).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">30</span><span class="tok-punctuation">);</span>          <span class="tok-comment">// cents are safe</span>
+
+<span class="tok-comment">// 2) Boundary inputs the form MUST reject:</span>
+<span class="tok-keyword">for</span> <span class="tok-punctuation">(</span><span class="tok-keyword">const</span> bad <span class="tok-keyword">of</span> <span class="tok-punctuation">["-</span><span class="tok-number">5</span><span class="tok-string">", "</span><span class="tok-number">0</span><span class="tok-string">", "</span>abc<span class="tok-string">", "</span>1e9<span class="tok-string">", "</span><span class="tok-number">10.999</span><span class="tok-string">"]) {
+  await page.getByLabel("</span>Amount<span class="tok-string">").fill(bad);
+  await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
+  await expect(page.getByText("</span>Invalid amount<span class="tok-string">")).toBeVisible();
+}
+
+// 3) Rounding is half-up and currency-formatted.
+expect(formatMoney(1890)).toBe("</span>$18<span class="tok-punctuation">.</span><span class="tok-number">90</span><span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="crit.authz.label">Seguridad: autorización e IDOR</h3>
+        <div class="prose" data-i18n-html="crit.authz.body"><p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Security — authorization &amp; IDOR (Insecure Direct Object Reference).</span>
+<span class="tok-comment">// User A must NOT read User B's order just by changing the id in the URL.</span>
+<span class="tok-keyword">const</span> asUserA <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">newContext</span><span class="tok-punctuation">({</span>
+  extraHTTPHeaders<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${userAToken}`</span> <span class="tok-punctuation">},</span>
+<span class="tok-punctuation">});</span>
+
+<span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> asUserA<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">99</span><span class="tok-string">"); // belongs to user B
+expect(res.status()).toBe(403);                  // forbidden, NOT 200
+
+// No token at all → 401 (never a 500 or a silent 200).
+const anon = await request.get("</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">99</span><span class="tok-punctuation">");</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>anon<span class="tok-punctuation">.</span><span class="tok-function">status</span><span class="tok-punctuation">()).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">401</span><span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/99</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">🔒</div>
+              <h4 class="mock-h">403 — Forbidden</h4>
+              <p class="mock-error-msg">You don't have permission to view this order.</p>
+              <div class="mock-http">GET /api/orders/99 → 403</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">expect(res.status()).toBe(403)</code>
+                <code class="mock-tag mock-tag--bad">✗ IDOR if it returned 200</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.injection.label">Seguridad: inyección y validación de entrada</h3>
+        <div class="prose" data-i18n-html="crit.injection.body"><p>La app tiene que <strong>neutralizar</strong> la entrada maliciosa, no ejecutarla. Probás payloads de <strong>XSS</strong> y <strong>SQL injection</strong>: el texto debe mostrarse escapado (como texto literal) y nada debe romperse.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Security — the app must NEUTRALIZE malicious input, not run it.</span>
+<span class="tok-keyword">const</span> payloads <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span>
+  <span class="tok-string">"&lt;script&gt;alert(1)&lt;/script&gt;"</span><span class="tok-punctuation">,</span>  <span class="tok-comment">// XSS</span>
+  <span class="tok-string">"'; DROP TABLE orders;--"</span><span class="tok-punctuation">,</span>     <span class="tok-comment">// SQL injection</span>
+<span class="tok-punctuation">];</span>
+
+<span class="tok-keyword">for</span> <span class="tok-punctuation">(</span><span class="tok-keyword">const</span> p <span class="tok-keyword">of</span> payloads<span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
+  <span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByLabel</span><span class="tok-punctuation">("</span>Search<span class="tok-string">").fill(p);
+  await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Search<span class="tok-string">" }).click();
+
+  // The payload is shown as TEXT (escaped), never executed; nothing breaks.
+  await expect(page.getByText(p)).toBeVisible();
+  await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">results</span><span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span>
+<span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <div class="callout callout--danger" data-i18n-html="crit.injection.callout"><strong>Ojo:</strong> probá seguridad solo en apps propias o con autorización explícita. En sistemas de terceros, sin permiso, es ilegal.</div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="components.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="nav.components">Componentes clave</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="ai-role.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.airole">El rol de la AI</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>
