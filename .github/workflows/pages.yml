@@ -37,7 +37,13 @@ jobs:
       - name: Check i18n parity
         run: node scripts/check-i18n.mjs
 
+      # enablement: true asks GitHub to turn on Pages (with GitHub Actions as
+      # the build source) automatically, so no manual Settings step is needed.
+      # NOTE: Pages on a PRIVATE repo requires a paid plan — make the repo
+      # public (recommended) for a free, shareable URL.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
