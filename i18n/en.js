@@ -783,13 +783,13 @@ I18n.register("en", {
   "mat.road.lead":
     "<p>A realistic path to raise QA maturity, in four phases. Each has an objective, concrete actions and typical tools. Don't skip phases: each one supports the next.</p>",
   "mat.phase1":
-    "<strong>Phase 1 — Diagnosis & standards.</strong> <em>Objective:</em> assess the current state and define quality standards. <em>Actions:</em> a maturity assessment (ISO 9001, TMMi, CMMI), document critical processes and current metrics, define KPIs (defect density, test coverage, MTTR). <em>Tools:</em> Jira, Azure DevOps Test Plans, Power BI.",
+    "<strong>Phase 1 — Diagnosis & standards.</strong> <em>Objective:</em> assess the current state and define quality standards. <em>Actions:</em> a maturity assessment (ISO 9001, TMMi, CMMI), document critical processes and current metrics, define KPIs (defect density, test coverage, MTTR). <em>Tools:</em> an issue tracker, a test-case management suite and a reporting/BI tool.",
   "mat.phase2":
-    "<strong>Phase 2 — Automation & efficiency.</strong> <em>Objective:</em> reduce human error and speed up testing. <em>Actions:</em> automate functional and regression tests (Selenium, Playwright, Robot), integrate QA into CI/CD pipelines, build bots for repetitive tasks. <em>Tools:</em> Postman, Azure DevOps, Power Automate.",
+    "<strong>Phase 2 — Automation & efficiency.</strong> <em>Objective:</em> reduce human error and speed up testing. <em>Actions:</em> automate functional and regression tests (Selenium, Playwright, Robot), integrate QA into CI/CD pipelines, build bots for repetitive tasks. <em>Tools:</em> an API client, your CI/CD platform and workflow-automation (RPA) tooling.",
   "mat.phase3":
-    "<strong>Phase 3 — Quality culture.</strong> <em>Objective:</em> involve the whole team in quality. <em>Actions:</em> training in agile testing and shift-left, bring QA into user stories (BDD with Cucumber/Gherkin), quality dashboards visible to everyone. <em>Tools:</em> Confluence, Miro, Power BI.",
+    "<strong>Phase 3 — Quality culture.</strong> <em>Objective:</em> involve the whole team in quality. <em>Actions:</em> training in agile testing and shift-left, bring QA into user stories (BDD with Cucumber/Gherkin), quality dashboards visible to everyone. <em>Tools:</em> a knowledge base/wiki, a collaborative whiteboard and BI dashboards.",
   "mat.phase4":
-    "<strong>Phase 4 — Total quality.</strong> <em>Objective:</em> QA as a strategic function, not just operational. <em>Actions:</em> use AI for predictive testing and risk analysis, continuous testing and production monitoring, certify the process (ISO 9001 / TMMi level 3+). <em>Tools:</em> Azure Monitor, Application Insights, AI copilots.",
+    "<strong>Phase 4 — Total quality.</strong> <em>Objective:</em> QA as a strategic function, not just operational. <em>Actions:</em> use AI for predictive testing and risk analysis, continuous testing and production monitoring, certify the process (ISO 9001 / TMMi level 3+). <em>Tools:</em> production observability and monitoring, application telemetry and AI assistants.",
   "mat.road.callout":
     "<strong>Beware skipping phases:</strong> automating (Phase 2) without standards (Phase 1) creates brittle suites nobody maintains; and AI (Phase 4) without culture (Phase 3) is an expensive tool the team ignores.",
 
@@ -823,12 +823,12 @@ I18n.register("en", {
     "<p><strong>ISTQB</strong> (International Software Testing Qualifications Board) is the global standard for testing certification. It doesn't make you a better tester on its own, but it gives a <strong>shared vocabulary</strong> and is highly valued in interviews and by companies.</p>",
   "mat.istqb.levels.label": "Levels",
   "mat.istqb.levels.body":
-    "<p>The scheme runs by levels: <strong>Foundation</strong> (CTFL, the base everyone starts with), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) and <strong>Expert</strong>. There are also <strong>specialties</strong> by domain or technology: AI Testing, Performance, Mobile, Security and — the one our QA mentioned — <strong>Finance Testing (CT-FT)</strong>.</p>",
+    "<p>The scheme runs by levels: <strong>Foundation</strong> (CTFL, the base everyone starts with), <strong>Advanced</strong> (Test Analyst, Test Automation Engineer, Test Manager) and <strong>Expert</strong>. There are also <strong>specialties</strong> by domain or technology: AI Testing, Performance, Mobile, Security and <strong>Finance Testing (CT-FT)</strong>.</p>",
   "mat.istqb.certs.label": "Certifications (official links)",
   "mat.istqb.ref.ctfl": "The entry level: vocabulary, the testing process, test-design techniques and management. Where everyone starts.",
   "mat.istqb.ref.ta": "Advanced level for designing and executing tests based on formal techniques and risk analysis.",
   "mat.istqb.ref.tae": "Advanced, focused on the architecture, implementation and maintenance of automation.",
-  "mat.istqb.ref.ft": "A specialty in finance-domain testing: regulations, amount accuracy, auditability. The one the QA recommended.",
+  "mat.istqb.ref.ft": "A specialty in finance-domain testing: regulations, amount accuracy, auditability.",
   "mat.istqb.ref.ai": "A specialty in testing of (and with) AI systems: bias, data, model-specific metrics.",
   "mat.istqb.callout":
     "<strong>Advice:</strong> start with the <strong>CTFL</strong> for the shared vocabulary, then pick a specialty aligned with your industry (finance, AI, performance). The certification opens doors; practice makes you good.",
