@@ -1721,6 +1721,97 @@ I pay with a valid card
 The order status should be "\${status}"
     Element Text Should Be    css=.order-status    \${status}`,
   },
+
+  /* ---- QA skills: SQL, Git, mobile (Appium) ---- */
+  sqlBasics: {
+    lang: "SQL",
+    code: `-- Read data to verify what your test created. Start simple.
+SELECT id, status, total
+FROM orders
+WHERE status = 'PAID'          -- filter rows
+ORDER BY total DESC            -- biggest first
+LIMIT 10;                      -- only the top 10`,
+  },
+  sqlJoin: {
+    lang: "SQL",
+    code: `-- Join related tables and aggregate to spot data problems.
+SELECT u.email, COUNT(o.id) AS orders, SUM(o.total) AS spent
+FROM users u
+JOIN orders o ON o.user_id = u.id      -- match orders to their user
+WHERE o.status = 'PAID'
+GROUP BY u.email
+HAVING COUNT(o.id) > 1;                -- users with more than one order`,
+  },
+  sqlValidate: {
+    lang: "Python",
+    code: `# Validate the DATABASE state after an action — the UI can lie, the data can't.
+import sqlite3
+
+
+def test_payment_persists_in_db():
+    conn = sqlite3.connect("shop.db")
+    row = conn.execute(
+        "SELECT status, total FROM orders WHERE id = ?", (42,)
+    ).fetchone()
+    conn.close()
+
+    # What the UI showed as PAID must really be PAID in the database.
+    assert row == ("PAID", 250)`,
+  },
+  gitBasics: {
+    lang: "Bash",
+    code: `# Get the code and work on your own branch (never commit straight to main).
+git clone https://github.com/acme/shop-e2e.git
+git checkout -b feature/login-tests   # create + switch to a new branch
+
+git add tests/login.spec.ts           # stage your changes
+git commit -m "test: add login happy path"
+git push -u origin feature/login-tests`,
+  },
+  gitFlow: {
+    lang: "Bash",
+    code: `# Keep your branch current and resolve conflicts calmly.
+git pull --rebase origin main         # replay your commits on top of main
+
+# If the rebase hits a conflict: edit the file, then:
+git add tests/login.spec.ts
+git rebase --continue                 # or: git rebase --abort to bail out
+
+# Park work-in-progress to switch tasks without committing:
+git stash            # save changes
+git stash pop        # bring them back`,
+  },
+  appiumSetup: {
+    lang: "Bash",
+    code: `# Appium automates REAL mobile apps (Android/iOS) — like Selenium for phones.
+pip install Appium-Python-Client pytest
+
+# Start the Appium server (needs Node + the UiAutomator2 / XCUITest drivers):
+appium
+
+# You also need an emulator/simulator or a real device connected.`,
+  },
+  appiumTest: {
+    lang: "Python",
+    code: `# test_login_mobile.py — drive a native app with Appium (Selenium-like API).
+from appium import webdriver
+from appium.options.android import UiAutomator2Options
+from appium.webdriver.common.appiumby import AppiumBy
+
+
+def test_login_on_android():
+    options = UiAutomator2Options()
+    options.app = "/apps/shop.apk"            # the app under test
+    driver = webdriver.Remote("http://localhost:4723", options=options)
+    try:
+        driver.find_element(AppiumBy.ACCESSIBILITY_ID, "username").send_keys("demo")
+        driver.find_element(AppiumBy.ACCESSIBILITY_ID, "password").send_keys("secret")
+        driver.find_element(AppiumBy.ACCESSIBILITY_ID, "signin").click()
+        banner = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "welcome")
+        assert banner.text == "Welcome, demo"
+    finally:
+        driver.quit()`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -2065,6 +2156,63 @@ function bddGroup() {
   ];
 }
 
+// "Habilidades del QA" — cross-cutting skills every QA needs beyond a framework:
+// SQL (validate the data), Git (version control) and Appium (mobile). A GROUP.
+function skillsGroup() {
+  const grp = { group: "skills", groupKey: "nav.skills", chip: { label: "Habilidades QA", color: "var(--fw-skills)" } };
+  return [
+    { ...grp, id: "skills-intro", navKey: "skills.page.intro", blocks: [
+      { type: "prose", html: "skills.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "skills.why" },
+      { type: "tiles", items: [
+        { icon: "🗄️", title: "skills.t1.title", body: "skills.t1.body" },
+        { icon: "🌿", title: "skills.t2.title", body: "skills.t2.body" },
+        { icon: "📱", title: "skills.t3.title", body: "skills.t3.body" },
+      ] },
+      { type: "callout", variant: "", html: "skills.callout" },
+    ] },
+    { ...grp, id: "skills-sql", navKey: "skills.page.sql", blocks: [
+      { type: "prose", html: "skills.sql.lead" },
+      { type: "label", text: "skills.sql.basics.label" },
+      { type: "prose", html: "skills.sql.basics.body" },
+      { type: "code", sample: "sqlBasics" },
+      { type: "label", text: "skills.sql.join.label" },
+      { type: "prose", html: "skills.sql.join.body" },
+      { type: "code", sample: "sqlJoin" },
+      { type: "label", text: "skills.sql.validate.label" },
+      { type: "prose", html: "skills.sql.validate.body" },
+      { type: "code", sample: "sqlValidate" },
+      { type: "callout", variant: "", html: "skills.sql.callout" },
+    ] },
+    { ...grp, id: "skills-git", navKey: "skills.page.git", blocks: [
+      { type: "prose", html: "skills.git.lead" },
+      { type: "label", text: "skills.git.basics.label" },
+      { type: "prose", html: "skills.git.basics.body" },
+      { type: "code", sample: "gitBasics" },
+      { type: "label", text: "skills.git.flow.label" },
+      { type: "prose", html: "skills.git.flow.body" },
+      { type: "code", sample: "gitFlow" },
+      { type: "callout", variant: "warn", html: "skills.git.callout" },
+    ] },
+    { ...grp, id: "skills-appium", navKey: "skills.page.appium", blocks: [
+      { type: "prose", html: "skills.appium.lead" },
+      { type: "label", text: "skills.appium.setup.label" },
+      { type: "prose", html: "skills.appium.setup.body" },
+      { type: "code", sample: "appiumSetup" },
+      { type: "label", text: "skills.appium.test.label" },
+      { type: "prose", html: "skills.appium.test.body" },
+      { type: "code", sample: "appiumTest" },
+      { type: "mock", screen: "login" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "skills.appium.manual.title", body: "skills.appium.manual.body" },
+        ai: { title: "skills.appium.ai.title", body: "skills.appium.ai.body" } },
+      { type: "callout", variant: "ok", html: "skills.appium.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -2311,6 +2459,8 @@ export const SECTIONS = [
       { type: "callout", variant: "ok", html: "best.callout" },
     ],
   },
+
+  ...skillsGroup(),
 
   {
     id: "key-terms",

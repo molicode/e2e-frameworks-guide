@@ -1,0 +1,7 @@
+-- Uní tablas relacionadas y agregá para detectar problemas de datos.
+SELECT u.email, COUNT(o.id) AS orders, SUM(o.total) AS spent
+FROM users u
+JOIN orders o ON o.user_id = u.id      -- relacioná los pedidos con su usuario
+WHERE o.status = 'PAID'
+GROUP BY u.email
+HAVING COUNT(o.id) > 1;                -- usuarios con más de un pedido

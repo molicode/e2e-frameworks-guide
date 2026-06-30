@@ -1,0 +1,7 @@
+# Conseguí el código y trabajá en tu propia rama (nunca hagas commit directo a main).
+git clone https://github.com/acme/shop-e2e.git
+git checkout -b feature/login-tests   # creá + cambiá a una rama nueva
+
+git add tests/login.spec.ts           # prepará tus cambios
+git commit -m "test: add login happy path"
+git push -u origin feature/login-tests

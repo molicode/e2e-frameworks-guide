@@ -1,0 +1,10 @@
+# Mantené tu rama al día y resolvé los conflictos con calma.
+git pull --rebase origin main         # reaplicá tus commits sobre main
+
+# Si el rebase encuentra un conflicto: editá el archivo, después:
+git add tests/login.spec.ts
+git rebase --continue                 # o: git rebase --abort para abandonar
+
+# Guardá el trabajo en curso para cambiar de tarea sin hacer commit:
+git stash            # guardá los cambios
+git stash pop        # traelos de vuelta
