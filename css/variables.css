@@ -1,0 +1,143 @@
+/* ==========================================================================
+   variables.css — Design tokens (colors, spacing, type) for both themes.
+
+   Themes are switched by toggling [data-theme="light"|"dark"] on <html>.
+   All colors are defined as CSS custom properties so the rest of the
+   stylesheet never references a raw hex value. To re-skin the site, edit
+   only this file.
+   ========================================================================== */
+
+:root {
+  /* ---- Spacing scale (8px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* ---- Radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* ---- Typography ---- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code",
+    Consolas, "Liberation Mono", Menlo, monospace;
+
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.15rem;
+  --fs-xl: 1.4rem;
+  --fs-2xl: 1.9rem;
+  --fs-3xl: 2.6rem;
+
+  --lh-tight: 1.25;
+  --lh-base: 1.65;
+
+  /* ---- Layout ---- */
+  --header-h: 60px;
+  --sidebar-w: 268px;
+  --content-max: 880px;
+
+  /* ---- Motion ---- */
+  --transition: 160ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME (default)
+   -------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-soft: #f6f8fb;
+  --surface: #ffffff;
+  --surface-2: #f1f4f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --text: #1b2333;
+  --text-soft: #4a5568;
+  --text-muted: #6b7689;
+
+  --accent: #5b5bd6;
+  --accent-strong: #4744c4;
+  --accent-soft: #ececfb;
+  --accent-contrast: #ffffff;
+
+  --secondary: #0d9488; /* teal */
+  --warning: #b45309;
+  --danger: #c0392b;
+  --success: #15803d;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+
+  /* Code / syntax tokens */
+  --code-bg: #f6f8fb;
+  --code-text: #1b2333;
+  --tok-comment: #6b7689;
+  --tok-keyword: #8b3fd1;
+  --tok-string: #0a7d52;
+  --tok-number: #b45309;
+  --tok-function: #2552c9;
+  --tok-property: #c0392b;
+  --tok-operator: #4a5568;
+  --tok-punctuation: #4a5568;
+
+  /* Framework accent chips */
+  --fw-selenium: #34a853;
+  --fw-cypress: #17202a;
+  --fw-playwright: #2ead52;
+}
+
+/* --------------------------------------------------------------------------
+   DARK THEME
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  --bg: #0d1117;
+  --bg-soft: #0a0e14;
+  --surface: #161b22;
+  --surface-2: #1c232d;
+  --border: #283039;
+  --border-strong: #3a444f;
+
+  --text: #e6edf3;
+  --text-soft: #b3bdc9;
+  --text-muted: #8b949e;
+
+  --accent: #8a8aff;
+  --accent-strong: #a5a5ff;
+  --accent-soft: #20203a;
+  --accent-contrast: #0d1117;
+
+  --secondary: #2dd4bf;
+  --warning: #f59e0b;
+  --danger: #f87171;
+  --success: #4ade80;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.45);
+
+  /* Code / syntax tokens */
+  --code-bg: #11161d;
+  --code-text: #e6edf3;
+  --tok-comment: #8b949e;
+  --tok-keyword: #c792ea;
+  --tok-string: #7ee787;
+  --tok-number: #f0a868;
+  --tok-function: #79c0ff;
+  --tok-property: #ff9492;
+  --tok-operator: #b3bdc9;
+  --tok-punctuation: #b3bdc9;
+
+  /* Framework accent chips */
+  --fw-selenium: #43c463;
+  --fw-cypress: #cdd9e5;
+  --fw-playwright: #4ade80;
+}
