@@ -692,6 +692,165 @@ for (const p of payloads) {
 }`,
   },
 
+  /* ================================================================== *
+   * Per-framework critical cases (same scenarios, each idiom)           *
+   * ================================================================== */
+
+  /* ---- Selenium ---- */
+  selApi: {
+    lang: "JavaScript",
+    code: `// API testing in a Selenium project — Selenium drives the UI; the API
+// layer uses a plain HTTP client (or REST Assured in Java).
+const res = await fetch("https://api.example.com/orders/42", {
+  headers: { Authorization: \`Bearer \${token}\` },
+});
+assert.strictEqual(res.status, 200);
+const order = await res.json();
+assert.strictEqual(order.total, 250);
+assert.strictEqual(order.status, "PAID");
+
+// Without a token → 401, never a silent 200.
+const anon = await fetch("https://api.example.com/orders/42");
+assert.strictEqual(anon.status, 401);`,
+  },
+  selMoney: {
+    lang: "JavaScript",
+    code: `// Amounts (Selenium) — read the money fields and assert the math in cents.
+await driver.get("https://pay.example.com/receipts/9087");
+const cents = (s) => Math.round(parseFloat(s.replace(/[^0-9.]/g, "")) * 100);
+
+const sub   = cents(await driver.findElement(By.css(".subtotal")).getText());
+const tax   = cents(await driver.findElement(By.css(".tax")).getText());
+const total = cents(await driver.findElement(By.css(".total")).getText());
+
+assert.strictEqual(tax, Math.round(sub * 0.21)); // exact tax
+assert.strictEqual(total, sub + tax);            // subtotal + tax = total
+assert.ok(total > 0);                            // never negative`,
+  },
+  selDocs: {
+    lang: "JavaScript",
+    code: `// Legal document validation (Selenium) — an invoice's required fields & format.
+await driver.get("https://app.example.com/invoices/INV-2026-0042");
+const text = async (sel) => (await driver.findElement(By.css(sel)).getText()).trim();
+
+assert.match(await text(".invoice-number"), /^INV-\\d{4}-\\d{4}$/); // ID format
+assert.ok((await text(".tax-id")).length > 0);                     // present
+assert.strictEqual(await text(".doc-status"), "SIGNED");           // signed
+assert.ok(new Date(await text(".issued-date")) <= new Date());     // not future`,
+  },
+  selSecurity: {
+    lang: "JavaScript",
+    code: `// Security (Selenium project) — authorization/IDOR + input handling.
+// User A must NOT read user B's invoice by changing the id.
+const res = await fetch("https://api.example.com/invoices/INV-2026-0099", {
+  headers: { Authorization: \`Bearer \${userAToken}\` },
+});
+assert.strictEqual(res.status, 403); // forbidden, NOT 200
+
+// XSS: a script payload must render as text, never execute.
+await driver.get("https://app.example.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E");
+const shown = await driver.findElement(By.css(".results")).getText();
+assert.ok(shown.includes("<script>alert(1)</script>")); // escaped, literal`,
+  },
+
+  /* ---- Cypress ---- */
+  cypApi: {
+    lang: "JavaScript",
+    code: `// API testing (Cypress) — cy.request hits the API directly, no UI.
+cy.request({
+  url: "/api/orders/42",
+  headers: { Authorization: \`Bearer \${token}\` },
+}).then((res) => {
+  expect(res.status).to.eq(200);
+  expect(res.body.total).to.eq(250);
+  expect(res.body.status).to.eq("PAID");
+});
+
+// Auth: no token must be rejected (401).
+cy.request({ url: "/api/orders/42", failOnStatusCode: false })
+  .its("status").should("eq", 401);`,
+  },
+  cypMoney: {
+    lang: "JavaScript",
+    code: `// Amounts (Cypress) — assert the receipt math in integer cents.
+cy.request("/api/receipts/9087").then(({ body: r }) => {
+  const items = r.items.reduce((s, it) => s + it.cents, 0);
+  expect(items).to.eq(r.subtotalCents);                         // 9000
+  expect(r.taxCents).to.eq(Math.round(r.subtotalCents * 0.21)); // 1890
+  expect(r.totalCents).to.eq(r.subtotalCents + r.taxCents);     // 10890
+  expect(r.totalCents).to.be.greaterThan(0);
+});`,
+  },
+  cypDocs: {
+    lang: "JavaScript",
+    code: `// Legal document validation (Cypress) — invoice required fields & format.
+cy.visit("/invoices/INV-2026-0042");
+cy.get(".invoice-number").invoke("text").should("match", /^INV-\\d{4}-\\d{4}$/);
+cy.get(".tax-id").should("not.be.empty");
+cy.get(".doc-status").should("have.text", "SIGNED");
+cy.get(".issued-date").invoke("text").then((d) => {
+  expect(new Date(d) <= new Date()).to.be.true; // not in the future
+});`,
+  },
+  cypSecurity: {
+    lang: "JavaScript",
+    code: `// Security (Cypress) — authorization/IDOR + XSS.
+// User A must NOT read user B's invoice by changing the id.
+cy.request({
+  url: "/api/invoices/INV-2026-0099",
+  headers: { Authorization: \`Bearer \${userAToken}\` },
+  failOnStatusCode: false,
+}).its("status").should("eq", 403); // forbidden, NOT 200
+
+// XSS: the payload renders as text, never executes.
+cy.visit("/search?q=<script>alert(1)</script>");
+cy.get(".results").should("be.visible");
+cy.contains("<script>alert(1)</script>").should("exist"); // escaped`,
+  },
+
+  /* ---- Playwright (extra) ---- */
+  pwDocs: {
+    lang: "JavaScript",
+    code: `// Legal document validation (Playwright) — invoice required fields & format.
+await page.goto("/invoices/INV-2026-0042");
+await expect(page.locator(".invoice-number")).toHaveText(/^INV-\\d{4}-\\d{4}$/);
+await expect(page.locator(".tax-id")).not.toBeEmpty();
+await expect(page.locator(".doc-status")).toHaveText("SIGNED");
+const issued = await page.locator(".issued-date").textContent();
+expect(new Date(issued).getTime()).toBeLessThanOrEqual(Date.now()); // not future`,
+  },
+  pwSecurity: {
+    lang: "JavaScript",
+    code: `// Security (Playwright) — authorization/IDOR + XSS.
+// User A must NOT read user B's invoice by changing the id.
+const asUserA = await request.newContext({
+  extraHTTPHeaders: { Authorization: \`Bearer \${userAToken}\` },
+});
+const res = await asUserA.get("/api/invoices/INV-2026-0099");
+expect(res.status()).toBe(403); // forbidden, NOT 200
+
+// XSS: the payload renders as text, never executes.
+await page.goto("/search?q=<script>alert(1)</script>");
+await expect(page.getByText("<script>alert(1)</script>")).toBeVisible();
+await expect(page.locator(".results")).toBeVisible();`,
+  },
+
+  /* ---- Fundamentals: anatomy of a test ---- */
+  aaaTest: {
+    lang: "JavaScript",
+    code: `// Anatomy of a test — Arrange, Act, Assert (AAA).
+test("paying an order shows the PAID badge", async ({ page }) => {
+  // Arrange — put the system in a known state.
+  await page.goto("/orders/42");
+
+  // Act — do the ONE thing under test.
+  await page.getByRole("button", { name: "Pay" }).click();
+
+  // Assert — verify the expected outcome (one intent per test).
+  await expect(page.getByText("PAID")).toBeVisible();
+});`,
+  },
+
   /* ---- AI tooling: MCP, Skills, Agents ---- */
   mcpConfig: {
     lang: "JSON",
@@ -758,7 +917,24 @@ function rungBlocks(prefix, rungs) {
   return blocks;
 }
 
-function frameworkSection(id, navKey, prefix, chip, rungs) {
+// The critical real-world scenarios EVERY framework must cover, in its own
+// idiom. Labels/intros are shared (same concept); only the code + framework
+// differ. `cases` is an array of { labelKey, bodyKey, sample, mock }.
+function casesBlocks(cases) {
+  const blocks = [
+    { type: "label", text: "ui.cases" },
+    { type: "prose", html: "cases.intro" },
+  ];
+  cases.forEach((c) => {
+    blocks.push({ type: "label", text: c.labelKey });
+    blocks.push({ type: "prose", html: c.bodyKey });
+    blocks.push({ type: "code", sample: c.sample });
+    if (c.mock) blocks.push({ type: "mock", screen: c.mock });
+  });
+  return blocks;
+}
+
+function frameworkSection(id, navKey, prefix, chip, rungs, cases) {
   return {
     id,
     navKey,
@@ -772,6 +948,7 @@ function frameworkSection(id, navKey, prefix, chip, rungs) {
       { type: "label", text: "ui.path" },
       { type: "roadmap", items: roadmapItems(prefix, rungs.length) },
       ...rungBlocks(prefix, rungs),
+      ...casesBlocks(cases),
       { type: "label", text: "ui.vs" },
       {
         type: "vs",
@@ -780,6 +957,16 @@ function frameworkSection(id, navKey, prefix, chip, rungs) {
       },
     ],
   };
+}
+
+// The four shared critical cases (label/body keys reused across frameworks).
+function frameworkCases(api, money, docs, security) {
+  return [
+    { labelKey: "crit.api.label", bodyKey: "crit.api.body", sample: api, mock: "api" },
+    { labelKey: "crit.receipt.label", bodyKey: "crit.receipt.body", sample: money, mock: "receipt" },
+    { labelKey: "crit.docs.label", bodyKey: "crit.docs.body", sample: docs, mock: "document" },
+    { labelKey: "crit.authz.label", bodyKey: "crit.authz.body", sample: security, mock: "forbidden" },
+  ];
 }
 
 /* ------------------------------------------------------------------ *
@@ -819,7 +1006,20 @@ export const SECTIONS = [
       { type: "prose", html: "fund.lead" },
       { type: "label", text: "ui.theory" },
       { type: "prose", html: "fund.theory.types" },
+      {
+        type: "tiles",
+        items: [
+          { icon: "🧪", title: "fund.tile.unit.title", body: "fund.tile.unit.body" },
+          { icon: "🔗", title: "fund.tile.integration.title", body: "fund.tile.integration.body" },
+          { icon: "🌐", title: "fund.tile.e2e.title", body: "fund.tile.e2e.body" },
+        ],
+      },
       { type: "prose", html: "fund.theory.pyramid" },
+      { type: "label", text: "fund.aaa.label" },
+      { type: "prose", html: "fund.aaa.body" },
+      { type: "code", sample: "aaaTest" },
+      { type: "label", text: "fund.first.label" },
+      { type: "prose", html: "fund.first.body" },
       { type: "label", text: "fund.assert.label" },
       { type: "prose", html: "fund.assert.body" },
       { type: "code", sample: "assertion" },
@@ -864,7 +1064,7 @@ export const SECTIONS = [
       { codes: ["selRunnerJava", "selRunnerPy"] },    // 4 Runner + assertions
       { codes: ["selPOM"], mock: "table" },           // 5 Page Object Model
       { codes: ["selGrid"] },                         // 6 Grid & CI
-    ]),
+    ], frameworkCases("selApi", "selMoney", "selDocs", "selSecurity")),
 
   frameworkSection("cypress", "nav.cypress", "cyp",
     { label: "Cypress", color: "var(--fw-cypress)" }, [
@@ -874,7 +1074,7 @@ export const SECTIONS = [
       { codes: ["cypIntercept"], mock: "error" },     // 4 Network with cy.intercept()
       { codes: ["cypCommands"] },                     // 5 Custom commands & fixtures
       { codes: ["cypComponent"], mock: "modal" },     // 6 Component testing + CI
-    ]),
+    ], frameworkCases("cypApi", "cypMoney", "cypDocs", "cypSecurity")),
 
   frameworkSection("playwright", "nav.playwright", "pw",
     { label: "Playwright", color: "var(--fw-playwright)" }, [
@@ -884,7 +1084,7 @@ export const SECTIONS = [
       { codes: ["pwFixtures"] },                          // 4 Fixtures & organization
       { codes: ["pwNetwork"], mock: "error" },            // 5 Network & auth
       { codes: ["pwConfig", "pwCIyml"] },                 // 6 CI + trace viewer
-    ]),
+    ], frameworkCases("apiCrud", "receiptTest", "pwDocs", "pwSecurity")),
 
   {
     id: "comparison",
@@ -958,38 +1158,6 @@ export const SECTIONS = [
       { type: "prose", html: "comp.a11y.body" },
       { type: "code", sample: "a11yTest" },
       { type: "mock", screen: "a11y" },
-    ],
-  },
-
-  {
-    id: "critical",
-    navKey: "nav.critical",
-    blocks: [
-      { type: "prose", html: "crit.lead" },
-      { type: "callout", variant: "warn", html: "crit.callout" },
-
-      { type: "label", text: "crit.api.label" },
-      { type: "prose", html: "crit.api.body" },
-      { type: "code", sample: "apiCrud" },
-
-      { type: "label", text: "crit.receipt.label" },
-      { type: "prose", html: "crit.receipt.body" },
-      { type: "code", sample: "receiptTest" },
-      { type: "mock", screen: "receipt" },
-
-      { type: "label", text: "crit.value.label" },
-      { type: "prose", html: "crit.value.body" },
-      { type: "code", sample: "moneyTest" },
-
-      { type: "label", text: "crit.authz.label" },
-      { type: "prose", html: "crit.authz.body" },
-      { type: "code", sample: "securityAuthz" },
-      { type: "mock", screen: "forbidden" },
-
-      { type: "label", text: "crit.injection.label" },
-      { type: "prose", html: "crit.injection.body" },
-      { type: "code", sample: "securityInjection" },
-      { type: "callout", variant: "danger", html: "crit.injection.callout" },
     ],
   },
 

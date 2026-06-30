@@ -626,6 +626,33 @@ I18n.register("es", {
   "kt.sec.leastpriv": "Principio de mínimo privilegio: cada usuario/servicio tiene solo los permisos que necesita, nada más.",
   "kt.sec.sensitive": "Exposición de datos sensibles: tokens, contraseñas o tarjetas filtrados en respuestas, logs o URLs.",
 
+  /* ---- Casos críticos por framework (compartidos) ---- */
+  "ui.cases": "Casos críticos",
+  "cases.intro":
+    "<p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p>",
+  "crit.docs.label": "Validación de documentos legales",
+  "crit.docs.body":
+    "<p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p>",
+
+  /* ---- Fundamentos (más profundo) ---- */
+  "fund.tile.unit.title": "Unit",
+  "fund.tile.unit.body": "Una función o componente aislado. Rapidísimos y muy específicos: la base de la pirámide.",
+  "fund.tile.integration.title": "Integration",
+  "fund.tile.integration.body": "Varias piezas trabajando juntas (un servicio + su base de datos, módulos entre sí).",
+  "fund.tile.e2e.title": "End-to-end (E2E)",
+  "fund.tile.e2e.body": "El flujo completo como un usuario real, en el navegador. Acá viven Selenium, Cypress y Playwright.",
+  "fund.aaa.label": "Anatomía de un test (AAA)",
+  "fund.aaa.body":
+    "<p>Casi todo test sigue el patrón <strong>Arrange-Act-Assert</strong>: <strong>preparás</strong> el estado, <strong>ejecutás</strong> la única acción bajo prueba y <strong>afirmás</strong> el resultado esperado. En BDD se expresa como <em>Given-When-Then</em>. Una intención por test.</p>",
+  "fund.first.label": "Qué hace bueno a un test (FIRST)",
+  "fund.first.body":
+    "<ul>" +
+    "<li><strong>Fast</strong>: rápido, para correrlo seguido.</li>" +
+    "<li><strong>Independent</strong>: no depende de otros tests ni del orden.</li>" +
+    "<li><strong>Repeatable</strong>: mismo resultado siempre, en cualquier entorno.</li>" +
+    "<li><strong>Self-validating</strong>: pasa o falla solo, sin revisar a mano.</li>" +
+    "<li><strong>Timely</strong>: escrito cerca del código que prueba.</li></ul>",
+
   /* ---- Pie de página ---- */
   "footer.text":
     "Hecho con ♥ para la comunidad de QA · Proyecto open source — las contribuciones son bienvenidas (mirá <code>CONTRIBUTING.md</code>).",

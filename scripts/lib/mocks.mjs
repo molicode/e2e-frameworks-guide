@@ -335,6 +335,31 @@ function forbiddenScreen() {
   );
 }
 
+/** A legal document (invoice/contract) — used by the document-validation case. */
+function documentScreen() {
+  return browser(
+    "app.example.com/invoices/INV-2026-0042",
+    `
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Invoice INV-2026-0042</h4>
+                <span class="mock-badge">SIGNED</span>
+              </div>
+              <div class="mock-doc-grid">
+                <div><span>Number</span><strong>INV-2026-0042</strong><code class="mock-tag">.invoice-number</code></div>
+                <div><span>Tax ID</span><strong>30-12345678-9</strong><code class="mock-tag">.tax-id</code></div>
+                <div><span>Issued</span><strong>2026-03-14</strong><code class="mock-tag">.issued-date</code></div>
+                <div><span>Total</span><strong>$108.90</strong><code class="mock-tag">.total</code></div>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ format INV-YYYY-NNNN</code>
+                <code class="mock-tag mock-tag--good">✓ status SIGNED</code>
+                <code class="mock-tag mock-tag--good">✓ date not in the future</code>
+              </div>
+            </div>`
+  );
+}
+
 const SCREENS = {
   login: loginScreen,
   order: orderScreen,
@@ -342,6 +367,7 @@ const SCREENS = {
   a11y: a11yScreen,
   receipt: receiptScreen,
   forbidden: forbiddenScreen,
+  document: documentScreen,
   validation: validationScreen,
   select: selectScreen,
   checkbox: checkboxScreen,

@@ -625,6 +625,33 @@ I18n.register("en", {
   "kt.sec.leastpriv": "Principle of least privilege: each user/service gets only the permissions it needs, nothing more.",
   "kt.sec.sensitive": "Sensitive data exposure: tokens, passwords or cards leaked in responses, logs or URLs.",
 
+  /* ---- Per-framework critical scenarios (shared) ---- */
+  "ui.cases": "Critical scenarios",
+  "cases.intro":
+    "<p>The scenarios every real app needs — <strong>APIs, amounts, legal documents and security</strong> — solved in this framework. (<strong>Login</strong> was already your first test, above.)</p>",
+  "crit.docs.label": "Legal document validation",
+  "crit.docs.body":
+    "<p>Invoices, contracts or receipts: you validate the <strong>required fields</strong>, the number <strong>format</strong>, the status (signed) and that the date isn't in the future.</p>",
+
+  /* ---- Fundamentals (deeper) ---- */
+  "fund.tile.unit.title": "Unit",
+  "fund.tile.unit.body": "A single function or component in isolation. Blazing fast and very specific: the base of the pyramid.",
+  "fund.tile.integration.title": "Integration",
+  "fund.tile.integration.body": "Several pieces working together (a service + its database, modules with each other).",
+  "fund.tile.e2e.title": "End-to-end (E2E)",
+  "fund.tile.e2e.body": "The full flow like a real user, in the browser. Selenium, Cypress and Playwright live here.",
+  "fund.aaa.label": "Anatomy of a test (AAA)",
+  "fund.aaa.body":
+    "<p>Almost every test follows <strong>Arrange-Act-Assert</strong>: you <strong>set up</strong> the state, <strong>do</strong> the one action under test, and <strong>assert</strong> the expected result. In BDD it reads as <em>Given-When-Then</em>. One intent per test.</p>",
+  "fund.first.label": "What makes a test good (FIRST)",
+  "fund.first.body":
+    "<ul>" +
+    "<li><strong>Fast</strong>: quick, so you run it often.</li>" +
+    "<li><strong>Independent</strong>: doesn't depend on other tests or order.</li>" +
+    "<li><strong>Repeatable</strong>: same result every time, in any environment.</li>" +
+    "<li><strong>Self-validating</strong>: passes or fails on its own, no manual checking.</li>" +
+    "<li><strong>Timely</strong>: written close to the code it tests.</li></ul>",
+
   /* ---- Footer ---- */
   "footer.text":
     "Made with ♥ for the QA community · Open-source project — contributions welcome (see <code>CONTRIBUTING.md</code>).",

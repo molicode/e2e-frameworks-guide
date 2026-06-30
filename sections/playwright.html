@@ -89,28 +89,24 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.components">Componentes clave</span>
         </a>
-        <a class="nav-link" href="critical.html">
-          <span class="nav-link__num">08</span>
-          <span data-i18n="nav.critical">Casos críticos</span>
-        </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">10</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">11</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">13</span>
+          <span class="nav-link__num">12</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
@@ -447,6 +443,201 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
     path<span class="tok-punctuation">:</span> playwright<span class="tok-punctuation">-</span>report<span class="tok-punctuation">/</span>
 <span class="tok-comment"># Locally, inspect a failure: npx playwright show-trace trace.zip</span></code></pre>
         </div>
+        <h3 class="block-label" data-i18n="ui.cases">Casos críticos</h3>
+        <div class="prose" data-i18n-html="cases.intro"><p>Los escenarios que toda app real necesita — <strong>APIs, montos, documentos legales y seguridad</strong> — resueltos en este framework. (El <strong>login</strong> ya fue tu primer test, más arriba.)</p></div>
+        <h3 class="block-label" data-i18n="crit.api.label">API testing (CRUD + auth)</h3>
+        <div class="prose" data-i18n-html="crit.api.body"><p>Probás la API directamente: creás (POST → 201), leés (GET → 200) y validás el <strong>contrato</strong> de la respuesta. Y verificás la autenticación: sin token, <code>401</code>; nunca un 200 silencioso.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// API CRUD with auth — create, read, assert the contract. No UI.</span>
+<span class="tok-keyword">const</span> api <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">newContext</span><span class="tok-punctuation">({</span>
+  baseURL<span class="tok-punctuation">:</span> <span class="tok-string">"https://api.example.com"</span><span class="tok-punctuation">,</span>
+  extraHTTPHeaders<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${token}`</span> <span class="tok-punctuation">},</span>
+<span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// CREATE</span>
+<span class="tok-keyword">const</span> created <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> api<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">("/</span>orders<span class="tok-string">", { data: { items: ["</span>book<span class="tok-string">"] } });
+expect(created.status()).toBe(201);
+const { id } = await created.json();
+
+// READ + assert the response shape
+const res = await api.get(`/orders/${id}`);
+await expect(res).toBeOK();
+expect(await res.json()).toMatchObject({ id, status: "</span>NEW<span class="tok-punctuation">"</span> <span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// Without a token → 401 (not a silent 200 or a 500)</span>
+<span class="tok-keyword">const</span> anon <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(`</span>https<span class="tok-punctuation">://</span>api<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span>$<span class="tok-punctuation">{</span>id<span class="tok-punctuation">}`);</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>anon<span class="tok-punctuation">.</span><span class="tok-function">status</span><span class="tok-punctuation">()).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">401</span><span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock-method">GET</span>
+            <span class="mock__url">api.example.com/orders/42</span>
+            <span class="mock-status mock-status--ok">200 OK</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <pre class="mock-json"><code>{
+  "total": 250,
+  "status": "PAID",
+  "items": ["book"]
+}</code></pre>
+            <div class="mock-tags-row">
+              <code class="mock-tag">request.get("/orders/42")</code>
+              <code class="mock-tag">expect(res).toBeOK()</code>
+              <code class="mock-tag">res.json()</code>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.receipt.label">Cuentas y recibos de pago</h3>
+        <div class="prose" data-i18n-html="crit.receipt.body"><p>La matemática del recibo tiene que cerrar <em>siempre</em>: la suma de los ítems = subtotal, el impuesto exacto y subtotal + impuesto = total. Más los invariantes: nunca negativo, estado consistente con lo pagado.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Payment receipt — the money math must ALWAYS add up.</span>
+<span class="tok-comment">// Work in integer cents to avoid floating-point errors.</span>
+<span class="tok-keyword">const</span> r <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> <span class="tok-punctuation">(</span><span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>receipts<span class="tok-punctuation">/</span><span class="tok-number">9087</span><span class="tok-string">")).json();
+
+// Sum of line items equals the subtotal.
+const itemsTotal = r.items.reduce((sum, it) =&gt; sum + it.cents, 0);
+expect(itemsTotal).toBe(r.subtotalCents);                 // 9000
+
+// Tax and total are exact.
+expect(r.taxCents).toBe(Math.round(r.subtotalCents * 0.21)); // 1890
+expect(r.totalCents).toBe(r.subtotalCents + r.taxCents);     // 10890
+
+// Invariants: never negative, status consistent with the amount paid.
+expect(r.totalCents).toBeGreaterThan(0);
+expect(r.status).toBe("</span>PAID<span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">pay.example.com/receipts/9087</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Receipt #9087</h4>
+                <span class="mock-badge">PAID</span>
+              </div>
+              <ul class="mock-receipt">
+                <li><span>The Pragmatic Programmer <em>(book)</em></span><span>$40.00</span></li>
+                <li><span>Wireless Mouse</span><span>$25.00</span></li>
+                <li><span>USB-C Cable × 5</span><span>$25.00</span></li>
+              </ul>
+              <div class="mock-receipt-row"><span>Subtotal</span><span>$90.00</span><code class="mock-tag">.subtotal</code></div>
+              <div class="mock-receipt-row"><span>Tax (21%)</span><span>$18.90</span><code class="mock-tag">.tax</code></div>
+              <div class="mock-receipt-row mock-receipt-total"><span>Total</span><span>$108.90</span><code class="mock-tag">.total</code></div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ items = subtotal</code>
+                <code class="mock-tag mock-tag--good">✓ subtotal + tax = total</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.docs.label">Validación de documentos legales</h3>
+        <div class="prose" data-i18n-html="crit.docs.body"><p>Facturas, contratos o comprobantes: validás que estén los <strong>campos obligatorios</strong>, el <strong>formato</strong> del número, el estado (firmado) y que la fecha no sea futura.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Legal document validation (Playwright) — invoice required fields &amp; format.</span>
+<span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0042</span><span class="tok-string">");
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">invoice</span><span class="tok-punctuation">-</span>number<span class="tok-string">")).toHaveText(/^INV-\d{4}-\d{4}$/);
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">tax</span><span class="tok-punctuation">-</span>id<span class="tok-string">")).not.toBeEmpty();
+await expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">doc</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).toHaveText("</span>SIGNED<span class="tok-string">");
+const issued = await page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">issued</span><span class="tok-punctuation">-</span>date<span class="tok-punctuation">").</span><span class="tok-function">textContent</span><span class="tok-punctuation">();</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-keyword">new</span> <span class="tok-function">Date</span><span class="tok-punctuation">(</span>issued<span class="tok-punctuation">).</span><span class="tok-function">getTime</span><span class="tok-punctuation">()).</span><span class="tok-function">toBeLessThanOrEqual</span><span class="tok-punctuation">(</span>Date<span class="tok-punctuation">.</span><span class="tok-function">now</span><span class="tok-punctuation">());</span> <span class="tok-comment">// not future</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/invoices/INV-2026-0042</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Invoice INV-2026-0042</h4>
+                <span class="mock-badge">SIGNED</span>
+              </div>
+              <div class="mock-doc-grid">
+                <div><span>Number</span><strong>INV-2026-0042</strong><code class="mock-tag">.invoice-number</code></div>
+                <div><span>Tax ID</span><strong>30-12345678-9</strong><code class="mock-tag">.tax-id</code></div>
+                <div><span>Issued</span><strong>2026-03-14</strong><code class="mock-tag">.issued-date</code></div>
+                <div><span>Total</span><strong>$108.90</strong><code class="mock-tag">.total</code></div>
+              </div>
+              <div class="mock-tags-row">
+                <code class="mock-tag mock-tag--good">✓ format INV-YYYY-NNNN</code>
+                <code class="mock-tag mock-tag--good">✓ status SIGNED</code>
+                <code class="mock-tag mock-tag--good">✓ date not in the future</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" data-i18n="crit.authz.label">Seguridad: autorización e IDOR</h3>
+        <div class="prose" data-i18n-html="crit.authz.body"><p>El control de acceso es crítico: el usuario A no debe poder leer la orden del usuario B con solo cambiar el <code>id</code> en la URL (eso es un <strong>IDOR</strong>). Debe responder <code>403</code>, no <code>200</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Security (Playwright) — authorization/IDOR + XSS.</span>
+<span class="tok-comment">// User A must NOT read user B's invoice by changing the id.</span>
+<span class="tok-keyword">const</span> asUserA <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">newContext</span><span class="tok-punctuation">({</span>
+  extraHTTPHeaders<span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> Authorization<span class="tok-punctuation">:</span> <span class="tok-string">`Bearer ${userAToken}`</span> <span class="tok-punctuation">},</span>
+<span class="tok-punctuation">});</span>
+<span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> asUserA<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("/</span>api<span class="tok-punctuation">/</span>invoices<span class="tok-punctuation">/</span>INV<span class="tok-punctuation">-</span><span class="tok-number">2026</span><span class="tok-punctuation">-</span><span class="tok-number">0099</span><span class="tok-string">");
+expect(res.status()).toBe(403); // forbidden, NOT 200
+
+// XSS: the payload renders as text, never executes.
+await page.goto("</span><span class="tok-punctuation">/</span>search<span class="tok-punctuation">?</span>q<span class="tok-punctuation">=&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;");</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByText</span><span class="tok-punctuation">("&lt;</span>script<span class="tok-punctuation">&gt;</span><span class="tok-function">alert</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-punctuation">)&lt;/</span>script<span class="tok-punctuation">&gt;")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span>
+<span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">results</span><span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">app.example.com/orders/99</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">🔒</div>
+              <h4 class="mock-h">403 — Forbidden</h4>
+              <p class="mock-error-msg">You don't have permission to view this order.</p>
+              <div class="mock-http">GET /api/orders/99 → 403</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">expect(res.status()).toBe(403)</code>
+                <code class="mock-tag mock-tag--bad">✗ IDOR if it returned 200</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
         <h3 class="block-label" data-i18n="ui.vs">Manual vs AI</h3>
         <div class="vs-grid">
           <div class="vs-card vs-card--manual">
