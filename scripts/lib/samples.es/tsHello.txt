@@ -1,0 +1,9 @@
+// hello.ts — tu primer archivo TypeScript.
+function greet(name: string): string {
+  // Los template literals interpolan con ${ }, y el tipo de retorno se verifica.
+  return `Hello, ${name}! Ready to automate.`;
+}
+
+console.log(greet("QA"));
+
+// Corré sin compilar primero:  npx tsx hello.ts

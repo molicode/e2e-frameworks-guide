@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--ts-tipos">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="python-intro.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.pyqa">Python para QA</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="ts-intro.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.tsqa">TypeScript para QA</span>
+        </a>
+          <a class="nav-link nav-sublink" href="ts-intro.html">
+            <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-hola.html">
+            <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-fundamentos.html">
+            <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="ts-tipos.html" aria-current="page">
+            <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-pruebas.html">
+            <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-componente.html">
+            <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
+          </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">13</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
+        <h2 class="section__title" data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</h2>
+        <div class="prose" data-i18n-html="tsqa.tipos.lead"><p>El corazón de TypeScript: describir la <strong>forma</strong> de tus datos. Interfaces, arrays tipados y JSON son lo que vas a tocar en cada test de API.</p></div>
+        <h3 class="block-label" data-i18n="tsqa.iface.label">Interfaces y objetos</h3>
+        <div class="prose" data-i18n-html="tsqa.iface.body"><p>Una <strong>interface</strong> (o <code>type</code>) describe la forma de un objeto: qué campos tiene y de qué tipo. Es el contrato de tu API expresado en código. Podés marcar propiedades <strong>opcionales</strong> con <code>?</code> y limitar valores con <strong>uniones</strong> (<code>"NEW" | "PAID"</code>).</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Una interface describe la FORMA de un objeto — tus contratos de API en código.</span>
+<span class="tok-keyword">interface</span> Order <span class="tok-punctuation">{</span>
+  id<span class="tok-punctuation">:</span> number<span class="tok-punctuation">;</span>
+  status<span class="tok-punctuation">:</span> <span class="tok-string">"NEW"</span> <span class="tok-punctuation">|</span> <span class="tok-string">"PAID"</span> <span class="tok-punctuation">|</span> <span class="tok-string">"REFUNDED"</span><span class="tok-punctuation">;</span> <span class="tok-comment">// una unión de valores permitidos</span>
+  total<span class="tok-punctuation">:</span> number<span class="tok-punctuation">;</span>
+  coupon<span class="tok-punctuation">?:</span> string<span class="tok-punctuation">;</span>                     <span class="tok-comment">// propiedad opcional</span>
+<span class="tok-punctuation">}</span>
+
+<span class="tok-keyword">const</span> order<span class="tok-punctuation">:</span> Order <span class="tok-punctuation">=</span> <span class="tok-punctuation">{</span> id<span class="tok-punctuation">:</span> <span class="tok-number">42</span><span class="tok-punctuation">,</span> status<span class="tok-punctuation">:</span> <span class="tok-string">"PAID"</span><span class="tok-punctuation">,</span> total<span class="tok-punctuation">:</span> <span class="tok-number">250</span> <span class="tok-punctuation">};</span>
+
+<span class="tok-comment">// El compilador ahora protege cada acceso:</span>
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">);</span>   <span class="tok-comment">// ok</span>
+<span class="tok-comment">// order.status = "DONE";    // error: no está en la unión</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// An interface describes the SHAPE of an object — your API contracts in code.</span>
+<span class="tok-keyword">interface</span> Order <span class="tok-punctuation">{</span>
+  id<span class="tok-punctuation">:</span> number<span class="tok-punctuation">;</span>
+  status<span class="tok-punctuation">:</span> <span class="tok-string">"NEW"</span> <span class="tok-punctuation">|</span> <span class="tok-string">"PAID"</span> <span class="tok-punctuation">|</span> <span class="tok-string">"REFUNDED"</span><span class="tok-punctuation">;</span> <span class="tok-comment">// a union of allowed values</span>
+  total<span class="tok-punctuation">:</span> number<span class="tok-punctuation">;</span>
+  coupon<span class="tok-punctuation">?:</span> string<span class="tok-punctuation">;</span>                     <span class="tok-comment">// optional property</span>
+<span class="tok-punctuation">}</span>
+
+<span class="tok-keyword">const</span> order<span class="tok-punctuation">:</span> Order <span class="tok-punctuation">=</span> <span class="tok-punctuation">{</span> id<span class="tok-punctuation">:</span> <span class="tok-number">42</span><span class="tok-punctuation">,</span> status<span class="tok-punctuation">:</span> <span class="tok-string">"PAID"</span><span class="tok-punctuation">,</span> total<span class="tok-punctuation">:</span> <span class="tok-number">250</span> <span class="tok-punctuation">};</span>
+
+<span class="tok-comment">// The compiler now guards every access:</span>
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">.</span><span class="tok-property">status</span><span class="tok-punctuation">);</span>   <span class="tok-comment">// ok</span>
+<span class="tok-comment">// order.status = "DONE";    // error: not in the union</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="tsqa.arrays.label">Arrays y transformaciones</h3>
+        <div class="prose" data-i18n-html="tsqa.arrays.body"><p>Los arrays se tipan (<code>number[]</code>). <code>map</code>, <code>filter</code> y <code>reduce</code> son tus transformaciones diarias, y <code>every</code>/<code>some</code> se leen como aserciones sobre toda una colección ("todos los precios son positivos").</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Los arrays son tipados; map/filter/reduce son tus transformaciones diarias.</span>
+<span class="tok-keyword">const</span> prices<span class="tok-punctuation">:</span> number<span class="tok-punctuation">[]</span> <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">25</span><span class="tok-punctuation">,</span> <span class="tok-number">7</span><span class="tok-punctuation">,</span> <span class="tok-number">50</span><span class="tok-punctuation">];</span>
+<span class="tok-keyword">const</span> withTax <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">map</span><span class="tok-punctuation">((</span>p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> Math<span class="tok-punctuation">.</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">*</span> <span class="tok-number">121</span><span class="tok-punctuation">)</span> <span class="tok-punctuation">/</span> <span class="tok-number">100</span><span class="tok-punctuation">);</span> <span class="tok-comment">// [12.1, 30.25, 8.47, 60.5]</span>
+<span class="tok-keyword">const</span> expensive <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">filter</span><span class="tok-punctuation">((</span>p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> p <span class="tok-punctuation">&gt;</span> <span class="tok-number">20</span><span class="tok-punctuation">);</span>               <span class="tok-comment">// [25, 50]</span>
+<span class="tok-keyword">const</span> sum <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">reduce</span><span class="tok-punctuation">((</span>acc<span class="tok-punctuation">,</span> p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> acc <span class="tok-punctuation">+</span> p<span class="tok-punctuation">,</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span>            <span class="tok-comment">// 92</span>
+
+<span class="tok-comment">// every() / some() se leen como aserciones sobre una colección:</span>
+<span class="tok-keyword">const</span> allPositive <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">every</span><span class="tok-punctuation">((</span>p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> p <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span> <span class="tok-comment">// true</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Arrays are typed; map/filter/reduce are your daily transforms.</span>
+<span class="tok-keyword">const</span> prices<span class="tok-punctuation">:</span> number<span class="tok-punctuation">[]</span> <span class="tok-punctuation">=</span> <span class="tok-punctuation">[</span><span class="tok-number">10</span><span class="tok-punctuation">,</span> <span class="tok-number">25</span><span class="tok-punctuation">,</span> <span class="tok-number">7</span><span class="tok-punctuation">,</span> <span class="tok-number">50</span><span class="tok-punctuation">];</span>
+<span class="tok-keyword">const</span> withTax <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">map</span><span class="tok-punctuation">((</span>p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> Math<span class="tok-punctuation">.</span><span class="tok-function">round</span><span class="tok-punctuation">(</span>p <span class="tok-punctuation">*</span> <span class="tok-number">121</span><span class="tok-punctuation">)</span> <span class="tok-punctuation">/</span> <span class="tok-number">100</span><span class="tok-punctuation">);</span> <span class="tok-comment">// [12.1, 30.25, 8.47, 60.5]</span>
+<span class="tok-keyword">const</span> expensive <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">filter</span><span class="tok-punctuation">((</span>p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> p <span class="tok-punctuation">&gt;</span> <span class="tok-number">20</span><span class="tok-punctuation">);</span>               <span class="tok-comment">// [25, 50]</span>
+<span class="tok-keyword">const</span> sum <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">reduce</span><span class="tok-punctuation">((</span>acc<span class="tok-punctuation">,</span> p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> acc <span class="tok-punctuation">+</span> p<span class="tok-punctuation">,</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span>            <span class="tok-comment">// 92</span>
+
+<span class="tok-comment">// every() / some() read like assertions over a collection:</span>
+<span class="tok-keyword">const</span> allPositive <span class="tok-punctuation">=</span> prices<span class="tok-punctuation">.</span><span class="tok-function">every</span><span class="tok-punctuation">((</span>p<span class="tok-punctuation">)</span> <span class="tok-punctuation">=&gt;</span> p <span class="tok-punctuation">&gt;</span> <span class="tok-number">0</span><span class="tok-punctuation">);</span> <span class="tok-comment">// true</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="tsqa.json.label">JSON</h3>
+        <div class="prose" data-i18n-html="tsqa.json.body"><p>Las APIs hablan JSON. <code>JSON.parse</code> convierte texto a objeto y <code>JSON.stringify</code> de vuelta a texto. Le podés afirmar la forma con <code>as</code>. En la práctica, <code>fetch</code> ya te da el body parseado con <code>await res.json()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Las APIs hablan JSON; JSON.parse/stringify convierten texto &lt;-&gt; objetos.</span>
+<span class="tok-keyword">const</span> raw <span class="tok-punctuation">=</span> <span class="tok-string">'{"id": 42, "items": ["book"], "total": 250}'</span><span class="tok-punctuation">;</span>
+<span class="tok-keyword">const</span> order <span class="tok-punctuation">=</span> JSON<span class="tok-punctuation">.</span><span class="tok-function">parse</span><span class="tok-punctuation">(</span>raw<span class="tok-punctuation">)</span> <span class="tok-keyword">as</span> <span class="tok-punctuation">{</span> id<span class="tok-punctuation">:</span> number<span class="tok-punctuation">;</span> items<span class="tok-punctuation">:</span> string<span class="tok-punctuation">[];</span> total<span class="tok-punctuation">:</span> number <span class="tok-punctuation">};</span>
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">.</span><span class="tok-property">items</span><span class="tok-punctuation">[</span><span class="tok-number">0</span><span class="tok-punctuation">]);</span> <span class="tok-comment">// book</span>
+
+<span class="tok-comment">// Objeto -&gt; texto JSON (el 2 agrega indentación para diffs de test legibles):</span>
+<span class="tok-keyword">const</span> payload <span class="tok-punctuation">=</span> JSON<span class="tok-punctuation">.</span><span class="tok-function">stringify</span><span class="tok-punctuation">({</span> status<span class="tok-punctuation">:</span> <span class="tok-string">"PAID"</span> <span class="tok-punctuation">},</span> <span class="tok-keyword">null</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">);</span>
+
+<span class="tok-comment">// fetch hace esto por vos: await res.json() devuelve el body parseado.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// APIs speak JSON; JSON.parse/stringify convert text &lt;-&gt; objects.</span>
+<span class="tok-keyword">const</span> raw <span class="tok-punctuation">=</span> <span class="tok-string">'{"id": 42, "items": ["book"], "total": 250}'</span><span class="tok-punctuation">;</span>
+<span class="tok-keyword">const</span> order <span class="tok-punctuation">=</span> JSON<span class="tok-punctuation">.</span><span class="tok-function">parse</span><span class="tok-punctuation">(</span>raw<span class="tok-punctuation">)</span> <span class="tok-keyword">as</span> <span class="tok-punctuation">{</span> id<span class="tok-punctuation">:</span> number<span class="tok-punctuation">;</span> items<span class="tok-punctuation">:</span> string<span class="tok-punctuation">[];</span> total<span class="tok-punctuation">:</span> number <span class="tok-punctuation">};</span>
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span>order<span class="tok-punctuation">.</span><span class="tok-property">items</span><span class="tok-punctuation">[</span><span class="tok-number">0</span><span class="tok-punctuation">]);</span> <span class="tok-comment">// book</span>
+
+<span class="tok-comment">// Object -&gt; JSON text (the 2 adds indentation for readable test diffs):</span>
+<span class="tok-keyword">const</span> payload <span class="tok-punctuation">=</span> JSON<span class="tok-punctuation">.</span><span class="tok-function">stringify</span><span class="tok-punctuation">({</span> status<span class="tok-punctuation">:</span> <span class="tok-string">"PAID"</span> <span class="tok-punctuation">},</span> <span class="tok-keyword">null</span><span class="tok-punctuation">,</span> <span class="tok-number">2</span><span class="tok-punctuation">);</span>
+
+<span class="tok-comment">// fetch does this for you: await res.json() returns the parsed body.</span></code></pre>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="ts-fundamentos.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="ts-pruebas.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

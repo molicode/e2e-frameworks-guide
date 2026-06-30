@@ -1,0 +1,9 @@
+# Verificá que Node esté instalado (18+ es una buena base):
+node --version
+
+# Iniciá un proyecto y agregá TypeScript + un test runner rápido:
+npm init -y
+npm install --save-dev typescript tsx vitest
+
+# Creá un tsconfig.json con valores por defecto sensatos:
+npx tsc --init

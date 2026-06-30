@@ -1,0 +1,13 @@
+// Funciones: params tipados (opcionales con ?, defaults con =) y un tipo de retorno.
+function totalCents(price: number, qty: number = 1): number {
+  return Math.round(price * qty * 100);
+}
+
+// Las arrow functions son concisas y están por todos lados en el código de tests:
+const double = (n: number): number => n * 2;
+
+// Las funciones son valores — pasalas de un lado a otro (la base de hooks/fixtures):
+function apply<T>(fn: (v: T) => T, value: T): T {
+  return fn(value);
+}
+console.log(totalCents(19.99, 3)); // 5997

@@ -1208,6 +1208,204 @@ def test_login_greets_the_user(page: Page):
     # Web-first assertion: auto-waits until the text shows or it times out.
     expect(page.get_by_text("Welcome, demo")).to_be_visible()`,
   },
+
+  /* ---- TypeScript para QA: de 0 a hero ---- */
+  tsSetup: {
+    lang: "Bash",
+    code: `# Check Node is installed (18+ is a good baseline):
+node --version
+
+# Start a project and add TypeScript + a fast test runner:
+npm init -y
+npm install --save-dev typescript tsx vitest
+
+# Create a tsconfig.json with sensible defaults:
+npx tsc --init`,
+  },
+  tsHello: {
+    lang: "TypeScript",
+    code: `// hello.ts — your first TypeScript file.
+function greet(name: string): string {
+  // Template literals interpolate with \${ }, and the return type is checked.
+  return \`Hello, \${name}! Ready to automate.\`;
+}
+
+console.log(greet("QA"));
+
+// Run it without compiling first:  npx tsx hello.ts`,
+  },
+  tsTypes: {
+    lang: "TypeScript",
+    code: `// You annotate types with ": type", but TS also INFERS them from the value.
+const name: string = "Ada";
+let attempts = 3;           // inferred as number
+const price = 19.99;        // number
+const isActive = true;      // boolean
+
+// "const" can't be reassigned; "let" can. Prefer const by default.
+attempts = attempts + 1;    // ok
+// price = 20;              // compile error: price is const
+
+// The compiler catches type mistakes BEFORE you run:
+const label = \`\${name} has \${attempts} attempts\`;`,
+  },
+  tsControl: {
+    lang: "TypeScript",
+    code: `// Control flow uses braces. if / else if / else to decide.
+const status = "PAID";
+if (status === "PAID") {
+  console.log("Charged");
+} else if (status === "NEW") {
+  console.log("Pending");
+} else {
+  console.log("Other state");
+}
+
+// for...of walks the values of any iterable:
+const names = ["Ada", "Linus", "Grace"];
+for (const n of names) {
+  if (n === "Linus") continue; // skip this one
+  console.log(n);
+}`,
+  },
+  tsFuncs: {
+    lang: "TypeScript",
+    code: `// Functions: typed params (optional with ?, defaults with =) and a return type.
+function totalCents(price: number, qty: number = 1): number {
+  return Math.round(price * qty * 100);
+}
+
+// Arrow functions are concise and everywhere in test code:
+const double = (n: number): number => n * 2;
+
+// Functions are values — pass them around (the basis of hooks/fixtures):
+function apply<T>(fn: (v: T) => T, value: T): T {
+  return fn(value);
+}
+console.log(totalCents(19.99, 3)); // 5997`,
+  },
+  tsInterfaces: {
+    lang: "TypeScript",
+    code: `// An interface describes the SHAPE of an object — your API contracts in code.
+interface Order {
+  id: number;
+  status: "NEW" | "PAID" | "REFUNDED"; // a union of allowed values
+  total: number;
+  coupon?: string;                     // optional property
+}
+
+const order: Order = { id: 42, status: "PAID", total: 250 };
+
+// The compiler now guards every access:
+console.log(order.status);   // ok
+// order.status = "DONE";    // error: not in the union`,
+  },
+  tsArrays: {
+    lang: "TypeScript",
+    code: `// Arrays are typed; map/filter/reduce are your daily transforms.
+const prices: number[] = [10, 25, 7, 50];
+const withTax = prices.map((p) => Math.round(p * 121) / 100); // [12.1, 30.25, 8.47, 60.5]
+const expensive = prices.filter((p) => p > 20);               // [25, 50]
+const sum = prices.reduce((acc, p) => acc + p, 0);            // 92
+
+// every() / some() read like assertions over a collection:
+const allPositive = prices.every((p) => p > 0); // true`,
+  },
+  tsJson: {
+    lang: "TypeScript",
+    code: `// APIs speak JSON; JSON.parse/stringify convert text <-> objects.
+const raw = '{"id": 42, "items": ["book"], "total": 250}';
+const order = JSON.parse(raw) as { id: number; items: string[]; total: number };
+console.log(order.items[0]); // book
+
+// Object -> JSON text (the 2 adds indentation for readable test diffs):
+const payload = JSON.stringify({ status: "PAID" }, null, 2);
+
+// fetch does this for you: await res.json() returns the parsed body.`,
+  },
+  tsFirstTest: {
+    lang: "TypeScript",
+    code: `// money.test.ts — Vitest (its API is Jest-compatible).
+import { describe, it, expect } from "vitest";
+
+function toCents(amount: number): number {
+  return Math.round(amount * 100);
+}
+
+describe("toCents", () => {
+  it("converts to integer cents", () => {
+    // expect(...).toBe(...) is the assertion; it prints both values on failure.
+    expect(toCents(19.99)).toBe(1999);
+  });
+
+  it("handles zero", () => {
+    expect(toCents(0)).toBe(0);
+  });
+});
+
+// Run the suite:  npx vitest run`,
+  },
+  tsHooksEach: {
+    lang: "TypeScript",
+    code: `// beforeEach prepares fresh state; it.each runs one test over many cases.
+import { describe, it, expect, beforeEach } from "vitest";
+
+describe("order", () => {
+  let order: { id: number; status: string };
+
+  beforeEach(() => {
+    // Arrange once before EACH test — no state leaks between tests.
+    order = { id: 42, status: "PAID" };
+  });
+
+  it("is paid", () => {
+    expect(order.status).toBe("PAID");
+  });
+
+  it.each([
+    [1.0, 100],
+    [19.99, 1999],
+    [0, 0],
+  ])("toCents(%d) === %d", (amount, cents) => {
+    expect(Math.round(amount * 100)).toBe(cents);
+  });
+});`,
+  },
+  tsFirstApiTest: {
+    lang: "TypeScript",
+    code: `// orders.test.ts — your first real test: hit an API, check the contract.
+import { describe, it, expect } from "vitest";
+
+const BASE = "https://api.example.com";
+
+describe("orders API", () => {
+  it("order 42 is paid", async () => {
+    const res = await fetch(\`\${BASE}/orders/42\`);
+
+    // Status first, then the body's shape.
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.status).toBe("PAID");
+    expect(body.total).toBe(250);
+    expect(body.items).toContain("book");
+  });
+});`,
+  },
+  tsFirstUiTest: {
+    lang: "TypeScript",
+    code: `// login.cy.ts — the same idea against a real browser, with Cypress.
+describe("Login", () => {
+  it("greets the user after a valid login", () => {
+    cy.visit("https://example.com/login");
+    cy.get("#username").type("demo");
+    cy.get("#password").type("secret");
+    cy.get("button[type=submit]").click();
+
+    // .should() retries until the assertion holds or it times out.
+    cy.get(".welcome").should("have.text", "Welcome, demo");
+  });
+});`,
+  },
 };
 
 /* ------------------------------------------------------------------ *
@@ -1418,6 +1616,88 @@ function pythonGroup() {
   ];
 }
 
+// "TypeScript para QA: de 0 a hero" — the twin of the Python primer. Cypress is
+// written in TypeScript in this guide, so this is its on-ramp.
+function typescriptGroup() {
+  const grp = { group: "typescript", groupKey: "nav.tsqa", chip: { label: "TypeScript", color: "var(--fw-typescript)" } };
+  return [
+    { ...grp, id: "ts-intro", navKey: "tsqa.page.intro", blocks: [
+      { type: "prose", html: "tsqa.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "tsqa.why" },
+      { type: "tiles", items: [
+        { icon: "🛡️", title: "tsqa.t1.title", body: "tsqa.t1.body" },
+        { icon: "💡", title: "tsqa.t2.title", body: "tsqa.t2.body" },
+        { icon: "🌐", title: "tsqa.t3.title", body: "tsqa.t3.body" },
+        { icon: "🤖", title: "tsqa.t4.title", body: "tsqa.t4.body" },
+      ] },
+      { type: "label", text: "ui.when" },
+      { type: "prose", html: "tsqa.when" },
+      { type: "callout", variant: "", html: "tsqa.callout" },
+    ] },
+    { ...grp, id: "ts-hola", navKey: "tsqa.page.hola", blocks: [
+      { type: "prose", html: "tsqa.hola.lead" },
+      { type: "label", text: "tsqa.install.label" },
+      { type: "prose", html: "tsqa.install.body" },
+      { type: "code", sample: "tsSetup" },
+      { type: "label", text: "tsqa.hello.label" },
+      { type: "prose", html: "tsqa.hello.body" },
+      { type: "code", sample: "tsHello" },
+      { type: "callout", variant: "ok", html: "tsqa.hola.callout" },
+    ] },
+    { ...grp, id: "ts-fundamentos", navKey: "tsqa.page.fund", blocks: [
+      { type: "prose", html: "tsqa.fund.lead" },
+      { type: "label", text: "tsqa.types.label" },
+      { type: "prose", html: "tsqa.types.body" },
+      { type: "code", sample: "tsTypes" },
+      { type: "label", text: "tsqa.control.label" },
+      { type: "prose", html: "tsqa.control.body" },
+      { type: "code", sample: "tsControl" },
+      { type: "label", text: "tsqa.funcs.label" },
+      { type: "prose", html: "tsqa.funcs.body" },
+      { type: "code", sample: "tsFuncs" },
+    ] },
+    { ...grp, id: "ts-tipos", navKey: "tsqa.page.tipos", blocks: [
+      { type: "prose", html: "tsqa.tipos.lead" },
+      { type: "label", text: "tsqa.iface.label" },
+      { type: "prose", html: "tsqa.iface.body" },
+      { type: "code", sample: "tsInterfaces" },
+      { type: "label", text: "tsqa.arrays.label" },
+      { type: "prose", html: "tsqa.arrays.body" },
+      { type: "code", sample: "tsArrays" },
+      { type: "label", text: "tsqa.json.label" },
+      { type: "prose", html: "tsqa.json.body" },
+      { type: "code", sample: "tsJson" },
+    ] },
+    { ...grp, id: "ts-pruebas", navKey: "tsqa.page.pruebas", blocks: [
+      { type: "prose", html: "tsqa.pruebas.lead" },
+      { type: "label", text: "tsqa.first.label" },
+      { type: "prose", html: "tsqa.first.body" },
+      { type: "code", sample: "tsFirstTest" },
+      { type: "label", text: "tsqa.hooks.label" },
+      { type: "prose", html: "tsqa.hooks.body" },
+      { type: "code", sample: "tsHooksEach" },
+      { type: "callout", variant: "", html: "tsqa.pruebas.callout" },
+    ] },
+    { ...grp, id: "ts-componente", navKey: "tsqa.page.comp", blocks: [
+      { type: "prose", html: "tsqa.comp.lead" },
+      { type: "label", text: "tsqa.api.label" },
+      { type: "prose", html: "tsqa.api.body" },
+      { type: "code", sample: "tsFirstApiTest" },
+      { type: "mock", screen: "order" },
+      { type: "label", text: "tsqa.ui.label" },
+      { type: "prose", html: "tsqa.ui.body" },
+      { type: "code", sample: "tsFirstUiTest" },
+      { type: "mock", screen: "login" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "tsqa.manual.title", body: "tsqa.manual.body" },
+        ai: { title: "tsqa.ai.title", body: "tsqa.ai.body" } },
+      { type: "callout", variant: "ok", html: "tsqa.comp.callout" },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -1506,6 +1786,8 @@ export const SECTIONS = [
   },
 
   ...pythonGroup(),
+
+  ...typescriptGroup(),
 
   ...frameworkGroup("selenium", "nav.selenium", "sel",
     { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" }, [

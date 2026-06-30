@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="tsqa.page.hola">Instalación y Hola mundo</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--ts-hola">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="python-intro.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.pyqa">Python para QA</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="ts-intro.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.tsqa">TypeScript para QA</span>
+        </a>
+          <a class="nav-link nav-sublink" href="ts-intro.html">
+            <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="ts-hola.html" aria-current="page">
+            <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-fundamentos.html">
+            <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-tipos.html">
+            <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-pruebas.html">
+            <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
+          </a>
+          <a class="nav-link nav-sublink" href="ts-componente.html">
+            <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
+          </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">13</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-typescript)">TypeScript</span></div>
+        <h2 class="section__title" data-i18n="tsqa.page.hola">Instalación y Hola mundo</h2>
+        <div class="prose" data-i18n-html="tsqa.hola.lead"><p>Lo primero: tener Node, agregar TypeScript y poder ejecutar un archivo <code>.ts</code> sin compilar a mano. Con <code>tsx</code> corrés TypeScript directo.</p></div>
+        <h3 class="block-label" data-i18n="tsqa.install.label">Instalación y proyecto</h3>
+        <div class="prose" data-i18n-html="tsqa.install.body"><p>Verificá Node con <code>node --version</code>. Iniciás el proyecto con <code>npm init -y</code> e instalás <code>typescript</code> y un runner rápido como <code>vitest</code>. Con <code>tsc --init</code> generás el <code>tsconfig.json</code> que configura el compilador.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Bash</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Verificá que Node esté instalado (18+ es una buena base):</span>
+node <span class="tok-punctuation">--</span>version
+
+<span class="tok-comment"># Iniciá un proyecto y agregá TypeScript + un test runner rápido:</span>
+npm init <span class="tok-punctuation">-</span>y
+npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev typescript tsx vitest
+
+<span class="tok-comment"># Creá un tsconfig.json con valores por defecto sensatos:</span>
+npx tsc <span class="tok-punctuation">--</span>init</code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Check Node is installed (18+ is a good baseline):</span>
+node <span class="tok-punctuation">--</span>version
+
+<span class="tok-comment"># Start a project and add TypeScript + a fast test runner:</span>
+npm init <span class="tok-punctuation">-</span>y
+npm install <span class="tok-punctuation">--</span>save<span class="tok-punctuation">-</span>dev typescript tsx vitest
+
+<span class="tok-comment"># Create a tsconfig.json with sensible defaults:</span>
+npx tsc <span class="tok-punctuation">--</span>init</code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="tsqa.hello.label">Tu primer archivo</h3>
+        <div class="prose" data-i18n-html="tsqa.hello.body"><p>Un archivo <code>.ts</code> con una función ya es un programa. Anotás el tipo de los parámetros y del retorno con <code>: tipo</code>, y el compilador te avisa si algo no cuadra. Con <code>npx tsx hello.ts</code> lo ejecutás sin un paso de build.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// hello.ts — tu primer archivo TypeScript.</span>
+<span class="tok-keyword">function</span> <span class="tok-function">greet</span><span class="tok-punctuation">(</span>name<span class="tok-punctuation">:</span> string<span class="tok-punctuation">):</span> string <span class="tok-punctuation">{</span>
+  <span class="tok-comment">// Los template literals interpolan con ${ }, y el tipo de retorno se verifica.</span>
+  <span class="tok-keyword">return</span> <span class="tok-string">`Hello, ${name}! Ready to automate.`</span><span class="tok-punctuation">;</span>
+<span class="tok-punctuation">}</span>
+
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span><span class="tok-function">greet</span><span class="tok-punctuation">("</span>QA<span class="tok-punctuation">"));</span>
+
+<span class="tok-comment">// Corré sin compilar primero:  npx tsx hello.ts</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// hello.ts — your first TypeScript file.</span>
+<span class="tok-keyword">function</span> <span class="tok-function">greet</span><span class="tok-punctuation">(</span>name<span class="tok-punctuation">:</span> string<span class="tok-punctuation">):</span> string <span class="tok-punctuation">{</span>
+  <span class="tok-comment">// Template literals interpolate with ${ }, and the return type is checked.</span>
+  <span class="tok-keyword">return</span> <span class="tok-string">`Hello, ${name}! Ready to automate.`</span><span class="tok-punctuation">;</span>
+<span class="tok-punctuation">}</span>
+
+console<span class="tok-punctuation">.</span><span class="tok-function">log</span><span class="tok-punctuation">(</span><span class="tok-function">greet</span><span class="tok-punctuation">("</span>QA<span class="tok-punctuation">"));</span>
+
+<span class="tok-comment">// Run it without compiling first:  npx tsx hello.ts</span></code></pre>
+        </div>
+        <div class="callout callout--ok" data-i18n-html="tsqa.hola.callout"><strong>¡Listo!</strong> Si viste <code>Hello, QA!</code> en la terminal, ya tenés TypeScript corriendo. El resto es construir sobre eso.</div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="ts-intro.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="ts-fundamentos.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>

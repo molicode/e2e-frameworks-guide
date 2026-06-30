@@ -45,6 +45,7 @@ I18n.register("es", {
   "nav.intro": "Introducción",
   "nav.fundamentals": "Fundamentos",
   "nav.pyqa": "Python para QA",
+  "nav.tsqa": "TypeScript para QA",
   "nav.selenium": "Selenium",
   "nav.cypress": "Cypress",
   "nav.playwright": "Playwright",
@@ -64,6 +65,7 @@ I18n.register("es", {
   "home.intro": "Qué es QA y automation, por qué importan, manual vs automatizado.",
   "home.fundamentals": "Tipos de tests, la pirámide, assertions, selectores y flaky tests.",
   "home.python": "Python de 0 a hero para QA: sintaxis, colecciones, pytest y tu primer test.",
+  "home.typescript": "TypeScript de 0 a hero para QA: tipos, interfaces, Vitest y tu primer test.",
   "home.selenium": "El estándar W3C WebDriver: ruta de aprendizaje de 6 pasos.",
   "home.cypress": "La mejor DX, runner visual y auto-retry: ruta de 6 pasos.",
   "home.playwright": "Multi-navegador, auto-wait y trazas: ruta de 6 pasos.",
@@ -234,6 +236,96 @@ I18n.register("es", {
     "<p>Una vez que entendés las bases, la AI acelera: genera el esqueleto del test en Python, sugiere casos y explica errores. Vos revisás y decidís qué entra al repo.</p>",
   "pyqa.comp2.callout":
     "<strong>Próximo paso:</strong> con Python y pytest dominados, elegí <strong>Selenium</strong> o <strong>Playwright</strong> en la navegación y construí suites completas. Ya tenés la base.",
+
+  /* ====================================================================
+     2c. TYPESCRIPT PARA QA (de 0 a hero)
+     ==================================================================== */
+  "tsqa.page.intro": "Por qué TypeScript para QA",
+  "tsqa.page.hola": "Instalación y Hola mundo",
+  "tsqa.page.fund": "Fundamentos del lenguaje",
+  "tsqa.page.tipos": "Tipos, objetos y arrays",
+  "tsqa.page.pruebas": "Vitest: tu primer test",
+  "tsqa.page.comp": "Tu primer componente testeado",
+
+  "tsqa.lead":
+    "<p><strong>TypeScript</strong> es JavaScript con tipos: te avisa de los errores <em>antes</em> de correr el test y te da autocompletado en todo el editor. Es el lenguaje de <strong>Cypress</strong> (y también funciona de diez con Playwright), así que es tu puerta de entrada al testing del front moderno.</p>",
+  "tsqa.why":
+    "<p>JavaScript es el idioma del navegador; TypeScript le agrega una capa de <strong>tipos</strong> que el compilador chequea. Para QA eso significa menos errores tontos (un campo mal escrito, un valor del tipo equivocado) y tests que se auto-documentan. Las herramientas clave — <code>Vitest</code>/<code>Jest</code>, Cypress y Playwright — son TypeScript de primera.</p>",
+  "tsqa.t1.title": "Tipado",
+  "tsqa.t1.body": "El compilador caza errores antes de ejecutar: menos sorpresas en runtime.",
+  "tsqa.t2.title": "Autocompletado",
+  "tsqa.t2.body": "El editor conoce la forma de tus datos y comandos: escribís más rápido y con menos typos.",
+  "tsqa.t3.title": "Cypress & Playwright",
+  "tsqa.t3.body": "El lenguaje nativo de Cypress y un ciudadano de primera en Playwright. Web testing puro.",
+  "tsqa.t4.title": "AI-friendly",
+  "tsqa.t4.body": "Los asistentes de AI generan TypeScript con tipos que vos revisás y el compilador valida.",
+  "tsqa.when":
+    "<p>Elegí TypeScript para QA cuando trabajás sobre apps web modernas (sobre todo con Cypress), cuando el equipo de front ya usa TS, o cuando querés que el compilador te cubra la espalda. Si tu foco es testing de APIs y multi-lenguaje, mirá la sección de Python; para el front, TypeScript es la apuesta natural.</p>",
+  "tsqa.callout":
+    "<strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Node y TypeScript, escribí tu primer archivo, aprendé tipos y sintaxis, y terminá escribiendo tu primer test. Después saltá a Cypress con base sólida.",
+
+  "tsqa.hola.lead":
+    "<p>Lo primero: tener Node, agregar TypeScript y poder ejecutar un archivo <code>.ts</code> sin compilar a mano. Con <code>tsx</code> corrés TypeScript directo.</p>",
+  "tsqa.install.label": "Instalación y proyecto",
+  "tsqa.install.body":
+    "<p>Verificá Node con <code>node --version</code>. Iniciás el proyecto con <code>npm init -y</code> e instalás <code>typescript</code> y un runner rápido como <code>vitest</code>. Con <code>tsc --init</code> generás el <code>tsconfig.json</code> que configura el compilador.</p>",
+  "tsqa.hello.label": "Tu primer archivo",
+  "tsqa.hello.body":
+    "<p>Un archivo <code>.ts</code> con una función ya es un programa. Anotás el tipo de los parámetros y del retorno con <code>: tipo</code>, y el compilador te avisa si algo no cuadra. Con <code>npx tsx hello.ts</code> lo ejecutás sin un paso de build.</p>",
+  "tsqa.hola.callout":
+    "<strong>¡Listo!</strong> Si viste <code>Hello, QA!</code> en la terminal, ya tenés TypeScript corriendo. El resto es construir sobre eso.",
+
+  "tsqa.fund.lead":
+    "<p>La sintaxis esencial: variables tipadas, control de flujo y funciones. Lo mismo que en JavaScript, pero con tipos que te cubren.</p>",
+  "tsqa.types.label": "Variables y tipos",
+  "tsqa.types.body":
+    "<p>Anotás tipos con <code>: tipo</code>, pero TS también los <strong>infiere</strong> del valor. Los básicos: <code>string</code>, <code>number</code>, <code>boolean</code>. Usá <code>const</code> por defecto (no se reasigna) y <code>let</code> solo cuando necesitás cambiar el valor. El compilador caza los errores de tipo antes de correr.</p>",
+  "tsqa.control.label": "Condicionales y bucles",
+  "tsqa.control.body":
+    "<p>El control de flujo usa llaves: <code>if/else if/else</code> para decidir, <code>for...of</code> para recorrer los valores de un iterable y <code>while</code> para una condición. <code>continue</code> saltea una vuelta y <code>break</code> corta el bucle.</p>",
+  "tsqa.funcs.label": "Funciones",
+  "tsqa.funcs.body":
+    "<p>Definís funciones con parámetros tipados (opcionales con <code>?</code>, con valor por defecto con <code>=</code>) y un tipo de retorno. Las <strong>arrow functions</strong> (<code>=&gt;</code>) son concisas y aparecen en todo el código de test. Las funciones son valores: podés pasarlas como argumento.</p>",
+
+  "tsqa.tipos.lead":
+    "<p>El corazón de TypeScript: describir la <strong>forma</strong> de tus datos. Interfaces, arrays tipados y JSON son lo que vas a tocar en cada test de API.</p>",
+  "tsqa.iface.label": "Interfaces y objetos",
+  "tsqa.iface.body":
+    "<p>Una <strong>interface</strong> (o <code>type</code>) describe la forma de un objeto: qué campos tiene y de qué tipo. Es el contrato de tu API expresado en código. Podés marcar propiedades <strong>opcionales</strong> con <code>?</code> y limitar valores con <strong>uniones</strong> (<code>\"NEW\" | \"PAID\"</code>).</p>",
+  "tsqa.arrays.label": "Arrays y transformaciones",
+  "tsqa.arrays.body":
+    "<p>Los arrays se tipan (<code>number[]</code>). <code>map</code>, <code>filter</code> y <code>reduce</code> son tus transformaciones diarias, y <code>every</code>/<code>some</code> se leen como aserciones sobre toda una colección (\"todos los precios son positivos\").</p>",
+  "tsqa.json.label": "JSON",
+  "tsqa.json.body":
+    "<p>Las APIs hablan JSON. <code>JSON.parse</code> convierte texto a objeto y <code>JSON.stringify</code> de vuelta a texto. Le podés afirmar la forma con <code>as</code>. En la práctica, <code>fetch</code> ya te da el body parseado con <code>await res.json()</code>.</p>",
+
+  "tsqa.pruebas.lead":
+    "<p><strong>Vitest</strong> (compatible con la API de Jest) es un runner rapidísimo para TypeScript. Organizás con <code>describe</code>/<code>it</code> y afirmás con <code>expect(...)</code>. Ideal para tu primer test.</p>",
+  "tsqa.first.label": "Tu primer test",
+  "tsqa.first.body":
+    "<p>Un test es una función dentro de <code>it(\"...\", () =&gt; { ... })</code>, agrupada en un <code>describe</code>. La aserción es <code>expect(actual).toBe(esperado)</code> y muestra ambos valores cuando falla. Corrés todo con <code>npx vitest run</code>.</p>",
+  "tsqa.hooks.label": "Hooks y casos múltiples",
+  "tsqa.hooks.body":
+    "<p><code>beforeEach</code> prepara un estado fresco antes de <em>cada</em> test, así no se filtran datos entre ellos. Con <code>it.each</code> corrés el mismo test sobre muchos casos sin repetir código — el equivalente a la parametrización.</p>",
+  "tsqa.pruebas.callout":
+    "<strong>Patrón AAA:</strong> hasta el test más simple sigue <em>Arrange</em>, <em>Act</em> y <em>Assert</em>. <code>beforeEach</code> es el lugar natural para el Arrange.",
+
+  "tsqa.comp.lead":
+    "<p>Hora de juntar todo: tu primer test \"de verdad\". Primero contra una <strong>API</strong> con <code>fetch</code> + Vitest, y después contra una <strong>UI</strong> real con Cypress. Mismo patrón, dos mundos.</p>",
+  "tsqa.api.label": "Testeando una API",
+  "tsqa.api.body":
+    "<p>Un test de API no necesita navegador: pegás al endpoint con <code>fetch</code>, verificás el <strong>status</strong> y la <strong>forma</strong> de la respuesta. La forma más rápida de empezar a automatizar de verdad.</p>",
+  "tsqa.ui.label": "Testeando un componente de UI",
+  "tsqa.ui.body":
+    "<p>El mismo patrón Arrange-Act-Assert, ahora contra el navegador con Cypress. Las aserciones <code>.should()</code> reintentan solas hasta cumplirse, así tu primer test de UI ya nace robusto.</p>",
+  "tsqa.manual.title": "A mano",
+  "tsqa.manual.body":
+    "<p>Aprendés los tipos y escribís cada test paso a paso. Es la mejor forma de entender qué hace cada línea antes de delegar nada.</p>",
+  "tsqa.ai.title": "Con AI",
+  "tsqa.ai.body":
+    "<p>Con las bases claras, la AI acelera: genera el esqueleto del test en TypeScript, sugiere casos y explica errores del compilador. Vos revisás y decidís qué entra al repo.</p>",
+  "tsqa.comp.callout":
+    "<strong>Próximo paso:</strong> con TypeScript y Vitest dominados, andá a <strong>Cypress</strong> en la navegación y construí suites E2E completas. Ya tenés la base.",
 
   /* ====================================================================
      3a. SELENIUM
