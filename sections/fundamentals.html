@@ -89,28 +89,24 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.components">Componentes clave</span>
         </a>
-        <a class="nav-link" href="critical.html">
-          <span class="nav-link__num">08</span>
-          <span data-i18n="nav.critical">Casos críticos</span>
-        </a>
         <a class="nav-link" href="ai-role.html">
-          <span class="nav-link__num">09</span>
+          <span class="nav-link__num">08</span>
           <span data-i18n="nav.airole">El rol de la AI</span>
         </a>
         <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">10</span>
+          <span class="nav-link__num">09</span>
           <span data-i18n="nav.prompts">Ejemplos con AI</span>
         </a>
         <a class="nav-link" href="best-practices.html">
-          <span class="nav-link__num">11</span>
+          <span class="nav-link__num">10</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
         <a class="nav-link" href="key-terms.html">
-          <span class="nav-link__num">12</span>
+          <span class="nav-link__num">11</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
         <a class="nav-link" href="bibliography.html">
-          <span class="nav-link__num">13</span>
+          <span class="nav-link__num">12</span>
           <span data-i18n="nav.biblio">Bibliografía</span>
         </a>
       </nav>
@@ -122,7 +118,47 @@
         <div class="prose" data-i18n-html="fund.lead"><p>Antes de elegir un framework conviene entender el vocabulario común a todos: tipos de tests, la pirámide, qué es un assertion, cómo se localizan los elementos y por qué algunos tests fallan de forma intermitente.</p></div>
         <h3 class="block-label" data-i18n="ui.theory">Teoría</h3>
         <div class="prose" data-i18n-html="fund.theory.types"><p>Hay tres niveles principales de tests automatizados:</p><ul><li><strong>Unit</strong>: prueban una función o componente aislado. Son rapidísimos y muy específicos. Ejemplo: <code>sum(2, 3) === 5</code>.</li><li><strong>Integration</strong>: prueban que varias piezas trabajen juntas (por ejemplo, un servicio + su base de datos).</li><li><strong>End-to-end (E2E)</strong>: prueban el flujo completo como lo haría un usuario real en el navegador. Selenium, Cypress y Playwright viven en este nivel.</li></ul></div>
+        <div class="tile-grid">
+            <div class="tile">
+              <div class="tile__icon">🧪</div>
+              <h4 data-i18n="fund.tile.unit.title">Unit</h4>
+              <p data-i18n="fund.tile.unit.body">Una función o componente aislado. Rapidísimos y muy específicos: la base de la pirámide.</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🔗</div>
+              <h4 data-i18n="fund.tile.integration.title">Integration</h4>
+              <p data-i18n="fund.tile.integration.body">Varias piezas trabajando juntas (un servicio + su base de datos, módulos entre sí).</p>
+            </div>
+            <div class="tile">
+              <div class="tile__icon">🌐</div>
+              <h4 data-i18n="fund.tile.e2e.title">End-to-end (E2E)</h4>
+              <p data-i18n="fund.tile.e2e.body">El flujo completo como un usuario real, en el navegador. Acá viven Selenium, Cypress y Playwright.</p>
+            </div>
+        </div>
         <div class="prose" data-i18n-html="fund.theory.pyramid"><p>La <strong>pirámide de testing</strong> es una guía de proporciones: muchos tests unit (base ancha), menos de integración (medio) y pocos E2E (punta). ¿Por qué? Los E2E son los más realistas pero también los más lentos y frágiles. Si invertís la pirámide (un <em>“cono de helado”</em>: muchos E2E, pocos unit) tu suite se vuelve lenta e inestable.</p></div>
+        <h3 class="block-label" data-i18n="fund.aaa.label">Anatomía de un test (AAA)</h3>
+        <div class="prose" data-i18n-html="fund.aaa.body"><p>Casi todo test sigue el patrón <strong>Arrange-Act-Assert</strong>: <strong>preparás</strong> el estado, <strong>ejecutás</strong> la única acción bajo prueba y <strong>afirmás</strong> el resultado esperado. En BDD se expresa como <em>Given-When-Then</em>. Una intención por test.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Anatomy of a test — Arrange, Act, Assert (AAA).</span>
+<span class="tok-function">test</span><span class="tok-punctuation">("</span>paying an order shows the PAID badge<span class="tok-string">", async ({ page }) =&gt; {
+  // Arrange — put the system in a known state.
+  await page.goto("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+
+  // Act — do the ONE thing under test.
+  await page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
+
+  // Assert — verify the expected outcome (one intent per test).
+  await expect(page.getByText("</span>PAID<span class="tok-punctuation">")).</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span>
+<span class="tok-punctuation">});</span></code></pre>
+        </div>
+        <h3 class="block-label" data-i18n="fund.first.label">Qué hace bueno a un test (FIRST)</h3>
+        <div class="prose" data-i18n-html="fund.first.body"><ul><li><strong>Fast</strong>: rápido, para correrlo seguido.</li><li><strong>Independent</strong>: no depende de otros tests ni del orden.</li><li><strong>Repeatable</strong>: mismo resultado siempre, en cualquier entorno.</li><li><strong>Self-validating</strong>: pasa o falla solo, sin revisar a mano.</li><li><strong>Timely</strong>: escrito cerca del código que prueba.</li></ul></div>
         <h3 class="block-label" data-i18n="fund.assert.label">Assertions</h3>
         <div class="prose" data-i18n-html="fund.assert.body"><p>Un <strong>assertion</strong> es la afirmación que decide si un test pasa o falla: compara lo que <em>realmente</em> ocurrió contra lo que <em>esperabas</em>. Es el corazón del test; sin assertions, el test no verifica nada.</p></div>
         <div class="code-block">

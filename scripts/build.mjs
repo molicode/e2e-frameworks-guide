@@ -16,7 +16,7 @@
        node scripts/build.mjs
    ========================================================================== */
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import vm from "node:vm";
@@ -58,6 +58,8 @@ const indexHtml = layout({
 writeFileSync(join(ROOT, "index.html"), indexHtml);
 
 /* ---- 2. One page per section (sections/<id>.html) ---- */
+// Clear stale pages first so removed/renamed sections don't leave orphans.
+rmSync(join(ROOT, "sections"), { recursive: true, force: true });
 mkdirSync(join(ROOT, "sections"), { recursive: true });
 const sectionHref = (id) => `${id}.html`; // sibling pages live in the same dir
 SECTIONS.forEach((section, index) => {
