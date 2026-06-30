@@ -32,6 +32,13 @@ I18n.register("en", {
   "ui.next": "Next",
   "ui.mockCaption": "👆 Mock screen: this is what the code above tests. The chips show which selector targets each element.",
 
+  /* ---- Per-framework sub-pages ---- */
+  "page.philosophy": "Philosophy & when to use it",
+  "page.hello": "Hello world",
+  "page.path": "Learning path",
+  "page.components": "Key components",
+  "page.cases": "Critical scenarios",
+
   /* ---- Navigation ---- */
   "nav.intro": "Introduction",
   "nav.fundamentals": "Fundamentals",
@@ -151,7 +158,6 @@ I18n.register("en", {
     "<p>AI saves you the boilerplate: it scaffolds the driver setup, reminds you to add <code>driver.wait(...)</code> before each assertion, and translates a Java test to JavaScript when you switch stacks.</p>",
 
   "sel.rung1.title": "WebDriver & navigation",
-  "sel.rung1.desc": "Spin up a driver, open a page, close with quit(). Understand the lifecycle.",
   "sel.rung1.body":
     "<p>Every Selenium test starts by creating a <strong>driver</strong> (the browser session) and ends with <code>driver.quit()</code> to free it. In between you navigate with <code>driver.get(url)</code>. Think of the driver as the browser's remote control: leave it on and it keeps eating resources.</p>",
   "sel.rung2.title": "Locating elements",
@@ -192,7 +198,6 @@ I18n.register("en", {
     "<p>AI turns a natural-language case into <code>cy.*</code> commands, suggests the right <code>.should()</code> for each check, and proposes <code>data-cy</code> attributes as stable selectors.</p>",
 
   "cyp.rung1.title": "The interactive runner",
-  "cyp.rung1.desc": "Run cypress open, watch the time-travel, understand describe / it.",
   "cyp.rung1.body":
     "<p>Cypress ships a <strong>visual runner</strong>: with <code>cypress open</code> you watch each command run live and can time-travel to any step. Tests are organized with <code>describe()</code> (a group) and <code>it()</code> (a case), just like many JS frameworks.</p>",
   "cyp.rung2.title": "Commands & the async chain",
@@ -233,7 +238,6 @@ I18n.register("en", {
     "<p>AI generates the full test from a description, recommends accessible locators (by role/label), and on a failure it reads the trace and explains the likely cause.</p>",
 
   "pw.rung1.title": "Setup & first test",
-  "pw.rung1.desc": "Install, run the example in --ui mode, understand the test() structure.",
   "pw.rung1.body":
     "<p><code>npm init playwright@latest</code> gives you config, example tests and a CI workflow in one command. Each test is a <code>test('name', async ({ page }) =&gt; { … })</code> function. Run <code>npx playwright test --ui</code> for the interactive mode with watch and time-travel.</p>",
   "pw.rung2.title": "Locators & actions",
@@ -394,7 +398,6 @@ I18n.register("en", {
     "<strong>The point:</strong> automation isn't about zero bugs, it's about <em>confidence to ship often</em>. Start small, keep it green, and grow from there.",
 
   /* ---- Navigation / index for the new sections ---- */
-  "nav.components": "Key components",
   "nav.keyterms": "Key terms",
   "nav.biblio": "References",
   "home.key-terms": "A glossary of key QA terms for interviews, grouped by category.",
@@ -602,7 +605,6 @@ I18n.register("en", {
   "kt.sec.sensitive": "Sensitive data exposure: tokens, passwords or cards leaked in responses, logs or URLs.",
 
   /* ---- Per-framework critical scenarios (shared) ---- */
-  "ui.cases": "Critical scenarios",
   "cases.intro":
     "<p>The scenarios every real app needs — <strong>APIs, amounts, legal documents and security</strong> — solved in this framework. (<strong>Login</strong> was already your first test, above.)</p>",
   "crit.docs.label": "Legal document validation",

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="page.path">Ruta de aprendizaje</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--cypress-ruta">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <a class="nav-link nav-group" href="selenium-filosofia.html">
+          <span class="nav-link__num">03</span>
+          <span data-i18n="nav.selenium">Selenium</span>
+        </a>
+        <a class="nav-link nav-group is-active-group" href="cypress-filosofia.html">
+          <span class="nav-link__num">04</span>
+          <span data-i18n="nav.cypress">Cypress</span>
+        </a>
+          <a class="nav-link nav-sublink" href="cypress-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="cypress-ruta.html" aria-current="page">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+        <a class="nav-link nav-group" href="playwright-filosofia.html">
+          <span class="nav-link__num">05</span>
+          <span data-i18n="nav.playwright">Playwright</span>
+        </a>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">06</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">07</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">08</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">09</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <a class="nav-link" href="key-terms.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.keyterms">Conceptos clave</span>
+        </a>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">11</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-cypress)">Cypress</span></div>
+        <h2 class="section__title" data-i18n="page.path">Ruta de aprendizaje</h2>
+        <h3 class="block-label" data-i18n="ui.path">Ruta de aprendizaje</h3>
+        <ol class="steps roadmap">
+            <li>
+              <a class="roadmap__link" href="#cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="cyp.rung2.desc">cy.get() no devuelve un valor directo: encadenás. Esto es lo que más cuesta al principio.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#cyp-rung-3" data-i18n="cyp.rung3.title">Assertions y selectores</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="cyp.rung3.desc">Las .should() implícitas y explícitas; la convención data-cy.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="cyp.rung4.desc">Mockeá APIs, esperá requests con alias y testeá estados de error.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="cyp.rung5.desc">Encapsulá el login y los datos en fixtures JSON para tests limpios.</span>
+            </li>
+            <li>
+              <a class="roadmap__link" href="#cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</a>
+              <span class="roadmap__sep"> — </span>
+              <span data-i18n="cyp.rung6.desc">Probá componentes aislados y armá la corrida en el pipeline.</span>
+            </li>
+        </ol>
+        <h3 class="block-label" id="cyp-rung-2" data-i18n="cyp.rung2.title">Comandos y la cadena async</h3>
+        <div class="prose" data-i18n-html="cyp.rung2.body"><p>El concepto que más cuesta: los comandos <code>cy.*</code> <strong>no son promesas</strong> y no devuelven un valor directo — se <strong>encolan</strong> y se encadenan. Si necesitás el valor de un elemento usás <code>.then()</code>, pero conviene evitarlo. Con <code>.as()</code> creás un alias y lo reusás con <code>@nombre</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// cy.* commands are NOT promises — they enqueue work. You chain, you don't await.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>username<span class="tok-string">").type("</span>demo<span class="tok-string">");          // queued
+cy.get("</span>button<span class="tok-punctuation">[</span>type<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>     <span class="tok-comment">// runs after the type resolves</span>
+
+<span class="tok-comment">// Need the *value*? Use .then() — but reach for it sparingly.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").then(($el) =&gt; {
+  expect($el.text()).to.eq("</span><span class="tok-number">250</span><span class="tok-string">");
+});
+
+// Alias a query with .as() and reuse it later with @:
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").as("</span>items<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">@</span>items<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-punctuation">",</span> <span class="tok-number">3</span><span class="tok-punctuation">);</span></code></pre>
+        </div>
+        <h3 class="block-label" id="cyp-rung-3" data-i18n="cyp.rung3.title">Assertions y selectores</h3>
+        <div class="prose" data-i18n-html="cyp.rung3.body"><p>Las assertions de Cypress son <strong>implícitas</strong>: <code>.should()</code> reintenta el comando anterior hasta que se cumple. Encadenás más condiciones con <code>.and()</code>, o usás <code>expect()</code> dentro de un callback para casos explícitos. Para selectores estables, la comunidad usa la convención <code>data-cy</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Implicit assertions retry the previous command until they pass:</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span>PAID<span class="tok-string">");
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">length</span><span class="tok-string">", 3).and("</span>contain<span class="tok-string">", "</span>book<span class="tok-string">");
+
+// Explicit assertions with expect() inside a .should() callback:
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").should(($el) =&gt; {
+  expect($el.text().trim()).to.eq("</span><span class="tok-number">250</span><span class="tok-string">");
+});
+
+// Prefer a dedicated test attribute over brittle css:
+//   &lt;button data-cy="</span>pay<span class="tok-string">"&gt;Pay&lt;/button&gt;
+cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctuation">-</span>cy<span class="tok-punctuation">=</span>pay<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card">
+              <div class="mock-order-head">
+                <h4 class="mock-h">Order #42</h4>
+                <span class="mock-badge">PAID<code class="mock-tag">.order-status</code></span>
+              </div>
+              <div class="mock-total">
+                <span>Total</span><strong>250</strong>
+                <code class="mock-tag">.order-total</code>
+              </div>
+              <ul class="mock-list">
+                <li class="mock-row"><span>The Pragmatic Programmer <em>(book)</em></span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>Wireless Mouse</span><span class="mock-mini">Remove</span></li>
+                <li class="mock-row"><span>USB-C Cable</span><span class="mock-mini">Remove</span></li>
+              </ul>
+              <div class="mock-tags-row">
+                <code class="mock-tag">.order-items li</code>
+                <code class="mock-tag">getByRole("row")</code>
+                <code class="mock-tag">toHaveCount(3)</code>
+                <code class="mock-tag">getByRole("button", { name: "Remove" })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" id="cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</h3>
+        <div class="prose" data-i18n-html="cyp.rung4.body"><p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// Stub the API: deterministic data, no real backend, instant tests.</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">intercept</span><span class="tok-punctuation">("</span>GET<span class="tok-string">", "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">", {
+  statusCode: 200,
+  body: { total: 250, status: "</span>PAID<span class="tok-string">", items: ["</span>book<span class="tok-string">"] },
+}).as("</span>getOrder<span class="tok-string">");
+
+cy.visit("</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">");
+cy.wait("</span><span class="tok-punctuation">@</span>getOrder<span class="tok-string">");                       // wait for the request, not a sleep
+cy.get("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span><span class="tok-number">250</span><span class="tok-string">");
+
+// Test an error state by stubbing a 500:
+cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/*",</span> <span class="tok-punctuation">{</span> statusCode<span class="tok-punctuation">:</span> <span class="tok-number">500</span> <span class="tok-punctuation">}).</span><span class="tok-keyword">as</span><span class="tok-punctuation">("</span>boom<span class="tok-punctuation">");</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-card mock-card--error">
+              <div class="mock-error-icon">⚠️</div>
+              <h4 class="mock-h">Something went wrong</h4>
+              <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
+              <div class="mock-http">HTTP 500 · Internal Server Error</div>
+              <div class="mock-tags-row">
+                <code class="mock-tag">cy.intercept(..., { statusCode: 500 })</code>
+                <code class="mock-tag">route.fulfill({ status: 500 })</code>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <h3 class="block-label" id="cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</h3>
+        <div class="prose" data-i18n-html="cyp.rung5.body"><p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// cypress/support/commands.js — encapsulate repetitive flows once.</span>
+Cypress<span class="tok-punctuation">.</span><span class="tok-property">Commands</span><span class="tok-punctuation">.</span><span class="tok-function">add</span><span class="tok-punctuation">("</span>login<span class="tok-string">", (user, pass) =&gt; {
+  cy.session([user], () =&gt; {
+    cy.visit("</span><span class="tok-punctuation">/</span>login<span class="tok-string">");
+    cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctuation">-</span>cy<span class="tok-punctuation">=</span>user<span class="tok-punctuation">]").</span><span class="tok-function">type</span><span class="tok-punctuation">(</span>user<span class="tok-punctuation">);</span>
+    cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>cy<span class="tok-punctuation">=</span><span class="tok-keyword">pass</span><span class="tok-punctuation">]").</span><span class="tok-function">type</span><span class="tok-punctuation">(</span><span class="tok-keyword">pass</span><span class="tok-punctuation">);</span>
+    cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("[</span>data<span class="tok-punctuation">-</span>cy<span class="tok-punctuation">=</span>submit<span class="tok-punctuation">]").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span>
+  <span class="tok-punctuation">});</span>
+<span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// cypress/fixtures/order.json -&gt; { "total": 250, "status": "PAID" }</span>
+cy<span class="tok-punctuation">.</span><span class="tok-function">login</span><span class="tok-punctuation">("</span>demo<span class="tok-string">", "</span>secret<span class="tok-string">");
+cy.fixture("</span>order<span class="tok-string">").then((order) =&gt; {
+  cy.intercept("</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">",</span> order<span class="tok-punctuation">);</span>
+<span class="tok-punctuation">});</span></code></pre>
+        </div>
+        <h3 class="block-label" id="cyp-rung-6" data-i18n="cyp.rung6.title">Component testing + CI</h3>
+        <div class="prose" data-i18n-html="cyp.rung6.body"><p>Además de E2E, Cypress hace <strong>component testing</strong>: montás un componente aislado con <code>cy.mount()</code> y lo probás sin levantar toda la app. En CI corrés <code>cypress run</code> (headless), con <code>--component</code> o <code>--e2e</code> según el tipo.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// button.cy.jsx — mount a component in isolation (no full app needed).</span>
+<span class="tok-keyword">import</span> Button <span class="tok-keyword">from</span> <span class="tok-string">"./Button"</span><span class="tok-punctuation">;</span>
+
+<span class="tok-function">it</span><span class="tok-punctuation">("</span>calls onClick<span class="tok-string">", () =&gt; {
+  const onClick = cy.stub().as("</span>onClick<span class="tok-string">");
+  cy.mount(&lt;Button onClick={onClick}&gt;Pay&lt;/Button&gt;);
+  cy.get("</span>button<span class="tok-string">").click();
+  cy.get("</span><span class="tok-punctuation">@</span>onClick<span class="tok-string">").should("</span>have<span class="tok-punctuation">.</span><span class="tok-property">been</span><span class="tok-punctuation">.</span><span class="tok-property">calledOnce</span><span class="tok-punctuation">");</span>
+<span class="tok-punctuation">});</span>
+
+<span class="tok-comment">// In CI:  npx cypress run --component   (and --e2e for end-to-end)</span></code></pre>
+        </div>
+        <figure class="mock-figure">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__url">shop.example.com/orders/42</span>
+          </div>
+          <div class="mock__body">
+            <div class="mock-stage">
+              <div class="mock-dialog" role="dialog">
+                <h4 class="mock-h">Delete order?</h4>
+                <p class="mock-error-msg">This action can't be undone.</p>
+                <div class="mock-btn-row">
+                  <span class="mock-btn mock-btn--ghost">Cancel</span>
+                  <span class="mock-btn mock-btn--danger">Delete</span>
+                </div>
+                <div class="mock-tags-row">
+                  <code class="mock-tag">getByRole("dialog")</code>
+                  <code class="mock-tag">getByRole("button", { name: "Delete" })</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+        </figure>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="cypress-hola-mundo.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="cypress-componentes.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="page.components">Componentes clave</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+</body>
+</html>
