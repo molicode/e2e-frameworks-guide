@@ -158,12 +158,14 @@ function renderBlock(block, dict) {
                 <div class="iv-av-wrap">${IV_AV_INTERVIEWER}<span class="iv-who" data-i18n="iv.role.q">${escText(t(dict, "iv.role.q"))}</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="${it.q}">${escText(t(dict, it.q))}</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">${escText(t(dict, "iv.reveal"))}</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="${it.a}">${escText(t(dict, it.a))}</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="${it.a}">${escText(t(dict, it.a))}</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">${escText(t(dict, "iv.reveal"))}</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a">${IV_AV_CANDIDATE}<span class="iv-who iv-who--a" data-i18n="iv.role.a">${escText(t(dict, "iv.role.a"))}</span></div>
               </div>
