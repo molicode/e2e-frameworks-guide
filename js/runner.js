@@ -1,12 +1,11 @@
 /* ==========================================================================
    js/runner.js — Drives the interactive "Code Runner" demo.
 
-   For each `.runner` on the page it wires:
-     - the framework tabs (Selenium / Cypress / Playwright),
+   Each `.runner` on the page animates one framework's login test:
      - a play / pause + replay control and a progress bar,
-     - the line-by-line execution: the active code line advances on a timer and
-       the simulated browser above reacts (types the username, presses the
-       button, then shows the "Welcome / assertion passed" result).
+     - line-by-line execution: the active code line advances on a timer and the
+       simulated browser above reacts (types the username, presses the button,
+       then shows the "Welcome / assertion passed" result).
 
    It self-plays once when scrolled into view. Everything degrades gracefully:
    with no JS the code is readable and the browser shows its final state, and
@@ -32,19 +31,19 @@
   }
 
   function setupRunner(root) {
-    var tabs = qsa(".runner__tab", root);
-    var panels = qsa(".runner__panel", root);
-    if (!panels.length) return;
+    var panel = qs(".runner__panel", root);
+    if (!panel) return;
 
     var playBtn = qs(".runner__play", root);
     var replayBtn = qs(".runner__replay", root);
     var progress = qs(".runner__progress", root);
     var timeEl = qs(".runner__time", root);
-    var ink = qs(".runner__ink", root);
+    var browser = qs(".runner__browser", panel);
+    var typed = qs(".runner__typed", panel);
 
-    var st = { i: 0, playing: false, timer: 0, typer: 0, panel: panels[0], tabW: 0 };
+    var st = { i: 0, playing: false, timer: 0, typer: 0 };
 
-    function lines() { return qsa(".runner__line", st.panel); }
+    function lines() { return qsa(".runner__line", panel); }
     function total() { return lines().length * LINE_MS; }
 
     /* ---- simulated browser ---- */
@@ -60,8 +59,6 @@
       }, 95);
     }
     function setStage(stage, instant) {
-      var browser = qs(".runner__browser", st.panel);
-      var typed = qs(".runner__typed", st.panel);
       if (!browser) return;
       browser.setAttribute("data-stage", stage);
       if (stage === "typing") {
@@ -74,19 +71,8 @@
       }
     }
 
-    /* ---- progress + tab underline ---- */
-    function positionInk() {
-      var active = null;
-      for (var i = 0; i < tabs.length; i++) {
-        if (tabs[i].classList.contains("is-active")) { active = tabs[i]; break; }
-      }
-      if (!active || !ink) return;
-      st.tabW = active.offsetWidth;
-      ink.style.left = active.offsetLeft + "px";
-    }
     function setProgress(frac) {
       if (progress) progress.style.width = Math.round(frac * 100) + "%";
-      if (ink) ink.style.width = Math.round(st.tabW * frac) + "px";
       if (timeEl) timeEl.textContent = fmt(frac * total()) + " / " + fmt(total());
     }
 
@@ -153,38 +139,14 @@
       root.classList.remove("is-playing");
     }
 
-    /* ---- tab switching ---- */
-    function selectFw(key) {
-      tabs.forEach(function (t) {
-        var on = t.getAttribute("data-fw") === key;
-        t.classList.toggle("is-active", on);
-        t.setAttribute("aria-selected", on ? "true" : "false");
-      });
-      panels.forEach(function (p) {
-        p.classList.toggle("is-active", p.getAttribute("data-fw") === key);
-      });
-      for (var i = 0; i < panels.length; i++) {
-        if (panels[i].getAttribute("data-fw") === key) { st.panel = panels[i]; break; }
-      }
-      positionInk();
-      reset();
-    }
-
     /* ---- events ---- */
     playBtn && playBtn.addEventListener("click", function () {
       if (st.playing) pause(); else play();
     });
     replayBtn && replayBtn.addEventListener("click", function () { reset(); play(); });
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () { selectFw(tab.getAttribute("data-fw")); });
-    });
-    global.addEventListener("resize", function () {
-      positionInk();
-      setProgress(st.i > 0 ? Math.min(1, st.i / lines().length) : 0);
-    });
 
-    // Initial paint (after layout so the underline can be measured).
-    global.requestAnimationFrame(function () { positionInk(); reset(); });
+    // Ready in the idle (form) state.
+    global.requestAnimationFrame(reset);
 
     // Self-play once when it scrolls into view (unless reduced motion).
     if (!REDUCE && global.IntersectionObserver) {

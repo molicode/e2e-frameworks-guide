@@ -161,6 +161,71 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h1 class="section__title" data-i18n="page.hello">Hola mundo</h1>
+        <figure class="runner" data-runner data-fw="playwright" style="--fw:var(--fw-playwright)">
+          <div class="runner__frame">
+            <div class="runner__head">
+              <span class="runner__fwchip">Playwright</span>
+              <div class="runner__chips"><span class="runner__chip">Auto-wait</span><span class="runner__chip">Multi-browser</span><span class="runner__chip">Trace viewer</span></div>
+            </div>
+            <div class="runner__panel" data-fw="playwright">
+              <div class="runner__stage">
+            <div class="mock runner__browser">
+              <div class="mock__bar">
+                <span class="mock__dots"><i></i><i></i><i></i></span>
+                <span class="mock__url runner__url">app.test/login</span>
+              </div>
+              <div class="mock__body runner__screens">
+                <div class="runner__screen runner__screen--form">
+                  <div class="mock-card">
+                    <p class="mock-h">Sign in</p>
+                    <div class="mock-field">
+                      <span class="mock-field__label">Username</span>
+                      <span class="mock-input runner__input"><span class="runner__typed"></span><span class="runner__caret" aria-hidden="true"></span></span>
+                    </div>
+                    <div class="mock-btn-row">
+                      <span class="mock-btn runner__btn">Sign in</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="runner__screen runner__screen--success">
+                  <div class="runner__result">
+                    <span class="runner__check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                    </span>
+                    <p class="runner__welcome">Welcome</p>
+                    <span class="runner__passed">✓ assertion passed</span>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+              <div class="runner__code">
+              <div class="runner__codebar">
+                <span class="runner__filedot"></span>
+                <span class="runner__file">login.spec.ts</span>
+                <span class="runner__badge">PLAYWRIGHT</span>
+              </div>
+              <pre class="runner__pre"><code><span class="runner__line" data-stage="form"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="typing"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByLabel</span><span class="tok-punctuation">("</span>User<span class="tok-punctuation">")</span></span>
+<span class="runner__line" data-stage="typing">  <span class="tok-punctuation">.</span><span class="tok-function">fill</span><span class="tok-punctuation">("</span>admin<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="submit"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-punctuation">",</span></span>
+<span class="runner__line" data-stage="submit">  <span class="tok-punctuation">{</span> name<span class="tok-punctuation">:</span> <span class="tok-string">"Go"</span> <span class="tok-punctuation">}).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></span>
+<span class="runner__line" data-stage="success"><span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByText</span><span class="tok-punctuation">("</span>Welcome<span class="tok-punctuation">"))</span></span>
+<span class="runner__line" data-stage="passed">  <span class="tok-punctuation">.</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></span></code></pre></div>
+            </div>
+            <div class="runner__player">
+              <button class="runner__play" type="button" aria-label="Reproducir la demo" data-i18n-attr="aria-label:runner.run">
+                <svg class="runner__ico-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                <svg class="runner__ico-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+              </button>
+              <div class="runner__timeline"><div class="runner__progress"></div></div>
+              <span class="runner__time">0:00</span>
+              <button class="runner__replay" type="button" aria-label="Reiniciar la demo" data-i18n-attr="aria-label:runner.replay">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>
+              </button>
+            </div>
+          </div>
+          <figcaption class="mock__caption" data-i18n="runner.caption">▶ Demo interactivo: dale play y mirá cómo se ejecuta el código de este framework línea por línea mientras la pantalla reacciona.</figcaption>
+        </figure>
         <h2 class="block-label" id="pw-rung-1" data-i18n="pw.rung1.title">Setup y primer test</h2>
         <div class="prose" data-i18n-html="pw.rung1.body"><p>Con <code>pip install pytest-playwright</code> y <code>playwright install</code> tenés todo listo. Cada test es una función <code>def test_nombre(page): …</code> que recibe la fixture <code>page</code>. Corré <code>pytest</code> (headless) o <code>pytest --headed</code> para verlo en vivo.</p></div>
         <div class="code-block">

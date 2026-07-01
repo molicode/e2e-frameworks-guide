@@ -32,10 +32,9 @@ I18n.register("en", {
   "ui.prev": "Previous",
   "ui.next": "Next",
   "ui.mockCaption": "👆 Mock screen: this is what the code above tests. The chips show which selector targets each element.",
-  "runner.caption": "▶ Interactive demo: hit play and watch the code run line by line while the screen reacts. Switch frameworks with the tabs.",
+  "runner.caption": "▶ Interactive demo: hit play and watch this framework's code run line by line while the screen reacts.",
   "runner.run": "Play the demo",
   "runner.replay": "Replay the demo",
-  "runner.tablist": "Pick a framework",
 
   /* ---- Per-framework sub-pages ---- */
   "page.philosophy": "Philosophy & when to use it",
