@@ -1905,6 +1905,39 @@ I18n.register("en", {
   "cpt.auto-mobile.ex": "You automate native/hybrid apps with the same idea as WebDriver:<pre class=\"cpt-code\"><code>el = driver.find_element(AppiumBy.ACCESSIBILITY_ID, \"loginBtn\")\nel.click()</code></pre>",
   "cpt.auto-mobile.uc": "Appium handles Android and iOS with a Selenium-style API. QA prioritises what's specific to mobile and absent on web: rotation, permissions, intermittent network, the system back button, and gestures (swipe, pinch).",
 
+  "cpt.design-ep.ex": "You split the inputs into groups that behave the same and test one representative of each. Age field (valid 0–150):<pre class=\"cpt-code\"><code>Invalid low:   -5        → 1 case\nValid:         0 to 150   → 1 case (e.g. 30)\nInvalid high:  200        → 1 case</code></pre>3 cases cover infinitely many inputs.",
+  "cpt.design-ep.uc": "It reduces the case explosion without losing coverage. QA identifies each field's partitions (valid and invalid) and tests <strong>one of each</strong>, instead of a thousand redundant values from the same group.",
+
+  "cpt.design-bva.ex": "Bugs live at the boundaries. For a valid range 1–100 you test the limit and ±1:<pre class=\"cpt-code\"><code>0    (just below)  → invalid\n1    (minimum)     → valid\n100  (maximum)     → valid\n101  (just above)  → invalid</code></pre>",
+  "cpt.design-bva.uc": "It complements Equivalence Partitioning by testing the <strong>exact boundaries</strong>, where the classic <code>&lt;</code> vs <code>&lt;=</code> errors hide. Ideal for amounts, ages, field lengths and dates.",
+
+  "cpt.design-dt.ex": "You map combinations of conditions to an action. A shop discount:<pre class=\"cpt-code\"><code>Member? | Spend &gt; $100? | Discount\n  No    |     No        |    0%\n  No    |     Yes       |    5%\n  Yes   |     No        |    5%\n  Yes   |     Yes       |   15%</code></pre>",
+  "cpt.design-dt.uc": "It's for business rules with several combined conditions. QA builds the table, derives <strong>one case per row</strong>, and spots combinations the developers forgot to implement.",
+
+  "cpt.design-state.ex": "You model the states and which transitions are valid or invalid. An order:<pre class=\"cpt-code\"><code>New → Paid → Shipped → Delivered\n          ↘ Cancelled\n\nInvalid: Delivered → Paid  (shouldn't be able to go back)</code></pre>",
+  "cpt.design-state.uc": "It's for stateful flows (orders, subscriptions, sessions). QA tests the valid transitions and — above all — the <strong>invalid</strong> ones, which the system should reject rather than allow.",
+
+  "cpt.design-pairwise.ex": "Instead of every combination (which explodes), you cover every <em>pair</em>. 3 variables × 3 values:<pre class=\"cpt-code\"><code>OS × Browser × Language\nall:      3 × 3 × 3 = 27 combinations\npairwise: ~9 cases cover every pair at least once</code></pre>",
+  "cpt.design-pairwise.uc": "Most bugs come from the interaction of <strong>two</strong> factors. QA uses tools (PICT, allpairs) to generate a small set covering every pair, saving dozens of cases with almost the same coverage.",
+
+  "cpt.design-trace.ex": "A matrix linking requirements to their test cases:<pre class=\"cpt-code\"><code>Requirement     | Cases       | Status\nRF-01 Login     | TC-1, TC-2  | covered\nRF-02 Payment   | TC-5        | missing edge case\nRF-03 Report    | —           | NO coverage ✗</code></pre>",
+  "cpt.design-trace.uc": "It shows at a glance which requirement is covered and which isn't. QA uses it to find coverage gaps and for <strong>impact analysis</strong>: if RF-02 changes, which cases must be re-run.",
+
+  "cpt.def-sevprio.ex": "Two different axes that are often confused:<pre class=\"cpt-code\"><code>Severity = technical impact | Priority = urgency to fix\n\nBroken logo on home:  Sev LOW  / Prio HIGH (visible, ships today)\nVery rare crash:      Sev HIGH / Prio LOW (1 user, dead flow)</code></pre>",
+  "cpt.def-sevprio.uc": "QA assigns the <strong>severity</strong> (objective, technical) and proposes a priority; the PO/team decides the final <strong>priority</strong> by business. Separating them avoids arguments and keeps the bug backlog well ordered.",
+
+  "cpt.def-lifecycle.ex": "A bug's life cycle, with states in the tracker:<pre class=\"cpt-code\"><code>New → Assigned → In Progress → Fixed → Retest\n                                    ↘ Reopened (if it persists)\n                                    → Closed\nOthers: Rejected / Duplicate / Won't fix</code></pre>",
+  "cpt.def-lifecycle.uc": "It gives a shared language of states (in Jira, etc.). QA opens the bug, verifies the fix (retest) and closes or reopens it; it knows <strong>“Fixed” is not “Closed”</strong> until it's re-tested.",
+
+  "cpt.def-rca.ex": "You look for the real cause, not the symptom. The “5 Whys” technique:<pre class=\"cpt-code\"><code>Payment fails\n → why? timeout to the gateway\n → why? there was no retry\n → why? the provider outage wasn't considered\n → root cause: missing error handling + retry</code></pre>",
+  "cpt.def-rca.uc": "It avoids shallow fixes that let the bug come back. QA provides the evidence (logs, steps) and joins the analysis so the <strong>cause</strong> is fixed and a test is added to cover that scenario going forward.",
+
+  "cpt.def-triage.ex": "A meeting where new bugs are classified:<pre class=\"cpt-code\"><code>Bug #123 → severity? priority? who? this sprint?\nOutcome:  fix now / to the backlog / reject / need info</code></pre>",
+  "cpt.def-triage.uc": "It keeps the defect flow orderly and stops bugs piling up undecided. QA presents each bug with clear data (impact, steps, evidence) so triage is fast and decisions are informed.",
+
+  "cpt.def-repro.ex": "A good report lets you reproduce the bug without guessing:<pre class=\"cpt-code\"><code>Steps:    1) log in  2) add to cart  3) apply coupon ABC\nExpected: total with 10% off\nActual:   total with no discount\nEnv:      Chrome 120, staging  |  Attached: video + logs</code></pre>",
+  "cpt.def-repro.uc": "Without clear steps the dev can't fix it (“can't reproduce”) and the bug bounces back. QA writes <strong>minimal, deterministic</strong> steps with expected vs actual, environment and evidence — the report you'd want to receive.",
+
   "kt.cat.maturity": "Metrics, maturity & certification",
   "kt.mat.dd": "<strong>Defect density</strong>: defects per unit of size (per KLOC or per module). Helps locate the riskiest areas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): the average time to fix a failure once detected. Measures responsiveness.",
