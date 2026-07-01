@@ -105,37 +105,38 @@
   transition: transform var(--transition);
 }
 .nav-group-item.is-open > .nav-group .nav-chevron { transform: rotate(90deg); }
+
+/* Collapsible sub-lists indent their contents by one step, and nesting
+   accumulates: grandparent → group → page → concept each sits a level deeper.
+   A faint guide line reinforces the hierarchy. */
 .nav-sub { display: none; }
 .nav-group-item.is-open > .nav-sub { display: block; }
+.nav-group-item > .nav-sub {
+  padding-left: var(--space-4);
+  margin-left: var(--space-3);
+  border-left: 1px solid var(--border);
+}
 .nav-sublink {
-  padding-left: calc(var(--space-3) + 1.4em + var(--space-3));
   font-size: var(--fs-sm);
-  border-left: 2px solid var(--border);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: var(--radius-sm);
 }
 .nav-sublink.is-active {
-  border-left-color: var(--accent);
-}
-/* 3-level nesting under Key terms: category headers + their concept pages */
-.nav-group--nested {
-  padding-left: calc(var(--space-3) + 1.4em + var(--space-3));
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--text-muted);
-  border-left: 2px solid var(--border);
-  border-radius: 0;
-}
-.nav-group--nested .nav-chevron { width: 14px; height: 14px; }
-.nav-group-item--nested.is-open > .nav-group--nested { color: var(--text); }
-.nav-sublink--deep {
-  padding-left: calc(var(--space-3) + 1.4em + var(--space-5) + var(--space-2));
-}
-.nav-sublink--deep.is-active {
-  border-left-color: var(--accent);
+  box-shadow: inset 2px 0 0 var(--accent);
   background: var(--accent-soft);
   color: var(--text);
   font-weight: 600;
 }
+/* Grandparent (top) group header — the most prominent nav level. */
+.nav-group--top { font-weight: 600; }
+/* Mid-level accordion (framework / language group, or Key terms). */
+.nav-group--nested {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+}
+.nav-group--nested .nav-chevron { width: 14px; height: 14px; }
+.nav-group-item--nested.is-open > .nav-group--nested { color: var(--text); }
 .nav-link__num {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
