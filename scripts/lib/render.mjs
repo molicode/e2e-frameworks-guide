@@ -672,119 +672,106 @@ export function sectionMain(sections, index, dict) {
   return `${header}${blocks}${foot}`;
 }
 
-/* ---- interactive content map (a mind-map style index on the home page) ---- */
-const MAP_BRANCHES = [
-  {
-    key: "foundations", icon: "🧭", color: "var(--accent)",
-    leaves: [
-      { id: "intro", icon: "🚀", label: "nav.intro" },
-      { id: "fundamentals", icon: "📐", label: "nav.fundamentals" },
-      { id: "key-terms", icon: "📖", label: "nav.keyterms" },
-    ],
-  },
-  {
-    key: "languages", icon: "💻", color: "var(--fw-python)",
-    leaves: [
-      { id: "python-intro", icon: "🐍", label: "nav.pyqa" },
-      { id: "ts-intro", icon: "🟦", label: "nav.tsqa" },
-    ],
-  },
-  {
-    key: "frameworks", icon: "🧩", color: "var(--fw-playwright)",
-    leaves: [
-      { id: "selenium-filosofia", icon: "🕸️", label: "nav.selenium" },
-      { id: "cypress-filosofia", icon: "🌲", label: "nav.cypress" },
-      { id: "playwright-filosofia", icon: "🎭", label: "nav.playwright" },
-      { id: "robot-filosofia", icon: "🤖", label: "nav.robot" },
-    ],
-  },
-  {
-    key: "approaches", icon: "🧪", color: "var(--fw-bdd)",
-    leaves: [
-      { id: "bdd-intro", icon: "🥒", label: "nav.bdd" },
-      { id: "comparison", icon: "⚖️", label: "nav.comparison" },
-      { id: "perf-intro", icon: "⚡", label: "nav.perf" },
-    ],
-  },
-  {
-    key: "ai", icon: "🤖", color: "var(--fw-maturity)",
-    leaves: [
-      { id: "ai-role", icon: "✨", label: "nav.airole" },
-      { id: "prompts", icon: "💬", label: "nav.prompts" },
-    ],
-  },
-  {
-    key: "process", icon: "🚦", color: "var(--fw-ci)",
-    leaves: [
-      { id: "ci-intro", icon: "🔁", label: "nav.ci" },
-      { id: "best-practices", icon: "✅", label: "nav.best" },
-      { id: "skills-intro", icon: "🛠️", label: "nav.skills" },
-      { id: "maturity-intro", icon: "📊", label: "nav.maturity" },
-      { id: "bibliography", icon: "📚", label: "nav.biblio" },
-    ],
-  },
-];
+/* ==========================================================================
+   Home page = a Duolingo-style learning PATH.
 
-function roadmapMap(dict, sectionHref) {
-  const branches = MAP_BRANCHES.map((b) => {
-    const leaves = b.leaves
-      .map(
-        (l) => `
-              <a class="rmap__leaf" href="${sectionHref(l.id)}">
-                <span class="rmap__leaf-icon" aria-hidden="true">${l.icon}</span>
-                <span class="rmap__leaf-label" data-i18n="${l.label}">${escText(t(dict, l.label))}</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>`
-      )
+   The old mind-map + table-of-contents + achievements panel are merged into a
+   single vertical, winding path of lesson nodes grouped into "units". Every
+   node is a real link (never locked) — progress.js decorates them at runtime:
+   finished nodes get a check, the first unfinished one becomes the highlighted
+   "start here" node, and a summary ring + achievements sit on top.
+   ========================================================================== */
+const NODE_ICON = {
+  intro: "🚀", fundamentals: "📐", "key-terms": "📖",
+  python: "🐍", typescript: "🟦",
+  selenium: "🕸️", cypress: "🌲", playwright: "🎭", robot: "🤖",
+  bdd: "🥒", comparison: "⚖️", perf: "⚡",
+  "ai-role": "✨", prompts: "💬",
+  ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
+};
+const PATH_UNITS = [
+  { key: "foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals", "key-terms"] },
+  { key: "languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
+  { key: "frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot"] },
+  { key: "approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "comparison", "perf"] },
+  { key: "ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai-role", "prompts"] },
+  { key: "process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity", "bibliography"] },
+];
+// Horizontal offsets that give the path its gentle zig-zag (cycled by node).
+const WIND = [0, 54, 88, 54, 0, -54, -88, -54];
+
+// Top-level entry (single section or framework group) keyed by id/group.
+function topsByKey(sections) {
+  const map = {};
+  topLevelEntries(sections).forEach((e) => {
+    if (e.type === "single") {
+      map[e.section.id] = { label: e.section.navKey, pages: [e.section.id], first: e.section.id };
+    } else {
+      map[e.group] = { label: e.groupKey, pages: e.members.map((m) => m.id), first: e.first.id };
+    }
+  });
+  return map;
+}
+
+function learningPath(sections, dict, sectionHref) {
+  const tops = topsByKey(sections);
+  let g = 0; // running node index (drives the continuous zig-zag)
+  const units = PATH_UNITS.map((u, ui) => {
+    const nodes = u.members
+      .map((key) => {
+        const top = tops[key];
+        if (!top) return "";
+        const x = WIND[g % WIND.length];
+        g += 1;
+        const icon = NODE_ICON[key] || "•";
+        const label = escText(t(dict, top.label));
+        return `
+              <li class="lnode" style="--x:${x}px;--c:${u.color}" data-pages="${escAttr(top.pages.join(","))}">
+                <a class="lnode__btn" href="${sectionHref(top.first)}" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
+                  <span class="lnode__icon" aria-hidden="true">${icon}</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
+                </a>
+                <span class="lnode__label" data-i18n="${top.label}">${label}</span>
+              </li>`;
+      })
       .join("");
     return `
-          <div class="rmap__branch" style="--c:${b.color}">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">${b.icon}</span>
-              <span data-i18n="map.${b.key}">${escText(t(dict, "map." + b.key))}</span>
+          <section class="lunit" style="--c:${u.color}">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">${escText(t(dict, "game.unit"))}</span> ${ui + 1}</span>
+                <span class="lunit__title" data-i18n="map.${u.key}">${escText(t(dict, "map." + u.key))}</span>
+              </div>
+              <a class="lunit__cta" href="${sectionHref(tops[u.members[0]].first)}" data-i18n="game.continue">${escText(t(dict, "game.continue"))}</a>
+              <span class="lunit__icon" aria-hidden="true">${u.icon}</span>
             </div>
-            <div class="rmap__leaves">${leaves}
-            </div>
-          </div>`;
+            <ol class="lunit__nodes">${nodes}
+            </ol>
+          </section>`;
   }).join("");
-  return `
-        <section class="rmap" aria-label="${escAttr(t(dict, "map.title"))}">
-          <div class="rmap__root">
-            <span class="rmap__root-icon" aria-hidden="true">🧪</span>
-            <span data-i18n="map.root">${escText(t(dict, "map.root"))}</span>
-          </div>
-          <div class="rmap__stem" aria-hidden="true"></div>
-          <div class="rmap__branches">${branches}
-          </div>
-        </section>`;
+  return `<div class="lpath">${units}\n        </div>`;
 }
 
 /* ---- render the index / landing page's <main> inner content ---- */
 export function indexMain(sections, dict, { sectionHref }) {
-  const cards = topLevelEntries(sections)
-    .map((e, i) => {
-      const num = String(i + 1).padStart(2, "0");
-      const id = e.type === "single" ? e.section.id : e.group;
-      const href = e.type === "single" ? e.section.id : e.first.id;
-      const titleKey = e.type === "single" ? e.section.navKey : e.groupKey;
-      return `
-          <a class="toc-card" href="${sectionHref(href)}">
-            <span class="toc-card__num">${num}</span>
-            <span class="toc-card__title" data-i18n="${titleKey}">${escText(t(dict, titleKey))}</span>
-            <span class="toc-card__desc" data-i18n="home.${id}">${escText(t(dict, "home." + id))}</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>`;
-    })
-    .join("");
+  const C = (2 * Math.PI * 15.5).toFixed(1);
   return `
-        <div class="hero hero--home">
-          <span class="section__eyebrow" data-i18n="home.eyebrow">${escText(t(dict, "home.eyebrow"))}</span>
-          <h1 class="hero__title" data-i18n="home.title">${escText(t(dict, "home.title"))}</h1>
-          <p class="hero__lead" data-i18n="home.lead">${escText(t(dict, "home.lead"))}</p>
-          <a class="cta-btn" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
-        </div>
-        <h2 class="block-label" data-i18n="map.title">${escText(t(dict, "map.title"))}</h2>
-        ${roadmapMap(dict, sectionHref)}
+        <section class="path-hero">
+          <div class="path-hero__ring" id="path-ring">
+            <svg viewBox="0 0 36 36" width="72" height="72" aria-hidden="true">
+              <circle class="path-hero__track" cx="18" cy="18" r="15.5" fill="none" stroke-width="3"/>
+              <circle class="path-hero__fill" id="path-fill" cx="18" cy="18" r="15.5" fill="none" stroke-width="3" stroke-linecap="round" transform="rotate(-90 18 18)" style="stroke-dasharray:${C};stroke-dashoffset:${C}"/>
+            </svg>
+            <span class="path-hero__pct" id="path-pct">0%</span>
+          </div>
+          <div class="path-hero__body">
+            <span class="section__eyebrow" data-i18n="home.eyebrow">${escText(t(dict, "home.eyebrow"))}</span>
+            <h1 class="path-hero__title" data-i18n="home.title">${escText(t(dict, "home.title"))}</h1>
+            <p class="path-hero__msg" id="path-msg" data-i18n="home.lead">${escText(t(dict, "home.lead"))}</p>
+            <a class="cta-btn" id="path-cta" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
+          </div>
+        </section>
         <section class="achievements" id="achievements" hidden>
           <div class="ach-head">
             <h2 class="block-label" data-i18n="game.achievements">${escText(t(dict, "game.achievements"))}</h2>
@@ -792,7 +779,6 @@ export function indexMain(sections, dict, { sectionHref }) {
           </div>
           <div class="ach-grid" id="ach-grid"></div>
         </section>
-        <h2 class="block-label" data-i18n="home.toc">${escText(t(dict, "home.toc"))}</h2>
-        <div class="toc-grid">${cards}
-        </div>`;
+        <h2 class="block-label" data-i18n="game.pathTitle">${escText(t(dict, "game.pathTitle"))}</h2>
+        ${learningPath(sections, dict, sectionHref)}`;
 }

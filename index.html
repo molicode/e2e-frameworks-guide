@@ -393,164 +393,19 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="hero hero--home">
-          <span class="section__eyebrow" data-i18n="home.eyebrow">Guía interactiva · open source</span>
-          <h1 class="hero__title" data-i18n="home.title">Aprendé QA Automation, de cero a tests automáticos</h1>
-          <p class="hero__lead" data-i18n="home.lead">Una guía bilingüe para dominar el testing automatizado: fundamentos, Selenium, Cypress y Playwright. Cada tema explicado a mano y potenciado con AI.</p>
-          <a class="cta-btn" href="sections/intro.html" data-i18n="home.cta">Empezar por la introducción →</a>
-        </div>
-        <h2 class="block-label" data-i18n="map.title">🗺️ Mapa interactivo — tocá un tema para ir directo</h2>
-        
-        <section class="rmap" aria-label="🗺️ Mapa interactivo — tocá un tema para ir directo">
-          <div class="rmap__root">
-            <span class="rmap__root-icon" aria-hidden="true">🧪</span>
-            <span data-i18n="map.root">QA Automation</span>
+        <section class="path-hero">
+          <div class="path-hero__ring" id="path-ring">
+            <svg viewBox="0 0 36 36" width="72" height="72" aria-hidden="true">
+              <circle class="path-hero__track" cx="18" cy="18" r="15.5" fill="none" stroke-width="3"/>
+              <circle class="path-hero__fill" id="path-fill" cx="18" cy="18" r="15.5" fill="none" stroke-width="3" stroke-linecap="round" transform="rotate(-90 18 18)" style="stroke-dasharray:97.4;stroke-dashoffset:97.4"/>
+            </svg>
+            <span class="path-hero__pct" id="path-pct">0%</span>
           </div>
-          <div class="rmap__stem" aria-hidden="true"></div>
-          <div class="rmap__branches">
-          <div class="rmap__branch" style="--c:var(--accent)">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">🧭</span>
-              <span data-i18n="map.foundations">Fundamentos</span>
-            </div>
-            <div class="rmap__leaves">
-              <a class="rmap__leaf" href="sections/intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🚀</span>
-                <span class="rmap__leaf-label" data-i18n="nav.intro">Introducción</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/fundamentals.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">📐</span>
-                <span class="rmap__leaf-label" data-i18n="nav.fundamentals">Fundamentos</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/key-terms.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">📖</span>
-                <span class="rmap__leaf-label" data-i18n="nav.keyterms">Conceptos clave</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-          <div class="rmap__branch" style="--c:var(--fw-python)">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">💻</span>
-              <span data-i18n="map.languages">Lenguajes</span>
-            </div>
-            <div class="rmap__leaves">
-              <a class="rmap__leaf" href="sections/python-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🐍</span>
-                <span class="rmap__leaf-label" data-i18n="nav.pyqa">Python para QA</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/ts-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🟦</span>
-                <span class="rmap__leaf-label" data-i18n="nav.tsqa">TypeScript para QA</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-          <div class="rmap__branch" style="--c:var(--fw-playwright)">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">🧩</span>
-              <span data-i18n="map.frameworks">Frameworks E2E</span>
-            </div>
-            <div class="rmap__leaves">
-              <a class="rmap__leaf" href="sections/selenium-filosofia.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🕸️</span>
-                <span class="rmap__leaf-label" data-i18n="nav.selenium">Selenium</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/cypress-filosofia.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🌲</span>
-                <span class="rmap__leaf-label" data-i18n="nav.cypress">Cypress</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/playwright-filosofia.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🎭</span>
-                <span class="rmap__leaf-label" data-i18n="nav.playwright">Playwright</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/robot-filosofia.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🤖</span>
-                <span class="rmap__leaf-label" data-i18n="nav.robot">Robot Framework</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-          <div class="rmap__branch" style="--c:var(--fw-bdd)">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">🧪</span>
-              <span data-i18n="map.approaches">Enfoques</span>
-            </div>
-            <div class="rmap__leaves">
-              <a class="rmap__leaf" href="sections/bdd-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🥒</span>
-                <span class="rmap__leaf-label" data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/comparison.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">⚖️</span>
-                <span class="rmap__leaf-label" data-i18n="nav.comparison">Comparativa</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/perf-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">⚡</span>
-                <span class="rmap__leaf-label" data-i18n="nav.perf">Performance testing</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-          <div class="rmap__branch" style="--c:var(--fw-maturity)">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">🤖</span>
-              <span data-i18n="map.ai">AI en QA</span>
-            </div>
-            <div class="rmap__leaves">
-              <a class="rmap__leaf" href="sections/ai-role.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">✨</span>
-                <span class="rmap__leaf-label" data-i18n="nav.airole">El rol de la AI</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/prompts.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">💬</span>
-                <span class="rmap__leaf-label" data-i18n="nav.prompts">Ejemplos con AI</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-          <div class="rmap__branch" style="--c:var(--fw-ci)">
-            <div class="rmap__cat">
-              <span class="rmap__cat-icon" aria-hidden="true">🚦</span>
-              <span data-i18n="map.process">Proceso y carrera</span>
-            </div>
-            <div class="rmap__leaves">
-              <a class="rmap__leaf" href="sections/ci-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🔁</span>
-                <span class="rmap__leaf-label" data-i18n="nav.ci">CI/CD para QA</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/best-practices.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">✅</span>
-                <span class="rmap__leaf-label" data-i18n="nav.best">Buenas prácticas</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/skills-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">🛠️</span>
-                <span class="rmap__leaf-label" data-i18n="nav.skills">Habilidades del QA</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/maturity-intro.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">📊</span>
-                <span class="rmap__leaf-label" data-i18n="nav.maturity">Estrategia y madurez de QA</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="rmap__leaf" href="sections/bibliography.html">
-                <span class="rmap__leaf-icon" aria-hidden="true">📚</span>
-                <span class="rmap__leaf-label" data-i18n="nav.biblio">Bibliografía</span>
-                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
+          <div class="path-hero__body">
+            <span class="section__eyebrow" data-i18n="home.eyebrow">Guía interactiva · open source</span>
+            <h1 class="path-hero__title" data-i18n="home.title">Aprendé QA Automation, de cero a tests automáticos</h1>
+            <p class="path-hero__msg" id="path-msg" data-i18n="home.lead">Una guía bilingüe para dominar el testing automatizado: fundamentos, Selenium, Cypress y Playwright. Cada tema explicado a mano y potenciado con AI.</p>
+            <a class="cta-btn" id="path-cta" href="sections/intro.html" data-i18n="home.cta">Empezar por la introducción →</a>
           </div>
         </section>
         <section class="achievements" id="achievements" hidden>
@@ -560,122 +415,232 @@
           </div>
           <div class="ach-grid" id="ach-grid"></div>
         </section>
-        <h2 class="block-label" data-i18n="home.toc">Contenido</h2>
-        <div class="toc-grid">
-          <a class="toc-card" href="sections/intro.html">
-            <span class="toc-card__num">01</span>
-            <span class="toc-card__title" data-i18n="nav.intro">Introducción</span>
-            <span class="toc-card__desc" data-i18n="home.intro">Qué es QA y automation, por qué importan, manual vs automatizado.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/fundamentals.html">
-            <span class="toc-card__num">02</span>
-            <span class="toc-card__title" data-i18n="nav.fundamentals">Fundamentos</span>
-            <span class="toc-card__desc" data-i18n="home.fundamentals">Tipos de tests, la pirámide, assertions, selectores y flaky tests.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/python-intro.html">
-            <span class="toc-card__num">03</span>
-            <span class="toc-card__title" data-i18n="nav.pyqa">Python para QA</span>
-            <span class="toc-card__desc" data-i18n="home.python">Python de 0 a hero para QA: sintaxis, colecciones, pytest y tu primer test.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/ts-intro.html">
-            <span class="toc-card__num">04</span>
-            <span class="toc-card__title" data-i18n="nav.tsqa">TypeScript para QA</span>
-            <span class="toc-card__desc" data-i18n="home.typescript">TypeScript de 0 a hero para QA: tipos, interfaces, Vitest y tu primer test.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/selenium-filosofia.html">
-            <span class="toc-card__num">05</span>
-            <span class="toc-card__title" data-i18n="nav.selenium">Selenium</span>
-            <span class="toc-card__desc" data-i18n="home.selenium">El estándar W3C WebDriver: ruta de aprendizaje de 6 pasos.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/cypress-filosofia.html">
-            <span class="toc-card__num">06</span>
-            <span class="toc-card__title" data-i18n="nav.cypress">Cypress</span>
-            <span class="toc-card__desc" data-i18n="home.cypress">La mejor DX, runner visual y auto-retry: ruta de 6 pasos.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/playwright-filosofia.html">
-            <span class="toc-card__num">07</span>
-            <span class="toc-card__title" data-i18n="nav.playwright">Playwright</span>
-            <span class="toc-card__desc" data-i18n="home.playwright">Multi-navegador, auto-wait y trazas: ruta de 6 pasos.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/robot-filosofia.html">
-            <span class="toc-card__num">08</span>
-            <span class="toc-card__title" data-i18n="nav.robot">Robot Framework</span>
-            <span class="toc-card__desc" data-i18n="home.robot">Keyword-driven y legible: tests en lenguaje casi natural con librerías Python.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/bdd-intro.html">
-            <span class="toc-card__num">09</span>
-            <span class="toc-card__title" data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
-            <span class="toc-card__desc" data-i18n="home.bdd">Behavior-Driven Development: Gherkin (Given/When/Then) y Cucumber para dar contexto.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/comparison.html">
-            <span class="toc-card__num">10</span>
-            <span class="toc-card__title" data-i18n="nav.comparison">Comparativa</span>
-            <span class="toc-card__desc" data-i18n="home.comparison">El mismo test VerifyOrder resuelto en los 3 frameworks.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/perf-intro.html">
-            <span class="toc-card__num">11</span>
-            <span class="toc-card__title" data-i18n="nav.perf">Performance testing</span>
-            <span class="toc-card__desc" data-i18n="home.perf">Pruebas de carga y rendimiento: métricas, tipos y k6, JMeter y Locust.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/ai-role.html">
-            <span class="toc-card__num">12</span>
-            <span class="toc-card__title" data-i18n="nav.airole">El rol de la AI</span>
-            <span class="toc-card__desc" data-i18n="home.ai-role">Cómo la AI complementa cada etapa del testing.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/prompts.html">
-            <span class="toc-card__num">13</span>
-            <span class="toc-card__title" data-i18n="nav.prompts">Ejemplos con AI</span>
-            <span class="toc-card__desc" data-i18n="home.prompts">Prompts concretos, cómo iterar y cómo validar el output.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/best-practices.html">
-            <span class="toc-card__num">14</span>
-            <span class="toc-card__title" data-i18n="nav.best">Buenas prácticas</span>
-            <span class="toc-card__desc" data-i18n="home.best-practices">Principios que perduran y tus próximos pasos.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/ci-intro.html">
-            <span class="toc-card__num">15</span>
-            <span class="toc-card__title" data-i18n="nav.ci">CI/CD para QA</span>
-            <span class="toc-card__desc" data-i18n="home.ci">Correr los tests en el pipeline: workflow, paralelización, quality gates y reportes.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/skills-intro.html">
-            <span class="toc-card__num">16</span>
-            <span class="toc-card__title" data-i18n="nav.skills">Habilidades del QA</span>
-            <span class="toc-card__desc" data-i18n="home.skills">Habilidades transversales del QA: SQL, Git y testing mobile con Appium.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/maturity-intro.html">
-            <span class="toc-card__num">17</span>
-            <span class="toc-card__title" data-i18n="nav.maturity">Estrategia y madurez de QA</span>
-            <span class="toc-card__desc" data-i18n="home.maturity">QA como estrategia: roadmap de madurez en 4 fases, KPIs, modelos e ISTQB.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/key-terms.html">
-            <span class="toc-card__num">18</span>
-            <span class="toc-card__title" data-i18n="nav.keyterms">Conceptos clave</span>
-            <span class="toc-card__desc" data-i18n="home.key-terms">Glosario de términos clave de QA para entrevistas, ordenado por categoría.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="toc-card" href="sections/bibliography.html">
-            <span class="toc-card__num">19</span>
-            <span class="toc-card__title" data-i18n="nav.biblio">Bibliografía</span>
-            <span class="toc-card__desc" data-i18n="home.bibliography">Fuentes oficiales de Selenium, Cypress, Playwright y AI.</span>
-            <span class="toc-card__arrow" aria-hidden="true">→</span>
-          </a>
+        <h2 class="block-label" data-i18n="game.pathTitle">🗺️ Tu ruta de aprendizaje</h2>
+        <div class="lpath">
+          <section class="lunit" style="--c:var(--accent)">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">Unidad</span> 1</span>
+                <span class="lunit__title" data-i18n="map.foundations">Fundamentos</span>
+              </div>
+              <a class="lunit__cta" href="sections/intro.html" data-i18n="game.continue">Continuar →</a>
+              <span class="lunit__icon" aria-hidden="true">🧭</span>
+            </div>
+            <ol class="lunit__nodes">
+              <li class="lnode" style="--x:0px;--c:var(--accent)" data-pages="intro">
+                <a class="lnode__btn" href="sections/intro.html" aria-label="Introducción" data-i18n-attr="aria-label:nav.intro">
+                  <span class="lnode__icon" aria-hidden="true">🚀</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.intro">Introducción</span>
+              </li>
+              <li class="lnode" style="--x:54px;--c:var(--accent)" data-pages="fundamentals">
+                <a class="lnode__btn" href="sections/fundamentals.html" aria-label="Fundamentos" data-i18n-attr="aria-label:nav.fundamentals">
+                  <span class="lnode__icon" aria-hidden="true">📐</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.fundamentals">Fundamentos</span>
+              </li>
+              <li class="lnode" style="--x:88px;--c:var(--accent)" data-pages="key-terms">
+                <a class="lnode__btn" href="sections/key-terms.html" aria-label="Conceptos clave" data-i18n-attr="aria-label:nav.keyterms">
+                  <span class="lnode__icon" aria-hidden="true">📖</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.keyterms">Conceptos clave</span>
+              </li>
+            </ol>
+          </section>
+          <section class="lunit" style="--c:var(--fw-python)">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">Unidad</span> 2</span>
+                <span class="lunit__title" data-i18n="map.languages">Lenguajes</span>
+              </div>
+              <a class="lunit__cta" href="sections/python-intro.html" data-i18n="game.continue">Continuar →</a>
+              <span class="lunit__icon" aria-hidden="true">💻</span>
+            </div>
+            <ol class="lunit__nodes">
+              <li class="lnode" style="--x:54px;--c:var(--fw-python)" data-pages="python-intro,python-hola,python-fundamentos,python-datos,python-pytest,python-componente">
+                <a class="lnode__btn" href="sections/python-intro.html" aria-label="Python para QA" data-i18n-attr="aria-label:nav.pyqa">
+                  <span class="lnode__icon" aria-hidden="true">🐍</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.pyqa">Python para QA</span>
+              </li>
+              <li class="lnode" style="--x:0px;--c:var(--fw-python)" data-pages="ts-intro,ts-hola,ts-fundamentos,ts-tipos,ts-pruebas,ts-componente">
+                <a class="lnode__btn" href="sections/ts-intro.html" aria-label="TypeScript para QA" data-i18n-attr="aria-label:nav.tsqa">
+                  <span class="lnode__icon" aria-hidden="true">🟦</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.tsqa">TypeScript para QA</span>
+              </li>
+            </ol>
+          </section>
+          <section class="lunit" style="--c:var(--fw-playwright)">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">Unidad</span> 3</span>
+                <span class="lunit__title" data-i18n="map.frameworks">Frameworks E2E</span>
+              </div>
+              <a class="lunit__cta" href="sections/selenium-filosofia.html" data-i18n="game.continue">Continuar →</a>
+              <span class="lunit__icon" aria-hidden="true">🧩</span>
+            </div>
+            <ol class="lunit__nodes">
+              <li class="lnode" style="--x:-54px;--c:var(--fw-playwright)" data-pages="selenium-filosofia,selenium-hola-mundo,selenium-ruta,selenium-componentes,selenium-criticos,selenium-verbos,selenium-flashcards,selenium-entrevista">
+                <a class="lnode__btn" href="sections/selenium-filosofia.html" aria-label="Selenium" data-i18n-attr="aria-label:nav.selenium">
+                  <span class="lnode__icon" aria-hidden="true">🕸️</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.selenium">Selenium</span>
+              </li>
+              <li class="lnode" style="--x:-88px;--c:var(--fw-playwright)" data-pages="cypress-filosofia,cypress-hola-mundo,cypress-ruta,cypress-componentes,cypress-criticos,cypress-verbos,cypress-flashcards,cypress-entrevista">
+                <a class="lnode__btn" href="sections/cypress-filosofia.html" aria-label="Cypress" data-i18n-attr="aria-label:nav.cypress">
+                  <span class="lnode__icon" aria-hidden="true">🌲</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.cypress">Cypress</span>
+              </li>
+              <li class="lnode" style="--x:-54px;--c:var(--fw-playwright)" data-pages="playwright-filosofia,playwright-hola-mundo,playwright-ruta,playwright-componentes,playwright-criticos,playwright-verbos,playwright-flashcards,playwright-entrevista">
+                <a class="lnode__btn" href="sections/playwright-filosofia.html" aria-label="Playwright" data-i18n-attr="aria-label:nav.playwright">
+                  <span class="lnode__icon" aria-hidden="true">🎭</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.playwright">Playwright</span>
+              </li>
+              <li class="lnode" style="--x:0px;--c:var(--fw-playwright)" data-pages="robot-filosofia,robot-hola-mundo,robot-ruta,robot-componentes,robot-criticos,robot-verbos,robot-flashcards,robot-entrevista">
+                <a class="lnode__btn" href="sections/robot-filosofia.html" aria-label="Robot Framework" data-i18n-attr="aria-label:nav.robot">
+                  <span class="lnode__icon" aria-hidden="true">🤖</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.robot">Robot Framework</span>
+              </li>
+            </ol>
+          </section>
+          <section class="lunit" style="--c:var(--fw-bdd)">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">Unidad</span> 4</span>
+                <span class="lunit__title" data-i18n="map.approaches">Enfoques</span>
+              </div>
+              <a class="lunit__cta" href="sections/bdd-intro.html" data-i18n="game.continue">Continuar →</a>
+              <span class="lunit__icon" aria-hidden="true">🧪</span>
+            </div>
+            <ol class="lunit__nodes">
+              <li class="lnode" style="--x:54px;--c:var(--fw-bdd)" data-pages="bdd-intro,bdd-gherkin,bdd-cucumber,bdd-practica">
+                <a class="lnode__btn" href="sections/bdd-intro.html" aria-label="BDD: Gherkin y Cucumber" data-i18n-attr="aria-label:nav.bdd">
+                  <span class="lnode__icon" aria-hidden="true">🥒</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
+              </li>
+              <li class="lnode" style="--x:88px;--c:var(--fw-bdd)" data-pages="comparison">
+                <a class="lnode__btn" href="sections/comparison.html" aria-label="Comparativa" data-i18n-attr="aria-label:nav.comparison">
+                  <span class="lnode__icon" aria-hidden="true">⚖️</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.comparison">Comparativa</span>
+              </li>
+              <li class="lnode" style="--x:54px;--c:var(--fw-bdd)" data-pages="perf-intro,perf-k6,perf-jmeter,perf-locust">
+                <a class="lnode__btn" href="sections/perf-intro.html" aria-label="Performance testing" data-i18n-attr="aria-label:nav.perf">
+                  <span class="lnode__icon" aria-hidden="true">⚡</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.perf">Performance testing</span>
+              </li>
+            </ol>
+          </section>
+          <section class="lunit" style="--c:var(--fw-maturity)">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">Unidad</span> 5</span>
+                <span class="lunit__title" data-i18n="map.ai">AI en QA</span>
+              </div>
+              <a class="lunit__cta" href="sections/ai-role.html" data-i18n="game.continue">Continuar →</a>
+              <span class="lunit__icon" aria-hidden="true">🤖</span>
+            </div>
+            <ol class="lunit__nodes">
+              <li class="lnode" style="--x:0px;--c:var(--fw-maturity)" data-pages="ai-role">
+                <a class="lnode__btn" href="sections/ai-role.html" aria-label="El rol de la AI" data-i18n-attr="aria-label:nav.airole">
+                  <span class="lnode__icon" aria-hidden="true">✨</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.airole">El rol de la AI</span>
+              </li>
+              <li class="lnode" style="--x:-54px;--c:var(--fw-maturity)" data-pages="prompts">
+                <a class="lnode__btn" href="sections/prompts.html" aria-label="Ejemplos con AI" data-i18n-attr="aria-label:nav.prompts">
+                  <span class="lnode__icon" aria-hidden="true">💬</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.prompts">Ejemplos con AI</span>
+              </li>
+            </ol>
+          </section>
+          <section class="lunit" style="--c:var(--fw-ci)">
+            <div class="lunit__banner">
+              <div class="lunit__meta">
+                <span class="lunit__eyebrow"><span data-i18n="game.unit">Unidad</span> 6</span>
+                <span class="lunit__title" data-i18n="map.process">Proceso y carrera</span>
+              </div>
+              <a class="lunit__cta" href="sections/ci-intro.html" data-i18n="game.continue">Continuar →</a>
+              <span class="lunit__icon" aria-hidden="true">🚦</span>
+            </div>
+            <ol class="lunit__nodes">
+              <li class="lnode" style="--x:-88px;--c:var(--fw-ci)" data-pages="ci-intro,ci-pipeline,ci-matrix,ci-gates">
+                <a class="lnode__btn" href="sections/ci-intro.html" aria-label="CI/CD para QA" data-i18n-attr="aria-label:nav.ci">
+                  <span class="lnode__icon" aria-hidden="true">🔁</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.ci">CI/CD para QA</span>
+              </li>
+              <li class="lnode" style="--x:-54px;--c:var(--fw-ci)" data-pages="best-practices">
+                <a class="lnode__btn" href="sections/best-practices.html" aria-label="Buenas prácticas" data-i18n-attr="aria-label:nav.best">
+                  <span class="lnode__icon" aria-hidden="true">✅</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.best">Buenas prácticas</span>
+              </li>
+              <li class="lnode" style="--x:0px;--c:var(--fw-ci)" data-pages="skills-intro,skills-sql,skills-git,skills-appium">
+                <a class="lnode__btn" href="sections/skills-intro.html" aria-label="Habilidades del QA" data-i18n-attr="aria-label:nav.skills">
+                  <span class="lnode__icon" aria-hidden="true">🛠️</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.skills">Habilidades del QA</span>
+              </li>
+              <li class="lnode" style="--x:54px;--c:var(--fw-ci)" data-pages="maturity-intro,maturity-roadmap,maturity-kpis,maturity-istqb">
+                <a class="lnode__btn" href="sections/maturity-intro.html" aria-label="Estrategia y madurez de QA" data-i18n-attr="aria-label:nav.maturity">
+                  <span class="lnode__icon" aria-hidden="true">📊</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.maturity">Estrategia y madurez de QA</span>
+              </li>
+              <li class="lnode" style="--x:88px;--c:var(--fw-ci)" data-pages="bibliography">
+                <a class="lnode__btn" href="sections/bibliography.html" aria-label="Bibliografía" data-i18n-attr="aria-label:nav.biblio">
+                  <span class="lnode__icon" aria-hidden="true">📚</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
+                </a>
+                <span class="lnode__label" data-i18n="nav.biblio">Bibliografía</span>
+              </li>
+            </ol>
+          </section>
         </div>
       </div>
     </main>
