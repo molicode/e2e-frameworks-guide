@@ -183,12 +183,14 @@
                 <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="iv.cypress.q1">¿Por qué en Cypress no usás async/await?</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="iv.cypress.a1">Los comandos se encolan y ejecutan en orden; Cypress maneja la asincronía. Si necesito el valor resuelto, uso .then().</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="iv.cypress.a1">Los comandos se encolan y ejecutan en orden, Cypress maneja la asincronía. Si necesito el valor uso .then(). Por ejemplo: cy.get('.total').then($el =&gt; expect($el.text()).to.eq('250')) en vez de un await.</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
@@ -198,12 +200,14 @@
                 <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="iv.cypress.q2">¿Cómo evitás la flakiness en Cypress?</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="iv.cypress.a2">Aprovecho el retry automático de .should(), evito waits fijos, uso cy.intercept() para esperar requests y selectores data-cy.</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="iv.cypress.a2">Aprovecho el retry automático de .should() y espero requests con cy.intercept(). Por ejemplo: cy.intercept('GET', '/orders').as('load'); cy.visit('/'); cy.wait('@load') en lugar de un cy.wait(3000) fijo.</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
@@ -213,12 +217,14 @@
                 <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="iv.cypress.q3">¿Cómo mockeás el backend?</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="iv.cypress.a3">Con cy.intercept() para stubbear respuestas y controlar estados (errores, listas vacías, loading).</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="iv.cypress.a3">Con cy.intercept() stubbeo la respuesta para controlar el estado. Por ejemplo: cy.intercept('GET', '/orders', { statusCode: 500 }) para probar cómo se ve la UI cuando el backend falla, sin depender de un servidor real.</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
@@ -228,12 +234,14 @@
                 <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="iv.cypress.q4">¿Qué limitaciones de Cypress tenés en cuenta?</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="iv.cypress.a4">Un solo origen/pestaña por test y multi-tab limitado; conviene diseñar los tests alrededor de eso.</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="iv.cypress.a4">Un solo origen/pestaña por test y multi-tab limitado. Por ejemplo, si el flujo abre una pestaña nueva o va a un dominio de pago externo, lo resuelvo con cy.request() o stubbeando, en vez de navegar de verdad.</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
@@ -243,12 +251,14 @@
                 <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="iv.cypress.q5">¿Cómo mantenés selectores estables?</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="iv.cypress.a5">Con atributos data-cy dedicados, desacoplados de clases y estilos que cambian.</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="iv.cypress.a5">Con atributos data-cy dedicados. Por ejemplo, cy.get('[data-cy=submit]') en vez de cy.get('.btn.btn-primary'), que se rompe apenas alguien cambia el CSS.</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
@@ -258,12 +268,14 @@
                 <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
                 <div class="iv-bubble iv-bubble--q">
                   <p class="iv-text" data-i18n="iv.cypress.q6">¿Cómo testeás endpoints sin UI?</p>
-                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
               </div>
-              <div class="iv-row iv-row--a" hidden>
-                <div class="iv-bubble iv-bubble--a">
-                  <p class="iv-text" data-i18n="iv.cypress.a6">Con cy.request(), verificando el status y el body.</p>
+              <div class="iv-row iv-row--a">
+                <div class="iv-answer">
+                  <div class="iv-bubble iv-bubble--a" hidden>
+                    <p class="iv-text" data-i18n="iv.cypress.a6">Con cy.request() verifico status y body. Por ejemplo: cy.request('POST', '/orders', order).its('status').should('eq', 201) para chequear la API sin abrir la pantalla.</p>
+                  </div>
+                  <button class="iv-reveal" type="button" aria-expanded="false" data-i18n="iv.reveal">Ver respuesta</button>
                 </div>
                 <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>

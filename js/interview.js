@@ -20,7 +20,7 @@
     if (!turns.length) return;
     var toggleAll = qs(".iv-toggle-all", root);
 
-    function answerOf(turn) { return qs(".iv-row--a", turn); }
+    function answerOf(turn) { return qs(".iv-bubble--a", turn); }
     function revealBtn(turn) { return qs(".iv-reveal", turn); }
 
     var cheered = false;

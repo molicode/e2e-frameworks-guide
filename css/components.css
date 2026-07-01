@@ -1437,6 +1437,15 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .iv-who--a { color: var(--success); }
 
+/* the candidate's answer area (bubble + reveal button, right side) */
+.iv-answer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  max-width: 78%;
+}
+.iv-bubble[hidden] { display: none; }
 .iv-bubble {
   position: relative;
   max-width: 78%;
@@ -1444,6 +1453,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
 }
+.iv-answer .iv-bubble { max-width: 100%; }
 .iv-bubble--q { background: var(--surface-2); border-color: color-mix(in srgb, var(--accent) 30%, var(--border)); border-top-left-radius: 4px; }
 .iv-bubble--a { background: color-mix(in srgb, var(--success) 8%, var(--surface)); border-color: color-mix(in srgb, var(--success) 35%, var(--border)); border-top-right-radius: 4px; }
 /* little speech-bubble tails toward each avatar */
@@ -1455,19 +1465,19 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .iv-bubble--q .iv-text { color: var(--text); font-weight: 600; }
 .iv-reveal {
   appearance: none;
-  margin-top: var(--space-3);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--accent);
+  align-self: flex-end;
+  border: 1px solid color-mix(in srgb, var(--success) 45%, var(--border));
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
+  color: var(--success);
   font-family: inherit;
   font-size: var(--fs-xs);
-  font-weight: 600;
+  font-weight: 700;
   border-radius: var(--radius-sm);
-  padding: var(--space-1) var(--space-3);
+  padding: var(--space-2) var(--space-3);
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition);
 }
-.iv-reveal:hover { border-color: var(--accent); background: var(--accent-soft); }
+.iv-reveal:hover { border-color: var(--success); background: color-mix(in srgb, var(--success) 16%, transparent); }
 @media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { width: 46px; } }
 @media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } }
 
