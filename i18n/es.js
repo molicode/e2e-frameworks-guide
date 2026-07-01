@@ -1906,6 +1906,39 @@ I18n.register("es", {
   "cpt.auto-mobile.ex": "Automatizás apps nativas/híbridas con la misma idea que WebDriver:<pre class=\"cpt-code\"><code>el = driver.find_element(AppiumBy.ACCESSIBILITY_ID, \"loginBtn\")\nel.click()</code></pre>",
   "cpt.auto-mobile.uc": "Appium maneja Android e iOS con una API estilo Selenium. QA prioriza lo propio del móvil que no existe en web: rotación, permisos, red intermitente, botón atrás del sistema y gestos (swipe, pinch).",
 
+  "cpt.design-ep.ex": "Dividís las entradas en grupos que se comportan igual y probás un representante de cada uno. Campo edad (válido 0–150):<pre class=\"cpt-code\"><code>Inválido bajo:  -5        → 1 caso\nVálido:         0 a 150   → 1 caso (ej. 30)\nInválido alto:  200       → 1 caso</code></pre>3 casos cubren infinitas entradas.",
+  "cpt.design-ep.uc": "Reduce la explosión de casos sin perder cobertura. QA identifica las particiones (válidas e inválidas) de cada campo y prueba <strong>una de cada</strong>, en vez de mil valores redundantes del mismo grupo.",
+
+  "cpt.design-bva.ex": "Los bugs viven en los bordes. Para un rango válido 1–100 probás el límite y ±1:<pre class=\"cpt-code\"><code>0    (justo debajo)  → inválido\n1    (mínimo)        → válido\n100  (máximo)        → válido\n101  (justo encima)  → inválido</code></pre>",
+  "cpt.design-bva.uc": "Complementa a Equivalence Partitioning probando los <strong>límites exactos</strong>, donde están los clásicos errores de <code>&lt;</code> vs <code>&lt;=</code>. Ideal para montos, edades, longitudes de campo y fechas.",
+
+  "cpt.design-dt.ex": "Mapeás combinaciones de condiciones a una acción. Descuento de una tienda:<pre class=\"cpt-code\"><code>¿Socio? | ¿Compra &gt; $100? | Descuento\n  No    |      No         |    0%\n  No    |      Sí         |    5%\n  Sí    |      No         |    5%\n  Sí    |      Sí         |   15%</code></pre>",
+  "cpt.design-dt.uc": "Sirve para reglas de negocio con varias condiciones combinadas. QA arma la tabla, deriva <strong>un caso por fila</strong> y detecta combinaciones que los desarrolladores olvidaron implementar.",
+
+  "cpt.design-state.ex": "Modelás los estados y qué transiciones son válidas o inválidas. Una orden:<pre class=\"cpt-code\"><code>Nueva → Pagada → Enviada → Entregada\n            ↘ Cancelada\n\nInválido: Entregada → Pagada  (no debería poder volver)</code></pre>",
+  "cpt.design-state.uc": "Sirve para flujos con estados (pedidos, suscripciones, sesiones). QA prueba las transiciones válidas y —sobre todo— las <strong>inválidas</strong>, que el sistema debería rechazar en vez de permitir.",
+
+  "cpt.design-pairwise.ex": "En vez de todas las combinaciones (explotan), cubrís todos los <em>pares</em>. 3 variables × 3 valores:<pre class=\"cpt-code\"><code>SO × Navegador × Idioma\ntodas:    3 × 3 × 3 = 27 combinaciones\npairwise: ~9 casos cubren cada par al menos una vez</code></pre>",
+  "cpt.design-pairwise.uc": "La mayoría de los bugs surgen de la interacción de <strong>dos</strong> factores. QA usa herramientas (PICT, allpairs) para generar un set chico que cubre todos los pares, ahorrando decenas de casos con cobertura casi igual.",
+
+  "cpt.design-trace.ex": "Una matriz que conecta requisitos con sus casos de prueba:<pre class=\"cpt-code\"><code>Requisito       | Casos       | Estado\nRF-01 Login     | TC-1, TC-2  | cubierto\nRF-02 Pago      | TC-5        | falta caso borde\nRF-03 Reporte   | —           | SIN cobertura ✗</code></pre>",
+  "cpt.design-trace.uc": "Muestra de un vistazo qué requisito está cubierto y cuál no. QA la usa para detectar huecos de cobertura y para el <strong>análisis de impacto</strong>: si cambia RF-02, qué casos hay que volver a correr.",
+
+  "cpt.def-sevprio.ex": "Dos ejes distintos que se suelen confundir:<pre class=\"cpt-code\"><code>Severidad = impacto técnico | Prioridad = urgencia de arreglo\n\nLogo mal en la home:  Sev BAJA  / Prio ALTA (se ve, sale hoy)\nCrash muy raro:       Sev ALTA  / Prio BAJA (1 usuario, flujo muerto)</code></pre>",
+  "cpt.def-sevprio.uc": "QA asigna la <strong>severidad</strong> (objetiva, técnica) y propone una prioridad; el PO/equipo decide la <strong>prioridad</strong> final según negocio. Separarlas evita discusiones y ordena bien el backlog de bugs.",
+
+  "cpt.def-lifecycle.ex": "El ciclo de vida de un bug, con estados en el tracker:<pre class=\"cpt-code\"><code>New → Assigned → In Progress → Fixed → Retest\n                                    ↘ Reopened (si sigue)\n                                    → Closed\nOtros: Rejected / Duplicate / Won't fix</code></pre>",
+  "cpt.def-lifecycle.uc": "Da un lenguaje común de estados (en Jira, etc.). QA abre el bug, verifica el arreglo (retest) y lo cierra o lo reabre; sabe que <strong>“Fixed” no es “Closed”</strong> hasta que lo vuelve a probar.",
+
+  "cpt.def-rca.ex": "Buscás la causa real, no el síntoma. Técnica de los “5 porqués”:<pre class=\"cpt-code\"><code>Falla el pago\n → ¿por qué? timeout a la pasarela\n → ¿por qué? no había reintento\n → ¿por qué? no se contempló la caída del proveedor\n → causa raíz: falta manejo de errores + retry</code></pre>",
+  "cpt.def-rca.uc": "Evita arreglos superficiales que dejan volver al bug. QA aporta la evidencia (logs, pasos) y participa del análisis para que se corrija la <strong>causa</strong> y se agregue un test que cubra ese escenario a futuro.",
+
+  "cpt.def-triage.ex": "Reunión donde se clasifican los bugs nuevos:<pre class=\"cpt-code\"><code>Bug #123 → severidad? prioridad? ¿a quién? ¿este sprint?\nSalida:   arreglar ya / al backlog / rechazar / falta info</code></pre>",
+  "cpt.def-triage.uc": "Mantiene el flujo de defectos ordenado y evita que se acumulen sin decisión. QA presenta cada bug con datos claros (impacto, pasos, evidencia) para que el triage sea rápido y las decisiones, informadas.",
+
+  "cpt.def-repro.ex": "Un buen reporte permite reproducir el bug sin adivinar:<pre class=\"cpt-code\"><code>Pasos:    1) login  2) agregar al carrito  3) aplicar cupón ABC\nEsperado: total con 10% de descuento\nActual:   total sin descuento\nEntorno:  Chrome 120, staging  |  Adjunto: video + logs</code></pre>",
+  "cpt.def-repro.uc": "Sin pasos claros el dev no puede arreglarlo (“no reproduce”) y el bug rebota. QA escribe pasos <strong>mínimos y deterministas</strong>, con esperado vs actual, entorno y evidencia — el reporte que a uno le gustaría recibir.",
+
   "kt.cat.maturity": "Métricas, madurez y certificación",
   "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
