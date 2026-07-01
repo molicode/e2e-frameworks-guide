@@ -16,6 +16,14 @@ import { SAMPLES, CONCEPTS } from "./model.mjs";
 import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
 import { renderRunner } from "./runner.mjs";
+import { brandFor, brandIcon } from "./icons.mjs";
+
+// A framework/language chip with its real brand logo (falls back to just the
+// coloured label when there's no matching brand mark).
+function fwChip(label, color, extraStyle = "") {
+  const logo = brandIcon(brandFor(label), "fw-chip__logo");
+  return `<span class="fw-chip" style="--chip-color:${color}${extraStyle}">${logo}${escText(label)}</span>`;
+}
 
 // Spanish-commented variant of a code sample, if one exists. These live as raw
 // text files under samples.es/<id>.txt (same code, only comments translated) so
@@ -213,7 +221,7 @@ function renderBlock(block, dict) {
     case "fwblock": {
       return `
         <div class="fw-block">
-          <span class="fw-chip" style="--chip-color:${block.chip.color}">${escText(block.chip.label)}</span>
+          ${fwChip(block.chip.label, block.chip.color)}
           <p class="prose" data-i18n-html="${block.note}">${t(dict, block.note)}</p>
           ${codeBlock(block.sample, dict)}
         </div>`;
@@ -495,11 +503,11 @@ function sectionHeader(section, topNum, dict) {
       ? `<span class="lang-pill" title="${escAttr(t(dict, "ui.langLabel"))}">${escText(section.chip.lang)}</span>`
       : "";
     return `
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:${section.chip.color}">${escText(section.chip.label)}</span>${langPill}</div>
+        <div class="section__crumb">${fwChip(section.chip.label, section.chip.color)}${langPill}</div>
         <h1 class="section__title" data-i18n="${section.navKey}">${escText(t(dict, section.navKey))}</h1>`;
   }
   const chip = section.chip
-    ? ` <span class="fw-chip" style="--chip-color:${section.chip.color};margin-left:var(--space-3)">${escText(section.chip.label)}</span>`
+    ? ` ${fwChip(section.chip.label, section.chip.color, ";margin-left:var(--space-3)")}`
     : "";
   return `
         <span class="section__eyebrow">${String(topNum).padStart(2, "0")}${chip}</span>
