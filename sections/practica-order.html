@@ -878,6 +878,16 @@
                 <div class="lab-task__num">1</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.order.t1">Afirmá que el <code>Total</code> es <code>250</code>.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;expect&quot;,&quot;250&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.order.w1">Apuntá a un <strong>locator</strong> estable (un <code>data-testid</code>) en vez del texto suelto: el precio puede formatearse distinto sin que el dato cambie.</div>
@@ -903,6 +913,16 @@
                 <div class="lab-task__num">2</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.order.t2">Afirmá que el <code>status</code> es <code>PAID</code>.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;expect&quot;,&quot;paid&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.order.w2">Usá <strong>web-first assertions</strong> que reintentan (<code>toHaveText</code>) en vez de leer el DOM una sola vez: el estado puede tardar en pintarse.</div>
@@ -928,6 +948,16 @@
                 <div class="lab-task__num">3</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.order.t3">Afirmá que la orden tiene <code>3</code> ítems.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;expect&quot;,&quot;tohavecount&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.order.w3">Contar elementos (<code>toHaveCount</code>) valida la colección completa: detecta ítems faltantes o duplicados que una sola aserción puntual dejaría pasar.</div>
@@ -979,6 +1009,7 @@
   <script src="../js/flashcards.js"></script>
   <script src="../js/interview.js"></script>
   <script src="../js/concepts.js"></script>
+  <script src="../js/lab.js"></script>
   <script src="../js/progress.js"></script>
 </body>
 </html>

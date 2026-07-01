@@ -903,6 +903,16 @@
                 <div class="lab-task__num">1</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.api.t1">Creá una orden con <code>POST /api/orders</code> y verificá el status <code>201</code>.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;post&quot;,&quot;201&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.api.w1"><code>POST</code> crea y <strong>no es idempotente</strong>: repetirlo crea otra orden. El <code>201 Created</code> confirma que el recurso nació.</div>
@@ -931,6 +941,16 @@ expect(await res.json()).toHaveProperty('</span>id<span class="tok-punctuation">
                 <div class="lab-task__num">2</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.api.t2">Leé la orden con <code>GET /api/orders/42</code> y verificá <code>200</code> y el cuerpo.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;get&quot;,&quot;200&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.api.w2"><code>GET</code> es <strong>seguro</strong>: no cambia estado. Validá el <code>200</code> y que el JSON cumpla el contrato (los campos esperados).</div>
@@ -957,6 +977,16 @@ expect(await res.json()).toMatchObject({ status: '</span>PAID<span class="tok-pu
                 <div class="lab-task__num">3</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.api.t3">Borrá la orden con <code>DELETE /api/orders/42</code> y verificá <code>204</code>.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;delete&quot;,&quot;204&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.api.w3"><code>DELETE</code> es <strong>idempotente</strong>: borrar dos veces deja el mismo estado final. El <code>204 No Content</code> dice «hecho, sin cuerpo».</div>
@@ -1011,6 +1041,7 @@ const again = await request.delete('</span><span class="tok-punctuation">/</span
   <script src="../js/flashcards.js"></script>
   <script src="../js/interview.js"></script>
   <script src="../js/concepts.js"></script>
+  <script src="../js/lab.js"></script>
   <script src="../js/progress.js"></script>
 </body>
 </html>
