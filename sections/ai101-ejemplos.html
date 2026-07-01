@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title data-i18n="page.examples">Ejemplos</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--ai101-ejemplos">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <button class="progress-badge" id="progress-badge" type="button" hidden
+                aria-label="Progreso" data-i18n-attr="aria-label:game.progress" title="">
+          <span class="progress-badge__ring"><svg viewBox="0 0 36 36" width="18" height="18" aria-hidden="true"><circle class="progress-badge__track" cx="18" cy="18" r="15.5" fill="none" stroke-width="4"/><circle class="progress-badge__fill" cx="18" cy="18" r="15.5" fill="none" stroke-width="4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></span>
+          <span class="progress-badge__pct">0%</span>
+        </button>
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">03</span>
+            <span data-i18n="nav.pyqa">Python para QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="python-intro.html">
+              <span data-i18n="pyqa.page.intro">Por qué Python para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-hola.html">
+              <span data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-fundamentos.html">
+              <span data-i18n="pyqa.page.fund">Fundamentos del lenguaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-datos.html">
+              <span data-i18n="pyqa.page.datos">Colecciones y JSON</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-pytest.html">
+              <span data-i18n="pyqa.page.pytest">pytest: tu primer test</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-componente.html">
+              <span data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">04</span>
+            <span data-i18n="nav.tsqa">TypeScript para QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="ts-intro.html">
+              <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-hola.html">
+              <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-fundamentos.html">
+              <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-tipos.html">
+              <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-pruebas.html">
+              <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-componente.html">
+              <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">05</span>
+            <span data-i18n="nav.selenium">Selenium</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="selenium-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">06</span>
+            <span data-i18n="nav.cypress">Cypress</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="cypress-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">07</span>
+            <span data-i18n="nav.playwright">Playwright</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="playwright-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">08</span>
+            <span data-i18n="nav.robot">Robot Framework</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="robot-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">09</span>
+            <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="bdd-intro.html">
+              <span data-i18n="bdd.page.intro">Qué es BDD y por qué</span>
+            </a>
+            <a class="nav-link nav-sublink" href="bdd-gherkin.html">
+              <span data-i18n="bdd.page.gherkin">La sintaxis Gherkin</span>
+            </a>
+            <a class="nav-link nav-sublink" href="bdd-cucumber.html">
+              <span data-i18n="bdd.page.cucumber">Cucumber y step definitions</span>
+            </a>
+            <a class="nav-link nav-sublink" href="bdd-practica.html">
+              <span data-i18n="bdd.page.practica">BDD en la práctica</span>
+            </a>
+          </div>
+        </div>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">11</span>
+            <span data-i18n="nav.perf">Performance testing</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="perf-intro.html">
+              <span data-i18n="perf.page.intro">Qué es y qué se mide</span>
+            </a>
+            <a class="nav-link nav-sublink" href="perf-k6.html">
+              <span data-i18n="perf.page.k6">k6</span>
+            </a>
+            <a class="nav-link nav-sublink" href="perf-jmeter.html">
+              <span data-i18n="perf.page.jmeter">JMeter</span>
+            </a>
+            <a class="nav-link nav-sublink" href="perf-locust.html">
+              <span data-i18n="perf.page.locust">Locust</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item is-open">
+          <button class="nav-link nav-group is-active-group" type="button" aria-expanded="true">
+            <span class="nav-link__num">12</span>
+            <span data-i18n="nav.ai101">AI 101</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="ai101-intro.html">
+              <span data-i18n="page.content">Contenido</span>
+            </a>
+            <a class="nav-link nav-sublink is-active" href="ai101-ejemplos.html" aria-current="page">
+              <span data-i18n="page.examples">Ejemplos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ai101-ejercicios.html">
+              <span data-i18n="page.exercises">Ejercicios</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ai101-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ai101-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">13</span>
+            <span data-i18n="nav.aiqa">AI QA Engineer</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="aiqa-intro.html">
+              <span data-i18n="page.content">Contenido</span>
+            </a>
+            <a class="nav-link nav-sublink" href="aiqa-herramientas.html">
+              <span data-i18n="aiqa.nav.tools">Skills, hooks y agentes</span>
+            </a>
+            <a class="nav-link nav-sublink" href="aiqa-prompts.html">
+              <span data-i18n="aiqa.nav.prompts">Prompt engineering</span>
+            </a>
+            <a class="nav-link nav-sublink" href="aiqa-ejercicios.html">
+              <span data-i18n="page.exercises">Ejercicios</span>
+            </a>
+            <a class="nav-link nav-sublink" href="aiqa-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="aiqa-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">14</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">15</span>
+            <span data-i18n="nav.ci">CI/CD para QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="ci-intro.html">
+              <span data-i18n="ci.page.intro">Por qué QA vive en el pipeline</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ci-pipeline.html">
+              <span data-i18n="ci.page.pipeline">Un pipeline de ejemplo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ci-matrix.html">
+              <span data-i18n="ci.page.matrix">Paralelización y matrix</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ci-gates.html">
+              <span data-i18n="ci.page.gates">Quality gates y reportes</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">16</span>
+            <span data-i18n="nav.skills">Habilidades del QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="skills-intro.html">
+              <span data-i18n="skills.page.intro">Por qué estas habilidades</span>
+            </a>
+            <a class="nav-link nav-sublink" href="skills-sql.html">
+              <span data-i18n="skills.page.sql">SQL para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="skills-git.html">
+              <span data-i18n="skills.page.git">Git para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="skills-appium.html">
+              <span data-i18n="skills.page.appium">Appium (mobile)</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">17</span>
+            <span data-i18n="nav.maturity">Estrategia y madurez de QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="maturity-intro.html">
+              <span data-i18n="mat.page.intro">QA como estrategia</span>
+            </a>
+            <a class="nav-link nav-sublink" href="maturity-roadmap.html">
+              <span data-i18n="mat.page.roadmap">Roadmap de madurez (4 fases)</span>
+            </a>
+            <a class="nav-link nav-sublink" href="maturity-kpis.html">
+              <span data-i18n="mat.page.kpis">KPIs y modelos de madurez</span>
+            </a>
+            <a class="nav-link nav-sublink" href="maturity-istqb.html">
+              <span data-i18n="mat.page.istqb">ISTQB y certificaciones</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">18</span>
+            <span data-i18n="nav.keyterms">Conceptos clave</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="key-terms.html">
+              <span data-i18n="kt.overview">Todos los conceptos</span>
+            </a>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.process">Proceso y estrategia</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-sdlc.html">
+                <span>SDLC / STLC</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-shiftleft.html">
+                <span>Shift-left testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-tdd.html">
+                <span>TDD (Test-Driven Development)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-bdd.html">
+                <span>BDD (Gherkin / Cucumber)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-gwt.html">
+                <span>Given / When / Then</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-amigos.html">
+                <span>Three amigos</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-atdd.html">
+                <span>ATDD</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-keyword.html">
+                <span>Keyword-driven testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-ct.html">
+                <span>Continuous testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-regression.html">
+                <span>Regression testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-smoke.html">
+                <span>Smoke vs Sanity</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-exploratory.html">
+                <span>Exploratory testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-uat.html">
+                <span>Acceptance / UAT</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-risk.html">
+                <span>Risk-based testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-ddt.html">
+                <span>Data-driven testing</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.design">Diseño de casos</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="design-ep.html">
+                <span>Equivalence Partitioning</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="design-bva.html">
+                <span>Boundary Value Analysis</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="design-dt.html">
+                <span>Decision Table</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="design-state.html">
+                <span>State Transition</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="design-pairwise.html">
+                <span>Pairwise / Combinatorial</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="design-trace.html">
+                <span>Traceability Matrix</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.defects">Defectos</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="def-sevprio.html">
+                <span>Severity vs Priority</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="def-lifecycle.html">
+                <span>Defect lifecycle</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="def-rca.html">
+                <span>Root Cause Analysis (RCA)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="def-triage.html">
+                <span>Triage</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="def-repro.html">
+                <span>Reproducible steps</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.automation">Automatización</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-assertion.html">
+                <span>Assertion</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-locator.html">
+                <span>Selector / Locator</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-pom.html">
+                <span>Page Object Model (POM)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-fixtures.html">
+                <span>Fixtures</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-hooks.html">
+                <span>Hooks (setup / teardown)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-doubles.html">
+                <span>Test doubles (mock / stub / spy / fake)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-waits.html">
+                <span>Implicit / Explicit / Fluent wait</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-autowait.html">
+                <span>Auto-wait / retry</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-flaky.html">
+                <span>Flaky test</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-headless.html">
+                <span>Headless</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-parallel.html">
+                <span>Parallelization</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-crossbrowser.html">
+                <span>Cross-browser</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-coverage.html">
+                <span>Code coverage</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-cicd.html">
+                <span>CI/CD &amp; quality gate</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-isolation.html">
+                <span>Test isolation</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-tdm.html">
+                <span>Test data management</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-visual.html">
+                <span>Visual regression</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-a11y.html">
+                <span>Accessibility (a11y) testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-api.html">
+                <span>API testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-mobile.html">
+                <span>Mobile testing (Appium)</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.api">API, HTTP y datos</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-methods.html">
+                <span>HTTP methods / verbs</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-idempotency.html">
+                <span>Idempotency</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-safe.html">
+                <span>Safe method</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-status.html">
+                <span>HTTP status codes</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-rest.html">
+                <span>REST</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-crud.html">
+                <span>CRUD</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-cors.html">
+                <span>CORS / preflight</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-sql.html">
+                <span>SQL / JOIN</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.ai">AI en QA</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-prompt.html">
+                <span>Prompt engineering</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-halluc.html">
+                <span>Hallucination</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-selfheal.html">
+                <span>Self-healing locators</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-gen.html">
+                <span>LLM test generation</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hitl.html">
+                <span>Human-in-the-loop</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-mcp.html">
+                <span>MCP (Model Context Protocol)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-skill.html">
+                <span>Skill</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-agent.html">
+                <span>Agent / sub-agent</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-rag.html">
+                <span>RAG (Retrieval-Augmented Generation)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-context.html">
+                <span>Context window / tokens</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-model.html">
+                <span>Modelos (LLM)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hooks.html">
+                <span>Hooks (automatización)</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.security">Seguridad</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-authn.html">
+                <span>Authentication vs Authorization</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-idor.html">
+                <span>IDOR</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-xss.html">
+                <span>XSS (Cross-Site Scripting)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-sqli.html">
+                <span>SQL Injection</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-csrf.html">
+                <span>CSRF</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-ratelimit.html">
+                <span>Rate limiting</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-leastpriv.html">
+                <span>Least privilege</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sec-sensitive.html">
+                <span>Sensitive data exposure</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.maturity">Métricas, madurez y certificación</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-dd.html">
+                <span>Defect density</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-mttr.html">
+                <span>MTTR</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-escape.html">
+                <span>Defect escape rate</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-models.html">
+                <span>Maturity models (TMMi / CMMI)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-iso.html">
+                <span>ISO 9001</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-istqb.html">
+                <span>ISTQB</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">19</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--accent)">AI 101</span></div>
+        <h1 class="section__title" data-i18n="page.examples">Ejemplos</h1>
+        <div class="prose" data-i18n-html="ai101.ex.lead"><p>Tres cosas que vas a hacer todo el tiempo como QA con AI: escribir buenos prompts, empaquetar tus reglas en una skill y dejar que un agente itere.</p></div>
+        <h2 class="block-label" data-i18n="ai101.ex.prompt.label">Un buen prompt vs uno vago</h2>
+        <div class="prose" data-i18n-html="ai101.ex.prompt.body"><p>Un prompt específico (rol, contexto, casos, formato) da un test usable; uno vago da algo genérico que hay que rehacer:</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Prompt</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es">Sos un ingeniero QA senior<span class="tok-punctuation">.</span> Escrib<span class="tok-punctuation">í</span> un test de Playwright en Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
+
+Contexto<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> P<span class="tok-punctuation">á</span>gina<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>un resumen de orden<span class="tok-punctuation">)</span>
+<span class="tok-punctuation">-</span> Selectores estables<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+
+El test <span class="tok-string">"test_verify_order"</span> debe afirmar<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      tiene el texto <span class="tok-string">"250"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     tiene el texto <span class="tok-string">"PAID"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contiene un <span class="tok-punctuation">í</span>tem cuyo texto incluye <span class="tok-string">"book"</span>
+
+Requisitos<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Us<span class="tok-punctuation">á</span> aserciones web<span class="tok-punctuation">-</span>first <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
+<span class="tok-punctuation">-</span> Sin esperas fijas<span class="tok-punctuation">.</span> Sin l<span class="tok-punctuation">ó</span>gica condicional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> en el test<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Un comentario corto sobre cada aserci<span class="tok-punctuation">ó</span>n explicando la intenci<span class="tok-punctuation">ó</span>n<span class="tok-punctuation">.</span></code><code class="code-i18n code-i18n--en">You are a senior QA engineer<span class="tok-punctuation">.</span> Write a Playwright test <span class="tok-keyword">in</span> Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
+
+Context<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Page<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>an order summary<span class="tok-punctuation">)</span>
+<span class="tok-punctuation">-</span> Stable selectors<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+
+Test <span class="tok-string">"test_verify_order"</span> must <span class="tok-keyword">assert</span><span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      has text <span class="tok-string">"250"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     has text <span class="tok-string">"PAID"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contains an item whose text includes <span class="tok-string">"book"</span>
+
+Requirements<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Use web<span class="tok-punctuation">-</span>first assertions <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
+<span class="tok-punctuation">-</span> No fixed sleeps<span class="tok-punctuation">.</span> No conditional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> logic <span class="tok-keyword">in</span> the test<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> One short comment above each assertion explaining intent<span class="tok-punctuation">.</span></code></pre>
+        </div>
+        <h2 class="block-label" data-i18n="ai101.ex.skill.label">Empaquetar tus reglas en una Skill</h2>
+        <div class="prose" data-i18n-html="ai101.ex.skill.body"><p>En vez de repetir tus convenciones en cada prompt, las guardás una vez en una skill y el modelo las aplica siempre:</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Markdown</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Skill: generate-e2e  (las convenciones de tu equipo, reutilizadas cada vez)</span>
+
+Cuando te pidan escribir un test end<span class="tok-punctuation">-</span>to<span class="tok-punctuation">-</span>end<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Us<span class="tok-punctuation">á</span> Playwright <span class="tok-punctuation">+</span> los Page Objects en src<span class="tok-punctuation">/</span>pages<span class="tok-punctuation">/.</span>
+<span class="tok-punctuation">-</span> Selectores<span class="tok-punctuation">:</span> getByRole <span class="tok-punctuation">/</span> getByTestId solamente <span class="tok-punctuation">—</span> nunca CSS ni XPath<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Una intenci<span class="tok-punctuation">ó</span>n por test<span class="tok-punctuation">,</span> aserciones web<span class="tok-punctuation">-</span>first<span class="tok-punctuation">,</span> cero esperas fijas<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Mocke<span class="tok-punctuation">á</span> la red con page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">();</span> nunca pegues al backend real<span class="tok-punctuation">.</span>
+
+<span class="tok-comment"># Un skill empaqueta este know-how para que cada test generado siga los</span>
+<span class="tok-comment"># mismos estándares — sin necesidad de re-explicarlos en cada prompt.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Skill: generate-e2e  (your team's conventions, reused every time)</span>
+
+When asked to write an end<span class="tok-punctuation">-</span>to<span class="tok-punctuation">-</span>end test<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Use Playwright <span class="tok-punctuation">+</span> the Page Objects <span class="tok-keyword">in</span> src<span class="tok-punctuation">/</span>pages<span class="tok-punctuation">/.</span>
+<span class="tok-punctuation">-</span> Selectors<span class="tok-punctuation">:</span> getByRole <span class="tok-punctuation">/</span> getByTestId only <span class="tok-punctuation">—</span> never CSS <span class="tok-keyword">or</span> XPath<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> One intent per test<span class="tok-punctuation">,</span> web<span class="tok-punctuation">-</span>first assertions<span class="tok-punctuation">,</span> zero fixed sleeps<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Mock the network <span class="tok-keyword">with</span> page<span class="tok-punctuation">.</span><span class="tok-function">route</span><span class="tok-punctuation">();</span> never hit the real backend<span class="tok-punctuation">.</span>
+
+<span class="tok-comment"># A skill packages this know-how so every generated test follows the</span>
+<span class="tok-comment"># same standards — no need to re-explain them in each prompt.</span></code></pre>
+        </div>
+        <h2 class="block-label" data-i18n="ai101.ex.agent.label">Dejar que un agente itere</h2>
+        <div class="prose" data-i18n-html="ai101.ex.agent.body"><p>Con las tools conectadas, un agente escribe el test, lo corre, lee el error y lo corrige — vos revisás el resultado:</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Text</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es">Bucle de agente <span class="tok-punctuation">—</span> aut<span class="tok-punctuation">ó</span>nomo <span class="tok-string">"escribir → correr → leer la falla → corregir"</span><span class="tok-punctuation">:</span>
+
+  <span class="tok-number">1</span><span class="tok-punctuation">.</span> Le<span class="tok-punctuation">é</span> la historia de usuario <span class="tok-punctuation">+</span> criterios de aceptaci<span class="tok-punctuation">ó</span>n<span class="tok-punctuation">.</span>
+  <span class="tok-number">2</span><span class="tok-punctuation">.</span> Gener<span class="tok-punctuation">á</span> el test de Playwright <span class="tok-punctuation">(</span>usando el Skill del equipo de arriba<span class="tok-punctuation">).</span>
+  <span class="tok-number">3</span><span class="tok-punctuation">.</span> Corr<span class="tok-punctuation">é</span>lo v<span class="tok-punctuation">í</span>a el servidor MCP de Playwright<span class="tok-punctuation">.</span>
+  <span class="tok-number">4</span><span class="tok-punctuation">.</span> Si falla<span class="tok-punctuation">:</span> le<span class="tok-punctuation">é</span> el error <span class="tok-punctuation">+</span> traza<span class="tok-punctuation">,</span> ubic<span class="tok-punctuation">á</span> la causa<span class="tok-punctuation">,</span> parche<span class="tok-punctuation">á</span> el test<span class="tok-punctuation">.</span>
+  <span class="tok-number">5</span><span class="tok-punctuation">.</span> Repet<span class="tok-punctuation">í</span> hasta que est<span class="tok-punctuation">é</span> en verde<span class="tok-punctuation">,</span> luego abr<span class="tok-punctuation">í</span> un PR<span class="tok-punctuation">.</span>
+
+Variante multi<span class="tok-punctuation">-</span>agente <span class="tok-punctuation">(</span>mayor confianza<span class="tok-punctuation">):</span>
+  <span class="tok-punctuation">-</span> Agente Escritor  <span class="tok-punctuation">-&gt;</span> redacta el test<span class="tok-punctuation">.</span>
+  <span class="tok-punctuation">-</span> Agente Revisor <span class="tok-punctuation">-&gt;</span> intenta REFUTARLO<span class="tok-punctuation">:</span> <span class="tok-string">"¿puede pasar incluso si la app está
+    rota?"</span> Solo los tests que sobreviven la revisi<span class="tok-punctuation">ó</span>n se commitean<span class="tok-punctuation">.</span></code><code class="code-i18n code-i18n--en">Agent loop <span class="tok-punctuation">—</span> autonomous <span class="tok-string">"write → run → read failure → fix"</span><span class="tok-punctuation">:</span>
+
+  <span class="tok-number">1</span><span class="tok-punctuation">.</span> Read the user story <span class="tok-punctuation">+</span> acceptance criteria<span class="tok-punctuation">.</span>
+  <span class="tok-number">2</span><span class="tok-punctuation">.</span> Generate the Playwright test <span class="tok-punctuation">(</span>using the team Skill above<span class="tok-punctuation">).</span>
+  <span class="tok-number">3</span><span class="tok-punctuation">.</span> Run it via the Playwright MCP server<span class="tok-punctuation">.</span>
+  <span class="tok-number">4</span><span class="tok-punctuation">.</span> If it fails<span class="tok-punctuation">:</span> read the error <span class="tok-punctuation">+</span> trace<span class="tok-punctuation">,</span> locate the cause<span class="tok-punctuation">,</span> patch the test<span class="tok-punctuation">.</span>
+  <span class="tok-number">5</span><span class="tok-punctuation">.</span> Repeat until green<span class="tok-punctuation">,</span> then open a PR<span class="tok-punctuation">.</span>
+
+Multi<span class="tok-punctuation">-</span>agent variant <span class="tok-punctuation">(</span>higher confidence<span class="tok-punctuation">):</span>
+  <span class="tok-punctuation">-</span> Writer agent  <span class="tok-punctuation">-&gt;</span> drafts the test<span class="tok-punctuation">.</span>
+  <span class="tok-punctuation">-</span> Reviewer agent <span class="tok-punctuation">-&gt;</span> tries to REFUTE it<span class="tok-punctuation">:</span> <span class="tok-string">"can this pass even if the app is
+    broken?"</span> Only tests that survive the review get committed<span class="tok-punctuation">.</span></code></pre>
+        </div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="ai101-intro.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="page.content">Contenido</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="ai101-ejercicios.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="page.exercises">Ejercicios</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
+
+  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai101-intro","ai101-ejemplos","ai101-ejercicios","ai101-flashcards","ai101-entrevista","aiqa-intro","aiqa-herramientas","aiqa-prompts","aiqa-ejercicios","aiqa-flashcards","aiqa-entrevista","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai101","label":"nav.ai101","pages":["ai101-intro","ai101-ejemplos","ai101-ejercicios","ai101-flashcards","ai101-entrevista"]},{"key":"aiqa","label":"nav.aiqa","pages":["aiqa-intro","aiqa-herramientas","aiqa-prompts","aiqa-ejercicios","aiqa-flashcards","aiqa-entrevista"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+  <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
+  <script src="../js/interview.js"></script>
+  <script src="../js/concepts.js"></script>
+  <script src="../js/progress.js"></script>
+</body>
+</html>

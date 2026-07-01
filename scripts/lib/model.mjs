@@ -2683,6 +2683,118 @@ function ciGroup() {
   ];
 }
 
+// "AI 101" — an intro-to-AI mini-course (for QA), as a GROUP of sub-pages:
+// content, examples, exercises, flashcards and a mock interview. The formal
+// definitions of each term live in "Conceptos clave".
+function ai101Group() {
+  const grp = { group: "ai101", groupKey: "nav.ai101", chip: { label: "AI 101", color: "var(--accent)" } };
+  return [
+    { ...grp, id: "ai101-intro", navKey: "page.content", blocks: [
+      { type: "prose", html: "ai101.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "ai101.what" },
+      { type: "tiles", items: [
+        { icon: "🧠", title: "ai101.t1.title", body: "ai101.t1.body" },
+        { icon: "💬", title: "ai101.t2.title", body: "ai101.t2.body" },
+        { icon: "🎟️", title: "ai101.t3.title", body: "ai101.t3.body" },
+        { icon: "⚠️", title: "ai101.t4.title", body: "ai101.t4.body" },
+      ] },
+      { type: "callout", variant: "", html: "ai101.concepts.note" },
+    ] },
+    { ...grp, id: "ai101-ejemplos", navKey: "page.examples", blocks: [
+      { type: "prose", html: "ai101.ex.lead" },
+      { type: "label", text: "ai101.ex.prompt.label" },
+      { type: "prose", html: "ai101.ex.prompt.body" },
+      { type: "code", sample: "aiPromptCode" },
+      { type: "label", text: "ai101.ex.skill.label" },
+      { type: "prose", html: "ai101.ex.skill.body" },
+      { type: "code", sample: "skillExample" },
+      { type: "label", text: "ai101.ex.agent.label" },
+      { type: "prose", html: "ai101.ex.agent.body" },
+      { type: "code", sample: "agentLoop" },
+    ] },
+    { ...grp, id: "ai101-ejercicios", navKey: "page.exercises", blocks: [
+      { type: "prose", html: "ai101.exr.lead" },
+      { type: "steps", items: ["ai101.exr.1", "ai101.exr.2", "ai101.exr.3", "ai101.exr.4"] },
+      { type: "callout", variant: "ok", html: "ai101.exr.callout" },
+    ] },
+    { ...grp, id: "ai101-flashcards", navKey: "page.flashcards", blocks: [
+      { type: "prose", html: "page.flashcards.lead" },
+      { type: "label", text: "fc.title" },
+      { type: "flashcards", cards: Array.from({ length: 10 }, (_, i) => ({ q: `fc.ai101.q${i + 1}`, a: `fc.ai101.a${i + 1}` })) },
+    ] },
+    { ...grp, id: "ai101-entrevista", navKey: "page.interview", blocks: [
+      { type: "prose", html: "page.interview.lead" },
+      { type: "interview", items: Array.from({ length: 6 }, (_, i) => ({ q: `iv.ai101.q${i + 1}`, a: `iv.ai101.a${i + 1}` })) },
+    ] },
+  ];
+}
+
+// "AI QA Engineer" — the applied mini-course: the role, the tooling you build
+// (skills, hooks, agents, MCP), prompt engineering, exercises, flashcards and
+// a mock interview. Definitions are linked out to "Conceptos clave".
+function aiQaGroup() {
+  const grp = { group: "aiqa", groupKey: "nav.aiqa", chip: { label: "AI QA Engineer", color: "var(--fw-maturity)" } };
+  return [
+    { ...grp, id: "aiqa-intro", navKey: "page.content", blocks: [
+      { type: "prose", html: "ai.lead" },
+      { type: "label", text: "ui.theory" },
+      { type: "prose", html: "ai.theory" },
+      { type: "label", text: "ai.stages.label" },
+      { type: "tiles", items: [
+        { icon: "🧩", title: "ai.stage1.title", body: "ai.stage1.body" },
+        { icon: "✍️", title: "ai.stage2.title", body: "ai.stage2.body" },
+        { icon: "🎯", title: "ai.stage3.title", body: "ai.stage3.body" },
+        { icon: "🔁", title: "ai.stage4.title", body: "ai.stage4.body" },
+        { icon: "🩺", title: "ai.stage5.title", body: "ai.stage5.body" },
+      ] },
+      { type: "callout", variant: "warn", html: "ai.callout" },
+    ] },
+    { ...grp, id: "aiqa-herramientas", navKey: "aiqa.nav.tools", blocks: [
+      { type: "prose", html: "aiqa.build.body" },
+      { type: "callout", variant: "", html: "aiqa.concepts.note" },
+      { type: "prose", html: "aiqa.skill.body" },
+      { type: "code", sample: "skillExample" },
+      { type: "prose", html: "aiqa.hook.body" },
+      { type: "code", sample: "hookExample" },
+      { type: "prose", html: "aiqa.agent.body" },
+      { type: "code", sample: "agentLoop" },
+      { type: "prose", html: "aiqa.mcp.body" },
+      { type: "code", sample: "mcpConfig" },
+    ] },
+    { ...grp, id: "aiqa-prompts", navKey: "aiqa.nav.prompts", blocks: [
+      { type: "prose", html: "prompts.lead" },
+      { type: "label", text: "prompts.generate.label" },
+      { type: "prose", html: "prompts.generate.body" },
+      { type: "code", sample: "aiPromptCode" },
+      { type: "label", text: "prompts.iterate.label" },
+      { type: "prose", html: "prompts.iterate.body" },
+      { type: "label", text: "prompts.validate.label" },
+      { type: "prose", html: "prompts.validate.body" },
+      { type: "code", sample: "aiValidate" },
+      { type: "label", text: "ui.vs" },
+      { type: "vs",
+        manual: { title: "ai.manual.title", body: "ai.manual.body", sample: "aiManualCase" },
+        ai: { title: "ai.ai.title", body: "ai.ai.body", sample: "aiPromptGenerate" } },
+      { type: "callout", variant: "danger", html: "prompts.callout" },
+    ] },
+    { ...grp, id: "aiqa-ejercicios", navKey: "page.exercises", blocks: [
+      { type: "prose", html: "aiqa.exr.lead" },
+      { type: "steps", items: ["aiqa.exr.1", "aiqa.exr.2", "aiqa.exr.3", "aiqa.exr.4", "aiqa.exr.5"] },
+      { type: "callout", variant: "ok", html: "aiqa.exr.callout" },
+    ] },
+    { ...grp, id: "aiqa-flashcards", navKey: "page.flashcards", blocks: [
+      { type: "prose", html: "page.flashcards.lead" },
+      { type: "label", text: "fc.title" },
+      { type: "flashcards", cards: Array.from({ length: 10 }, (_, i) => ({ q: `fc.aiqa.q${i + 1}`, a: `fc.aiqa.a${i + 1}` })) },
+    ] },
+    { ...grp, id: "aiqa-entrevista", navKey: "page.interview", blocks: [
+      { type: "prose", html: "page.interview.lead" },
+      { type: "interview", items: Array.from({ length: 6 }, (_, i) => ({ q: `iv.aiqa.q${i + 1}`, a: `iv.aiqa.a${i + 1}` })) },
+    ] },
+  ];
+}
+
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
  * ------------------------------------------------------------------ */
@@ -3034,66 +3146,9 @@ export const SECTIONS = [
 
   ...perfGroup(),
 
-  {
-    // "AI QA Engineer" — the APPLIED section (formerly "El rol de la AI" +
-    // "Ejemplos con AI", now merged). It shows how to CREATE and USE skills,
-    // hooks, agents, MCP and prompts for QA. The DEFINITIONS of those terms
-    // live in the "AI concepts" section (linked via aiqa.concepts.note).
-    id: "ai-role",
-    navKey: "nav.airole",
-    blocks: [
-      { type: "prose", html: "ai.lead" },
-      { type: "label", text: "ui.theory" },
-      { type: "prose", html: "ai.theory" },
-      { type: "label", text: "ai.stages.label" },
-      {
-        type: "tiles",
-        items: [
-          { icon: "🧩", title: "ai.stage1.title", body: "ai.stage1.body" },
-          { icon: "✍️", title: "ai.stage2.title", body: "ai.stage2.body" },
-          { icon: "🎯", title: "ai.stage3.title", body: "ai.stage3.body" },
-          { icon: "🔁", title: "ai.stage4.title", body: "ai.stage4.body" },
-          { icon: "🩺", title: "ai.stage5.title", body: "ai.stage5.body" },
-        ],
-      },
-      { type: "label", text: "aiqa.build.label" },
-      { type: "prose", html: "aiqa.build.body" },
-      { type: "callout", variant: "", html: "aiqa.concepts.note" },
-      { type: "prose", html: "aiqa.skill.body" },
-      { type: "code", sample: "skillExample" },
-      { type: "prose", html: "aiqa.hook.body" },
-      { type: "code", sample: "hookExample" },
-      { type: "prose", html: "aiqa.agent.body" },
-      { type: "code", sample: "agentLoop" },
-      { type: "prose", html: "aiqa.mcp.body" },
-      { type: "code", sample: "mcpConfig" },
-      { type: "label", text: "aiqa.prompts.label" },
-      { type: "prose", html: "prompts.generate.body" },
-      { type: "code", sample: "aiPromptCode" },
-      { type: "prose", html: "prompts.iterate.body" },
-      { type: "prose", html: "prompts.validate.body" },
-      { type: "code", sample: "aiValidate" },
-      { type: "label", text: "ui.vs" },
-      {
-        type: "vs",
-        manual: { title: "ai.manual.title", body: "ai.manual.body", sample: "aiManualCase" },
-        ai: { title: "ai.ai.title", body: "ai.ai.body", sample: "aiPromptGenerate" },
-      },
-      { type: "callout", variant: "warn", html: "ai.callout" },
-    ],
-  },
+  ...ai101Group(),
 
-  {
-    // "AI concepts" — the reference section: definitions of the AI-engineering
-    // concepts (skill, agent, model, hook, MCP, RAG, …) as a branched menu.
-    id: "ai-concepts",
-    navKey: "nav.aiconcepts",
-    blocks: [
-      { type: "prose", html: "aic.lead" },
-      { type: "aimenu" },
-      { type: "callout", variant: "", html: "aic.callout" },
-    ],
-  },
+  ...aiQaGroup(),
 
   {
     id: "best-practices",
@@ -3277,7 +3332,6 @@ const DECKS = {
   bdd: "bdd-practica",
   comparison: "comparison",
   perf: "perf-locust",
-  airole: "ai-role",
   bestpractices: "best-practices",
   ci: "ci-gates",
   skills: "skills-appium",
