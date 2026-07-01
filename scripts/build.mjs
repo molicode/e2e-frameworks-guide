@@ -22,7 +22,7 @@ import { dirname, join } from "node:path";
 import vm from "node:vm";
 
 import { SECTIONS } from "./lib/model.mjs";
-import { layout, sidebar, sectionMain, indexMain } from "./lib/render.mjs";
+import { layout, sidebar, sectionMain, indexMain, progressData } from "./lib/render.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -39,6 +39,7 @@ function loadDictionary(lang) {
 }
 
 const dict = loadDictionary(DEFAULT_LANG);
+const progressJson = JSON.stringify(progressData(SECTIONS));
 
 /* ---- 1. Landing page (index.html at the repo root) ---- */
 const indexSectionHref = (id) => `sections/${id}.html`;
@@ -49,6 +50,7 @@ const indexHtml = layout({
   descKey: "meta.description",
   bodyClass: "page--home",
   assetPrefix: "",
+  progressJson,
   sidebarHtml: sidebar(SECTIONS, null, dict, {
     sectionHref: indexSectionHref,
     homeHref: "index.html",
@@ -70,6 +72,7 @@ SECTIONS.forEach((section, index) => {
     descKey: "meta.description",
     bodyClass: `page--section page--${section.id}`,
     assetPrefix: "../",
+    progressJson,
     sidebarHtml: sidebar(SECTIONS, section.id, dict, {
       sectionHref,
       homeHref: "../index.html",

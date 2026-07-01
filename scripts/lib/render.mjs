@@ -299,6 +299,18 @@ function topLevelEntries(sections) {
   return entries;
 }
 
+// Data for the gamified progress layer (js/progress.js): the flat list of page
+// ids and the top-level sections (with the i18n label key + their page ids), so
+// the runtime can compute % done and celebrate finished sections.
+export function progressData(sections) {
+  const tops = topLevelEntries(sections).map((e) =>
+    e.type === "single"
+      ? { key: e.section.id, label: e.section.navKey, pages: [e.section.id] }
+      : { key: e.group, label: e.groupKey, pages: e.members.map((m) => m.id) }
+  );
+  return { pages: sections.map((s) => s.id), tops };
+}
+
 // The top-level number for a section (1-based, groups count once).
 function topNumberOf(sections, section) {
   const entries = topLevelEntries(sections);
@@ -404,7 +416,7 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
 }
 
 /* ---- the full HTML document shell ---- */
-export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, sidebarHtml, main }) {
+export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, sidebarHtml, main, progressJson }) {
   const title = escText(t(dict, titleKey));
   const desc = escAttr(t(dict, descKey));
   return `<!DOCTYPE html>
@@ -449,6 +461,11 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
         <span class="brand__text" data-i18n="brand.title">${escText(t(dict, "brand.title"))}</span>
       </a>
       <div class="site-header__actions">
+        <button class="progress-badge" id="progress-badge" type="button" hidden
+                aria-label="Progreso" data-i18n-attr="aria-label:game.progress" title="">
+          <span class="progress-badge__ring"><svg viewBox="0 0 36 36" width="18" height="18" aria-hidden="true"><circle class="progress-badge__track" cx="18" cy="18" r="15.5" fill="none" stroke-width="4"/><circle class="progress-badge__fill" cx="18" cy="18" r="15.5" fill="none" stroke-width="4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></span>
+          <span class="progress-badge__pct">0%</span>
+        </button>
         <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
           <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
           <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
@@ -473,6 +490,9 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
     </main>
   </div>
 
+  <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
+
+  <script>window.QAGUIDE_PROGRESS = ${progressJson || "null"};</script>
   <script src="${assetPrefix}js/i18n.js"></script>
   <script src="${assetPrefix}i18n/es.js"></script>
   <script src="${assetPrefix}i18n/en.js"></script>
@@ -481,6 +501,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
   <script src="${assetPrefix}js/runner.js"></script>
   <script src="${assetPrefix}js/flashcards.js"></script>
   <script src="${assetPrefix}js/interview.js"></script>
+  <script src="${assetPrefix}js/progress.js"></script>
 </body>
 </html>
 `;
