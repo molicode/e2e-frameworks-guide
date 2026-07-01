@@ -3163,5 +3163,13 @@ export const SECTIONS = [
   },
 ];
 
+// Showcase: the interactive Code Runner opens the Selenium "first test" page.
+// (Kept to one page for now; the tabs let you compare the same login test
+// across Selenium / Cypress / Playwright.)
+const seleniumHello = SECTIONS.find((s) => s.id === "selenium-hola-mundo");
+if (seleniumHello) {
+  seleniumHello.blocks = [{ type: "runner" }, ...seleniumHello.blocks];
+}
+
 /** Lightweight nav metadata (id + key + number) for building menus/index. */
 export const NAV = SECTIONS.map((s, i) => ({ id: s.id, navKey: s.navKey, num: i + 1 }));

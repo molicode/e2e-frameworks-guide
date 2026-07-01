@@ -161,6 +161,165 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-selenium)">Selenium</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h1 class="section__title" data-i18n="page.hello">Hola mundo</h1>
+        <figure class="runner" data-runner>
+          <div class="runner__frame">
+            <div class="runner__tabs" role="tablist" aria-label="Elegí un framework">
+              <button class="runner__tab is-active" type="button" role="tab" aria-selected="true" data-fw="selenium" style="--fw:var(--fw-selenium)">Selenium</button><button class="runner__tab" type="button" role="tab" aria-selected="false" data-fw="cypress" style="--fw:var(--fw-cypress)">Cypress</button><button class="runner__tab" type="button" role="tab" aria-selected="false" data-fw="playwright" style="--fw:var(--fw-playwright)">Playwright</button>
+              <span class="runner__ink" aria-hidden="true"></span>
+            </div>
+            <div class="runner__panels">
+          <div class="runner__panel is-active" data-fw="selenium" style="--fw:var(--fw-selenium)">
+            <div class="runner__chips"><span class="runner__chip">Multi-language</span><span class="runner__chip">W3C WebDriver</span><span class="runner__chip">Battle-tested</span></div>
+            <div class="runner__stage">
+            <div class="mock runner__browser">
+              <div class="mock__bar">
+                <span class="mock__dots"><i></i><i></i><i></i></span>
+                <span class="mock__url runner__url">app.test/login</span>
+              </div>
+              <div class="mock__body runner__screens">
+                <div class="runner__screen runner__screen--form">
+                  <div class="mock-card">
+                    <p class="mock-h">Sign in</p>
+                    <div class="mock-field">
+                      <span class="mock-field__label">Username</span>
+                      <span class="mock-input runner__input"><span class="runner__typed"></span><span class="runner__caret" aria-hidden="true"></span></span>
+                    </div>
+                    <div class="mock-btn-row">
+                      <span class="mock-btn runner__btn">Sign in</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="runner__screen runner__screen--success">
+                  <div class="runner__result">
+                    <span class="runner__check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                    </span>
+                    <p class="runner__welcome">Welcome</p>
+                    <span class="runner__passed">✓ assertion passed</span>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+            <div class="runner__code">
+              <div class="runner__codebar">
+                <span class="runner__filedot" style="background:var(--fw-selenium)"></span>
+                <span class="runner__file">LoginTest.java</span>
+                <span class="runner__badge">JAVA</span>
+              </div>
+              <pre class="runner__pre"><code><span class="runner__line" data-stage="form">WebDriver driver <span class="tok-punctuation">=</span> <span class="tok-keyword">new</span> <span class="tok-function">ChromeDriver</span><span class="tok-punctuation">();</span></span>
+<span class="runner__line" data-stage="form">driver<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="typing">driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>user<span class="tok-punctuation">"))</span></span>
+<span class="runner__line" data-stage="typing">    <span class="tok-punctuation">.</span><span class="tok-function">sendKeys</span><span class="tok-punctuation">("</span>admin<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="submit">driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span>By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>go<span class="tok-punctuation">")).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></span>
+<span class="runner__line" data-stage="success"><span class="tok-keyword">String</span> msg <span class="tok-punctuation">=</span> driver<span class="tok-punctuation">.</span><span class="tok-function">findElement</span><span class="tok-punctuation">(</span></span>
+<span class="runner__line" data-stage="success">    By<span class="tok-punctuation">.</span><span class="tok-function">id</span><span class="tok-punctuation">("</span>welcome<span class="tok-punctuation">")).</span><span class="tok-function">getText</span><span class="tok-punctuation">();</span></span>
+<span class="runner__line" data-stage="passed"><span class="tok-function">assertEquals</span><span class="tok-punctuation">("</span>Welcome<span class="tok-punctuation">",</span> msg<span class="tok-punctuation">);</span></span></code></pre></div>
+          </div>
+          <div class="runner__panel" data-fw="cypress" style="--fw:var(--fw-cypress)">
+            <div class="runner__chips"><span class="runner__chip">All-in-one</span><span class="runner__chip">Time-travel</span><span class="runner__chip">DX-first</span></div>
+            <div class="runner__stage">
+            <div class="mock runner__browser">
+              <div class="mock__bar">
+                <span class="mock__dots"><i></i><i></i><i></i></span>
+                <span class="mock__url runner__url">app.test/login</span>
+              </div>
+              <div class="mock__body runner__screens">
+                <div class="runner__screen runner__screen--form">
+                  <div class="mock-card">
+                    <p class="mock-h">Sign in</p>
+                    <div class="mock-field">
+                      <span class="mock-field__label">Username</span>
+                      <span class="mock-input runner__input"><span class="runner__typed"></span><span class="runner__caret" aria-hidden="true"></span></span>
+                    </div>
+                    <div class="mock-btn-row">
+                      <span class="mock-btn runner__btn">Sign in</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="runner__screen runner__screen--success">
+                  <div class="runner__result">
+                    <span class="runner__check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                    </span>
+                    <p class="runner__welcome">Welcome</p>
+                    <span class="runner__passed">✓ assertion passed</span>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+            <div class="runner__code">
+              <div class="runner__codebar">
+                <span class="runner__filedot" style="background:var(--fw-cypress)"></span>
+                <span class="runner__file">login.cy.js</span>
+                <span class="runner__badge">CYPRESS</span>
+              </div>
+              <pre class="runner__pre"><code><span class="runner__line" data-stage="form">cy<span class="tok-punctuation">.</span><span class="tok-function">visit</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="typing">cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>user<span class="tok-string">").type("</span>admin<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="submit">cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>go<span class="tok-punctuation">").</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></span>
+<span class="runner__line" data-stage="success">cy<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("#</span>welcome<span class="tok-punctuation">")</span></span>
+<span class="runner__line" data-stage="passed">  <span class="tok-punctuation">.</span><span class="tok-function">should</span><span class="tok-punctuation">("</span>have<span class="tok-punctuation">.</span><span class="tok-property">text</span><span class="tok-string">", "</span>Welcome<span class="tok-punctuation">");</span></span></code></pre></div>
+          </div>
+          <div class="runner__panel" data-fw="playwright" style="--fw:var(--fw-playwright)">
+            <div class="runner__chips"><span class="runner__chip">Auto-wait</span><span class="runner__chip">Multi-browser</span><span class="runner__chip">Trace viewer</span></div>
+            <div class="runner__stage">
+            <div class="mock runner__browser">
+              <div class="mock__bar">
+                <span class="mock__dots"><i></i><i></i><i></i></span>
+                <span class="mock__url runner__url">app.test/login</span>
+              </div>
+              <div class="mock__body runner__screens">
+                <div class="runner__screen runner__screen--form">
+                  <div class="mock-card">
+                    <p class="mock-h">Sign in</p>
+                    <div class="mock-field">
+                      <span class="mock-field__label">Username</span>
+                      <span class="mock-input runner__input"><span class="runner__typed"></span><span class="runner__caret" aria-hidden="true"></span></span>
+                    </div>
+                    <div class="mock-btn-row">
+                      <span class="mock-btn runner__btn">Sign in</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="runner__screen runner__screen--success">
+                  <div class="runner__result">
+                    <span class="runner__check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+                    </span>
+                    <p class="runner__welcome">Welcome</p>
+                    <span class="runner__passed">✓ assertion passed</span>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+            <div class="runner__code">
+              <div class="runner__codebar">
+                <span class="runner__filedot" style="background:var(--fw-playwright)"></span>
+                <span class="runner__file">login.spec.ts</span>
+                <span class="runner__badge">PLAYWRIGHT</span>
+              </div>
+              <pre class="runner__pre"><code><span class="runner__line" data-stage="form"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="typing"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByLabel</span><span class="tok-punctuation">("</span>User<span class="tok-punctuation">")</span></span>
+<span class="runner__line" data-stage="typing">  <span class="tok-punctuation">.</span><span class="tok-function">fill</span><span class="tok-punctuation">("</span>admin<span class="tok-punctuation">");</span></span>
+<span class="runner__line" data-stage="submit"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-punctuation">",</span></span>
+<span class="runner__line" data-stage="submit">  <span class="tok-punctuation">{</span> name<span class="tok-punctuation">:</span> <span class="tok-string">"Go"</span> <span class="tok-punctuation">}).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></span>
+<span class="runner__line" data-stage="success"><span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByText</span><span class="tok-punctuation">("</span>Welcome<span class="tok-punctuation">"))</span></span>
+<span class="runner__line" data-stage="passed">  <span class="tok-punctuation">.</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></span></code></pre></div>
+          </div>
+            </div>
+            <div class="runner__player">
+              <button class="runner__play" type="button" aria-label="Reproducir la demo" data-i18n-attr="aria-label:runner.run">
+                <svg class="runner__ico-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                <svg class="runner__ico-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+              </button>
+              <div class="runner__timeline"><div class="runner__progress"></div></div>
+              <span class="runner__time">0:00</span>
+              <button class="runner__replay" type="button" aria-label="Reiniciar la demo" data-i18n-attr="aria-label:runner.replay">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>
+              </button>
+            </div>
+          </div>
+          <figcaption class="mock__caption" data-i18n="runner.caption">▶ Demo interactivo: dale play y mirá cómo se ejecuta el código línea por línea mientras la pantalla reacciona. Cambiá de framework en las pestañas.</figcaption>
+        </figure>
         <h2 class="block-label" id="sel-rung-1" data-i18n="sel.rung1.title">WebDriver y navegación</h2>
         <div class="prose" data-i18n-html="sel.rung1.body"><p>Todo test de Selenium empieza creando un <strong>driver</strong> (la sesión del navegador) y termina con <code>driver.quit()</code> para liberarla. En el medio navegás con <code>driver.get(url)</code>. Pensá el driver como el control remoto del navegador: si no lo apagás, queda consumiendo recursos.</p></div>
         <div class="code-block">
@@ -292,5 +451,6 @@ pytest test_login<span class="tok-punctuation">.</span><span class="tok-property
   <script src="../i18n/en.js"></script>
   <script src="../js/theme.js"></script>
   <script src="../js/page.js"></script>
+  <script src="../js/runner.js"></script>
 </body>
 </html>
