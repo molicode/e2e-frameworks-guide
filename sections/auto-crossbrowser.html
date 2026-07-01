@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
+  <meta name="color-scheme" content="light dark" />
+  <title>Cross-browser</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('qaguide-theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page--section page--concept page--auto-crossbrowser">
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress__bar" id="reading-progress-bar"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú"
+              data-i18n-attr="aria-label:ui.menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+      </button>
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__text" data-i18n="brand.title">QA Automation Guide</span>
+      </a>
+      <div class="site-header__actions">
+        <button class="progress-badge" id="progress-badge" type="button" hidden
+                aria-label="Progreso" data-i18n-attr="aria-label:game.progress" title="">
+          <span class="progress-badge__ring"><svg viewBox="0 0 36 36" width="18" height="18" aria-hidden="true"><circle class="progress-badge__track" cx="18" cy="18" r="15.5" fill="none" stroke-width="4"/><circle class="progress-badge__fill" cx="18" cy="18" r="15.5" fill="none" stroke-width="4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></span>
+          <span class="progress-badge__pct">0%</span>
+        </button>
+        <div class="seg-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.lang">
+          <button class="seg-toggle__btn" data-lang="es" type="button">ES</button>
+          <button class="seg-toggle__btn" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="icon-btn theme-btn" id="theme-toggle" type="button"
+                aria-label="Tema" data-i18n-attr="aria-label:ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 11h2a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm16 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM5.6 4.2l1.4 1.4A1 1 0 1 1 5.6 7L4.2 5.6a1 1 0 0 1 1.4-1.4zm12 12l1.4 1.4a1 1 0 0 1-1.4 1.4L16.2 18a1 1 0 0 1 1.4-1.4zM18 5.6l-1.4 1.4A1 1 0 0 1 15.2 5.6l1.4-1.4A1 1 0 0 1 18 5.6zM7 16.2L5.6 17.6A1 1 0 0 1 4.2 16.2L5.6 14.8A1 1 0 0 1 7 16.2z" /></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.6 13.3A8 8 0 0 1 10.7 2.4 1 1 0 0 0 9.4 1 10 10 0 1 0 23 14.6a1 1 0 0 0-1.4-1.3z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <nav class="sidebar__nav">
+        <a class="nav-link nav-link--home" href="../index.html">
+          <span class="nav-link__num">⌂</span>
+          <span data-i18n="nav.home">Inicio</span>
+        </a>
+        <a class="nav-link" href="intro.html">
+          <span class="nav-link__num">01</span>
+          <span data-i18n="nav.intro">Introducción</span>
+        </a>
+        <a class="nav-link" href="fundamentals.html">
+          <span class="nav-link__num">02</span>
+          <span data-i18n="nav.fundamentals">Fundamentos</span>
+        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">03</span>
+            <span data-i18n="nav.pyqa">Python para QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="python-intro.html">
+              <span data-i18n="pyqa.page.intro">Por qué Python para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-hola.html">
+              <span data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-fundamentos.html">
+              <span data-i18n="pyqa.page.fund">Fundamentos del lenguaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-datos.html">
+              <span data-i18n="pyqa.page.datos">Colecciones y JSON</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-pytest.html">
+              <span data-i18n="pyqa.page.pytest">pytest: tu primer test</span>
+            </a>
+            <a class="nav-link nav-sublink" href="python-componente.html">
+              <span data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">04</span>
+            <span data-i18n="nav.tsqa">TypeScript para QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="ts-intro.html">
+              <span data-i18n="tsqa.page.intro">Por qué TypeScript para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-hola.html">
+              <span data-i18n="tsqa.page.hola">Instalación y Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-fundamentos.html">
+              <span data-i18n="tsqa.page.fund">Fundamentos del lenguaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-tipos.html">
+              <span data-i18n="tsqa.page.tipos">Tipos, objetos y arrays</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-pruebas.html">
+              <span data-i18n="tsqa.page.pruebas">Vitest: tu primer test</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ts-componente.html">
+              <span data-i18n="tsqa.page.comp">Tu primer componente testeado</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">05</span>
+            <span data-i18n="nav.selenium">Selenium</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="selenium-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="selenium-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">06</span>
+            <span data-i18n="nav.cypress">Cypress</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="cypress-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="cypress-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">07</span>
+            <span data-i18n="nav.playwright">Playwright</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="playwright-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="playwright-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">08</span>
+            <span data-i18n="nav.robot">Robot Framework</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="robot-filosofia.html">
+              <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
+              <span data-i18n="page.hello">Hola mundo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-ruta.html">
+              <span data-i18n="page.path">Ruta de aprendizaje</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-componentes.html">
+              <span data-i18n="page.components">Componentes clave</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-criticos.html">
+              <span data-i18n="page.cases">Casos críticos</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-verbos.html">
+              <span data-i18n="page.verbs">Verbos HTTP</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-flashcards.html">
+              <span data-i18n="page.flashcards">Flashcards</span>
+            </a>
+            <a class="nav-link nav-sublink" href="robot-entrevista.html">
+              <span data-i18n="page.interview">Mock interview</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">09</span>
+            <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="bdd-intro.html">
+              <span data-i18n="bdd.page.intro">Qué es BDD y por qué</span>
+            </a>
+            <a class="nav-link nav-sublink" href="bdd-gherkin.html">
+              <span data-i18n="bdd.page.gherkin">La sintaxis Gherkin</span>
+            </a>
+            <a class="nav-link nav-sublink" href="bdd-cucumber.html">
+              <span data-i18n="bdd.page.cucumber">Cucumber y step definitions</span>
+            </a>
+            <a class="nav-link nav-sublink" href="bdd-practica.html">
+              <span data-i18n="bdd.page.practica">BDD en la práctica</span>
+            </a>
+          </div>
+        </div>
+        <a class="nav-link" href="comparison.html">
+          <span class="nav-link__num">10</span>
+          <span data-i18n="nav.comparison">Comparativa</span>
+        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">11</span>
+            <span data-i18n="nav.perf">Performance testing</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="perf-intro.html">
+              <span data-i18n="perf.page.intro">Qué es y qué se mide</span>
+            </a>
+            <a class="nav-link nav-sublink" href="perf-k6.html">
+              <span data-i18n="perf.page.k6">k6</span>
+            </a>
+            <a class="nav-link nav-sublink" href="perf-jmeter.html">
+              <span data-i18n="perf.page.jmeter">JMeter</span>
+            </a>
+            <a class="nav-link nav-sublink" href="perf-locust.html">
+              <span data-i18n="perf.page.locust">Locust</span>
+            </a>
+          </div>
+        </div>
+        <a class="nav-link" href="ai-role.html">
+          <span class="nav-link__num">12</span>
+          <span data-i18n="nav.airole">El rol de la AI</span>
+        </a>
+        <a class="nav-link" href="prompts.html">
+          <span class="nav-link__num">13</span>
+          <span data-i18n="nav.prompts">Ejemplos con AI</span>
+        </a>
+        <a class="nav-link" href="best-practices.html">
+          <span class="nav-link__num">14</span>
+          <span data-i18n="nav.best">Buenas prácticas</span>
+        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">15</span>
+            <span data-i18n="nav.ci">CI/CD para QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="ci-intro.html">
+              <span data-i18n="ci.page.intro">Por qué QA vive en el pipeline</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ci-pipeline.html">
+              <span data-i18n="ci.page.pipeline">Un pipeline de ejemplo</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ci-matrix.html">
+              <span data-i18n="ci.page.matrix">Paralelización y matrix</span>
+            </a>
+            <a class="nav-link nav-sublink" href="ci-gates.html">
+              <span data-i18n="ci.page.gates">Quality gates y reportes</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">16</span>
+            <span data-i18n="nav.skills">Habilidades del QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="skills-intro.html">
+              <span data-i18n="skills.page.intro">Por qué estas habilidades</span>
+            </a>
+            <a class="nav-link nav-sublink" href="skills-sql.html">
+              <span data-i18n="skills.page.sql">SQL para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="skills-git.html">
+              <span data-i18n="skills.page.git">Git para QA</span>
+            </a>
+            <a class="nav-link nav-sublink" href="skills-appium.html">
+              <span data-i18n="skills.page.appium">Appium (mobile)</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">17</span>
+            <span data-i18n="nav.maturity">Estrategia y madurez de QA</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="maturity-intro.html">
+              <span data-i18n="mat.page.intro">QA como estrategia</span>
+            </a>
+            <a class="nav-link nav-sublink" href="maturity-roadmap.html">
+              <span data-i18n="mat.page.roadmap">Roadmap de madurez (4 fases)</span>
+            </a>
+            <a class="nav-link nav-sublink" href="maturity-kpis.html">
+              <span data-i18n="mat.page.kpis">KPIs y modelos de madurez</span>
+            </a>
+            <a class="nav-link nav-sublink" href="maturity-istqb.html">
+              <span data-i18n="mat.page.istqb">ISTQB y certificaciones</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-group-item is-open">
+          <button class="nav-link nav-group is-active-group" type="button" aria-expanded="true">
+            <span class="nav-link__num">18</span>
+            <span data-i18n="nav.keyterms">Conceptos clave</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="key-terms.html">
+              <span data-i18n="kt.overview">Todos los conceptos</span>
+            </a>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.process">Proceso y estrategia</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-sdlc.html">
+                <span>SDLC / STLC</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-shiftleft.html">
+                <span>Shift-left testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-tdd.html">
+                <span>TDD (Test-Driven Development)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-bdd.html">
+                <span>BDD (Gherkin / Cucumber)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-gwt.html">
+                <span>Given / When / Then</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-amigos.html">
+                <span>Three amigos</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-atdd.html">
+                <span>ATDD</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-keyword.html">
+                <span>Keyword-driven testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-ct.html">
+                <span>Continuous testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-regression.html">
+                <span>Regression testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-smoke.html">
+                <span>Smoke vs Sanity</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-exploratory.html">
+                <span>Exploratory testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-uat.html">
+                <span>Acceptance / UAT</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-risk.html">
+                <span>Risk-based testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="proc-ddt.html">
+                <span>Data-driven testing</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested is-open">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
+              <span data-i18n="kt.cat.automation">Automatización</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-assertion.html">
+                <span>Assertion</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-locator.html">
+                <span>Selector / Locator</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-pom.html">
+                <span>Page Object Model (POM)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-fixtures.html">
+                <span>Fixtures</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-hooks.html">
+                <span>Hooks (setup / teardown)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-doubles.html">
+                <span>Test doubles (mock / stub / spy / fake)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-waits.html">
+                <span>Implicit / Explicit / Fluent wait</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-autowait.html">
+                <span>Auto-wait / retry</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-flaky.html">
+                <span>Flaky test</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-headless.html">
+                <span>Headless</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-parallel.html">
+                <span>Parallelization</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="auto-crossbrowser.html" aria-current="page">
+                <span>Cross-browser</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-coverage.html">
+                <span>Code coverage</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-cicd.html">
+                <span>CI/CD &amp; quality gate</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-isolation.html">
+                <span>Test isolation</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-tdm.html">
+                <span>Test data management</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-visual.html">
+                <span>Visual regression</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-a11y.html">
+                <span>Accessibility (a11y) testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-api.html">
+                <span>API testing</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="auto-mobile.html">
+                <span>Mobile testing (Appium)</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="kt.cat.api">API, HTTP y datos</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-methods.html">
+                <span>HTTP methods / verbs</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-idempotency.html">
+                <span>Idempotency</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-safe.html">
+                <span>Safe method</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-status.html">
+                <span>HTTP status codes</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-rest.html">
+                <span>REST</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-crud.html">
+                <span>CRUD</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-cors.html">
+                <span>CORS / preflight</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="api-sql.html">
+                <span>SQL / JOIN</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <a class="nav-link" href="bibliography.html">
+          <span class="nav-link__num">19</span>
+          <span data-i18n="nav.biblio">Bibliografía</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="content" id="main-content">
+      <div class="content__inner">
+        <div class="cpt-crumb"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
+        <span class="cpt-cat" style="--c:var(--fw-playwright)" data-i18n="kt.cat.automation">Automatización</span>
+        <h1 class="section__title cpt-title">Cross-browser</h1>
+        <div class="cpt-body">
+          <section class="cpt-sec">
+            <h2 class="block-label" data-i18n="cpt.def">Definición</h2>
+            <div class="cpt-rich cpt-def" data-i18n-html="kt.auto.crossbrowser">Verificar que la app funciona en distintos navegadores/motores (Chromium, Firefox, WebKit).</div>
+          </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
+          <div class="cpt-rich" data-i18n-html="cpt.auto-crossbrowser.ex">El mismo test corre en varios motores:<pre class="cpt-code"><code>// playwright.config.ts
+projects: [
+  { name: "chromium" },
+  { name: "firefox" },
+  { name: "webkit" },   // Safari
+]</code></pre></div>
+        </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
+          <div class="cpt-rich" data-i18n-html="cpt.auto-crossbrowser.uc">Valida que la app ande en Chrome, Firefox y Safari (WebKit). QA prioriza los navegadores reales de sus usuarios (según analytics) y automatiza los flujos críticos en ellos, no todo en todos.</div>
+        </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.refs">Para profundizar</h2>
+          <ul class="ref-list">
+            <li class="ref">
+              <a class="ref__link" href="https://playwright.dev/docs/browsers" target="_blank" rel="noopener noreferrer">Playwright — Browsers</a>
+            </li>
+          </ul>
+        </section>
+        </div>
+        <div class="page-nav page-nav--single"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
+
+  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai-role","prompts","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai-role","label":"nav.airole","pages":["ai-role"]},{"key":"prompts","label":"nav.prompts","pages":["prompts"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
+  <script src="../js/i18n.js"></script>
+  <script src="../i18n/es.js"></script>
+  <script src="../i18n/en.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/page.js"></script>
+  <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
+  <script src="../js/interview.js"></script>
+  <script src="../js/concepts.js"></script>
+  <script src="../js/progress.js"></script>
+</body>
+</html>

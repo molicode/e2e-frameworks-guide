@@ -1846,6 +1846,66 @@ I18n.register("es", {
   "cpt.proc-ddt.ex": "Un mismo test corre con muchos datos desde una tabla:<pre class=\"cpt-code\"><code>@pytest.mark.parametrize(\"user, pwd, ok\", [\n    (\"ana\", \"1234\", True),    # válido\n    (\"ana\", \"malo\", False),   # password incorrecta\n    (\"\",    \"1234\", False),   # usuario vacío\n])\ndef test_login(user, pwd, ok):\n    ...</code></pre>",
   "cpt.proc-ddt.uc": "Cubrís muchas combinaciones (válidas, inválidas, de borde) sin duplicar código. QA separa los datos del test, así agregar un caso nuevo es agregar una fila — ideal para reglas con muchas variantes (impuestos, descuentos, validaciones).",
 
+  "cpt.auto-assertion.ex": "La verificación que decide si el test pasa o falla:<pre class=\"cpt-code\"><code>assert page.title() == \"Dashboard\"\nexpect(page.get_by_role(\"alert\")).to_have_text(\"Guardado\")</code></pre>Un test <em>sin</em> aserción no prueba nada: siempre “pasa”.",
+  "cpt.auto-assertion.uc": "Cada caso termina en una o más aserciones sobre el estado esperado. Las buenas son específicas (comparás el valor exacto, no solo “existe”). Usá <em>soft asserts</em> cuando quieras ver todos los fallos de un test juntos en vez de frenar en el primero.",
+
+  "cpt.auto-locator.ex": "Cómo el test encuentra un elemento; conviene esta jerarquía (rol/texto &gt; test-id &gt; CSS &gt; XPath):<pre class=\"cpt-code\"><code>page.get_by_role(\"button\", name=\"Pagar\")   # ✅ accesible, estable\npage.get_by_test_id(\"submit\")               # ✅ explícito\npage.locator(\"#app div.card:nth-child(3) button\")  # ❌ frágil</code></pre>",
+  "cpt.auto-locator.uc": "Un buen locator sobrevive a cambios de estilo o estructura. QA prioriza el <strong>rol accesible</strong> y el texto (como lo ve el usuario) sobre selectores CSS/XPath acoplados al DOM, reduciendo la fragilidad y los falsos rojos.",
+
+  "cpt.auto-pom.ex": "Encapsulás una pantalla en una clase con métodos, y los tests la usan:<pre class=\"cpt-code\"><code>class LoginPage:\n    def __init__(self, page): self.page = page\n    def login(self, user, pwd):\n        self.page.fill(\"#user\", user)\n        self.page.fill(\"#pass\", pwd)\n        self.page.click(\"#submit\")\n\nLoginPage(page).login(\"ana\", \"1234\")   # el test queda legible</code></pre>",
+  "cpt.auto-pom.uc": "Los selectores y las acciones viven en un solo lugar: si cambia el HTML, tocás la clase y no los 50 tests que la usan. Mejora la legibilidad y baja muchísimo el costo de mantenimiento de una suite grande.",
+
+  "cpt.auto-fixtures.ex": "Preparan el contexto (datos, sesión, browser) y se lo entregan al test:<pre class=\"cpt-code\"><code>@pytest.fixture\ndef logged_page(page):\n    LoginPage(page).login(\"ana\", \"1234\")\n    return page\n\ndef test_panel(logged_page):\n    expect(logged_page.get_by_role(\"heading\")).to_have_text(\"Panel\")</code></pre>",
+  "cpt.auto-fixtures.uc": "Evitan repetir el setup en cada test y garantizan un estado conocido de partida. QA arma fixtures por alcance (función, sesión) y las combina para montar escenarios complejos sin duplicar código.",
+
+  "cpt.auto-hooks.ex": "Código que corre antes/después de cada test o suite:<pre class=\"cpt-code\"><code>test.beforeEach(async ({ page }) => { await page.goto(\"/\"); });\ntest.afterEach(async ({ page }) => { await page.close(); });</code></pre>",
+  "cpt.auto-hooks.uc": "Centralizan la preparación (abrir la app, loguearse) y la limpieza (borrar los datos creados) para que cada test empiece y termine limpio. Son la base de la <strong>aislación</strong> entre tests.",
+
+  "cpt.auto-doubles.ex": "Reemplazos de las dependencias reales, según qué necesites:<pre class=\"cpt-code\"><code>Dummy  → relleno que no se usa\nStub   → devuelve respuestas fijas\nSpy    → registra cómo lo llamaron\nMock   → verifica las interacciones esperadas\nFake   → implementación simplificada (DB en memoria)</code></pre>",
+  "cpt.auto-doubles.uc": "Aíslan la unidad bajo prueba de servicios lentos o externos (pago, email). En e2e mockeás la red (<code>cy.intercept</code> / <code>page.route</code>) para forzar de forma determinista un error 500 o una respuesta lenta y probar cómo reacciona la UI.",
+
+  "cpt.auto-waits.ex": "Tres formas de esperar en Selenium (de peor a mejor):<pre class=\"cpt-code\"><code>driver.implicitly_wait(10)                 # implícita: global\nWebDriverWait(driver, 10).until(           # explícita: por condición\n    EC.element_to_be_clickable((By.ID, \"pay\")))\nWebDriverWait(driver, 10, poll_frequency=0.5)  # fluent: + intervalo</code></pre>",
+  "cpt.auto-waits.uc": "Reemplazan al <code>sleep</code> fijo, que es frágil (a veces corto) y lento (siempre espera de más). QA usa esperas <strong>explícitas por condición</strong> (“visible”, “clickable”) para tests estables; nunca <code>time.sleep</code>.",
+
+  "cpt.auto-autowait.ex": "Playwright y Cypress esperan solos a que el elemento sea accionable:<pre class=\"cpt-code\"><code>await page.get_by_role(\"button\", name=\"Pagar\").click()\n# espera: visible, habilitado, estable y sin overlay encima\nawait expect(page.get_by_text(\"Pagado\")).to_be_visible()  # reintenta</code></pre>",
+  "cpt.auto-autowait.uc": "Elimina la mayoría de los <code>sleep</code> y esperas manuales, bajando muchísimo el flakiness. QA se apoya en aserciones “web-first” que <em>reintentan</em> hasta el timeout en vez de evaluar el DOM una sola vez.",
+
+  "cpt.auto-flaky.ex": "Un test que a veces pasa y a veces falla sin cambiar el código:<pre class=\"cpt-code\"><code>run 1: PASS   run 2: FAIL   run 3: PASS\n\nCausas típicas: sleeps fijos, estado/orden compartido,\nesperas de red, animaciones, datos aleatorios, zona horaria.</code></pre>",
+  "cpt.auto-flaky.uc": "Los flaky erosionan la confianza: si la suite “falla sola”, el equipo empieza a ignorar los rojos. QA los detecta (reintentos que revelan inestabilidad), los aísla y arregla la <strong>causa raíz</strong> (esperas, aislación de datos) en vez de taparlos con reintentos.",
+
+  "cpt.auto-headless.ex": "Correr el navegador sin ventana visible:<pre class=\"cpt-code\"><code>playwright test            # headless por defecto (CI)\nplaywright test --headed   # con ventana (para depurar)</code></pre>",
+  "cpt.auto-headless.uc": "Es más rápido y liviano, ideal para CI (que no tiene pantalla). QA corre <em>headless</em> en el pipeline y <em>headed</em> localmente para depurar, cuidando diferencias sutiles como el tamaño del viewport o las fuentes disponibles.",
+
+  "cpt.auto-parallel.ex": "Correr varios tests a la vez para bajar el tiempo total:<pre class=\"cpt-code\"><code>playwright test --workers=4    # 4 en paralelo\npytest -n auto                 # pytest-xdist reparte por CPU</code></pre>",
+  "cpt.auto-parallel.uc": "Baja el tiempo de reloj de la suite (de 20 min a 5). Requiere tests <strong>aislados</strong>, sin estado compartido. QA reparte en <em>shards</em> en CI y evita que dos workers usen los mismos datos y se pisen.",
+
+  "cpt.auto-crossbrowser.ex": "El mismo test corre en varios motores:<pre class=\"cpt-code\"><code>// playwright.config.ts\nprojects: [\n  { name: \"chromium\" },\n  { name: \"firefox\" },\n  { name: \"webkit\" },   // Safari\n]</code></pre>",
+  "cpt.auto-crossbrowser.uc": "Valida que la app ande en Chrome, Firefox y Safari (WebKit). QA prioriza los navegadores reales de sus usuarios (según analytics) y automatiza los flujos críticos en ellos, no todo en todos.",
+
+  "cpt.auto-coverage.ex": "Qué porcentaje del código ejecutan los tests:<pre class=\"cpt-code\"><code>pytest --cov=app\n\napp/pay.py .......... 92%\napp/utils.py ........ 40%   ← zona poco probada</code></pre>",
+  "cpt.auto-coverage.uc": "Ayuda a encontrar zonas sin probar, pero 100% no significa “sin bugs” (podés ejecutar el código sin verificar nada). QA la usa como guía de qué falta, no como meta ciega: cobertura alta con aserciones pobres engaña.",
+
+  "cpt.auto-cicd.ex": "El pipeline corre los tests y frena el merge si no pasan:<pre class=\"cpt-code\"><code>jobs:\n  test:\n    steps:\n      - run: pytest --maxfail=1\n# branch protection: exige el check \"test\" en verde para mergear</code></pre>",
+  "cpt.auto-cicd.uc": "El <strong>quality gate</strong> impide que código roto llegue a <code>main</code>. QA define qué chequeos son obligatorios (tests, lint, cobertura mínima) y en qué etapa corren (smoke en el PR, regresión completa antes del release).",
+
+  "cpt.auto-isolation.ex": "Cada test parte de un estado limpio e independiente:<pre class=\"cpt-code\"><code>test.beforeEach(async ({ context }) => {\n  await context.clearCookies();     // sesión limpia\n});\n// además crea sus propios datos; no depende de otro test</code></pre>",
+  "cpt.auto-isolation.uc": "Evita que el orden o los datos de un test afecten a otro — una causa clásica de flakiness. QA crea y borra sus propios datos, usa un contexto/DB por test y nunca asume que “el test anterior dejó X”.",
+
+  "cpt.auto-tdm.ex": "Cómo conseguís datos válidos y repetibles:<pre class=\"cpt-code\"><code>Factory/builder → construye un usuario válido con defaults\nSeed            → carga datos base antes de correr\nVía API         → crea el dato por API (rápido), no por la UI\nLimpieza        → borra lo creado al terminar</code></pre>",
+  "cpt.auto-tdm.uc": "Datos malos = tests frágiles. QA genera datos frescos por test (factories), evita depender de registros “mágicos” en la base y limpia al final para no ensuciar el entorno compartido.",
+
+  "cpt.auto-visual.ex": "Comparás un screenshot contra un <em>baseline</em> aprobado:<pre class=\"cpt-code\"><code>await expect(page).to_have_screenshot(\"checkout.png\")\n# falla si difiere del baseline más que el umbral → muestra el diff</code></pre>",
+  "cpt.auto-visual.uc": "Atrapa cambios visuales que las aserciones funcionales no ven: layout roto, color, texto cortado, overflow. QA aprueba los baselines con cuidado y usa umbrales o máscaras para las zonas dinámicas (fechas, avatars).",
+
+  "cpt.auto-a11y.ex": "Chequeás reglas WCAG automáticamente con axe:<pre class=\"cpt-code\"><code>import AxeBuilder from \"@axe-core/playwright\";\nconst results = await new AxeBuilder({ page }).analyze();\nexpect(results.violations).toEqual([]);</code></pre>",
+  "cpt.auto-a11y.uc": "Detecta problemas de accesibilidad (contraste, labels, roles ARIA) que además mejoran la testabilidad (elementos con rol y nombre son más fáciles de localizar). QA combina el scan automático con una revisión manual de teclado y lector de pantalla.",
+
+  "cpt.auto-api.ex": "Probás el backend sin UI: más rápido y estable:<pre class=\"cpt-code\"><code>const res = await request.post(\"/orders\", { data: cart });\nexpect(res.status()).toBe(201);\nexpect((await res.json()).id).toBeTruthy();</code></pre>",
+  "cpt.auto-api.uc": "Cubre lógica de negocio y casos borde a nivel API, mucho más barato que un e2e. QA arma la <strong>base de la pirámide</strong> con tests de API y reserva los e2e para los pocos flujos críticos de usuario de punta a punta.",
+
+  "cpt.auto-mobile.ex": "Automatizás apps nativas/híbridas con la misma idea que WebDriver:<pre class=\"cpt-code\"><code>el = driver.find_element(AppiumBy.ACCESSIBILITY_ID, \"loginBtn\")\nel.click()</code></pre>",
+  "cpt.auto-mobile.uc": "Appium maneja Android e iOS con una API estilo Selenium. QA prioriza lo propio del móvil que no existe en web: rotación, permisos, red intermitente, botón atrás del sistema y gestos (swipe, pinch).",
+
   "kt.cat.maturity": "Métricas, madurez y certificación",
   "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
