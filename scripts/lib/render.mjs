@@ -98,6 +98,39 @@ function renderBlock(block, dict) {
     case "runner":
       return renderRunner(dict, block.fw || "selenium", block.scenario || "login", block.verb);
 
+    case "flashcards": {
+      // A little study deck: one flippable Q/A card at a time, with a pager.
+      const cards = block.cards
+        .map(
+          (c, i) => `
+            <div class="fc-card${i === 0 ? " is-active" : ""}" data-fc-card tabindex="0" role="button" aria-label="${escAttr(t(dict, "fc.flip"))}">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">${escText(t(dict, "fc.q"))}</span>
+                  <p class="fc-text" data-i18n="${c.q}">${escText(t(dict, c.q))}</p>
+                  <span class="fc-hint" data-i18n="fc.hint">${escText(t(dict, "fc.hint"))}</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">${escText(t(dict, "fc.a"))}</span>
+                  <p class="fc-text" data-i18n="${c.a}">${escText(t(dict, c.a))}</p>
+                </div>
+              </div>
+            </div>`
+        )
+        .join("");
+      return `
+        <div class="flashcards" data-flashcards>
+          <div class="fc-stage">${cards}
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-prev" type="button" aria-label="${escAttr(t(dict, "fc.prev"))}" data-i18n-attr="aria-label:fc.prev">‹</button>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / ${block.cards.length}</span>
+            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">${escText(t(dict, "fc.flip"))}</button>
+            <button class="fc-btn fc-next" type="button" aria-label="${escAttr(t(dict, "fc.next"))}" data-i18n-attr="aria-label:fc.next">›</button>
+          </div>
+        </div>`;
+    }
+
     case "mock":
       return `
         <figure class="mock-figure">${renderMock(block.screen)}
@@ -418,6 +451,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
   <script src="${assetPrefix}js/theme.js"></script>
   <script src="${assetPrefix}js/page.js"></script>
   <script src="${assetPrefix}js/runner.js"></script>
+  <script src="${assetPrefix}js/flashcards.js"></script>
 </body>
 </html>
 `;

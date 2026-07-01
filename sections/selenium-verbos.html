@@ -667,6 +667,69 @@ opt <span class="tok-punctuation">=</span> requests<span class="tok-punctuation"
 <span class="tok-keyword">assert</span> <span class="tok-string">"POST"</span> <span class="tok-keyword">in</span> opt<span class="tok-punctuation">.</span><span class="tok-property">headers</span><span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">("</span>Allow<span class="tok-string">", "</span><span class="tok-punctuation">")</span></code></pre>
         </div>
         <div class="callout" data-i18n-html="verbs.callout"><strong>Regla práctica:</strong> verificá <em>primero</em> el status y <em>después</em> el cuerpo. Y testeá los caminos infelices: sin token → <code>401</code>, recurso de otro usuario → <code>403</code>, id inexistente → <code>404</code>. Un 200 que debería ser un 404 es un bug.</div>
+        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
+        <div class="flashcards" data-flashcards>
+          <div class="fc-stage">
+            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.q1">¿Qué es WebDriver?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.a1">El estándar W3C para controlar un navegador real de forma programática.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.q2">¿Espera implícita vs explícita?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.a2">La implícita aplica a todas las búsquedas; la explícita espera una condición puntual (más robusta).</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.q3">¿Qué es el patrón Page Object?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.a3">Encapsular selectores y acciones de una página en una clase, para tests legibles y mantenibles.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.q4">¿Por qué evitar un sleep fijo?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.selenium.a4">Hace los tests lentos y flaky; mejor esperar por condiciones (elemento visible o clickeable).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
+            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
+            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
+          </div>
+        </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="selenium-criticos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
@@ -687,5 +750,6 @@ opt <span class="tok-punctuation">=</span> requests<span class="tok-punctuation"
   <script src="../js/theme.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
 </body>
 </html>

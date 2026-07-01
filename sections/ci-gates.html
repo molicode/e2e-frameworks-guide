@@ -200,6 +200,69 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
           </div>
         </div>
         <div class="callout callout--ok" data-i18n-html="ci.gate.callout"><strong>Próximo paso:</strong> empezá con un gate mínimo (los tests deben pasar) y subí el listón de a poco — cobertura, luego performance. Un gate que el equipo respeta vale más que diez que se saltean.</div>
+        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
+        <div class="flashcards" data-flashcards>
+          <div class="fc-stage">
+            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.ci.q1">¿Qué es CI/CD?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.ci.a1">Integración y entrega continuas: automatizar build, test y despliegue en cada cambio.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.ci.q2">¿Qué es una matriz de build?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.ci.a2">Correr el mismo job en varias combinaciones (SO, versión, navegador) en paralelo.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.ci.q3">¿Qué es un quality gate?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.ci.a3">Un umbral que debe cumplirse (tests verdes, cobertura) para avanzar en el pipeline.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.ci.q4">¿Qué son los artifacts?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.ci.a4">Archivos que el pipeline guarda (reportes, screenshots, traces) para inspeccionar después.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
+            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
+            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
+          </div>
+        </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="ci-matrix.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
@@ -220,5 +283,6 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
   <script src="../js/theme.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
 </body>
 </html>

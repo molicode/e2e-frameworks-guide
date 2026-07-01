@@ -3184,5 +3184,39 @@ const VERB_KEYS = ["get", "post", "put", "patch", "delete", "head", "options"];
   }
 });
 
+// Flashcards: a small study deck at the END of each study section, to review
+// its key concepts. For a framework GROUP the deck lands on its last sub-page.
+const flashcard = (k, n) =>
+  Array.from({ length: n }, (_, i) => ({ q: `fc.${k}.q${i + 1}`, a: `fc.${k}.a${i + 1}` }));
+const DECKS = {
+  intro: "intro",
+  fundamentals: "fundamentals",
+  python: "python-componente",
+  typescript: "ts-componente",
+  selenium: "selenium-verbos",
+  cypress: "cypress-verbos",
+  playwright: "playwright-verbos",
+  robot: "robot-verbos",
+  bdd: "bdd-practica",
+  comparison: "comparison",
+  perf: "perf-locust",
+  airole: "ai-role",
+  prompts: "prompts",
+  bestpractices: "best-practices",
+  ci: "ci-gates",
+  skills: "skills-appium",
+  maturity: "maturity-istqb",
+};
+Object.entries(DECKS).forEach(([key, targetId]) => {
+  const target = SECTIONS.find((s) => s.id === targetId);
+  if (target) {
+    target.blocks = [
+      ...target.blocks,
+      { type: "label", text: "fc.title" },
+      { type: "flashcards", cards: flashcard(key, 4) },
+    ];
+  }
+});
+
 /** Lightweight nav metadata (id + key + number) for building menus/index. */
 export const NAV = SECTIONS.map((s, i) => ({ id: s.id, navKey: s.navKey, num: i + 1 }));

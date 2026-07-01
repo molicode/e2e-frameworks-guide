@@ -186,6 +186,69 @@
           </div>
         </div>
         <div class="callout" data-i18n-html="intro.callout"><strong>Cómo leer esta guía:</strong> va de menos a más. Si recién empezás, seguí el orden. Si ya tenés experiencia, saltá con la navegación lateral a la comparativa o a las secciones de AI.</div>
+        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
+        <div class="flashcards" data-flashcards>
+          <div class="fc-stage">
+            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.intro.q1">¿Qué es QA y en qué se diferencia del testing?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.intro.a1">QA asegura la calidad de todo el proceso; el testing es una parte: ejecutar pruebas para encontrar defectos.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.intro.q2">Manual vs automatizado: ¿cuándo conviene automatizar?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.intro.a2">Automatizá lo repetitivo, estable y crítico (regresión); dejá manual lo exploratorio y lo que cambia mucho.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.intro.q3">¿Qué aporta la automatización?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.intro.a3">Velocidad, repetibilidad y feedback temprano; corre siempre igual y libera tiempo para explorar.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.intro.q4">¿La automatización reemplaza al tester?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.intro.a4">No: lo complementa. El criterio, el diseño de casos y la exploración siguen siendo humanos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
+            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
+            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
+          </div>
+        </div>
         <nav class="page-nav" aria-label="Pagination">
           <span></span>
           <a class="page-nav__link page-nav__next" href="fundamentals.html">
@@ -203,5 +266,6 @@
   <script src="../js/theme.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
 </body>
 </html>

@@ -219,6 +219,69 @@ The order status should be <span class="tok-string">"${status}"</span>
           </div>
         </div>
         <div class="callout callout--ok" data-i18n-html="bdd.prac.callout"><strong>Próximo paso:</strong> elegí un flujo crítico (login, checkout), escribí su <code>.feature</code> con negocio presente, y conectalo a tu framework. Empezá por uno solo: BDD se gana lugar mostrando valor, no imponiéndose.</div>
+        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
+        <div class="flashcards" data-flashcards>
+          <div class="fc-stage">
+            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.q1">¿Qué es BDD?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.a1">Behavior-Driven Development: describir el comportamiento esperado en lenguaje común antes de codear.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.q2">¿Qué es Gherkin?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.a2">El lenguaje Given/When/Then para escribir escenarios legibles por el negocio.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.q3">¿Qué son los step definitions?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.a3">El código que conecta cada paso de Gherkin con la automatización real.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.q4">¿Qué ventaja le da BDD al equipo?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bdd.a4">Un lenguaje común entre negocio, QA y devs; los escenarios son la especificación viva.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
+            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
+            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
+          </div>
+        </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="bdd-cucumber.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
@@ -239,5 +302,6 @@ The order status should be <span class="tok-string">"${status}"</span>
   <script src="../js/theme.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
 </body>
 </html>

@@ -155,6 +155,69 @@
             <li data-i18n-html="best.step5"><strong>Contribuí a esta guía:</strong> es open source. Agregá un idioma, una sección o un ejemplo (ver el README).</li>
         </ol>
         <div class="callout callout--ok" data-i18n-html="best.callout"><strong>Lo importante:</strong> la automatización no busca cero bugs, busca <em>confianza para entregar seguido</em>. Empezá chico, mantené verde y crecé desde ahí.</div>
+        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
+        <div class="flashcards" data-flashcards>
+          <div class="fc-stage">
+            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.q1">¿Qué hace a un test mantenible?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.a1">Es legible, independiente, determinista y usa selectores resilientes.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.q2">¿Por qué los tests deben ser independientes?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.a2">Para poder correr en cualquier orden y en paralelo sin efectos entre sí.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.q3">¿Qué es el patrón AAA?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.a3">Arrange, Act, Assert: preparar, actuar y verificar, en ese orden.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.q4">¿Qué evitar en las aserciones?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.bestpractices.a4">Aserciones vagas o muchas sin foco; cada test debería verificar una cosa clara.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
+            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
+            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
+          </div>
+        </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="prompts.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
@@ -175,5 +238,6 @@
   <script src="../js/theme.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
+  <script src="../js/flashcards.js"></script>
 </body>
 </html>
