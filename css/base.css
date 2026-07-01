@@ -129,12 +129,22 @@ code, pre, kbd, samp {
    Layout: sidebar + content
    -------------------------------------------------------------------------- */
 .layout {
-  max-width: 1320px;
+  max-width: 1520px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   align-items: start;
 }
+/* On wide screens a page gets a third "supporting pane" (M3) on the right,
+   added by JS when there's something to show — so the app fills the width
+   instead of leaving a big empty gutter. */
+@media (min-width: 1201px) {
+  .layout.has-rail {
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--rail-w);
+  }
+  .layout.has-rail .rail { display: block; }
+}
+.rail { display: none; }
 
 .sidebar {
   position: sticky;

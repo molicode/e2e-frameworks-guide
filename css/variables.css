@@ -1,10 +1,14 @@
 /* ==========================================================================
-   variables.css — Design tokens (colors, spacing, type) for both themes.
+   variables.css — Design tokens, built on Material Design 3.
 
-   Themes are switched by toggling [data-theme="light"|"dark"] on <html>.
-   All colors are defined as CSS custom properties so the rest of the
-   stylesheet never references a raw hex value. To re-skin the site, edit
-   only this file.
+   The color system is a real M3 scheme (TonalSpot) generated from the source
+   colour #6A5AE0 with Google's material-color-utilities, exposing the standard
+   --md-sys-color-* roles for light and dark. On top of the roles we define the
+   M3 shape scale, elevation (with surface tint), state-layer opacities, motion
+   and a type scale. The site's older token names (--accent, --surface, …) are
+   kept as thin aliases onto M3 roles so every component inherits the system.
+
+   Themes switch via [data-theme="light"|"dark"] on <html>.
    ========================================================================== */
 
 :root {
@@ -18,193 +22,314 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
-  /* ---- Radius (rounded, friendly / Duolingo-like) ---- */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-pill: 999px;
+  /* ---- M3 shape scale ---- */
+  --md-sys-shape-corner-none: 0;
+  --md-sys-shape-corner-xs: 4px;
+  --md-sys-shape-corner-sm: 8px;
+  --md-sys-shape-corner-md: 12px;
+  --md-sys-shape-corner-lg: 16px;
+  --md-sys-shape-corner-xl: 28px;
+  --md-sys-shape-corner-full: 9999px;
+  /* legacy aliases */
+  --radius-sm: var(--md-sys-shape-corner-sm);
+  --radius-md: var(--md-sys-shape-corner-md);
+  --radius-lg: var(--md-sys-shape-corner-lg);
+  --radius-pill: var(--md-sys-shape-corner-full);
 
-  /* ---- Typography ---- */
-  /* Nunito is self-hosted in css/fonts.css; the rest is a graceful fallback. */
+  /* ---- M3 state-layer opacities ---- */
+  --md-sys-state-hover: 0.08;
+  --md-sys-state-focus: 0.10;
+  --md-sys-state-pressed: 0.10;
+  --md-sys-state-dragged: 0.16;
+
+  /* ---- Typography (Nunito as the brand typeface; M3 type scale) ---- */
   --font-sans: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code",
     Consolas, "Liberation Mono", Menlo, monospace;
 
-  --fs-xs: 0.78rem;
+  /* M3 type scale (size / line-height / weight / tracking) */
+  --md-display-large: 700 3.5rem/1.12 var(--font-sans);
+  --md-headline-large: 800 2rem/1.25 var(--font-sans);
+  --md-headline-medium: 800 1.75rem/1.29 var(--font-sans);
+  --md-title-large: 700 1.375rem/1.27 var(--font-sans);
+  --md-title-medium: 700 1rem/1.5 var(--font-sans);
+  --md-body-large: 400 1rem/1.5 var(--font-sans);
+  --md-body-medium: 400 0.875rem/1.43 var(--font-sans);
+  --md-label-large: 700 0.875rem/1.43 var(--font-sans);
+
+  --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
   --fs-base: 1rem;
   --fs-lg: 1.15rem;
-  --fs-xl: 1.4rem;
-  --fs-2xl: 1.9rem;
-  --fs-3xl: 2.6rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.5rem;
 
   --lh-tight: 1.25;
-  --lh-base: 1.65;
+  --lh-base: 1.5;
 
   /* ---- Layout ---- */
   --header-h: 60px;
   --sidebar-w: 268px;
+  --rail-w: 300px;
   --content-max: 880px;
 
-  /* ---- Motion ---- */
-  --transition: 160ms ease;
+  /* ---- Motion (M3 easing + duration) ---- */
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --transition: 150ms var(--md-sys-motion-easing-standard);
 }
 
 /* --------------------------------------------------------------------------
-   LIGHT THEME (default)
+   LIGHT THEME (default) — M3 TonalSpot from #6A5AE0
    -------------------------------------------------------------------------- */
 :root,
 [data-theme="light"] {
-  --bg: #ffffff;
-  --bg-soft: #f6f5fc; /* soft lavender wash */
-  --surface: #ffffff;
-  --surface-2: #f1effb;
-  --border: #e7e5f2;
-  --border-strong: #d6d2ec;
+  --md-sys-color-primary: #5d5791;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #e4dfff;
+  --md-sys-color-on-primary-container: #191249;
+  --md-sys-color-secondary: #5f5c71;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #e4dff9;
+  --md-sys-color-on-secondary-container: #1b192c;
+  --md-sys-color-tertiary: #7b5266;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #ffd8e8;
+  --md-sys-color-on-tertiary-container: #301122;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-background: #fcf8ff;
+  --md-sys-color-on-background: #1c1b20;
+  --md-sys-color-surface: #fcf8ff;
+  --md-sys-color-on-surface: #1c1b20;
+  --md-sys-color-surface-variant: #e5e1ec;
+  --md-sys-color-on-surface-variant: #47464f;
+  --md-sys-color-surface-dim: #ddd8e0;
+  --md-sys-color-surface-bright: #fcf8ff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f6f2fa;
+  --md-sys-color-surface-container: #f1ecf4;
+  --md-sys-color-surface-container-high: #ebe6ef;
+  --md-sys-color-surface-container-highest: #e5e1e9;
+  --md-sys-color-outline: #787680;
+  --md-sys-color-outline-variant: #c9c5d0;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #313036;
+  --md-sys-color-inverse-on-surface: #f4eff7;
+  --md-sys-color-inverse-primary: #c7bfff;
+  --md-sys-color-surface-tint: #5d5791;
 
-  --text: #3c3a52; /* ink */
-  --text-soft: #5a5875;
-  --text-muted: #7a7898;
+  /* ---- M3 elevation: surface-tint overlays + shadow per level ---- */
+  --md-surface-1: color-mix(in srgb, var(--md-sys-color-surface-tint) 5%, var(--md-sys-color-surface-container-low));
+  --md-surface-2: color-mix(in srgb, var(--md-sys-color-surface-tint) 8%, var(--md-sys-color-surface-container));
+  --md-surface-3: color-mix(in srgb, var(--md-sys-color-surface-tint) 11%, var(--md-sys-color-surface-container-high));
+  --md-surface-4: color-mix(in srgb, var(--md-sys-color-surface-tint) 12%, var(--md-sys-color-surface-container-high));
+  --md-surface-5: color-mix(in srgb, var(--md-sys-color-surface-tint) 14%, var(--md-sys-color-surface-container-highest));
+  --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.20), 0 1px 3px 1px rgba(0, 0, 0, 0.10);
+  --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.20), 0 2px 6px 2px rgba(0, 0, 0, 0.10);
+  --md-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.20), 0 4px 8px 3px rgba(0, 0, 0, 0.10);
+  --md-elevation-4: 0 2px 3px rgba(0, 0, 0, 0.20), 0 6px 10px 4px rgba(0, 0, 0, 0.10);
+  --md-elevation-5: 0 4px 4px rgba(0, 0, 0, 0.20), 0 8px 12px 6px rgba(0, 0, 0, 0.10);
 
-  --accent: #6a5ae0; /* primary — Duolingo-ish violet */
-  --accent-strong: #574ac9;
-  --accent-soft: #ece9fb;
-  --accent-contrast: #ffffff;
+  /* ---- Legacy aliases → M3 roles ---- */
+  --bg: var(--md-sys-color-surface);
+  --bg-soft: var(--md-sys-color-surface-container-low);
+  --surface: var(--md-sys-color-surface-container-lowest);
+  --surface-2: var(--md-sys-color-surface-container-high);
+  --border: var(--md-sys-color-outline-variant);
+  --border-strong: var(--md-sys-color-outline);
 
-  --secondary: #12b8a6; /* teal */
-  --warning: #e08a00;
-  --danger: #ff5a6e;
-  --success: #58cc02;
+  --text: var(--md-sys-color-on-surface);
+  --text-soft: var(--md-sys-color-on-surface-variant);
+  --text-muted: var(--md-sys-color-on-surface-variant);
 
-  --shadow-sm: 0 1px 2px rgba(60, 58, 82, 0.06);
-  --shadow-md: 0 4px 16px rgba(60, 58, 82, 0.10);
+  --accent: var(--md-sys-color-primary);
+  --accent-strong: var(--md-sys-color-primary);
+  --accent-soft: var(--md-sys-color-primary-container);
+  --accent-contrast: var(--md-sys-color-on-primary);
 
-  /* Material-3 style elevation (layered ambient + key shadows) */
-  --elev-1: 0 1px 2px rgba(60, 58, 82, 0.06), 0 1px 3px rgba(60, 58, 82, 0.10);
-  --elev-2: 0 2px 6px rgba(60, 58, 82, 0.07), 0 6px 16px rgba(60, 58, 82, 0.10);
-  --elev-3: 0 4px 10px rgba(60, 58, 82, 0.09), 0 12px 28px rgba(60, 58, 82, 0.13);
+  --secondary: var(--md-sys-color-tertiary);
+  --warning: #815600;
+  --danger: var(--md-sys-color-error);
+  --success: #3c6a1f;
+
+  --shadow-sm: var(--md-elevation-1);
+  --shadow-md: var(--md-elevation-3);
+  --elev-1: var(--md-elevation-1);
+  --elev-2: var(--md-elevation-2);
+  --elev-3: var(--md-elevation-3);
 
   /* Code / syntax tokens */
-  --code-bg: #f6f5fc;
-  --code-text: #3c3a52;
-  --tok-comment: #7a7898;
+  --code-bg: var(--md-sys-color-surface-container);
+  --code-text: var(--md-sys-color-on-surface);
+  --tok-comment: var(--md-sys-color-on-surface-variant);
   --tok-keyword: #8b3fd1;
-  --tok-string: #0a9d6e;
-  --tok-number: #e08a00;
+  --tok-string: #0a7d52;
+  --tok-number: #815600;
   --tok-function: #4a5bd6;
-  --tok-property: #e0417a;
-  --tok-operator: #5a5875;
-  --tok-punctuation: #5a5875;
+  --tok-property: #b3261e;
+  --tok-operator: var(--md-sys-color-on-surface-variant);
+  --tok-punctuation: var(--md-sys-color-on-surface-variant);
 
-  /* ---- Unit / category colors (roadmap, sidebar groups, home path) ---- */
-  --cat-foundations: #7c5cfc;
-  --cat-languages: #1cb0f6;
-  --cat-frameworks: #58cc02;
-  --cat-approaches: #12b8a6;
-  --cat-ai: #c061ff;
-  --cat-process: #ff9600;
-  --cat-practica: #ff5a6e;
-  --cat-glossary: #ffc531;
-  /* pastel tints (soft backgrounds) */
-  --cat-foundations-soft: #ede9fe;
-  --cat-languages-soft: #e1f3fe;
-  --cat-frameworks-soft: #e7f8dc;
-  --cat-approaches-soft: #def6f2;
-  --cat-ai-soft: #f5e6fe;
-  --cat-process-soft: #ffefd9;
-  --cat-practica-soft: #ffe4e7;
-  --cat-glossary-soft: #fff3d4;
+  /* ---- Unit / category colours (roadmap, sidebar groups, home path) ---- */
+  --cat-foundations: #5d5791;
+  --cat-languages: #1a6a9e;
+  --cat-frameworks: #3c6a1f;
+  --cat-approaches: #106b60;
+  --cat-ai: #7b4a9e;
+  --cat-process: #8a5000;
+  --cat-practica: #a03040;
+  --cat-glossary: #7a5a00;
+  --cat-foundations-soft: var(--md-sys-color-primary-container);
+  --cat-languages-soft: #cfe6f6;
+  --cat-frameworks-soft: #d3edc4;
+  --cat-approaches-soft: #c8ece5;
+  --cat-ai-soft: #efdbff;
+  --cat-process-soft: #ffddb5;
+  --cat-practica-soft: #ffdad9;
+  --cat-glossary-soft: #f6e2b0;
 
   /* Framework / technology brand-accent chips */
   --fw-selenium: #43b02a;
   --fw-cypress: #2c9c85;
-  --fw-playwright: #58cc02;
+  --fw-playwright: #2ead52;
   --fw-python: #3776ab;
-  --fw-typescript: #1cb0f6;
-  --fw-robot: #00c0b5;
-  --fw-bdd: #12b8a6;
-  --fw-skills: #ffc531;
-  --fw-maturity: #c061ff;
-  --fw-verbs: #ff5a6e;
-  --fw-perf: #ff9600;
-  --fw-ci: #1cb0f6;
+  --fw-typescript: #1a6a9e;
+  --fw-robot: #00857c;
+  --fw-bdd: #106b60;
+  --fw-skills: #8a5000;
+  --fw-maturity: #7b4a9e;
+  --fw-verbs: #a03040;
+  --fw-perf: #8a5000;
+  --fw-ci: #1a6a9e;
 }
 
 /* --------------------------------------------------------------------------
-   DARK THEME
+   DARK THEME — M3 TonalSpot from #6A5AE0
    -------------------------------------------------------------------------- */
 [data-theme="dark"] {
-  --bg: #16141f;
-  --bg-soft: #100e18;
-  --surface: #1e1b2b;
-  --surface-2: #262336;
-  --border: #322e45;
-  --border-strong: #453f5c;
+  --md-sys-color-primary: #c7bfff;
+  --md-sys-color-on-primary: #2f295f;
+  --md-sys-color-primary-container: #454077;
+  --md-sys-color-on-primary-container: #e4dfff;
+  --md-sys-color-secondary: #c8c3dc;
+  --md-sys-color-on-secondary: #302e41;
+  --md-sys-color-secondary-container: #474459;
+  --md-sys-color-on-secondary-container: #e4dff9;
+  --md-sys-color-tertiary: #ecb8cf;
+  --md-sys-color-on-tertiary: #482537;
+  --md-sys-color-tertiary-container: #613b4e;
+  --md-sys-color-on-tertiary-container: #ffd8e8;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+  --md-sys-color-background: #141318;
+  --md-sys-color-on-background: #e5e1e9;
+  --md-sys-color-surface: #141318;
+  --md-sys-color-on-surface: #e5e1e9;
+  --md-sys-color-surface-variant: #47464f;
+  --md-sys-color-on-surface-variant: #c9c5d0;
+  --md-sys-color-surface-dim: #141318;
+  --md-sys-color-surface-bright: #3a383e;
+  --md-sys-color-surface-container-lowest: #0e0e13;
+  --md-sys-color-surface-container-low: #1c1b20;
+  --md-sys-color-surface-container: #201f25;
+  --md-sys-color-surface-container-high: #2a292f;
+  --md-sys-color-surface-container-highest: #35343a;
+  --md-sys-color-outline: #928f99;
+  --md-sys-color-outline-variant: #47464f;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #e5e1e9;
+  --md-sys-color-inverse-on-surface: #313036;
+  --md-sys-color-inverse-primary: #5d5791;
+  --md-sys-color-surface-tint: #c7bfff;
 
-  --text: #ece9f7;
-  --text-soft: #c1bcd6;
-  --text-muted: #948eab;
+  --md-surface-1: color-mix(in srgb, var(--md-sys-color-surface-tint) 5%, var(--md-sys-color-surface-container-low));
+  --md-surface-2: color-mix(in srgb, var(--md-sys-color-surface-tint) 8%, var(--md-sys-color-surface-container));
+  --md-surface-3: color-mix(in srgb, var(--md-sys-color-surface-tint) 11%, var(--md-sys-color-surface-container-high));
+  --md-surface-4: color-mix(in srgb, var(--md-sys-color-surface-tint) 12%, var(--md-sys-color-surface-container-high));
+  --md-surface-5: color-mix(in srgb, var(--md-sys-color-surface-tint) 14%, var(--md-sys-color-surface-container-highest));
+  --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.45), 0 1px 3px 1px rgba(0, 0, 0, 0.30);
+  --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.45), 0 2px 6px 2px rgba(0, 0, 0, 0.30);
+  --md-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.45), 0 4px 8px 3px rgba(0, 0, 0, 0.30);
+  --md-elevation-4: 0 2px 3px rgba(0, 0, 0, 0.45), 0 6px 10px 4px rgba(0, 0, 0, 0.30);
+  --md-elevation-5: 0 4px 4px rgba(0, 0, 0, 0.45), 0 8px 12px 6px rgba(0, 0, 0, 0.30);
 
-  --accent: #a99cff;
-  --accent-strong: #bcb2ff;
-  --accent-soft: #2a2540;
-  --accent-contrast: #16141f;
+  --bg: var(--md-sys-color-surface);
+  --bg-soft: var(--md-sys-color-surface-container-low);
+  --surface: var(--md-sys-color-surface-container-low);
+  --surface-2: var(--md-sys-color-surface-container-high);
+  --border: var(--md-sys-color-outline-variant);
+  --border-strong: var(--md-sys-color-outline);
 
-  --secondary: #34d6c4;
-  --warning: #fbbf24;
-  --danger: #ff8592;
-  --success: #74dd3a;
+  --text: var(--md-sys-color-on-surface);
+  --text-soft: var(--md-sys-color-on-surface-variant);
+  --text-muted: var(--md-sys-color-on-surface-variant);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.45);
+  --accent: var(--md-sys-color-primary);
+  --accent-strong: var(--md-sys-color-primary);
+  --accent-soft: var(--md-sys-color-primary-container);
+  --accent-contrast: var(--md-sys-color-on-primary);
 
-  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --elev-2: 0 2px 10px rgba(0, 0, 0, 0.5);
-  --elev-3: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --secondary: var(--md-sys-color-tertiary);
+  --warning: #f5bd4f;
+  --danger: var(--md-sys-color-error);
+  --success: #a6d388;
+
+  --shadow-sm: var(--md-elevation-1);
+  --shadow-md: var(--md-elevation-3);
+  --elev-1: var(--md-elevation-1);
+  --elev-2: var(--md-elevation-2);
+  --elev-3: var(--md-elevation-3);
 
   /* Code / syntax tokens */
-  --code-bg: #16131f;
-  --code-text: #ece9f7;
-  --tok-comment: #948eab;
+  --code-bg: var(--md-sys-color-surface-container-lowest);
+  --code-text: var(--md-sys-color-on-surface);
+  --tok-comment: var(--md-sys-color-on-surface-variant);
   --tok-keyword: #c792ea;
   --tok-string: #7ee787;
   --tok-number: #f0a868;
-  --tok-function: #a99cff;
+  --tok-function: #c7bfff;
   --tok-property: #ff9492;
-  --tok-operator: #c1bcd6;
-  --tok-punctuation: #c1bcd6;
+  --tok-operator: var(--md-sys-color-on-surface-variant);
+  --tok-punctuation: var(--md-sys-color-on-surface-variant);
 
-  /* ---- Unit / category colors ---- */
-  --cat-foundations: #a99cff;
-  --cat-languages: #4cc4ff;
-  --cat-frameworks: #74dd3a;
-  --cat-approaches: #34d6c4;
-  --cat-ai: #d18cff;
-  --cat-process: #ffb03a;
-  --cat-practica: #ff8592;
-  --cat-glossary: #ffd45e;
-  /* pastel tints (soft backgrounds) */
-  --cat-foundations-soft: #2a2540;
-  --cat-languages-soft: #0f2c3d;
-  --cat-frameworks-soft: #1a2e10;
-  --cat-approaches-soft: #0e2e2a;
-  --cat-ai-soft: #2c1a3a;
-  --cat-process-soft: #2f2410;
-  --cat-practica-soft: #331a1f;
-  --cat-glossary-soft: #2f2810;
+  /* ---- Unit / category colours ---- */
+  --cat-foundations: #c7bfff;
+  --cat-languages: #8fcdf3;
+  --cat-frameworks: #a6d388;
+  --cat-approaches: #86d5c8;
+  --cat-ai: #dcb8f5;
+  --cat-process: #f5bd4f;
+  --cat-practica: #f5b7bd;
+  --cat-glossary: #e2c56b;
+  --cat-foundations-soft: var(--md-sys-color-primary-container);
+  --cat-languages-soft: #0f3a52;
+  --cat-frameworks-soft: #24401a;
+  --cat-approaches-soft: #103d38;
+  --cat-ai-soft: #43305a;
+  --cat-process-soft: #4a3200;
+  --cat-practica-soft: #5a2226;
+  --cat-glossary-soft: #453800;
 
   /* Framework / technology brand-accent chips */
   --fw-selenium: #5cc44a;
   --fw-cypress: #4fd6bf;
-  --fw-playwright: #74dd3a;
-  --fw-python: #6aade4;
-  --fw-typescript: #4cc4ff;
-  --fw-robot: #2dd4cf;
-  --fw-bdd: #34d6c4;
-  --fw-skills: #ffd45e;
-  --fw-maturity: #d18cff;
-  --fw-verbs: #ff8592;
-  --fw-perf: #ffb03a;
-  --fw-ci: #4cc4ff;
+  --fw-playwright: #4ade80;
+  --fw-python: #8fcdf3;
+  --fw-typescript: #8fcdf3;
+  --fw-robot: #4fd6bf;
+  --fw-bdd: #86d5c8;
+  --fw-skills: #f5bd4f;
+  --fw-maturity: #dcb8f5;
+  --fw-verbs: #f5b7bd;
+  --fw-perf: #f5bd4f;
+  --fw-ci: #8fcdf3;
 }

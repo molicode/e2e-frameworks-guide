@@ -1537,7 +1537,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   align-items: center;
   gap: 5px;
 }
-.iv-av { border-radius: 50%; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.10); }
+.iv-av { border-radius: 50%; box-shadow: var(--md-elevation-1); }
 .iv-who {
   font-size: 9px;
   text-transform: uppercase;
@@ -1584,28 +1584,27 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .iv-text { margin: 0; color: var(--text-soft); }
 .iv-bubble--q .iv-text { color: var(--text); font-weight: 650; }
 .iv-bubble--a .iv-text { color: var(--text); }
-/* reveal = the signature Duolingo 3D button */
+/* reveal = M3 tonal button */
 .iv-reveal {
   appearance: none;
   align-self: flex-end;
   border: none;
-  background: var(--secondary);
-  color: #fff;
-  font-family: inherit;
-  font-size: var(--fs-xs);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-radius: 14px;
-  padding: 10px 18px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font: var(--md-label-large);
+  border-radius: var(--md-sys-shape-corner-full);
+  padding: 9px 18px;
   cursor: pointer;
-  box-shadow: 0 4px 0 color-mix(in srgb, var(--secondary) 55%, #000);
-  transition: transform 0.08s ease, box-shadow 0.08s ease, filter var(--transition);
+  box-shadow: none;
+  transition: background var(--transition), box-shadow var(--transition);
 }
-.iv-reveal:hover { filter: brightness(1.06); }
-.iv-reveal:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--secondary) 55%, #000); }
+.iv-reveal:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 8%, var(--md-sys-color-secondary-container));
+  box-shadow: var(--md-elevation-1);
+}
+.iv-reveal:active { background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 10%, var(--md-sys-color-secondary-container)); box-shadow: none; }
 @media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { min-width: 44px; max-width: 78px; } .iv-av { width: 44px; height: 44px; } .iv-who { font-size: 8px; } }
-@media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } .iv-reveal:active { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } }
 
 /* ==========================================================================
    Gamification: progress badge, toasts, confetti, sidebar ticks (js/progress.js)
@@ -2109,9 +2108,9 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   gap: var(--space-3);
   background: var(--c);
   color: #fff;
-  border-radius: var(--radius-lg);
+  border-radius: var(--md-sys-shape-corner-lg);
   padding: var(--space-4) var(--space-5);
-  box-shadow: 0 4px 0 color-mix(in srgb, var(--c) 55%, #000);
+  box-shadow: var(--md-elevation-1);
 }
 .lunit__meta { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .lunit__eyebrow { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; font-weight: 700; }
@@ -2131,6 +2130,10 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .lunit.is-active-unit .lunit__cta { display: inline-flex; }
 .lunit__cta:hover { background: rgba(255, 255, 255, 0.3); text-decoration: none; }
+/* Dark theme: unit colours are light tones, so the banner needs dark ink. */
+[data-theme="dark"] .lunit__banner { color: #141318; }
+[data-theme="dark"] .lunit__cta { background: rgba(0, 0, 0, 0.14); border-color: rgba(0, 0, 0, 0.3); color: #141318; }
+[data-theme="dark"] .lunit__cta:hover { background: rgba(0, 0, 0, 0.24); }
 
 .lunit__nodes {
   list-style: none;
@@ -2171,11 +2174,11 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   place-items: center;
   background: var(--surface);
   border: 3px solid var(--c);
-  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: var(--md-elevation-1);
+  transition: box-shadow var(--transition), background var(--transition);
 }
-.lnode__btn:hover { transform: translateY(-2px); text-decoration: none; }
-.lnode__btn:active { transform: translateY(4px); box-shadow: 0 2px 0 color-mix(in srgb, var(--c) 70%, #000); }
+.lnode__btn:hover { box-shadow: var(--md-elevation-2); text-decoration: none; }
+.lnode__btn:active { box-shadow: var(--md-elevation-1); }
 .lnode__btn:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
 .lnode__icon { line-height: 1; font-size: 2.1rem; }
 .lnode__logo { display: grid; place-items: center; }
@@ -2186,7 +2189,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .lnode.is-done .lnode__btn {
   background: color-mix(in srgb, var(--c) 16%, var(--surface));
   border-color: var(--c);
-  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
+  box-shadow: var(--md-elevation-1);
 }
 .lnode__check {
   display: none;
@@ -2208,7 +2211,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 /* current node — bobbing, with a START pill above it */
 .lnode.is-current .lnode__btn {
   border-color: var(--c);
-  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
+  box-shadow: var(--md-elevation-3);
   animation: lnode-bob 1.7s ease-in-out infinite;
 }
 .lnode__start {
@@ -2225,7 +2228,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   padding: 4px 11px;
   border-radius: 999px;
   white-space: nowrap;
-  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 55%, #000);
+  box-shadow: var(--md-elevation-1);
 }
 .lnode__start::after {
   content: "";
@@ -2330,18 +2333,18 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   place-items: center;
   background: var(--surface);
   border: 2px solid var(--border-strong);
-  box-shadow: 0 3px 0 var(--border-strong);
+  box-shadow: var(--md-elevation-1);
   font-size: var(--fs-sm);
   font-weight: 800;
   color: var(--text-muted);
-  transition: transform 0.12s ease;
+  transition: box-shadow var(--transition);
 }
-.lchild__link:hover .lchild__dot { transform: translateY(-1px); }
+.lchild__link:hover .lchild__dot { box-shadow: var(--md-elevation-2); }
 .lchild.is-done .lchild__dot {
   background: var(--c);
   border-color: var(--c);
-  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 55%, #000);
-  color: #fff;
+  box-shadow: var(--md-elevation-1);
+  color: var(--md-sys-color-on-primary);
   font-size: 0;
 }
 .lchild.is-done .lchild__dot::after { content: "✓"; font-size: 0.85rem; }
@@ -2378,56 +2381,148 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 
 /* ==========================================================================
-   Material-3 flavoured polish — elevation, state layers, softer pill shapes.
-   Layered on top of the existing components; tokens live in variables.css.
+   Material Design 3 layer — color roles, elevation (surface tint + shadow),
+   state layers, shape scale and the standard button variants. This sits on
+   top of the base components; all tokens live in variables.css.
    ========================================================================== */
 
-/* Buttons: pill shape + a tonal state layer on hover / press. */
-.icon-btn { border-radius: 12px; }
-.icon-btn:hover { background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
-.icon-btn:active { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
-
-.seg-toggle { border-radius: 999px; padding: 4px; }
-.seg-toggle__btn { border-radius: 999px; }
-.seg-toggle__btn:not([aria-pressed="true"]):hover {
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
-  color: var(--text);
-}
-.seg-toggle__btn[aria-pressed="true"] { box-shadow: var(--elev-1); }
-
-/* Signature Duolingo 3D press: a solid coloured "ledge" under the button. */
+/* ---- Filled button (primary CTA) — flat, pill, state layer, no 3D ledge. */
 .cta-btn {
-  border-radius: 16px;
+  padding: 10px 24px;
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-radius: var(--md-sys-shape-corner-full);
+  font: var(--md-label-large);
+  letter-spacing: 0.006em;
+  box-shadow: none;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.cta-btn:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
+  box-shadow: var(--md-elevation-1);
+  transform: none;
+  text-decoration: none;
+}
+.cta-btn:active {
+  background: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, var(--md-sys-color-primary));
+  box-shadow: none;
+}
+.cta-btn:focus-visible { outline: 3px solid var(--md-sys-color-primary); outline-offset: 2px; }
+
+/* ---- Icon buttons: circular target + on-surface state layer. */
+.icon-btn { border-radius: var(--md-sys-shape-corner-full); }
+.icon-btn:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+.icon-btn:active { background: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent); }
+
+/* ---- Segmented control → M3 tonal segmented buttons. */
+.seg-toggle {
+  border-radius: var(--md-sys-shape-corner-full);
+  padding: 3px;
+  border: 1px solid var(--md-sys-color-outline);
+  background: transparent;
+}
+.seg-toggle__btn { border-radius: var(--md-sys-shape-corner-full); }
+.seg-toggle__btn:not([aria-pressed="true"]):hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  color: var(--md-sys-color-on-surface);
+}
+.seg-toggle__btn[aria-pressed="true"] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  box-shadow: none;
+}
+
+/* ---- Copy button: text/tonal button with a state layer. */
+.copy-btn { border-radius: var(--md-sys-shape-corner-full); }
+.copy-btn:hover { background: color-mix(in srgb, var(--md-sys-color-primary) 8%, var(--surface)); }
+
+/* ---- Top app bar: surface, no shadow at rest (M3 small top app bar). */
+.site-header { box-shadow: none; }
+
+/* ---- Cards, tiles & containers: M3 tinted surface + elevation level 1. */
+.tile,
+.toc-card,
+.ref-group,
+.callout,
+.fw-chip { background: var(--md-surface-1); box-shadow: var(--md-elevation-1); }
+.tile:hover,
+.toc-card:hover {
+  box-shadow: var(--md-elevation-2);
+  background: var(--md-surface-2);
+  border-color: var(--md-sys-color-outline-variant);
+  transform: none;
+}
+
+/* ---- Navigation drawer items: pill hover + active tonal container (M3). */
+.nav-link:not(.nav-group):hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+.nav-link.is-active,
+.nav-sublink.is-active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.nav-link.is-active .nav-link__num { color: var(--md-sys-color-on-secondary-container); }
+
+/* ==========================================================================
+   Right supporting pane (M3) — an "on this page" outline + a keep-learning
+   card, so wide screens use the full width instead of an empty right gutter.
+   Populated by js/page.js; only shown when it has something to say.
+   ========================================================================== */
+.rail {
+  position: sticky;
+  top: var(--header-h);
+  align-self: start;
+  max-height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  padding: var(--space-6) var(--space-4) var(--space-6) var(--space-2);
+}
+.rail__inner { display: flex; flex-direction: column; gap: var(--space-4); }
+.rail-card {
+  background: var(--md-surface-1);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-lg);
+  padding: var(--space-4);
+}
+.rail-card__title {
+  margin: 0 0 var(--space-3);
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  box-shadow: 0 4px 0 var(--accent-strong);
+  font-size: var(--fs-sm);
+  color: var(--md-sys-color-on-surface);
 }
-.cta-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--accent-strong); filter: brightness(1.04); }
-.cta-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--accent-strong); }
-@media (prefers-reduced-motion: reduce) { .cta-btn:active, .cta-btn:hover { transform: none; } }
-
-/* Copy button (in code blocks): rounder + state layer. */
-.copy-btn { border-radius: 999px; }
-.copy-btn:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
-
-/* App bar: a hair of elevation to lift it off the content. */
-.site-header { box-shadow: var(--elev-1); }
-
-/* Cards & tiles: rest elevation, then lift with a tonal state layer on hover. */
-.tile { box-shadow: var(--elev-1); }
-.tile:hover {
-  box-shadow: var(--elev-2);
-  background: color-mix(in srgb, var(--accent) 4%, var(--surface));
-  border-color: color-mix(in srgb, var(--accent) 24%, var(--border));
+.rail-toc__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.rail-toc__link {
+  display: block;
+  padding: 6px 10px;
+  border-radius: var(--md-sys-shape-corner-sm);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: var(--fs-sm);
+  line-height: 1.3;
+  transition: background var(--transition), color var(--transition);
 }
-
-/* Nav links: a soft tonal hover; the active item reads as a filled pill. */
-.nav-link:not(.nav-group):hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
-
-/* Framework chip: pill with a hair of elevation so the brand mark pops. */
-.fw-chip { box-shadow: var(--elev-1); background: var(--surface); }
-
-/* Mock browser + reference groups pick up a soft, consistent elevation. */
-.ref-group { box-shadow: var(--elev-1); }
-.callout { box-shadow: var(--elev-1); }
+.rail-toc__link:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  color: var(--md-sys-color-on-surface);
+  text-decoration: none;
+}
+.rail-toc__link.is-active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 700;
+}
+.rail-next { display: flex; flex-direction: column; gap: var(--space-2); }
+.rail-next__link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: var(--md-sys-shape-corner-md);
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  transition: box-shadow var(--transition), background var(--transition);
+}
+.rail-next__link--next {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.rail-next__link:hover { box-shadow: var(--md-elevation-1); text-decoration: none; }
+.rail-next__dir { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; }
+.rail-next__label { font-weight: 700; font-size: var(--fs-sm); line-height: 1.25; }

@@ -148,6 +148,61 @@
     });
   }
 
+  /* ---- Right supporting pane (M3): "on this page" + keep-learning ---- */
+  function t(k) { return (global.I18n && global.I18n.t) ? global.I18n.t(k) : k; }
+
+  function railLabel(a) {
+    var span = a.querySelector("[data-i18n]");
+    return (span || a).textContent.trim();
+  }
+  function railNextLink(a, dir) {
+    return '<a class="rail-next__link rail-next__link--' + dir + '" href="' +
+      a.getAttribute("href") + '">' +
+      '<span class="rail-next__dir">' + t(dir === "next" ? "rail.next" : "rail.prev") + "</span>" +
+      '<span class="rail-next__label">' + railLabel(a) + "</span></a>";
+  }
+  function buildRail() {
+    var rail = document.getElementById("page-rail");
+    var layout = document.querySelector(".layout");
+    if (!rail || !layout) return;
+    var parts = [];
+
+    // 1) "On this page" — only when the content has real sub-headings.
+    var content = document.getElementById("main-content");
+    var heads = content ? content.querySelectorAll("h2[id], h3[id]") : [];
+    if (heads.length >= 2) {
+      var items = "";
+      Array.prototype.forEach.call(heads, function (h) {
+        items += '<li><a class="rail-toc__link" href="#' + h.id + '">' +
+          h.textContent.trim() + "</a></li>";
+      });
+      parts.push('<nav class="rail-card rail-toc" aria-label="' + t("rail.onThisPage") +
+        '"><p class="rail-card__title">' + t("rail.onThisPage") +
+        '</p><ul class="rail-toc__list">' + items + "</ul></nav>");
+    }
+
+    // 2) "Keep learning" — previous / next lesson, following the sidebar order.
+    var links = Array.prototype.slice
+      .call(document.querySelectorAll(".sidebar__nav a[href]"))
+      .filter(function (a) { return !a.classList.contains("nav-link--home"); });
+    var idx = -1;
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].classList.contains("is-active") ||
+          links[i].getAttribute("aria-current") === "page") { idx = i; break; }
+    }
+    if (idx !== -1 && (links[idx + 1] || links[idx - 1])) {
+      var card = '<section class="rail-card rail-next"><p class="rail-card__title">' +
+        t("rail.continue") + "</p>";
+      if (links[idx + 1]) card += railNextLink(links[idx + 1], "next");
+      if (links[idx - 1]) card += railNextLink(links[idx - 1], "prev");
+      parts.push(card + "</section>");
+    }
+
+    if (!parts.length) { layout.classList.remove("has-rail"); rail.innerHTML = ""; return; }
+    rail.innerHTML = '<div class="rail__inner">' + parts.join("") + "</div>";
+    layout.classList.add("has-rail");
+  }
+
   /* ---- Mobile drawer ---- */
   function setupDrawer() {
     var sidebar = document.getElementById("sidebar");
@@ -177,6 +232,8 @@
     // Fill / swap all translated text for the active language.
     global.I18n.apply(document);
     global.I18n.onChange(function () { global.I18n.apply(document); });
+    // Rebuild the rail after translations are (re)applied so its labels match.
+    global.I18n.onChange(buildRail);
 
     setupLangToggle();
     setupCopyButtons();
@@ -185,6 +242,7 @@
     setupNavGroups();
     setupPathNodes();
     setupDrawer();
+    buildRail();
     global.Theme.init();
   }
 
