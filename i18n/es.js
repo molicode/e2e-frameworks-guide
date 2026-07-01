@@ -1796,6 +1796,51 @@ I18n.register("es", {
   "cpt.api-sql.ex": "Para validar en la base lo que la API dice, consultás con SQL y cruzás tablas con <strong>JOIN</strong>:<pre class=\"cpt-code\"><code>SELECT o.id, o.total, u.email\nFROM orders o\nJOIN users u ON u.id = o.user_id\nWHERE o.status = 'PAID'\n  AND o.total &gt; 1000;</code></pre>",
   "cpt.api-sql.uc": "Sirve para <strong>verificar datos de punta a punta</strong>: creás una orden por la API y confirmás en la base que se guardó bien (monto, estado, relación con el usuario). Detectás inconsistencias que la UI oculta.<pre class=\"cpt-code\"><code>-- tras POST /orders debería existir 1 fila\nSELECT COUNT(*) FROM orders WHERE id = :new_id;  -- espera 1</code></pre>",
 
+  "cpt.proc-sdlc.ex": "Una feature recorre fases; el testing tiene su propio ciclo (STLC) dentro del SDLC:<pre class=\"cpt-code\"><code>SDLC:  Requisitos → Diseño → Desarrollo → Pruebas → Deploy → Mantenimiento\nSTLC:            Análisis → Plan → Diseño de casos → Setup → Ejecución → Cierre</code></pre>",
+  "cpt.proc-sdlc.uc": "QA se engancha en <em>cada</em> fase, no solo al final: revisa requisitos, define criterios de aceptación y diseña casos antes de que exista el código. El STLC es tu checklist de qué entregable de testing corresponde a cada fase (plan, casos, reporte de cierre).",
+
+  "cpt.proc-shiftleft.ex": "En vez de testear al final, QA agrega criterios en el refinamiento y se automatizan antes del merge:<pre class=\"cpt-code\"><code>Refinamiento → QA: “dado carrito vacío, el botón Pagar está deshabilitado”\n            → test automatizado creado ANTES de codear la feature</code></pre>",
+  "cpt.proc-shiftleft.uc": "Mueve la detección de defectos hacia la izquierda del cronograma. Importa porque un bug encontrado en requisitos cuesta muchísimo menos que uno en producción. En la práctica: revisión de requisitos, TDD/BDD, análisis estático y tests en cada PR.",
+
+  "cpt.proc-tdd.ex": "Ciclo <strong>Red → Green → Refactor</strong>:<pre class=\"cpt-code\"><code># 1. RED: el test primero, falla (suma no existe)\ndef test_suma():\n    assert suma(2, 3) == 5\n\n# 2. GREEN: el código mínimo para que pase\ndef suma(a, b):\n    return a + b\n\n# 3. REFACTOR: mejorás sin romper el test</code></pre>",
+  "cpt.proc-tdd.uc": "El test es la especificación ejecutable: escribís la prueba antes que el código, así garantizás cobertura desde el diseño. En automatización de UI, TDD guía el diseño de los Page Objects y evita código sin test.",
+
+  "cpt.proc-bdd.ex": "El comportamiento se describe en Gherkin, legible por negocio:<pre class=\"cpt-code\"><code>Feature: Login\n  Scenario: Credenciales válidas\n    Given un usuario registrado\n    When ingresa email y password correctos\n    Then ve su dashboard</code></pre>",
+  "cpt.proc-bdd.uc": "Alinea a negocio, desarrollo y QA con un lenguaje común. Cada <code>Scenario</code> se conecta a <em>step definitions</em> que lo automatizan. QA suele escribir los scenarios en el refinamiento, así el criterio de aceptación ya nace como test.",
+
+  "cpt.proc-gwt.ex": "Estructura un caso en contexto → acción → resultado:<pre class=\"cpt-code\"><code>Given (contexto):  usuario con 100 créditos\nWhen  (acción):    compra un ítem de 30\nThen  (resultado): saldo = 70 y ve la confirmación</code></pre>",
+  "cpt.proc-gwt.uc": "Es el patrón para escribir casos legibles con aserciones claras. En código se ve como <em>Arrange-Act-Assert</em>. Evita tests que mezclan el setup con la verificación y hace obvio qué se está probando.",
+
+  "cpt.proc-amigos.ex": "Antes de codear una historia se juntan tres miradas:<pre class=\"cpt-code\"><code>Product Owner → el qué y el por qué\nDesarrollo    → el cómo (factibilidad)\nQA            → qué puede fallar, casos borde y negativos</code></pre>",
+  "cpt.proc-amigos.uc": "QA aporta los escenarios negativos y de borde que los demás no ven. Es shift-left en acción: los defectos de requisitos se atrapan en la conversación (barato) y no en la fase de pruebas (caro).",
+
+  "cpt.proc-atdd.ex": "El criterio de aceptación se define como test <em>antes</em> de desarrollar:<pre class=\"cpt-code\"><code>Criterio: si monto &gt; saldo → rechazar con “fondos insuficientes”\n→ se automatiza el test\n→ se desarrolla hasta que pasa</code></pre>",
+  "cpt.proc-atdd.uc": "Parecido a BDD pero centrado en la aceptación. QA facilita una <strong>Definition of Done</strong> medible: la historia está lista cuando su test de aceptación pasa, no cuando “se ve bien”.",
+
+  "cpt.proc-keyword.ex": "Los tests se escriben con <em>keywords</em> legibles (aquí en Robot Framework):<pre class=\"cpt-code\"><code>*** Test Cases ***\nLogin válido\n    Abrir Navegador          ${URL}\n    Ingresar Credenciales    ana    secreta\n    Verificar Dashboard</code></pre>",
+  "cpt.proc-keyword.uc": "Separa la lógica técnica (dentro de cada keyword) del caso de negocio, así analistas sin programar pueden escribir y leer tests. QA mantiene una librería de keywords reutilizables; cambiar un selector se hace en un solo lugar.",
+
+  "cpt.proc-ct.ex": "En cada push el pipeline corre las pruebas y bloquea el merge si algo falla:<pre class=\"cpt-code\"><code>on: [push]\njobs:\n  test:\n    run: pytest && playwright test   # unit + e2e en cada cambio</code></pre>",
+  "cpt.proc-ct.uc": "Da feedback inmediato y evita acumular deuda de testing. QA decide qué suite corre en cada etapa: un <em>smoke</em> rápido en cada PR y la regresión completa de noche, para no frenar al equipo.",
+
+  "cpt.proc-regression.ex": "Agregaste “cupones” y sin querer rompiste el cálculo del IVA; la suite de regresión (casos que ya funcionaban) lo detecta:<pre class=\"cpt-code\"><code>test_total_sin_cupon .... ok\ntest_cupon_10 ........... ok\ntest_iva ................ FALLA  ← regresión introducida</code></pre>",
+  "cpt.proc-regression.uc": "Se corre tras cada cambio para confirmar que lo que andaba sigue andando. Es el caso de uso número uno de la automatización por ser repetitivo. QA prioriza qué casos entran a la suite según riesgo × frecuencia de uso.",
+
+  "cpt.proc-smoke.ex": "Dos chequeos rápidos con propósitos distintos:<pre class=\"cpt-code\"><code>Smoke  (¿prende?):    build nuevo → ¿levanta la app? ¿se puede loguear?\nSanity (¿anda esto?): tras un fix puntual → ¿el login que arreglaron funciona?</code></pre>",
+  "cpt.proc-smoke.uc": "El smoke es amplio y superficial: un <em>gate</em> para no perder tiempo testeando un build roto. El sanity es angosto y profundo: una verificación veloz después de un arreglo. QA corre smoke primero, siempre.",
+
+  "cpt.proc-exploratory.ex": "Sin script previo, QA explora con una <em>charter</em> (misión acotada) y va aprendiendo sobre la marcha:<pre class=\"cpt-code\"><code>Charter: explorar el checkout con tarjetas inválidas (45 min)\n→ probar, observar, anotar bugs y nuevas ideas de prueba</code></pre>",
+  "cpt.proc-exploratory.uc": "Encuentra bugs que los casos scripted no cubren: usabilidad, flujos raros, combinaciones inesperadas. Se complementa con la automatización — lo repetitivo se automatiza, lo creativo se explora — y es clave en features nuevas o poco documentadas.",
+
+  "cpt.proc-uat.ex": "Antes del go-live, usuarios reales del negocio (no QA) validan con datos reales que el sistema cubre <em>sus</em> necesidades:<pre class=\"cpt-code\"><code>UAT: “¿puedo emitir la factura como lo hago hoy, con mi flujo real?”\n→ el sign-off lo da el usuario/cliente, no el equipo técnico</code></pre>",
+  "cpt.proc-uat.uc": "Es la última validación, orientada a negocio y no a bugs técnicos. QA prepara los casos, los datos y acompaña la sesión, pero la aprobación final (go / no-go) la firma el usuario que conoce el proceso real.",
+
+  "cpt.proc-risk.ex": "No se puede probar todo, así que priorizás por riesgo (probabilidad × impacto):<pre class=\"cpt-code\"><code>Pagos     → riesgo ALTO   → 40 casos, a fondo\nBúsqueda  → riesgo MEDIO  → 12 casos\nFooter    → riesgo BAJO   → 1 caso</code></pre>",
+  "cpt.proc-risk.uc": "Enfoca el esfuerzo donde más duele fallar. QA arma una matriz de riesgo junto con negocio y asigna la profundidad del testing según ese puntaje, en vez de repartir el tiempo por igual entre todo.",
+
+  "cpt.proc-ddt.ex": "Un mismo test corre con muchos datos desde una tabla:<pre class=\"cpt-code\"><code>@pytest.mark.parametrize(\"user, pwd, ok\", [\n    (\"ana\", \"1234\", True),    # válido\n    (\"ana\", \"malo\", False),   # password incorrecta\n    (\"\",    \"1234\", False),   # usuario vacío\n])\ndef test_login(user, pwd, ok):\n    ...</code></pre>",
+  "cpt.proc-ddt.uc": "Cubrís muchas combinaciones (válidas, inválidas, de borde) sin duplicar código. QA separa los datos del test, así agregar un caso nuevo es agregar una fila — ideal para reglas con muchas variantes (impuestos, descuentos, validaciones).",
+
   "kt.cat.maturity": "Métricas, madurez y certificación",
   "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
