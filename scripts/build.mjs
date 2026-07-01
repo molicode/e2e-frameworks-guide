@@ -95,7 +95,7 @@ CONCEPTS.filter((c) => c.full).forEach((concept) => {
     bodyClass: `page--section page--concept page--${concept.id}`,
     assetPrefix: "../",
     progressJson,
-    sidebarHtml: sidebar(SECTIONS, "key-terms", dict, {
+    sidebarHtml: sidebar(SECTIONS, concept.id, dict, {
       sectionHref,
       homeHref: "../index.html",
     }),

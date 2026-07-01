@@ -518,6 +518,58 @@ function pager(sections, index, dict) {
 }
 
 /* ---- the shared, nested sidebar ---- */
+const NAV_CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>';
+
+// Key-terms rendered as a 3-level tree: Key terms → each category that has
+// deep-dive concepts → the concept sub-pages. Only categories with `full`
+// concepts appear, so it grows as more batches ship.
+function keyTermsNav(num, activeId, dict, sectionHref) {
+  const fulls = CONCEPTS.filter((c) => c.full);
+  const activeConcept = fulls.find((c) => c.id === activeId);
+  const ktOpen = activeId === "key-terms" || !!activeConcept;
+  const cats = KT_CATS.filter((cat) => fulls.some((c) => c.cat === cat.key));
+  const catBlocks = cats
+    .map((cat) => {
+      const items = fulls.filter((c) => c.cat === cat.key);
+      const catOpen = !!activeConcept && activeConcept.cat === cat.key;
+      const links = items
+        .map((c) => {
+          const a = c.id === activeId ? " is-active" : "";
+          const cur = c.id === activeId ? ' aria-current="page"' : "";
+          return `
+              <a class="nav-link nav-sublink nav-sublink--deep${a}" href="${sectionHref(c.id)}"${cur}>
+                <span>${escText(c.term)}</span>
+              </a>`;
+        })
+        .join("");
+      return `
+          <div class="nav-group-item nav-group-item--nested${catOpen ? " is-open" : ""}">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="${catOpen}">
+              <span data-i18n="kt.cat.${cat.key}">${escText(t(dict, "kt.cat." + cat.key))}</span>
+              ${NAV_CHEVRON}
+            </button>
+            <div class="nav-sub nav-sub--nested">${links}
+            </div>
+          </div>`;
+    })
+    .join("");
+  const overviewActive = activeId === "key-terms" ? " is-active" : "";
+  const overviewCur = activeId === "key-terms" ? ' aria-current="page"' : "";
+  return `
+        <div class="nav-group-item${ktOpen ? " is-open" : ""}">
+          <button class="nav-link nav-group${ktOpen ? " is-active-group" : ""}" type="button" aria-expanded="${ktOpen}">
+            <span class="nav-link__num">${num}</span>
+            <span data-i18n="nav.keyterms">${escText(t(dict, "nav.keyterms"))}</span>
+            ${NAV_CHEVRON}
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink${overviewActive}" href="${sectionHref("key-terms")}"${overviewCur}>
+              <span data-i18n="kt.overview">${escText(t(dict, "kt.overview"))}</span>
+            </a>${catBlocks}
+          </div>
+        </div>`;
+}
+
 export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
   const home = `
         <a class="nav-link nav-link--home" href="${homeHref}">
@@ -531,6 +583,7 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
       const num = String(i + 1).padStart(2, "0");
       if (e.type === "single") {
         const s = e.section;
+        if (s.id === "key-terms") return keyTermsNav(num, activeId, dict, sectionHref);
         const active = s.id === activeId ? " is-active" : "";
         const cur = s.id === activeId ? ' aria-current="page"' : "";
         return `
