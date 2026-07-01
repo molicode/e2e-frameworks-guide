@@ -309,6 +309,23 @@ I18n.register("es", {
   "iv.robot.q6": "¿Cómo integrás Robot en CI?",
   "iv.robot.a6": "Ejecuto robot desde el pipeline, publico el report/log HTML como artifact y fallo el build si hay tests en rojo.",
 
+  /* ====================================================================
+     GAMIFICACIÓN (progreso + mensajes de ánimo)
+     ==================================================================== */
+  "game.progress": "Tu progreso",
+  "game.keepGoing": "Vas {p}% del recorrido.",
+  "game.section": "¡Completaste “{s}”!",
+  "game.m25": "🚀 ¡25% completado! Arrancaste con todo, seguí así.",
+  "game.m50": "🔥 ¡Mitad del camino! Vas increíble.",
+  "game.m75": "🌟 ¡75%! Ya casi sos un crack del QA.",
+  "game.m100": "🏆 ¡100%! Recorriste toda la guía. ¡Sos imparable!",
+  "game.cheer1": "¡Vas genial, seguí así! 💪",
+  "game.cheer2": "¡Un paso más cerca de dominar QA! 🚀",
+  "game.cheer3": "¡Excelente progreso! 🌟",
+  "game.cheer4": "¡Imparable! 🔥",
+  "game.cheer5": "Tu yo del futuro te lo agradece. 🙌",
+  "game.cheer6": "¡Crack! Cada página suma. ✨",
+
   /* ---- Sub-páginas de cada framework ---- */
   "page.philosophy": "Filosofía y cuándo usarlo",
   "page.hello": "Hola mundo",
