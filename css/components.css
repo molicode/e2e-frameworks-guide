@@ -2158,15 +2158,9 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 @media (prefers-reduced-motion: reduce) {
   .lnode.is-current .lnode__btn { animation: none; }
 }
-/* group node: a caret in the label + a small "done/total" badge on the circle */
-.lnode__caret {
-  display: inline-block;
-  margin-left: 5px;
-  color: var(--c);
-  transition: transform var(--transition);
-}
-.lnode.is-expanded .lnode__caret { transform: rotate(180deg); }
+/* group node: a "done/total" badge (top-right) + an expand chevron (bottom) */
 .lnode--group .lnode__btn { cursor: pointer; }
+.lnode--group .lnode__label { margin-top: 16px; } /* clear the chevron badge */
 .lnode__count {
   position: absolute;
   top: -6px;
@@ -2185,31 +2179,60 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   line-height: 1;
 }
 .lnode.is-done .lnode__count { display: none; } /* the ✓ takes over when complete */
+.lnode__toggle {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--c);
+  color: #fff;
+  border: 2px solid var(--surface);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+  transition: transform var(--transition);
+}
+.lnode.is-expanded .lnode__toggle { transform: translateX(-50%) rotate(180deg); }
 
-/* the expandable route of child lessons under a group node */
+/* the expandable route of child lessons: a centred column of dots (aligned
+   under the parent circle) with the lesson name to the right of each. */
 .lnode__children {
   display: none;
   list-style: none;
-  margin: var(--space-3) 0 0;
-  padding: var(--space-3) 0 0;
-  width: max-content;
-  max-width: 260px;
-  border-top: 2px dashed var(--border-strong);
+  position: relative;
+  width: 38px;
+  margin: var(--space-4) auto 0;
+  padding: 0;
 }
-.lnode.is-expanded .lnode__children { display: flex; flex-direction: column; gap: 4px; }
-.lchild__link {
+.lnode.is-expanded .lnode__children {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 5px 8px;
-  border-radius: 999px;
-  color: var(--text);
+  gap: var(--space-4);
 }
-.lchild__link:hover { background: var(--surface-2); text-decoration: none; }
+.lnode__children::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--space-4));
+  bottom: 16px;
+  left: 50%;
+  width: 3px;
+  margin-left: -1.5px;
+  background: repeating-linear-gradient(var(--border-strong) 0 7px, transparent 7px 14px);
+  z-index: 0;
+}
+.lchild {
+  position: relative;
+  z-index: 1;
+  width: 38px;
+}
+.lchild__link { display: block; position: relative; border-radius: 50%; }
 .lchild__dot {
-  flex: none;
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -2219,7 +2242,9 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   font-size: var(--fs-sm);
   font-weight: 800;
   color: var(--text-muted);
+  transition: transform 0.12s ease;
 }
+.lchild__link:hover .lchild__dot { transform: translateY(-1px); }
 .lchild.is-done .lchild__dot {
   background: var(--c);
   border-color: var(--c);
@@ -2227,12 +2252,35 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   color: #fff;
   font-size: 0;
 }
-.lchild.is-done .lchild__dot::after { content: "✓"; font-size: 0.8rem; }
-.lchild__label { font-size: var(--fs-sm); font-weight: 650; }
+.lchild.is-done .lchild__dot::after { content: "✓"; font-size: 0.85rem; }
+.lchild__label {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  color: var(--text);
+}
+.lchild__link:hover .lchild__label { color: var(--c); }
 
 /* tighten the zig-zag on small screens so nothing overflows */
 @media (max-width: 520px) {
   .lnode { transform: translateX(calc(var(--x, 0) * 0.6)); }
   .lnode__label { max-width: 130px; }
+}
+/* narrow screens: lay the child route out inline (dot + wrapped label) so the
+   long names never run off the edge */
+@media (max-width: 860px) {
+  .lnode__children { width: auto; max-width: 230px; margin-top: var(--space-3); }
+  .lnode.is-expanded .lnode__children { align-items: stretch; }
+  .lnode__children::before { display: none; }
+  .lchild { width: auto; }
+  .lchild__link { display: flex; align-items: center; gap: 10px; padding: 4px 6px; border-radius: 999px; }
+  .lchild__link:hover { background: var(--surface-2); }
+  .lchild__label { position: static; transform: none; white-space: normal; }
+}
+@media (max-width: 520px) {
   .lnode__children { max-width: 210px; }
 }
