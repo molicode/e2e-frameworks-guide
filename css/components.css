@@ -1468,7 +1468,10 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .iv-row--a { justify-content: flex-end; margin-top: var(--space-4); animation: iv-in 0.25s ease; }
 .iv-av-wrap {
   flex: none;
-  width: 62px;
+  /* Size to the caption so "Entrevistador/a" / "Candidato/a" never wrap. */
+  width: auto;
+  min-width: 52px;
+  max-width: 88px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1476,15 +1479,14 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .iv-av { border-radius: 50%; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.10); }
 .iv-who {
-  font-family: var(--font-mono);
   font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   font-weight: 800;
   color: var(--accent);
   text-align: center;
   line-height: 1.15;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 .iv-who--a { color: var(--secondary); }
 
@@ -1542,7 +1544,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .iv-reveal:hover { filter: brightness(1.06); }
 .iv-reveal:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--secondary) 55%, #000); }
-@media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { width: 52px; } .iv-av { width: 44px; height: 44px; } }
+@media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { min-width: 44px; max-width: 78px; } .iv-av { width: 44px; height: 44px; } .iv-who { font-size: 8px; } }
 @media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } .iv-reveal:active { transform: none; } }
 
 /* ==========================================================================
