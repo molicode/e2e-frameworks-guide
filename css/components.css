@@ -147,6 +147,66 @@
 .nav-link.is-active .nav-link__num {
   color: var(--accent);
 }
+/* The per-group emoji icon — hidden in the full sidebar, shown in the rail. */
+.nav-link__ico {
+  display: none;
+  font-size: 1.15rem;
+  line-height: 1;
+  min-width: 1.5em;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Collapsible sidebar → icon rail (desktop only). A small toggle shrinks the
+   sidebar to a narrow strip of icons instead of hiding it entirely.
+   -------------------------------------------------------------------------- */
+.sidebar-collapse {
+  display: none; /* shown only on desktop via the min-width query below */
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 var(--space-3) auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.sidebar-collapse:hover { background: var(--surface-2); color: var(--text); border-color: var(--border-strong); }
+.sidebar-collapse__ico { transition: transform var(--transition); }
+
+@media (min-width: 901px) {
+  .sidebar-collapse { display: inline-flex; }
+
+  .nav-collapsed { --sidebar-w: 78px; }
+  .nav-collapsed .sidebar { padding-left: var(--space-2); padding-right: var(--space-2); }
+  .nav-collapsed .sidebar-collapse { margin-right: auto; margin-left: auto; }
+  .nav-collapsed .sidebar-collapse__ico { transform: rotate(180deg); }
+
+  /* Show icons, hide labels / numbers / chevrons / nested lists. */
+  .nav-collapsed .nav-link__ico { display: block; }
+  .nav-collapsed .nav-link__txt,
+  .nav-collapsed .nav-chevron,
+  .nav-collapsed .nav-link--top .nav-link__num,
+  .nav-collapsed .nav-group--top .nav-link__num { display: none; }
+  /* extra .sidebar keeps this ahead of the .is-open > .nav-sub rule */
+  .nav-collapsed .sidebar .nav-group-item--top > .nav-sub { display: none; }
+
+  /* Center each top-level item on its icon. */
+  .nav-collapsed .nav-link--home,
+  .nav-collapsed .nav-link--top,
+  .nav-collapsed .nav-group--top {
+    justify-content: center;
+    gap: 0;
+    padding-left: var(--space-1);
+    padding-right: var(--space-1);
+    border-left-color: transparent;
+  }
+  .nav-collapsed .nav-group-item--top { margin-bottom: 2px; }
+}
 
 /* --------------------------------------------------------------------------
    Sections
@@ -1468,7 +1528,10 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .iv-row--a { justify-content: flex-end; margin-top: var(--space-4); animation: iv-in 0.25s ease; }
 .iv-av-wrap {
   flex: none;
-  width: 62px;
+  /* Size to the caption so "Entrevistador/a" / "Candidato/a" never wrap. */
+  width: auto;
+  min-width: 52px;
+  max-width: 88px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1476,15 +1539,14 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .iv-av { border-radius: 50%; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.10); }
 .iv-who {
-  font-family: var(--font-mono);
   font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   font-weight: 800;
   color: var(--accent);
   text-align: center;
   line-height: 1.15;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 .iv-who--a { color: var(--secondary); }
 
@@ -1542,7 +1604,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .iv-reveal:hover { filter: brightness(1.06); }
 .iv-reveal:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--secondary) 55%, #000); }
-@media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { width: 52px; } .iv-av { width: 44px; height: 44px; } }
+@media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { min-width: 44px; max-width: 78px; } .iv-av { width: 44px; height: 44px; } .iv-who { font-size: 8px; } }
 @media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } .iv-reveal:active { transform: none; } }
 
 /* ==========================================================================
@@ -2102,27 +2164,29 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .lnode:last-child { margin-bottom: 0; }
 .lnode__btn {
   position: relative;
-  width: 76px;
-  height: 76px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   background: var(--surface);
-  border: 2px solid var(--border-strong);
-  box-shadow: 0 5px 0 var(--border-strong);
-  font-size: 2em;
+  border: 3px solid var(--c);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .lnode__btn:hover { transform: translateY(-2px); text-decoration: none; }
-.lnode__btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--border-strong); }
+.lnode__btn:active { transform: translateY(4px); box-shadow: 0 2px 0 color-mix(in srgb, var(--c) 70%, #000); }
 .lnode__btn:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
-.lnode__icon { line-height: 1; }
+.lnode__icon { line-height: 1; font-size: 2.1rem; }
+.lnode__logo { display: grid; place-items: center; }
+.lnode__svg { width: 44px; height: 44px; display: block; }
 
-/* completed node — filled with its unit colour + a check badge */
+/* completed node — soft tint of its unit colour so the logo still shows,
+   plus a check badge in the corner */
 .lnode.is-done .lnode__btn {
-  background: var(--c);
+  background: color-mix(in srgb, var(--c) 16%, var(--surface));
   border-color: var(--c);
-  box-shadow: 0 5px 0 color-mix(in srgb, var(--c) 55%, #000);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
 }
 .lnode__check {
   display: none;
@@ -2144,7 +2208,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 /* current node — bobbing, with a START pill above it */
 .lnode.is-current .lnode__btn {
   border-color: var(--c);
-  box-shadow: 0 5px 0 color-mix(in srgb, var(--c) 55%, #000);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
   animation: lnode-bob 1.7s ease-in-out infinite;
 }
 .lnode__start {

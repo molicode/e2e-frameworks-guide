@@ -17,6 +17,7 @@ import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
 import { renderRunner } from "./runner.mjs";
 import { brandFor, brandIcon } from "./icons.mjs";
+import { techLogo } from "./logos.mjs";
 
 // A framework/language chip with its real brand logo (falls back to just the
 // coloured label when there's no matching brand mark).
@@ -650,9 +651,9 @@ function memberNav(e, activeId, dict, sectionHref) {
 
 export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
   const home = `
-        <a class="nav-link nav-link--home" href="${homeHref}">
+        <a class="nav-link nav-link--home" href="${homeHref}" title="${escAttr(t(dict, "nav.home"))}">
           <span class="nav-link__num">⌂</span>
-          <span data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
+          <span class="nav-link__txt" data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
         </a>`;
 
   const emap = topEntryByKey(sections);
@@ -664,9 +665,10 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
       const active = id === activeId ? " is-active" : "";
       const cur = id === activeId ? ' aria-current="page"' : "";
       return `
-        <a class="nav-link nav-link--top${active}" href="${sectionHref(id)}"${cur}>
+        <a class="nav-link nav-link--top${active}" href="${sectionHref(id)}"${cur} title="${escAttr(t(dict, g.label))}">
           <span class="nav-link__num">${num}</span>
-          <span data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
+          <span class="nav-link__ico" aria-hidden="true">${g.icon}</span>
+          <span class="nav-link__txt" data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
         </a>`;
     }
     const members = g.members.map((k) => emap[k]).filter(Boolean);
@@ -674,9 +676,10 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
     const inner = members.map((e) => memberNav(e, activeId, dict, sectionHref)).join("");
     return `
         <div class="nav-group-item nav-group-item--top${open ? " is-open" : ""}">
-          <button class="nav-link nav-group nav-group--top${open ? " is-active-group" : ""}" type="button" aria-expanded="${open}">
+          <button class="nav-link nav-group nav-group--top${open ? " is-active-group" : ""}" type="button" aria-expanded="${open}" title="${escAttr(t(dict, g.label))}">
             <span class="nav-link__num">${num}</span>
-            <span data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
+            <span class="nav-link__ico" aria-hidden="true">${g.icon}</span>
+            <span class="nav-link__txt" data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
             ${NAV_CHEVRON}
           </button>
           <div class="nav-sub">${inner}
@@ -708,11 +711,16 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
         var prefersDark = window.matchMedia &&
           window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        // Restore the collapsed-sidebar (icon rail) preference before first paint.
+        if (localStorage.getItem('qaguide-nav') === 'rail') {
+          document.documentElement.classList.add('nav-collapsed');
+        }
       } catch (e) {
         document.documentElement.setAttribute('data-theme', 'light');
       }
     })();
   </script>
+  <link rel="stylesheet" href="${assetPrefix}css/fonts.css" />
   <link rel="stylesheet" href="${assetPrefix}css/variables.css" />
   <link rel="stylesheet" href="${assetPrefix}css/base.css" />
   <link rel="stylesheet" href="${assetPrefix}css/components.css" />
@@ -756,6 +764,11 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
   <div class="layout">
     <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
     <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <button class="sidebar-collapse" id="sidebar-collapse" type="button"
+              aria-label="${escAttr(t(dict, "ui.toggleNav"))}" data-i18n-attr="aria-label:ui.toggleNav"
+              title="${escAttr(t(dict, "ui.toggleNav"))}">
+        <svg class="sidebar-collapse__ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M14.5 6.5 9 12l5.5 5.5"/></svg>
+      </button>
       ${sidebarHtml}
     </aside>
     <main class="content" id="main-content">
@@ -808,17 +821,30 @@ const NODE_ICON = {
   ai101: "🎓", aiqa: "🤖",
   ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
 };
+// Nodes that map to a real technology use its official, full-colour logo;
+// the rest fall back to the emoji above.
+const NODE_LOGO = {
+  python: "python", typescript: "typescript",
+  selenium: "selenium", cypress: "cypress", playwright: "playwright", robot: "robot",
+  bdd: "cucumber", perf: "k6", ci: "githubactions", skills: "git",
+};
+// The media (official logo or emoji) shown inside a learning-path node.
+function nodeMedia(key) {
+  const logo = NODE_LOGO[key];
+  if (logo) return `<span class="lnode__logo" aria-hidden="true">${techLogo(logo, "lnode__svg")}</span>`;
+  return `<span class="lnode__icon" aria-hidden="true">${NODE_ICON[key] || "•"}</span>`;
+}
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
 const NAV_GROUPS = [
-  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals"] },
-  { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
-  { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
-  { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "perf"] },
-  { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai101", "aiqa"] },
-  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--secondary)",     members: ["practica"], leaf: true },
-  { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--fw-skills)",     members: ["key-terms", "bibliography"] },
+  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--cat-foundations)", members: ["intro", "fundamentals"] },
+  { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--cat-languages)",   members: ["python", "typescript"] },
+  { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--cat-frameworks)",  members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
+  { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
+  { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
+  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
+  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica"], leaf: true },
+  { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
@@ -847,7 +873,7 @@ function learningPath(sections, dict, sectionHref) {
         if (!top) return "";
         const x = WIND[g % WIND.length];
         g += 1;
-        const icon = NODE_ICON[key] || "•";
+        const media = nodeMedia(key);
         const label = escText(t(dict, top.label));
         const pagesAttr = escAttr(top.members.map((m) => m.id).join(","));
         // Single-page entry → a plain link node.
@@ -855,7 +881,7 @@ function learningPath(sections, dict, sectionHref) {
           return `
               <li class="lnode" style="--x:${x}px;--c:${u.color}" data-pages="${pagesAttr}">
                 <a class="lnode__btn" href="${sectionHref(top.first)}" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
-                  <span class="lnode__icon" aria-hidden="true">${icon}</span>
+                  ${media}
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
                 </a>
@@ -875,7 +901,7 @@ function learningPath(sections, dict, sectionHref) {
         return `
               <li class="lnode lnode--group" style="--x:${x}px;--c:${u.color}" data-pages="${pagesAttr}">
                 <button class="lnode__btn lnode__btn--group" type="button" aria-expanded="false" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
-                  <span class="lnode__icon" aria-hidden="true">${icon}</span>
+                  ${media}
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
                   <span class="lnode__count" aria-hidden="true"></span>

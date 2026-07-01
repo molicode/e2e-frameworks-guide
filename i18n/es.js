@@ -20,6 +20,7 @@ I18n.register("es", {
   "ui.theme": "Cambiar tema claro/oscuro",
   "ui.lang": "Cambiar idioma",
   "ui.menu": "Abrir menú",
+  "ui.toggleNav": "Contraer o expandir el menú",
   "ui.copy": "Copiar",
   "ui.copied": "¡Copiado!",
   "ui.theory": "Teoría",
