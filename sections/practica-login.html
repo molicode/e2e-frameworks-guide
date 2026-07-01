@@ -876,6 +876,16 @@
                 <div class="lab-task__num">1</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.login.t1">Localizá los campos <code>Usuario</code> y <code>Contraseña</code> y completalos.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;getby&quot;,&quot;fill&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.login.w1">Un buen <strong>selector</strong> es la base de un test estable: preferí roles y labels accesibles antes que clases CSS o XPath frágiles que cambian con el diseño.</div>
@@ -902,6 +912,16 @@ await page.getByLabel('</span>Password<span class="tok-string">').fill('</span>s
                 <div class="lab-task__num">2</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.login.t2">Hacé click en <code>Iniciar sesión</code> para enviar el formulario.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;getbyrole&quot;,&quot;click&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.login.w2">No metas <code>sleep</code> fijos esperando la navegación: dejá que el framework espere solo (auto-wait) a que el botón esté listo y la página responda.</div>
@@ -927,6 +947,16 @@ await page.getByLabel('</span>Password<span class="tok-string">').fill('</span>s
                 <div class="lab-task__num">3</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.login.t3">Verificá que aparezca el saludo <code>Welcome</code> con el usuario.</div>
+                  <div class="lab-try">
+                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="[&quot;expect&quot;,&quot;tobevisible&quot;]"
+                      placeholder="// Escribí tu solución acá…"
+                      aria-label="Editor de código del reto"
+                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+                    <div class="lab-try__row">
+                      <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                      <span class="lab-try__result" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.login.w3">Sin una <strong>aserción</strong> el test no prueba nada: afirmá el estado final esperado (el saludo visible) para que falle si el login se rompe.</div>
@@ -978,6 +1008,7 @@ await page.getByLabel('</span>Password<span class="tok-string">').fill('</span>s
   <script src="../js/flashcards.js"></script>
   <script src="../js/interview.js"></script>
   <script src="../js/concepts.js"></script>
+  <script src="../js/lab.js"></script>
   <script src="../js/progress.js"></script>
 </body>
 </html>

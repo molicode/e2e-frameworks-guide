@@ -3241,9 +3241,9 @@ export const SECTIONS = [
     blocks: [
       { type: "prose", html: "practica.login.lead" },
       { type: "lab", stage: "login", tasks: [
-        { text: "practica.login.t1", why: "practica.login.w1", hint: "p_login_locate", terms: ["auto-locator"] },
-        { text: "practica.login.t2", why: "practica.login.w2", hint: "p_login_submit", terms: ["auto-autowait", "auto-waits"] },
-        { text: "practica.login.t3", why: "practica.login.w3", hint: "p_login_assert", terms: ["auto-assertion"] },
+        { text: "practica.login.t1", why: "practica.login.w1", hint: "p_login_locate", terms: ["auto-locator"], check: ["getby", "fill"] },
+        { text: "practica.login.t2", why: "practica.login.w2", hint: "p_login_submit", terms: ["auto-autowait", "auto-waits"], check: ["getbyrole", "click"] },
+        { text: "practica.login.t3", why: "practica.login.w3", hint: "p_login_assert", terms: ["auto-assertion"], check: ["expect", "tobevisible"] },
       ] },
     ],
   },
@@ -3253,9 +3253,9 @@ export const SECTIONS = [
     blocks: [
       { type: "prose", html: "practica.order.lead" },
       { type: "lab", stage: "order", tasks: [
-        { text: "practica.order.t1", why: "practica.order.w1", hint: "p_order_total", terms: ["auto-locator"] },
-        { text: "practica.order.t2", why: "practica.order.w2", hint: "p_order_status", terms: ["auto-assertion", "auto-autowait"] },
-        { text: "practica.order.t3", why: "practica.order.w3", hint: "p_order_items", terms: ["auto-assertion"] },
+        { text: "practica.order.t1", why: "practica.order.w1", hint: "p_order_total", terms: ["auto-locator"], check: ["expect", "250"] },
+        { text: "practica.order.t2", why: "practica.order.w2", hint: "p_order_status", terms: ["auto-assertion", "auto-autowait"], check: ["expect", "paid"] },
+        { text: "practica.order.t3", why: "practica.order.w3", hint: "p_order_items", terms: ["auto-assertion"], check: ["expect", "tohavecount"] },
       ] },
     ],
   },
@@ -3265,9 +3265,9 @@ export const SECTIONS = [
     blocks: [
       { type: "prose", html: "practica.api.lead" },
       { type: "lab", stage: "verbs", tasks: [
-        { text: "practica.api.t1", why: "practica.api.w1", hint: "p_api_post", terms: ["api-methods", "api-crud"] },
-        { text: "practica.api.t2", why: "practica.api.w2", hint: "p_api_get", terms: ["api-safe", "api-status"] },
-        { text: "practica.api.t3", why: "practica.api.w3", hint: "p_api_delete", terms: ["api-idempotency", "api-status"] },
+        { text: "practica.api.t1", why: "practica.api.w1", hint: "p_api_post", terms: ["api-methods", "api-crud"], check: ["post", "201"] },
+        { text: "practica.api.t2", why: "practica.api.w2", hint: "p_api_get", terms: ["api-safe", "api-status"], check: ["get", "200"] },
+        { text: "practica.api.t3", why: "practica.api.w3", hint: "p_api_delete", terms: ["api-idempotency", "api-status"], check: ["delete", "204"] },
       ] },
     ],
   },

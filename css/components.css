@@ -2670,3 +2670,54 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   .lab { grid-template-columns: minmax(0, 1fr); }
   .lab__stage { position: static; }
 }
+
+/* ---- Práctica lab: interactive editor + roomier spacing ---- */
+/* Reto pages break out of the reading measure so the two panes have room. */
+.content__inner:has(.lab) { max-width: 1060px; }
+
+.lab { gap: var(--space-6); }
+.lab__tasks { gap: 0; }
+.lab-task { padding: var(--space-6) 0; }
+.lab-task:first-child { padding-top: 0; }
+.lab-task:not(:last-child) { border-bottom: 1px solid var(--border); }
+.lab-task__text { line-height: 1.7; }
+
+.lab-try { margin-top: var(--space-4); }
+.lab-editor {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--code-text);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  resize: vertical;
+  min-height: 52px;
+  display: block;
+}
+.lab-editor:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.lab-try__row { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-3); }
+.lab-check {
+  flex: none;
+  font: var(--md-label-large);
+  padding: 8px 18px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.lab-check:hover { background: var(--cta-bg-hover); }
+.lab-try__result { font-size: var(--fs-sm); font-weight: 500; color: var(--text-muted); }
+.lab-try.is-ok .lab-try__result { color: var(--success); }
+.lab-try.is-retry .lab-try__result { color: var(--danger); }
+.lab-try.is-ok .lab-editor { border-color: color-mix(in srgb, var(--success) 55%, var(--border)); }
+
+.lab-acc { margin-top: var(--space-3); }
+.lab-task.is-solved .lab-task__num {
+  background: color-mix(in srgb, var(--success) 22%, var(--surface));
+  color: var(--success);
+}
