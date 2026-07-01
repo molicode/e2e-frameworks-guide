@@ -1939,6 +1939,36 @@ I18n.register("es", {
   "cpt.def-repro.ex": "Un buen reporte permite reproducir el bug sin adivinar:<pre class=\"cpt-code\"><code>Pasos:    1) login  2) agregar al carrito  3) aplicar cupón ABC\nEsperado: total con 10% de descuento\nActual:   total sin descuento\nEntorno:  Chrome 120, staging  |  Adjunto: video + logs</code></pre>",
   "cpt.def-repro.uc": "Sin pasos claros el dev no puede arreglarlo (“no reproduce”) y el bug rebota. QA escribe pasos <strong>mínimos y deterministas</strong>, con esperado vs actual, entorno y evidencia — el reporte que a uno le gustaría recibir.",
 
+  "cpt.ai-prompt.ex": "Un buen prompt para generar tests es específico (rol, contexto, formato):<pre class=\"cpt-code\"><code>❌ \"escribí tests para el login\"\n\n✅ \"Generá tests de Playwright (Python) para POST /login.\n    Casos: 200 ok, 401 sin token, 400 email inválido.\n    Usá get_by_role y assert sobre status_code.\"</code></pre>",
+  "cpt.ai-prompt.uc": "QA lo usa para generar casos, datos y esqueletos de test. Un prompt con rol, contexto, formato y un ejemplo da salidas usables; uno vago da resultados genéricos. La salida <strong>siempre</strong> se revisa antes de usarla.",
+
+  "cpt.ai-halluc.ex": "El modelo inventa algo que suena bien pero es falso:<pre class=\"cpt-code\"><code>Prompt: \"¿qué método de Playwright hace X?\"\nLLM:    \"usá page.wait_for_magic()\"   ← no existe</code></pre>",
+  "cpt.ai-halluc.uc": "Por eso QA nunca confía a ciegas: valida contra la doc real los selectores, métodos y datos que sugiere la IA. Un test generado por IA que “pasa” puede estar verificando lo <strong>incorrecto</strong> o llamando a una API inexistente.",
+
+  "cpt.ai-selfheal.ex": "Si un selector se rompe, la herramienta re-encuentra el elemento por atributos alternativos:<pre class=\"cpt-code\"><code>#submit-btn ya no existe\n→ la IA lo re-localiza por texto \"Pagar\" + rol button\n→ el test sigue verde y avisa del cambio de selector</code></pre>",
+  "cpt.ai-selfheal.uc": "Reduce el mantenimiento por selectores frágiles. QA lo trata como una ayuda, no como excusa: revisa las “curaciones”, porque a veces el elemento re-encontrado es el <strong>equivocado</strong> y taparía un bug real.",
+
+  "cpt.ai-gen.ex": "La IA propone casos a partir de una historia o del código:<pre class=\"cpt-code\"><code>Input: función descuento(socio, monto)\nLLM sugiere: socio+monto alto, no-socio+bajo, monto 0,\n             monto negativo, justo en el límite $100...</code></pre>",
+  "cpt.ai-gen.uc": "Acelera la cobertura y sugiere bordes que uno olvida. QA <strong>cura</strong> la lista (borra ruido, agrega el dominio), porque la IA no conoce las reglas de negocio implícitas ni cuál es el riesgo real del producto.",
+
+  "cpt.ai-hitl.ex": "La IA propone y la persona aprueba antes de aplicar:<pre class=\"cpt-code\"><code>La IA genera 12 tests → QA revisa\n→ aprueba 9, corrige 2, descarta 1\n→ recién ahí se commitea</code></pre>",
+  "cpt.ai-hitl.uc": "Mantiene el control y la responsabilidad en manos del QA. La IA <strong>amplifica</strong>, no reemplaza el criterio: el humano decide qué se mergea, sobre todo en los flujos críticos donde un error sale caro.",
+
+  "cpt.ai-mcp.ex": "Un protocolo estándar para que un modelo use herramientas y datos externos:<pre class=\"cpt-code\"><code>LLM ⇄ servidor MCP → { navegador, base de datos, tracker }\n\"corré la suite y leé el reporte\" → el modelo usa las tools reales</code></pre>",
+  "cpt.ai-mcp.uc": "Deja que un agente de QA interactúe de forma estandarizada con el navegador, la API o el sistema de bugs. QA arma o usa servidores MCP para disparar tareas (correr tests, abrir un bug) desde lenguaje natural, sin pegamento a medida.",
+
+  "cpt.ai-skill.ex": "Una capacidad empaquetada (instrucciones + scripts) que el agente carga cuando la necesita:<pre class=\"cpt-code\"><code>skill \"reportar-bug\":\n  plantilla + pasos + cómo adjuntar evidencia\n→ el agente la invoca al detectar un fallo</code></pre>",
+  "cpt.ai-skill.uc": "Estandariza <em>cómo</em> la IA hace una tarea repetible de QA (reportar, generar datos, correr una regresión). QA escribe la skill con su criterio adentro para que el agente la siga siempre igual, sin improvisar.",
+
+  "cpt.ai-agent.ex": "Un LLM que planifica y ejecuta pasos con herramientas, en un bucle:<pre class=\"cpt-code\"><code>Objetivo: \"encontrá bugs en el checkout\"\nAgente:   navega → prueba tarjetas inválidas → observa → reporta\nSub-agente: se especializa en una parte (ej. solo accesibilidad)</code></pre>",
+  "cpt.ai-agent.uc": "Automatiza tareas de varios pasos con menos guionado. QA define el objetivo, los límites y revisa lo que hizo; los <strong>sub-agentes</strong> dividen trabajos grandes (uno explora, otro verifica, otro resume) para no saturar el contexto.",
+
+  "cpt.ai-rag.ex": "El modelo primero recupera contexto real y después responde:<pre class=\"cpt-code\"><code>Pregunta → busca en { docs del producto, casos previos }\n        → arma la respuesta CON esas fuentes (no solo su memoria)</code></pre>",
+  "cpt.ai-rag.uc": "Reduce las alucinaciones al anclar la respuesta en documentación real (specs, criterios de aceptación). QA usa RAG para que la IA genere tests basados en los <strong>requisitos de la empresa</strong> y no en suposiciones genéricas.",
+
+  "cpt.ai-context.ex": "Cuánto texto “ve” el modelo a la vez, medido en tokens:<pre class=\"cpt-code\"><code>1 token ≈ ¾ de una palabra\nventana llena → el modelo “olvida” lo más viejo\nregla: meté solo lo relevante (el caso + la doc), no todo el repo</code></pre>",
+  "cpt.ai-context.uc": "Si le pasás demasiado (todo el código), la señal se diluye y la respuesta empeora. QA arma prompts con el <strong>contexto justo</strong> (la historia, el endpoint, un ejemplo) para respuestas más precisas, rápidas y baratas.",
+
   "kt.cat.maturity": "Métricas, madurez y certificación",
   "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
