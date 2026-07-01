@@ -20,6 +20,9 @@ import { brandFor, brandIcon } from "./icons.mjs";
 import { techLogo } from "./logos.mjs";
 import { uiIcon } from "./ui-icons.mjs";
 
+// id → display term, so a "lab" task can link Key terms to their concept page.
+const CONCEPT_TERM = Object.fromEntries(CONCEPTS.map((c) => [c.id, c.term]));
+
 // A framework/language chip with its real brand logo (falls back to just the
 // coloured label when there's no matching brand mark).
 function fwChip(label, color, extraStyle = "") {
@@ -115,9 +118,62 @@ function vsCard(kind, data, dict) {
           </div>`;
 }
 
+/* ---- hands-on "lab": system-under-test (left) + guided tasks (right) ----
+   Each task has a "why it matters" and a "hint" (the full solution) as native
+   <details> accordions, plus Key-term links back to the studied concepts. */
+function renderLab(block, dict) {
+  const tasks = block.tasks
+    .map((task, i) => {
+      const terms = (task.terms || [])
+        .map((id) => {
+          const term = CONCEPT_TERM[id];
+          if (!term) return "";
+          return `<a class="kt-link" href="${escAttr(id)}.html">${escText(term)}</a>`;
+        })
+        .join("");
+      const termsRow = terms
+        ? `\n                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">${escText(t(dict, "practica.keyTerms"))}</span>${terms}</div>`
+        : "";
+      return `
+              <li class="lab-task">
+                <div class="lab-task__num">${i + 1}</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="${task.text}">${t(dict, task.text)}</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum">${uiIcon("why", "lab-acc__ico")}<span data-i18n="practica.why">${escText(t(dict, "practica.why"))}</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="${task.why}">${t(dict, task.why)}</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum">${uiIcon("hint", "lab-acc__ico")}<span data-i18n="practica.hint">${escText(t(dict, "practica.hint"))}</span></summary>
+                    <div class="lab-acc__body">${codeBlock(task.hint, dict)}</div>
+                  </details>${termsRow}
+                </div>
+              </li>`;
+    })
+    .join("");
+  return `
+        <div class="lab">
+          <div class="lab__stage">
+            <div class="lab__stage-head">
+              <span class="lab__dot"></span><span class="lab__dot"></span><span class="lab__dot"></span>
+              <span class="lab__stage-title" data-i18n="practica.sut">${escText(t(dict, "practica.sut"))}</span>
+            </div>
+            <div class="lab__stage-body">${renderMock(block.stage)}</div>
+          </div>
+          <div class="lab__panel">
+            <p class="lab__panel-title" data-i18n="practica.tasks">${escText(t(dict, "practica.tasks"))}</p>
+            <ol class="lab__tasks">${tasks}
+            </ol>
+          </div>
+        </div>`;
+}
+
 /* ---- block dispatcher ---- */
 function renderBlock(block, dict) {
   switch (block.type) {
+    case "lab":
+      return renderLab(block, dict);
+
     case "prose":
       return `\n        <div class="prose" data-i18n-html="${block.html}">${t(dict, block.html)}</div>`;
 
@@ -838,7 +894,7 @@ const NAV_GROUPS = [
   { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
   { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
   { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica"], leaf: true },
+  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica", "practica-login", "practica-order", "practica-api"] },
   { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
