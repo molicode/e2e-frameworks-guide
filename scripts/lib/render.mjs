@@ -12,7 +12,7 @@
    ========================================================================== */
 
 import { readFileSync } from "node:fs";
-import { SAMPLES } from "./model.mjs";
+import { SAMPLES, CONCEPTS } from "./model.mjs";
 import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
 import { renderRunner } from "./runner.mjs";
@@ -280,6 +280,9 @@ function renderBlock(block, dict) {
       return `\n        <div class="gloss-list">${items}\n        </div>`;
     }
 
+    case "ktmenu":
+      return ktMenu(dict);
+
     case "biblio": {
       // item.title + item.url are literals; item.desc is an i18n key.
       const items = block.items
@@ -310,6 +313,116 @@ function renderBlock(block, dict) {
     default:
       return "";
   }
+}
+
+/* ==========================================================================
+   KEY-TERMS branched menu + concept deep-dive sub-pages.
+
+   The glossary is presented as a Duolingo-style branched menu grouped by
+   category. Each concept is a tappable node; tapping opens a popup with the
+   definition (and, for the `full` concepts, a "See more" link to a dedicated
+   deep-dive page with example + use case + references).
+   ========================================================================== */
+const KT_CATS = [
+  { key: "process",    icon: "🔄", color: "var(--fw-ci)" },
+  { key: "design",     icon: "📐", color: "var(--accent)" },
+  { key: "defects",    icon: "🐞", color: "var(--fw-verbs)" },
+  { key: "automation", icon: "⚙️", color: "var(--fw-playwright)" },
+  { key: "api",        icon: "🔌", color: "var(--fw-python)" },
+  { key: "ai",         icon: "🤖", color: "var(--fw-maturity)" },
+  { key: "security",   icon: "🔒", color: "var(--danger)" },
+  { key: "maturity",   icon: "📊", color: "var(--fw-skills)" },
+];
+
+function ktMenu(dict) {
+  const branches = KT_CATS.map((cat) => {
+    const list = CONCEPTS.filter((c) => c.cat === cat.key);
+    if (!list.length) return "";
+    const nodes = list
+      .map((c) => {
+        const href = c.full ? ` data-href="${escAttr(c.id + ".html")}"` : "";
+        const full = c.full ? " kt-node--full" : "";
+        const badge = c.full
+          ? `<span class="kt-node__badge" title="${escAttr(t(dict, "kt.deep"))}" aria-hidden="true">★</span>`
+          : "";
+        return `
+              <button class="kt-node${full}" type="button" data-term="${escAttr(c.term)}" data-def="${c.def}" data-cat="kt.cat.${c.cat}"${href}>
+                <span class="kt-node__label">${escText(c.term)}</span>${badge}
+              </button>`;
+      })
+      .join("");
+    return `
+          <div class="kt-branch" style="--c:${cat.color}">
+            <div class="kt-branch__head">
+              <span class="kt-branch__icon" aria-hidden="true">${cat.icon}</span>
+              <span class="kt-branch__name" data-i18n="kt.cat.${cat.key}">${escText(t(dict, "kt.cat." + cat.key))}</span>
+              <span class="kt-branch__count">${list.length}</span>
+            </div>
+            <div class="kt-branch__nodes">${nodes}
+            </div>
+          </div>`;
+  }).join("");
+
+  // A single popup, baked once and reused by js/concepts.js.
+  const pop = `
+        <div class="kt-pop" id="kt-pop" hidden>
+          <div class="kt-pop__backdrop" data-kt-close></div>
+          <div class="kt-pop__dialog" role="dialog" aria-modal="true" aria-labelledby="kt-pop-term">
+            <button class="kt-pop__close" type="button" data-kt-close aria-label="${escAttr(t(dict, "kt.close"))}" data-i18n-attr="aria-label:kt.close">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></svg>
+            </button>
+            <span class="kt-pop__cat" id="kt-pop-cat" hidden></span>
+            <h3 class="kt-pop__term" id="kt-pop-term"></h3>
+            <div class="kt-pop__def" id="kt-pop-def"></div>
+            <a class="kt-pop__more" id="kt-pop-more" hidden href="#">
+              <span data-i18n="kt.more">${escText(t(dict, "kt.more"))}</span>
+            </a>
+          </div>
+        </div>`;
+
+  return `
+        <p class="kt-hint" data-i18n="kt.hint">${escText(t(dict, "kt.hint"))}</p>
+        <div class="kt-map">${branches}
+        </div>${pop}`;
+}
+
+// Deep-dive sub-page for a single `full` concept: definition + example + use
+// case + references. Built by build.mjs into sections/<concept.id>.html.
+export function conceptMain(concept, dict) {
+  const catKey = "kt.cat." + concept.cat;
+  const back = `<a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">${escText(t(dict, "cpt.back"))}</a>`;
+  const sec = (labelKey, key) => `
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="${labelKey}">${escText(t(dict, labelKey))}</h2>
+          <div class="cpt-rich" data-i18n-html="${key}">${t(dict, key)}</div>
+        </section>`;
+  const refs = (concept.refs || [])
+    .map(
+      (r) => `
+            <li class="ref">
+              <a class="ref__link" href="${escAttr(r.url)}" target="_blank" rel="noopener noreferrer">${escText(r.title)}</a>
+            </li>`
+    )
+    .join("");
+  const refsSec = refs
+    ? `
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.refs">${escText(t(dict, "cpt.refs"))}</h2>
+          <ul class="ref-list">${refs}
+          </ul>
+        </section>`
+    : "";
+  return `
+        <div class="cpt-crumb">${back}</div>
+        <span class="cpt-cat" style="--c:${(KT_CATS.find((c) => c.key === concept.cat) || {}).color || "var(--accent)"}" data-i18n="${catKey}">${escText(t(dict, catKey))}</span>
+        <h1 class="section__title cpt-title">${escText(concept.term)}</h1>
+        <div class="cpt-body">
+          <section class="cpt-sec">
+            <h2 class="block-label" data-i18n="cpt.def">${escText(t(dict, "cpt.def"))}</h2>
+            <div class="cpt-rich cpt-def" data-i18n-html="${concept.def}">${t(dict, concept.def)}</div>
+          </section>${sec("cpt.example", concept.example)}${sec("cpt.usecase", concept.usecase)}${refsSec}
+        </div>
+        <div class="page-nav page-nav--single">${back}</div>`;
 }
 
 /* ---- section header (hero for intro, numbered title otherwise) ---- */
@@ -455,8 +568,11 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
 }
 
 /* ---- the full HTML document shell ---- */
-export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, sidebarHtml, main, progressJson }) {
-  const title = escText(t(dict, titleKey));
+export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, assetPrefix, sidebarHtml, main, progressJson }) {
+  // A concept sub-page passes a literal title (the term) with no i18n key.
+  const titleTag = titleText
+    ? `<title>${escText(titleText)}</title>`
+    : `<title data-i18n="${titleKey}">${escText(t(dict, titleKey))}</title>`;
   const desc = escAttr(t(dict, descKey));
   return `<!DOCTYPE html>
 <html lang="${lang}">
@@ -465,7 +581,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:${descKey}" content="${desc}" />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="${titleKey}">${title}</title>
+  ${titleTag}
   <script>
     (function () {
       try {
@@ -540,6 +656,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
   <script src="${assetPrefix}js/runner.js"></script>
   <script src="${assetPrefix}js/flashcards.js"></script>
   <script src="${assetPrefix}js/interview.js"></script>
+  <script src="${assetPrefix}js/concepts.js"></script>
   <script src="${assetPrefix}js/progress.js"></script>
 </body>
 </html>

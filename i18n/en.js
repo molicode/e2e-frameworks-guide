@@ -1760,6 +1760,41 @@ I18n.register("en", {
   "kt.api.cors": "<strong>CORS</strong>: rules controlling which origins may call an API from the browser. The browser first sends an <code>OPTIONS</code> (preflight) to check permissions.",
   "kt.api.sql": "<strong>SQL</strong> queries relational databases (<code>SELECT … WHERE</code>). A <strong>JOIN</strong> matches tables by their key. Key for QA: validate in the DB what the UI claims.",
 
+  /* ---- Concept menu + detail pages ---- */
+  "kt.hint": "Tap a concept to see its definition. The ones marked ★ have a detail page with an example and a use case.",
+  "kt.more": "See more →",
+  "kt.close": "Close",
+  "kt.deep": "Has a detail page",
+  "cpt.back": "← Back to Key terms",
+  "cpt.def": "Definition",
+  "cpt.example": "Example",
+  "cpt.usecase": "Use case in QA",
+  "cpt.refs": "Go deeper",
+
+  "cpt.api-methods.ex": "On a shop's <code>/orders</code> resource, each verb does something different:<pre class=\"cpt-code\"><code>GET    /orders/42   → reads order 42\nPOST   /orders      → creates a new order\nPUT    /orders/42   → replaces order 42 entirely\nPATCH  /orders/42   → changes one field (e.g. status)\nDELETE /orders/42   → removes order 42</code></pre>The same <code>/orders/42</code> responds differently depending on the verb.",
+  "cpt.api-methods.uc": "In QA you check each verb honours its semantics and returns the expected status: <code>GET</code> must never create data, <code>POST</code> should reply <code>201</code> with the created resource, and an unsupported verb should give <code>405 Method Not Allowed</code>.<pre class=\"cpt-code\"><code>res = requests.post(\"/orders\", json=payload)\nassert res.status_code == 201\nassert res.json()[\"id\"]        # got a new id\n\nres = requests.get(\"/orders\")  # reading must not mutate\nassert res.status_code == 200</code></pre>",
+
+  "cpt.api-idempotency.ex": "Repeat the same call N times and compare the final state:<pre class=\"cpt-code\"><code># Idempotent PUT: 5 times = same result\nfor _ in range(5):\n    requests.put(\"/users/7\", json={\"name\": \"Ana\"})\n# user 7 still has name=Ana (a single state)\n\n# Non-idempotent POST: 5 times = 5 orders\nfor _ in range(5):\n    requests.post(\"/orders\", json=cart)\n# now there are 5 duplicate orders</code></pre>",
+  "cpt.api-idempotency.uc": "It's key for <strong>retries</strong>: if the network fails and the client retries, a <code>PUT</code>/<code>DELETE</code> is safe to repeat, but a <code>POST</code> can duplicate. In QA you test it by repeating the request and checking no extra records are created — and if the <code>POST</code> uses an <em>idempotency key</em>, that the second call returns the same resource instead of a new one.<pre class=\"cpt-code\"><code>a = requests.delete(\"/users/7\").status_code\nb = requests.delete(\"/users/7\").status_code\nassert a in (200, 204) and b in (200, 204, 404)  # still 'deleted'</code></pre>",
+
+  "cpt.api-safe.ex": "<strong>Safe</strong> methods don't change server state:<pre class=\"cpt-code\"><code>GET     /products      → safe (read only)\nHEAD    /products      → safe (headers, no body)\nOPTIONS /products      → safe (which methods are allowed)\n\nPOST/PUT/PATCH/DELETE  → NOT safe (they modify)</code></pre>Every safe method is idempotent, but not the other way around: <code>DELETE</code> is idempotent and NOT safe.",
+  "cpt.api-safe.uc": "It tells you what you can cache and helps catch a classic bug: a <code>GET</code> that <em>writes</em> (e.g. <code>GET /cart/add?id=3</code> adding to the cart). In QA you verify that after a series of <code>GET</code>/<code>HEAD</code> the state is unchanged:<pre class=\"cpt-code\"><code>before = requests.get(\"/cart\").json()\nrequests.get(\"/products?page=2\")   # just browsing\nafter = requests.get(\"/cart\").json()\nassert before == after             # nothing mutated</code></pre>",
+
+  "cpt.api-status.ex": "Every response carries a 3-digit code grouped by family:<pre class=\"cpt-code\"><code>2xx success      200 OK · 201 Created · 204 No Content\n3xx redirect     301 Moved · 304 Not Modified\n4xx client error 400 Bad Request · 401 · 403 · 404 · 409\n5xx server error 500 Internal · 502 · 503</code></pre>",
+  "cpt.api-status.uc": "It's the first thing you assert in an API test: the right code for each case, not just the <em>happy path</em>. Login ok → <code>200</code>, create → <code>201</code>, no token → <code>401</code>, no permission → <code>403</code>, missing resource → <code>404</code>, invalid data → <code>400/422</code>.<pre class=\"cpt-code\"><code>assert requests.post(\"/login\", json=bad).status_code == 401\nassert requests.get(\"/orders/999999\").status_code == 404</code></pre>",
+
+  "cpt.api-rest.ex": "REST models everything as <strong>resources</strong> with a URL, operated via HTTP verbs and stateless between requests:<pre class=\"cpt-code\"><code>GET    /articles              → list\nGET    /articles/12           → detail\nPOST   /articles              → create\nGET    /articles/12/comments  → sub-resource\n\n(each request carries its own token; the server does\n not remember the previous request → stateless)</code></pre>",
+  "cpt.api-rest.uc": "In QA you verify the API is <em>consistent</em>: URLs per resource (no verbs in the path, avoid <code>/getArticle</code>), the same JSON shape everywhere, and that it's stateless — two parallel requests must not interfere. You also validate <strong>pagination</strong> and links (HATEOAS) if the API exposes them.",
+
+  "cpt.api-crud.ex": "CRUD is a datum's life cycle, mapped to verbs:<pre class=\"cpt-code\"><code>Create  POST   /tasks       → 201 + id\nRead    GET    /tasks/{id}  → 200 + data\nUpdate  PUT    /tasks/{id}  → 200 new data\nDelete  DELETE /tasks/{id}  → 204\n        GET    /tasks/{id}  → 404 (gone)</code></pre>",
+  "cpt.api-crud.uc": "The flagship API test is the <strong>full CRUD flow</strong> chained together: create, read what you created, update it, delete it and confirm it's gone. It covers all 4 verbs in a single end-to-end test:<pre class=\"cpt-code\"><code>id = requests.post(\"/tasks\", json=t).json()[\"id\"]\nassert requests.get(f\"/tasks/{id}\").status_code == 200\nrequests.put(f\"/tasks/{id}\", json=upd)\nrequests.delete(f\"/tasks/{id}\")\nassert requests.get(f\"/tasks/{id}\").status_code == 404</code></pre>",
+
+  "cpt.api-cors.ex": "Before a “non-simple” request from the browser, the browser sends a <strong>preflight</strong> <code>OPTIONS</code> and the server replies with permissions:<pre class=\"cpt-code\"><code>&gt; OPTIONS /api/orders\n&gt; Origin: https://app.mysite.com\n&gt; Access-Control-Request-Method: POST\n\n&lt; 204 No Content\n&lt; Access-Control-Allow-Origin: https://app.mysite.com\n&lt; Access-Control-Allow-Methods: GET, POST, PUT</code></pre>",
+  "cpt.api-cors.uc": "The classic bug: “works in Postman but fails in the browser”. In QA you reproduce the <code>OPTIONS</code> preflight and check the <code>Access-Control-Allow-Origin/-Methods/-Headers</code> headers; a disallowed origin must be rejected. It's a browser control, not server security: you still validate authorization separately.",
+
+  "cpt.api-sql.ex": "To validate in the database what the API claims, you query with SQL and cross tables with a <strong>JOIN</strong>:<pre class=\"cpt-code\"><code>SELECT o.id, o.total, u.email\nFROM orders o\nJOIN users u ON u.id = o.user_id\nWHERE o.status = 'PAID'\n  AND o.total &gt; 1000;</code></pre>",
+  "cpt.api-sql.uc": "It's for <strong>end-to-end data verification</strong>: you create an order via the API and confirm in the database it was stored correctly (amount, status, link to the user). You catch inconsistencies the UI hides.<pre class=\"cpt-code\"><code>-- after POST /orders exactly 1 row should exist\nSELECT COUNT(*) FROM orders WHERE id = :new_id;  -- expects 1</code></pre>",
+
   "kt.cat.maturity": "Metrics, maturity & certification",
   "kt.mat.dd": "<strong>Defect density</strong>: defects per unit of size (per KLOC or per module). Helps locate the riskiest areas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): the average time to fix a failure once detected. Measures responsiveness.",

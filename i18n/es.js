@@ -1761,6 +1761,41 @@ I18n.register("es", {
   "kt.api.cors": "<strong>CORS</strong>: reglas que controlan qué orígenes pueden llamar a una API desde el navegador. El navegador manda primero un <code>OPTIONS</code> (preflight) para chequear permisos.",
   "kt.api.sql": "<strong>SQL</strong> consulta bases relacionales (<code>SELECT … WHERE</code>). Un <strong>JOIN</strong> cruza tablas por su clave. Clave para QA: validar en la base lo que la UI dice.",
 
+  /* ---- Menú de conceptos + páginas de detalle ---- */
+  "kt.hint": "Tocá un concepto para ver su definición. Los marcados con ★ tienen una página de detalle con ejemplo y caso de uso.",
+  "kt.more": "Ver más →",
+  "kt.close": "Cerrar",
+  "kt.deep": "Tiene página de detalle",
+  "cpt.back": "← Volver a Conceptos clave",
+  "cpt.def": "Definición",
+  "cpt.example": "Ejemplo",
+  "cpt.usecase": "Caso de uso en QA",
+  "cpt.refs": "Para profundizar",
+
+  "cpt.api-methods.ex": "Sobre el recurso <code>/orders</code> de una tienda, cada verbo hace algo distinto:<pre class=\"cpt-code\"><code>GET    /orders/42   → lee la orden 42\nPOST   /orders      → crea una orden nueva\nPUT    /orders/42   → reemplaza la orden 42 completa\nPATCH  /orders/42   → cambia solo un campo (ej. estado)\nDELETE /orders/42   → elimina la orden 42</code></pre>El mismo <code>/orders/42</code> responde distinto según el verbo que uses.",
+  "cpt.api-methods.uc": "En QA validás que cada verbo respete su semántica y devuelva el estado esperado: <code>GET</code> nunca debe crear datos, <code>POST</code> debe responder <code>201</code> con el recurso creado y un verbo no soportado debe dar <code>405 Method Not Allowed</code>.<pre class=\"cpt-code\"><code>res = requests.post(\"/orders\", json=payload)\nassert res.status_code == 201\nassert res.json()[\"id\"]        # vino un id nuevo\n\nres = requests.get(\"/orders\")  # leer no debe mutar\nassert res.status_code == 200</code></pre>",
+
+  "cpt.api-idempotency.ex": "Repetí la misma llamada N veces y compará el estado final:<pre class=\"cpt-code\"><code># PUT idempotente: 5 veces = mismo resultado\nfor _ in range(5):\n    requests.put(\"/users/7\", json={\"name\": \"Ana\"})\n# el usuario 7 sigue con name=Ana (un solo estado)\n\n# POST NO idempotente: 5 veces = 5 órdenes\nfor _ in range(5):\n    requests.post(\"/orders\", json=cart)\n# ahora hay 5 órdenes duplicadas</code></pre>",
+  "cpt.api-idempotency.uc": "Es clave para los <strong>reintentos</strong>: si la red falla y el cliente reintenta, un <code>PUT</code>/<code>DELETE</code> es seguro de repetir, pero un <code>POST</code> puede duplicar. En QA lo probás repitiendo el request y verificando que no se creen registros de más — y si el <code>POST</code> usa una <em>idempotency key</em>, que la segunda llamada devuelva el mismo recurso en vez de uno nuevo.<pre class=\"cpt-code\"><code>a = requests.delete(\"/users/7\").status_code\nb = requests.delete(\"/users/7\").status_code\nassert a in (200, 204) and b in (200, 204, 404)  # sigue 'borrado'</code></pre>",
+
+  "cpt.api-safe.ex": "Los métodos <strong>seguros</strong> no cambian el estado del servidor:<pre class=\"cpt-code\"><code>GET     /products      → seguro (solo lee)\nHEAD    /products      → seguro (headers, sin body)\nOPTIONS /products      → seguro (qué métodos permite)\n\nPOST/PUT/PATCH/DELETE  → NO seguros (modifican)</code></pre>Todo método seguro es idempotente, pero no al revés: <code>DELETE</code> es idempotente y NO seguro.",
+  "cpt.api-safe.uc": "Sirve para saber qué podés cachear y para detectar un bug clásico: un <code>GET</code> que <em>escribe</em> (ej. <code>GET /cart/add?id=3</code> que agrega al carrito). En QA verificás que tras una serie de <code>GET</code>/<code>HEAD</code> el estado no cambió:<pre class=\"cpt-code\"><code>before = requests.get(\"/cart\").json()\nrequests.get(\"/products?page=2\")   # solo navegación\nafter = requests.get(\"/cart\").json()\nassert before == after             # nada mutó</code></pre>",
+
+  "cpt.api-status.ex": "Cada respuesta trae un código de 3 dígitos agrupado por familia:<pre class=\"cpt-code\"><code>2xx éxito        200 OK · 201 Created · 204 No Content\n3xx redirección  301 Moved · 304 Not Modified\n4xx del cliente  400 Bad Request · 401 · 403 · 404 · 409\n5xx del servidor 500 Internal · 502 · 503</code></pre>",
+  "cpt.api-status.uc": "Es lo primero que assertás en un test de API: el código correcto para cada caso, no solo el <em>happy path</em>. Login ok → <code>200</code>, alta → <code>201</code>, sin token → <code>401</code>, sin permiso → <code>403</code>, recurso inexistente → <code>404</code>, dato inválido → <code>400/422</code>.<pre class=\"cpt-code\"><code>assert requests.post(\"/login\", json=bad).status_code == 401\nassert requests.get(\"/orders/999999\").status_code == 404</code></pre>",
+
+  "cpt.api-rest.ex": "REST modela todo como <strong>recursos</strong> con URL, operados con verbos HTTP y sin estado entre requests:<pre class=\"cpt-code\"><code>GET    /articles              → lista\nGET    /articles/12           → detalle\nPOST   /articles              → crear\nGET    /articles/12/comments  → sub-recurso\n\n(cada request lleva su propio token; el server no\n recuerda la request anterior → stateless)</code></pre>",
+  "cpt.api-rest.uc": "En QA verificás que la API sea <em>consistente</em>: URLs por recurso (no verbos en la ruta, evitá <code>/getArticle</code>), el mismo formato JSON en todas y que sea stateless — que dos requests en paralelo no se pisen. También validás <strong>paginación</strong> y enlaces (HATEOAS) si la API los expone.",
+
+  "cpt.api-crud.ex": "CRUD es el ciclo de vida de un dato, mapeado a verbos:<pre class=\"cpt-code\"><code>Create  POST   /tasks       → 201 + id\nRead    GET    /tasks/{id}  → 200 + datos\nUpdate  PUT    /tasks/{id}  → 200 datos nuevos\nDelete  DELETE /tasks/{id}  → 204\n        GET    /tasks/{id}  → 404 (ya no está)</code></pre>",
+  "cpt.api-crud.uc": "El caso de prueba estrella de una API es el <strong>flujo CRUD completo</strong> encadenado: creás, leés lo que creaste, lo modificás, lo borrás y confirmás que desapareció. Cubre los 4 verbos en un solo test end-to-end:<pre class=\"cpt-code\"><code>id = requests.post(\"/tasks\", json=t).json()[\"id\"]\nassert requests.get(f\"/tasks/{id}\").status_code == 200\nrequests.put(f\"/tasks/{id}\", json=upd)\nrequests.delete(f\"/tasks/{id}\")\nassert requests.get(f\"/tasks/{id}\").status_code == 404</code></pre>",
+
+  "cpt.api-cors.ex": "Antes de un request “no simple” desde el navegador, el browser manda un <strong>preflight</strong> <code>OPTIONS</code> y el server responde con permisos:<pre class=\"cpt-code\"><code>&gt; OPTIONS /api/orders\n&gt; Origin: https://app.miweb.com\n&gt; Access-Control-Request-Method: POST\n\n&lt; 204 No Content\n&lt; Access-Control-Allow-Origin: https://app.miweb.com\n&lt; Access-Control-Allow-Methods: GET, POST, PUT</code></pre>",
+  "cpt.api-cors.uc": "El bug típico: “funciona en Postman pero falla en el navegador”. En QA reproducís el <code>OPTIONS</code> preflight y verificás los headers <code>Access-Control-Allow-Origin/-Methods/-Headers</code>; un origen no permitido debe ser rechazado. Es un control del navegador, no seguridad del server: igual validás la autorización aparte.",
+
+  "cpt.api-sql.ex": "Para validar en la base lo que la API dice, consultás con SQL y cruzás tablas con <strong>JOIN</strong>:<pre class=\"cpt-code\"><code>SELECT o.id, o.total, u.email\nFROM orders o\nJOIN users u ON u.id = o.user_id\nWHERE o.status = 'PAID'\n  AND o.total &gt; 1000;</code></pre>",
+  "cpt.api-sql.uc": "Sirve para <strong>verificar datos de punta a punta</strong>: creás una orden por la API y confirmás en la base que se guardó bien (monto, estado, relación con el usuario). Detectás inconsistencias que la UI oculta.<pre class=\"cpt-code\"><code>-- tras POST /orders debería existir 1 fila\nSELECT COUNT(*) FROM orders WHERE id = :new_id;  -- espera 1</code></pre>",
+
   "kt.cat.maturity": "Métricas, madurez y certificación",
   "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
