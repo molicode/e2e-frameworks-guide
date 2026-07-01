@@ -103,6 +103,18 @@
     update();
   }
 
+  /* ---- Sidebar accordion: click a group to expand, click again to collapse ---- */
+  function setupNavGroups() {
+    Array.prototype.forEach.call(document.querySelectorAll(".nav-group"), function (btn) {
+      btn.addEventListener("click", function () {
+        var item = btn.closest(".nav-group-item");
+        if (!item) return;
+        var open = item.classList.toggle("is-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    });
+  }
+
   /* ---- Mobile drawer ---- */
   function setupDrawer() {
     var sidebar = document.getElementById("sidebar");
@@ -136,6 +148,7 @@
     setupLangToggle();
     setupCopyButtons();
     setupProgress();
+    setupNavGroups();
     setupDrawer();
     global.Theme.init();
   }
