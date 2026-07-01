@@ -1969,6 +1969,48 @@ I18n.register("es", {
   "cpt.ai-context.ex": "Cuánto texto “ve” el modelo a la vez, medido en tokens:<pre class=\"cpt-code\"><code>1 token ≈ ¾ de una palabra\nventana llena → el modelo “olvida” lo más viejo\nregla: meté solo lo relevante (el caso + la doc), no todo el repo</code></pre>",
   "cpt.ai-context.uc": "Si le pasás demasiado (todo el código), la señal se diluye y la respuesta empeora. QA arma prompts con el <strong>contexto justo</strong> (la historia, el endpoint, un ejemplo) para respuestas más precisas, rápidas y baratas.",
 
+  "cpt.sec-authn.ex": "Dos cosas distintas que se confunden:<pre class=\"cpt-code\"><code>Authentication (authn) = ¿quién sos?  → login, token válido\nAuthorization  (authz) = ¿qué podés?  → permisos, roles\n\n401 Unauthorized → no autenticado (falta o expiró el token)\n403 Forbidden    → autenticado pero SIN permiso</code></pre>",
+  "cpt.sec-authn.uc": "QA prueba las dos por separado: sin token → <code>401</code>; con un token de usuario común entrando a <code>/admin</code> → <code>403</code>. El bug clásico es la <strong>autorización rota</strong> (un usuario ve o toca datos de otro).",
+
+  "cpt.sec-idor.ex": "Cambiás un id en la URL y accedés a lo ajeno:<pre class=\"cpt-code\"><code>GET /api/invoices/1001   (mía)    → 200 ✔\nGET /api/invoices/1002   (ajena)  → 200 ✗  ← IDOR (debería ser 403)</code></pre>",
+  "cpt.sec-idor.uc": "QA intenta acceder a recursos de otro usuario cambiando ids (secuenciales o adivinables). Es uno de los bugs más comunes y graves; se corrige verificando <strong>en cada request</strong> que el recurso pertenezca a quien lo pide.",
+
+  "cpt.sec-xss.ex": "Inyectar un script que el navegador ejecuta:<pre class=\"cpt-code\"><code>Comentario: &lt;script&gt;robarCookie()&lt;/script&gt;\nSi la app lo muestra sin escapar → se ejecuta en otros usuarios</code></pre>",
+  "cpt.sec-xss.uc": "QA prueba meter payloads (<code>&lt;script&gt;</code>, <code>onerror=</code>) en cada input que después se muestre en pantalla, y verifica que la app los escape o sanitice. Foco en comentarios, nombres y búsqueda: cualquier dato de usuario que se renderice.",
+
+  "cpt.sec-sqli.ex": "Inyectar SQL en un input mal manejado:<pre class=\"cpt-code\"><code>usuario:  admin'--\nquery:    SELECT * FROM users WHERE name='admin'--' AND pass='...'\n          el --' comenta el resto → saltea el password</code></pre>",
+  "cpt.sec-sqli.uc": "QA prueba entradas con comillas, <code>--</code> y <code>OR 1=1</code> en campos que llegan a la base, y verifica que se usen <strong>consultas parametrizadas</strong>. Siempre en entornos autorizados: es testing de seguridad con permiso, nunca sobre sistemas ajenos.",
+
+  "cpt.sec-csrf.ex": "Forzar una acción usando la sesión de la víctima:<pre class=\"cpt-code\"><code>La víctima logueada abre una web maliciosa que dispara:\nPOST /transfer  (a la cuenta del atacante)\n→ el navegador manda su cookie automáticamente\nDefensa: token CSRF + cookies SameSite</code></pre>",
+  "cpt.sec-csrf.uc": "QA verifica que las acciones sensibles (transferir, cambiar email) exijan un <strong>token anti-CSRF</strong> y no se puedan disparar desde otro origen. También chequea el atributo <code>SameSite</code> en las cookies de sesión.",
+
+  "cpt.sec-ratelimit.ex": "Limitar cuántas requests por unidad de tiempo:<pre class=\"cpt-code\"><code>100 logins/min por IP\nrequest 101 → 429 Too Many Requests</code></pre>",
+  "cpt.sec-ratelimit.uc": "QA prueba que los endpoints sensibles (login, OTP, búsqueda) frenen el abuso: fuerza bruta, scraping. Verifica que devuelvan <code>429</code> al pasarse y que el límite no moleste al uso normal.",
+
+  "cpt.sec-leastpriv.ex": "Cada rol tiene el mínimo permiso necesario:<pre class=\"cpt-code\"><code>Cajero:   cobrar          (NO borrar productos)\nAdmin:    todo\nAPI key:  solo lectura    (si el servicio solo lee)</code></pre>",
+  "cpt.sec-leastpriv.uc": "QA prueba que un rol no pueda hacer más de lo que le toca (escalada de privilegios) y que las cuentas de servicio tengan permisos acotados. Se cruza con la autorización y con IDOR.",
+
+  "cpt.sec-sensitive.ex": "Datos que no deberían verse ni viajar en claro:<pre class=\"cpt-code\"><code>❌ password o tarjeta en la respuesta JSON o en los logs\n❌ token en la URL (queda en el historial y los proxies)\n✅ HTTPS + hashing + enmascarado (**** 1234)</code></pre>",
+  "cpt.sec-sensitive.uc": "QA revisa respuestas de API, logs, mensajes de error y almacenamiento buscando datos sensibles expuestos (PII, secretos). Verifica HTTPS, que no se logueen passwords y que los errores no filtren detalles internos (stack traces, rutas).",
+
+  "cpt.mat-dd.ex": "Defectos por unidad de tamaño (por KLOC = 1.000 líneas):<pre class=\"cpt-code\"><code>Módulo Pagos:    12 bugs / 1.000 líneas → 12 por KLOC\nMódulo Reportes:  2 bugs / 1.000 líneas →  2 por KLOC\n→ Pagos concentra el riesgo</code></pre>",
+  "cpt.mat-dd.uc": "QA la usa para ubicar los módulos más riesgosos y enfocar ahí las pruebas y la automatización. Sirve para comparar componentes y para justificar dónde invertir más esfuerzo de testing.",
+
+  "cpt.mat-mttr.ex": "Tiempo promedio de reparar un fallo desde que se detecta:<pre class=\"cpt-code\"><code>MTTR = suma(tiempo de reparación) / cantidad de incidentes\nEj.: 2h + 30min + 1h = 3,5h  /  3 incidentes ≈ 70 min</code></pre>",
+  "cpt.mat-mttr.uc": "Mide la <strong>capacidad de respuesta</strong> del equipo, no la calidad del código. Se baja con buen monitoreo, alertas y tests que localizan rápido la causa: un test rojo específico repara antes que un vago “algo falla”.",
+
+  "cpt.mat-escape.ex": "Qué porcentaje de bugs llegó a producción:<pre class=\"cpt-code\"><code>Encontrados en QA: 45   |   Escaparon a prod: 5\nescape rate = 5 / (45 + 5) = 10%\n→ cuanto más bajo, mejor filtró el testing</code></pre>",
+  "cpt.mat-escape.uc": "Es la métrica que mide qué tan bien atrapa bugs el proceso. QA la sigue en el tiempo; si sube, analiza qué <em>tipo</em> de bug se escapa y agrega esa clase de test (regresión, caso borde, integración).",
+
+  "cpt.mat-models.ex": "Niveles que describen cuán maduro es el proceso:<pre class=\"cpt-code\"><code>TMMi (testing): 1 Inicial → 2 Gestionado → 3 Definido\n                → 4 Medido → 5 Optimización\nCMMI: lo mismo, pero para el desarrollo en general</code></pre>",
+  "cpt.mat-models.uc": "Sirven como mapa de “qué nos falta” para profesionalizar el testing. QA los usa para diagnosticar (¿tenemos proceso definido? ¿medimos?) y planear mejoras, no como un fin burocrático.",
+
+  "cpt.mat-iso.ex": "Norma genérica de gestión de calidad, certificable:<pre class=\"cpt-code\"><code>No dice cómo testear; exige: procesos documentados,\nresponsabilidades claras, mejora continua y evidencia.</code></pre>",
+  "cpt.mat-iso.uc": "No es de testing en sí, pero ordena los procesos y responsabilidades de calidad en la organización. QA aporta la <strong>evidencia</strong> (planes, reportes, trazabilidad) que una auditoría ISO exige.",
+
+  "cpt.mat-istqb.ex": "El estándar global de certificación en testing:<pre class=\"cpt-code\"><code>Foundation → Advanced (Test Analyst, TAE, Test Manager)\n           → Expert + especialidades (Agile, Security, AI...)</code></pre>",
+  "cpt.mat-istqb.uc": "Da un <strong>vocabulario común</strong> muy valorado en entrevistas y equipos. QA lo usa para nivelar conceptos (severidad, técnicas de diseño) y como ruta de crecimiento; el glosario ISTQB es la referencia compartida.",
+
   "kt.cat.maturity": "Métricas, madurez y certificación",
   "kt.mat.dd": "<strong>Defect density</strong>: defectos por unidad de tamaño (por KLOC o por módulo). Ayuda a ubicar las zonas más riesgosas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): tiempo promedio que toma reparar un fallo desde que se detecta. Mide capacidad de respuesta.",
