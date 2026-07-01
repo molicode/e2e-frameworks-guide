@@ -516,6 +516,93 @@ export function sectionMain(sections, index, dict) {
   return `${header}${blocks}${foot}`;
 }
 
+/* ---- interactive content map (a mind-map style index on the home page) ---- */
+const MAP_BRANCHES = [
+  {
+    key: "foundations", icon: "🧭", color: "var(--accent)",
+    leaves: [
+      { id: "intro", icon: "🚀", label: "nav.intro" },
+      { id: "fundamentals", icon: "📐", label: "nav.fundamentals" },
+      { id: "key-terms", icon: "📖", label: "nav.keyterms" },
+    ],
+  },
+  {
+    key: "languages", icon: "💻", color: "var(--fw-python)",
+    leaves: [
+      { id: "python-intro", icon: "🐍", label: "nav.pyqa" },
+      { id: "ts-intro", icon: "🟦", label: "nav.tsqa" },
+    ],
+  },
+  {
+    key: "frameworks", icon: "🧩", color: "var(--fw-playwright)",
+    leaves: [
+      { id: "selenium-filosofia", icon: "🕸️", label: "nav.selenium" },
+      { id: "cypress-filosofia", icon: "🌲", label: "nav.cypress" },
+      { id: "playwright-filosofia", icon: "🎭", label: "nav.playwright" },
+      { id: "robot-filosofia", icon: "🤖", label: "nav.robot" },
+    ],
+  },
+  {
+    key: "approaches", icon: "🧪", color: "var(--fw-bdd)",
+    leaves: [
+      { id: "bdd-intro", icon: "🥒", label: "nav.bdd" },
+      { id: "comparison", icon: "⚖️", label: "nav.comparison" },
+      { id: "perf-intro", icon: "⚡", label: "nav.perf" },
+    ],
+  },
+  {
+    key: "ai", icon: "🤖", color: "var(--fw-maturity)",
+    leaves: [
+      { id: "ai-role", icon: "✨", label: "nav.airole" },
+      { id: "prompts", icon: "💬", label: "nav.prompts" },
+    ],
+  },
+  {
+    key: "process", icon: "🚦", color: "var(--fw-ci)",
+    leaves: [
+      { id: "ci-intro", icon: "🔁", label: "nav.ci" },
+      { id: "best-practices", icon: "✅", label: "nav.best" },
+      { id: "skills-intro", icon: "🛠️", label: "nav.skills" },
+      { id: "maturity-intro", icon: "📊", label: "nav.maturity" },
+      { id: "bibliography", icon: "📚", label: "nav.biblio" },
+    ],
+  },
+];
+
+function roadmapMap(dict, sectionHref) {
+  const branches = MAP_BRANCHES.map((b) => {
+    const leaves = b.leaves
+      .map(
+        (l) => `
+              <a class="rmap__leaf" href="${sectionHref(l.id)}">
+                <span class="rmap__leaf-icon" aria-hidden="true">${l.icon}</span>
+                <span class="rmap__leaf-label" data-i18n="${l.label}">${escText(t(dict, l.label))}</span>
+                <span class="rmap__leaf-arrow" aria-hidden="true">→</span>
+              </a>`
+      )
+      .join("");
+    return `
+          <div class="rmap__branch" style="--c:${b.color}">
+            <div class="rmap__cat">
+              <span class="rmap__cat-icon" aria-hidden="true">${b.icon}</span>
+              <span data-i18n="map.${b.key}">${escText(t(dict, "map." + b.key))}</span>
+            </div>
+            <div class="rmap__leaves">${leaves}
+            </div>
+          </div>`;
+  }).join("");
+  return `
+        <section class="rmap" aria-label="${escAttr(t(dict, "map.title"))}">
+          <div class="rmap__root">
+            <span class="rmap__root-icon" aria-hidden="true">🧪</span>
+            <span data-i18n="map.root">${escText(t(dict, "map.root"))}</span>
+          </div>
+          <div class="rmap__stem" aria-hidden="true"></div>
+          <div class="rmap__branches">${branches}
+          </div>
+        </section>`;
+}
+
 /* ---- render the index / landing page's <main> inner content ---- */
 export function indexMain(sections, dict, { sectionHref }) {
   const cards = topLevelEntries(sections)
@@ -540,6 +627,8 @@ export function indexMain(sections, dict, { sectionHref }) {
           <p class="hero__lead" data-i18n="home.lead">${escText(t(dict, "home.lead"))}</p>
           <a class="cta-btn" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
         </div>
+        <h2 class="block-label" data-i18n="map.title">${escText(t(dict, "map.title"))}</h2>
+        ${roadmapMap(dict, sectionHref)}
         <section class="achievements" id="achievements" hidden>
           <div class="ach-head">
             <h2 class="block-label" data-i18n="game.achievements">${escText(t(dict, "game.achievements"))}</h2>
