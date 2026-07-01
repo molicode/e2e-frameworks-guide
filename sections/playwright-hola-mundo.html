@@ -161,39 +161,38 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
         <h1 class="section__title" data-i18n="page.hello">Hola mundo</h1>
-        <figure class="runner" data-runner data-fw="playwright" style="--fw:var(--fw-playwright)">
+        <figure class="runner" data-runner data-fw="playwright" data-scenario="login" style="--fw:var(--fw-playwright)">
           <div class="runner__frame">
             <div class="runner__head">
               <span class="runner__fwchip">Playwright</span>
-              <div class="runner__chips"><span class="runner__chip">Auto-wait</span><span class="runner__chip">Multi-browser</span><span class="runner__chip">Trace viewer</span></div>
+              <div class="runner__chips"><span class="runner__chip">Python</span><span class="runner__chip">Auto-wait</span><span class="runner__chip">Trace viewer</span></div>
             </div>
-            <div class="runner__panel" data-fw="playwright">
+            <div class="runner__panel">
               <div class="runner__stage">
             <div class="mock runner__browser">
               <div class="mock__bar">
                 <span class="mock__dots"><i></i><i></i><i></i></span>
-                <span class="mock__url runner__url">app.test/login</span>
+                <span class="mock__url">app.test/login</span>
               </div>
-              <div class="mock__body runner__screens">
-                <div class="runner__screen runner__screen--form">
-                  <div class="mock-card">
-                    <p class="mock-h">Sign in</p>
+              <div class="mock__body">
+                <div class="runner__screens">
+                  <div class="runner__screen runner__screen--form">
+                    <div class="mock-card">
+                      <p class="mock-h">Sign in</p>
+                      
                     <div class="mock-field">
                       <span class="mock-field__label">Username</span>
-                      <span class="mock-input runner__input"><span class="runner__typed"></span><span class="runner__caret" aria-hidden="true"></span></span>
+                      <span class="mock-input"><span class="runner__typed" data-at="typing" data-text="admin"></span><span class="runner__caret" aria-hidden="true"></span></span>
                     </div>
-                    <div class="mock-btn-row">
-                      <span class="mock-btn runner__btn">Sign in</span>
+                      <div class="mock-btn-row"><span class="mock-btn runner__btn">Sign in</span></div>
                     </div>
                   </div>
-                </div>
-                <div class="runner__screen runner__screen--success">
-                  <div class="runner__result">
-                    <span class="runner__check" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
-                    </span>
-                    <p class="runner__welcome">Welcome</p>
-                    <span class="runner__passed">✓ assertion passed</span>
+                  <div class="runner__screen runner__screen--success">
+                    <div class="runner__result">
+                      <span class="runner__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>
+                      <p class="runner__welcome">Welcome</p>
+                      <div class="runner__passed">✓ assertion passed</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,16 +200,14 @@
               <div class="runner__code">
               <div class="runner__codebar">
                 <span class="runner__filedot"></span>
-                <span class="runner__file">login.spec.ts</span>
-                <span class="runner__badge">PLAYWRIGHT</span>
+                <span class="runner__file">test_login.py</span>
+                <span class="runner__badge">PYTHON</span>
               </div>
-              <pre class="runner__pre"><code><span class="runner__line" data-stage="form"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">");</span></span>
-<span class="runner__line" data-stage="typing"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByLabel</span><span class="tok-punctuation">("</span>User<span class="tok-punctuation">")</span></span>
-<span class="runner__line" data-stage="typing">  <span class="tok-punctuation">.</span><span class="tok-function">fill</span><span class="tok-punctuation">("</span>admin<span class="tok-punctuation">");</span></span>
-<span class="runner__line" data-stage="submit"><span class="tok-keyword">await</span> page<span class="tok-punctuation">.</span><span class="tok-function">getByRole</span><span class="tok-punctuation">("</span>button<span class="tok-punctuation">",</span></span>
-<span class="runner__line" data-stage="submit">  <span class="tok-punctuation">{</span> name<span class="tok-punctuation">:</span> <span class="tok-string">"Go"</span> <span class="tok-punctuation">}).</span><span class="tok-function">click</span><span class="tok-punctuation">();</span></span>
-<span class="runner__line" data-stage="success"><span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">getByText</span><span class="tok-punctuation">("</span>Welcome<span class="tok-punctuation">"))</span></span>
-<span class="runner__line" data-stage="passed">  <span class="tok-punctuation">.</span><span class="tok-function">toBeVisible</span><span class="tok-punctuation">();</span></span></code></pre></div>
+              <pre class="runner__pre"><code><span class="runner__line" data-stage="form">page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">")</span></span>
+<span class="runner__line" data-stage="typing">page<span class="tok-punctuation">.</span><span class="tok-function">get_by_label</span><span class="tok-punctuation">("</span>User<span class="tok-string">").fill("</span>admin<span class="tok-punctuation">")</span></span>
+<span class="runner__line" data-stage="submit">page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Go<span class="tok-punctuation">").</span><span class="tok-function">click</span><span class="tok-punctuation">()</span></span>
+<span class="runner__line" data-stage="success"><span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">get_by_text</span><span class="tok-punctuation">("</span>Welcome<span class="tok-punctuation">"))</span></span>
+<span class="runner__line" data-stage="success">    <span class="tok-punctuation">.</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></span></code></pre></div>
             </div>
             <div class="runner__player">
               <button class="runner__play" type="button" aria-label="Reproducir la demo" data-i18n-attr="aria-label:runner.run">

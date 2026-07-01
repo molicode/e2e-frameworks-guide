@@ -161,6 +161,74 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
         <h1 class="section__title" data-i18n="page.verbs">Verbos HTTP</h1>
+        <figure class="runner" data-runner data-fw="robot" data-scenario="api" style="--fw:var(--fw-robot)">
+          <div class="runner__frame">
+            <div class="runner__head">
+              <span class="runner__fwchip">Robot Framework</span>
+              <div class="runner__chips"><span class="runner__chip">Keyword-driven</span><span class="runner__chip">Readable</span><span class="runner__chip">SeleniumLibrary</span></div>
+            </div>
+            <div class="runner__panel">
+              <div class="runner__stage">
+            <div class="mock runner__browser">
+              <div class="mock__bar">
+                <span class="mock__dots"><i></i><i></i><i></i></span>
+                <span class="mock__url">api.app.test</span>
+              </div>
+              <div class="mock__body">
+                <div class="mock--api runner__console">
+                  
+                  <div class="runner__areq" data-row="post">
+                    <span class="mock-method mock-method--post">POST</span>
+                    <span class="runner__apath">/orders</span>
+                    <span class="mock-status mock-status--ok">201</span>
+                  </div>
+                  
+                  <div class="runner__areq" data-row="get">
+                    <span class="mock-method mock-method--get">GET</span>
+                    <span class="runner__apath">/orders/42</span>
+                    <span class="mock-status mock-status--ok">200</span>
+                  </div>
+                  
+                  <div class="runner__areq" data-row="put">
+                    <span class="mock-method mock-method--put">PUT</span>
+                    <span class="runner__apath">/orders/42</span>
+                    <span class="mock-status mock-status--ok">200</span>
+                  </div>
+                  
+                  <div class="runner__areq" data-row="delete">
+                    <span class="mock-method mock-method--delete">DELETE</span>
+                    <span class="runner__apath">/orders/42</span>
+                    <span class="mock-status mock-status--ok">204</span>
+                  </div>
+                  <div class="runner__passed">✓ assertion passed</div>
+                </div>
+              </div>
+            </div></div>
+              <div class="runner__code">
+              <div class="runner__codebar">
+                <span class="runner__filedot"></span>
+                <span class="runner__file">api.robot</span>
+                <span class="runner__badge">ROBOT</span>
+              </div>
+              <pre class="runner__pre"><code><span class="runner__line" data-stage="post">POST On Session      api    <span class="tok-punctuation">/</span>orders    expected_status<span class="tok-punctuation">=</span><span class="tok-number">201</span></span>
+<span class="runner__line" data-stage="get">GET On Session       api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span></span>
+<span class="runner__line" data-stage="put">PUT On Session       api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span></span>
+<span class="runner__line" data-stage="delete">DELETE On Session    api    <span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>    expected_status<span class="tok-punctuation">=</span><span class="tok-number">204</span></span></code></pre></div>
+            </div>
+            <div class="runner__player">
+              <button class="runner__play" type="button" aria-label="Reproducir la demo" data-i18n-attr="aria-label:runner.run">
+                <svg class="runner__ico-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                <svg class="runner__ico-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+              </button>
+              <div class="runner__timeline"><div class="runner__progress"></div></div>
+              <span class="runner__time">0:00</span>
+              <button class="runner__replay" type="button" aria-label="Reiniciar la demo" data-i18n-attr="aria-label:runner.replay">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>
+              </button>
+            </div>
+          </div>
+          <figcaption class="mock__caption" data-i18n="runner.caption">▶ Demo interactivo: dale play y mirá cómo se ejecuta el código de este framework línea por línea mientras la pantalla reacciona.</figcaption>
+        </figure>
         <div class="prose" data-i18n-html="verbs.lead"><p>Una API REST se maneja con <strong>verbos HTTP</strong>: cada uno declara una intención (leer, crear, reemplazar, borrar…). Testear una API es, en gran parte, disparar el verbo correcto y verificar el <strong>código de estado</strong> y el cuerpo de la respuesta. Acá los ves todos, en el idiom de este framework.</p></div>
         <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
         <div class="prose" data-i18n-html="verbs.why"><p>Dos conceptos que toda entrevista pregunta: el <strong>código de estado</strong> (2xx ok, 4xx error del cliente, 5xx error del servidor) y la <strong>idempotencia</strong> — si repetir la misma llamada deja el sistema igual. <code>GET</code>, <code>PUT</code> y <code>DELETE</code> son idempotentes; <code>POST</code> no (cada llamada crea algo nuevo). <code>PATCH</code> suele serlo, pero depende de cómo lo implementes.</p></div>
