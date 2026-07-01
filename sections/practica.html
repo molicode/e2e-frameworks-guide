@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title>Defect escape rate</title>
+  <title data-i18n="nav.practica">Práctica</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--concept page--mat-escape">
+<body class="page--section page--practica">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -461,19 +461,19 @@
           </div>
           </div>
         </div>
-        <a class="nav-link nav-link--top" href="practica.html">
+        <a class="nav-link nav-link--top is-active" href="practica.html" aria-current="page">
           <span class="nav-link__num">07</span>
           <span data-i18n="grp.practica">Práctica</span>
         </a>
-        <div class="nav-group-item nav-group-item--top is-open">
-          <button class="nav-link nav-group nav-group--top is-active-group" type="button" aria-expanded="true">
+        <div class="nav-group-item nav-group-item--top">
+          <button class="nav-link nav-group nav-group--top" type="button" aria-expanded="false">
             <span class="nav-link__num">08</span>
             <span data-i18n="grp.glossary">Glosario</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
           </button>
           <div class="nav-sub">
-        <div class="nav-group-item nav-group-item--nested is-open">
-          <button class="nav-link nav-group nav-group--nested is-active-group" type="button" aria-expanded="true">
+        <div class="nav-group-item nav-group-item--nested">
+          <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
             <span data-i18n="nav.keyterms">Conceptos clave</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
           </button>
@@ -759,8 +759,8 @@
               </a>
             </div>
           </div>
-          <div class="nav-group-item nav-group-item--nested is-open">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
               <span data-i18n="kt.cat.maturity">Métricas, madurez y certificación</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -771,7 +771,7 @@
               <a class="nav-link nav-sublink nav-sublink--deep" href="mat-mttr.html">
                 <span>MTTR</span>
               </a>
-              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="mat-escape.html" aria-current="page">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="mat-escape.html">
                 <span>Defect escape rate</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="mat-models.html">
@@ -796,34 +796,20 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="cpt-crumb"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
-        <span class="cpt-cat" style="--c:var(--fw-skills)" data-i18n="kt.cat.maturity">Métricas, madurez y certificación</span>
-        <h1 class="section__title cpt-title">Defect escape rate</h1>
-        <div class="cpt-body">
-          <section class="cpt-sec">
-            <h2 class="block-label" data-i18n="cpt.def">Definición</h2>
-            <div class="cpt-rich cpt-def" data-i18n-html="kt.mat.escape"><strong>Defect escape rate</strong>: porcentaje de bugs que llegaron a producción (escaparon al filtro de testing). Cuanto más bajo, mejor.</div>
-          </section>
-        <section class="cpt-sec">
-          <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.mat-escape.ex">Qué porcentaje de bugs llegó a producción:<pre class="cpt-code"><code>Encontrados en QA: 45   |   Escaparon a prod: 5
-escape rate = 5 / (45 + 5) = 10%
-→ cuanto más bajo, mejor filtró el testing</code></pre></div>
-        </section>
-        <section class="cpt-sec">
-          <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.mat-escape.uc">Es la métrica que mide qué tan bien atrapa bugs el proceso. QA la sigue en el tiempo; si sube, analiza qué <em>tipo</em> de bug se escapa y agrega esa clase de test (regresión, caso borde, integración).</div>
-        </section>
-        <section class="cpt-sec">
-          <h2 class="block-label" data-i18n="cpt.refs">Para profundizar</h2>
-          <ul class="ref-list">
-            <li class="ref">
-              <a class="ref__link" href="https://glossary.istqb.org/" target="_blank" rel="noopener noreferrer">ISTQB — Glossary</a>
-            </li>
-          </ul>
-        </section>
-        </div>
-        <div class="page-nav page-nav--single"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
+        <span class="section__eyebrow">07</span>
+        <h1 class="section__title" data-i18n="nav.practica">Práctica</h1>
+        <div class="prose" data-i18n-html="practica.lead"><p>🏗️ <strong>Sección en construcción.</strong></p></div>
+        <div class="callout" data-i18n-html="practica.callout"><p>Próximamente: ejercicios prácticos para poner a prueba todo lo que aprendiste — casos reales, retos guiados y soluciones paso a paso.</p></div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="maturity-istqb.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="mat.page.istqb">ISTQB y certificaciones</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="key-terms.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.keyterms">Conceptos clave</span>
+          </a>
+        </nav>
       </div>
     </main>
   </div>

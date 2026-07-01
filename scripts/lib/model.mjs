@@ -3170,6 +3170,16 @@ export const SECTIONS = [
   ...maturityGroup(),
 
   {
+    // Placeholder — the menu entry exists; content comes later.
+    id: "practica",
+    navKey: "nav.practica",
+    blocks: [
+      { type: "prose", html: "practica.lead" },
+      { type: "callout", variant: "", html: "practica.callout" },
+    ],
+  },
+
+  {
     id: "key-terms",
     navKey: "nav.keyterms",
     blocks: [
