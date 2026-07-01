@@ -2158,8 +2158,81 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 @media (prefers-reduced-motion: reduce) {
   .lnode.is-current .lnode__btn { animation: none; }
 }
+/* group node: a caret in the label + a small "done/total" badge on the circle */
+.lnode__caret {
+  display: inline-block;
+  margin-left: 5px;
+  color: var(--c);
+  transition: transform var(--transition);
+}
+.lnode.is-expanded .lnode__caret { transform: rotate(180deg); }
+.lnode--group .lnode__btn { cursor: pointer; }
+.lnode__count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 2px solid var(--c);
+  color: var(--c);
+  font-size: 0.34em;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+.lnode.is-done .lnode__count { display: none; } /* the ✓ takes over when complete */
+
+/* the expandable route of child lessons under a group node */
+.lnode__children {
+  display: none;
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3) 0 0;
+  width: max-content;
+  max-width: 260px;
+  border-top: 2px dashed var(--border-strong);
+}
+.lnode.is-expanded .lnode__children { display: flex; flex-direction: column; gap: 4px; }
+.lchild__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: var(--text);
+}
+.lchild__link:hover { background: var(--surface-2); text-decoration: none; }
+.lchild__dot {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: 0 3px 0 var(--border-strong);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.lchild.is-done .lchild__dot {
+  background: var(--c);
+  border-color: var(--c);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 55%, #000);
+  color: #fff;
+  font-size: 0;
+}
+.lchild.is-done .lchild__dot::after { content: "✓"; font-size: 0.8rem; }
+.lchild__label { font-size: var(--fs-sm); font-weight: 650; }
+
 /* tighten the zig-zag on small screens so nothing overflows */
 @media (max-width: 520px) {
   .lnode { transform: translateX(calc(var(--x, 0) * 0.6)); }
   .lnode__label { max-width: 130px; }
+  .lnode__children { max-width: 210px; }
 }

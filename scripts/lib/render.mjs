@@ -758,9 +758,9 @@ function topsByKey(sections) {
   const map = {};
   topLevelEntries(sections).forEach((e) => {
     if (e.type === "single") {
-      map[e.section.id] = { label: e.section.navKey, pages: [e.section.id], first: e.section.id };
+      map[e.section.id] = { label: e.section.navKey, first: e.section.id, members: [{ id: e.section.id, navKey: e.section.navKey }] };
     } else {
-      map[e.group] = { label: e.groupKey, pages: e.members.map((m) => m.id), first: e.first.id };
+      map[e.group] = { label: e.groupKey, first: e.first.id, members: e.members.map((m) => ({ id: m.id, navKey: m.navKey })) };
     }
   });
   return map;
@@ -778,14 +778,40 @@ function learningPath(sections, dict, sectionHref) {
         g += 1;
         const icon = NODE_ICON[key] || "•";
         const label = escText(t(dict, top.label));
-        return `
-              <li class="lnode" style="--x:${x}px;--c:${u.color}" data-pages="${escAttr(top.pages.join(","))}">
+        const pagesAttr = escAttr(top.members.map((m) => m.id).join(","));
+        // Single-page entry → a plain link node.
+        if (top.members.length < 2) {
+          return `
+              <li class="lnode" style="--x:${x}px;--c:${u.color}" data-pages="${pagesAttr}">
                 <a class="lnode__btn" href="${sectionHref(top.first)}" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
                   <span class="lnode__icon" aria-hidden="true">${icon}</span>
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
                 </a>
                 <span class="lnode__label" data-i18n="${top.label}">${label}</span>
+              </li>`;
+        }
+        // Multi-page group → a toggle node that expands into its child lessons.
+        const children = top.members
+          .map((m, ci) => `
+                  <li class="lchild" data-page="${m.id}">
+                    <a class="lchild__link" href="${sectionHref(m.id)}">
+                      <span class="lchild__dot" aria-hidden="true">${ci + 1}</span>
+                      <span class="lchild__label" data-i18n="${m.navKey}">${escText(t(dict, m.navKey))}</span>
+                    </a>
+                  </li>`)
+          .join("");
+        return `
+              <li class="lnode lnode--group" style="--x:${x}px;--c:${u.color}" data-pages="${pagesAttr}">
+                <button class="lnode__btn lnode__btn--group" type="button" aria-expanded="false" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
+                  <span class="lnode__icon" aria-hidden="true">${icon}</span>
+                  <span class="lnode__check" aria-hidden="true">✓</span>
+                  <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
+                  <span class="lnode__count" aria-hidden="true"></span>
+                </button>
+                <span class="lnode__label" data-i18n="${top.label}">${label}<span class="lnode__caret" aria-hidden="true">▾</span></span>
+                <ol class="lnode__children">${children}
+                </ol>
               </li>`;
       })
       .join("");

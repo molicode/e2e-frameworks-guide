@@ -115,6 +115,18 @@
     });
   }
 
+  /* ---- Home learning path: expand a group node into its child lessons ---- */
+  function setupPathNodes() {
+    Array.prototype.forEach.call(document.querySelectorAll(".lnode__btn--group"), function (btn) {
+      btn.addEventListener("click", function () {
+        var node = btn.closest(".lnode");
+        if (!node) return;
+        var open = node.classList.toggle("is-expanded");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    });
+  }
+
   /* ---- Mobile drawer ---- */
   function setupDrawer() {
     var sidebar = document.getElementById("sidebar");
@@ -149,6 +161,7 @@
     setupCopyButtons();
     setupProgress();
     setupNavGroups();
+    setupPathNodes();
     setupDrawer();
     global.Theme.init();
   }
