@@ -2542,3 +2542,39 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .block-label--path { display: inline-flex; align-items: center; gap: 8px; }
 .block-label__ico { display: inline-flex; color: var(--md-sys-color-on-surface-variant); }
 .block-label__ico .ui-icon { width: 16px; height: 16px; display: block; }
+
+/* Card hover: a glowing gradient BORDER + a tight bloom hugging the edge
+   (like the AWS card effect) — reveals only on hover, so the resting state
+   stays calm and flat. Applied to every card-like surface. */
+.tile, .toc-card, .callout, .vs-card, .ref-group, .rail-card {
+  position: relative;
+  transition: transform var(--transition), box-shadow 220ms ease;
+}
+.tile::after, .toc-card::after, .callout::after,
+.vs-card::after, .ref-group::after, .rail-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.6px;                         /* glowing border thickness */
+  background: linear-gradient(130deg, #8f7fe6, #f2b978);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+.tile:hover, .toc-card:hover, .callout:hover,
+.vs-card:hover, .ref-group:hover, .rail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px -3px rgba(143, 127, 230, 0.6),
+              0 0 10px -2px rgba(242, 185, 120, 0.5);
+}
+.tile:hover::after, .toc-card:hover::after, .callout:hover::after,
+.vs-card:hover::after, .ref-group:hover::after, .rail-card:hover::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .tile:hover, .toc-card:hover, .callout:hover,
+  .vs-card:hover, .ref-group:hover, .rail-card:hover { transform: none; }
+}
