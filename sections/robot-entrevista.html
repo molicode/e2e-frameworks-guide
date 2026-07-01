@@ -179,69 +179,93 @@
           </div>
           <div class="iv-thread">
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.robot.q1">¿Cuándo elegirías Robot Framework?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.robot.q1">¿Cuándo elegirías Robot Framework?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.robot.a1">Cuando quiero tests legibles por no-programadores, reutilización por keywords y el ecosistema de librerías.</p>
-              </div>
-            </div>
-            <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.robot.q2">¿Cómo mantenés los tests DRY en Robot?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
-              </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.robot.a2">Con keywords de usuario que agrupan pasos y con Resource files compartidos.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.robot.a1">Cuando quiero tests legibles por no-programadores, reutilización por keywords y el ecosistema de librerías.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.robot.q3">¿Cómo manejás los datos de prueba?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.robot.q2">¿Cómo mantenés los tests DRY en Robot?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.robot.a3">Con variables, Variables files, o data-driven usando Test Templates.</p>
-              </div>
-            </div>
-            <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.robot.q4">¿Cómo testeás APIs en Robot?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
-              </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.robot.a4">Con RequestsLibrary: Create Session y GET/POST/... On Session, más Status Should Be.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.robot.a2">Con keywords de usuario que agrupan pasos y con Resource files compartidos.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.robot.q5">¿SeleniumLibrary o Browser library?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.robot.q3">¿Cómo manejás los datos de prueba?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.robot.a5">SeleniumLibrary es clásica y estable; Browser (basada en Playwright) da auto-wait y velocidad. Elijo según el proyecto.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.robot.a3">Con variables, Variables files, o data-driven usando Test Templates.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.robot.q6">¿Cómo integrás Robot en CI?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.robot.q4">¿Cómo testeás APIs en Robot?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.robot.a6">Ejecuto robot desde el pipeline, publico el report/log HTML como artifact y fallo el build si hay tests en rojo.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.robot.a4">Con RequestsLibrary: Create Session y GET/POST/... On Session, más Status Should Be.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.robot.q5">¿SeleniumLibrary o Browser library?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
+              </div>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.robot.a5">SeleniumLibrary es clásica y estable; Browser (basada en Playwright) da auto-wait y velocidad. Elijo según el proyecto.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.robot.q6">¿Cómo integrás Robot en CI?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
+              </div>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.robot.a6">Ejecuto robot desde el pipeline, publico el report/log HTML como artifact y fallo el build si hay tests en rojo.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
           </div>

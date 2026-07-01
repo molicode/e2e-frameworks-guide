@@ -40,6 +40,22 @@ function t(dict, key) {
   return Object.prototype.hasOwnProperty.call(dict, key) ? dict[key] : key;
 }
 
+/* Little drawn people for the mock-interview chat (SVG, theme-colored). */
+const IV_AV_INTERVIEWER =
+  '<svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true">' +
+  '<circle cx="24" cy="24" r="24" fill="var(--accent)"/>' +
+  '<circle cx="24" cy="19.5" r="7.5" fill="#fff"/>' +
+  '<path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/>' +
+  '<path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg>'; // + tie
+const IV_AV_CANDIDATE =
+  '<svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true">' +
+  '<circle cx="24" cy="24" r="24" fill="var(--success)"/>' +
+  '<circle cx="24" cy="19.5" r="7.5" fill="#fff"/>' +
+  '<path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/>' +
+  '<path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>' +
+  '<rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/>' +
+  '<rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg>'; // + headset
+
 /* ---- code block (baked highlighted, with a copy button) ----
    When a Spanish-commented variant exists we bake BOTH versions and let CSS
    show the one matching <html lang>. Spanish is visible by default (the page
@@ -132,19 +148,24 @@ function renderBlock(block, dict) {
     }
 
     case "interview": {
-      // A simulated interview: interviewer question → (reveal) your answer.
+      // A simulated interview drawn as a two-person chat: the interviewer (left)
+      // asks; you reveal your answer (right). The avatars are little SVG people.
       const turns = block.items
         .map(
           (it) => `
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">${escText(t(dict, "iv.role.q"))}</span>
-                <p class="iv-text" data-i18n="${it.q}">${escText(t(dict, it.q))}</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">${escText(t(dict, "iv.reveal"))}</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap">${IV_AV_INTERVIEWER}<span class="iv-who" data-i18n="iv.role.q">${escText(t(dict, "iv.role.q"))}</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="${it.q}">${escText(t(dict, it.q))}</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">${escText(t(dict, "iv.reveal"))}</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">${escText(t(dict, "iv.role.a"))}</span>
-                <p class="iv-text" data-i18n="${it.a}">${escText(t(dict, it.a))}</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="${it.a}">${escText(t(dict, it.a))}</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a">${IV_AV_CANDIDATE}<span class="iv-who iv-who--a" data-i18n="iv.role.a">${escText(t(dict, "iv.role.a"))}</span></div>
               </div>
             </div>`
         )

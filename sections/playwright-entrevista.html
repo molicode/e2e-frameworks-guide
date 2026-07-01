@@ -179,69 +179,93 @@
           </div>
           <div class="iv-thread">
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.playwright.q1">¿Qué es el auto-waiting y por qué importa?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.playwright.q1">¿Qué es el auto-waiting y por qué importa?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.playwright.a1">Playwright espera a que el elemento esté accionable antes de actuar; reduce flakiness y elimina los sleeps manuales.</p>
-              </div>
-            </div>
-            <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.playwright.q2">¿Cómo depurás un test que falla en CI pero no localmente?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
-              </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.playwright.a2">Con el trace viewer: reviso DOM, red y screenshots paso a paso de la corrida que falló.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.playwright.a1">Playwright espera a que el elemento esté accionable antes de actuar; reduce flakiness y elimina los sleeps manuales.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.playwright.q3">¿Qué locators preferís y por qué?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.playwright.q2">¿Cómo depurás un test que falla en CI pero no localmente?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.playwright.a3">get_by_role / get_by_label / get_by_text: resilientes y centrados en el usuario, en vez de CSS o XPath frágil.</p>
-              </div>
-            </div>
-            <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.playwright.q4">¿Cómo testeás en varios navegadores?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
-              </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.playwright.a4">Configuro proyectos para Chromium, Firefox y WebKit; los mismos tests corren en cada motor.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.playwright.a2">Con el trace viewer: reviso DOM, red y screenshots paso a paso de la corrida que falló.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.playwright.q5">¿Cómo manejás la autenticación entre tests?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.playwright.q3">¿Qué locators preferís y por qué?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.playwright.a5">Guardo el storage state tras loguear una vez y lo reuso, evitando el login en cada test.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.playwright.a3">get_by_role / get_by_label / get_by_text: resilientes y centrados en el usuario, en vez de CSS o XPath frágil.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.playwright.q6">¿Cómo testeás una API con Playwright?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.playwright.q4">¿Cómo testeás en varios navegadores?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.playwright.a6">Con el request context (api.get/post/...), sin abrir navegador, verificando el status.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.playwright.a4">Configuro proyectos para Chromium, Firefox y WebKit; los mismos tests corren en cada motor.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.playwright.q5">¿Cómo manejás la autenticación entre tests?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
+              </div>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.playwright.a5">Guardo el storage state tras loguear una vez y lo reuso, evitando el login en cada test.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.playwright.q6">¿Cómo testeás una API con Playwright?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
+              </div>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.playwright.a6">Con el request context (api.get/post/...), sin abrir navegador, verificando el status.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
           </div>

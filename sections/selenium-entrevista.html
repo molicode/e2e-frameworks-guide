@@ -179,69 +179,93 @@
           </div>
           <div class="iv-thread">
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.selenium.q1">¿Cómo manejás las esperas para evitar tests flaky en Selenium?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.selenium.q1">¿Cómo manejás las esperas para evitar tests flaky en Selenium?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.selenium.a1">Uso esperas explícitas (WebDriverWait + expected_conditions) por condiciones concretas, en vez de sleeps fijos; la implícita, con cuidado.</p>
-              </div>
-            </div>
-            <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.selenium.q2">Contame cómo estructurarías un proyecto de automatización con Selenium.</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
-              </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.selenium.a2">Con Page Objects para encapsular páginas, un runner como pytest, datos de prueba separados, selectores estables (id/data-*) y reporte.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.selenium.a1">Uso esperas explícitas (WebDriverWait + expected_conditions) por condiciones concretas, en vez de sleeps fijos; la implícita, con cuidado.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.selenium.q3">¿Cómo localizarías un elemento que no tiene id ni clase estable?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.selenium.q2">Contame cómo estructurarías un proyecto de automatización con Selenium.</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.selenium.a3">Por atributos semánticos (name, aria-label, texto) o relaciones cercanas; evito el XPath posicional que se rompe fácil.</p>
-              </div>
-            </div>
-            <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.selenium.q4">¿Cómo corrés Selenium en CI y en paralelo?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
-              </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.selenium.a4">En un pipeline con navegador headless; en paralelo con Selenium Grid o pytest-xdist.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.selenium.a2">Con Page Objects para encapsular páginas, un runner como pytest, datos de prueba separados, selectores estables (id/data-*) y reporte.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.selenium.q5">¿Ventajas y desventajas frente a Playwright o Cypress?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.selenium.q3">¿Cómo localizarías un elemento que no tiene id ni clase estable?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.selenium.a5">Ventaja: estándar maduro, multi-lenguaje y multi-navegador. Desventaja: más verboso y sin auto-wait nativo, hay que manejar las esperas.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.selenium.a3">Por atributos semánticos (name, aria-label, texto) o relaciones cercanas; evito el XPath posicional que se rompe fácil.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
             <div class="iv-turn">
-              <div class="iv-bubble iv-bubble--q">
-                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
-                <p class="iv-text" data-i18n="iv.selenium.q6">¿Cómo validás una respuesta de API dentro de un flujo de Selenium?</p>
-                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.selenium.q4">¿Cómo corrés Selenium en CI y en paralelo?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
               </div>
-              <div class="iv-bubble iv-bubble--a" hidden>
-                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
-                <p class="iv-text" data-i18n="iv.selenium.a6">Selenium es de UI; para la API uso requests y verifico el status_code y el body por separado.</p>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.selenium.a4">En un pipeline con navegador headless; en paralelo con Selenium Grid o pytest-xdist.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.selenium.q5">¿Ventajas y desventajas frente a Playwright o Cypress?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
+              </div>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.selenium.a5">Ventaja: estándar maduro, multi-lenguaje y multi-navegador. Desventaja: más verboso y sin auto-wait nativo, hay que manejar las esperas.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-row iv-row--q">
+                <div class="iv-av-wrap"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--accent)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg><span class="iv-who" data-i18n="iv.role.q">Reclutador</span></div>
+                <div class="iv-bubble iv-bubble--q">
+                  <p class="iv-text" data-i18n="iv.selenium.q6">¿Cómo validás una respuesta de API dentro de un flujo de Selenium?</p>
+                  <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+                </div>
+              </div>
+              <div class="iv-row iv-row--a" hidden>
+                <div class="iv-bubble iv-bubble--a">
+                  <p class="iv-text" data-i18n="iv.selenium.a6">Selenium es de UI; para la API uso requests y verifico el status_code y el body por separado.</p>
+                </div>
+                <div class="iv-av-wrap iv-av-wrap--a"><svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--success)"/><circle cx="24" cy="19.5" r="7.5" fill="#fff"/><path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/><path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/><rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg><span class="iv-who iv-who--a" data-i18n="iv.role.a">Candidato/a</span></div>
               </div>
             </div>
           </div>
