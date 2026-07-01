@@ -126,8 +126,9 @@
   color: var(--text);
   font-weight: 600;
 }
-/* Grandparent (top) group header — the most prominent nav level. */
-.nav-group--top { font-weight: 600; }
+/* Grandparent (top) group header + top-level leaf links — the most prominent nav level. */
+.nav-group--top,
+.nav-link--top { font-weight: 600; }
 /* Mid-level accordion (framework / language group, or Key terms). */
 .nav-group--nested {
   font-size: var(--fs-sm);

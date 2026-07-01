@@ -650,6 +650,17 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
   const emap = topEntryByKey(sections);
   const links = NAV_GROUPS.map((g, gi) => {
     const num = String(gi + 1).padStart(2, "0");
+    // A "leaf" grandparent is just a top-level link (e.g. a placeholder section).
+    if (g.leaf) {
+      const id = g.members[0];
+      const active = id === activeId ? " is-active" : "";
+      const cur = id === activeId ? ' aria-current="page"' : "";
+      return `
+        <a class="nav-link nav-link--top${active}" href="${sectionHref(id)}"${cur}>
+          <span class="nav-link__num">${num}</span>
+          <span data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
+        </a>`;
+    }
     const members = g.members.map((k) => emap[k]).filter(Boolean);
     const open = members.some((e) => entryHasActive(e, activeId));
     const inner = members.map((e) => memberNav(e, activeId, dict, sectionHref)).join("");
@@ -792,12 +803,14 @@ const NODE_ICON = {
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
 const NAV_GROUPS = [
-  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals", "key-terms"] },
+  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals"] },
   { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
   { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
   { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "perf"] },
   { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai101", "aiqa"] },
-  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity", "bibliography"] },
+  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity"] },
+  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--secondary)",     members: ["practica"], leaf: true },
+  { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--fw-skills)",     members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
@@ -819,7 +832,7 @@ function topsByKey(sections) {
 function learningPath(sections, dict, sectionHref) {
   const tops = topsByKey(sections);
   let g = 0; // running node index (drives the continuous zig-zag)
-  const units = PATH_UNITS.map((u, ui) => {
+  const units = PATH_UNITS.filter((u) => !u.leaf).map((u, ui) => {
     const nodes = u.members
       .map((key) => {
         const top = tops[key];
