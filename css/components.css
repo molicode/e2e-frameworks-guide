@@ -1315,3 +1315,78 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   .runner__browser[data-stage="form"] .runner__caret,
   .runner__browser[data-stage="typing"] .runner__caret { animation: none; }
 }
+
+/* ==========================================================================
+   Flashcards — end-of-section study decks (js/flashcards.js)
+   ========================================================================== */
+.flashcards { margin: var(--space-3) 0 var(--space-6); }
+.fc-stage { perspective: 1400px; }
+.fc-card { display: none; cursor: pointer; outline: none; }
+.fc-card.is-active { display: block; }
+.fc-card:focus-visible .fc-card__inner { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent); }
+.fc-card__inner {
+  position: relative;
+  min-height: 168px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.fc-card.is-flipped .fc-card__inner { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--surface);
+  text-align: center;
+  overflow: auto;
+}
+.fc-face--q { background: color-mix(in srgb, var(--accent) 6%, var(--surface)); }
+.fc-face--a { transform: rotateY(180deg); background: color-mix(in srgb, var(--success) 8%, var(--surface)); }
+.fc-tag {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: 999px;
+  padding: 2px var(--space-3);
+}
+.fc-tag--a { color: var(--success); background: color-mix(in srgb, var(--success) 14%, transparent); }
+.fc-text { margin: 0; font-size: var(--fs-lg); font-weight: 600; color: var(--text); line-height: 1.45; }
+.fc-hint { font-size: var(--fs-xs); color: var(--text-muted); }
+.fc-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.fc-btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+.fc-btn:hover { color: var(--accent); border-color: var(--border-strong); }
+.fc-prev, .fc-next { min-width: 2.4em; font-size: var(--fs-lg); line-height: 1; }
+.fc-flip-btn { font-weight: 700; }
+.fc-count { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-muted); min-width: 3.5em; text-align: center; }
+@media (prefers-reduced-motion: reduce) {
+  .fc-card__inner { transition: none; }
+}
