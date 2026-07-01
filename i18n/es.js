@@ -33,10 +33,9 @@ I18n.register("es", {
   "ui.prev": "Anterior",
   "ui.next": "Siguiente",
   "ui.mockCaption": "👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.",
-  "runner.caption": "▶ Demo interactivo: dale play y mirá cómo se ejecuta el código línea por línea mientras la pantalla reacciona. Cambiá de framework en las pestañas.",
+  "runner.caption": "▶ Demo interactivo: dale play y mirá cómo se ejecuta el código de este framework línea por línea mientras la pantalla reacciona.",
   "runner.run": "Reproducir la demo",
   "runner.replay": "Reiniciar la demo",
-  "runner.tablist": "Elegí un framework",
 
   /* ---- Sub-páginas de cada framework ---- */
   "page.philosophy": "Filosofía y cuándo usarlo",

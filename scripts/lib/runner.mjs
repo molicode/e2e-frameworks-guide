@@ -1,9 +1,10 @@
 /* ==========================================================================
    scripts/lib/runner.mjs — The interactive "Code Runner" demo.
 
-   Renders a self-playing test-runner: framework tabs (Selenium / Cypress /
-   Playwright), a simulated browser that acts out a login test, and a code
-   panel whose active line advances in sync with the browser — plus a small
+   Each framework section gets its OWN runner: a self-playing test-runner that
+   acts out that framework's first login test. A simulated browser types the
+   username, presses the button and lands on the "Welcome / assertion passed"
+   screen, while the code panel's active line advances in sync — with a small
    play / progress control. All the motion lives in js/runner.js; here we only
    bake the static markup (and a sensible no-JS fallback: the code is readable
    and the browser shows its final "success" state).
@@ -25,17 +26,16 @@ function escAttr(s) {
   return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 }
 
-/* Each framework runs the SAME login test, so the browser choreography is
-   shared. A line's `stage` says what the browser should be showing while that
-   line is the active (executing) one:
+/* Every framework runs the same login test, so the browser choreography is
+   shared. A line's `stage` says what the browser should show while that line
+   is the active (executing) one:
      form    → empty sign-in form
      typing  → username field filling with "admin"
      submit  → the "Sign in" button pressed
      success → the app navigated to the welcome screen
      passed  → success + the "assertion passed" badge  */
-const FRAMEWORKS = [
-  {
-    key: "selenium",
+const FRAMEWORKS = {
+  selenium: {
     label: "Selenium",
     color: "var(--fw-selenium)",
     file: "LoginTest.java",
@@ -52,8 +52,7 @@ const FRAMEWORKS = [
       ['assertEquals("Welcome", msg);', "passed"],
     ],
   },
-  {
-    key: "cypress",
+  cypress: {
     label: "Cypress",
     color: "var(--fw-cypress)",
     file: "login.cy.js",
@@ -67,8 +66,7 @@ const FRAMEWORKS = [
       ['  .should("have.text", "Welcome");', "passed"],
     ],
   },
-  {
-    key: "playwright",
+  playwright: {
     label: "Playwright",
     color: "var(--fw-playwright)",
     file: "login.spec.ts",
@@ -84,7 +82,20 @@ const FRAMEWORKS = [
       ["  .toBeVisible();", "passed"],
     ],
   },
-];
+  robot: {
+    label: "Robot Framework",
+    color: "var(--fw-robot)",
+    file: "login.robot",
+    badge: "ROBOT",
+    chips: ["Keyword-driven", "Readable", "SeleniumLibrary"],
+    lines: [
+      ["Open Browser      https://app.test/login    chrome", "form"],
+      ["Input Text        id=user    admin", "typing"],
+      ["Click Button      id=go", "submit"],
+      ["Page Should Contain    Welcome", "passed"],
+    ],
+  },
+};
 
 /* The simulated browser. Both screens (form + success) are baked; JS crossfades
    between them. Without JS the "success" screen is shown (see runner CSS). */
@@ -130,41 +141,30 @@ function codePanel(fw) {
     .join("\n");
   return `
               <div class="runner__codebar">
-                <span class="runner__filedot" style="background:${fw.color}"></span>
+                <span class="runner__filedot"></span>
                 <span class="runner__file">${escText(fw.file)}</span>
                 <span class="runner__badge">${escText(fw.badge)}</span>
               </div>
               <pre class="runner__pre"><code>${lines}</code></pre>`;
 }
 
-function panel(fw, active) {
+/** Render one framework's Code Runner block. `fwKey` picks the framework. */
+export function renderRunner(dict, fwKey) {
+  const fw = FRAMEWORKS[fwKey] || FRAMEWORKS.selenium;
   const chips = fw.chips
     .map((c) => `<span class="runner__chip">${escText(c)}</span>`)
     .join("");
-  return `
-          <div class="runner__panel${active ? " is-active" : ""}" data-fw="${fw.key}" style="--fw:${fw.color}">
-            <div class="runner__chips">${chips}</div>
-            <div class="runner__stage">${stage()}</div>
-            <div class="runner__code">${codePanel(fw)}</div>
-          </div>`;
-}
-
-/** Render the whole Code Runner block. */
-export function renderRunner(dict) {
-  const tabs = FRAMEWORKS.map(
-    (fw, i) =>
-      `<button class="runner__tab${i === 0 ? " is-active" : ""}" type="button" role="tab" aria-selected="${i === 0}" data-fw="${fw.key}" style="--fw:${fw.color}">${escText(fw.label)}</button>`
-  ).join("");
-  const panels = FRAMEWORKS.map((fw, i) => panel(fw, i === 0)).join("");
 
   return `
-        <figure class="runner" data-runner>
+        <figure class="runner" data-runner data-fw="${fwKey}" style="--fw:${fw.color}">
           <div class="runner__frame">
-            <div class="runner__tabs" role="tablist" aria-label="${escAttr(t(dict, "runner.tablist"))}">
-              ${tabs}
-              <span class="runner__ink" aria-hidden="true"></span>
+            <div class="runner__head">
+              <span class="runner__fwchip">${escText(fw.label)}</span>
+              <div class="runner__chips">${chips}</div>
             </div>
-            <div class="runner__panels">${panels}
+            <div class="runner__panel" data-fw="${fwKey}">
+              <div class="runner__stage">${stage()}</div>
+              <div class="runner__code">${codePanel(fw)}</div>
             </div>
             <div class="runner__player">
               <button class="runner__play" type="button" aria-label="${escAttr(t(dict, "runner.run"))}" data-i18n-attr="aria-label:runner.run">
