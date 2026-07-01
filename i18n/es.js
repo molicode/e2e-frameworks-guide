@@ -549,7 +549,13 @@ I18n.register("es", {
 
   /* ---- Navegación ---- */
   "nav.intro": "Introducción",
-  "nav.fundamentals": "Fundamentos",
+  "nav.fundamentals": "Tipos de test y pirámide",
+  "grp.foundations": "Fundamentos",
+  "grp.languages": "Lenguajes",
+  "grp.frameworks": "Frameworks",
+  "grp.approaches": "Enfoques",
+  "grp.ai": "AI en QA",
+  "grp.process": "Proceso y carrera",
   "nav.pyqa": "Python para QA",
   "nav.tsqa": "TypeScript para QA",
   "nav.selenium": "Selenium",

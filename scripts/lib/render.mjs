@@ -475,15 +475,11 @@ export function progressData(sections) {
   return { pages: sections.map((s) => s.id), tops };
 }
 
-// The top-level number for a section (1-based, groups count once).
+// The grandparent number for a section (1-based) — matches the sidebar groups.
 function topNumberOf(sections, section) {
-  const entries = topLevelEntries(sections);
-  for (let i = 0; i < entries.length; i++) {
-    const e = entries[i];
-    if ((e.type === "single" && e.section === section) ||
-        (e.type === "group" && e.members.includes(section))) {
-      return i + 1;
-    }
+  const topKey = section.group || section.id;
+  for (let i = 0; i < NAV_GROUPS.length; i++) {
+    if (NAV_GROUPS[i].members.includes(topKey)) return i + 1;
   }
   return 0;
 }
@@ -539,7 +535,9 @@ const NAV_CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" width="16" hei
 // tree: section → each category that has deep-dive concepts → the concept
 // sub-pages. Only categories belonging to this host (and with `full` concepts)
 // appear, so each grows as more batches ship.
-function conceptNav(hostId, navKey, overviewKey, num, activeId, dict, sectionHref) {
+// When `nested` is true it renders as a mid-level accordion (inside a
+// grandparent) with no leading number; otherwise as a top-level group.
+function conceptNav(hostId, navKey, overviewKey, num, activeId, dict, sectionHref, nested) {
   const fulls = CONCEPTS.filter((c) => c.full && conceptHost(c.cat) === hostId);
   const activeConcept = fulls.find((c) => c.id === activeId);
   const hostOpen = activeId === hostId || !!activeConcept;
@@ -571,19 +569,75 @@ function conceptNav(hostId, navKey, overviewKey, num, activeId, dict, sectionHre
     .join("");
   const overviewActive = activeId === hostId ? " is-active" : "";
   const overviewCur = activeId === hostId ? ' aria-current="page"' : "";
+  const groupCls = nested ? "nav-group nav-group--nested" : "nav-group";
+  const numHtml = nested ? "" : `<span class="nav-link__num">${num}</span>`;
   return `
-        <div class="nav-group-item${hostOpen ? " is-open" : ""}">
-          <button class="nav-link nav-group${hostOpen ? " is-active-group" : ""}" type="button" aria-expanded="${hostOpen}">
-            <span class="nav-link__num">${num}</span>
-            <span data-i18n="${navKey}">${escText(t(dict, navKey))}</span>
+        <div class="nav-group-item${nested ? " nav-group-item--nested" : ""}${hostOpen ? " is-open" : ""}">
+          <button class="nav-link ${groupCls}${hostOpen ? " is-active-group" : ""}" type="button" aria-expanded="${hostOpen}">
+            ${numHtml}<span data-i18n="${navKey}">${escText(t(dict, navKey))}</span>
             ${NAV_CHEVRON}
           </button>
-          <div class="nav-sub">
+          <div class="nav-sub${nested ? " nav-sub--nested" : ""}">
             <a class="nav-link nav-sublink${overviewActive}" href="${sectionHref(hostId)}"${overviewCur}>
               <span data-i18n="${overviewKey}">${escText(t(dict, overviewKey))}</span>
             </a>${catBlocks}
           </div>
         </div>`;
+}
+
+// Map every top-level entry (single section or group) by its id/group key.
+function topEntryByKey(sections) {
+  const map = {};
+  topLevelEntries(sections).forEach((e) => {
+    map[e.type === "single" ? e.section.id : e.group] = e;
+  });
+  return map;
+}
+
+// Is the active page inside this top-level entry?
+function entryHasActive(e, activeId) {
+  if (!e) return false;
+  if (e.type === "single") {
+    if (e.section.id === activeId) return true;
+    if (e.section.id === "key-terms") return CONCEPTS.some((c) => c.full && c.id === activeId);
+    return false;
+  }
+  return e.members.some((m) => m.id === activeId);
+}
+
+// Render a member of a grandparent: a single link, a framework/language group
+// (nested accordion), or the Key-terms concept tree (nested).
+function memberNav(e, activeId, dict, sectionHref) {
+  if (e.type === "single") {
+    const s = e.section;
+    if (s.id === "key-terms") return conceptNav("key-terms", "nav.keyterms", "kt.overview", "", activeId, dict, sectionHref, true);
+    const a = s.id === activeId ? " is-active" : "";
+    const cur = s.id === activeId ? ' aria-current="page"' : "";
+    return `
+            <a class="nav-link nav-sublink${a}" href="${sectionHref(s.id)}"${cur}>
+              <span data-i18n="${s.navKey}">${escText(t(dict, s.navKey))}</span>
+            </a>`;
+  }
+  const open = e.members.some((m) => m.id === activeId);
+  const sub = e.members
+    .map((m) => {
+      const a = m.id === activeId ? " is-active" : "";
+      const cur = m.id === activeId ? ' aria-current="page"' : "";
+      return `
+              <a class="nav-link nav-sublink nav-sublink--deep${a}" href="${sectionHref(m.id)}"${cur}>
+                <span data-i18n="${m.navKey}">${escText(t(dict, m.navKey))}</span>
+              </a>`;
+    })
+    .join("");
+  return `
+          <div class="nav-group-item nav-group-item--nested${open ? " is-open" : ""}">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="${open}">
+              <span data-i18n="${e.groupKey}">${escText(t(dict, e.groupKey))}</span>
+              ${NAV_CHEVRON}
+            </button>
+            <div class="nav-sub nav-sub--nested">${sub}
+            </div>
+          </div>`;
 }
 
 export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
@@ -593,46 +647,23 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
           <span data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
         </a>`;
 
-  const entries = topLevelEntries(sections);
-  const links = entries
-    .map((e, i) => {
-      const num = String(i + 1).padStart(2, "0");
-      if (e.type === "single") {
-        const s = e.section;
-        if (s.id === "key-terms") return conceptNav("key-terms", "nav.keyterms", "kt.overview", num, activeId, dict, sectionHref);
-        const active = s.id === activeId ? " is-active" : "";
-        const cur = s.id === activeId ? ' aria-current="page"' : "";
-        return `
-        <a class="nav-link${active}" href="${sectionHref(s.id)}"${cur}>
-          <span class="nav-link__num">${num}</span>
-          <span data-i18n="${s.navKey}">${escText(t(dict, s.navKey))}</span>
-        </a>`;
-      }
-      // group: a collapsible accordion. All sub-pages are rendered; the header
-      // toggles them open/closed (open by default on the active group).
-      const isActiveGroup = e.members.some((m) => m.id === activeId);
-      const sub = e.members
-        .map((m) => {
-          const a = m.id === activeId ? " is-active" : "";
-          const cur = m.id === activeId ? ' aria-current="page"' : "";
-          return `
-            <a class="nav-link nav-sublink${a}" href="${sectionHref(m.id)}"${cur}>
-              <span data-i18n="${m.navKey}">${escText(t(dict, m.navKey))}</span>
-            </a>`;
-        })
-        .join("");
-      return `
-        <div class="nav-group-item${isActiveGroup ? " is-open" : ""}">
-          <button class="nav-link nav-group${isActiveGroup ? " is-active-group" : ""}" type="button" aria-expanded="${isActiveGroup}">
+  const emap = topEntryByKey(sections);
+  const links = NAV_GROUPS.map((g, gi) => {
+    const num = String(gi + 1).padStart(2, "0");
+    const members = g.members.map((k) => emap[k]).filter(Boolean);
+    const open = members.some((e) => entryHasActive(e, activeId));
+    const inner = members.map((e) => memberNav(e, activeId, dict, sectionHref)).join("");
+    return `
+        <div class="nav-group-item nav-group-item--top${open ? " is-open" : ""}">
+          <button class="nav-link nav-group nav-group--top${open ? " is-active-group" : ""}" type="button" aria-expanded="${open}">
             <span class="nav-link__num">${num}</span>
-            <span data-i18n="${e.groupKey}">${escText(t(dict, e.groupKey))}</span>
-            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            <span data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
+            ${NAV_CHEVRON}
           </button>
-          <div class="nav-sub">${sub}
+          <div class="nav-sub">${inner}
           </div>
         </div>`;
-    })
-    .join("");
+  }).join("");
   return `<nav class="sidebar__nav">${home}${links}\n      </nav>`;
 }
 
@@ -758,14 +789,17 @@ const NODE_ICON = {
   ai101: "🎓", aiqa: "🤖",
   ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
 };
-const PATH_UNITS = [
-  { key: "foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals", "key-terms"] },
-  { key: "languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
-  { key: "frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot"] },
-  { key: "approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "comparison", "perf"] },
-  { key: "ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai101", "aiqa"] },
-  { key: "process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity", "bibliography"] },
+// The thematic "grandparent" groups. Shared by BOTH the home learning path
+// (units) and the sidebar (collapsible grandparents), so the two stay in sync.
+const NAV_GROUPS = [
+  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals", "key-terms"] },
+  { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
+  { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
+  { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "perf"] },
+  { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai101", "aiqa"] },
+  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity", "bibliography"] },
 ];
+const PATH_UNITS = NAV_GROUPS;
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
 const WIND = [0, 54, 88, 54, 0, -54, -88, -54];
 
@@ -837,7 +871,7 @@ function learningPath(sections, dict, sectionHref) {
             <div class="lunit__banner">
               <div class="lunit__meta">
                 <span class="lunit__eyebrow"><span data-i18n="game.unit">${escText(t(dict, "game.unit"))}</span> ${ui + 1}</span>
-                <span class="lunit__title" data-i18n="map.${u.key}">${escText(t(dict, "map." + u.key))}</span>
+                <span class="lunit__title" data-i18n="${u.label}">${escText(t(dict, u.label))}</span>
               </div>
               <a class="lunit__cta" href="${sectionHref(tops[u.members[0]].first)}" data-i18n="game.continue">${escText(t(dict, "game.continue"))}</a>
               <span class="lunit__icon" aria-hidden="true">${u.icon}</span>
