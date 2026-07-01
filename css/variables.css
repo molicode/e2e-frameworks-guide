@@ -176,37 +176,38 @@
   --tok-operator: var(--md-sys-color-on-surface-variant);
   --tok-punctuation: var(--md-sys-color-on-surface-variant);
 
-  /* ---- Unit / category colours (roadmap, sidebar groups, home path) ---- */
-  --cat-foundations: #5d5791;
-  --cat-languages: #1a6a9e;
-  --cat-frameworks: #3c6a1f;
-  --cat-approaches: #106b60;
-  --cat-ai: #7b4a9e;
-  --cat-process: #8a5000;
-  --cat-practica: #a03040;
-  --cat-glossary: #7a5a00;
-  --cat-foundations-soft: var(--md-sys-color-primary-container);
-  --cat-languages-soft: #cfe6f6;
-  --cat-frameworks-soft: #d3edc4;
-  --cat-approaches-soft: #c8ece5;
-  --cat-ai-soft: #efdbff;
-  --cat-process-soft: #ffddb5;
-  --cat-practica-soft: #ffdad9;
-  --cat-glossary-soft: #f6e2b0;
+  /* ---- Unit / category colours — bright pastels (roadmap, sidebar, path).
+     Kept vivid on purpose; the M3 chrome around them stays tonal. ---- */
+  --cat-foundations: #7c5cfc;
+  --cat-languages: #1cb0f6;
+  --cat-frameworks: #58cc02;
+  --cat-approaches: #12b8a6;
+  --cat-ai: #c061ff;
+  --cat-process: #ff9600;
+  --cat-practica: #ff5a6e;
+  --cat-glossary: #ffc531;
+  --cat-foundations-soft: #ede9fe;
+  --cat-languages-soft: #e1f3fe;
+  --cat-frameworks-soft: #e7f8dc;
+  --cat-approaches-soft: #def6f2;
+  --cat-ai-soft: #f5e6fe;
+  --cat-process-soft: #ffefd9;
+  --cat-practica-soft: #ffe4e7;
+  --cat-glossary-soft: #fff3d4;
 
   /* Framework / technology brand-accent chips */
   --fw-selenium: #43b02a;
   --fw-cypress: #2c9c85;
   --fw-playwright: #2ead52;
   --fw-python: #3776ab;
-  --fw-typescript: #1a6a9e;
-  --fw-robot: #00857c;
-  --fw-bdd: #106b60;
-  --fw-skills: #8a5000;
-  --fw-maturity: #7b4a9e;
-  --fw-verbs: #a03040;
-  --fw-perf: #8a5000;
-  --fw-ci: #1a6a9e;
+  --fw-typescript: #1cb0f6;
+  --fw-robot: #00c0b5;
+  --fw-bdd: #12b8a6;
+  --fw-skills: #f59e0b;
+  --fw-maturity: #8b5cf6;
+  --fw-verbs: #e11d48;
+  --fw-perf: #f97316;
+  --fw-ci: #0ea5e9;
 }
 
 /* --------------------------------------------------------------------------
@@ -301,35 +302,35 @@
   --tok-operator: var(--md-sys-color-on-surface-variant);
   --tok-punctuation: var(--md-sys-color-on-surface-variant);
 
-  /* ---- Unit / category colours ---- */
-  --cat-foundations: #c7bfff;
-  --cat-languages: #8fcdf3;
-  --cat-frameworks: #a6d388;
-  --cat-approaches: #86d5c8;
-  --cat-ai: #dcb8f5;
-  --cat-process: #f5bd4f;
-  --cat-practica: #f5b7bd;
-  --cat-glossary: #e2c56b;
-  --cat-foundations-soft: var(--md-sys-color-primary-container);
-  --cat-languages-soft: #0f3a52;
-  --cat-frameworks-soft: #24401a;
-  --cat-approaches-soft: #103d38;
-  --cat-ai-soft: #43305a;
-  --cat-process-soft: #4a3200;
-  --cat-practica-soft: #5a2226;
-  --cat-glossary-soft: #453800;
+  /* ---- Unit / category colours — bright pastels ---- */
+  --cat-foundations: #a99cff;
+  --cat-languages: #4cc4ff;
+  --cat-frameworks: #74dd3a;
+  --cat-approaches: #34d6c4;
+  --cat-ai: #d18cff;
+  --cat-process: #ffb03a;
+  --cat-practica: #ff8592;
+  --cat-glossary: #ffd45e;
+  --cat-foundations-soft: #2a2540;
+  --cat-languages-soft: #0f2c3d;
+  --cat-frameworks-soft: #1a2e10;
+  --cat-approaches-soft: #0e2e2a;
+  --cat-ai-soft: #2c1a3a;
+  --cat-process-soft: #2f2410;
+  --cat-practica-soft: #331a1f;
+  --cat-glossary-soft: #2f2810;
 
   /* Framework / technology brand-accent chips */
   --fw-selenium: #5cc44a;
   --fw-cypress: #4fd6bf;
   --fw-playwright: #4ade80;
-  --fw-python: #8fcdf3;
-  --fw-typescript: #8fcdf3;
-  --fw-robot: #4fd6bf;
-  --fw-bdd: #86d5c8;
-  --fw-skills: #f5bd4f;
-  --fw-maturity: #dcb8f5;
-  --fw-verbs: #f5b7bd;
-  --fw-perf: #f5bd4f;
-  --fw-ci: #8fcdf3;
+  --fw-python: #6aade4;
+  --fw-typescript: #4cc4ff;
+  --fw-robot: #2dd4cf;
+  --fw-bdd: #34d6c4;
+  --fw-skills: #fbbf24;
+  --fw-maturity: #a78bfa;
+  --fw-verbs: #fb7185;
+  --fw-perf: #fb923c;
+  --fw-ci: #38bdf8;
 }
