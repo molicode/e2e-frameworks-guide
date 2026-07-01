@@ -3169,13 +3169,19 @@ const RUNNER_PAGES = [
   { page: "hola-mundo", scenario: "login" },
   { page: "componentes", scenario: "signup" },
   { page: "criticos", scenario: "order" },
-  { page: "verbos", scenario: "api" },
 ];
+// The HTTP-verbs page gets ONE test + animation per verb, separately.
+const VERB_KEYS = ["get", "post", "put", "patch", "delete", "head", "options"];
 ["selenium", "cypress", "playwright", "robot"].forEach((fw) => {
   RUNNER_PAGES.forEach(({ page, scenario }) => {
     const s = SECTIONS.find((x) => x.id === `${fw}-${page}`);
     if (s) s.blocks = [{ type: "runner", fw, scenario }, ...s.blocks];
   });
+  const verbos = SECTIONS.find((x) => x.id === `${fw}-verbos`);
+  if (verbos) {
+    const runners = VERB_KEYS.map((v) => ({ type: "runner", fw, scenario: "verb", verb: v }));
+    verbos.blocks = [...runners, ...verbos.blocks];
+  }
 });
 
 /** Lightweight nav metadata (id + key + number) for building menus/index. */
