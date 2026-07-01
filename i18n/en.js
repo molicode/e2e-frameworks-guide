@@ -1938,6 +1938,36 @@ I18n.register("en", {
   "cpt.def-repro.ex": "A good report lets you reproduce the bug without guessing:<pre class=\"cpt-code\"><code>Steps:    1) log in  2) add to cart  3) apply coupon ABC\nExpected: total with 10% off\nActual:   total with no discount\nEnv:      Chrome 120, staging  |  Attached: video + logs</code></pre>",
   "cpt.def-repro.uc": "Without clear steps the dev can't fix it (“can't reproduce”) and the bug bounces back. QA writes <strong>minimal, deterministic</strong> steps with expected vs actual, environment and evidence — the report you'd want to receive.",
 
+  "cpt.ai-prompt.ex": "A good prompt for generating tests is specific (role, context, format):<pre class=\"cpt-code\"><code>❌ \"write tests for the login\"\n\n✅ \"Generate Playwright (Python) tests for POST /login.\n    Cases: 200 ok, 401 no token, 400 invalid email.\n    Use get_by_role and assert on status_code.\"</code></pre>",
+  "cpt.ai-prompt.uc": "QA uses it to generate cases, data and test skeletons. A prompt with role, context, format and an example gives usable output; a vague one gives generic results. The output is <strong>always</strong> reviewed before use.",
+
+  "cpt.ai-halluc.ex": "The model invents something that sounds right but is false:<pre class=\"cpt-code\"><code>Prompt: \"which Playwright method does X?\"\nLLM:    \"use page.wait_for_magic()\"   ← doesn't exist</code></pre>",
+  "cpt.ai-halluc.uc": "That's why QA never trusts blindly: it validates the selectors, methods and data the AI suggests against the real docs. An AI-generated test that “passes” may be verifying the <strong>wrong</strong> thing or calling a non-existent API.",
+
+  "cpt.ai-selfheal.ex": "If a selector breaks, the tool re-finds the element by alternative attributes:<pre class=\"cpt-code\"><code>#submit-btn no longer exists\n→ the AI relocates it by text \"Pay\" + role button\n→ the test stays green and flags the selector change</code></pre>",
+  "cpt.ai-selfheal.uc": "It reduces maintenance caused by fragile selectors. QA treats it as a help, not an excuse: it reviews the “heals”, because sometimes the re-found element is the <strong>wrong</strong> one and would hide a real bug.",
+
+  "cpt.ai-gen.ex": "The AI proposes cases from a story or from the code:<pre class=\"cpt-code\"><code>Input: function discount(member, amount)\nLLM suggests: member+high, non-member+low, amount 0,\n              negative amount, right at the $100 boundary...</code></pre>",
+  "cpt.ai-gen.uc": "It speeds up coverage and suggests edges you forget. QA <strong>curates</strong> the list (removes noise, adds domain), because the AI doesn't know the implicit business rules or the product's real risk.",
+
+  "cpt.ai-hitl.ex": "The AI proposes and a person approves before applying:<pre class=\"cpt-code\"><code>The AI generates 12 tests → QA reviews\n→ approves 9, fixes 2, discards 1\n→ only then is it committed</code></pre>",
+  "cpt.ai-hitl.uc": "It keeps control and accountability in the QA's hands. AI <strong>amplifies</strong>, it doesn't replace judgment: the human decides what gets merged, especially in critical flows where a mistake is costly.",
+
+  "cpt.ai-mcp.ex": "A standard protocol for a model to use external tools and data:<pre class=\"cpt-code\"><code>LLM ⇄ MCP server → { browser, database, bug tracker }\n\"run the suite and read the report\" → the model uses the real tools</code></pre>",
+  "cpt.ai-mcp.uc": "It lets a QA agent interact with the browser, the API or the bug tracker in a standardised way. QA builds or uses MCP servers to trigger tasks (run tests, open a bug) from natural language, with no bespoke glue.",
+
+  "cpt.ai-skill.ex": "A packaged capability (instructions + scripts) the agent loads when needed:<pre class=\"cpt-code\"><code>skill \"report-bug\":\n  template + steps + how to attach evidence\n→ the agent invokes it when it detects a failure</code></pre>",
+  "cpt.ai-skill.uc": "It standardises <em>how</em> the AI does a repeatable QA task (reporting, generating data, running a regression). QA writes the skill with its judgment baked in so the agent follows it the same way every time.",
+
+  "cpt.ai-agent.ex": "An LLM that plans and executes steps with tools, in a loop:<pre class=\"cpt-code\"><code>Goal: \"find bugs in the checkout\"\nAgent:     navigates → tries invalid cards → observes → reports\nSub-agent: specialises in one part (e.g. accessibility only)</code></pre>",
+  "cpt.ai-agent.uc": "It automates multi-step tasks with less scripting. QA sets the goal, the limits and reviews what it did; <strong>sub-agents</strong> split large jobs (one explores, one verifies, one summarises) to avoid saturating the context.",
+
+  "cpt.ai-rag.ex": "The model first retrieves real context and then answers:<pre class=\"cpt-code\"><code>Question → searches { product docs, previous cases }\n         → builds the answer WITH those sources (not just memory)</code></pre>",
+  "cpt.ai-rag.uc": "It reduces hallucinations by grounding the answer in real documentation (specs, acceptance criteria). QA uses RAG so the AI generates tests based on the <strong>company's requirements</strong> and not on generic assumptions.",
+
+  "cpt.ai-context.ex": "How much text the model “sees” at once, measured in tokens:<pre class=\"cpt-code\"><code>1 token ≈ ¾ of a word\nfull window → the model “forgets” the oldest content\nrule: include only what's relevant (the case + the docs), not the whole repo</code></pre>",
+  "cpt.ai-context.uc": "If you pass too much (the whole codebase), the signal is diluted and the answer gets worse. QA builds prompts with the <strong>right amount of context</strong> (the story, the endpoint, one example) for more precise, faster and cheaper answers.",
+
   "kt.cat.maturity": "Metrics, maturity & certification",
   "kt.mat.dd": "<strong>Defect density</strong>: defects per unit of size (per KLOC or per module). Helps locate the riskiest areas.",
   "kt.mat.mttr": "<strong>MTTR</strong> (Mean Time To Repair): the average time to fix a failure once detected. Measures responsiveness.",
