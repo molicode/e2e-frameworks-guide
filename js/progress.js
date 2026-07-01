@@ -133,19 +133,34 @@
     });
     nodes.forEach(function (li) {
       var pages = (li.getAttribute("data-pages") || "").split(",").filter(Boolean);
-      var done = pages.length > 0 && pages.every(function (id) { return vs[id]; });
+      var doneCount = 0;
+      pages.forEach(function (id) { if (vs[id]) doneCount++; });
+      var done = pages.length > 0 && doneCount === pages.length;
       li.classList.toggle("is-done", done);
       li.classList.remove("is-current");
+      // Group nodes: tick each finished child + show a "done/total" count.
+      Array.prototype.forEach.call(li.querySelectorAll(".lchild"), function (child) {
+        child.classList.toggle("is-done", !!vs[child.getAttribute("data-page")]);
+      });
+      var count = li.querySelector(".lnode__count");
+      if (count) count.textContent = doneCount + "/" + pages.length;
       if (!done && !current) current = li;
     });
-    var link = current && current.querySelector(".lnode__btn");
+    // The navigable target of the current node (a link node's own href, or the
+    // first child link of a group node).
+    var link = null;
+    if (current) {
+      link = current.querySelector("a.lnode__btn") || current.querySelector(".lchild__link");
+    }
+    var curHref = link ? link.getAttribute("href") : null;
     if (current) {
       current.classList.add("is-current");
+      if (current.classList.contains("lnode--group")) current.classList.add("is-expanded"); // reveal the route you're on
       var unit = current.closest(".lunit");
       if (unit) {
         unit.classList.add("is-active-unit");
         var cta = unit.querySelector(".lunit__cta");
-        if (cta && link) cta.setAttribute("href", link.getAttribute("href"));
+        if (cta && curHref) cta.setAttribute("href", curHref);
       }
     }
     var pct = pctNow();
@@ -166,9 +181,9 @@
       msg.textContent = t("game.keepGoing").replace("{p}", pct) + " " + cheer();
     }
     var heroCta = document.getElementById("path-cta");
-    if (heroCta && link && pct > 0) {
+    if (heroCta && curHref && pct > 0) {
       heroCta.removeAttribute("data-i18n");
-      heroCta.setAttribute("href", link.getAttribute("href"));
+      heroCta.setAttribute("href", curHref);
       heroCta.textContent = t("game.continue");
     }
   }
