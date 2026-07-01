@@ -30,12 +30,15 @@ body {
   line-height: var(--lh-base);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Lexend ships only 400/500 — never synthesise heavier/lighter faces, so any
+     700/800 in the components renders as the real 500 weight. */
+  font-synthesis: none;
   transition: background var(--transition), color var(--transition);
 }
 
 h1, h2, h3, h4 {
   line-height: var(--lh-tight);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--text);
 }
 
@@ -73,7 +76,7 @@ code, pre, kbd, samp {
 .reading-progress__bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  background: var(--success);
   transition: width 80ms linear;
 }
 

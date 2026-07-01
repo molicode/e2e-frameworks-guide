@@ -1,43 +1,23 @@
 /* ==========================================================================
-   fonts.css — Self-hosted Nunito (the site's brand typeface).
+   fonts.css — Self-hosted Lexend (the site's single typeface).
 
-   Nunito is a rounded, friendly sans that gives the site its Duolingo-like
-   personality. Files live in assets/fonts/ (latin subset, woff2) so the
-   site works fully offline with no external font requests.
+   Lexend is a calm, highly-legible sans designed for long reading. We ship
+   only the two weights the design system uses (400 regular, 500 medium),
+   latin subset woff2, so the site works fully offline with no external
+   font requests and never renders a "light" (<400) weight.
    ========================================================================== */
 
 @font-face {
-  font-family: "Nunito";
+  font-family: "Lexend";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../assets/fonts/nunito-400.woff2") format("woff2");
+  src: url("../assets/fonts/lexend-400.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Lexend";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-display: swap;
-  src: url("../assets/fonts/nunito-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../assets/fonts/nunito-700.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("../assets/fonts/nunito-800.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url("../assets/fonts/nunito-900.woff2") format("woff2");
+  src: url("../assets/fonts/lexend-500.woff2") format("woff2");
 }
