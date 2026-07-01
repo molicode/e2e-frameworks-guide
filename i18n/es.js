@@ -501,7 +501,7 @@ I18n.register("es", {
   "game.cheer5": "Tu yo del futuro te lo agradece. 🙌",
   "game.cheer6": "¡Crack! Cada página suma. ✨",
   "game.achievements": "Tus logros",
-  "game.pathTitle": "🗺️ Tu ruta de aprendizaje",
+  "game.pathTitle": "Tu ruta de aprendizaje",
   "game.unit": "Unidad",
   "game.start": "EMPIEZA",
   "game.continue": "Continuar →",

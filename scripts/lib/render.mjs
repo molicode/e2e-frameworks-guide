@@ -18,6 +18,7 @@ import { renderMock } from "./mocks.mjs";
 import { renderRunner } from "./runner.mjs";
 import { brandFor, brandIcon } from "./icons.mjs";
 import { techLogo } from "./logos.mjs";
+import { uiIcon } from "./ui-icons.mjs";
 
 // A framework/language chip with its real brand logo (falls back to just the
 // coloured label when there's no matching brand mark).
@@ -652,7 +653,7 @@ function memberNav(e, activeId, dict, sectionHref) {
 export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
   const home = `
         <a class="nav-link nav-link--home" href="${homeHref}" title="${escAttr(t(dict, "nav.home"))}">
-          <span class="nav-link__num">⌂</span>
+          <span class="nav-link__ico" aria-hidden="true">${uiIcon("home")}</span>
           <span class="nav-link__txt" data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
         </a>`;
 
@@ -667,7 +668,7 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
       return `
         <a class="nav-link nav-link--top${active}" href="${sectionHref(id)}"${cur} title="${escAttr(t(dict, g.label))}">
           <span class="nav-link__num">${num}</span>
-          <span class="nav-link__ico" aria-hidden="true">${g.icon}</span>
+          <span class="nav-link__ico" aria-hidden="true">${uiIcon(g.key)}</span>
           <span class="nav-link__txt" data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
         </a>`;
     }
@@ -678,7 +679,7 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
         <div class="nav-group-item nav-group-item--top${open ? " is-open" : ""}">
           <button class="nav-link nav-group nav-group--top${open ? " is-active-group" : ""}" type="button" aria-expanded="${open}" title="${escAttr(t(dict, g.label))}">
             <span class="nav-link__num">${num}</span>
-            <span class="nav-link__ico" aria-hidden="true">${g.icon}</span>
+            <span class="nav-link__ico" aria-hidden="true">${uiIcon(g.key)}</span>
             <span class="nav-link__txt" data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
             ${NAV_CHEVRON}
           </button>
@@ -814,26 +815,19 @@ export function sectionMain(sections, index, dict) {
    finished nodes get a check, the first unfinished one becomes the highlighted
    "start here" node, and a summary ring + achievements sit on top.
    ========================================================================== */
-const NODE_ICON = {
-  intro: "🚀", fundamentals: "📐", "key-terms": "📖",
-  python: "🐍", typescript: "🟦",
-  selenium: "🕸️", cypress: "🌲", playwright: "🎭", robot: "🤖",
-  bdd: "🥒", comparison: "⚖️", perf: "⚡",
-  ai101: "🎓", aiqa: "🤖",
-  ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
-};
 // Nodes that map to a real technology use its official, full-colour logo;
-// the rest fall back to the emoji above.
+// every other node uses a line icon (see nodeMedia / ui-icons.mjs).
 const NODE_LOGO = {
   python: "python", typescript: "typescript",
   selenium: "selenium", cypress: "cypress", playwright: "playwright", robot: "robot",
   bdd: "cucumber", perf: "k6", ci: "githubactions", skills: "git",
 };
-// The media (official logo or emoji) shown inside a learning-path node.
+// The media inside a learning-path node: an official technology logo where
+// one exists, otherwise a clean line icon (not a system emoji).
 function nodeMedia(key) {
   const logo = NODE_LOGO[key];
   if (logo) return `<span class="lnode__logo" aria-hidden="true">${techLogo(logo, "lnode__svg")}</span>`;
-  return `<span class="lnode__icon" aria-hidden="true">${NODE_ICON[key] || "•"}</span>`;
+  return `<span class="lnode__icon" aria-hidden="true">${uiIcon(key, "lnode__ui")}</span>`;
 }
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
@@ -922,7 +916,7 @@ function learningPath(sections, dict, sectionHref) {
                 <span class="lunit__title" data-i18n="${u.label}">${escText(t(dict, u.label))}</span>
               </div>
               <a class="lunit__cta" href="${sectionHref(tops[u.members[0]].first)}" data-i18n="game.continue">${escText(t(dict, "game.continue"))}</a>
-              <span class="lunit__icon" aria-hidden="true">${u.icon}</span>
+              <span class="lunit__icon" aria-hidden="true">${uiIcon(u.key, "lunit__ui")}</span>
             </div>
             <ol class="lunit__nodes">${nodes}
             </ol>
@@ -950,6 +944,6 @@ export function indexMain(sections, dict, { sectionHref }) {
             <a class="cta-btn" id="path-cta" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
           </div>
         </section>
-        <h2 class="block-label" data-i18n="game.pathTitle">${escText(t(dict, "game.pathTitle"))}</h2>
+        <h2 class="block-label block-label--path"><span class="block-label__ico" aria-hidden="true">${uiIcon("path")}</span><span data-i18n="game.pathTitle">${escText(t(dict, "game.pathTitle"))}</span></h2>
         ${learningPath(sections, dict, sectionHref)}`;
 }

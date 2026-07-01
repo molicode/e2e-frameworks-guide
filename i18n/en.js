@@ -500,7 +500,7 @@ I18n.register("en", {
   "game.cheer5": "Your future self thanks you. 🙌",
   "game.cheer6": "Nice! Every page counts. ✨",
   "game.achievements": "Your achievements",
-  "game.pathTitle": "🗺️ Your learning path",
+  "game.pathTitle": "Your learning path",
   "game.unit": "Unit",
   "game.start": "START",
   "game.continue": "Continue →",
