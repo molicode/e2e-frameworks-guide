@@ -48,21 +48,29 @@ function t(dict, key) {
   return Object.prototype.hasOwnProperty.call(dict, key) ? dict[key] : key;
 }
 
-/* Little drawn people for the mock-interview chat (SVG, theme-colored). */
+/* Friendly little characters for the mock-interview chat (Duolingo-ish: round
+   coloured avatar, simple face, one identifying prop). SVG, theme-coloured. */
 const IV_AV_INTERVIEWER =
-  '<svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true">' +
-  '<circle cx="24" cy="24" r="24" fill="var(--accent)"/>' +
-  '<circle cx="24" cy="19.5" r="7.5" fill="#fff"/>' +
-  '<path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/>' +
-  '<path d="M24 29l-2.8 6 2.8 3 2.8-3z" fill="var(--accent)"/></svg>'; // + tie
+  '<svg class="iv-av" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true">' +
+  '<circle cx="28" cy="28" r="28" fill="var(--accent)"/>' +
+  '<path d="M13 46c1.5-7 7.5-11 15-11s13.5 4 15 11z" fill="#fff"/>' + // shoulders
+  '<path d="M28 35l-3 5.5 3 3.5 3-3.5z" fill="var(--accent)"/>' + // tie
+  '<circle cx="28" cy="23" r="12" fill="#f6c9a0"/>' + // face
+  '<circle cx="23.4" cy="22.5" r="1.9" fill="#42332a"/>' + // eyes
+  '<circle cx="32.6" cy="22.5" r="1.9" fill="#42332a"/>' +
+  '<path d="M23.5 27.5q4.5 3.5 9 0" fill="none" stroke="#42332a" stroke-width="1.9" stroke-linecap="round"/>' + // smile
+  '<path d="M15.5 20c1-6 7-10 12.5-10s11.5 4 12.5 10q-6-4-12.5-4t-12.5 4z" fill="#42332a"/></svg>'; // hair
 const IV_AV_CANDIDATE =
-  '<svg class="iv-av" viewBox="0 0 48 48" width="46" height="46" aria-hidden="true">' +
-  '<circle cx="24" cy="24" r="24" fill="var(--success)"/>' +
-  '<circle cx="24" cy="19.5" r="7.5" fill="#fff"/>' +
-  '<path d="M10.5 41c0-8 6.5-12 13.5-12s13.5 4 13.5 12z" fill="#fff"/>' +
-  '<path d="M16 19a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>' +
-  '<rect x="14.2" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/>' +
-  '<rect x="30.4" y="18.5" width="3.4" height="5.5" rx="1.7" fill="#fff"/></svg>'; // + headset
+  '<svg class="iv-av" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true">' +
+  '<circle cx="28" cy="28" r="28" fill="var(--secondary)"/>' +
+  '<path d="M13 46c1.5-7 7.5-11 15-11s13.5 4 15 11z" fill="#fff"/>' +
+  '<circle cx="28" cy="23" r="12" fill="#e6b088"/>' + // face
+  '<circle cx="23.4" cy="22.5" r="1.9" fill="#3a2c22"/>' +
+  '<circle cx="32.6" cy="22.5" r="1.9" fill="#3a2c22"/>' +
+  '<path d="M23.5 27.5q4.5 3.5 9 0" fill="none" stroke="#3a2c22" stroke-width="1.9" stroke-linecap="round"/>' +
+  '<path d="M16 23a12 12 0 0 1 24 0" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>' + // headset band
+  '<rect x="14" y="22" width="4" height="7" rx="2" fill="#fff"/>' +
+  '<rect x="38" y="22" width="4" height="7" rx="2" fill="#fff"/></svg>'; // + mic ear pads
 
 /* ---- code block (baked highlighted, with a copy button) ----
    When a Spanish-commented variant exists we bake BOTH versions and let CSS
