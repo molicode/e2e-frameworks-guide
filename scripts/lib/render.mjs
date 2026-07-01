@@ -283,9 +283,6 @@ function renderBlock(block, dict) {
     case "ktmenu":
       return conceptMenu(dict, "key-terms");
 
-    case "aimenu":
-      return conceptMenu(dict, "ai-concepts");
-
     case "biblio": {
       // item.title + item.url are literals; item.desc is an i18n key.
       const items = block.items
@@ -337,18 +334,11 @@ const KT_CATS = [
   { key: "maturity",   icon: "📊", color: "var(--fw-skills)" },
 ];
 
-// Which section hosts each concept category. AI-engineering concepts get their
-// own "AI concepts" section; every other category stays under "Key terms".
-const CONCEPT_HOST = { ai: "ai-concepts" };
-function conceptHost(cat) { return CONCEPT_HOST[cat] || "key-terms"; }
-// The i18n label key used for a category's header/chip (AI is shown as
-// "Conceptos generales" inside the AI concepts section).
-function conceptCatLabelKey(cat) { return cat === "ai" ? "aic.general" : "kt.cat." + cat; }
-// The categories that belong to a given host section, with their label keys.
-function hostCategories(hostId) {
-  return KT_CATS
-    .filter((cat) => conceptHost(cat.key) === hostId)
-    .map((cat) => ({ ...cat, labelKey: conceptCatLabelKey(cat.key) }));
+// Every concept category lives under the "Key terms" glossary.
+function conceptHost() { return "key-terms"; }
+function conceptCatLabelKey(cat) { return "kt.cat." + cat; }
+function hostCategories() {
+  return KT_CATS.map((cat) => ({ ...cat, labelKey: conceptCatLabelKey(cat.key) }));
 }
 
 function conceptMenu(dict, hostId) {
@@ -406,10 +396,8 @@ function conceptMenu(dict, hostId) {
 // Deep-dive sub-page for a single `full` concept: definition + example + use
 // case + references. Built by build.mjs into sections/<concept.id>.html.
 export function conceptMain(concept, dict) {
-  const hostId = conceptHost(concept.cat);
   const catKey = conceptCatLabelKey(concept.cat);
-  const backKey = hostId === "ai-concepts" ? "aic.back" : "cpt.back";
-  const back = `<a class="cpt-back" href="${hostId}.html" data-i18n="${backKey}">${escText(t(dict, backKey))}</a>`;
+  const back = `<a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">${escText(t(dict, "cpt.back"))}</a>`;
   const sec = (labelKey, key) => `
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="${labelKey}">${escText(t(dict, labelKey))}</h2>
@@ -604,7 +592,6 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
       if (e.type === "single") {
         const s = e.section;
         if (s.id === "key-terms") return conceptNav("key-terms", "nav.keyterms", "kt.overview", num, activeId, dict, sectionHref);
-        if (s.id === "ai-concepts") return conceptNav("ai-concepts", "nav.aiconcepts", "aic.overview", num, activeId, dict, sectionHref);
         const active = s.id === activeId ? " is-active" : "";
         const cur = s.id === activeId ? ' aria-current="page"' : "";
         return `
@@ -760,7 +747,7 @@ const NODE_ICON = {
   python: "🐍", typescript: "🟦",
   selenium: "🕸️", cypress: "🌲", playwright: "🎭", robot: "🤖",
   bdd: "🥒", comparison: "⚖️", perf: "⚡",
-  "ai-role": "✨", "ai-concepts": "🧠",
+  ai101: "🎓", aiqa: "🤖",
   ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
 };
 const PATH_UNITS = [
@@ -768,7 +755,7 @@ const PATH_UNITS = [
   { key: "languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
   { key: "frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot"] },
   { key: "approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "comparison", "perf"] },
-  { key: "ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai-role", "ai-concepts"] },
+  { key: "ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai101", "aiqa"] },
   { key: "process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity", "bibliography"] },
 ];
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
