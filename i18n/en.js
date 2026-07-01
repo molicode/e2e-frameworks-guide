@@ -555,7 +555,8 @@ I18n.register("en", {
   "nav.bdd": "BDD: Gherkin & Cucumber",
   "nav.comparison": "Comparison",
   "nav.perf": "Performance testing",
-  "nav.airole": "The role of AI",
+  "nav.airole": "AI QA Engineer",
+  "nav.aiconcepts": "AI concepts",
   "nav.prompts": "AI examples",
   "nav.best": "Best practices",
   "nav.ci": "CI/CD for QA",
@@ -581,7 +582,8 @@ I18n.register("en", {
   "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) and Cucumber to give context.",
   "home.comparison": "The same VerifyOrder test solved in all 3 frameworks.",
   "home.perf": "Load & performance testing: metrics, types and k6, JMeter and Locust.",
-  "home.ai-role": "How AI complements each stage of testing.",
+  "home.ai-role": "The QA role with AI: build and use skills, hooks, agents, MCP and prompts.",
+  "home.ai-concepts": "The definitions: skill, agent, model, hook, MCP, RAG and more.",
   "home.prompts": "Concrete prompts, how to iterate and how to validate the output.",
   "home.best-practices": "Principles that endure and your next steps.",
   "home.ci": "Run the tests in the pipeline: workflow, parallelization, quality gates and reports.",
@@ -1269,6 +1271,31 @@ I18n.register("en", {
   "ai.callout":
     "<strong>Golden rule:</strong> AI is an accelerator, not an oracle. It can invent selectors that don't exist or assertions that don't reflect the acceptance criteria. Never merge test code you didn't understand and didn't run.",
 
+  /* ---- AI QA Engineer (applied) ---- */
+  "aiqa.build.label": "Build & use your AI tooling",
+  "aiqa.build.body":
+    "<p>As an <strong>AI QA Engineer</strong> you don't just write prompts: you build <strong>skills</strong>, <strong>hooks</strong> and <strong>agents</strong> that make the repeatable work happen for you. Here's the <em>how</em> of each, applied to QA.</p>",
+  "aiqa.concepts.note":
+    "💡 The <strong>definitions</strong> of skill, hook, agent, model, MCP and RAG live in the <a href=\"ai-concepts.html\"><strong>AI concepts</strong></a> section. Here we focus on how to build and use them.",
+  "aiqa.skill.body":
+    "<p><strong>Create a Skill:</strong> you package your team's conventions (framework, selectors, assertion style) into a file the model always loads, so every generated test follows your standards without re-explaining them in each prompt:</p>",
+  "aiqa.hook.body":
+    "<p><strong>Use a Hook:</strong> you wire your own command to an agent event. Classic QA example: after the AI edits a test, run lint + that test automatically, so a broken change can't slip through:</p>",
+  "aiqa.agent.body":
+    "<p><strong>Run an Agent:</strong> you give it a goal and it iterates on its own (write → run → read the failure → fix) using the tools. For more confidence, a second <em>reviewer</em> agent tries to refute the test:</p>",
+  "aiqa.mcp.body":
+    "<p><strong>Connect with MCP:</strong> you give it real tools (browser, GitHub, database) so the agent uses them in a standard way. With it, it can actually run the suite and read the report:</p>",
+  "aiqa.prompts.label": "Prompt engineering for QA",
+
+  /* ---- AI concepts (definitions) ---- */
+  "aic.lead":
+    "<p>The <strong>definitions</strong> of the concepts an AI QA Engineer uses. Tap any to see its definition; the ones marked ★ have a detail page with an example and a use case.</p>",
+  "aic.general": "General concepts",
+  "aic.overview": "All AI concepts",
+  "aic.back": "← Back to AI concepts",
+  "aic.callout":
+    "<p>These concepts are applied in the <strong>AI QA Engineer</strong> section, where you'll see how to create and use them in your day-to-day testing.</p>",
+
   /* ====================================================================
      6. HANDS-ON AI EXAMPLES
      ==================================================================== */
@@ -1666,6 +1693,8 @@ I18n.register("en", {
   "kt.ai.agent": "An AI system that plans and runs multiple steps with tools; sub-agents split up the work.",
   "kt.ai.rag": "Retrieval-Augmented Generation: the model consults your docs/data to answer with real context.",
   "kt.ai.context": "The window of <em>tokens</em> the model can see at once; it limits how much context fits at a time.",
+  "kt.ai.model": "<strong>Model (LLM)</strong>: the AI engine that generates text. They come in <em>families</em> (Claude, GPT, Gemini…) and sizes that trade off <strong>capability</strong>, <strong>speed</strong> and <strong>cost</strong>. Choosing the right model (and its context window) is part of the job.",
+  "kt.ai.hooks": "<strong>Hook</strong>: your own command that fires <em>automatically</em> on an event (before/after an agent action, on save, on finish). It's for enforcing checks —running tests or lint— without relying on the model to remember. Different from a test framework's setup/teardown <em>hooks</em>.",
 
   /* ====================================================================
      REFERENCES
@@ -1967,6 +1996,12 @@ I18n.register("en", {
 
   "cpt.ai-context.ex": "How much text the model “sees” at once, measured in tokens:<pre class=\"cpt-code\"><code>1 token ≈ ¾ of a word\nfull window → the model “forgets” the oldest content\nrule: include only what's relevant (the case + the docs), not the whole repo</code></pre>",
   "cpt.ai-context.uc": "If you pass too much (the whole codebase), the signal is diluted and the answer gets worse. QA builds prompts with the <strong>right amount of context</strong> (the story, the endpoint, one example) for more precise, faster and cheaper answers.",
+
+  "cpt.ai-model.ex": "You pick the model by the task (not always the biggest one):<pre class=\"cpt-code\"><code>Classify 10,000 logs   → small/fast model (cheap)\nGenerate an e2e suite  → large model (more capable)\nSummarise a report     → mid-size model\n\nMore capability = slower and pricier; pick the smallest that works.</code></pre>",
+  "cpt.ai-model.uc": "In QA you weigh this when automating with AI: a small model is enough for triage or classifying bugs; a large one is worth it for generating tests or analysing failures. Also check the <strong>context window</strong> (how much code/doc fits) and the cost per token if you run it many times in CI.",
+
+  "cpt.ai-hooks.ex": "A hook runs your command on an agent event. Here: after editing a test, lint + that test:<pre class=\"cpt-code\"><code>{\n  \"hooks\": {\n    \"PostToolUse\": [\n      { \"matcher\": \"Edit|Write\",\n        \"hooks\": [{ \"type\": \"command\",\n          \"command\": \"eslint $FILE && playwright test $FILE\" }] }\n    ]\n  }\n}</code></pre>",
+  "cpt.ai-hooks.uc": "In QA it's for putting <strong>automatic guards</strong> around an agent: running the linter or tests after each change, blocking a commit if something fails, or logging what it did. That way quality doesn't depend on the model “remembering” to verify.",
 
   "cpt.sec-authn.ex": "Two different things that get confused:<pre class=\"cpt-code\"><code>Authentication (authn) = who are you?   → login, valid token\nAuthorization  (authz) = what can you do? → permissions, roles\n\n401 Unauthorized → not authenticated (missing/expired token)\n403 Forbidden    → authenticated but WITHOUT permission</code></pre>",
   "cpt.sec-authn.uc": "QA tests both separately: no token → <code>401</code>; a regular user's token hitting <code>/admin</code> → <code>403</code>. The classic bug is <strong>broken authorization</strong> (one user can see or touch another's data).",

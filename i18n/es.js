@@ -556,7 +556,8 @@ I18n.register("es", {
   "nav.bdd": "BDD: Gherkin y Cucumber",
   "nav.comparison": "Comparativa",
   "nav.perf": "Performance testing",
-  "nav.airole": "El rol de la AI",
+  "nav.airole": "AI QA Engineer",
+  "nav.aiconcepts": "AI concepts",
   "nav.prompts": "Ejemplos con AI",
   "nav.best": "Buenas prácticas",
   "nav.ci": "CI/CD para QA",
@@ -582,7 +583,8 @@ I18n.register("es", {
   "home.bdd": "Behavior-Driven Development: Gherkin (Given/When/Then) y Cucumber para dar contexto.",
   "home.comparison": "El mismo test VerifyOrder resuelto en los 3 frameworks.",
   "home.perf": "Pruebas de carga y rendimiento: métricas, tipos y k6, JMeter y Locust.",
-  "home.ai-role": "Cómo la AI complementa cada etapa del testing.",
+  "home.ai-role": "El rol del QA con AI: crear y usar skills, hooks, agentes, MCP y prompts.",
+  "home.ai-concepts": "Las definiciones: skill, agente, modelo, hook, MCP, RAG y más.",
   "home.prompts": "Prompts concretos, cómo iterar y cómo validar el output.",
   "home.best-practices": "Principios que perduran y tus próximos pasos.",
   "home.ci": "Correr los tests en el pipeline: workflow, paralelización, quality gates y reportes.",
@@ -1270,6 +1272,31 @@ I18n.register("es", {
   "ai.callout":
     "<strong>Regla de oro:</strong> la AI es un acelerador, no un oráculo. Puede inventar selectores que no existen o assertions que no reflejan los criterios de aceptación. Nunca mergees código de test que no entendiste y no corriste.",
 
+  /* ---- AI QA Engineer (aplicado) ---- */
+  "aiqa.build.label": "Crear y usar tus herramientas de AI",
+  "aiqa.build.body":
+    "<p>Como <strong>AI QA Engineer</strong> no solo escribís prompts: armás <strong>skills</strong>, <strong>hooks</strong> y <strong>agentes</strong> que hacen el trabajo repetible por vos. Acá va el <em>cómo</em> de cada uno aplicado a QA.</p>",
+  "aiqa.concepts.note":
+    "💡 Las <strong>definiciones</strong> de skill, hook, agente, modelo, MCP y RAG viven en la sección <a href=\"ai-concepts.html\"><strong>AI concepts</strong></a>. Acá nos enfocamos en cómo crearlos y usarlos.",
+  "aiqa.skill.body":
+    "<p><strong>Crear una Skill:</strong> empaquetás las convenciones de tu equipo (framework, selectores, estilo de aserciones) en un archivo que el modelo carga siempre. Así cada test generado sale con tus estándares sin re-explicarlos en cada prompt:</p>",
+  "aiqa.hook.body":
+    "<p><strong>Usar un Hook:</strong> enganchás un comando tuyo a un evento del agente. Ejemplo típico de QA: después de que la IA edita un test, correr lint + ese test automáticamente, para que un cambio roto no pase:</p>",
+  "aiqa.agent.body":
+    "<p><strong>Correr un Agente:</strong> le das un objetivo y itera solo (escribir → correr → leer el fallo → corregir) usando las tools. Para más confianza, un segundo agente <em>revisor</em> intenta refutar el test:</p>",
+  "aiqa.mcp.body":
+    "<p><strong>Conectar con MCP:</strong> le das herramientas reales (navegador, GitHub, base de datos) para que el agente las use de forma estándar. Con esto puede correr la suite y leer el reporte de verdad:</p>",
+  "aiqa.prompts.label": "Prompt engineering para QA",
+
+  /* ---- AI concepts (definiciones) ---- */
+  "aic.lead":
+    "<p>Las <strong>definiciones</strong> de los conceptos que usa un AI QA Engineer. Tocá cualquiera para ver su definición; los marcados con ★ tienen página de detalle con ejemplo y caso de uso.</p>",
+  "aic.general": "Conceptos generales",
+  "aic.overview": "Todos los conceptos de AI",
+  "aic.back": "← Volver a AI concepts",
+  "aic.callout":
+    "<p>Estos conceptos se aplican en la sección <strong>AI QA Engineer</strong>, donde vas a ver cómo crearlos y usarlos en tu día a día de testing.</p>",
+
   /* ====================================================================
      6. EJEMPLOS PRÁCTICOS CON AI
      ==================================================================== */
@@ -1667,6 +1694,8 @@ I18n.register("es", {
   "kt.ai.agent": "Sistema de AI que planifica y ejecuta varios pasos con herramientas; los sub-agentes dividen el trabajo.",
   "kt.ai.rag": "Retrieval-Augmented Generation: el modelo consulta tu documentación/datos para responder con contexto real.",
   "kt.ai.context": "La ventana de <em>tokens</em> que el modelo puede ver a la vez; limita cuánto contexto entra de una.",
+  "kt.ai.model": "<strong>Modelo (LLM)</strong>: el motor de IA que genera texto. Vienen en <em>familias</em> (Claude, GPT, Gemini…) y tamaños que balancean <strong>capacidad</strong>, <strong>velocidad</strong> y <strong>costo</strong>. Elegir bien el modelo (y su ventana de contexto) es parte del trabajo.",
+  "kt.ai.hooks": "<strong>Hook</strong>: un comando propio que se dispara <em>automáticamente</em> ante un evento (antes/después de una acción del agente, al guardar, al terminar). Sirve para imponer chequeos —correr tests o lint— sin depender de que el modelo se acuerde. Distinto de los <em>hooks</em> de setup/teardown de un framework de tests.",
 
   /* ====================================================================
      BIBLIOGRAFÍA
@@ -1968,6 +1997,12 @@ I18n.register("es", {
 
   "cpt.ai-context.ex": "Cuánto texto “ve” el modelo a la vez, medido en tokens:<pre class=\"cpt-code\"><code>1 token ≈ ¾ de una palabra\nventana llena → el modelo “olvida” lo más viejo\nregla: meté solo lo relevante (el caso + la doc), no todo el repo</code></pre>",
   "cpt.ai-context.uc": "Si le pasás demasiado (todo el código), la señal se diluye y la respuesta empeora. QA arma prompts con el <strong>contexto justo</strong> (la historia, el endpoint, un ejemplo) para respuestas más precisas, rápidas y baratas.",
+
+  "cpt.ai-model.ex": "Elegís el modelo según la tarea (no siempre el más grande):<pre class=\"cpt-code\"><code>Clasificar 10.000 logs   → modelo chico/rápido (barato)\nGenerar una suite e2e    → modelo grande (más capaz)\nResumir un reporte       → modelo intermedio\n\nMás capacidad = más lento y caro; elegí el mínimo que cumpla.</code></pre>",
+  "cpt.ai-model.uc": "En QA lo tenés en cuenta al automatizar con IA: un modelo chico alcanza para triage o clasificar bugs; uno grande conviene para generar tests o analizar fallos. Mirá también la <strong>ventana de contexto</strong> (cuánto código/doc entra) y el costo por token si corrés muchas veces en CI.",
+
+  "cpt.ai-hooks.ex": "Un hook corre tu comando ante un evento del agente. Acá: tras editar un test, lint + ese test:<pre class=\"cpt-code\"><code>{\n  \"hooks\": {\n    \"PostToolUse\": [\n      { \"matcher\": \"Edit|Write\",\n        \"hooks\": [{ \"type\": \"command\",\n          \"command\": \"eslint $FILE && playwright test $FILE\" }] }\n    ]\n  }\n}</code></pre>",
+  "cpt.ai-hooks.uc": "En QA sirve para poner <strong>guardas automáticas</strong> alrededor de un agente: correr el linter o los tests después de cada cambio, bloquear un commit si algo falla, o registrar lo que hizo. Así la calidad no depende de que el modelo “se acuerde” de verificar.",
 
   "cpt.sec-authn.ex": "Dos cosas distintas que se confunden:<pre class=\"cpt-code\"><code>Authentication (authn) = ¿quién sos?  → login, token válido\nAuthorization  (authz) = ¿qué podés?  → permisos, roles\n\n401 Unauthorized → no autenticado (falta o expiró el token)\n403 Forbidden    → autenticado pero SIN permiso</code></pre>",
   "cpt.sec-authn.uc": "QA prueba las dos por separado: sin token → <code>401</code>; con un token de usuario común entrando a <code>/admin</code> → <code>403</code>. El bug clásico es la <strong>autorización rota</strong> (un usuario ve o toca datos de otro).",

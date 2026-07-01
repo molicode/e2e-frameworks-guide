@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="bdd.page.cucumber">Cucumber y step definitions</title>
+  <title>Hooks (automatización)</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--bdd-cucumber">
+<body class="page--section page--concept page--ai-hooks">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -260,8 +260,8 @@
             </a>
           </div>
         </div>
-        <div class="nav-group-item is-open">
-          <button class="nav-link nav-group is-active-group" type="button" aria-expanded="true">
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
             <span class="nav-link__num">09</span>
             <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
@@ -273,7 +273,7 @@
             <a class="nav-link nav-sublink" href="bdd-gherkin.html">
               <span data-i18n="bdd.page.gherkin">La sintaxis Gherkin</span>
             </a>
-            <a class="nav-link nav-sublink is-active" href="bdd-cucumber.html" aria-current="page">
+            <a class="nav-link nav-sublink" href="bdd-cucumber.html">
               <span data-i18n="bdd.page.cucumber">Cucumber y step definitions</span>
             </a>
             <a class="nav-link nav-sublink" href="bdd-practica.html">
@@ -310,8 +310,8 @@
           <span class="nav-link__num">12</span>
           <span data-i18n="nav.airole">AI QA Engineer</span>
         </a>
-        <div class="nav-group-item">
-          <button class="nav-link nav-group" type="button" aria-expanded="false">
+        <div class="nav-group-item is-open">
+          <button class="nav-link nav-group is-active-group" type="button" aria-expanded="true">
             <span class="nav-link__num">13</span>
             <span data-i18n="nav.aiconcepts">AI concepts</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
@@ -320,8 +320,8 @@
             <a class="nav-link nav-sublink" href="ai-concepts.html">
               <span data-i18n="aic.overview">Todos los conceptos de AI</span>
             </a>
-          <div class="nav-group-item nav-group-item--nested">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+          <div class="nav-group-item nav-group-item--nested is-open">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
               <span data-i18n="aic.general">Conceptos generales</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -359,7 +359,7 @@
               <a class="nav-link nav-sublink nav-sublink--deep" href="ai-model.html">
                 <span>Modelos (LLM)</span>
               </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hooks.html">
+              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="ai-hooks.html" aria-current="page">
                 <span>Hooks (automatización)</span>
               </a>
             </div>
@@ -713,110 +713,40 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-bdd)">BDD · Gherkin</span></div>
-        <h1 class="section__title" data-i18n="bdd.page.cucumber">Cucumber y step definitions</h1>
-        <div class="prose" data-i18n-html="bdd.cuke.lead"><p>Gherkin describe <em>qué</em> probar; los <strong>step definitions</strong> dicen <em>cómo</em>. <strong>Cucumber</strong> es la herramienta que conecta cada paso en lenguaje natural con el código que lo ejecuta (el "glue"). Existe para casi todos los lenguajes.</p></div>
-        <h2 class="block-label" data-i18n="bdd.cuke.js.label">Cucumber.js (con Playwright)</h2>
-        <div class="prose" data-i18n-html="bdd.cuke.js.body"><p>En JS/TS usás <code>@cucumber/cucumber</code>: registrás <code>Given</code>/<code>When</code>/<code>Then</code> con la frase exacta del paso y el código que la implementa (acá, con Playwright). Los <code>{string}</code> capturan valores del paso y llegan como argumento.</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">JavaScript</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// steps/checkout.steps.js — el "pegamento" que mapea cada paso de Gherkin a acciones.</span>
-<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> Given<span class="tok-punctuation">,</span> When<span class="tok-punctuation">,</span> Then <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("@</span>cucumber<span class="tok-punctuation">/</span>cucumber<span class="tok-string">");
-const { expect } = require("</span><span class="tok-punctuation">@</span>playwright<span class="tok-punctuation">/</span>test<span class="tok-string">");
-
-Given("</span>I have a book <span class="tok-keyword">in</span> my cart<span class="tok-string">", async function () {
-  await this.page.goto("</span><span class="tok-punctuation">/</span>cart<span class="tok-punctuation">?</span>items<span class="tok-punctuation">=</span>book<span class="tok-string">");
-});
-
-When("</span>I pay <span class="tok-keyword">with</span> a valid card<span class="tok-string">", async function () {
-  await this.page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
-});
-
-// {string} captura el valor entre comillas del paso y lo pasa como argumento.
-Then("</span>the order status should be <span class="tok-punctuation">{</span>string<span class="tok-punctuation">}",</span> <span class="tok-keyword">async</span> <span class="tok-keyword">function</span> <span class="tok-punctuation">(</span>status<span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
-  <span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">page</span><span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">")).</span><span class="tok-function">toHaveText</span><span class="tok-punctuation">(</span>status<span class="tok-punctuation">);</span>
-<span class="tok-punctuation">});</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// steps/checkout.steps.js — "glue" that maps each Gherkin step to actions.</span>
-<span class="tok-keyword">const</span> <span class="tok-punctuation">{</span> Given<span class="tok-punctuation">,</span> When<span class="tok-punctuation">,</span> Then <span class="tok-punctuation">}</span> <span class="tok-punctuation">=</span> <span class="tok-function">require</span><span class="tok-punctuation">("@</span>cucumber<span class="tok-punctuation">/</span>cucumber<span class="tok-string">");
-const { expect } = require("</span><span class="tok-punctuation">@</span>playwright<span class="tok-punctuation">/</span>test<span class="tok-string">");
-
-Given("</span>I have a book <span class="tok-keyword">in</span> my cart<span class="tok-string">", async function () {
-  await this.page.goto("</span><span class="tok-punctuation">/</span>cart<span class="tok-punctuation">?</span>items<span class="tok-punctuation">=</span>book<span class="tok-string">");
-});
-
-When("</span>I pay <span class="tok-keyword">with</span> a valid card<span class="tok-string">", async function () {
-  await this.page.getByRole("</span>button<span class="tok-string">", { name: "</span>Pay<span class="tok-string">" }).click();
-});
-
-// {string} captures the quoted value from the step and passes it as an argument.
-Then("</span>the order status should be <span class="tok-punctuation">{</span>string<span class="tok-punctuation">}",</span> <span class="tok-keyword">async</span> <span class="tok-keyword">function</span> <span class="tok-punctuation">(</span>status<span class="tok-punctuation">)</span> <span class="tok-punctuation">{</span>
-  <span class="tok-keyword">await</span> <span class="tok-function">expect</span><span class="tok-punctuation">(</span><span class="tok-keyword">this</span><span class="tok-punctuation">.</span><span class="tok-property">page</span><span class="tok-punctuation">.</span><span class="tok-function">locator</span><span class="tok-punctuation">(".</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">")).</span><span class="tok-function">toHaveText</span><span class="tok-punctuation">(</span>status<span class="tok-punctuation">);</span>
-<span class="tok-punctuation">});</span></code></pre>
+        <div class="cpt-crumb"><a class="cpt-back" href="ai-concepts.html" data-i18n="aic.back">← Volver a AI concepts</a></div>
+        <span class="cpt-cat" style="--c:var(--fw-maturity)" data-i18n="aic.general">Conceptos generales</span>
+        <h1 class="section__title cpt-title">Hooks (automatización)</h1>
+        <div class="cpt-body">
+          <section class="cpt-sec">
+            <h2 class="block-label" data-i18n="cpt.def">Definición</h2>
+            <div class="cpt-rich cpt-def" data-i18n-html="kt.ai.hooks"><strong>Hook</strong>: un comando propio que se dispara <em>automáticamente</em> ante un evento (antes/después de una acción del agente, al guardar, al terminar). Sirve para imponer chequeos —correr tests o lint— sin depender de que el modelo se acuerde. Distinto de los <em>hooks</em> de setup/teardown de un framework de tests.</div>
+          </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
+          <div class="cpt-rich" data-i18n-html="cpt.ai-hooks.ex">Un hook corre tu comando ante un evento del agente. Acá: tras editar un test, lint + ese test:<pre class="cpt-code"><code>{
+  "hooks": {
+    "PostToolUse": [
+      { "matcher": "Edit|Write",
+        "hooks": [{ "type": "command",
+          "command": "eslint $FILE && playwright test $FILE" }] }
+    ]
+  }
+}</code></pre></div>
+        </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
+          <div class="cpt-rich" data-i18n-html="cpt.ai-hooks.uc">En QA sirve para poner <strong>guardas automáticas</strong> alrededor de un agente: correr el linter o los tests después de cada cambio, bloquear un commit si algo falla, o registrar lo que hizo. Así la calidad no depende de que el modelo “se acuerde” de verificar.</div>
+        </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.refs">Para profundizar</h2>
+          <ul class="ref-list">
+            <li class="ref">
+              <a class="ref__link" href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener noreferrer">Claude Code — Hooks</a>
+            </li>
+          </ul>
+        </section>
         </div>
-        <h2 class="block-label" data-i18n="bdd.cuke.py.label">pytest-bdd (con Python)</h2>
-        <div class="prose" data-i18n-html="bdd.cuke.py.body"><p>En Python, <code>pytest-bdd</code> (o <code>behave</code>) hace lo mismo: <code>scenarios("checkout.feature")</code> ata los escenarios del archivo y decorás funciones con <code>@given</code>/<code>@when</code>/<code>@then</code>. Reusás toda la potencia de pytest (fixtures, parametrize).</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">Python</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># test_checkout.py — el mismo feature conectado con pytest-bdd.</span>
-<span class="tok-keyword">from</span> pytest_bdd <span class="tok-keyword">import</span> scenarios<span class="tok-punctuation">,</span> given<span class="tok-punctuation">,</span> when<span class="tok-punctuation">,</span> then
-<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
-
-<span class="tok-function">scenarios</span><span class="tok-punctuation">("</span>checkout<span class="tok-punctuation">.</span><span class="tok-property">feature</span><span class="tok-string">")   # vincula cada escenario del archivo
-
-
-@given("</span>I have a book <span class="tok-keyword">in</span> my cart<span class="tok-string">")
-def add_book(page: Page):
-    page.goto("</span><span class="tok-punctuation">/</span>cart<span class="tok-punctuation">?</span>items<span class="tok-punctuation">=</span>book<span class="tok-string">")
-
-
-@when("</span>I pay <span class="tok-keyword">with</span> a valid card<span class="tok-string">")
-def pay(page: Page):
-    page.get_by_role("</span>button<span class="tok-string">", name="</span>Pay<span class="tok-string">").click()
-
-
-@then('the order status should be "</span>PAID<span class="tok-string">"')
-def status_paid(page: Page):
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-punctuation">")</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># test_checkout.py — the same feature wired up with pytest-bdd.</span>
-<span class="tok-keyword">from</span> pytest_bdd <span class="tok-keyword">import</span> scenarios<span class="tok-punctuation">,</span> given<span class="tok-punctuation">,</span> when<span class="tok-punctuation">,</span> then
-<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
-
-<span class="tok-function">scenarios</span><span class="tok-punctuation">("</span>checkout<span class="tok-punctuation">.</span><span class="tok-property">feature</span><span class="tok-string">")   # bind every scenario in the file
-
-
-@given("</span>I have a book <span class="tok-keyword">in</span> my cart<span class="tok-string">")
-def add_book(page: Page):
-    page.goto("</span><span class="tok-punctuation">/</span>cart<span class="tok-punctuation">?</span>items<span class="tok-punctuation">=</span>book<span class="tok-string">")
-
-
-@when("</span>I pay <span class="tok-keyword">with</span> a valid card<span class="tok-string">")
-def pay(page: Page):
-    page.get_by_role("</span>button<span class="tok-string">", name="</span>Pay<span class="tok-string">").click()
-
-
-@then('the order status should be "</span>PAID<span class="tok-string">"')
-def status_paid(page: Page):
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-punctuation">")</span></code></pre>
-        </div>
-        <div class="callout" data-i18n-html="bdd.cuke.callout"><strong>Tip:</strong> mantené los step definitions <strong>finos</strong> — que llamen a Page Objects o helpers, no que tengan lógica de test adentro. Steps reutilizables = features que escalan.</div>
-        <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="bdd-gherkin.html">
-            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="bdd.page.gherkin">La sintaxis Gherkin</span>
-          </a>
-          <a class="page-nav__link page-nav__next" href="bdd-practica.html">
-            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="bdd.page.practica">BDD en la práctica</span>
-          </a>
-        </nav>
+        <div class="page-nav page-nav--single"><a class="cpt-back" href="ai-concepts.html" data-i18n="aic.back">← Volver a AI concepts</a></div>
       </div>
     </main>
   </div>

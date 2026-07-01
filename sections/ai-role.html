@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="nav.airole">El rol de la AI</title>
+  <title data-i18n="nav.airole">AI QA Engineer</title>
   <script>
     (function () {
       try {
@@ -308,12 +308,64 @@
         </div>
         <a class="nav-link is-active" href="ai-role.html" aria-current="page">
           <span class="nav-link__num">12</span>
-          <span data-i18n="nav.airole">El rol de la AI</span>
+          <span data-i18n="nav.airole">AI QA Engineer</span>
         </a>
-        <a class="nav-link" href="prompts.html">
-          <span class="nav-link__num">13</span>
-          <span data-i18n="nav.prompts">Ejemplos con AI</span>
-        </a>
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
+            <span class="nav-link__num">13</span>
+            <span data-i18n="nav.aiconcepts">AI concepts</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink" href="ai-concepts.html">
+              <span data-i18n="aic.overview">Todos los conceptos de AI</span>
+            </a>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="aic.general">Conceptos generales</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-prompt.html">
+                <span>Prompt engineering</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-halluc.html">
+                <span>Hallucination</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-selfheal.html">
+                <span>Self-healing locators</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-gen.html">
+                <span>LLM test generation</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hitl.html">
+                <span>Human-in-the-loop</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-mcp.html">
+                <span>MCP (Model Context Protocol)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-skill.html">
+                <span>Skill</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-agent.html">
+                <span>Agent / sub-agent</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-rag.html">
+                <span>RAG (Retrieval-Augmented Generation)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-context.html">
+                <span>Context window / tokens</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-model.html">
+                <span>Modelos (LLM)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hooks.html">
+                <span>Hooks (automatización)</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
         <a class="nav-link" href="best-practices.html">
           <span class="nav-link__num">14</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
@@ -595,44 +647,6 @@
           </div>
           <div class="nav-group-item nav-group-item--nested">
             <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
-              <span data-i18n="kt.cat.ai">AI en QA</span>
-              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
-            </button>
-            <div class="nav-sub nav-sub--nested">
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-prompt.html">
-                <span>Prompt engineering</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-halluc.html">
-                <span>Hallucination</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-selfheal.html">
-                <span>Self-healing locators</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-gen.html">
-                <span>LLM test generation</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hitl.html">
-                <span>Human-in-the-loop</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-mcp.html">
-                <span>MCP (Model Context Protocol)</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-skill.html">
-                <span>Skill</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-agent.html">
-                <span>Agent / sub-agent</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-rag.html">
-                <span>RAG (Retrieval-Augmented Generation)</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-context.html">
-                <span>Context window / tokens</span>
-              </a>
-            </div>
-          </div>
-          <div class="nav-group-item nav-group-item--nested">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
               <span data-i18n="kt.cat.security">Seguridad</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -700,7 +714,7 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <span class="section__eyebrow">12</span>
-        <h1 class="section__title" data-i18n="nav.airole">El rol de la AI</h1>
+        <h1 class="section__title" data-i18n="nav.airole">AI QA Engineer</h1>
         <div class="prose" data-i18n-html="ai.lead"><p>La AI no vino a reemplazar al QA, sino a <strong>amplificarlo</strong>. Es como tener un par junior infinito: rápido, incansable y que a veces se equivoca. Tu trabajo pasa de <em>escribir todo</em> a <em>dirigir y validar</em>.</p></div>
         <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
         <div class="prose" data-i18n-html="ai.theory"><p>La AI puede asistir en cada etapa del ciclo de testing, pero siempre con un humano en el bucle. El patrón es el mismo: la AI <strong>propone</strong>, vos <strong>disponés</strong>. Veamos dónde aporta valor.</p></div>
@@ -732,50 +746,10 @@
               <p data-i18n="ai.stage5.body">Lee el error, el stack trace o la traza y explica en lenguaje claro la causa más probable.</p>
             </div>
         </div>
-        <h2 class="block-label" data-i18n="ai.tools.label">Skills, MCP y Agentes</h2>
-        <div class="prose" data-i18n-html="ai.tools.body"><p>La AI rinde mucho más cuando le das <strong>herramientas, contexto y autonomía</strong>. Tres piezas modernas que potencian el testing automation:</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon">🧩</div>
-              <h3 data-i18n="ai.tool.skills.title">Skills</h3>
-              <p data-i18n="ai.tool.skills.body">Instrucciones reutilizables que encapsulan las convenciones de tu equipo (POM, política de selectores) para generar tests consistentes.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🔌</div>
-              <h3 data-i18n="ai.tool.mcp.title">MCP</h3>
-              <p data-i18n="ai.tool.mcp.body">El Model Context Protocol conecta a la AI con herramientas reales: un navegador, tu repo, el issue tracker, los logs de CI.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon">🤖</div>
-              <h3 data-i18n="ai.tool.agents.title">Agentes</h3>
-              <p data-i18n="ai.tool.agents.body">Agentes que planifican y ejecutan varios pasos: generan el test, lo corren, leen el fallo y lo arreglan en un bucle.</p>
-            </div>
-        </div>
-        <div class="prose" data-i18n-html="ai.tool.mcp.note"><p>Con <strong>MCP</strong> la AI deja de adivinar: puede abrir la app, leer el árbol de accesibilidad y proponer selectores que <em>existen</em> de verdad.</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">JSON</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Dale a la IA herramientas reales vía servidores MCP (puede manejar un navegador, leer</span>
-<span class="tok-comment">// el DOM/árbol de accesibilidad en vivo, abrir PRs, consultar tu issue tracker).</span>
-<span class="tok-punctuation">{</span>
-  <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
-    <span class="tok-string">"playwright"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx"</span><span class="tok-punctuation">,</span> <span class="tok-string">"args"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">["@</span>playwright<span class="tok-punctuation">/</span>mcp<span class="tok-punctuation">@</span>latest<span class="tok-string">"] },
-    "</span>github<span class="tok-string">": { "</span>command<span class="tok-string">": "</span>npx<span class="tok-string">", "</span>args<span class="tok-string">": ["</span><span class="tok-punctuation">-</span>y<span class="tok-string">", "</span><span class="tok-punctuation">@</span>modelcontextprotocol<span class="tok-punctuation">/</span>server<span class="tok-punctuation">-</span>github<span class="tok-punctuation">"]</span> <span class="tok-punctuation">}</span>
-  <span class="tok-punctuation">}</span>
-<span class="tok-punctuation">}</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Give the AI real tools via MCP servers (it can drive a browser, read</span>
-<span class="tok-comment">// the live DOM/accessibility tree, open PRs, query your issue tracker).</span>
-<span class="tok-punctuation">{</span>
-  <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
-    <span class="tok-string">"playwright"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx"</span><span class="tok-punctuation">,</span> <span class="tok-string">"args"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">["@</span>playwright<span class="tok-punctuation">/</span>mcp<span class="tok-punctuation">@</span>latest<span class="tok-string">"] },
-    "</span>github<span class="tok-string">": { "</span>command<span class="tok-string">": "</span>npx<span class="tok-string">", "</span>args<span class="tok-string">": ["</span><span class="tok-punctuation">-</span>y<span class="tok-string">", "</span><span class="tok-punctuation">@</span>modelcontextprotocol<span class="tok-punctuation">/</span>server<span class="tok-punctuation">-</span>github<span class="tok-punctuation">"]</span> <span class="tok-punctuation">}</span>
-  <span class="tok-punctuation">}</span>
-<span class="tok-punctuation">}</span></code></pre>
-        </div>
-        <div class="prose" data-i18n-html="ai.tool.skills.note"><p>Una <strong>Skill</strong> es como un comando con el know-how de tu equipo adentro: en vez de re-explicar tus reglas en cada prompt, los tests salen siempre con el mismo estándar.</p></div>
+        <h2 class="block-label" data-i18n="aiqa.build.label">Crear y usar tus herramientas de AI</h2>
+        <div class="prose" data-i18n-html="aiqa.build.body"><p>Como <strong>AI QA Engineer</strong> no solo escribís prompts: armás <strong>skills</strong>, <strong>hooks</strong> y <strong>agentes</strong> que hacen el trabajo repetible por vos. Acá va el <em>cómo</em> de cada uno aplicado a QA.</p></div>
+        <div class="callout" data-i18n-html="aiqa.concepts.note">💡 Las <strong>definiciones</strong> de skill, hook, agente, modelo, MCP y RAG viven en la sección <a href="ai-concepts.html"><strong>AI concepts</strong></a>. Acá nos enfocamos en cómo crearlos y usarlos.</div>
+        <div class="prose" data-i18n-html="aiqa.skill.body"><p><strong>Crear una Skill:</strong> empaquetás las convenciones de tu equipo (framework, selectores, estilo de aserciones) en un archivo que el modelo carga siempre. Así cada test generado sale con tus estándares sin re-explicarlos en cada prompt:</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Markdown</span>
@@ -803,7 +777,32 @@ When asked to write an end<span class="tok-punctuation">-</span>to<span class="t
 <span class="tok-comment"># A skill packages this know-how so every generated test follows the</span>
 <span class="tok-comment"># same standards — no need to re-explain them in each prompt.</span></code></pre>
         </div>
-        <div class="prose" data-i18n-html="ai.tool.agents.note"><p>Un <strong>agente</strong> cierra el lazo. Y con varios agentes (uno escribe, otro intenta refutar) subís la confianza antes de commitear.</p></div>
+        <div class="prose" data-i18n-html="aiqa.hook.body"><p><strong>Usar un Hook:</strong> enganchás un comando tuyo a un evento del agente. Ejemplo típico de QA: después de que la IA edita un test, correr lint + ese test automáticamente, para que un cambio roto no pase:</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JSON</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-comment">// A HOOK runs YOUR command automatically on an agent event. Here: after</span>
+<span class="tok-comment">// the agent edits any test file, lint it and run it — so a broken change</span>
+<span class="tok-comment">// can never slip through, no matter what the model does.</span>
+<span class="tok-punctuation">{</span>
+  <span class="tok-string">"hooks"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
+    <span class="tok-string">"PostToolUse"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">[</span>
+      <span class="tok-punctuation">{</span>
+        <span class="tok-string">"matcher"</span><span class="tok-punctuation">:</span> <span class="tok-string">"Edit|Write"</span><span class="tok-punctuation">,</span>
+        <span class="tok-string">"hooks"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">[</span>
+          <span class="tok-punctuation">{</span> <span class="tok-string">"type"</span><span class="tok-punctuation">:</span> <span class="tok-string">"command"</span><span class="tok-punctuation">,</span>
+            <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx eslint \"$FILE\" &amp;&amp; npx playwright test \"$FILE\""</span> <span class="tok-punctuation">}</span>
+        <span class="tok-punctuation">]</span>
+      <span class="tok-punctuation">}</span>
+    <span class="tok-punctuation">]</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <div class="prose" data-i18n-html="aiqa.agent.body"><p><strong>Correr un Agente:</strong> le das un objetivo y itera solo (escribir → correr → leer el fallo → corregir) usando las tools. Para más confianza, un segundo agente <em>revisor</em> intenta refutar el test:</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Text</span>
@@ -834,6 +833,110 @@ Multi<span class="tok-punctuation">-</span>agent variant <span class="tok-punctu
   <span class="tok-punctuation">-</span> Writer agent  <span class="tok-punctuation">-&gt;</span> drafts the test<span class="tok-punctuation">.</span>
   <span class="tok-punctuation">-</span> Reviewer agent <span class="tok-punctuation">-&gt;</span> tries to REFUTE it<span class="tok-punctuation">:</span> <span class="tok-string">"can this pass even if the app is
     broken?"</span> Only tests that survive the review get committed<span class="tok-punctuation">.</span></code></pre>
+        </div>
+        <div class="prose" data-i18n-html="aiqa.mcp.body"><p><strong>Conectar con MCP:</strong> le das herramientas reales (navegador, GitHub, base de datos) para que el agente las use de forma estándar. Con esto puede correr la suite y leer el reporte de verdad:</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">JSON</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment">// Dale a la IA herramientas reales vía servidores MCP (puede manejar un navegador, leer</span>
+<span class="tok-comment">// el DOM/árbol de accesibilidad en vivo, abrir PRs, consultar tu issue tracker).</span>
+<span class="tok-punctuation">{</span>
+  <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
+    <span class="tok-string">"playwright"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx"</span><span class="tok-punctuation">,</span> <span class="tok-string">"args"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">["@</span>playwright<span class="tok-punctuation">/</span>mcp<span class="tok-punctuation">@</span>latest<span class="tok-string">"] },
+    "</span>github<span class="tok-string">": { "</span>command<span class="tok-string">": "</span>npx<span class="tok-string">", "</span>args<span class="tok-string">": ["</span><span class="tok-punctuation">-</span>y<span class="tok-string">", "</span><span class="tok-punctuation">@</span>modelcontextprotocol<span class="tok-punctuation">/</span>server<span class="tok-punctuation">-</span>github<span class="tok-punctuation">"]</span> <span class="tok-punctuation">}</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">}</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment">// Give the AI real tools via MCP servers (it can drive a browser, read</span>
+<span class="tok-comment">// the live DOM/accessibility tree, open PRs, query your issue tracker).</span>
+<span class="tok-punctuation">{</span>
+  <span class="tok-string">"mcpServers"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span>
+    <span class="tok-string">"playwright"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> <span class="tok-string">"command"</span><span class="tok-punctuation">:</span> <span class="tok-string">"npx"</span><span class="tok-punctuation">,</span> <span class="tok-string">"args"</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">["@</span>playwright<span class="tok-punctuation">/</span>mcp<span class="tok-punctuation">@</span>latest<span class="tok-string">"] },
+    "</span>github<span class="tok-string">": { "</span>command<span class="tok-string">": "</span>npx<span class="tok-string">", "</span>args<span class="tok-string">": ["</span><span class="tok-punctuation">-</span>y<span class="tok-string">", "</span><span class="tok-punctuation">@</span>modelcontextprotocol<span class="tok-punctuation">/</span>server<span class="tok-punctuation">-</span>github<span class="tok-punctuation">"]</span> <span class="tok-punctuation">}</span>
+  <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">}</span></code></pre>
+        </div>
+        <h2 class="block-label" data-i18n="aiqa.prompts.label">Prompt engineering para QA</h2>
+        <div class="prose" data-i18n-html="prompts.generate.body"><p>Incluí siempre cuatro cosas: <strong>rol</strong> (“sos QA senior”), <strong>contexto</strong> (URL, selectores), <strong>objetivo</strong> (qué verificar) y <strong>restricciones</strong> (sin sleeps, assertions web-first). Cuanto más específico, menos alucina.</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Prompt</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es">Sos un ingeniero QA senior<span class="tok-punctuation">.</span> Escrib<span class="tok-punctuation">í</span> un test de Playwright en Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
+
+Contexto<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> P<span class="tok-punctuation">á</span>gina<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>un resumen de orden<span class="tok-punctuation">)</span>
+<span class="tok-punctuation">-</span> Selectores estables<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+
+El test <span class="tok-string">"test_verify_order"</span> debe afirmar<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      tiene el texto <span class="tok-string">"250"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     tiene el texto <span class="tok-string">"PAID"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contiene un <span class="tok-punctuation">í</span>tem cuyo texto incluye <span class="tok-string">"book"</span>
+
+Requisitos<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Us<span class="tok-punctuation">á</span> aserciones web<span class="tok-punctuation">-</span>first <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
+<span class="tok-punctuation">-</span> Sin esperas fijas<span class="tok-punctuation">.</span> Sin l<span class="tok-punctuation">ó</span>gica condicional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> en el test<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> Un comentario corto sobre cada aserci<span class="tok-punctuation">ó</span>n explicando la intenci<span class="tok-punctuation">ó</span>n<span class="tok-punctuation">.</span></code><code class="code-i18n code-i18n--en">You are a senior QA engineer<span class="tok-punctuation">.</span> Write a Playwright test <span class="tok-keyword">in</span> Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
+
+Context<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Page<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>an order summary<span class="tok-punctuation">)</span>
+<span class="tok-punctuation">-</span> Stable selectors<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
+
+Test <span class="tok-string">"test_verify_order"</span> must <span class="tok-keyword">assert</span><span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      has text <span class="tok-string">"250"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     has text <span class="tok-string">"PAID"</span>
+<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contains an item whose text includes <span class="tok-string">"book"</span>
+
+Requirements<span class="tok-punctuation">:</span>
+<span class="tok-punctuation">-</span> Use web<span class="tok-punctuation">-</span>first assertions <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
+<span class="tok-punctuation">-</span> No fixed sleeps<span class="tok-punctuation">.</span> No conditional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> logic <span class="tok-keyword">in</span> the test<span class="tok-punctuation">.</span>
+<span class="tok-punctuation">-</span> One short comment above each assertion explaining intent<span class="tok-punctuation">.</span></code></pre>
+        </div>
+        <div class="prose" data-i18n-html="prompts.iterate.body"><p>Casi nunca el primer intento es perfecto. Iterá con feedback corto y concreto:</p><ul><li>“El selector <code>.total</code> no existe; usá <code>.order-total</code>.”</li><li>“Quitá el <code>cy.wait(2000)</code> y confiá en el auto-retry.”</li><li>“Agregá un caso para <code>status = REFUNDED</code>.”</li></ul><p>Tratá a la AI como a un colega: respuestas cortas, ejemplos del resultado esperado y un cambio por vez.</p></div>
+        <div class="prose" data-i18n-html="prompts.validate.body"><p>No confíes a ciegas. Revisá el código generado como si fuera un pull request de alguien más:</p></div>
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Python</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Salida de la IA — revisala como lo harías con el pull request de un dev junior.</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span>
+
+
+<span class="tok-comment"># Checklist antes de confiar en ella:</span>
+<span class="tok-comment">#  - Los selectores realmente existen en la app (no lo asumas).</span>
+<span class="tok-comment">#  - Las aserciones coinciden con los CRITERIOS DE ACEPTACIÓN, no solo el happy path.</span>
+<span class="tok-comment">#  - Sin esperas/sleeps ocultos, sin tests que nunca puedan fallar.</span>
+<span class="tok-comment">#  - Falla cuando debe: rompé temporalmente la app y volvé a correr.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># AI output — review it the way you would a junior dev's pull request.</span>
+<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
+
+
+<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
+    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
+    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span>
+
+
+<span class="tok-comment"># Checklist before you trust it:</span>
+<span class="tok-comment">#  - Selectors actually exist in the app (don't assume).</span>
+<span class="tok-comment">#  - Assertions match the ACCEPTANCE CRITERIA, not just the happy path.</span>
+<span class="tok-comment">#  - No hidden waits/sleeps, no test that can never fail.</span>
+<span class="tok-comment">#  - It fails when it should: temporarily break the app and re-run.</span></code></pre>
         </div>
         <h2 class="block-label" data-i18n="ui.vs">Manual vs AI</h2>
         <div class="vs-grid">
@@ -1043,9 +1146,9 @@ Mark which cases are good candidates <span class="tok-keyword">for</span> automa
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
             <span class="page-nav__title" data-i18n="perf.page.locust">Locust</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="prompts.html">
+          <a class="page-nav__link page-nav__next" href="ai-concepts.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="nav.prompts">Ejemplos con AI</span>
+            <span class="page-nav__title" data-i18n="nav.aiconcepts">AI concepts</span>
           </a>
         </nav>
       </div>
@@ -1054,7 +1157,7 @@ Mark which cases are good candidates <span class="tok-keyword">for</span> automa
 
   <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
 
-  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai-role","prompts","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai-role","label":"nav.airole","pages":["ai-role"]},{"key":"prompts","label":"nav.prompts","pages":["prompts"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
+  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai-role","ai-concepts","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai-role","label":"nav.airole","pages":["ai-role"]},{"key":"ai-concepts","label":"nav.aiconcepts","pages":["ai-concepts"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
   <script src="../js/i18n.js"></script>
   <script src="../i18n/es.js"></script>
   <script src="../i18n/en.js"></script>

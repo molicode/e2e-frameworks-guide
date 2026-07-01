@@ -1014,6 +1014,25 @@ Multi-agent variant (higher confidence):
   - Reviewer agent -> tries to REFUTE it: "can this pass even if the app is
     broken?" Only tests that survive the review get committed.`,
   },
+  hookExample: {
+    lang: "JSON",
+    code: `// A HOOK runs YOUR command automatically on an agent event. Here: after
+// the agent edits any test file, lint it and run it — so a broken change
+// can never slip through, no matter what the model does.
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command",
+            "command": "npx eslint \\"$FILE\\" && npx playwright test \\"$FILE\\"" }
+        ]
+      }
+    ]
+  }
+}`,
+  },
 
   /* ---- Python para QA: de 0 a hero ---- */
   pySetup: {
@@ -2809,6 +2828,10 @@ export const CONCEPTS = [
     refs: [{ title: "AWS — What is RAG", url: "https://aws.amazon.com/what-is/retrieval-augmented-generation/" }] },
   { id: "ai-context", cat: "ai", term: "Context window / tokens", def: "kt.ai.context", full: true, example: "cpt.ai-context.ex", usecase: "cpt.ai-context.uc",
     refs: [{ title: "Anthropic — Context windows", url: "https://docs.anthropic.com/en/docs/build-with-claude/context-windows" }] },
+  { id: "ai-model", cat: "ai", term: "Modelos (LLM)", def: "kt.ai.model", full: true, example: "cpt.ai-model.ex", usecase: "cpt.ai-model.uc",
+    refs: [{ title: "Anthropic — Models overview", url: "https://docs.anthropic.com/en/docs/about-claude/models" }] },
+  { id: "ai-hooks", cat: "ai", term: "Hooks (automatización)", def: "kt.ai.hooks", full: true, example: "cpt.ai-hooks.ex", usecase: "cpt.ai-hooks.uc",
+    refs: [{ title: "Claude Code — Hooks", url: "https://docs.anthropic.com/en/docs/claude-code/hooks" }] },
   // --- security (FULL deep-dives) ---
   { id: "sec-authn", cat: "security", term: "Authentication vs Authorization", def: "kt.sec.authn", full: true, example: "cpt.sec-authn.ex", usecase: "cpt.sec-authn.uc",
     refs: [{ title: "OWASP — Top Ten", url: "https://owasp.org/www-project-top-ten/" }] },
@@ -3012,6 +3035,10 @@ export const SECTIONS = [
   ...perfGroup(),
 
   {
+    // "AI QA Engineer" — the APPLIED section (formerly "El rol de la AI" +
+    // "Ejemplos con AI", now merged). It shows how to CREATE and USE skills,
+    // hooks, agents, MCP and prompts for QA. The DEFINITIONS of those terms
+    // live in the "AI concepts" section (linked via aiqa.concepts.note).
     id: "ai-role",
     navKey: "nav.airole",
     blocks: [
@@ -3029,22 +3056,23 @@ export const SECTIONS = [
           { icon: "🩺", title: "ai.stage5.title", body: "ai.stage5.body" },
         ],
       },
-      { type: "label", text: "ai.tools.label" },
-      { type: "prose", html: "ai.tools.body" },
-      {
-        type: "tiles",
-        items: [
-          { icon: "🧩", title: "ai.tool.skills.title", body: "ai.tool.skills.body" },
-          { icon: "🔌", title: "ai.tool.mcp.title", body: "ai.tool.mcp.body" },
-          { icon: "🤖", title: "ai.tool.agents.title", body: "ai.tool.agents.body" },
-        ],
-      },
-      { type: "prose", html: "ai.tool.mcp.note" },
-      { type: "code", sample: "mcpConfig" },
-      { type: "prose", html: "ai.tool.skills.note" },
+      { type: "label", text: "aiqa.build.label" },
+      { type: "prose", html: "aiqa.build.body" },
+      { type: "callout", variant: "", html: "aiqa.concepts.note" },
+      { type: "prose", html: "aiqa.skill.body" },
       { type: "code", sample: "skillExample" },
-      { type: "prose", html: "ai.tool.agents.note" },
+      { type: "prose", html: "aiqa.hook.body" },
+      { type: "code", sample: "hookExample" },
+      { type: "prose", html: "aiqa.agent.body" },
       { type: "code", sample: "agentLoop" },
+      { type: "prose", html: "aiqa.mcp.body" },
+      { type: "code", sample: "mcpConfig" },
+      { type: "label", text: "aiqa.prompts.label" },
+      { type: "prose", html: "prompts.generate.body" },
+      { type: "code", sample: "aiPromptCode" },
+      { type: "prose", html: "prompts.iterate.body" },
+      { type: "prose", html: "prompts.validate.body" },
+      { type: "code", sample: "aiValidate" },
       { type: "label", text: "ui.vs" },
       {
         type: "vs",
@@ -3056,25 +3084,14 @@ export const SECTIONS = [
   },
 
   {
-    id: "prompts",
-    navKey: "nav.prompts",
+    // "AI concepts" — the reference section: definitions of the AI-engineering
+    // concepts (skill, agent, model, hook, MCP, RAG, …) as a branched menu.
+    id: "ai-concepts",
+    navKey: "nav.aiconcepts",
     blocks: [
-      { type: "prose", html: "prompts.lead" },
-      { type: "label", text: "prompts.generate.label" },
-      { type: "prose", html: "prompts.generate.body" },
-      { type: "code", sample: "aiPromptCode" },
-      { type: "label", text: "prompts.iterate.label" },
-      { type: "prose", html: "prompts.iterate.body" },
-      { type: "label", text: "prompts.validate.label" },
-      { type: "prose", html: "prompts.validate.body" },
-      { type: "code", sample: "aiValidate" },
-      { type: "label", text: "ui.vs" },
-      {
-        type: "vs",
-        manual: { title: "prompts.manual.title", body: "prompts.manual.body" },
-        ai: { title: "prompts.ai.title", body: "prompts.ai.body" },
-      },
-      { type: "callout", variant: "danger", html: "prompts.callout" },
+      { type: "prose", html: "aic.lead" },
+      { type: "aimenu" },
+      { type: "callout", variant: "", html: "aic.callout" },
     ],
   },
 
@@ -3261,7 +3278,6 @@ const DECKS = {
   comparison: "comparison",
   perf: "perf-locust",
   airole: "ai-role",
-  prompts: "prompts",
   bestpractices: "best-practices",
   ci: "ci-gates",
   skills: "skills-appium",
