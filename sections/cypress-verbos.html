@@ -103,6 +103,12 @@
           <a class="nav-link nav-sublink is-active" href="cypress-verbos.html" aria-current="page">
             <span data-i18n="page.verbs">Verbos HTTP</span>
           </a>
+          <a class="nav-link nav-sublink" href="cypress-flashcards.html">
+            <span data-i18n="page.flashcards">Flashcards</span>
+          </a>
+          <a class="nav-link nav-sublink" href="cypress-entrevista.html">
+            <span data-i18n="page.interview">Mock interview</span>
+          </a>
         <a class="nav-link nav-group" href="playwright-filosofia.html">
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
@@ -665,77 +671,14 @@ cy.request({ method: "</span>OPTIONS<span class="tok-string">", url: "</span><sp
   .its("</span>headers<span class="tok-punctuation">.</span><span class="tok-property">allow</span><span class="tok-string">").should("</span>contain<span class="tok-string">", "</span>POST<span class="tok-punctuation">");</span></code></pre>
         </div>
         <div class="callout" data-i18n-html="verbs.callout"><strong>Regla práctica:</strong> verificá <em>primero</em> el status y <em>después</em> el cuerpo. Y testeá los caminos infelices: sin token → <code>401</code>, recurso de otro usuario → <code>403</code>, id inexistente → <code>404</code>. Un 200 que debería ser un 404 es un bug.</div>
-        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
-        <div class="flashcards" data-flashcards>
-          <div class="fc-stage">
-            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.q1">¿Por qué los comandos de Cypress no necesitan await?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.a1">Se encolan y ejecutan en orden automáticamente; Cypress gestiona la asincronía por vos.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.q2">¿Qué es la retry-ability de .should()?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.a2">Reintenta la aserción hasta que pasa o expira el timeout, reduciendo la flakiness.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.q3">¿Qué es cy.intercept()?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.a3">Interceptar, espiar o mockear requests de red para controlar el backend en los tests.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.q4">¿Buena práctica de selectores en Cypress?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.cypress.a4">Usar atributos dedicados (data-cy) en vez de clases o estilos que cambian.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fc-controls">
-            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
-            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
-            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
-            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
-          </div>
-        </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="cypress-criticos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
             <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="playwright-filosofia.html">
+          <a class="page-nav__link page-nav__next" href="cypress-flashcards.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+            <span class="page-nav__title" data-i18n="page.flashcards">Flashcards</span>
           </a>
         </nav>
       </div>
@@ -749,5 +692,6 @@ cy.request({ method: "</span>OPTIONS<span class="tok-string">", url: "</span><sp
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
   <script src="../js/flashcards.js"></script>
+  <script src="../js/interview.js"></script>
 </body>
 </html>

@@ -131,6 +131,34 @@ function renderBlock(block, dict) {
         </div>`;
     }
 
+    case "interview": {
+      // A simulated interview: interviewer question → (reveal) your answer.
+      const turns = block.items
+        .map(
+          (it) => `
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">${escText(t(dict, "iv.role.q"))}</span>
+                <p class="iv-text" data-i18n="${it.q}">${escText(t(dict, it.q))}</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">${escText(t(dict, "iv.reveal"))}</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">${escText(t(dict, "iv.role.a"))}</span>
+                <p class="iv-text" data-i18n="${it.a}">${escText(t(dict, it.a))}</p>
+              </div>
+            </div>`
+        )
+        .join("");
+      return `
+        <div class="interview" data-interview>
+          <div class="iv-controls">
+            <button class="iv-toggle-all" type="button" data-i18n="iv.showAll">${escText(t(dict, "iv.showAll"))}</button>
+          </div>
+          <div class="iv-thread">${turns}
+          </div>
+        </div>`;
+    }
+
     case "mock":
       return `
         <figure class="mock-figure">${renderMock(block.screen)}
@@ -452,6 +480,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
   <script src="${assetPrefix}js/page.js"></script>
   <script src="${assetPrefix}js/runner.js"></script>
   <script src="${assetPrefix}js/flashcards.js"></script>
+  <script src="${assetPrefix}js/interview.js"></script>
 </body>
 </html>
 `;
