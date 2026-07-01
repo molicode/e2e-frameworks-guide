@@ -1,11 +1,11 @@
 /* ==========================================================================
    js/lab.js — Interactivity for the Práctica "lab" challenges.
 
-   One editor per reto (the work console, below the app). Each task carries a
-   list of tokens its solution must contain; on "Comprobar" we tick off every
-   task the learner's code satisfies and show progress. We don't run a real
-   browser — it's a guided check of the approach. The Hint accordions hold the
-   full reference solutions.
+   One editor per reto (the work console, below the app). "Comprobar" validates
+   ONE instruction at a time — the next pending one — and, if the learner's code
+   satisfies it, ticks it off on the right and advances to the next. A progress
+   counter (top-right of the console) tracks how many are solved. We don't run a
+   real browser; it's a guided check of the approach. Hints hold full solutions.
    ========================================================================== */
 (function (global) {
   "use strict";
@@ -22,48 +22,65 @@
     return true;
   }
 
+  function tasksOf(lab) {
+    return Array.prototype.slice.call(lab.querySelectorAll(".lab-task"));
+  }
+
+  // Highlight the first not-yet-solved task as the active one.
+  function refreshActive(lab) {
+    var tasks = tasksOf(lab);
+    var found = false;
+    tasks.forEach(function (task) {
+      var active = !found && !task.classList.contains("is-solved");
+      if (active) found = true;
+      task.classList.toggle("is-active", active);
+    });
+  }
+
+  function updateProgress(lab) {
+    var tasks = tasksOf(lab);
+    var total = tasks.length;
+    var solved = tasks.filter(function (x) { return x.classList.contains("is-solved"); }).length;
+    var progress = lab.querySelector(".lab__progress");
+    if (solved === total) progress.textContent = t("practica.done");
+    else progress.textContent = solved + " / " + total;
+    lab.querySelector(".lab__console").classList.toggle("is-done", solved === total);
+    return solved === total;
+  }
+
   function run(btn) {
     var lab = btn.closest(".lab");
     if (!lab) return;
     var editor = lab.querySelector(".lab-editor");
-    var progress = lab.querySelector(".lab__progress");
     var console_ = lab.querySelector(".lab__console");
     var checks;
     try { checks = JSON.parse(editor.getAttribute("data-tasks") || "[]"); }
     catch (e) { checks = []; }
     var val = String(editor.value || "").toLowerCase();
 
-    console_.classList.remove("is-ok", "is-partial", "is-retry");
+    console_.classList.remove("is-ok", "is-retry");
     if (!val.trim()) {
-      progress.textContent = t("practica.empty");
       console_.classList.add("is-retry");
-      markAll(lab, checks.length, function () { return false; });
+      lab.querySelector(".lab__progress").textContent = t("practica.empty");
       return;
     }
 
-    var solved = 0;
-    checks.forEach(function (tokens, i) {
-      var ok = taskSolved(val, tokens);
-      if (ok) solved++;
-      var task = lab.querySelector('.lab-task[data-task="' + i + '"]');
-      if (task) task.classList.toggle("is-solved", ok);
-    });
+    // Validate only the next pending instruction.
+    var tasks = tasksOf(lab);
+    var idx = -1;
+    for (var i = 0; i < tasks.length; i++) {
+      if (!tasks[i].classList.contains("is-solved")) { idx = i; break; }
+    }
+    if (idx === -1) { updateProgress(lab); return; }
 
-    var total = checks.length;
-    if (solved === total) {
-      progress.textContent = t("practica.done");
+    if (taskSolved(val, checks[idx])) {
+      tasks[idx].classList.add("is-solved");
       console_.classList.add("is-ok");
     } else {
-      progress.textContent = solved + " / " + total + " " + t("practica.steps");
-      console_.classList.add("is-partial");
+      console_.classList.add("is-retry");
     }
-  }
-
-  function markAll(lab, total, fn) {
-    for (var i = 0; i < total; i++) {
-      var task = lab.querySelector('.lab-task[data-task="' + i + '"]');
-      if (task) task.classList.toggle("is-solved", fn(i));
-    }
+    refreshActive(lab);
+    updateProgress(lab);
   }
 
   function setup() {
