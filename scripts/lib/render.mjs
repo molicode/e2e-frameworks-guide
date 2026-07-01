@@ -413,26 +413,29 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
           <span data-i18n="${s.navKey}">${escText(t(dict, s.navKey))}</span>
         </a>`;
       }
-      // group: header (links to its first sub-page) + sub-pages when active.
+      // group: a collapsible accordion. All sub-pages are rendered; the header
+      // toggles them open/closed (open by default on the active group).
       const isActiveGroup = e.members.some((m) => m.id === activeId);
-      const headActive = isActiveGroup ? " is-active-group" : "";
-      const sub = isActiveGroup
-        ? e.members
-            .map((m) => {
-              const a = m.id === activeId ? " is-active" : "";
-              const cur = m.id === activeId ? ' aria-current="page"' : "";
-              return `
-          <a class="nav-link nav-sublink${a}" href="${sectionHref(m.id)}"${cur}>
-            <span data-i18n="${m.navKey}">${escText(t(dict, m.navKey))}</span>
-          </a>`;
-            })
-            .join("")
-        : "";
+      const sub = e.members
+        .map((m) => {
+          const a = m.id === activeId ? " is-active" : "";
+          const cur = m.id === activeId ? ' aria-current="page"' : "";
+          return `
+            <a class="nav-link nav-sublink${a}" href="${sectionHref(m.id)}"${cur}>
+              <span data-i18n="${m.navKey}">${escText(t(dict, m.navKey))}</span>
+            </a>`;
+        })
+        .join("");
       return `
-        <a class="nav-link nav-group${headActive}" href="${sectionHref(e.first.id)}">
-          <span class="nav-link__num">${num}</span>
-          <span data-i18n="${e.groupKey}">${escText(t(dict, e.groupKey))}</span>
-        </a>${sub}`;
+        <div class="nav-group-item${isActiveGroup ? " is-open" : ""}">
+          <button class="nav-link nav-group${isActiveGroup ? " is-active-group" : ""}" type="button" aria-expanded="${isActiveGroup}">
+            <span class="nav-link__num">${num}</span>
+            <span data-i18n="${e.groupKey}">${escText(t(dict, e.groupKey))}</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">${sub}
+          </div>
+        </div>`;
     })
     .join("");
   return `<nav class="sidebar__nav">${home}${links}\n      </nav>`;

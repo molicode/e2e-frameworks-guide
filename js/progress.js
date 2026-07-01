@@ -82,23 +82,26 @@
   }
   function cheer() { return t("game.cheer" + (1 + Math.floor(Math.random() * 6))); }
 
-  /* ---- compute + celebrate ---- */
+  /* ---- state ---- */
   var store = load();
   var total = P.pages.length;
   var pageSet = {};
   P.pages.forEach(function (id) { pageSet[id] = true; });
-
   var here = currentId();
-  if (pageSet[here] && store.visited.indexOf(here) === -1) store.visited.push(here);
 
-  var visitedSet = {};
-  store.visited.forEach(function (id) { if (pageSet[id]) visitedSet[id] = true; });
-  var visitedCount = Object.keys(visitedSet).length;
-  var pct = Math.round((visitedCount / total) * 100);
+  function visitedSet() {
+    var vs = {};
+    store.visited.forEach(function (id) { if (pageSet[id]) vs[id] = true; });
+    return vs;
+  }
+  function pctNow() { return Math.round((Object.keys(visitedSet()).length / total) * 100); }
 
-  // Header badge (progress ring).
+  // Header badge (progress ring) — reflects saved progress, refreshable.
   var badge = document.getElementById("progress-badge");
-  if (badge) {
+  function refreshBadge() {
+    if (!badge) return;
+    var vc = Object.keys(visitedSet()).length;
+    var pct = Math.round((vc / total) * 100);
     badge.hidden = false;
     var pctEl = badge.querySelector(".progress-badge__pct");
     if (pctEl) pctEl.textContent = pct + "%";
@@ -108,39 +111,69 @@
       fill.style.strokeDasharray = C.toFixed(1);
       fill.style.strokeDashoffset = (C * (1 - pct / 100)).toFixed(1);
     }
-    badge.title = visitedCount + " / " + total;
+    badge.title = vc + " / " + total;
+  }
+  function refreshTicks() {
+    var vs = visitedSet();
+    Array.prototype.forEach.call(document.querySelectorAll(".sidebar__nav .nav-link"), function (a) {
+      if (vs[pageIdFromHref(a.getAttribute("href"))]) a.classList.add("is-visited");
+    });
+  }
+  refreshBadge();
+  refreshTicks();
+  if (badge) {
     badge.addEventListener("click", function () {
-      toast(t("game.keepGoing").replace("{p}", pct) + " " + cheer(), { icon: "🏆" });
+      toast(t("game.keepGoing").replace("{p}", pctNow()) + " " + cheer(), { icon: "🏆" });
     });
   }
 
-  // Tick visited pages in the sidebar.
-  Array.prototype.forEach.call(document.querySelectorAll(".sidebar__nav .nav-link"), function (a) {
-    if (visitedSet[pageIdFromHref(a.getAttribute("href"))]) a.classList.add("is-visited");
-  });
+  // ONE coordinated celebration when you reach the bottom of a section: mark it
+  // done, then a single motivating toast (+ any milestone / section-complete).
+  function celebrateBottom() {
+    if (!pageSet[here] || store.visited.indexOf(here) !== -1) return; // only first finish
+    store.visited.push(here);
+    var vs = visitedSet();
+    var pct = pctNow();
+    var parts = [];
+    var big = false, confetti = true;
+    [25, 50, 75, 100].forEach(function (m) {
+      if (pct >= m && store.milestones.indexOf(m) === -1) {
+        store.milestones.push(m); parts.push(t("game.m" + m)); if (m >= 75) big = true;
+      }
+    });
+    P.tops.forEach(function (top) {
+      if (top.pages.every(function (id) { return vs[id]; }) && store.sections.indexOf(top.key) === -1) {
+        store.sections.push(top.key); parts.push(t("game.section").replace("{s}", t(top.label)));
+      }
+    });
+    save(store);
+    refreshBadge();
+    refreshTicks();
+    if (typeof renderPanel === "function") renderPanel();
+    var msg = (parts.length ? parts.join(" ") + " " : "") + cheer();
+    var icon = big ? "🏆" : (parts.length ? "🎉" : "💪");
+    toast(msg, { icon: icon, confetti: confetti, big: big });
+  }
 
-  // Queue celebrations. Milestones first (rarer, bigger) so they're never
-  // starved when several sections happen to complete at once.
-  var queue = [];
-  [25, 50, 75, 100].forEach(function (m) {
-    if (pct >= m && store.milestones.indexOf(m) === -1) {
-      store.milestones.push(m);
-      queue.push({ msg: t("game.m" + m), opts: { icon: m === 100 ? "🏆" : "🚀", confetti: true, big: m >= 75 } });
+  // Trigger when the pager (bottom of the content) scrolls into view.
+  var bottomEl = document.querySelector(".page-nav") || document.querySelector(".content__inner");
+  if (bottomEl && pageSet[here]) {
+    if (global.IntersectionObserver) {
+      var fired = false;
+      var io2 = new global.IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !fired) { fired = true; celebrateBottom(); io2.disconnect(); }
+        });
+      }, { threshold: 0.1 });
+      io2.observe(bottomEl);
+    } else {
+      global.addEventListener("scroll", function once() {
+        if (global.innerHeight + global.scrollY >= document.body.offsetHeight - 80) {
+          global.removeEventListener("scroll", once); celebrateBottom();
+        }
+      });
     }
-  });
-  P.tops.forEach(function (top) {
-    var done = top.pages.every(function (id) { return visitedSet[id]; });
-    if (done && store.sections.indexOf(top.key) === -1) {
-      store.sections.push(top.key);
-      queue.push({ msg: t("game.section").replace("{s}", t(top.label)) + " " + cheer(), opts: { icon: "✅", confetti: true } });
-    }
-  });
-  save(store);
-
-  // Show queued toasts, staggered, after the page settles.
-  queue.slice(0, 3).forEach(function (item, i) {
-    global.setTimeout(function () { toast(item.msg, item.opts); }, 700 + i * 900);
-  });
+  }
 
   /* ---- achievements (badges) — a collectible view of the store ---- */
   var ACH = [

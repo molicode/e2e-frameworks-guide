@@ -2558,8 +2558,8 @@ function maturityGroup() {
       { type: "label", text: "mat.istqb.certs.label" },
       { type: "biblio", items: [
         { title: "ISTQB — Certified Tester Foundation Level (CTFL)", url: "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl", desc: "mat.istqb.ref.ctfl" },
-        { title: "ISTQB — Advanced Test Analyst (CTAL-TA)", url: "https://www.istqb.org/certifications/certified-tester-test-analyst", desc: "mat.istqb.ref.ta" },
-        { title: "ISTQB — Test Automation Engineer (CT-TAE)", url: "https://www.istqb.org/certifications/certified-tester-test-automation-engineer", desc: "mat.istqb.ref.tae" },
+        { title: "ISTQB — Advanced Test Analyst (CTAL-TA)", url: "https://www.istqb.org/certifications/certified-tester-advanced-level-test-analyst/", desc: "mat.istqb.ref.ta" },
+        { title: "ISTQB — Test Automation Engineer (CTAL-TAE)", url: "https://www.istqb.org/certifications/certified-tester-advanced-level-test-automation-engineering-ctal-tae-v2-0/", desc: "mat.istqb.ref.tae" },
         { title: "ISTQB — Certified Tester Finance Testing (CT-FT)", url: "https://www.istqb.org/certifications/certified-tester-finance-testing-ct-ft", desc: "mat.istqb.ref.ft" },
         { title: "ISTQB — AI Testing (CT-AI)", url: "https://www.istqb.org/certifications/certified-tester-ai-testing", desc: "mat.istqb.ref.ai" },
       ] },
