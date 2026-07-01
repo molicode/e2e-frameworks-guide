@@ -96,7 +96,7 @@ function renderBlock(block, dict) {
       return codeBlock(block.sample, dict);
 
     case "runner":
-      return renderRunner(dict, block.fw || "selenium", block.scenario || "login");
+      return renderRunner(dict, block.fw || "selenium", block.scenario || "login", block.verb);
 
     case "mock":
       return `

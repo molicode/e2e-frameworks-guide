@@ -274,6 +274,66 @@ const SCENARIOS = {
   },
 };
 
+/* ---- per-verb scenario: one test + one animation for each HTTP verb ---- */
+const VERBS = {
+  get:     { method: "GET",     path: "/orders/42", status: "200", ok: true, note: "reads a resource",        hasBody: false },
+  post:    { method: "POST",    path: "/orders",    status: "201", ok: true, note: "creates a resource",      hasBody: true },
+  put:     { method: "PUT",     path: "/orders/42", status: "200", ok: true, note: "replaces it fully",       hasBody: true },
+  patch:   { method: "PATCH",   path: "/orders/42", status: "200", ok: true, note: "updates it partially",    hasBody: true },
+  delete:  { method: "DELETE",  path: "/orders/42", status: "204", ok: true, note: "removes it (no content)", hasBody: false },
+  head:    { method: "HEAD",    path: "/orders/42", status: "200", ok: true, note: "headers only, no body",   hasBody: false },
+  options: { method: "OPTIONS", path: "/orders",    status: "204", ok: true, note: "lists allowed methods",   hasBody: false },
+};
+
+// Each generator returns [[code, stage], …] in the framework's real language.
+const CODEGEN = {
+  selenium: (v) => {
+    const m = v.method.toLowerCase();
+    const body = v.hasBody ? ", json=data" : "";
+    return [
+      [`r = requests.${m}(f"{API}${v.path}"${body})`, "send"],
+      [`assert r.status_code == ${v.status}`, "resp"],
+    ];
+  },
+  playwright: (v) => {
+    const m = v.method.toLowerCase();
+    const body = v.hasBody ? ", data=data" : "";
+    const call = v.method === "OPTIONS"
+      ? `api.fetch("${v.path}", method="OPTIONS")`
+      : `api.${m}("${v.path}"${body})`;
+    return [
+      [`r = ${call}`, "send"],
+      [`assert r.status == ${v.status}`, "resp"],
+    ];
+  },
+  cypress: (v) => {
+    const body = v.hasBody ? ", data" : "";
+    return [
+      [`cy.request("${v.method}", "${v.path}"${body})`, "send"],
+      [`  .its("status").should("eq", ${v.status});`, "resp"],
+    ];
+  },
+  robot: (v) => [
+    [`\${resp}=    ${v.method} On Session    api    ${v.path}`, "send"],
+    [`Status Should Be    ${v.status}    \${resp}`, "resp"],
+  ],
+};
+
+function verbStage(v) {
+  const m = v.method.toLowerCase();
+  return browser("api.app.test", `
+                <div class="mock--api runner__vconsole">
+                  <div class="runner__vreq">
+                    <span class="mock-method mock-method--${m}">${v.method}</span>
+                    <span class="runner__apath">${v.path}</span>
+                    <span class="runner__sending" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="runner__vstatus mock-status mock-status--${v.ok ? "ok" : "bad"}">${v.status}</span>
+                  </div>
+                  <div class="runner__vnote">${escText(v.note)}</div>
+                  ${passedBadge()}
+                </div>`);
+}
+
 function codePanel(fw, file, lines) {
   const rows = lines
     .map(([code, st]) => `<span class="runner__line" data-stage="${st}">${highlight(code)}</span>`)
@@ -287,23 +347,43 @@ function codePanel(fw, file, lines) {
               <pre class="runner__pre"><code>${rows}</code></pre>`;
 }
 
-/** Render one framework's runner for a scenario. */
-export function renderRunner(dict, fwKey, scenarioKey) {
+/** Render one framework's runner for a scenario (verb runners pass verbKey). */
+export function renderRunner(dict, fwKey, scenarioKey, verbKey) {
   const fw = FW[fwKey] || FW.selenium;
-  const sc = SCENARIOS[scenarioKey] || SCENARIOS.login;
-  const lines = sc.code[fwKey] || sc.code.selenium;
-  const chips = fw.chips.map((c) => `<span class="runner__chip">${escText(c)}</span>`).join("");
+  let lines, stageHtml, name, head, extraClass = "";
 
-  return `
-        <figure class="runner" data-runner data-fw="${fwKey}" data-scenario="${sc.name}" style="--fw:${fw.color}">
-          <div class="runner__frame">
+  if (scenarioKey === "verb") {
+    const v = VERBS[verbKey] || VERBS.get;
+    lines = (CODEGEN[fwKey] || CODEGEN.selenium)(v);
+    stageHtml = verbStage(v);
+    name = verbKey;
+    extraClass = " runner--verb";
+    head = `
+            <div class="runner__head runner__head--verb">
+              <span class="runner__vmethod mock-method mock-method--${v.method.toLowerCase()}">${v.method}</span>
+              <span class="runner__vlabel">${escText(v.note)}</span>
+              <span class="runner__hfw">${escText(fw.label)}</span>
+            </div>`;
+  } else {
+    const sc = SCENARIOS[scenarioKey] || SCENARIOS.login;
+    lines = sc.code[fwKey] || sc.code.selenium;
+    stageHtml = sc.stage();
+    name = sc.name;
+    const chips = fw.chips.map((c) => `<span class="runner__chip">${escText(c)}</span>`).join("");
+    head = `
             <div class="runner__head">
               <span class="runner__fwchip">${escText(fw.label)}</span>
               <div class="runner__chips">${chips}</div>
-            </div>
+            </div>`;
+  }
+
+  return `
+        <figure class="runner${extraClass}" data-runner data-fw="${fwKey}" data-scenario="${scenarioKey}" style="--fw:${fw.color}">
+          <div class="runner__frame">
+            ${head}
             <div class="runner__panel">
-              <div class="runner__stage">${sc.stage()}</div>
-              <div class="runner__code">${codePanel(fw, fw.file(sc.name), lines)}</div>
+              <div class="runner__stage">${stageHtml}</div>
+              <div class="runner__code">${codePanel(fw, fw.file(name), lines)}</div>
             </div>
             <div class="runner__player">
               <button class="runner__play" type="button" aria-label="${escAttr(t(dict, "runner.run"))}" data-i18n-attr="aria-label:runner.run">
