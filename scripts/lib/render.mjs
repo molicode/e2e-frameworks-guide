@@ -713,6 +713,7 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
       }
     })();
   </script>
+  <link rel="stylesheet" href="${assetPrefix}css/fonts.css" />
   <link rel="stylesheet" href="${assetPrefix}css/variables.css" />
   <link rel="stylesheet" href="${assetPrefix}css/base.css" />
   <link rel="stylesheet" href="${assetPrefix}css/components.css" />
@@ -811,14 +812,14 @@ const NODE_ICON = {
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
 const NAV_GROUPS = [
-  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--accent)",        members: ["intro", "fundamentals"] },
-  { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
-  { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
-  { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "perf"] },
-  { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai101", "aiqa"] },
-  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--secondary)",     members: ["practica"], leaf: true },
-  { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--fw-skills)",     members: ["key-terms", "bibliography"] },
+  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--cat-foundations)", members: ["intro", "fundamentals"] },
+  { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--cat-languages)",   members: ["python", "typescript"] },
+  { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--cat-frameworks)",  members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
+  { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
+  { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
+  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
+  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica"], leaf: true },
+  { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
