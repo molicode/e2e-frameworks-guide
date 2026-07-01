@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="nav.prompts">Ejemplos con AI</title>
+  <title data-i18n="nav.aiconcepts">AI concepts</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--prompts">
+<body class="page--section page--ai-concepts">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -308,12 +308,64 @@
         </div>
         <a class="nav-link" href="ai-role.html">
           <span class="nav-link__num">12</span>
-          <span data-i18n="nav.airole">El rol de la AI</span>
+          <span data-i18n="nav.airole">AI QA Engineer</span>
         </a>
-        <a class="nav-link is-active" href="prompts.html" aria-current="page">
-          <span class="nav-link__num">13</span>
-          <span data-i18n="nav.prompts">Ejemplos con AI</span>
-        </a>
+        <div class="nav-group-item is-open">
+          <button class="nav-link nav-group is-active-group" type="button" aria-expanded="true">
+            <span class="nav-link__num">13</span>
+            <span data-i18n="nav.aiconcepts">AI concepts</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+          </button>
+          <div class="nav-sub">
+            <a class="nav-link nav-sublink is-active" href="ai-concepts.html" aria-current="page">
+              <span data-i18n="aic.overview">Todos los conceptos de AI</span>
+            </a>
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+              <span data-i18n="aic.general">Conceptos generales</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
+            </button>
+            <div class="nav-sub nav-sub--nested">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-prompt.html">
+                <span>Prompt engineering</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-halluc.html">
+                <span>Hallucination</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-selfheal.html">
+                <span>Self-healing locators</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-gen.html">
+                <span>LLM test generation</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hitl.html">
+                <span>Human-in-the-loop</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-mcp.html">
+                <span>MCP (Model Context Protocol)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-skill.html">
+                <span>Skill</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-agent.html">
+                <span>Agent / sub-agent</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-rag.html">
+                <span>RAG (Retrieval-Augmented Generation)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-context.html">
+                <span>Context window / tokens</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-model.html">
+                <span>Modelos (LLM)</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hooks.html">
+                <span>Hooks (automatización)</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
         <a class="nav-link" href="best-practices.html">
           <span class="nav-link__num">14</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
@@ -595,44 +647,6 @@
           </div>
           <div class="nav-group-item nav-group-item--nested">
             <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
-              <span data-i18n="kt.cat.ai">AI en QA</span>
-              <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
-            </button>
-            <div class="nav-sub nav-sub--nested">
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-prompt.html">
-                <span>Prompt engineering</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-halluc.html">
-                <span>Hallucination</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-selfheal.html">
-                <span>Self-healing locators</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-gen.html">
-                <span>LLM test generation</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-hitl.html">
-                <span>Human-in-the-loop</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-mcp.html">
-                <span>MCP (Model Context Protocol)</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-skill.html">
-                <span>Skill</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-agent.html">
-                <span>Agent / sub-agent</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-rag.html">
-                <span>RAG (Retrieval-Augmented Generation)</span>
-              </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-context.html">
-                <span>Context window / tokens</span>
-              </a>
-            </div>
-          </div>
-          <div class="nav-group-item nav-group-item--nested">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
               <span data-i18n="kt.cat.security">Seguridad</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -700,255 +714,75 @@
     <main class="content" id="main-content">
       <div class="content__inner">
         <span class="section__eyebrow">13</span>
-        <h1 class="section__title" data-i18n="nav.prompts">Ejemplos con AI</h1>
-        <div class="prose" data-i18n-html="prompts.lead"><p>Un buen resultado empieza por un buen prompt. La clave es dar <strong>contexto, restricciones y formato de salida</strong>. Veamos prompts concretos y cómo iterar y validar lo que la AI produce.</p></div>
-        <h2 class="block-label" data-i18n="prompts.generate.label">Prompt para generar un test</h2>
-        <div class="prose" data-i18n-html="prompts.generate.body"><p>Incluí siempre cuatro cosas: <strong>rol</strong> (“sos QA senior”), <strong>contexto</strong> (URL, selectores), <strong>objetivo</strong> (qué verificar) y <strong>restricciones</strong> (sin sleeps, assertions web-first). Cuanto más específico, menos alucina.</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">Prompt</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
+        <h1 class="section__title" data-i18n="nav.aiconcepts">AI concepts</h1>
+        <div class="prose" data-i18n-html="aic.lead"><p>Las <strong>definiciones</strong> de los conceptos que usa un AI QA Engineer. Tocá cualquiera para ver su definición; los marcados con ★ tienen página de detalle con ejemplo y caso de uso.</p></div>
+        <p class="kt-hint" data-i18n="kt.hint">Tocá un concepto para ver su definición. Los marcados con ★ tienen una página de detalle con ejemplo y caso de uso.</p>
+        <div class="kt-map">
+          <div class="kt-branch" style="--c:var(--fw-maturity)">
+            <div class="kt-branch__head">
+              <span class="kt-branch__icon" aria-hidden="true">🤖</span>
+              <span class="kt-branch__name" data-i18n="aic.general">Conceptos generales</span>
+              <span class="kt-branch__count">12</span>
+            </div>
+            <div class="kt-branch__nodes">
+              <button class="kt-node kt-node--full" type="button" data-term="Prompt engineering" data-def="kt.ai.prompt" data-cat="aic.general" data-href="ai-prompt.html">
+                <span class="kt-node__label">Prompt engineering</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Hallucination" data-def="kt.ai.halluc" data-cat="aic.general" data-href="ai-halluc.html">
+                <span class="kt-node__label">Hallucination</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Self-healing locators" data-def="kt.ai.selfheal" data-cat="aic.general" data-href="ai-selfheal.html">
+                <span class="kt-node__label">Self-healing locators</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="LLM test generation" data-def="kt.ai.gen" data-cat="aic.general" data-href="ai-gen.html">
+                <span class="kt-node__label">LLM test generation</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Human-in-the-loop" data-def="kt.ai.hitl" data-cat="aic.general" data-href="ai-hitl.html">
+                <span class="kt-node__label">Human-in-the-loop</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="MCP (Model Context Protocol)" data-def="kt.ai.mcp" data-cat="aic.general" data-href="ai-mcp.html">
+                <span class="kt-node__label">MCP (Model Context Protocol)</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Skill" data-def="kt.ai.skill" data-cat="aic.general" data-href="ai-skill.html">
+                <span class="kt-node__label">Skill</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Agent / sub-agent" data-def="kt.ai.agent" data-cat="aic.general" data-href="ai-agent.html">
+                <span class="kt-node__label">Agent / sub-agent</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="RAG (Retrieval-Augmented Generation)" data-def="kt.ai.rag" data-cat="aic.general" data-href="ai-rag.html">
+                <span class="kt-node__label">RAG (Retrieval-Augmented Generation)</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Context window / tokens" data-def="kt.ai.context" data-cat="aic.general" data-href="ai-context.html">
+                <span class="kt-node__label">Context window / tokens</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Modelos (LLM)" data-def="kt.ai.model" data-cat="aic.general" data-href="ai-model.html">
+                <span class="kt-node__label">Modelos (LLM)</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+              <button class="kt-node kt-node--full" type="button" data-term="Hooks (automatización)" data-def="kt.ai.hooks" data-cat="aic.general" data-href="ai-hooks.html">
+                <span class="kt-node__label">Hooks (automatización)</span><span class="kt-node__badge" title="Tiene página de detalle" aria-hidden="true">★</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="kt-pop" id="kt-pop" hidden>
+          <div class="kt-pop__backdrop" data-kt-close></div>
+          <div class="kt-pop__dialog" role="dialog" aria-modal="true" aria-labelledby="kt-pop-term">
+            <button class="kt-pop__close" type="button" data-kt-close aria-label="Cerrar" data-i18n-attr="aria-label:kt.close">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></svg>
             </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es">Sos un ingeniero QA senior<span class="tok-punctuation">.</span> Escrib<span class="tok-punctuation">í</span> un test de Playwright en Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
-
-Contexto<span class="tok-punctuation">:</span>
-<span class="tok-punctuation">-</span> P<span class="tok-punctuation">á</span>gina<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>un resumen de orden<span class="tok-punctuation">)</span>
-<span class="tok-punctuation">-</span> Selectores estables<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
-
-El test <span class="tok-string">"test_verify_order"</span> debe afirmar<span class="tok-punctuation">:</span>
-<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      tiene el texto <span class="tok-string">"250"</span>
-<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     tiene el texto <span class="tok-string">"PAID"</span>
-<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contiene un <span class="tok-punctuation">í</span>tem cuyo texto incluye <span class="tok-string">"book"</span>
-
-Requisitos<span class="tok-punctuation">:</span>
-<span class="tok-punctuation">-</span> Us<span class="tok-punctuation">á</span> aserciones web<span class="tok-punctuation">-</span>first <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
-<span class="tok-punctuation">-</span> Sin esperas fijas<span class="tok-punctuation">.</span> Sin l<span class="tok-punctuation">ó</span>gica condicional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> en el test<span class="tok-punctuation">.</span>
-<span class="tok-punctuation">-</span> Un comentario corto sobre cada aserci<span class="tok-punctuation">ó</span>n explicando la intenci<span class="tok-punctuation">ó</span>n<span class="tok-punctuation">.</span></code><code class="code-i18n code-i18n--en">You are a senior QA engineer<span class="tok-punctuation">.</span> Write a Playwright test <span class="tok-keyword">in</span> Python <span class="tok-punctuation">(</span>pytest<span class="tok-punctuation">).</span>
-
-Context<span class="tok-punctuation">:</span>
-<span class="tok-punctuation">-</span> Page<span class="tok-punctuation">:</span> https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span>  <span class="tok-punctuation">(</span>an order summary<span class="tok-punctuation">)</span>
-<span class="tok-punctuation">-</span> Stable selectors<span class="tok-punctuation">:</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-punctuation">,</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li
-
-Test <span class="tok-string">"test_verify_order"</span> must <span class="tok-keyword">assert</span><span class="tok-punctuation">:</span>
-<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total      has text <span class="tok-string">"250"</span>
-<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status     has text <span class="tok-string">"PAID"</span>
-<span class="tok-punctuation">-</span> <span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items      contains an item whose text includes <span class="tok-string">"book"</span>
-
-Requirements<span class="tok-punctuation">:</span>
-<span class="tok-punctuation">-</span> Use web<span class="tok-punctuation">-</span>first assertions <span class="tok-punctuation">(</span><span class="tok-function">expect</span><span class="tok-punctuation">(...).</span><span class="tok-property">to_have_text</span> <span class="tok-punctuation">/</span> to_contain_text<span class="tok-punctuation">).</span>
-<span class="tok-punctuation">-</span> No fixed sleeps<span class="tok-punctuation">.</span> No conditional <span class="tok-punctuation">(</span><span class="tok-keyword">if</span><span class="tok-punctuation">/</span><span class="tok-keyword">else</span><span class="tok-punctuation">)</span> logic <span class="tok-keyword">in</span> the test<span class="tok-punctuation">.</span>
-<span class="tok-punctuation">-</span> One short comment above each assertion explaining intent<span class="tok-punctuation">.</span></code></pre>
-        </div>
-        <h2 class="block-label" data-i18n="prompts.iterate.label">Cómo iterar sobre el output</h2>
-        <div class="prose" data-i18n-html="prompts.iterate.body"><p>Casi nunca el primer intento es perfecto. Iterá con feedback corto y concreto:</p><ul><li>“El selector <code>.total</code> no existe; usá <code>.order-total</code>.”</li><li>“Quitá el <code>cy.wait(2000)</code> y confiá en el auto-retry.”</li><li>“Agregá un caso para <code>status = REFUNDED</code>.”</li></ul><p>Tratá a la AI como a un colega: respuestas cortas, ejemplos del resultado esperado y un cambio por vez.</p></div>
-        <h2 class="block-label" data-i18n="prompts.validate.label">Cómo validar lo que produjo</h2>
-        <div class="prose" data-i18n-html="prompts.validate.body"><p>No confíes a ciegas. Revisá el código generado como si fuera un pull request de alguien más:</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">Python</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Salida de la IA — revisala como lo harías con el pull request de un dev junior.</span>
-<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
-
-
-<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
-    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span>
-
-
-<span class="tok-comment"># Checklist antes de confiar en ella:</span>
-<span class="tok-comment">#  - Los selectores realmente existen en la app (no lo asumas).</span>
-<span class="tok-comment">#  - Las aserciones coinciden con los CRITERIOS DE ACEPTACIÓN, no solo el happy path.</span>
-<span class="tok-comment">#  - Sin esperas/sleeps ocultos, sin tests que nunca puedan fallar.</span>
-<span class="tok-comment">#  - Falla cuando debe: rompé temporalmente la app y volvé a correr.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># AI output — review it the way you would a junior dev's pull request.</span>
-<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
-
-
-<span class="tok-keyword">def</span> <span class="tok-function">test_verify_order</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
-    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>shop<span class="tok-punctuation">.</span><span class="tok-property">example</span><span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">")
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>total<span class="tok-string">")).to_have_text("</span><span class="tok-number">250</span><span class="tok-string">")
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-string">")
-    expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>items li<span class="tok-string">")).to_contain_text("</span>book<span class="tok-punctuation">")</span>
-
-
-<span class="tok-comment"># Checklist before you trust it:</span>
-<span class="tok-comment">#  - Selectors actually exist in the app (don't assume).</span>
-<span class="tok-comment">#  - Assertions match the ACCEPTANCE CRITERIA, not just the happy path.</span>
-<span class="tok-comment">#  - No hidden waits/sleeps, no test that can never fail.</span>
-<span class="tok-comment">#  - It fails when it should: temporarily break the app and re-run.</span></code></pre>
-        </div>
-        <h2 class="block-label" data-i18n="ui.vs">Manual vs AI</h2>
-        <div class="vs-grid">
-          <div class="vs-card vs-card--manual">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
-              <span data-i18n="prompts.manual.title">Escribir el test a mano</span>
-            </div>
-            <div data-i18n-html="prompts.manual.body"><p>Pensás la estructura, recordás la sintaxis, tipeás cada línea. Aprendés mucho, pero tardás más.</p></div>
-            
-          </div>
-          <div class="vs-card vs-card--ai">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
-              <span data-i18n="prompts.ai.title">Generar y revisar con AI</span>
-            </div>
-            <div data-i18n-html="prompts.ai.body"><p>Pedís el borrador, lo leés críticamente, corregís selectores y assertions, y lo corrés. Más rápido <strong>si</strong> mantenés el ojo crítico.</p></div>
-            
+            <span class="kt-pop__cat" id="kt-pop-cat" hidden></span>
+            <h3 class="kt-pop__term" id="kt-pop-term"></h3>
+            <div class="kt-pop__def" id="kt-pop-def"></div>
+            <a class="kt-pop__more" id="kt-pop-more" hidden href="#">
+              <span data-i18n="kt.more">Ver más →</span>
+            </a>
           </div>
         </div>
-        <div class="callout callout--danger" data-i18n-html="prompts.callout"><strong>No confíes a ciegas:</strong> la AI puede producir tests que <em>siempre pasan</em> (y por lo tanto no sirven). Verificá que el test FALLE cuando debe: rompé el comportamiento a propósito y confirmá que se pone en rojo.</div>
-        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
-        <div class="flashcards" data-flashcards>
-          <div class="fc-stage">
-            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q1">¿Qué hace a un buen prompt?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a1">Contexto claro, un objetivo concreto, ejemplos y el formato de salida esperado.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q2">¿Por qué iterar el prompt?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a2">El primer intento rara vez es óptimo; refinar con feedback mejora el resultado.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q3">¿Cómo validar el output de la AI?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a3">Ejecutarlo, revisarlo contra los requisitos y probar casos borde; no asumir que está bien.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q4">¿Qué es “few-shot”?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a4">Dar ejemplos dentro del prompt para guiar el estilo y el formato de la respuesta.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q5">¿Qué es el “contexto” en un prompt?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a5">La información relevante que le das al modelo para responder bien.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q6">¿Conviene pedir el formato de salida?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a6">Sí: especificar el formato (JSON, pasos, tabla) mejora el resultado.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q7">¿Qué es “chain of thought”?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a7">Pedirle al modelo que razone paso a paso antes de responder.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q8">¿Cómo reducís las alucinaciones?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a8">Dando contexto, pidiendo fuentes y validando el output.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q9">¿Qué es un system prompt?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a9">Instrucciones de alto nivel que fijan el rol y las reglas del modelo.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.q10">¿Por qué dar ejemplos (few-shot)?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.prompts.a10">Guían el estilo y el formato esperado de la respuesta.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fc-controls">
-            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
-            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 10</span>
-            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
-            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
-          </div>
-        </div>
+        <div class="callout" data-i18n-html="aic.callout"><p>Estos conceptos se aplican en la sección <strong>AI QA Engineer</strong>, donde vas a ver cómo crearlos y usarlos en tu día a día de testing.</p></div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="ai-role.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="nav.airole">El rol de la AI</span>
+            <span class="page-nav__title" data-i18n="nav.airole">AI QA Engineer</span>
           </a>
           <a class="page-nav__link page-nav__next" href="best-practices.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
@@ -961,7 +795,7 @@ Requirements<span class="tok-punctuation">:</span>
 
   <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
 
-  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai-role","prompts","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai-role","label":"nav.airole","pages":["ai-role"]},{"key":"prompts","label":"nav.prompts","pages":["prompts"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
+  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai-role","ai-concepts","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai-role","label":"nav.airole","pages":["ai-role"]},{"key":"ai-concepts","label":"nav.aiconcepts","pages":["ai-concepts"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
   <script src="../js/i18n.js"></script>
   <script src="../i18n/es.js"></script>
   <script src="../i18n/en.js"></script>

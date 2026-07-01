@@ -281,7 +281,10 @@ function renderBlock(block, dict) {
     }
 
     case "ktmenu":
-      return ktMenu(dict);
+      return conceptMenu(dict, "key-terms");
+
+    case "aimenu":
+      return conceptMenu(dict, "ai-concepts");
 
     case "biblio": {
       // item.title + item.url are literals; item.desc is an i18n key.
@@ -334,8 +337,22 @@ const KT_CATS = [
   { key: "maturity",   icon: "📊", color: "var(--fw-skills)" },
 ];
 
-function ktMenu(dict) {
-  const branches = KT_CATS.map((cat) => {
+// Which section hosts each concept category. AI-engineering concepts get their
+// own "AI concepts" section; every other category stays under "Key terms".
+const CONCEPT_HOST = { ai: "ai-concepts" };
+function conceptHost(cat) { return CONCEPT_HOST[cat] || "key-terms"; }
+// The i18n label key used for a category's header/chip (AI is shown as
+// "Conceptos generales" inside the AI concepts section).
+function conceptCatLabelKey(cat) { return cat === "ai" ? "aic.general" : "kt.cat." + cat; }
+// The categories that belong to a given host section, with their label keys.
+function hostCategories(hostId) {
+  return KT_CATS
+    .filter((cat) => conceptHost(cat.key) === hostId)
+    .map((cat) => ({ ...cat, labelKey: conceptCatLabelKey(cat.key) }));
+}
+
+function conceptMenu(dict, hostId) {
+  const branches = hostCategories(hostId).map((cat) => {
     const list = CONCEPTS.filter((c) => c.cat === cat.key);
     if (!list.length) return "";
     const nodes = list
@@ -346,7 +363,7 @@ function ktMenu(dict) {
           ? `<span class="kt-node__badge" title="${escAttr(t(dict, "kt.deep"))}" aria-hidden="true">★</span>`
           : "";
         return `
-              <button class="kt-node${full}" type="button" data-term="${escAttr(c.term)}" data-def="${c.def}" data-cat="kt.cat.${c.cat}"${href}>
+              <button class="kt-node${full}" type="button" data-term="${escAttr(c.term)}" data-def="${c.def}" data-cat="${cat.labelKey}"${href}>
                 <span class="kt-node__label">${escText(c.term)}</span>${badge}
               </button>`;
       })
@@ -355,7 +372,7 @@ function ktMenu(dict) {
           <div class="kt-branch" style="--c:${cat.color}">
             <div class="kt-branch__head">
               <span class="kt-branch__icon" aria-hidden="true">${cat.icon}</span>
-              <span class="kt-branch__name" data-i18n="kt.cat.${cat.key}">${escText(t(dict, "kt.cat." + cat.key))}</span>
+              <span class="kt-branch__name" data-i18n="${cat.labelKey}">${escText(t(dict, cat.labelKey))}</span>
               <span class="kt-branch__count">${list.length}</span>
             </div>
             <div class="kt-branch__nodes">${nodes}
@@ -389,8 +406,10 @@ function ktMenu(dict) {
 // Deep-dive sub-page for a single `full` concept: definition + example + use
 // case + references. Built by build.mjs into sections/<concept.id>.html.
 export function conceptMain(concept, dict) {
-  const catKey = "kt.cat." + concept.cat;
-  const back = `<a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">${escText(t(dict, "cpt.back"))}</a>`;
+  const hostId = conceptHost(concept.cat);
+  const catKey = conceptCatLabelKey(concept.cat);
+  const backKey = hostId === "ai-concepts" ? "aic.back" : "cpt.back";
+  const back = `<a class="cpt-back" href="${hostId}.html" data-i18n="${backKey}">${escText(t(dict, backKey))}</a>`;
   const sec = (labelKey, key) => `
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="${labelKey}">${escText(t(dict, labelKey))}</h2>
@@ -520,14 +539,15 @@ function pager(sections, index, dict) {
 /* ---- the shared, nested sidebar ---- */
 const NAV_CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>';
 
-// Key-terms rendered as a 3-level tree: Key terms → each category that has
-// deep-dive concepts → the concept sub-pages. Only categories with `full`
-// concepts appear, so it grows as more batches ship.
-function keyTermsNav(num, activeId, dict, sectionHref) {
-  const fulls = CONCEPTS.filter((c) => c.full);
+// A concept-host section (Key terms or AI concepts) rendered as a 3-level
+// tree: section → each category that has deep-dive concepts → the concept
+// sub-pages. Only categories belonging to this host (and with `full` concepts)
+// appear, so each grows as more batches ship.
+function conceptNav(hostId, navKey, overviewKey, num, activeId, dict, sectionHref) {
+  const fulls = CONCEPTS.filter((c) => c.full && conceptHost(c.cat) === hostId);
   const activeConcept = fulls.find((c) => c.id === activeId);
-  const ktOpen = activeId === "key-terms" || !!activeConcept;
-  const cats = KT_CATS.filter((cat) => fulls.some((c) => c.cat === cat.key));
+  const hostOpen = activeId === hostId || !!activeConcept;
+  const cats = hostCategories(hostId).filter((cat) => fulls.some((c) => c.cat === cat.key));
   const catBlocks = cats
     .map((cat) => {
       const items = fulls.filter((c) => c.cat === cat.key);
@@ -545,7 +565,7 @@ function keyTermsNav(num, activeId, dict, sectionHref) {
       return `
           <div class="nav-group-item nav-group-item--nested${catOpen ? " is-open" : ""}">
             <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="${catOpen}">
-              <span data-i18n="kt.cat.${cat.key}">${escText(t(dict, "kt.cat." + cat.key))}</span>
+              <span data-i18n="${cat.labelKey}">${escText(t(dict, cat.labelKey))}</span>
               ${NAV_CHEVRON}
             </button>
             <div class="nav-sub nav-sub--nested">${links}
@@ -553,18 +573,18 @@ function keyTermsNav(num, activeId, dict, sectionHref) {
           </div>`;
     })
     .join("");
-  const overviewActive = activeId === "key-terms" ? " is-active" : "";
-  const overviewCur = activeId === "key-terms" ? ' aria-current="page"' : "";
+  const overviewActive = activeId === hostId ? " is-active" : "";
+  const overviewCur = activeId === hostId ? ' aria-current="page"' : "";
   return `
-        <div class="nav-group-item${ktOpen ? " is-open" : ""}">
-          <button class="nav-link nav-group${ktOpen ? " is-active-group" : ""}" type="button" aria-expanded="${ktOpen}">
+        <div class="nav-group-item${hostOpen ? " is-open" : ""}">
+          <button class="nav-link nav-group${hostOpen ? " is-active-group" : ""}" type="button" aria-expanded="${hostOpen}">
             <span class="nav-link__num">${num}</span>
-            <span data-i18n="nav.keyterms">${escText(t(dict, "nav.keyterms"))}</span>
+            <span data-i18n="${navKey}">${escText(t(dict, navKey))}</span>
             ${NAV_CHEVRON}
           </button>
           <div class="nav-sub">
-            <a class="nav-link nav-sublink${overviewActive}" href="${sectionHref("key-terms")}"${overviewCur}>
-              <span data-i18n="kt.overview">${escText(t(dict, "kt.overview"))}</span>
+            <a class="nav-link nav-sublink${overviewActive}" href="${sectionHref(hostId)}"${overviewCur}>
+              <span data-i18n="${overviewKey}">${escText(t(dict, overviewKey))}</span>
             </a>${catBlocks}
           </div>
         </div>`;
@@ -583,7 +603,8 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
       const num = String(i + 1).padStart(2, "0");
       if (e.type === "single") {
         const s = e.section;
-        if (s.id === "key-terms") return keyTermsNav(num, activeId, dict, sectionHref);
+        if (s.id === "key-terms") return conceptNav("key-terms", "nav.keyterms", "kt.overview", num, activeId, dict, sectionHref);
+        if (s.id === "ai-concepts") return conceptNav("ai-concepts", "nav.aiconcepts", "aic.overview", num, activeId, dict, sectionHref);
         const active = s.id === activeId ? " is-active" : "";
         const cur = s.id === activeId ? ' aria-current="page"' : "";
         return `
@@ -739,7 +760,7 @@ const NODE_ICON = {
   python: "🐍", typescript: "🟦",
   selenium: "🕸️", cypress: "🌲", playwright: "🎭", robot: "🤖",
   bdd: "🥒", comparison: "⚖️", perf: "⚡",
-  "ai-role": "✨", prompts: "💬",
+  "ai-role": "✨", "ai-concepts": "🧠",
   ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
 };
 const PATH_UNITS = [
@@ -747,7 +768,7 @@ const PATH_UNITS = [
   { key: "languages",   icon: "💻", color: "var(--fw-python)",     members: ["python", "typescript"] },
   { key: "frameworks",  icon: "🧩", color: "var(--fw-playwright)", members: ["selenium", "cypress", "playwright", "robot"] },
   { key: "approaches",  icon: "🧪", color: "var(--fw-bdd)",        members: ["bdd", "comparison", "perf"] },
-  { key: "ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai-role", "prompts"] },
+  { key: "ai",          icon: "🤖", color: "var(--fw-maturity)",   members: ["ai-role", "ai-concepts"] },
   { key: "process",     icon: "🚦", color: "var(--fw-ci)",         members: ["ci", "best-practices", "skills", "maturity", "bibliography"] },
 ];
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
