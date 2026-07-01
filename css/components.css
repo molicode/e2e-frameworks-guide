@@ -2772,3 +2772,35 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 @media (max-width: 980px) {
   .lab { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ---- Práctica lab v3: corner progress, wider, divider, active task ---- */
+.layout:has(.lab) { max-width: 1800px; }
+.content:has(.lab) { padding-left: var(--space-5); padding-right: var(--space-5); }
+
+.lab { gap: var(--space-5); }
+/* subtle vertical line separating the lab (left) from the instructions (right) */
+.lab__panel {
+  border-left: 1px solid var(--border);
+  padding-left: var(--space-6);
+}
+
+/* progress moved to the top-right corner of the console */
+.lab__progress {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-soft);
+}
+.lab__console.is-ok .lab__progress { color: var(--success); }
+.lab__console.is-retry .lab__progress { color: var(--danger); }
+.lab__console.is-done .lab__progress { color: var(--success); background: color-mix(in srgb, var(--success) 16%, var(--surface)); }
+
+.lab__console-foot { justify-content: space-between; }
+.lab__console-foot .lab__console-lang { color: var(--text-muted); }
+
+/* the current (next pending) instruction is highlighted */
+.lab-task.is-active .lab-task__num { box-shadow: 0 0 0 3px var(--accent-soft); }
+.lab-task.is-solved.is-active .lab-task__num { box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 25%, transparent); }

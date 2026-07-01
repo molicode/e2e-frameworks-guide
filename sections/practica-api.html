@@ -900,7 +900,7 @@
             <div class="lab__console">
               <div class="lab__console-head">
                 <span class="lab__console-title" data-i18n="practica.yourSolution">Tu solución</span>
-                <span class="lab__console-lang">TYPESCRIPT</span>
+                <span class="lab__progress" role="status" aria-live="polite">0 / 3</span>
               </div>
               <textarea class="lab-editor" spellcheck="false" rows="7" data-tasks="[[&quot;post&quot;,&quot;201&quot;],[&quot;get&quot;,&quot;200&quot;],[&quot;delete&quot;,&quot;204&quot;]]"
                 placeholder="// Escribí acá tu test — una línea por tarea…"
@@ -908,14 +908,14 @@
                 data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
               <div class="lab__console-foot">
                 <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
-                <span class="lab__progress" role="status" aria-live="polite"></span>
+                <span class="lab__console-lang">TYPESCRIPT</span>
               </div>
             </div>
           </div>
           <div class="lab__panel">
             <p class="lab__panel-title" data-i18n="practica.tasks">Instrucciones</p>
             <ol class="lab__tasks">
-              <li class="lab-task" data-task="0">
+              <li class="lab-task is-active" data-task="0">
                 <div class="lab-task__num">1</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="practica.api.t1">Creá una orden con <code>POST /api/orders</code> y verificá el status <code>201</code>.</div>

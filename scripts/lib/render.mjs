@@ -135,7 +135,7 @@ function renderLab(block, dict) {
         ? `\n                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">${escText(t(dict, "practica.keyTerms"))}</span>${terms}</div>`
         : "";
       return `
-              <li class="lab-task" data-task="${i}">
+              <li class="lab-task${i === 0 ? " is-active" : ""}" data-task="${i}">
                 <div class="lab-task__num">${i + 1}</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="${task.text}">${t(dict, task.text)}</div>
@@ -167,7 +167,7 @@ function renderLab(block, dict) {
             <div class="lab__console">
               <div class="lab__console-head">
                 <span class="lab__console-title" data-i18n="practica.yourSolution">${escText(t(dict, "practica.yourSolution"))}</span>
-                <span class="lab__console-lang">TYPESCRIPT</span>
+                <span class="lab__progress" role="status" aria-live="polite">0 / ${block.tasks.length}</span>
               </div>
               <textarea class="lab-editor" spellcheck="false" rows="7" data-tasks="${tasksData}"
                 placeholder="${escAttr(t(dict, "practica.editorPlaceholder"))}"
@@ -175,7 +175,7 @@ function renderLab(block, dict) {
                 data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
               <div class="lab__console-foot">
                 <button class="lab-check" type="button" data-i18n="practica.check">${escText(t(dict, "practica.check"))}</button>
-                <span class="lab__progress" role="status" aria-live="polite"></span>
+                <span class="lab__console-lang">TYPESCRIPT</span>
               </div>
             </div>
           </div>
