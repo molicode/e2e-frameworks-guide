@@ -252,12 +252,9 @@
 }
 .hero__title {
   font-size: var(--fs-3xl);
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   margin: var(--space-3) 0;
-  background: linear-gradient(120deg, var(--text), var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text);
 }
 .hero__lead {
   font-size: var(--fs-lg);
@@ -414,8 +411,8 @@ html[lang="en"] .code-i18n--en { display: block; }
   min-width: 0; /* allow the card (and the code block inside) to shrink */
 }
 .vs-card--ai {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-  background: linear-gradient(180deg, var(--accent-soft), var(--surface) 60%);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  background: color-mix(in srgb, var(--accent-soft) 45%, var(--surface));
 }
 .vs-card__head {
   display: flex;
@@ -1660,7 +1657,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   border-left: 3px solid var(--success);
   border-radius: var(--radius-md);
   background: var(--surface);
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
   color: var(--text);
   font-size: var(--fs-sm);
   cursor: pointer;
@@ -1737,11 +1734,11 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   margin: 0 auto;
   padding: var(--space-3) var(--space-5);
   border-radius: 999px;
-  background: linear-gradient(120deg, var(--accent), var(--accent-strong, var(--accent)));
-  color: #fff;
-  font-weight: 800;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 500;
   font-size: var(--fs-lg);
-  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: none;
 }
 .rmap { text-align: center; }
 .rmap__root-icon { font-size: 1.2em; }
@@ -2080,7 +2077,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   padding: var(--space-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface));
+  background: var(--surface);
   margin-bottom: var(--space-5);
 }
 .path-hero__ring {
@@ -2282,11 +2279,11 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   height: 24px;
   border-radius: 50%;
   background: var(--c);
-  color: #fff;
+  color: var(--surface);
   border: 2px solid var(--surface);
   display: grid;
   place-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
   transition: transform var(--transition);
 }
 .lnode.is-expanded .lnode__toggle { transform: translateX(-50%) rotate(180deg); }
@@ -2385,28 +2382,24 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
    top of the base components; all tokens live in variables.css.
    ========================================================================== */
 
-/* ---- Filled button (primary CTA) — flat, pill, state layer, no 3D ledge. */
+/* ---- Primary CTA — peach accent, dark ink (never white on a pastel). */
 .cta-btn {
   padding: 10px 24px;
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
+  background: var(--cta-bg);
+  color: var(--cta-text);
   border-radius: var(--md-sys-shape-corner-full);
   font: var(--md-label-large);
-  letter-spacing: 0.006em;
   box-shadow: none;
-  transition: background var(--transition), box-shadow var(--transition);
+  transition: background var(--transition);
 }
 .cta-btn:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
-  box-shadow: var(--md-elevation-1);
+  background: var(--cta-bg-hover);
+  color: var(--cta-text);
   transform: none;
   text-decoration: none;
 }
-.cta-btn:active {
-  background: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, var(--md-sys-color-primary));
-  box-shadow: none;
-}
-.cta-btn:focus-visible { outline: 3px solid var(--md-sys-color-primary); outline-offset: 2px; }
+.cta-btn:active { background: var(--cta-bg-hover); }
+.cta-btn:focus-visible { outline: 3px solid var(--cta-text); outline-offset: 2px; }
 
 /* ---- Icon buttons: circular target + on-surface state layer. */
 .icon-btn { border-radius: var(--md-sys-shape-corner-full); }
@@ -2525,3 +2518,14 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .rail-next__link:hover { box-shadow: var(--md-elevation-1); text-decoration: none; }
 .rail-next__dir { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; }
 .rail-next__label { font-weight: 700; font-size: var(--fs-sm); line-height: 1.25; }
+
+/* ==========================================================================
+   Warm-study finishing touches
+   ========================================================================== */
+/* Roadmap logos → muted warm monochrome (keeps light/dark structure so
+   figure-ground logos like TS stay legible). */
+.lnode__svg { filter: grayscale(1) sepia(0.35) saturate(1.4) brightness(0.82); }
+[data-theme="dark"] .lnode__svg { filter: grayscale(1) sepia(0.5) saturate(1.4) brightness(1.45); }
+
+/* Calm headings: normal tracking (no tight negative letter-spacing). */
+.hero__title, .section__title, .lunit__title, .kt-hero__title { letter-spacing: 0 !important; }

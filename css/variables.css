@@ -1,14 +1,15 @@
 /* ==========================================================================
-   variables.css — Design tokens, built on Material Design 3.
+   variables.css — Design tokens for the "warm study" system.
 
-   The color system is a real M3 scheme (TonalSpot) generated from the source
-   colour #6A5AE0 with Google's material-color-utilities, exposing the standard
-   --md-sys-color-* roles for light and dark. On top of the roles we define the
-   M3 shape scale, elevation (with surface tint), state-layer opacities, motion
-   and a type scale. The site's older token names (--accent, --surface, …) are
-   kept as thin aliases onto M3 roles so every component inherits the system.
+   A calm, low-contrast palette for long reading/study sessions: a bone page,
+   white cards, warm borders, and soft pastels used only as accents (never as
+   dominant backgrounds). No decorative shadows or gradients. Single typeface
+   (Lexend) at weights 400/500. Rules of the system: never white text on a
+   pastel — always the dark version of the same hue; never pure black text.
 
-   Themes switch via [data-theme="light"|"dark"] on <html>.
+   The M3-style role names (--md-sys-color-*) are kept as the token layer so
+   components need no rewrite; here they carry the warm-study values. Two
+   themes: [data-theme="light"] (default) and a warm [data-theme="dark"].
    ========================================================================== */
 
 :root {
@@ -22,315 +23,257 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
-  /* ---- M3 shape scale ---- */
+  /* ---- Shape scale (gentle, calm) ---- */
   --md-sys-shape-corner-none: 0;
-  --md-sys-shape-corner-xs: 4px;
+  --md-sys-shape-corner-xs: 6px;
   --md-sys-shape-corner-sm: 8px;
   --md-sys-shape-corner-md: 12px;
   --md-sys-shape-corner-lg: 16px;
-  --md-sys-shape-corner-xl: 28px;
+  --md-sys-shape-corner-xl: 24px;
   --md-sys-shape-corner-full: 9999px;
-  /* legacy aliases */
   --radius-sm: var(--md-sys-shape-corner-sm);
   --radius-md: var(--md-sys-shape-corner-md);
   --radius-lg: var(--md-sys-shape-corner-lg);
   --radius-pill: var(--md-sys-shape-corner-full);
 
-  /* ---- M3 state-layer opacities ---- */
-  --md-sys-state-hover: 0.08;
+  /* ---- State-layer opacities (subtle) ---- */
+  --md-sys-state-hover: 0.06;
   --md-sys-state-focus: 0.10;
   --md-sys-state-pressed: 0.10;
-  --md-sys-state-dragged: 0.16;
 
-  /* ---- Typography (Nunito as the brand typeface; M3 type scale) ---- */
-  --font-sans: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+  /* ---- Typography — Lexend, 400/500 only ---- */
+  --font-sans: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code",
     Consolas, "Liberation Mono", Menlo, monospace;
 
-  /* M3 type scale (size / line-height / weight / tracking) */
-  --md-display-large: 700 3.5rem/1.12 var(--font-sans);
-  --md-headline-large: 800 2rem/1.25 var(--font-sans);
-  --md-headline-medium: 800 1.75rem/1.29 var(--font-sans);
-  --md-title-large: 700 1.375rem/1.27 var(--font-sans);
-  --md-title-medium: 700 1rem/1.5 var(--font-sans);
-  --md-body-large: 400 1rem/1.5 var(--font-sans);
-  --md-body-medium: 400 0.875rem/1.43 var(--font-sans);
-  --md-label-large: 700 0.875rem/1.43 var(--font-sans);
+  --fs-xs: 0.8125rem;   /* 13 */
+  --fs-sm: 0.875rem;    /* 14 */
+  --fs-base: 1rem;      /* 16 */
+  --fs-lg: 1.0625rem;   /* 17 */
+  --fs-xl: 1.125rem;    /* 18 */
+  --fs-2xl: 1.25rem;    /* 20 */
+  --fs-3xl: 1.375rem;   /* 22 */
 
-  --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1rem;
-  --fs-lg: 1.15rem;
-  --fs-xl: 1.375rem;
-  --fs-2xl: 1.75rem;
-  --fs-3xl: 2.5rem;
+  --lh-tight: 1.35;
+  --lh-base: 1.68;
 
-  --lh-tight: 1.25;
-  --lh-base: 1.5;
+  /* Button/label text (Lexend medium) */
+  --md-label-large: 500 0.9375rem/1.2 var(--font-sans);
 
   /* ---- Layout ---- */
   --header-h: 60px;
   --sidebar-w: 268px;
   --rail-w: 300px;
-  --content-max: 880px;
+  --content-max: 760px;   /* comfortable measure for long reading */
 
-  /* ---- Motion (M3 easing + duration) ---- */
-  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
-  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
-  --transition: 150ms var(--md-sys-motion-easing-standard);
+  /* ---- Motion ---- */
+  --transition: 150ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* No decorative elevation anywhere in this system. */
+  --md-elevation-1: none; --md-elevation-2: none; --md-elevation-3: none;
+  --md-elevation-4: none; --md-elevation-5: none;
+  --elev-1: none; --elev-2: none; --elev-3: none;
+  --shadow-sm: none; --shadow-md: none;
 }
 
 /* --------------------------------------------------------------------------
-   LIGHT THEME (default) — M3 TonalSpot from #6A5AE0
+   LIGHT (default) — warm bone, white cards, pastel accents
    -------------------------------------------------------------------------- */
 :root,
 [data-theme="light"] {
-  --md-sys-color-primary: #5d5791;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #e4dfff;
-  --md-sys-color-on-primary-container: #191249;
-  --md-sys-color-secondary: #5f5c71;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #e4dff9;
-  --md-sys-color-on-secondary-container: #1b192c;
-  --md-sys-color-tertiary: #7b5266;
-  --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #ffd8e8;
-  --md-sys-color-on-tertiary-container: #301122;
-  --md-sys-color-error: #ba1a1a;
-  --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #ffdad6;
-  --md-sys-color-on-error-container: #410002;
-  --md-sys-color-background: #fcf8ff;
-  --md-sys-color-on-background: #1c1b20;
-  --md-sys-color-surface: #fcf8ff;
-  --md-sys-color-on-surface: #1c1b20;
-  --md-sys-color-surface-variant: #e5e1ec;
-  --md-sys-color-on-surface-variant: #47464f;
-  --md-sys-color-surface-dim: #ddd8e0;
-  --md-sys-color-surface-bright: #fcf8ff;
+  --md-sys-color-background: #faf7f1;
+  --md-sys-color-surface: #faf7f1;
+  --md-sys-color-surface-dim: #efeadf;
+  --md-sys-color-surface-bright: #ffffff;
   --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f6f2fa;
-  --md-sys-color-surface-container: #f1ecf4;
-  --md-sys-color-surface-container-high: #ebe6ef;
-  --md-sys-color-surface-container-highest: #e5e1e9;
-  --md-sys-color-outline: #787680;
-  --md-sys-color-outline-variant: #c9c5d0;
-  --md-sys-color-shadow: #000000;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-inverse-surface: #313036;
-  --md-sys-color-inverse-on-surface: #f4eff7;
-  --md-sys-color-inverse-primary: #c7bfff;
-  --md-sys-color-surface-tint: #5d5791;
+  --md-sys-color-surface-container-low: #ffffff;
+  --md-sys-color-surface-container: #f6f2ea;
+  --md-sys-color-surface-container-high: #f1ece1;
+  --md-sys-color-surface-container-highest: #ece7da;
+  --md-sys-color-on-surface: #4a473f;
+  --md-sys-color-on-background: #4a473f;
+  --md-sys-color-on-surface-variant: #8a8577;
+  --md-sys-color-outline: #c9c2b2;
+  --md-sys-color-outline-variant: #e4dfd3;
 
-  /* ---- M3 elevation: surface-tint overlays + shadow per level ---- */
-  --md-surface-1: color-mix(in srgb, var(--md-sys-color-surface-tint) 5%, var(--md-sys-color-surface-container-low));
-  --md-surface-2: color-mix(in srgb, var(--md-sys-color-surface-tint) 8%, var(--md-sys-color-surface-container));
-  --md-surface-3: color-mix(in srgb, var(--md-sys-color-surface-tint) 11%, var(--md-sys-color-surface-container-high));
-  --md-surface-4: color-mix(in srgb, var(--md-sys-color-surface-tint) 12%, var(--md-sys-color-surface-container-high));
-  --md-surface-5: color-mix(in srgb, var(--md-sys-color-surface-tint) 14%, var(--md-sys-color-surface-container-highest));
-  --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.20), 0 1px 3px 1px rgba(0, 0, 0, 0.10);
-  --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.20), 0 2px 6px 2px rgba(0, 0, 0, 0.10);
-  --md-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.20), 0 4px 8px 3px rgba(0, 0, 0, 0.10);
-  --md-elevation-4: 0 2px 3px rgba(0, 0, 0, 0.20), 0 6px 10px 4px rgba(0, 0, 0, 0.10);
-  --md-elevation-5: 0 4px 4px rgba(0, 0, 0, 0.20), 0 8px 12px 6px rgba(0, 0, 0, 0.10);
+  --md-sys-color-primary: #4a3e7a;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #d9d3ef;
+  --md-sys-color-on-primary-container: #4a3e7a;
+  --md-sys-color-secondary: #5c5568;
+  --md-sys-color-secondary-container: #d9d3ef;
+  --md-sys-color-on-secondary-container: #4a3e7a;
+  --md-sys-color-tertiary: #1f6b4f;
+  --md-sys-color-tertiary-container: #c8ebdd;
+  --md-sys-color-on-tertiary-container: #1f6b4f;
+  --md-sys-color-error: #9b4a3a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #f4ded4;
+  --md-sys-color-on-error-container: #6e2b1f;
+  --md-sys-color-surface-tint: #4a3e7a;
 
-  /* ---- Legacy aliases → M3 roles ---- */
+  /* flat white "elevated" surfaces (no tint, no shadow) */
+  --md-surface-1: #ffffff; --md-surface-2: #ffffff; --md-surface-3: #ffffff;
+  --md-surface-4: #ffffff; --md-surface-5: #ffffff;
+
+  /* ---- Accent / CTA (peach) — filled buttons only ---- */
+  --cta-bg: #fbe0c2;
+  --cta-text: #7a4e1f;
+  --cta-bg-hover: #f6d3ac;
+
+  /* ---- Legacy aliases ---- */
   --bg: var(--md-sys-color-surface);
-  --bg-soft: var(--md-sys-color-surface-container-low);
-  --surface: var(--md-sys-color-surface-container-lowest);
-  --surface-2: var(--md-sys-color-surface-container-high);
+  --bg-soft: #f3efe4;
+  --surface: #ffffff;
+  --surface-2: #f5f1e8;
   --border: var(--md-sys-color-outline-variant);
-  --border-strong: var(--md-sys-color-outline);
+  --border-strong: #d8d2c4;
 
   --text: var(--md-sys-color-on-surface);
-  --text-soft: var(--md-sys-color-on-surface-variant);
+  --text-soft: #6e6a5e;
   --text-muted: var(--md-sys-color-on-surface-variant);
 
-  --accent: var(--md-sys-color-primary);
-  --accent-strong: var(--md-sys-color-primary);
-  --accent-soft: var(--md-sys-color-primary-container);
-  --accent-contrast: var(--md-sys-color-on-primary);
+  --accent: #4a3e7a;
+  --accent-strong: #3c2f66;
+  --accent-soft: #d9d3ef;
+  --accent-contrast: #ffffff;
 
-  --secondary: var(--md-sys-color-tertiary);
-  --warning: #815600;
-  --danger: var(--md-sys-color-error);
-  --success: #3c6a1f;
+  --secondary: #1f6b4f;
+  --warning: #7a4e1f;
+  --danger: #9b4a3a;
+  --success: #1f6b4f;
 
-  --shadow-sm: var(--md-elevation-1);
-  --shadow-md: var(--md-elevation-3);
-  --elev-1: var(--md-elevation-1);
-  --elev-2: var(--md-elevation-2);
-  --elev-3: var(--md-elevation-3);
+  /* Code / syntax (warm, low-contrast) */
+  --code-bg: #f5f1e8;
+  --code-text: #4a473f;
+  --tok-comment: #a49c88;
+  --tok-keyword: #6e5aa6;
+  --tok-string: #1f6b4f;
+  --tok-number: #7a4e1f;
+  --tok-function: #4a3e7a;
+  --tok-property: #9b4a3a;
+  --tok-operator: #6e6a5e;
+  --tok-punctuation: #6e6a5e;
 
-  /* Code / syntax tokens */
-  --code-bg: var(--md-sys-color-surface-container);
-  --code-text: var(--md-sys-color-on-surface);
-  --tok-comment: var(--md-sys-color-on-surface-variant);
-  --tok-keyword: #8b3fd1;
-  --tok-string: #0a7d52;
-  --tok-number: #815600;
-  --tok-function: #4a5bd6;
-  --tok-property: #b3261e;
-  --tok-operator: var(--md-sys-color-on-surface-variant);
-  --tok-punctuation: var(--md-sys-color-on-surface-variant);
+  /* ---- Unit / category colours — calm accent rotation ---- */
+  --cat-foundations: #4a3e7a;
+  --cat-languages: #1f6b4f;
+  --cat-frameworks: #7a4e1f;
+  --cat-approaches: #4a3e7a;
+  --cat-ai: #1f6b4f;
+  --cat-process: #7a4e1f;
+  --cat-practica: #9b4a3a;
+  --cat-glossary: #7a4e1f;
+  --cat-foundations-soft: #ece9f6;
+  --cat-languages-soft: #dcefe6;
+  --cat-frameworks-soft: #f6e6d3;
+  --cat-approaches-soft: #ece9f6;
+  --cat-ai-soft: #dcefe6;
+  --cat-process-soft: #f6e6d3;
+  --cat-practica-soft: #f4e0d9;
+  --cat-glossary-soft: #f6e6d3;
 
-  /* ---- Unit / category colours — bright pastels (roadmap, sidebar, path).
-     Kept vivid on purpose; the M3 chrome around them stays tonal. ---- */
-  --cat-foundations: #7c5cfc;
-  --cat-languages: #1cb0f6;
-  --cat-frameworks: #58cc02;
-  --cat-approaches: #12b8a6;
-  --cat-ai: #c061ff;
-  --cat-process: #ff9600;
-  --cat-practica: #ff5a6e;
-  --cat-glossary: #ffc531;
-  --cat-foundations-soft: #ede9fe;
-  --cat-languages-soft: #e1f3fe;
-  --cat-frameworks-soft: #e7f8dc;
-  --cat-approaches-soft: #def6f2;
-  --cat-ai-soft: #f5e6fe;
-  --cat-process-soft: #ffefd9;
-  --cat-practica-soft: #ffe4e7;
-  --cat-glossary-soft: #fff3d4;
-
-  /* Framework / technology brand-accent chips */
-  --fw-selenium: #43b02a;
-  --fw-cypress: #2c9c85;
-  --fw-playwright: #2ead52;
-  --fw-python: #3776ab;
-  --fw-typescript: #1cb0f6;
-  --fw-robot: #00c0b5;
-  --fw-bdd: #12b8a6;
-  --fw-skills: #f59e0b;
-  --fw-maturity: #8b5cf6;
-  --fw-verbs: #e11d48;
-  --fw-perf: #f97316;
-  --fw-ci: #0ea5e9;
+  /* Technology chips — quiet, single warm accent */
+  --fw-selenium: #4a3e7a; --fw-cypress: #1f6b4f; --fw-playwright: #4a3e7a;
+  --fw-python: #4a3e7a; --fw-typescript: #4a3e7a; --fw-robot: #1f6b4f;
+  --fw-bdd: #1f6b4f; --fw-skills: #7a4e1f; --fw-maturity: #4a3e7a;
+  --fw-verbs: #9b4a3a; --fw-perf: #7a4e1f; --fw-ci: #4a3e7a;
 }
 
 /* --------------------------------------------------------------------------
-   DARK THEME — M3 TonalSpot from #6A5AE0
+   DARK — warm dark (brown/charcoal), same pastel accents
    -------------------------------------------------------------------------- */
 [data-theme="dark"] {
-  --md-sys-color-primary: #c7bfff;
-  --md-sys-color-on-primary: #2f295f;
-  --md-sys-color-primary-container: #454077;
-  --md-sys-color-on-primary-container: #e4dfff;
-  --md-sys-color-secondary: #c8c3dc;
-  --md-sys-color-on-secondary: #302e41;
-  --md-sys-color-secondary-container: #474459;
-  --md-sys-color-on-secondary-container: #e4dff9;
-  --md-sys-color-tertiary: #ecb8cf;
-  --md-sys-color-on-tertiary: #482537;
-  --md-sys-color-tertiary-container: #613b4e;
-  --md-sys-color-on-tertiary-container: #ffd8e8;
-  --md-sys-color-error: #ffb4ab;
-  --md-sys-color-on-error: #690005;
-  --md-sys-color-error-container: #93000a;
-  --md-sys-color-on-error-container: #ffdad6;
-  --md-sys-color-background: #141318;
-  --md-sys-color-on-background: #e5e1e9;
-  --md-sys-color-surface: #141318;
-  --md-sys-color-on-surface: #e5e1e9;
-  --md-sys-color-surface-variant: #47464f;
-  --md-sys-color-on-surface-variant: #c9c5d0;
-  --md-sys-color-surface-dim: #141318;
-  --md-sys-color-surface-bright: #3a383e;
-  --md-sys-color-surface-container-lowest: #0e0e13;
-  --md-sys-color-surface-container-low: #1c1b20;
-  --md-sys-color-surface-container: #201f25;
-  --md-sys-color-surface-container-high: #2a292f;
-  --md-sys-color-surface-container-highest: #35343a;
-  --md-sys-color-outline: #928f99;
-  --md-sys-color-outline-variant: #47464f;
-  --md-sys-color-shadow: #000000;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-inverse-surface: #e5e1e9;
-  --md-sys-color-inverse-on-surface: #313036;
-  --md-sys-color-inverse-primary: #5d5791;
-  --md-sys-color-surface-tint: #c7bfff;
+  --md-sys-color-background: #211e19;
+  --md-sys-color-surface: #211e19;
+  --md-sys-color-surface-dim: #1b1814;
+  --md-sys-color-surface-bright: #35302a;
+  --md-sys-color-surface-container-lowest: #1a1713;
+  --md-sys-color-surface-container-low: #26221c;
+  --md-sys-color-surface-container: #2b261f;
+  --md-sys-color-surface-container-high: #322d25;
+  --md-sys-color-surface-container-highest: #3a342b;
+  --md-sys-color-on-surface: #ece6d9;
+  --md-sys-color-on-background: #ece6d9;
+  --md-sys-color-on-surface-variant: #aba492;
+  --md-sys-color-outline: #6b6555;
+  --md-sys-color-outline-variant: #3e382f;
 
-  --md-surface-1: color-mix(in srgb, var(--md-sys-color-surface-tint) 5%, var(--md-sys-color-surface-container-low));
-  --md-surface-2: color-mix(in srgb, var(--md-sys-color-surface-tint) 8%, var(--md-sys-color-surface-container));
-  --md-surface-3: color-mix(in srgb, var(--md-sys-color-surface-tint) 11%, var(--md-sys-color-surface-container-high));
-  --md-surface-4: color-mix(in srgb, var(--md-sys-color-surface-tint) 12%, var(--md-sys-color-surface-container-high));
-  --md-surface-5: color-mix(in srgb, var(--md-sys-color-surface-tint) 14%, var(--md-sys-color-surface-container-highest));
-  --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.45), 0 1px 3px 1px rgba(0, 0, 0, 0.30);
-  --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.45), 0 2px 6px 2px rgba(0, 0, 0, 0.30);
-  --md-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.45), 0 4px 8px 3px rgba(0, 0, 0, 0.30);
-  --md-elevation-4: 0 2px 3px rgba(0, 0, 0, 0.45), 0 6px 10px 4px rgba(0, 0, 0, 0.30);
-  --md-elevation-5: 0 4px 4px rgba(0, 0, 0, 0.45), 0 8px 12px 6px rgba(0, 0, 0, 0.30);
+  --md-sys-color-primary: #c6bcec;
+  --md-sys-color-on-primary: #2a2447;
+  --md-sys-color-primary-container: #3b3460;
+  --md-sys-color-on-primary-container: #e3def6;
+  --md-sys-color-secondary: #cabfb0;
+  --md-sys-color-secondary-container: #3b3460;
+  --md-sys-color-on-secondary-container: #e3def6;
+  --md-sys-color-tertiary: #82c7a6;
+  --md-sys-color-tertiary-container: #26473a;
+  --md-sys-color-on-tertiary-container: #c3e8d6;
+  --md-sys-color-error: #e7a99a;
+  --md-sys-color-on-error: #522a20;
+  --md-sys-color-error-container: #522a20;
+  --md-sys-color-on-error-container: #f5d8cf;
+  --md-sys-color-surface-tint: #c6bcec;
+
+  --md-surface-1: #26221c; --md-surface-2: #26221c; --md-surface-3: #26221c;
+  --md-surface-4: #26221c; --md-surface-5: #26221c;
+
+  --cta-bg: #e9c58f;
+  --cta-text: #3e2c14;
+  --cta-bg-hover: #f0d2a4;
 
   --bg: var(--md-sys-color-surface);
-  --bg-soft: var(--md-sys-color-surface-container-low);
-  --surface: var(--md-sys-color-surface-container-low);
-  --surface-2: var(--md-sys-color-surface-container-high);
+  --bg-soft: #1b1814;
+  --surface: #26221c;
+  --surface-2: #322d25;
   --border: var(--md-sys-color-outline-variant);
-  --border-strong: var(--md-sys-color-outline);
+  --border-strong: #524b3e;
 
   --text: var(--md-sys-color-on-surface);
-  --text-soft: var(--md-sys-color-on-surface-variant);
+  --text-soft: #c7bfae;
   --text-muted: var(--md-sys-color-on-surface-variant);
 
-  --accent: var(--md-sys-color-primary);
-  --accent-strong: var(--md-sys-color-primary);
-  --accent-soft: var(--md-sys-color-primary-container);
-  --accent-contrast: var(--md-sys-color-on-primary);
+  --accent: #c6bcec;
+  --accent-strong: #d6cff2;
+  --accent-soft: #3b3460;
+  --accent-contrast: #2a2447;
 
-  --secondary: var(--md-sys-color-tertiary);
-  --warning: #f5bd4f;
-  --danger: var(--md-sys-color-error);
-  --success: #a6d388;
+  --secondary: #82c7a6;
+  --warning: #e9c58f;
+  --danger: #e7a99a;
+  --success: #82c7a6;
 
-  --shadow-sm: var(--md-elevation-1);
-  --shadow-md: var(--md-elevation-3);
-  --elev-1: var(--md-elevation-1);
-  --elev-2: var(--md-elevation-2);
-  --elev-3: var(--md-elevation-3);
+  --code-bg: #1a1713;
+  --code-text: #ece6d9;
+  --tok-comment: #8f8877;
+  --tok-keyword: #c4b6ee;
+  --tok-string: #82c7a6;
+  --tok-number: #e0b57e;
+  --tok-function: #c6bcec;
+  --tok-property: #e7a99a;
+  --tok-operator: #c7bfae;
+  --tok-punctuation: #c7bfae;
 
-  /* Code / syntax tokens */
-  --code-bg: var(--md-sys-color-surface-container-lowest);
-  --code-text: var(--md-sys-color-on-surface);
-  --tok-comment: var(--md-sys-color-on-surface-variant);
-  --tok-keyword: #c792ea;
-  --tok-string: #7ee787;
-  --tok-number: #f0a868;
-  --tok-function: #c7bfff;
-  --tok-property: #ff9492;
-  --tok-operator: var(--md-sys-color-on-surface-variant);
-  --tok-punctuation: var(--md-sys-color-on-surface-variant);
+  --cat-foundations: #c6bcec;
+  --cat-languages: #82c7a6;
+  --cat-frameworks: #e0b57e;
+  --cat-approaches: #c6bcec;
+  --cat-ai: #82c7a6;
+  --cat-process: #e0b57e;
+  --cat-practica: #e39b8a;
+  --cat-glossary: #e0b57e;
+  --cat-foundations-soft: #322c4a;
+  --cat-languages-soft: #23402f;
+  --cat-frameworks-soft: #3f3320;
+  --cat-approaches-soft: #322c4a;
+  --cat-ai-soft: #23402f;
+  --cat-process-soft: #3f3320;
+  --cat-practica-soft: #422a22;
+  --cat-glossary-soft: #3f3320;
 
-  /* ---- Unit / category colours — bright pastels ---- */
-  --cat-foundations: #a99cff;
-  --cat-languages: #4cc4ff;
-  --cat-frameworks: #74dd3a;
-  --cat-approaches: #34d6c4;
-  --cat-ai: #d18cff;
-  --cat-process: #ffb03a;
-  --cat-practica: #ff8592;
-  --cat-glossary: #ffd45e;
-  --cat-foundations-soft: #2a2540;
-  --cat-languages-soft: #0f2c3d;
-  --cat-frameworks-soft: #1a2e10;
-  --cat-approaches-soft: #0e2e2a;
-  --cat-ai-soft: #2c1a3a;
-  --cat-process-soft: #2f2410;
-  --cat-practica-soft: #331a1f;
-  --cat-glossary-soft: #2f2810;
-
-  /* Framework / technology brand-accent chips */
-  --fw-selenium: #5cc44a;
-  --fw-cypress: #4fd6bf;
-  --fw-playwright: #4ade80;
-  --fw-python: #6aade4;
-  --fw-typescript: #4cc4ff;
-  --fw-robot: #2dd4cf;
-  --fw-bdd: #34d6c4;
-  --fw-skills: #fbbf24;
-  --fw-maturity: #a78bfa;
-  --fw-verbs: #fb7185;
-  --fw-perf: #fb923c;
-  --fw-ci: #38bdf8;
+  --fw-selenium: #c6bcec; --fw-cypress: #82c7a6; --fw-playwright: #c6bcec;
+  --fw-python: #c6bcec; --fw-typescript: #c6bcec; --fw-robot: #82c7a6;
+  --fw-bdd: #82c7a6; --fw-skills: #e0b57e; --fw-maturity: #c6bcec;
+  --fw-verbs: #e39b8a; --fw-perf: #e0b57e; --fw-ci: #c6bcec;
 }
