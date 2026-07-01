@@ -134,22 +134,11 @@ function renderLab(block, dict) {
       const termsRow = terms
         ? `\n                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">${escText(t(dict, "practica.keyTerms"))}</span>${terms}</div>`
         : "";
-      const checkAttr = escAttr(JSON.stringify(task.check || []));
       return `
-              <li class="lab-task">
+              <li class="lab-task" data-task="${i}">
                 <div class="lab-task__num">${i + 1}</div>
                 <div class="lab-task__main">
                   <div class="lab-task__text" data-i18n-html="${task.text}">${t(dict, task.text)}</div>
-                  <div class="lab-try">
-                    <textarea class="lab-editor" spellcheck="false" rows="2" data-check="${checkAttr}"
-                      placeholder="${escAttr(t(dict, "practica.editorPlaceholder"))}"
-                      aria-label="${escAttr(t(dict, "practica.editorAria"))}"
-                      data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
-                    <div class="lab-try__row">
-                      <button class="lab-check" type="button" data-i18n="practica.check">${escText(t(dict, "practica.check"))}</button>
-                      <span class="lab-try__result" role="status" aria-live="polite"></span>
-                    </div>
-                  </div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum">${uiIcon("why", "lab-acc__ico")}<span data-i18n="practica.why">${escText(t(dict, "practica.why"))}</span></summary>
                     <div class="lab-acc__body" data-i18n-html="${task.why}">${t(dict, task.why)}</div>
@@ -162,14 +151,33 @@ function renderLab(block, dict) {
               </li>`;
     })
     .join("");
+  // one editor for the whole reto; each task's check tokens are carried so the
+  // driver (js/lab.js) can tick off the tasks the learner's code satisfies.
+  const tasksData = escAttr(JSON.stringify(block.tasks.map((tk) => tk.check || [])));
   return `
         <div class="lab">
-          <div class="lab__stage">
-            <div class="lab__stage-head">
-              <span class="lab__dot"></span><span class="lab__dot"></span><span class="lab__dot"></span>
-              <span class="lab__stage-title" data-i18n="practica.sut">${escText(t(dict, "practica.sut"))}</span>
+          <div class="lab__work">
+            <div class="lab__stage">
+              <div class="lab__stage-head">
+                <span class="lab__dot"></span><span class="lab__dot"></span><span class="lab__dot"></span>
+                <span class="lab__stage-title" data-i18n="practica.sut">${escText(t(dict, "practica.sut"))}</span>
+              </div>
+              <div class="lab__stage-body">${renderMock(block.stage)}</div>
             </div>
-            <div class="lab__stage-body">${renderMock(block.stage)}</div>
+            <div class="lab__console">
+              <div class="lab__console-head">
+                <span class="lab__console-title" data-i18n="practica.yourSolution">${escText(t(dict, "practica.yourSolution"))}</span>
+                <span class="lab__console-lang">TYPESCRIPT</span>
+              </div>
+              <textarea class="lab-editor" spellcheck="false" rows="7" data-tasks="${tasksData}"
+                placeholder="${escAttr(t(dict, "practica.editorPlaceholder"))}"
+                aria-label="${escAttr(t(dict, "practica.editorAria"))}"
+                data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+              <div class="lab__console-foot">
+                <button class="lab-check" type="button" data-i18n="practica.check">${escText(t(dict, "practica.check"))}</button>
+                <span class="lab__progress" role="status" aria-live="polite"></span>
+              </div>
+            </div>
           </div>
           <div class="lab__panel">
             <p class="lab__panel-title" data-i18n="practica.tasks">${escText(t(dict, "practica.tasks"))}</p>
