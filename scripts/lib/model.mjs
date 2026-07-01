@@ -3232,7 +3232,7 @@ Object.entries(DECKS).forEach(([key, targetId]) => {
     target.blocks = [
       ...target.blocks,
       { type: "label", text: "fc.title" },
-      { type: "flashcards", cards: flashcard(key, 4) },
+      { type: "flashcards", cards: flashcard(key, 10) },
     ];
   }
 });
