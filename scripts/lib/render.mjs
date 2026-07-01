@@ -291,7 +291,20 @@ function renderBlock(block, dict) {
             </li>`
         )
         .join("");
-      return `\n        <ul class="ref-list">${items}\n        </ul>`;
+      const list = `<ul class="ref-list">${items}\n            </ul>`;
+      // With a category label, render as a collapsible accordion group.
+      if (block.label) {
+        return `
+        <details class="ref-group"${block.open ? " open" : ""}>
+          <summary class="ref-group__sum">
+            <span class="ref-group__chev" aria-hidden="true"></span>
+            <span data-i18n="${block.label}">${escText(t(dict, block.label))}</span>
+            <span class="ref-group__count">${block.items.length}</span>
+          </summary>
+          ${list}
+        </details>`;
+      }
+      return `\n        ${list}`;
     }
 
     default:

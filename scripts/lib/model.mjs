@@ -3237,5 +3237,25 @@ Object.entries(DECKS).forEach(([key, targetId]) => {
   }
 });
 
+// Bibliography: fold each "label + biblio" pair into a single collapsible group
+// (so the long list of references becomes tidy accordions). First one open.
+const biblioSec = SECTIONS.find((s) => s.id === "bibliography");
+if (biblioSec) {
+  const out = [];
+  let firstGroup = true;
+  for (let i = 0; i < biblioSec.blocks.length; i++) {
+    const bl = biblioSec.blocks[i];
+    const next = biblioSec.blocks[i + 1];
+    if (bl.type === "label" && next && next.type === "biblio") {
+      out.push({ type: "biblio", label: bl.text, items: next.items, open: firstGroup });
+      firstGroup = false;
+      i++; // skip the now-merged biblio block
+    } else {
+      out.push(bl);
+    }
+  }
+  biblioSec.blocks = out;
+}
+
 /** Lightweight nav metadata (id + key + number) for building menus/index. */
 export const NAV = SECTIONS.map((s, i) => ({ id: s.id, navKey: s.navKey, num: i + 1 }));
