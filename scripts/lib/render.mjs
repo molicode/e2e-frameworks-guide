@@ -775,6 +775,7 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
       <div class="content__inner">${main}
       </div>
     </main>
+    <aside class="rail" id="page-rail" aria-label="En esta sección"></aside>
   </div>
 
   <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
