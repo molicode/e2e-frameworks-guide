@@ -540,6 +540,13 @@ export function indexMain(sections, dict, { sectionHref }) {
           <p class="hero__lead" data-i18n="home.lead">${escText(t(dict, "home.lead"))}</p>
           <a class="cta-btn" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
         </div>
+        <section class="achievements" id="achievements" hidden>
+          <div class="ach-head">
+            <h2 class="block-label" data-i18n="game.achievements">${escText(t(dict, "game.achievements"))}</h2>
+            <span class="ach-count" id="ach-count"></span>
+          </div>
+          <div class="ach-grid" id="ach-grid"></div>
+        </section>
         <h2 class="block-label" data-i18n="home.toc">${escText(t(dict, "home.toc"))}</h2>
         <div class="toc-grid">${cards}
         </div>`;

@@ -24,6 +24,8 @@
     var next = qs(".fc-next", root);
     var flipBtn = qs(".fc-flip-btn", root);
     var i = 0;
+    var seen = {};
+    var cheered = false;
 
     function faces(card) {
       return { q: qs(".fc-face--q", card), a: qs(".fc-face--a", card) };
@@ -42,6 +44,12 @@
         reflectFaces(c);
       });
       if (idxEl) idxEl.textContent = String(i + 1);
+      // Cheer once the learner has gone through the whole deck.
+      seen[i] = true;
+      if (!cheered && cards.length > 1 && Object.keys(seen).length >= cards.length) {
+        cheered = true;
+        if (global.QAGame && global.I18n) global.QAGame.celebrate("deck", global.I18n.t("game.deckDone"), "🃏");
+      }
     }
     function flip() {
       cards[i].classList.toggle("is-flipped");
