@@ -165,6 +165,8 @@
     var rail = document.getElementById("page-rail");
     var layout = document.querySelector(".layout");
     if (!rail || !layout) return;
+    // Hands-on lab pages use the full width (no supporting pane).
+    if (document.querySelector(".lab")) { layout.classList.remove("has-rail"); rail.innerHTML = ""; return; }
     var parts = [];
 
     // 1) "On this page" — only when the content has real sub-headings.

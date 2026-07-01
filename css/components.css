@@ -2721,3 +2721,54 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   background: color-mix(in srgb, var(--success) 22%, var(--surface));
   color: var(--success);
 }
+
+/* ---- Práctica lab v2: full-width, work console on the left (Kibana-style) ---- */
+.content__inner:has(.lab) { max-width: none; }
+
+.lab {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--space-6);
+}
+.lab__work { display: flex; flex-direction: column; gap: var(--space-4); }
+.lab__stage { position: static; }
+
+.lab__console {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+}
+.lab__console-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+.lab__console-title { font-size: var(--fs-sm); font-weight: 500; color: var(--text); }
+.lab__console-lang { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; color: var(--text-muted); }
+.lab__console .lab-editor {
+  border: none;
+  border-radius: 0;
+  background: var(--code-bg);
+  min-height: 150px;
+  width: 100%;
+  display: block;
+  padding: 14px;
+  resize: vertical;
+}
+.lab__console-foot {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+}
+.lab__progress { font-size: var(--fs-sm); font-weight: 500; color: var(--text-muted); }
+.lab__console.is-ok .lab__progress { color: var(--success); }
+.lab__console.is-partial .lab__progress { color: var(--warning); }
+.lab__console.is-retry .lab__progress { color: var(--danger); }
+.lab__console.is-ok { border-color: color-mix(in srgb, var(--success) 45%, var(--border)); }
+
+.lab__panel .lab-task:first-child { padding-top: 0; }
+
+@media (max-width: 980px) {
+  .lab { grid-template-columns: minmax(0, 1fr); }
+}
