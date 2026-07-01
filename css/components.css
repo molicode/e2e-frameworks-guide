@@ -147,6 +147,66 @@
 .nav-link.is-active .nav-link__num {
   color: var(--accent);
 }
+/* The per-group emoji icon — hidden in the full sidebar, shown in the rail. */
+.nav-link__ico {
+  display: none;
+  font-size: 1.15rem;
+  line-height: 1;
+  min-width: 1.5em;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Collapsible sidebar → icon rail (desktop only). A small toggle shrinks the
+   sidebar to a narrow strip of icons instead of hiding it entirely.
+   -------------------------------------------------------------------------- */
+.sidebar-collapse {
+  display: none; /* shown only on desktop via the min-width query below */
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 var(--space-3) auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.sidebar-collapse:hover { background: var(--surface-2); color: var(--text); border-color: var(--border-strong); }
+.sidebar-collapse__ico { transition: transform var(--transition); }
+
+@media (min-width: 901px) {
+  .sidebar-collapse { display: inline-flex; }
+
+  .nav-collapsed { --sidebar-w: 78px; }
+  .nav-collapsed .sidebar { padding-left: var(--space-2); padding-right: var(--space-2); }
+  .nav-collapsed .sidebar-collapse { margin-right: auto; margin-left: auto; }
+  .nav-collapsed .sidebar-collapse__ico { transform: rotate(180deg); }
+
+  /* Show icons, hide labels / numbers / chevrons / nested lists. */
+  .nav-collapsed .nav-link__ico { display: block; }
+  .nav-collapsed .nav-link__txt,
+  .nav-collapsed .nav-chevron,
+  .nav-collapsed .nav-link--top .nav-link__num,
+  .nav-collapsed .nav-group--top .nav-link__num { display: none; }
+  /* extra .sidebar keeps this ahead of the .is-open > .nav-sub rule */
+  .nav-collapsed .sidebar .nav-group-item--top > .nav-sub { display: none; }
+
+  /* Center each top-level item on its icon. */
+  .nav-collapsed .nav-link--home,
+  .nav-collapsed .nav-link--top,
+  .nav-collapsed .nav-group--top {
+    justify-content: center;
+    gap: 0;
+    padding-left: var(--space-1);
+    padding-right: var(--space-1);
+    border-left-color: transparent;
+  }
+  .nav-collapsed .nav-group-item--top { margin-bottom: 2px; }
+}
 
 /* --------------------------------------------------------------------------
    Sections

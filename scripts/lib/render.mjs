@@ -651,9 +651,9 @@ function memberNav(e, activeId, dict, sectionHref) {
 
 export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
   const home = `
-        <a class="nav-link nav-link--home" href="${homeHref}">
+        <a class="nav-link nav-link--home" href="${homeHref}" title="${escAttr(t(dict, "nav.home"))}">
           <span class="nav-link__num">⌂</span>
-          <span data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
+          <span class="nav-link__txt" data-i18n="nav.home">${escText(t(dict, "nav.home"))}</span>
         </a>`;
 
   const emap = topEntryByKey(sections);
@@ -665,9 +665,10 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
       const active = id === activeId ? " is-active" : "";
       const cur = id === activeId ? ' aria-current="page"' : "";
       return `
-        <a class="nav-link nav-link--top${active}" href="${sectionHref(id)}"${cur}>
+        <a class="nav-link nav-link--top${active}" href="${sectionHref(id)}"${cur} title="${escAttr(t(dict, g.label))}">
           <span class="nav-link__num">${num}</span>
-          <span data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
+          <span class="nav-link__ico" aria-hidden="true">${g.icon}</span>
+          <span class="nav-link__txt" data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
         </a>`;
     }
     const members = g.members.map((k) => emap[k]).filter(Boolean);
@@ -675,9 +676,10 @@ export function sidebar(sections, activeId, dict, { sectionHref, homeHref }) {
     const inner = members.map((e) => memberNav(e, activeId, dict, sectionHref)).join("");
     return `
         <div class="nav-group-item nav-group-item--top${open ? " is-open" : ""}">
-          <button class="nav-link nav-group nav-group--top${open ? " is-active-group" : ""}" type="button" aria-expanded="${open}">
+          <button class="nav-link nav-group nav-group--top${open ? " is-active-group" : ""}" type="button" aria-expanded="${open}" title="${escAttr(t(dict, g.label))}">
             <span class="nav-link__num">${num}</span>
-            <span data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
+            <span class="nav-link__ico" aria-hidden="true">${g.icon}</span>
+            <span class="nav-link__txt" data-i18n="${g.label}">${escText(t(dict, g.label))}</span>
             ${NAV_CHEVRON}
           </button>
           <div class="nav-sub">${inner}
@@ -709,6 +711,10 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
         var prefersDark = window.matchMedia &&
           window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        // Restore the collapsed-sidebar (icon rail) preference before first paint.
+        if (localStorage.getItem('qaguide-nav') === 'rail') {
+          document.documentElement.classList.add('nav-collapsed');
+        }
       } catch (e) {
         document.documentElement.setAttribute('data-theme', 'light');
       }
@@ -758,6 +764,11 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
   <div class="layout">
     <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
     <aside class="sidebar" id="sidebar" aria-label="Secciones">
+      <button class="sidebar-collapse" id="sidebar-collapse" type="button"
+              aria-label="${escAttr(t(dict, "ui.toggleNav"))}" data-i18n-attr="aria-label:ui.toggleNav"
+              title="${escAttr(t(dict, "ui.toggleNav"))}">
+        <svg class="sidebar-collapse__ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M14.5 6.5 9 12l5.5 5.5"/></svg>
+      </button>
       ${sidebarHtml}
     </aside>
     <main class="content" id="main-content">

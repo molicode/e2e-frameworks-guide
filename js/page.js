@@ -103,12 +103,33 @@
     update();
   }
 
+  /* ---- Collapsible sidebar → icon rail (desktop) ---- */
+  function setRail(collapsed) {
+    document.documentElement.classList.toggle("nav-collapsed", collapsed);
+    try { localStorage.setItem("qaguide-nav", collapsed ? "rail" : "full"); } catch (e) { /* noop */ }
+  }
+  function setupRail() {
+    var btn = document.getElementById("sidebar-collapse");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      setRail(!document.documentElement.classList.contains("nav-collapsed"));
+    });
+  }
+
   /* ---- Sidebar accordion: click a group to expand, click again to collapse ---- */
   function setupNavGroups() {
     Array.prototype.forEach.call(document.querySelectorAll(".nav-group"), function (btn) {
       btn.addEventListener("click", function () {
         var item = btn.closest(".nav-group-item");
         if (!item) return;
+        // In the collapsed rail, a click first re-opens the sidebar, then
+        // reveals that group — so the icons stay useful instead of dead.
+        if (document.documentElement.classList.contains("nav-collapsed")) {
+          setRail(false);
+          item.classList.add("is-open");
+          btn.setAttribute("aria-expanded", "true");
+          return;
+        }
         var open = item.classList.toggle("is-open");
         btn.setAttribute("aria-expanded", open ? "true" : "false");
       });
@@ -160,6 +181,7 @@
     setupLangToggle();
     setupCopyButtons();
     setupProgress();
+    setupRail();
     setupNavGroups();
     setupPathNodes();
     setupDrawer();
