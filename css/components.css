@@ -1572,3 +1572,85 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .ach--on .ach__name { color: var(--text); }
 .ach--off { opacity: 0.55; filter: grayscale(0.8); }
+
+/* ==========================================================================
+   Interactive content map (mind-map style index) — home
+   ========================================================================== */
+.rmap { margin: var(--space-3) 0 var(--space-6); }
+.rmap__root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--accent), var(--accent-strong, var(--accent)));
+  color: #fff;
+  font-weight: 800;
+  font-size: var(--fs-lg);
+  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.rmap { text-align: center; }
+.rmap__root-icon { font-size: 1.2em; }
+.rmap__stem { width: 2px; height: var(--space-5); margin: 0 auto; background: var(--border-strong); }
+.rmap__branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  text-align: left;
+}
+.rmap__branch {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--c);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+.rmap__cat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 800;
+  font-size: var(--fs-base);
+  color: var(--text);
+  margin-bottom: var(--space-3);
+}
+.rmap__cat-icon { font-size: 1.2em; }
+.rmap__leaves { position: relative; padding-left: var(--space-4); }
+.rmap__leaves::before {
+  content: "";
+  position: absolute;
+  left: 7px; top: 4px; bottom: 18px;
+  width: 2px;
+  background: color-mix(in srgb, var(--c) 35%, var(--border));
+}
+.rmap__leaf {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+}
+.rmap__leaf::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-4) + 7px);
+  top: 50%;
+  width: calc(var(--space-4) - 7px);
+  height: 2px;
+  background: color-mix(in srgb, var(--c) 35%, var(--border));
+}
+.rmap__leaf:hover {
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+  color: var(--text);
+  text-decoration: none;
+}
+.rmap__leaf-icon { font-size: 1.1em; }
+.rmap__leaf-label { flex: 1; }
+.rmap__leaf-arrow { color: var(--c); opacity: 0; transition: opacity var(--transition), transform var(--transition); }
+.rmap__leaf:hover .rmap__leaf-arrow { opacity: 1; transform: translateX(2px); }

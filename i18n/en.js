@@ -339,6 +339,16 @@ I18n.register("en", {
   "game.ach.halfway": "Halfway there",
   "game.ach.champion": "QA Champion",
 
+  /* ---- interactive map (home) ---- */
+  "map.title": "🗺️ Interactive map — tap a topic to jump straight in",
+  "map.root": "QA Automation",
+  "map.foundations": "Foundations",
+  "map.languages": "Languages",
+  "map.frameworks": "E2E Frameworks",
+  "map.approaches": "Approaches",
+  "map.ai": "AI in QA",
+  "map.process": "Process & career",
+
   /* ---- Per-framework sub-pages ---- */
   "page.philosophy": "Philosophy & when to use it",
   "page.hello": "Hello world",
