@@ -1,16 +1,16 @@
 /* ==========================================================================
-   js/runner.js — Drives the interactive "Code Runner" demo.
+   js/runner.js — Drives the interactive "Code Runner" demos.
 
-   Each `.runner` on the page animates one framework's login test:
-     - a play / pause + replay control and a progress bar,
-     - line-by-line execution: the active code line advances on a timer and the
-       simulated browser above reacts (types the username, presses the button,
-       then shows the "Welcome / assertion passed" result).
+   Scenario-agnostic on purpose: it advances the code line by line and, for each
+   active line, drives the simulated browser with two hooks the CSS keys off:
+     - `data-stage="<key>"` on the browser  → the current (transient) look,
+     - a cumulative `seen-<key>` class       → progressive reveals that stick.
+   A field to type is `.runner__typed[data-at="<stage>"][data-text="…"]`. When
+   the run finishes the driver adds `seen-passed` (the ✓ badge).
 
    It self-plays once when scrolled into view. Everything degrades gracefully:
-   with no JS the code is readable and the browser shows its final state, and
-   when the user prefers reduced motion we jump straight to that final state
-   instead of animating.
+   with no JS the code is readable and the mock shows its initial state, and
+   when the user prefers reduced motion we jump straight to the final state.
    ========================================================================== */
 
 (function (global) {
@@ -19,7 +19,6 @@
   var mm = global.matchMedia;
   var REDUCE = !!(mm && mm("(prefers-reduced-motion: reduce)").matches);
   var LINE_MS = 820; // how long each code line stays "executing"
-  var USERNAME = "admin";
 
   function qs(sel, el) { return (el || document).querySelector(sel); }
   function qsa(sel, el) {
@@ -32,43 +31,44 @@
 
   function setupRunner(root) {
     var panel = qs(".runner__panel", root);
-    if (!panel) return;
+    var browser = qs(".runner__browser", root);
+    if (!panel || !browser) return;
 
     var playBtn = qs(".runner__play", root);
     var replayBtn = qs(".runner__replay", root);
     var progress = qs(".runner__progress", root);
     var timeEl = qs(".runner__time", root);
-    var browser = qs(".runner__browser", panel);
-    var typed = qs(".runner__typed", panel);
 
     var st = { i: 0, playing: false, timer: 0, typer: 0 };
 
     function lines() { return qsa(".runner__line", panel); }
     function total() { return lines().length * LINE_MS; }
+    function typedEls() { return qsa(".runner__typed", browser); }
 
-    /* ---- simulated browser ---- */
+    /* ---- browser state ---- */
     function cancelType() { if (st.typer) { clearInterval(st.typer); st.typer = 0; } }
-    function typeInto(el) {
+    function typewrite(el) {
       cancelType();
+      var full = el.getAttribute("data-text") || "";
       var k = 0;
       el.textContent = "";
       st.typer = global.setInterval(function () {
         k++;
-        el.textContent = USERNAME.slice(0, k);
-        if (k >= USERNAME.length) cancelType();
-      }, 95);
+        el.textContent = full.slice(0, k);
+        if (k >= full.length) cancelType();
+      }, 80);
     }
-    function setStage(stage, instant) {
-      if (!browser) return;
+    function clearSeen() {
+      browser.className = browser.className.replace(/(^|\s)seen-\S+/g, "").trim();
+    }
+    function enter(stage, instant) {
       browser.setAttribute("data-stage", stage);
-      if (stage === "typing") {
-        if (instant) { cancelType(); typed.textContent = USERNAME; }
-        else typeInto(typed);
-      } else if (stage === "form") {
-        cancelType(); typed.textContent = "";
-      } else {
-        cancelType(); typed.textContent = USERNAME; // keep the value once submitted
-      }
+      browser.classList.add("seen-" + stage);
+      var fields = qsa('.runner__typed[data-at="' + stage + '"]', browser);
+      fields.forEach(function (el) {
+        if (instant) el.textContent = el.getAttribute("data-text") || "";
+        else typewrite(el);
+      });
     }
 
     function setProgress(frac) {
@@ -83,7 +83,7 @@
         ls[j].classList.toggle("is-active", j === idx);
         ls[j].classList.toggle("is-done", j < idx);
       }
-      setStage(ls[idx].getAttribute("data-stage"), false);
+      enter(ls[idx].getAttribute("data-stage"), false);
       setProgress((idx + 1) / ls.length);
     }
     function tick() {
@@ -94,11 +94,8 @@
     }
     function finish() {
       st.playing = false;
-      lines().forEach(function (l) {
-        l.classList.add("is-done");
-        l.classList.remove("is-active");
-      });
-      setStage("passed", false);
+      lines().forEach(function (l) { l.classList.add("is-done"); l.classList.remove("is-active"); });
+      browser.classList.add("seen-passed");
       setProgress(1);
       root.classList.remove("is-playing");
       root.classList.add("is-finished");
@@ -108,8 +105,15 @@
       global.clearTimeout(st.timer);
       var ls = lines();
       st.i = ls.length;
-      ls.forEach(function (l) { l.classList.add("is-done"); l.classList.remove("is-active"); });
-      setStage("passed", true);
+      ls.forEach(function (l) {
+        l.classList.add("is-done");
+        l.classList.remove("is-active");
+        browser.classList.add("seen-" + l.getAttribute("data-stage"));
+      });
+      typedEls().forEach(function (el) { el.textContent = el.getAttribute("data-text") || ""; });
+      var last = ls[ls.length - 1];
+      if (last) browser.setAttribute("data-stage", last.getAttribute("data-stage"));
+      browser.classList.add("seen-passed");
       setProgress(1);
       root.classList.remove("is-playing");
       root.classList.add("is-finished");
@@ -119,7 +123,10 @@
       cancelType();
       st.i = 0; st.playing = false;
       lines().forEach(function (l) { l.classList.remove("is-active", "is-done"); });
-      setStage("form", true);
+      typedEls().forEach(function (el) { el.textContent = ""; });
+      clearSeen();
+      var first = lines()[0];
+      browser.setAttribute("data-stage", first ? first.getAttribute("data-stage") : "");
       setProgress(0);
       root.classList.remove("is-playing", "is-finished");
     }
@@ -145,10 +152,8 @@
     });
     replayBtn && replayBtn.addEventListener("click", function () { reset(); play(); });
 
-    // Ready in the idle (form) state.
     global.requestAnimationFrame(reset);
 
-    // Self-play once when it scrolls into view (unless reduced motion).
     if (!REDUCE && global.IntersectionObserver) {
       var seen = false;
       var io = new global.IntersectionObserver(function (entries) {
@@ -159,7 +164,7 @@
             io.disconnect();
           }
         });
-      }, { threshold: 0.4 });
+      }, { threshold: 0.35 });
       io.observe(root);
     }
   }

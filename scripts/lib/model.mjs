@@ -3163,11 +3163,19 @@ export const SECTIONS = [
   },
 ];
 
-// Each framework section gets its OWN interactive Code Runner, opening its
-// "first test" page and animating that framework's own login example.
+// Each framework section animates its OWN examples: a runner opens each of its
+// practical pages, keyed to that framework's language and the page's scenario.
+const RUNNER_PAGES = [
+  { page: "hola-mundo", scenario: "login" },
+  { page: "componentes", scenario: "signup" },
+  { page: "criticos", scenario: "order" },
+  { page: "verbos", scenario: "api" },
+];
 ["selenium", "cypress", "playwright", "robot"].forEach((fw) => {
-  const hello = SECTIONS.find((s) => s.id === `${fw}-hola-mundo`);
-  if (hello) hello.blocks = [{ type: "runner", fw }, ...hello.blocks];
+  RUNNER_PAGES.forEach(({ page, scenario }) => {
+    const s = SECTIONS.find((x) => x.id === `${fw}-${page}`);
+    if (s) s.blocks = [{ type: "runner", fw, scenario }, ...s.blocks];
+  });
 });
 
 /** Lightweight nav metadata (id + key + number) for building menus/index. */
