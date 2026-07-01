@@ -2102,27 +2102,29 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .lnode:last-child { margin-bottom: 0; }
 .lnode__btn {
   position: relative;
-  width: 76px;
-  height: 76px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   background: var(--surface);
-  border: 2px solid var(--border-strong);
-  box-shadow: 0 5px 0 var(--border-strong);
-  font-size: 2em;
+  border: 3px solid var(--c);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .lnode__btn:hover { transform: translateY(-2px); text-decoration: none; }
-.lnode__btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--border-strong); }
+.lnode__btn:active { transform: translateY(4px); box-shadow: 0 2px 0 color-mix(in srgb, var(--c) 70%, #000); }
 .lnode__btn:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
-.lnode__icon { line-height: 1; }
+.lnode__icon { line-height: 1; font-size: 2.1rem; }
+.lnode__logo { display: grid; place-items: center; }
+.lnode__svg { width: 44px; height: 44px; display: block; }
 
-/* completed node — filled with its unit colour + a check badge */
+/* completed node — soft tint of its unit colour so the logo still shows,
+   plus a check badge in the corner */
 .lnode.is-done .lnode__btn {
-  background: var(--c);
+  background: color-mix(in srgb, var(--c) 16%, var(--surface));
   border-color: var(--c);
-  box-shadow: 0 5px 0 color-mix(in srgb, var(--c) 55%, #000);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
 }
 .lnode__check {
   display: none;
@@ -2144,7 +2146,7 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 /* current node — bobbing, with a START pill above it */
 .lnode.is-current .lnode__btn {
   border-color: var(--c);
-  box-shadow: 0 5px 0 color-mix(in srgb, var(--c) 55%, #000);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--c) 70%, #000);
   animation: lnode-bob 1.7s ease-in-out infinite;
 }
 .lnode__start {

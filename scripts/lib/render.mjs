@@ -17,6 +17,7 @@ import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
 import { renderRunner } from "./runner.mjs";
 import { brandFor, brandIcon } from "./icons.mjs";
+import { techLogo } from "./logos.mjs";
 
 // A framework/language chip with its real brand logo (falls back to just the
 // coloured label when there's no matching brand mark).
@@ -809,6 +810,19 @@ const NODE_ICON = {
   ai101: "🎓", aiqa: "🤖",
   ci: "🔁", "best-practices": "✅", skills: "🛠️", maturity: "📊", bibliography: "📚",
 };
+// Nodes that map to a real technology use its official, full-colour logo;
+// the rest fall back to the emoji above.
+const NODE_LOGO = {
+  python: "python", typescript: "typescript",
+  selenium: "selenium", cypress: "cypress", playwright: "playwright", robot: "robot",
+  bdd: "cucumber", perf: "k6", ci: "githubactions", skills: "git",
+};
+// The media (official logo or emoji) shown inside a learning-path node.
+function nodeMedia(key) {
+  const logo = NODE_LOGO[key];
+  if (logo) return `<span class="lnode__logo" aria-hidden="true">${techLogo(logo, "lnode__svg")}</span>`;
+  return `<span class="lnode__icon" aria-hidden="true">${NODE_ICON[key] || "•"}</span>`;
+}
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
 const NAV_GROUPS = [
@@ -848,7 +862,7 @@ function learningPath(sections, dict, sectionHref) {
         if (!top) return "";
         const x = WIND[g % WIND.length];
         g += 1;
-        const icon = NODE_ICON[key] || "•";
+        const media = nodeMedia(key);
         const label = escText(t(dict, top.label));
         const pagesAttr = escAttr(top.members.map((m) => m.id).join(","));
         // Single-page entry → a plain link node.
@@ -856,7 +870,7 @@ function learningPath(sections, dict, sectionHref) {
           return `
               <li class="lnode" style="--x:${x}px;--c:${u.color}" data-pages="${pagesAttr}">
                 <a class="lnode__btn" href="${sectionHref(top.first)}" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
-                  <span class="lnode__icon" aria-hidden="true">${icon}</span>
+                  ${media}
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
                 </a>
@@ -876,7 +890,7 @@ function learningPath(sections, dict, sectionHref) {
         return `
               <li class="lnode lnode--group" style="--x:${x}px;--c:${u.color}" data-pages="${pagesAttr}">
                 <button class="lnode__btn lnode__btn--group" type="button" aria-expanded="false" aria-label="${escAttr(t(dict, top.label))}" data-i18n-attr="aria-label:${top.label}">
-                  <span class="lnode__icon" aria-hidden="true">${icon}</span>
+                  ${media}
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
                   <span class="lnode__count" aria-hidden="true"></span>
