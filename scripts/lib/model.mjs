@@ -19,6 +19,61 @@
  * 1. CODE SAMPLES (language-neutral)                                  *
  * ------------------------------------------------------------------ */
 export const SAMPLES = {
+  /* ---- Práctica: reto solutions (Playwright + TypeScript) ---- */
+  p_login_locate: {
+    lang: "TypeScript",
+    code: `// Prefer accessible locators over brittle CSS / XPath.
+await page.getByLabel('User').fill('ana');
+await page.getByLabel('Password').fill('s3cret!');`,
+  },
+  p_login_submit: {
+    lang: "TypeScript",
+    code: `// Playwright auto-waits for the button to be actionable — no sleeps.
+await page.getByRole('button', { name: 'Sign in' }).click();`,
+  },
+  p_login_assert: {
+    lang: "TypeScript",
+    code: `// Assert the expected final state; the test fails if login breaks.
+await expect(page.getByText('Welcome, ana')).toBeVisible();`,
+  },
+  p_order_total: {
+    lang: "TypeScript",
+    code: `// Target a stable test id, not the formatted text.
+await expect(page.getByTestId('order-total')).toHaveText('250');`,
+  },
+  p_order_status: {
+    lang: "TypeScript",
+    code: `// Web-first assertion: retries until the status renders.
+await expect(page.getByTestId('order-status')).toHaveText('PAID');`,
+  },
+  p_order_items: {
+    lang: "TypeScript",
+    code: `// Counting validates the whole list (missing / duplicated items).
+await expect(page.getByRole('listitem')).toHaveCount(3);`,
+  },
+  p_api_post: {
+    lang: "TypeScript",
+    code: `const res = await request.post('/api/orders', {
+  data: { item: 'The Pragmatic Programmer', qty: 1 },
+});
+expect(res.status()).toBe(201);           // Created
+expect(await res.json()).toHaveProperty('id');`,
+  },
+  p_api_get: {
+    lang: "TypeScript",
+    code: `const res = await request.get('/api/orders/42');
+expect(res.status()).toBe(200);           // OK, safe read
+expect(await res.json()).toMatchObject({ status: 'PAID', total: 250 });`,
+  },
+  p_api_delete: {
+    lang: "TypeScript",
+    code: `const res = await request.delete('/api/orders/42');
+expect(res.status()).toBe(204);           // No Content
+// idempotent: deleting again leaves the same final state
+const again = await request.delete('/api/orders/42');
+expect(again.status()).toBe(204);`,
+  },
+
   /* ---- Fundamentals ---- */
   assertion: {
     lang: "JavaScript",
@@ -3170,12 +3225,50 @@ export const SECTIONS = [
   ...maturityGroup(),
 
   {
-    // Placeholder — the menu entry exists; content comes later.
+    // Práctica — intro / how the challenges work.
     id: "practica",
-    navKey: "nav.practica",
+    navKey: "practica.intro.nav",
     blocks: [
       { type: "prose", html: "practica.lead" },
-      { type: "callout", variant: "", html: "practica.callout" },
+      { type: "label", text: "practica.howLabel" },
+      { type: "steps", items: ["practica.how.1", "practica.how.2", "practica.how.3"] },
+      { type: "callout", variant: "ok", html: "practica.callout" },
+    ],
+  },
+  {
+    id: "practica-login",
+    navKey: "practica.login.nav",
+    blocks: [
+      { type: "prose", html: "practica.login.lead" },
+      { type: "lab", stage: "login", tasks: [
+        { text: "practica.login.t1", why: "practica.login.w1", hint: "p_login_locate", terms: ["auto-locator"] },
+        { text: "practica.login.t2", why: "practica.login.w2", hint: "p_login_submit", terms: ["auto-autowait", "auto-waits"] },
+        { text: "practica.login.t3", why: "practica.login.w3", hint: "p_login_assert", terms: ["auto-assertion"] },
+      ] },
+    ],
+  },
+  {
+    id: "practica-order",
+    navKey: "practica.order.nav",
+    blocks: [
+      { type: "prose", html: "practica.order.lead" },
+      { type: "lab", stage: "order", tasks: [
+        { text: "practica.order.t1", why: "practica.order.w1", hint: "p_order_total", terms: ["auto-locator"] },
+        { text: "practica.order.t2", why: "practica.order.w2", hint: "p_order_status", terms: ["auto-assertion", "auto-autowait"] },
+        { text: "practica.order.t3", why: "practica.order.w3", hint: "p_order_items", terms: ["auto-assertion"] },
+      ] },
+    ],
+  },
+  {
+    id: "practica-api",
+    navKey: "practica.api.nav",
+    blocks: [
+      { type: "prose", html: "practica.api.lead" },
+      { type: "lab", stage: "verbs", tasks: [
+        { text: "practica.api.t1", why: "practica.api.w1", hint: "p_api_post", terms: ["api-methods", "api-crud"] },
+        { text: "practica.api.t2", why: "practica.api.w2", hint: "p_api_get", terms: ["api-safe", "api-status"] },
+        { text: "practica.api.t3", why: "practica.api.w3", hint: "p_api_delete", terms: ["api-idempotency", "api-status"] },
+      ] },
     ],
   },
 

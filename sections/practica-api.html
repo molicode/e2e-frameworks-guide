@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="pyqa.page.intro">Por qué Python para QA</title>
+  <title data-i18n="practica.api.nav">Reto: API y verbos HTTP</title>
   <script>
     (function () {
       try {
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--python-intro">
+<body class="page--section page--practica-api">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -92,21 +92,21 @@
             </a>
           </div>
         </div>
-        <div class="nav-group-item nav-group-item--top is-open">
-          <button class="nav-link nav-group nav-group--top is-active-group" type="button" aria-expanded="true" title="Lenguajes">
+        <div class="nav-group-item nav-group-item--top">
+          <button class="nav-link nav-group nav-group--top" type="button" aria-expanded="false" title="Lenguajes">
             <span class="nav-link__num">02</span>
             <span class="nav-link__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /> <path d="m8 6-6 6 6 6" /></svg></span>
             <span class="nav-link__txt" data-i18n="grp.languages">Lenguajes</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
           </button>
           <div class="nav-sub">
-          <div class="nav-group-item nav-group-item--nested is-open">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
               <span data-i18n="nav.pyqa">Python para QA</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
             <div class="nav-sub nav-sub--nested">
-              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="python-intro.html" aria-current="page">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="python-intro.html">
                 <span data-i18n="pyqa.page.intro">Por qué Python para QA</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="python-hola.html">
@@ -477,8 +477,8 @@
           </div>
           </div>
         </div>
-        <div class="nav-group-item nav-group-item--top">
-          <button class="nav-link nav-group nav-group--top" type="button" aria-expanded="false" title="Práctica">
+        <div class="nav-group-item nav-group-item--top is-open">
+          <button class="nav-link nav-group nav-group--top is-active-group" type="button" aria-expanded="true" title="Práctica">
             <span class="nav-link__num">07</span>
             <span class="nav-link__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg></span>
             <span class="nav-link__txt" data-i18n="grp.practica">Práctica</span>
@@ -494,7 +494,7 @@
             <a class="nav-link nav-sublink" href="practica-order.html">
               <span data-i18n="practica.order.nav">Reto: Aserciones de una orden</span>
             </a>
-            <a class="nav-link nav-sublink" href="practica-api.html">
+            <a class="nav-link nav-sublink is-active" href="practica-api.html" aria-current="page">
               <span data-i18n="practica.api.nav">Reto: API y verbos HTTP</span>
             </a>
           </div>
@@ -831,44 +831,167 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-python)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg>Python</span></div>
-        <h1 class="section__title" data-i18n="pyqa.page.intro">Por qué Python para QA</h1>
-        <div class="prose" data-i18n-html="pyqa.lead"><p><strong>Python</strong> es el lenguaje más amigable para entrar a la automatización: legible, sin ceremonia y con un ecosistema enorme de testing. Es el que usamos para <strong>Selenium</strong> y <strong>Playwright</strong> en esta guía, así que dominarlo te abre las dos puertas.</p></div>
-        <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
-        <div class="prose" data-i18n-html="pyqa.why"><p>Python lee casi como pseudocódigo en inglés: poca sintaxis, indentación en vez de llaves y baterías incluidas. Para QA eso significa que pasás menos tiempo peleando con el lenguaje y más tiempo escribiendo verificaciones. Además, las herramientas que más vas a usar — <code>pytest</code>, <code>requests</code>, Selenium y Playwright — son de primera clase en Python.</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon">📖</div>
-              <h3 data-i18n="pyqa.t1.title">Legible</h3>
-              <p data-i18n="pyqa.t1.body">Indentación en vez de llaves; el código se lee como una receta. Ideal para arrancar.</p>
+        <span class="section__eyebrow">07</span>
+        <h1 class="section__title" data-i18n="practica.api.nav">Reto: API y verbos HTTP</h1>
+        <div class="prose" data-i18n-html="practica.api.lead"><p>Sin UI: testeá la API de órdenes directo. Ejercé los verbos contra el contrato y verificá los <strong>status codes</strong>.</p></div>
+        <div class="lab">
+          <div class="lab__stage">
+            <div class="lab__stage-head">
+              <span class="lab__dot"></span><span class="lab__dot"></span><span class="lab__dot"></span>
+              <span class="lab__stage-title" data-i18n="practica.sut">Sistema bajo prueba</span>
             </div>
-            <div class="tile">
-              <div class="tile__icon">🧪</div>
-              <h3 data-i18n="pyqa.t2.title">pytest</h3>
-              <p data-i18n="pyqa.t2.body">El runner de testing más usado: assert plano, fixtures y parametrización con muy poco código.</p>
+            <div class="lab__stage-body">
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock__url">API console · api.example.com/orders</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <div class="mock-req">
+              <span class="mock-method mock-method--post">POST</span>
+              <span class="mock-req__path">/orders</span>
+              <span class="mock-status mock-status--ok">201 Created</span>
+              <span class="mock-req__note">create</span>
             </div>
-            <div class="tile">
-              <div class="tile__icon">🌐</div>
-              <h3 data-i18n="pyqa.t3.title">Web + API</h3>
-              <p data-i18n="pyqa.t3.body">Selenium y Playwright manejan el navegador; requests pega a las APIs. Todo desde Python.</p>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">read</span>
             </div>
-            <div class="tile">
-              <div class="tile__icon">🤖</div>
-              <h3 data-i18n="pyqa.t4.title">AI-friendly</h3>
-              <p data-i18n="pyqa.t4.body">Es el lenguaje que mejor generan los asistentes de AI: te dan tests Python listos para revisar.</p>
+            <div class="mock-req">
+              <span class="mock-method mock-method--put">PUT</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">replace · idempotent</span>
             </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--patch">PATCH</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">partial update</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--delete">DELETE</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">204 No Content</span>
+              <span class="mock-req__note">remove · idempotent</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--bad">404 Not Found</span>
+              <span class="mock-req__note">after delete</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/1</span>
+              <span class="mock-status mock-status--bad">401 Unauthorized</span>
+              <span class="mock-req__note">no token</span>
+            </div>
+            <div class="mock-tags-row">
+              <code class="mock-tag mock-tag--good">✓ 2xx happy paths</code>
+              <code class="mock-tag mock-tag--good">✓ 401 / 404 unhappy paths</code>
+              <code class="mock-tag">idempotent: GET · PUT · DELETE</code>
+            </div>
+          </div>
+        </div></div>
+          </div>
+          <div class="lab__panel">
+            <p class="lab__panel-title" data-i18n="practica.tasks">Instrucciones</p>
+            <ol class="lab__tasks">
+              <li class="lab-task">
+                <div class="lab-task__num">1</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="practica.api.t1">Creá una orden con <code>POST /api/orders</code> y verificá el status <code>201</code>.</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="practica.api.w1"><code>POST</code> crea y <strong>no es idempotente</strong>: repetirlo crea otra orden. El <code>201 Created</code> confirma que el recurso nació.</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
+                    <div class="lab-acc__body">
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">post</span><span class="tok-punctuation">('/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-string">', {
+  data: { item: '</span>The Pragmatic Programmer<span class="tok-string">', qty: 1 },
+});
+expect(res.status()).toBe(201);           // Created
+expect(await res.json()).toHaveProperty('</span>id<span class="tok-punctuation">');</span></code></pre>
+        </div></div>
+                  </details>
+                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">Key terms:</span><a class="kt-link" href="api-methods.html">HTTP methods / verbs</a><a class="kt-link" href="api-crud.html">CRUD</a></div>
+                </div>
+              </li>
+              <li class="lab-task">
+                <div class="lab-task__num">2</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="practica.api.t2">Leé la orden con <code>GET /api/orders/42</code> y verificá <code>200</code> y el cuerpo.</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="practica.api.w2"><code>GET</code> es <strong>seguro</strong>: no cambia estado. Validá el <code>200</code> y que el JSON cumpla el contrato (los campos esperados).</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
+                    <div class="lab-acc__body">
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-function">get</span><span class="tok-punctuation">('/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">');
+expect(res.status()).toBe(200);           // OK, safe read
+expect(await res.json()).toMatchObject({ status: '</span>PAID<span class="tok-punctuation">',</span> total<span class="tok-punctuation">:</span> <span class="tok-number">250</span> <span class="tok-punctuation">});</span></code></pre>
+        </div></div>
+                  </details>
+                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">Key terms:</span><a class="kt-link" href="api-safe.html">Safe method</a><a class="kt-link" href="api-status.html">HTTP status codes</a></div>
+                </div>
+              </li>
+              <li class="lab-task">
+                <div class="lab-task__num">3</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="practica.api.t3">Borrá la orden con <code>DELETE /api/orders/42</code> y verificá <code>204</code>.</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="practica.api.w3"><code>DELETE</code> es <strong>idempotente</strong>: borrar dos veces deja el mismo estado final. El <code>204 No Content</code> dice «hecho, sin cuerpo».</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
+                    <div class="lab-acc__body">
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code><span class="tok-keyword">const</span> res <span class="tok-punctuation">=</span> <span class="tok-keyword">await</span> request<span class="tok-punctuation">.</span><span class="tok-keyword">delete</span><span class="tok-punctuation">('/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-string">');
+expect(res.status()).toBe(204);           // No Content
+// idempotent: deleting again leaves the same final state
+const again = await request.delete('</span><span class="tok-punctuation">/</span>api<span class="tok-punctuation">/</span>orders<span class="tok-punctuation">/</span><span class="tok-number">42</span><span class="tok-punctuation">');</span>
+<span class="tok-function">expect</span><span class="tok-punctuation">(</span>again<span class="tok-punctuation">.</span><span class="tok-function">status</span><span class="tok-punctuation">()).</span><span class="tok-function">toBe</span><span class="tok-punctuation">(</span><span class="tok-number">204</span><span class="tok-punctuation">);</span></code></pre>
+        </div></div>
+                  </details>
+                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">Key terms:</span><a class="kt-link" href="api-idempotency.html">Idempotency</a><a class="kt-link" href="api-status.html">HTTP status codes</a></div>
+                </div>
+              </li>
+            </ol>
+          </div>
         </div>
-        <h2 class="block-label" data-i18n="ui.when">Cuándo usarlo</h2>
-        <div class="prose" data-i18n-html="pyqa.when"><p>Usá Python para QA cuando querés una curva de aprendizaje suave, automatizar APIs y UI con una sola base, o trabajar en equipos donde Python ya está presente (data, backend, scripting). Si tu stack es 100% front y Cypress, mirá la sección de TypeScript; para todo lo demás, Python es una apuesta segura.</p></div>
-        <div class="callout" data-i18n-html="pyqa.callout"><strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Python, escribí tu primer script, aprendé la sintaxis esencial y terminá escribiendo tu primer test real. Después saltá a Selenium o Playwright con base sólida.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="fundamentals.html">
+          <a class="page-nav__link page-nav__prev" href="practica-order.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="nav.fundamentals">Tipos de test y pirámide</span>
+            <span class="page-nav__title" data-i18n="practica.order.nav">Reto: Aserciones de una orden</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="python-hola.html">
+          <a class="page-nav__link page-nav__next" href="key-terms.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
+            <span class="page-nav__title" data-i18n="nav.keyterms">Conceptos clave</span>
           </a>
         </nav>
       </div>
