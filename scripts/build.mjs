@@ -21,8 +21,8 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import vm from "node:vm";
 
-import { SECTIONS } from "./lib/model.mjs";
-import { layout, sidebar, sectionMain, indexMain, progressData } from "./lib/render.mjs";
+import { SECTIONS, CONCEPTS } from "./lib/model.mjs";
+import { layout, sidebar, sectionMain, indexMain, conceptMain, progressData } from "./lib/render.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -80,6 +80,28 @@ SECTIONS.forEach((section, index) => {
     main: sectionMain(SECTIONS, index, dict),
   });
   writeFileSync(join(ROOT, "sections", `${section.id}.html`), html);
+});
+
+/* ---- 3. Concept deep-dive sub-pages (sections/<concept.id>.html) ---- */
+// The `full` concepts get a dedicated page linked from the Key-terms popup.
+// They stay out of the main nav (not in SECTIONS) but share its sidebar with
+// Key-terms highlighted as the active page.
+CONCEPTS.filter((c) => c.full).forEach((concept) => {
+  const html = layout({
+    lang: DEFAULT_LANG,
+    dict,
+    titleText: concept.term, // literal term (English), no i18n key
+    descKey: "meta.description",
+    bodyClass: `page--section page--concept page--${concept.id}`,
+    assetPrefix: "../",
+    progressJson,
+    sidebarHtml: sidebar(SECTIONS, "key-terms", dict, {
+      sectionHref,
+      homeHref: "../index.html",
+    }),
+    main: conceptMain(concept, dict),
+  });
+  writeFileSync(join(ROOT, "sections", `${concept.id}.html`), html);
 });
 
 /* ---- summary ---- */

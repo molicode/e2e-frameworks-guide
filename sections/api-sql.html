@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="page.hello">Hola mundo</title>
+  <title>SQL / JOIN</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--playwright-hola-mundo">
+<body class="page--section page--concept page--api-sql">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -194,8 +194,8 @@
             </a>
           </div>
         </div>
-        <div class="nav-group-item is-open">
-          <button class="nav-link nav-group is-active-group" type="button" aria-expanded="true">
+        <div class="nav-group-item">
+          <button class="nav-link nav-group" type="button" aria-expanded="false">
             <span class="nav-link__num">07</span>
             <span data-i18n="nav.playwright">Playwright</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
@@ -204,7 +204,7 @@
             <a class="nav-link nav-sublink" href="playwright-filosofia.html">
               <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
             </a>
-            <a class="nav-link nav-sublink is-active" href="playwright-hola-mundo.html" aria-current="page">
+            <a class="nav-link nav-sublink" href="playwright-hola-mundo.html">
               <span data-i18n="page.hello">Hola mundo</span>
             </a>
             <a class="nav-link nav-sublink" href="playwright-ruta.html">
@@ -381,7 +381,7 @@
             </a>
           </div>
         </div>
-        <a class="nav-link" href="key-terms.html">
+        <a class="nav-link is-active" href="key-terms.html" aria-current="page">
           <span class="nav-link__num">18</span>
           <span data-i18n="nav.keyterms">Conceptos clave</span>
         </a>
@@ -393,173 +393,40 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
-        <h1 class="section__title" data-i18n="page.hello">Hola mundo</h1>
-        <figure class="runner" data-runner data-fw="playwright" data-scenario="login" style="--fw:var(--fw-playwright)">
-          <div class="runner__frame">
-            
-            <div class="runner__head">
-              <span class="runner__fwchip">Playwright</span>
-              <div class="runner__chips"><span class="runner__chip">Python</span><span class="runner__chip">Auto-wait</span><span class="runner__chip">Trace viewer</span></div>
-            </div>
-            <div class="runner__panel">
-              <div class="runner__stage">
-            <div class="mock runner__browser">
-              <div class="mock__bar">
-                <span class="mock__dots"><i></i><i></i><i></i></span>
-                <span class="mock__url">app.test/login</span>
-              </div>
-              <div class="mock__body">
-                <div class="runner__screens">
-                  <div class="runner__screen runner__screen--form">
-                    <div class="mock-card">
-                      <p class="mock-h">Sign in</p>
-                      
-                    <div class="mock-field">
-                      <span class="mock-field__label">Username</span>
-                      <span class="mock-input"><span class="runner__typed" data-at="typing" data-text="admin"></span><span class="runner__caret" aria-hidden="true"></span></span>
-                    </div>
-                      <div class="mock-btn-row"><span class="mock-btn runner__btn">Sign in</span></div>
-                    </div>
-                  </div>
-                  <div class="runner__screen runner__screen--success">
-                    <div class="runner__result">
-                      <span class="runner__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>
-                      <p class="runner__welcome">Welcome</p>
-                      <div class="runner__passed">✓ assertion passed</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div></div>
-              <div class="runner__code">
-              <div class="runner__codebar">
-                <span class="runner__filedot"></span>
-                <span class="runner__file">test_login.py</span>
-                <span class="runner__badge">PYTHON</span>
-              </div>
-              <pre class="runner__pre"><code><span class="runner__line" data-stage="form">page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>app<span class="tok-punctuation">.</span><span class="tok-property">test</span><span class="tok-punctuation">/</span>login<span class="tok-punctuation">")</span></span>
-<span class="runner__line" data-stage="typing">page<span class="tok-punctuation">.</span><span class="tok-function">get_by_label</span><span class="tok-punctuation">("</span>User<span class="tok-string">").fill("</span>admin<span class="tok-punctuation">")</span></span>
-<span class="runner__line" data-stage="submit">page<span class="tok-punctuation">.</span><span class="tok-function">get_by_role</span><span class="tok-punctuation">("</span>button<span class="tok-string">", name="</span>Go<span class="tok-punctuation">").</span><span class="tok-function">click</span><span class="tok-punctuation">()</span></span>
-<span class="runner__line" data-stage="success"><span class="tok-function">expect</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">.</span><span class="tok-function">get_by_text</span><span class="tok-punctuation">("</span>Welcome<span class="tok-punctuation">"))</span></span>
-<span class="runner__line" data-stage="success">    <span class="tok-punctuation">.</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></span></code></pre></div>
-            </div>
-            <div class="runner__player">
-              <button class="runner__play" type="button" aria-label="Reproducir la demo" data-i18n-attr="aria-label:runner.run">
-                <svg class="runner__ico-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-                <svg class="runner__ico-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
-              </button>
-              <div class="runner__timeline"><div class="runner__progress"></div></div>
-              <span class="runner__time">0:00</span>
-              <button class="runner__replay" type="button" aria-label="Reiniciar la demo" data-i18n-attr="aria-label:runner.replay">
-                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>
-              </button>
-            </div>
-          </div>
-          <figcaption class="mock__caption" data-i18n="runner.caption">▶ Demo interactivo: dale play y mirá cómo se ejecuta el código de este framework línea por línea mientras la pantalla reacciona.</figcaption>
-        </figure>
-        <h2 class="block-label" id="pw-rung-1" data-i18n="pw.rung1.title">Setup y primer test</h2>
-        <div class="prose" data-i18n-html="pw.rung1.body"><p>Con <code>pip install pytest-playwright</code> y <code>playwright install</code> tenés todo listo. Cada test es una función <code>def test_nombre(page): …</code> que recibe la fixture <code>page</code>. Corré <code>pytest</code> (headless) o <code>pytest --headed</code> para verlo en vivo.</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">Bash</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Instalá pytest-playwright (el plugin oficial de testing para Python):</span>
-pip install pytest<span class="tok-punctuation">-</span>playwright
-playwright install        <span class="tok-comment"># descarga los binarios del navegador</span>
-
-<span class="tok-comment"># Ejecutá la suite (Chromium headless por defecto):</span>
-pytest
-
-<span class="tok-comment"># Ejecutá en los tres motores, con interfaz gráfica:</span>
-pytest <span class="tok-punctuation">--</span>browser chromium <span class="tok-punctuation">--</span>browser firefox <span class="tok-punctuation">--</span>browser webkit <span class="tok-punctuation">--</span>headed</code><code class="code-i18n code-i18n--en"><span class="tok-comment"># Install pytest-playwright (the official Python test plugin):</span>
-pip install pytest<span class="tok-punctuation">-</span>playwright
-playwright install        <span class="tok-comment"># downloads the browser binaries</span>
-
-<span class="tok-comment"># Run the suite (headless Chromium by default):</span>
-pytest
-
-<span class="tok-comment"># Run across all three engines, headed:</span>
-pytest <span class="tok-punctuation">--</span>browser chromium <span class="tok-punctuation">--</span>browser firefox <span class="tok-punctuation">--</span>browser webkit <span class="tok-punctuation">--</span>headed</code></pre>
+        <div class="cpt-crumb"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
+        <span class="cpt-cat" style="--c:var(--fw-python)" data-i18n="kt.cat.api">API, HTTP y datos</span>
+        <h1 class="section__title cpt-title">SQL / JOIN</h1>
+        <div class="cpt-body">
+          <section class="cpt-sec">
+            <h2 class="block-label" data-i18n="cpt.def">Definición</h2>
+            <div class="cpt-rich cpt-def" data-i18n-html="kt.api.sql"><strong>SQL</strong> consulta bases relacionales (<code>SELECT … WHERE</code>). Un <strong>JOIN</strong> cruza tablas por su clave. Clave para QA: validar en la base lo que la UI dice.</div>
+          </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
+          <div class="cpt-rich" data-i18n-html="cpt.api-sql.ex">Para validar en la base lo que la API dice, consultás con SQL y cruzás tablas con <strong>JOIN</strong>:<pre class="cpt-code"><code>SELECT o.id, o.total, u.email
+FROM orders o
+JOIN users u ON u.id = o.user_id
+WHERE o.status = 'PAID'
+  AND o.total &gt; 1000;</code></pre></div>
+        </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
+          <div class="cpt-rich" data-i18n-html="cpt.api-sql.uc">Sirve para <strong>verificar datos de punta a punta</strong>: creás una orden por la API y confirmás en la base que se guardó bien (monto, estado, relación con el usuario). Detectás inconsistencias que la UI oculta.<pre class="cpt-code"><code>-- tras POST /orders debería existir 1 fila
+SELECT COUNT(*) FROM orders WHERE id = :new_id;  -- espera 1</code></pre></div>
+        </section>
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.refs">Para profundizar</h2>
+          <ul class="ref-list">
+            <li class="ref">
+              <a class="ref__link" href="https://sqlbolt.com/" target="_blank" rel="noopener noreferrer">SQLBolt — Interactive SQL</a>
+            </li>
+            <li class="ref">
+              <a class="ref__link" href="https://developer.mozilla.org/en-US/docs/Glossary/SQL" target="_blank" rel="noopener noreferrer">MDN — SQL</a>
+            </li>
+          </ul>
+        </section>
         </div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">Python</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># test_login.py — pytest-playwright</span>
-<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
-
-
-<span class="tok-keyword">def</span> <span class="tok-function">test_greets_the_user_after_login</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
-    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">")
-
-    # Los locators son lazy y autoesperan a que el elemento sea accionable.
-    page.get_by_label("</span>Username<span class="tok-string">").fill("</span>demo<span class="tok-string">")
-    page.get_by_label("</span>Password<span class="tok-string">").fill("</span>secret<span class="tok-string">")
-    page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign <span class="tok-keyword">in</span><span class="tok-string">").click()
-
-    # Las aserciones web-first reintentan hasta pasar o agotar el timeout.
-    expect(page.get_by_text("</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># test_login.py — pytest-playwright</span>
-<span class="tok-keyword">from</span> playwright<span class="tok-punctuation">.</span><span class="tok-property">sync_api</span> <span class="tok-keyword">import</span> Page<span class="tok-punctuation">,</span> expect
-
-
-<span class="tok-keyword">def</span> <span class="tok-function">test_greets_the_user_after_login</span><span class="tok-punctuation">(</span>page<span class="tok-punctuation">:</span> Page<span class="tok-punctuation">):</span>
-    page<span class="tok-punctuation">.</span><span class="tok-function">goto</span><span class="tok-punctuation">("</span>https<span class="tok-punctuation">://</span>example<span class="tok-punctuation">.</span><span class="tok-property">com</span><span class="tok-punctuation">/</span>login<span class="tok-string">")
-
-    # Locators are lazy and auto-wait for the element to be actionable.
-    page.get_by_label("</span>Username<span class="tok-string">").fill("</span>demo<span class="tok-string">")
-    page.get_by_label("</span>Password<span class="tok-string">").fill("</span>secret<span class="tok-string">")
-    page.get_by_role("</span>button<span class="tok-string">", name="</span>Sign <span class="tok-keyword">in</span><span class="tok-string">").click()
-
-    # Web-first assertions auto-retry until they pass or time out.
-    expect(page.get_by_text("</span>Welcome<span class="tok-punctuation">,</span> demo<span class="tok-punctuation">")).</span><span class="tok-function">to_be_visible</span><span class="tok-punctuation">()</span></code></pre>
-        </div>
-        <figure class="mock-figure">
-        <div class="mock">
-          <div class="mock__bar">
-            <span class="mock__dots"><i></i><i></i><i></i></span>
-            <span class="mock__url">example.com/login</span>
-          </div>
-          <div class="mock__body">
-            <div class="mock-card">
-              <p class="mock-h">Sign in</p>
-              <div class="mock-field">
-                <span class="mock-field__label">Email</span>
-                <span class="mock-input">demo@acme.test</span>
-                <code class="mock-tag">getByLabel("Email")</code>
-              </div>
-              <div class="mock-field">
-                <span class="mock-field__label">Password</span>
-                <span class="mock-input">••••••••</span>
-              </div>
-              <div class="mock-btn-row">
-                <span class="mock-btn">Sign in</span>
-                <code class="mock-tag">getByRole("button", { name: "Sign in" })</code>
-              </div>
-              <p class="mock-after">after login → <strong>Welcome, demo</strong>
-                <code class="mock-tag">getByText("Welcome")</code>
-              </p>
-            </div>
-          </div>
-        </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
-        </figure>
-        <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="playwright-filosofia.html">
-            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
-          </a>
-          <a class="page-nav__link page-nav__next" href="playwright-ruta.html">
-            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.path">Ruta de aprendizaje</span>
-          </a>
-        </nav>
+        <div class="page-nav page-nav--single"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
       </div>
     </main>
   </div>
