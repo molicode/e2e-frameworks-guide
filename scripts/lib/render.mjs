@@ -15,6 +15,7 @@ import { readFileSync } from "node:fs";
 import { SAMPLES } from "./model.mjs";
 import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
+import { renderRunner } from "./runner.mjs";
 
 // Spanish-commented variant of a code sample, if one exists. These live as raw
 // text files under samples.es/<id>.txt (same code, only comments translated) so
@@ -93,6 +94,9 @@ function renderBlock(block, dict) {
 
     case "code":
       return codeBlock(block.sample, dict);
+
+    case "runner":
+      return renderRunner(dict);
 
     case "mock":
       return `
@@ -413,6 +417,7 @@ export function layout({ lang, dict, titleKey, descKey, bodyClass, assetPrefix, 
   <script src="${assetPrefix}i18n/en.js"></script>
   <script src="${assetPrefix}js/theme.js"></script>
   <script src="${assetPrefix}js/page.js"></script>
+  <script src="${assetPrefix}js/runner.js"></script>
 </body>
 </html>
 `;

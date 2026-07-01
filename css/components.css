@@ -980,3 +980,256 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .ref__link { font-weight: 600; }
 .ref__link::after { content: " ↗"; color: var(--text-muted); font-size: 0.85em; }
 .ref__desc { color: var(--text-muted); font-size: var(--fs-sm); }
+
+/* ==========================================================================
+   Interactive "Code Runner" demo (runner.mjs + js/runner.js)
+   ========================================================================== */
+.runner { margin: var(--space-4) 0 var(--space-6); }
+.runner__frame {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+/* ---- framework tabs + progress underline ---- */
+.runner__tabs {
+  position: relative;
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) 0;
+  border-bottom: 1px solid var(--border);
+}
+.runner__tab {
+  appearance: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+}
+.runner__tab:hover { color: var(--text); }
+.runner__tab.is-active {
+  color: #fff;
+  background: var(--fw);
+}
+/* Cypress' brand color flips per theme (dark in light theme, light in dark),
+   so its active-tab text must flip to stay readable. */
+[data-theme="dark"] .runner__tab[data-fw="cypress"].is-active { color: #17202a; }
+.runner__ink {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--fw, var(--accent));
+  border-radius: 2px 2px 0 0;
+  transition: width 0.25s linear, left 0.25s ease;
+}
+
+/* ---- panels (one per framework) ---- */
+.runner__panel { display: none; padding: var(--space-4); }
+.runner__panel.is-active { display: block; }
+.runner__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.runner__chip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: color-mix(in srgb, var(--fw) 75%, var(--text));
+  background: color-mix(in srgb, var(--fw) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fw) 30%, transparent);
+  border-radius: 999px;
+  padding: 2px var(--space-3);
+  white-space: nowrap;
+}
+
+/* ---- simulated browser (reuses .mock look) ---- */
+.runner__stage { margin-bottom: var(--space-4); }
+.runner__browser { margin: 0; }
+.runner__screens { position: relative; display: grid; min-height: 210px; }
+.runner__screen {
+  grid-area: 1 / 1;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.runner__screen--form { opacity: 0; visibility: hidden; width: 100%; }
+.runner__screen--success { opacity: 1; visibility: visible; } /* no-JS: final state */
+.runner__browser[data-stage="form"] .runner__screen--form,
+.runner__browser[data-stage="typing"] .runner__screen--form,
+.runner__browser[data-stage="submit"] .runner__screen--form { opacity: 1; visibility: visible; }
+.runner__browser[data-stage="form"] .runner__screen--success,
+.runner__browser[data-stage="typing"] .runner__screen--success,
+.runner__browser[data-stage="submit"] .runner__screen--success { opacity: 0; visibility: hidden; }
+.runner__screen--form .mock-card { width: 100%; max-width: 320px; }
+
+.runner__input {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.4em;
+}
+.runner__caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 1px;
+  background: var(--fw, var(--accent));
+  opacity: 0;
+  vertical-align: middle;
+}
+.runner__browser[data-stage="form"] .runner__caret,
+.runner__browser[data-stage="typing"] .runner__caret {
+  opacity: 1;
+  animation: runner-blink 1s steps(1) infinite;
+}
+@keyframes runner-blink { 50% { opacity: 0; } }
+.runner__btn { transition: transform 0.12s ease, filter 0.12s ease; }
+.runner__browser[data-stage="submit"] .runner__btn { transform: scale(0.95); filter: brightness(0.88); }
+
+/* success result */
+.runner__result { text-align: center; padding: var(--space-4); }
+.runner__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: var(--success);
+  border: 2px solid var(--success);
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+  margin-bottom: var(--space-3);
+}
+.runner__browser[data-stage="passed"] .runner__check,
+.runner__browser[data-stage="success"] .runner__check { animation: runner-pop 0.4s ease; }
+@keyframes runner-pop { 0% { transform: scale(0.4); opacity: 0; } 60% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+.runner__welcome { font-size: var(--fs-xl, 1.4rem); font-weight: 800; margin: 0 0 var(--space-3); color: var(--text); }
+.runner__passed {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+  border-radius: 999px;
+  padding: 3px var(--space-3);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.runner__browser[data-stage="passed"] .runner__passed { opacity: 1; transform: none; }
+
+/* ---- code panel ---- */
+.runner__code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.runner__codebar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--code-bg) 70%, var(--surface-2));
+}
+.runner__filedot { width: 9px; height: 9px; border-radius: 50%; }
+.runner__file { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--code-text); }
+.runner__badge {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--fw);
+  border-radius: var(--radius-sm);
+  padding: 1px var(--space-2);
+}
+[data-theme="dark"] .runner__panel[data-fw="cypress"] .runner__badge { color: #17202a; }
+.runner__pre {
+  margin: 0;
+  padding: var(--space-3) 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--code-text);
+  white-space: pre;
+}
+.runner__line {
+  display: block;
+  padding: 2px var(--space-4);
+  border-left: 2px solid transparent;
+  transition: background 0.2s ease, opacity 0.25s ease, border-color 0.2s ease;
+}
+.runner__line.is-active {
+  background: color-mix(in srgb, var(--fw) 16%, transparent);
+  border-left-color: var(--fw);
+}
+.runner.is-playing .runner__line:not(.is-active):not(.is-done) { opacity: 0.4; }
+
+/* ---- player controls ---- */
+.runner__player {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.runner__play, .runner__replay {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.runner__play { width: 38px; height: 38px; }
+.runner__replay { width: 30px; height: 30px; color: var(--text-muted); }
+.runner__play:hover, .runner__replay:hover { color: var(--accent); border-color: var(--border-strong); }
+.runner__ico-pause { display: none; }
+.runner.is-playing .runner__ico-play { display: none; }
+.runner.is-playing .runner__ico-pause { display: inline; }
+.runner__timeline {
+  flex: 1;
+  height: 5px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.runner__progress {
+  width: 0;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.25s linear;
+}
+.runner__time {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  min-width: 68px;
+  text-align: right;
+}
+@media (prefers-reduced-motion: reduce) {
+  .runner__screen, .runner__progress, .runner__ink, .runner__line, .runner__passed { transition: none; }
+  .runner__check { animation: none; }
+  .runner__browser[data-stage="form"] .runner__caret,
+  .runner__browser[data-stage="typing"] .runner__caret { animation: none; }
+}
