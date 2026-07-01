@@ -147,14 +147,18 @@
 .nav-link.is-active .nav-link__num {
   color: var(--accent);
 }
-/* The per-group emoji icon — hidden in the full sidebar, shown in the rail. */
+/* The per-group line icon — hidden in the full sidebar, shown in the rail.
+   (Home always shows its icon, since it has no section number.) */
 .nav-link__ico {
   display: none;
-  font-size: 1.15rem;
-  line-height: 1;
+  align-items: center;
+  justify-content: center;
   min-width: 1.5em;
-  text-align: center;
+  color: var(--md-sys-color-on-surface-variant);
 }
+.nav-link__ico .ui-icon { width: 20px; height: 20px; display: block; }
+.nav-link--home .nav-link__ico { display: inline-flex; }
+.nav-link.is-active .nav-link__ico { color: var(--md-sys-color-on-secondary-container); }
 
 /* --------------------------------------------------------------------------
    Collapsible sidebar → icon rail (desktop only). A small toggle shrinks the
@@ -187,7 +191,7 @@
   .nav-collapsed .sidebar-collapse__ico { transform: rotate(180deg); }
 
   /* Show icons, hide labels / numbers / chevrons / nested lists. */
-  .nav-collapsed .nav-link__ico { display: block; }
+  .nav-collapsed .nav-link__ico { display: inline-flex; }
   .nav-collapsed .nav-link__txt,
   .nav-collapsed .nav-chevron,
   .nav-collapsed .nav-link--top .nav-link__num,
@@ -2529,3 +2533,12 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 
 /* Calm headings: normal tracking (no tight negative letter-spacing). */
 .hero__title, .section__title, .lunit__title, .kt-hero__title { letter-spacing: 0 !important; }
+
+/* Line icons (Lucide) sizing per context. */
+.lnode__icon { color: var(--c); line-height: 0; }
+.lnode__ui { width: 34px; height: 34px; display: block; }
+.lunit__icon { display: inline-flex; opacity: 0.9; }
+.lunit__ui { width: 26px; height: 26px; display: block; }
+.block-label--path { display: inline-flex; align-items: center; gap: 8px; }
+.block-label__ico { display: inline-flex; color: var(--md-sys-color-on-surface-variant); }
+.block-label__ico .ui-icon { width: 16px; height: 16px; display: block; }
