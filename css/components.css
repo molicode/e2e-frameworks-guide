@@ -1441,92 +1441,109 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 /* ==========================================================================
    Mock interview thread (js/interview.js)
    ========================================================================== */
-.interview { margin: var(--space-3) 0 var(--space-6); }
-.iv-controls { display: flex; justify-content: flex-end; margin-bottom: var(--space-3); }
+/* ---- Mock interview — Duolingo-style dialogue ---- */
+.interview { margin: var(--space-4) 0 var(--space-6); }
+.iv-controls { display: flex; justify-content: flex-end; margin-bottom: var(--space-4); }
 .iv-toggle-all {
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border-strong);
   background: var(--surface);
   color: var(--text-soft);
   font-family: inherit;
-  font-size: var(--fs-sm);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
   cursor: pointer;
-  transition: color var(--transition), border-color var(--transition);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
 }
-.iv-toggle-all:hover { color: var(--accent); border-color: var(--border-strong); }
-.iv-thread { display: flex; flex-direction: column; gap: var(--space-5); }
+.iv-toggle-all:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.iv-thread { display: flex; flex-direction: column; gap: var(--space-6); }
 
 /* chat rows: interviewer on the left, you on the right */
 .iv-row { display: flex; align-items: flex-start; gap: var(--space-3); }
 .iv-row--q { justify-content: flex-start; }
-.iv-row--a { justify-content: flex-end; margin-top: var(--space-3); animation: iv-in 0.25s ease; }
+.iv-row--a { justify-content: flex-end; margin-top: var(--space-4); animation: iv-in 0.25s ease; }
 .iv-av-wrap {
   flex: none;
-  width: 66px;
+  width: 62px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
+  gap: 5px;
 }
-.iv-av { border-radius: 50%; box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.4); }
+.iv-av { border-radius: 50%; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.10); }
 .iv-who {
   font-family: var(--font-mono);
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--accent);
   text-align: center;
   line-height: 1.15;
   overflow-wrap: anywhere;
 }
-.iv-who--a { color: var(--success); }
+.iv-who--a { color: var(--secondary); }
 
 /* the candidate's answer area (bubble + reveal button, right side) */
 .iv-answer {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: var(--space-2);
-  max-width: 78%;
+  gap: var(--space-3);
+  max-width: 80%;
 }
 .iv-bubble[hidden] { display: none; }
 .iv-bubble {
   position: relative;
-  max-width: 78%;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  max-width: 80%;
+  border: 2px solid var(--border-strong);
+  border-radius: 20px;
   padding: var(--space-3) var(--space-4);
+  line-height: 1.55;
 }
 .iv-answer .iv-bubble { max-width: 100%; }
-.iv-bubble--q { background: var(--surface-2); border-color: color-mix(in srgb, var(--accent) 30%, var(--border)); border-top-left-radius: 4px; }
-.iv-bubble--a { background: color-mix(in srgb, var(--success) 8%, var(--surface)); border-color: color-mix(in srgb, var(--success) 35%, var(--border)); border-top-right-radius: 4px; }
-/* little speech-bubble tails toward each avatar */
-.iv-bubble::before { content: ""; position: absolute; top: 12px; width: 0; height: 0; border: 7px solid transparent; }
-.iv-bubble--q::before { left: -13px; border-right-color: color-mix(in srgb, var(--accent) 30%, var(--border)); }
-.iv-bubble--a::before { right: -13px; border-left-color: color-mix(in srgb, var(--success) 35%, var(--border)); }
+.iv-bubble--q { background: var(--surface); border-bottom-left-radius: 5px; }
+.iv-bubble--a {
+  background: color-mix(in srgb, var(--secondary) 12%, var(--surface));
+  border-color: color-mix(in srgb, var(--secondary) 45%, var(--border-strong));
+  border-bottom-right-radius: 5px;
+}
+/* speech-bubble tails toward each avatar (border triangle + inner fill) */
+.iv-bubble::before, .iv-bubble::after { content: ""; position: absolute; top: 15px; width: 0; height: 0; border: 9px solid transparent; }
+.iv-bubble--q::before { left: -18px; border-right-color: var(--border-strong); }
+.iv-bubble--q::after  { left: -14px; border-right-color: var(--surface); }
+.iv-bubble--a::before { right: -18px; border-left-color: color-mix(in srgb, var(--secondary) 45%, var(--border-strong)); }
+.iv-bubble--a::after  { right: -14px; border-left-color: color-mix(in srgb, var(--secondary) 12%, var(--surface)); }
 @keyframes iv-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 .iv-text { margin: 0; color: var(--text-soft); }
-.iv-bubble--q .iv-text { color: var(--text); font-weight: 600; }
+.iv-bubble--q .iv-text { color: var(--text); font-weight: 650; }
+.iv-bubble--a .iv-text { color: var(--text); }
+/* reveal = the signature Duolingo 3D button */
 .iv-reveal {
   appearance: none;
   align-self: flex-end;
-  border: 1px solid color-mix(in srgb, var(--success) 45%, var(--border));
-  background: color-mix(in srgb, var(--success) 8%, var(--surface));
-  color: var(--success);
+  border: none;
+  background: var(--secondary);
+  color: #fff;
   font-family: inherit;
   font-size: var(--fs-xs);
-  font-weight: 700;
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-3);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 14px;
+  padding: 10px 18px;
   cursor: pointer;
-  transition: border-color var(--transition), background var(--transition);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--secondary) 55%, #000);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter var(--transition);
 }
-.iv-reveal:hover { border-color: var(--success); background: color-mix(in srgb, var(--success) 16%, transparent); }
-@media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { width: 46px; } }
-@media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } }
+.iv-reveal:hover { filter: brightness(1.06); }
+.iv-reveal:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--secondary) 55%, #000); }
+@media (max-width: 520px) { .iv-bubble { max-width: 100%; } .iv-av-wrap { width: 52px; } .iv-av { width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .iv-row--a { animation: none; } .iv-reveal:active { transform: none; } }
 
 /* ==========================================================================
    Gamification: progress badge, toasts, confetti, sidebar ticks (js/progress.js)
@@ -2314,9 +2331,17 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 .seg-toggle__btn[aria-pressed="true"] { box-shadow: var(--elev-1); }
 
-.cta-btn { border-radius: 999px; box-shadow: var(--elev-1); }
-.cta-btn:hover { box-shadow: var(--elev-2); }
-.cta-btn:active { transform: translateY(0); box-shadow: var(--elev-1); }
+/* Signature Duolingo 3D press: a solid coloured "ledge" under the button. */
+.cta-btn {
+  border-radius: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 0 var(--accent-strong);
+}
+.cta-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--accent-strong); filter: brightness(1.04); }
+.cta-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--accent-strong); }
+@media (prefers-reduced-motion: reduce) { .cta-btn:active, .cta-btn:hover { transform: none; } }
 
 /* Copy button (in code blocks): rounder + state layer. */
 .copy-btn { border-radius: 999px; }
