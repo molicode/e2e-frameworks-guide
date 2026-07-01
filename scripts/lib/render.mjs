@@ -808,8 +808,9 @@ function learningPath(sections, dict, sectionHref) {
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">${escText(t(dict, "game.start"))}</span>
                   <span class="lnode__count" aria-hidden="true"></span>
+                  <span class="lnode__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 15.5 5.5 9 7 7.5l5 5 5-5L18.5 9z"/></svg></span>
                 </button>
-                <span class="lnode__label" data-i18n="${top.label}">${label}<span class="lnode__caret" aria-hidden="true">▾</span></span>
+                <span class="lnode__label" data-i18n="${top.label}">${label}</span>
                 <ol class="lnode__children">${children}
                 </ol>
               </li>`;
@@ -850,13 +851,6 @@ export function indexMain(sections, dict, { sectionHref }) {
             <p class="path-hero__msg" id="path-msg" data-i18n="home.lead">${escText(t(dict, "home.lead"))}</p>
             <a class="cta-btn" id="path-cta" href="${sectionHref("intro")}" data-i18n="home.cta">${escText(t(dict, "home.cta"))}</a>
           </div>
-        </section>
-        <section class="achievements" id="achievements" hidden>
-          <div class="ach-head">
-            <h2 class="block-label" data-i18n="game.achievements">${escText(t(dict, "game.achievements"))}</h2>
-            <span class="ach-count" id="ach-count"></span>
-          </div>
-          <div class="ach-grid" id="ach-grid"></div>
         </section>
         <h2 class="block-label" data-i18n="game.pathTitle">${escText(t(dict, "game.pathTitle"))}</h2>
         ${learningPath(sections, dict, sectionHref)}`;
