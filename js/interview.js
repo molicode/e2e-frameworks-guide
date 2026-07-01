@@ -23,6 +23,15 @@
     function answerOf(turn) { return qs(".iv-bubble--a", turn); }
     function revealBtn(turn) { return qs(".iv-reveal", turn); }
 
+    var cheered = false;
+    function maybeCheer() {
+      if (cheered) return;
+      var allOpen = turns.every(function (t) { return answerOf(t) && !answerOf(t).hidden; });
+      if (allOpen) {
+        cheered = true;
+        if (global.QAGame && global.I18n) global.QAGame.celebrate("interview", global.I18n.t("game.interviewDone"), "🎤");
+      }
+    }
     function setOpen(turn, open) {
       var a = answerOf(turn);
       var btn = revealBtn(turn);
@@ -33,6 +42,7 @@
         btn.setAttribute("aria-expanded", open ? "true" : "false");
         btn.textContent = global.I18n.t(open ? "iv.hide" : "iv.reveal");
       }
+      if (open) maybeCheer();
     }
 
     turns.forEach(function (turn) {

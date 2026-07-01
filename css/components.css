@@ -1540,3 +1540,35 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   .confetti-bit { display: none; }
   .progress-badge__fill { transition: none; }
 }
+
+/* ==========================================================================
+   Achievements panel (home) — js/progress.js
+   ========================================================================== */
+.achievements { margin: var(--space-5) 0 var(--space-6); }
+.ach-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.ach-head .block-label { margin-top: 0; }
+.ach-count { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; color: var(--accent); }
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: var(--space-3);
+}
+.ach {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-3) var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.ach__icon { font-size: 1.7rem; line-height: 1; }
+.ach__name { font-size: var(--fs-xs); font-weight: 600; color: var(--text-soft); }
+.ach--on {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+.ach--on .ach__name { color: var(--text); }
+.ach--off { opacity: 0.55; filter: grayscale(0.8); }

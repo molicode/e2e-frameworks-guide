@@ -26,9 +26,11 @@
       s.visited = s.visited || [];
       s.milestones = s.milestones || [];
       s.sections = s.sections || [];
+      s.flags = s.flags || {};
       return s;
-    } catch (e) { return { visited: [], milestones: [], sections: [] }; }
+    } catch (e) { return { visited: [], milestones: [], sections: [], flags: {} }; }
   }
+  function has(arr, v) { return arr && arr.indexOf(v) !== -1; }
   function save(s) { try { global.localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) { /* private mode */ } }
 
   function currentId() {
@@ -139,4 +141,53 @@
   queue.slice(0, 3).forEach(function (item, i) {
     global.setTimeout(function () { toast(item.msg, item.opts); }, 700 + i * 900);
   });
+
+  /* ---- achievements (badges) — a collectible view of the store ---- */
+  var ACH = [
+    { id: "firststep", icon: "👣", earned: function (s) { return s.visited.length >= 1; } },
+    { id: "selenium", icon: "🕸️", earned: function (s) { return has(s.sections, "selenium"); } },
+    { id: "cypress", icon: "🌲", earned: function (s) { return has(s.sections, "cypress"); } },
+    { id: "playwright", icon: "🎭", earned: function (s) { return has(s.sections, "playwright"); } },
+    { id: "robot", icon: "🤖", earned: function (s) { return has(s.sections, "robot"); } },
+    { id: "polyglot", icon: "🐍", earned: function (s) { return has(s.sections, "python") && has(s.sections, "typescript"); } },
+    { id: "flashcards", icon: "🃏", earned: function (s) { return !!s.flags.deck; } },
+    { id: "interview", icon: "🎤", earned: function (s) { return !!s.flags.interview; } },
+    { id: "halfway", icon: "🔥", earned: function (s) { return has(s.milestones, 50); } },
+    { id: "champion", icon: "🏆", earned: function (s) { return has(s.milestones, 100); } },
+  ];
+
+  function renderPanel() {
+    var section = document.getElementById("achievements");
+    var grid = document.getElementById("ach-grid");
+    if (!section || !grid) return;
+    var s = load();
+    var earned = 0;
+    grid.innerHTML = ACH.map(function (a) {
+      var on = a.earned(s);
+      if (on) earned++;
+      var name = t("game.ach." + a.id);
+      return '<div class="ach ' + (on ? "ach--on" : "ach--off") + '" title="' +
+        (on ? name : t("game.locked")).replace(/"/g, "&quot;") + '">' +
+        '<span class="ach__icon" aria-hidden="true">' + (on ? a.icon : "🔒") + "</span>" +
+        '<span class="ach__name">' + name + "</span></div>";
+    }).join("");
+    var count = document.getElementById("ach-count");
+    if (count) count.textContent = earned + " / " + ACH.length;
+    section.hidden = false;
+  }
+  renderPanel();
+  if (global.I18n && global.I18n.onChange) global.I18n.onChange(renderPanel);
+
+  /* ---- API for the flashcards / interview pages to cheer a one-off action ---- */
+  global.QAGame = {
+    celebrate: function (flag, msg, icon) {
+      var s = load();
+      s.flags = s.flags || {};
+      if (s.flags[flag]) return; // once per browser
+      s.flags[flag] = true;
+      save(s);
+      toast(msg + " " + cheer(), { icon: icon || "🎉", confetti: true });
+      renderPanel();
+    },
+  };
 })(window);
