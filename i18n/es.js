@@ -1767,6 +1767,7 @@ I18n.register("es", {
 
   /* ---- Menú de conceptos + páginas de detalle ---- */
   "kt.hint": "Tocá un concepto para ver su definición. Los marcados con ★ tienen una página de detalle con ejemplo y caso de uso.",
+  "kt.overview": "Todos los conceptos",
   "kt.more": "Ver más →",
   "kt.close": "Cerrar",
   "kt.deep": "Tiene página de detalle",

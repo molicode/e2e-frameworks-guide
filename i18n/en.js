@@ -1766,6 +1766,7 @@ I18n.register("en", {
 
   /* ---- Concept menu + detail pages ---- */
   "kt.hint": "Tap a concept to see its definition. The ones marked ★ have a detail page with an example and a use case.",
+  "kt.overview": "All concepts",
   "kt.more": "See more →",
   "kt.close": "Close",
   "kt.deep": "Has a detail page",
