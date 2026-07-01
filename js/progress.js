@@ -119,8 +119,63 @@
       if (vs[pageIdFromHref(a.getAttribute("href"))]) a.classList.add("is-visited");
     });
   }
+
+  // ---- Duolingo learning path (home page): mark done nodes, highlight the
+  //      first unfinished one as "start here", update the summary ring/CTA. ----
+  function decoratePath() {
+    var path = document.querySelector(".lpath");
+    if (!path) return;
+    var vs = visitedSet();
+    var nodes = Array.prototype.slice.call(path.querySelectorAll(".lnode"));
+    var current = null;
+    Array.prototype.forEach.call(path.querySelectorAll(".lunit"), function (u) {
+      u.classList.remove("is-active-unit");
+    });
+    nodes.forEach(function (li) {
+      var pages = (li.getAttribute("data-pages") || "").split(",").filter(Boolean);
+      var done = pages.length > 0 && pages.every(function (id) { return vs[id]; });
+      li.classList.toggle("is-done", done);
+      li.classList.remove("is-current");
+      if (!done && !current) current = li;
+    });
+    var link = current && current.querySelector(".lnode__btn");
+    if (current) {
+      current.classList.add("is-current");
+      var unit = current.closest(".lunit");
+      if (unit) {
+        unit.classList.add("is-active-unit");
+        var cta = unit.querySelector(".lunit__cta");
+        if (cta && link) cta.setAttribute("href", link.getAttribute("href"));
+      }
+    }
+    var pct = pctNow();
+    var fill = document.getElementById("path-fill");
+    if (fill) {
+      var Cc = 2 * Math.PI * 15.5;
+      fill.style.strokeDasharray = Cc.toFixed(1);
+      fill.style.strokeDashoffset = (Cc * (1 - pct / 100)).toFixed(1);
+    }
+    var pctEl = document.getElementById("path-pct");
+    if (pctEl) pctEl.textContent = pct + "%";
+    // For the dynamic message + CTA we drop their data-i18n so the global
+    // re-translation (which runs after us) can't clobber the overridden text;
+    // we re-render them here on every language change instead.
+    var msg = document.getElementById("path-msg");
+    if (msg && pct > 0) {
+      msg.removeAttribute("data-i18n");
+      msg.textContent = t("game.keepGoing").replace("{p}", pct) + " " + cheer();
+    }
+    var heroCta = document.getElementById("path-cta");
+    if (heroCta && link && pct > 0) {
+      heroCta.removeAttribute("data-i18n");
+      heroCta.setAttribute("href", link.getAttribute("href"));
+      heroCta.textContent = t("game.continue");
+    }
+  }
+
   refreshBadge();
   refreshTicks();
+  decoratePath();
   if (badge) {
     badge.addEventListener("click", function () {
       toast(t("game.keepGoing").replace("{p}", pctNow()) + " " + cheer(), { icon: "🏆" });
@@ -209,7 +264,10 @@
     section.hidden = false;
   }
   renderPanel();
-  if (global.I18n && global.I18n.onChange) global.I18n.onChange(renderPanel);
+  if (global.I18n && global.I18n.onChange) {
+    global.I18n.onChange(renderPanel);
+    global.I18n.onChange(decoratePath); // re-apply dynamic path text after re-translation
+  }
 
   /* ---- API for the flashcards / interview pages to cheer a one-off action ---- */
   global.QAGame = {
