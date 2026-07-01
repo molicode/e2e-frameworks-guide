@@ -2207,6 +2207,27 @@ function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components, verb
     { ...grp, id: `${id}-componentes`, navKey: "page.components", blocks: componentsBlocks(components) },
     { ...grp, id: `${id}-criticos`, navKey: "page.cases", blocks: casesBlocks(cases) },
     { ...grp, id: `${id}-verbos`, navKey: "page.verbs", blocks: verbsBlocks(verbs) },
+    {
+      ...grp, id: `${id}-flashcards`, navKey: "page.flashcards",
+      blocks: [
+        { type: "prose", html: "page.flashcards.lead" },
+        { type: "label", text: "fc.title" },
+        {
+          type: "flashcards",
+          cards: Array.from({ length: 10 }, (_, i) => ({ q: `fc.${id}.q${i + 1}`, a: `fc.${id}.a${i + 1}` })),
+        },
+      ],
+    },
+    {
+      ...grp, id: `${id}-entrevista`, navKey: "page.interview",
+      blocks: [
+        { type: "prose", html: "page.interview.lead" },
+        {
+          type: "interview",
+          items: Array.from({ length: 6 }, (_, i) => ({ q: `iv.${id}.q${i + 1}`, a: `iv.${id}.a${i + 1}` })),
+        },
+      ],
+    },
   ];
 }
 
@@ -3188,15 +3209,13 @@ const VERB_KEYS = ["get", "post", "put", "patch", "delete", "head", "options"];
 // its key concepts. For a framework GROUP the deck lands on its last sub-page.
 const flashcard = (k, n) =>
   Array.from({ length: n }, (_, i) => ({ q: `fc.${k}.q${i + 1}`, a: `fc.${k}.a${i + 1}` }));
+// Non-framework study sections keep a small deck at their end. The four E2E
+// frameworks instead get a dedicated Flashcards page (see frameworkGroup).
 const DECKS = {
   intro: "intro",
   fundamentals: "fundamentals",
   python: "python-componente",
   typescript: "ts-componente",
-  selenium: "selenium-verbos",
-  cypress: "cypress-verbos",
-  playwright: "playwright-verbos",
-  robot: "robot-verbos",
   bdd: "bdd-practica",
   comparison: "comparison",
   perf: "perf-locust",

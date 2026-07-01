@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="pyqa.page.intro">Por qué Python para QA</title>
+  <title data-i18n="page.interview">Mock interview</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--python-intro">
+<body class="page--section page--playwright-entrevista">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -69,28 +69,10 @@
           <span class="nav-link__num">02</span>
           <span data-i18n="nav.fundamentals">Fundamentos</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="python-intro.html">
+        <a class="nav-link nav-group" href="python-intro.html">
           <span class="nav-link__num">03</span>
           <span data-i18n="nav.pyqa">Python para QA</span>
         </a>
-          <a class="nav-link nav-sublink is-active" href="python-intro.html" aria-current="page">
-            <span data-i18n="pyqa.page.intro">Por qué Python para QA</span>
-          </a>
-          <a class="nav-link nav-sublink" href="python-hola.html">
-            <span data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="python-fundamentos.html">
-            <span data-i18n="pyqa.page.fund">Fundamentos del lenguaje</span>
-          </a>
-          <a class="nav-link nav-sublink" href="python-datos.html">
-            <span data-i18n="pyqa.page.datos">Colecciones y JSON</span>
-          </a>
-          <a class="nav-link nav-sublink" href="python-pytest.html">
-            <span data-i18n="pyqa.page.pytest">pytest: tu primer test</span>
-          </a>
-          <a class="nav-link nav-sublink" href="python-componente.html">
-            <span data-i18n="pyqa.page.comp">Tu primer componente testeado</span>
-          </a>
         <a class="nav-link nav-group" href="ts-intro.html">
           <span class="nav-link__num">04</span>
           <span data-i18n="nav.tsqa">TypeScript para QA</span>
@@ -103,10 +85,34 @@
           <span class="nav-link__num">06</span>
           <span data-i18n="nav.cypress">Cypress</span>
         </a>
-        <a class="nav-link nav-group" href="playwright-filosofia.html">
+        <a class="nav-link nav-group is-active-group" href="playwright-filosofia.html">
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
+          <a class="nav-link nav-sublink" href="playwright-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-verbos.html">
+            <span data-i18n="page.verbs">Verbos HTTP</span>
+          </a>
+          <a class="nav-link nav-sublink" href="playwright-flashcards.html">
+            <span data-i18n="page.flashcards">Flashcards</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="playwright-entrevista.html" aria-current="page">
+            <span data-i18n="page.interview">Mock interview</span>
+          </a>
         <a class="nav-link nav-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
@@ -159,44 +165,90 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-python)">Python</span></div>
-        <h1 class="section__title" data-i18n="pyqa.page.intro">Por qué Python para QA</h1>
-        <div class="prose" data-i18n-html="pyqa.lead"><p><strong>Python</strong> es el lenguaje más amigable para entrar a la automatización: legible, sin ceremonia y con un ecosistema enorme de testing. Es el que usamos para <strong>Selenium</strong> y <strong>Playwright</strong> en esta guía, así que dominarlo te abre las dos puertas.</p></div>
-        <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
-        <div class="prose" data-i18n-html="pyqa.why"><p>Python lee casi como pseudocódigo en inglés: poca sintaxis, indentación en vez de llaves y baterías incluidas. Para QA eso significa que pasás menos tiempo peleando con el lenguaje y más tiempo escribiendo verificaciones. Además, las herramientas que más vas a usar — <code>pytest</code>, <code>requests</code>, Selenium y Playwright — son de primera clase en Python.</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon">📖</div>
-              <h3 data-i18n="pyqa.t1.title">Legible</h3>
-              <p data-i18n="pyqa.t1.body">Indentación en vez de llaves; el código se lee como una receta. Ideal para arrancar.</p>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-playwright)">Playwright</span><span class="lang-pill" title="Lenguaje de los ejemplos">Python</span></div>
+        <h1 class="section__title" data-i18n="page.interview">Mock interview</h1>
+        <div class="prose" data-i18n-html="page.interview.lead"><p>Una entrevista simulada: preguntas típicas de este framework. Leé cada una, pensá cómo responderías y revelá una respuesta de referencia.</p></div>
+        <div class="interview" data-interview>
+          <div class="iv-controls">
+            <button class="iv-toggle-all" type="button" data-i18n="iv.showAll">Mostrar todas</button>
+          </div>
+          <div class="iv-thread">
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
+                <p class="iv-text" data-i18n="iv.playwright.q1">¿Qué es el auto-waiting y por qué importa?</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
+                <p class="iv-text" data-i18n="iv.playwright.a1">Playwright espera a que el elemento esté accionable antes de actuar; reduce flakiness y elimina los sleeps manuales.</p>
+              </div>
             </div>
-            <div class="tile">
-              <div class="tile__icon">🧪</div>
-              <h3 data-i18n="pyqa.t2.title">pytest</h3>
-              <p data-i18n="pyqa.t2.body">El runner de testing más usado: assert plano, fixtures y parametrización con muy poco código.</p>
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
+                <p class="iv-text" data-i18n="iv.playwright.q2">¿Cómo depurás un test que falla en CI pero no localmente?</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
+                <p class="iv-text" data-i18n="iv.playwright.a2">Con el trace viewer: reviso DOM, red y screenshots paso a paso de la corrida que falló.</p>
+              </div>
             </div>
-            <div class="tile">
-              <div class="tile__icon">🌐</div>
-              <h3 data-i18n="pyqa.t3.title">Web + API</h3>
-              <p data-i18n="pyqa.t3.body">Selenium y Playwright manejan el navegador; requests pega a las APIs. Todo desde Python.</p>
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
+                <p class="iv-text" data-i18n="iv.playwright.q3">¿Qué locators preferís y por qué?</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
+                <p class="iv-text" data-i18n="iv.playwright.a3">get_by_role / get_by_label / get_by_text: resilientes y centrados en el usuario, en vez de CSS o XPath frágil.</p>
+              </div>
             </div>
-            <div class="tile">
-              <div class="tile__icon">🤖</div>
-              <h3 data-i18n="pyqa.t4.title">AI-friendly</h3>
-              <p data-i18n="pyqa.t4.body">Es el lenguaje que mejor generan los asistentes de AI: te dan tests Python listos para revisar.</p>
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
+                <p class="iv-text" data-i18n="iv.playwright.q4">¿Cómo testeás en varios navegadores?</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
+                <p class="iv-text" data-i18n="iv.playwright.a4">Configuro proyectos para Chromium, Firefox y WebKit; los mismos tests corren en cada motor.</p>
+              </div>
             </div>
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
+                <p class="iv-text" data-i18n="iv.playwright.q5">¿Cómo manejás la autenticación entre tests?</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
+                <p class="iv-text" data-i18n="iv.playwright.a5">Guardo el storage state tras loguear una vez y lo reuso, evitando el login en cada test.</p>
+              </div>
+            </div>
+            <div class="iv-turn">
+              <div class="iv-bubble iv-bubble--q">
+                <span class="iv-who" data-i18n="iv.role.q">Entrevistador</span>
+                <p class="iv-text" data-i18n="iv.playwright.q6">¿Cómo testeás una API con Playwright?</p>
+                <button class="iv-reveal" type="button" data-i18n="iv.reveal">Ver respuesta</button>
+              </div>
+              <div class="iv-bubble iv-bubble--a" hidden>
+                <span class="iv-who iv-who--a" data-i18n="iv.role.a">Tu respuesta</span>
+                <p class="iv-text" data-i18n="iv.playwright.a6">Con el request context (api.get/post/...), sin abrir navegador, verificando el status.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <h2 class="block-label" data-i18n="ui.when">Cuándo usarlo</h2>
-        <div class="prose" data-i18n-html="pyqa.when"><p>Usá Python para QA cuando querés una curva de aprendizaje suave, automatizar APIs y UI con una sola base, o trabajar en equipos donde Python ya está presente (data, backend, scripting). Si tu stack es 100% front y Cypress, mirá la sección de TypeScript; para todo lo demás, Python es una apuesta segura.</p></div>
-        <div class="callout" data-i18n-html="pyqa.callout"><strong>Cómo seguir esta sección:</strong> va de 0 a hero en orden. Instalá Python, escribí tu primer script, aprendé la sintaxis esencial y terminá escribiendo tu primer test real. Después saltá a Selenium o Playwright con base sólida.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="fundamentals.html">
+          <a class="page-nav__link page-nav__prev" href="playwright-flashcards.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="nav.fundamentals">Fundamentos</span>
+            <span class="page-nav__title" data-i18n="page.flashcards">Flashcards</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="python-hola.html">
+          <a class="page-nav__link page-nav__next" href="robot-filosofia.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="pyqa.page.hola">Instalación y Hola mundo</span>
+            <span class="page-nav__title" data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
           </a>
         </nav>
       </div>

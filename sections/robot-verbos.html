@@ -111,6 +111,12 @@
           <a class="nav-link nav-sublink is-active" href="robot-verbos.html" aria-current="page">
             <span data-i18n="page.verbs">Verbos HTTP</span>
           </a>
+          <a class="nav-link nav-sublink" href="robot-flashcards.html">
+            <span data-i18n="page.flashcards">Flashcards</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-entrevista.html">
+            <span data-i18n="page.interview">Mock interview</span>
+          </a>
         <a class="nav-link nav-group" href="bdd-intro.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
@@ -645,77 +651,14 @@ Every HTTP verb
     OPTIONS On Session    api    <span class="tok-punctuation">/</span>orders</code></pre>
         </div>
         <div class="callout" data-i18n-html="verbs.callout"><strong>Regla práctica:</strong> verificá <em>primero</em> el status y <em>después</em> el cuerpo. Y testeá los caminos infelices: sin token → <code>401</code>, recurso de otro usuario → <code>403</code>, id inexistente → <code>404</code>. Un 200 que debería ser un 404 es un bug.</div>
-        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
-        <div class="flashcards" data-flashcards>
-          <div class="fc-stage">
-            <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.robot.q1">¿Qué estilo de sintaxis usa Robot Framework?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.robot.a1">Keyword-driven: los tests se escriben con keywords legibles, casi lenguaje natural.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.robot.q2">¿Qué es una librería en Robot (por ejemplo, SeleniumLibrary)?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.robot.a2">Un conjunto de keywords que aporta capacidades (navegador, HTTP, mobile, etc.).</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.robot.q3">¿Cómo se referencia una variable?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.robot.a3">Con la sintaxis ${nombre}; se asigna desde keywords o desde una sección de variables.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
-              <div class="fc-card__inner">
-                <div class="fc-face fc-face--q">
-                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.robot.q4">¿Para quién es ideal Robot?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
-                </div>
-                <div class="fc-face fc-face--a" aria-hidden="true">
-                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.robot.a4">Equipos que quieren tests legibles por no-programadores y reutilización por keywords.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fc-controls">
-            <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
-            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
-            <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
-            <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
-          </div>
-        </div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="robot-criticos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
             <span class="page-nav__title" data-i18n="page.cases">Casos críticos</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="bdd-intro.html">
+          <a class="page-nav__link page-nav__next" href="robot-flashcards.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="bdd.page.intro">Qué es BDD y por qué</span>
+            <span class="page-nav__title" data-i18n="page.flashcards">Flashcards</span>
           </a>
         </nav>
       </div>
@@ -729,5 +672,6 @@ Every HTTP verb
   <script src="../js/page.js"></script>
   <script src="../js/runner.js"></script>
   <script src="../js/flashcards.js"></script>
+  <script src="../js/interview.js"></script>
 </body>
 </html>

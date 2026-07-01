@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="ci.page.gates">Quality gates y reportes</title>
+  <title data-i18n="page.flashcards">Flashcards</title>
   <script>
     (function () {
       try {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--ci-gates">
+<body class="page--section page--robot-flashcards">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -89,10 +89,34 @@
           <span class="nav-link__num">07</span>
           <span data-i18n="nav.playwright">Playwright</span>
         </a>
-        <a class="nav-link nav-group" href="robot-filosofia.html">
+        <a class="nav-link nav-group is-active-group" href="robot-filosofia.html">
           <span class="nav-link__num">08</span>
           <span data-i18n="nav.robot">Robot Framework</span>
         </a>
+          <a class="nav-link nav-sublink" href="robot-filosofia.html">
+            <span data-i18n="page.philosophy">Filosofía y cuándo usarlo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-hola-mundo.html">
+            <span data-i18n="page.hello">Hola mundo</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-ruta.html">
+            <span data-i18n="page.path">Ruta de aprendizaje</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-componentes.html">
+            <span data-i18n="page.components">Componentes clave</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-criticos.html">
+            <span data-i18n="page.cases">Casos críticos</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-verbos.html">
+            <span data-i18n="page.verbs">Verbos HTTP</span>
+          </a>
+          <a class="nav-link nav-sublink is-active" href="robot-flashcards.html" aria-current="page">
+            <span data-i18n="page.flashcards">Flashcards</span>
+          </a>
+          <a class="nav-link nav-sublink" href="robot-entrevista.html">
+            <span data-i18n="page.interview">Mock interview</span>
+          </a>
         <a class="nav-link nav-group" href="bdd-intro.html">
           <span class="nav-link__num">09</span>
           <span data-i18n="nav.bdd">BDD: Gherkin y Cucumber</span>
@@ -117,22 +141,10 @@
           <span class="nav-link__num">14</span>
           <span data-i18n="nav.best">Buenas prácticas</span>
         </a>
-        <a class="nav-link nav-group is-active-group" href="ci-intro.html">
+        <a class="nav-link nav-group" href="ci-intro.html">
           <span class="nav-link__num">15</span>
           <span data-i18n="nav.ci">CI/CD para QA</span>
         </a>
-          <a class="nav-link nav-sublink" href="ci-intro.html">
-            <span data-i18n="ci.page.intro">Por qué QA vive en el pipeline</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ci-pipeline.html">
-            <span data-i18n="ci.page.pipeline">Un pipeline de ejemplo</span>
-          </a>
-          <a class="nav-link nav-sublink" href="ci-matrix.html">
-            <span data-i18n="ci.page.matrix">Paralelización y matrix</span>
-          </a>
-          <a class="nav-link nav-sublink is-active" href="ci-gates.html" aria-current="page">
-            <span data-i18n="ci.page.gates">Quality gates y reportes</span>
-          </a>
         <a class="nav-link nav-group" href="skills-intro.html">
           <span class="nav-link__num">16</span>
           <span data-i18n="nav.skills">Habilidades del QA</span>
@@ -153,53 +165,9 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-ci)">CI/CD</span></div>
-        <h1 class="section__title" data-i18n="ci.page.gates">Quality gates y reportes</h1>
-        <div class="prose" data-i18n-html="ci.gate.lead"><p>El <strong>quality gate</strong> es lo que convierte a los tests en una barrera real: una serie de chequeos que <em>deben</em> pasar para poder mergear o desplegar. Si uno falla, se corta.</p></div>
-        <div class="prose" data-i18n-html="ci.gate.body"><p>Cada comando que devuelve un código de salida ≠ 0 <strong>falla el job</strong>: tests rojos, cobertura por debajo del umbral (<code>--cov-fail-under</code>), un threshold de performance roto (k6). En GitHub los configurás como <strong>required checks</strong> con protección de rama, así nadie puede saltearlos.</p></div>
-        <div class="code-block">
-          <div class="code-block__head">
-            <span class="code-block__lang">Bash</span>
-            <button class="copy-btn" type="button">
-              <span data-i18n="ui.copy">Copiar</span>
-            </button>
-          </div>
-          <pre><code class="code-i18n code-i18n--es"><span class="tok-comment"># Un "quality gate": cada comando HACE FALLAR el job si no cumple su umbral,</span>
-<span class="tok-comment"># así una regresión no se puede mergear. Conectá estos como required checks.</span>
-
-pytest <span class="tok-punctuation">--</span>cov<span class="tok-punctuation">=</span>app <span class="tok-punctuation">--</span>cov<span class="tok-punctuation">-</span>fail<span class="tok-punctuation">-</span>under<span class="tok-punctuation">=</span><span class="tok-number">80</span>     <span class="tok-comment"># fallá si la cobertura baja del 80%</span>
-npx playwright test                      <span class="tok-comment"># fallá si algún test E2E falla</span>
-k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctuation">-</span>test<span class="tok-punctuation">.</span><span class="tok-property">js</span>              <span class="tok-comment"># fallá si se supera un umbral de perf</span>
-
-<span class="tok-comment"># En GitHub: Settings -&gt; Branches -&gt; requerí que pasen estos checks antes del merge.</span></code><code class="code-i18n code-i18n--en"><span class="tok-comment"># A "quality gate": each command FAILS the job if its bar isn't met,</span>
-<span class="tok-comment"># so a regression can't be merged. Wire these as required checks.</span>
-
-pytest <span class="tok-punctuation">--</span>cov<span class="tok-punctuation">=</span>app <span class="tok-punctuation">--</span>cov<span class="tok-punctuation">-</span>fail<span class="tok-punctuation">-</span>under<span class="tok-punctuation">=</span><span class="tok-number">80</span>     <span class="tok-comment"># fail if coverage drops below 80%</span>
-npx playwright test                      <span class="tok-comment"># fail if any E2E test fails</span>
-k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctuation">-</span>test<span class="tok-punctuation">.</span><span class="tok-property">js</span>              <span class="tok-comment"># fail if a perf threshold is breached</span>
-
-<span class="tok-comment"># In GitHub: Settings -&gt; Branches -&gt; require these checks to pass before merge.</span></code></pre>
-        </div>
-        <h2 class="block-label" data-i18n="ui.vs">Manual vs AI</h2>
-        <div class="vs-grid">
-          <div class="vs-card vs-card--manual">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.manual">Manual</span>
-              <span data-i18n="ci.manual.title">A mano</span>
-            </div>
-            <div data-i18n-html="ci.manual.body"><p>Definís los jobs, el orden, los umbrales y qué checks son obligatorios. El valor está en elegir gates que protejan sin frenar al equipo con falsos positivos.</p></div>
-            
-          </div>
-          <div class="vs-card vs-card--ai">
-            <div class="vs-card__head">
-              <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
-              <span data-i18n="ci.ai.title">Con AI</span>
-            </div>
-            <div data-i18n-html="ci.ai.body"><p>La AI te arma el YAML del workflow desde una descripción, sugiere caching y matrix, y ante un CI en rojo lee el log del job y te apunta la causa probable y el fix.</p></div>
-            
-          </div>
-        </div>
-        <div class="callout callout--ok" data-i18n-html="ci.gate.callout"><strong>Próximo paso:</strong> empezá con un gate mínimo (los tests deben pasar) y subí el listón de a poco — cobertura, luego performance. Un gate que el equipo respeta vale más que diez que se saltean.</div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-robot)">Robot Framework</span></div>
+        <h1 class="section__title" data-i18n="page.flashcards">Flashcards</h1>
+        <div class="prose" data-i18n-html="page.flashcards.lead"><p>Repasá los conceptos clave de este framework con tarjetas: leé la pregunta, pensá tu respuesta y dala vuelta para comprobar.</p></div>
         <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
         <div class="flashcards" data-flashcards>
           <div class="fc-stage">
@@ -207,12 +175,12 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
               <div class="fc-card__inner">
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.ci.q1">¿Qué es CI/CD?</p>
+                  <p class="fc-text" data-i18n="fc.robot.q1">¿Qué estilo de sintaxis usa Robot Framework?</p>
                   <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.ci.a1">Integración y entrega continuas: automatizar build, test y despliegue en cada cambio.</p>
+                  <p class="fc-text" data-i18n="fc.robot.a1">Keyword-driven: los tests se escriben con keywords legibles, casi lenguaje natural.</p>
                 </div>
               </div>
             </div>
@@ -220,12 +188,12 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
               <div class="fc-card__inner">
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.ci.q2">¿Qué es una matriz de build?</p>
+                  <p class="fc-text" data-i18n="fc.robot.q2">¿Qué es una librería en Robot (por ejemplo, SeleniumLibrary)?</p>
                   <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.ci.a2">Correr el mismo job en varias combinaciones (SO, versión, navegador) en paralelo.</p>
+                  <p class="fc-text" data-i18n="fc.robot.a2">Un conjunto de keywords que aporta capacidades (navegador, HTTP, mobile, etc.).</p>
                 </div>
               </div>
             </div>
@@ -233,12 +201,12 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
               <div class="fc-card__inner">
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.ci.q3">¿Qué es un quality gate?</p>
+                  <p class="fc-text" data-i18n="fc.robot.q3">¿Cómo se referencia una variable?</p>
                   <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.ci.a3">Un umbral que debe cumplirse (tests verdes, cobertura) para avanzar en el pipeline.</p>
+                  <p class="fc-text" data-i18n="fc.robot.a3">Con la sintaxis ${nombre}; se asigna desde keywords o desde una sección de variables.</p>
                 </div>
               </div>
             </div>
@@ -246,31 +214,109 @@ k6 run <span class="tok-punctuation">--</span>quiet load<span class="tok-punctua
               <div class="fc-card__inner">
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
-                  <p class="fc-text" data-i18n="fc.ci.q4">¿Qué son los artifacts?</p>
+                  <p class="fc-text" data-i18n="fc.robot.q4">¿Para quién es ideal Robot?</p>
                   <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
-                  <p class="fc-text" data-i18n="fc.ci.a4">Archivos que el pipeline guarda (reportes, screenshots, traces) para inspeccionar después.</p>
+                  <p class="fc-text" data-i18n="fc.robot.a4">Equipos que quieren tests legibles por no-programadores y reutilización por keywords.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.robot.q5">¿Cómo abrís un navegador con SeleniumLibrary?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.robot.a5">Con la keyword: Open Browser    url    chrome.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.robot.q6">¿Cómo escribís en un campo?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.robot.a6">Con: Input Text    id=user    admin.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.robot.q7">¿Cómo verificás que una página contiene un texto?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.robot.a7">Con: Page Should Contain    Welcome.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.robot.q8">¿Qué librería usás para HTTP/APIs?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.robot.a8">RequestsLibrary (GET/POST On Session, Status Should Be, etc.).</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.robot.q9">¿Qué es una keyword de usuario?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.robot.a9">Una keyword propia que agrupa pasos reutilizables.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fc-card" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
+              <div class="fc-card__inner">
+                <div class="fc-face fc-face--q">
+                  <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
+                  <p class="fc-text" data-i18n="fc.robot.q10">¿Cómo se separan los argumentos?</p>
+                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                </div>
+                <div class="fc-face fc-face--a" aria-hidden="true">
+                  <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
+                  <p class="fc-text" data-i18n="fc.robot.a10">Con 2 o más espacios (o tabs) entre columnas.</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="fc-controls">
             <button class="fc-btn fc-prev" type="button" aria-label="Anterior" data-i18n-attr="aria-label:fc.prev">‹</button>
-            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 4</span>
+            <span class="fc-count" aria-live="polite"><span class="fc-idx">1</span> / 10</span>
             <button class="fc-btn fc-flip-btn" type="button" data-i18n="fc.flip">Dar vuelta</button>
             <button class="fc-btn fc-next" type="button" aria-label="Siguiente" data-i18n-attr="aria-label:fc.next">›</button>
           </div>
         </div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="ci-matrix.html">
+          <a class="page-nav__link page-nav__prev" href="robot-verbos.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="ci.page.matrix">Paralelización y matrix</span>
+            <span class="page-nav__title" data-i18n="page.verbs">Verbos HTTP</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="skills-intro.html">
+          <a class="page-nav__link page-nav__next" href="robot-entrevista.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="skills.page.intro">Por qué estas habilidades</span>
+            <span class="page-nav__title" data-i18n="page.interview">Mock interview</span>
           </a>
         </nav>
       </div>
