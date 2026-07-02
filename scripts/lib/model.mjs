@@ -74,6 +74,57 @@ const again = await request.delete('/api/orders/42');
 expect(again.status()).toBe(204);`,
   },
 
+  /* ---- Práctica: Selenium (Python) login solution ---- */
+  sel_login_1: {
+    lang: "Python",
+    code: `driver.find_element(By.NAME, "user").send_keys("ana")
+driver.find_element(By.NAME, "password").send_keys("s3cret!")`,
+  },
+  sel_login_2: {
+    lang: "Python",
+    code: `driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()`,
+  },
+  sel_login_3: {
+    lang: "Python",
+    code: `# Explicit wait, then assert the greeting is present.
+WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located((By.XPATH, "//*[contains(., 'Welcome')]"))
+)
+assert "Welcome" in driver.page_source`,
+  },
+
+  /* ---- Práctica: Cypress (TypeScript) login solution ---- */
+  cy_login_1: {
+    lang: "TypeScript",
+    code: `cy.get('[name="user"]').type('ana');
+cy.get('[name="password"]').type('s3cret!');`,
+  },
+  cy_login_2: {
+    lang: "TypeScript",
+    code: `cy.contains('button', 'Sign in').click();`,
+  },
+  cy_login_3: {
+    lang: "TypeScript",
+    code: `// Cypress retries the assertion until it passes or times out.
+cy.contains('Welcome').should('be.visible');`,
+  },
+
+  /* ---- Práctica: Robot Framework login solution ---- */
+  rf_login_1: {
+    lang: "Robot",
+    code: `Input Text      name:user       ana
+Input Text      name:password   s3cret!`,
+  },
+  rf_login_2: {
+    lang: "Robot",
+    code: `Click Button    Sign in`,
+  },
+  rf_login_3: {
+    lang: "Robot",
+    code: `Wait Until Page Contains    Welcome
+Page Should Contain         Welcome`,
+  },
+
   /* ---- Fundamentals ---- */
   assertion: {
     lang: "JavaScript",
@@ -3235,42 +3286,64 @@ export const SECTIONS = [
       { type: "callout", variant: "ok", html: "practica.callout" },
     ],
   },
-  {
-    id: "practica-login",
-    navKey: "practica.login.nav",
-    blocks: [
+  // ---- Playwright practice group (TypeScript) ----
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-login", navKey: "practica.login.nav", blocks: [
       { type: "prose", html: "practica.login.lead" },
-      { type: "lab", stage: "login", tasks: [
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
         { text: "practica.login.t1", why: "practica.login.w1", hint: "p_login_locate", terms: ["auto-locator"], check: ["getby", "fill"] },
         { text: "practica.login.t2", why: "practica.login.w2", hint: "p_login_submit", terms: ["auto-autowait", "auto-waits"], check: ["getbyrole", "click"] },
         { text: "practica.login.t3", why: "practica.login.w3", hint: "p_login_assert", terms: ["auto-assertion"], check: ["expect", "tobevisible"] },
       ] },
-    ],
-  },
-  {
-    id: "practica-order",
-    navKey: "practica.order.nav",
-    blocks: [
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-order", navKey: "practica.order.nav", blocks: [
       { type: "prose", html: "practica.order.lead" },
-      { type: "lab", stage: "order", tasks: [
+      { type: "lab", stage: "order", lang: "TypeScript", tasks: [
         { text: "practica.order.t1", why: "practica.order.w1", hint: "p_order_total", terms: ["auto-locator"], check: ["expect", "250"] },
         { text: "practica.order.t2", why: "practica.order.w2", hint: "p_order_status", terms: ["auto-assertion", "auto-autowait"], check: ["expect", "paid"] },
         { text: "practica.order.t3", why: "practica.order.w3", hint: "p_order_items", terms: ["auto-assertion"], check: ["expect", "tohavecount"] },
       ] },
-    ],
-  },
-  {
-    id: "practica-api",
-    navKey: "practica.api.nav",
-    blocks: [
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-api", navKey: "practica.api.nav", blocks: [
       { type: "prose", html: "practica.api.lead" },
-      { type: "lab", stage: "verbs", tasks: [
+      { type: "lab", stage: "verbs", lang: "TypeScript", tasks: [
         { text: "practica.api.t1", why: "practica.api.w1", hint: "p_api_post", terms: ["api-methods", "api-crud"], check: ["post", "201"] },
         { text: "practica.api.t2", why: "practica.api.w2", hint: "p_api_get", terms: ["api-safe", "api-status"], check: ["get", "200"] },
         { text: "practica.api.t3", why: "practica.api.w3", hint: "p_api_delete", terms: ["api-idempotency", "api-status"], check: ["delete", "204"] },
       ] },
-    ],
-  },
+    ] },
+  // ---- Selenium practice group (Python) ----
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-login", navKey: "practica.login.nav", blocks: [
+      { type: "prose", html: "practica.login.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.login.t1", why: "practica.login.w1", hint: "sel_login_1", terms: ["auto-locator"], check: ["find_element", "send_keys"] },
+        { text: "practica.login.t2", why: "practica.login.w2", hint: "sel_login_2", terms: ["auto-autowait", "auto-waits"], check: ["find_element", "click"] },
+        { text: "practica.login.t3", why: "practica.login.w3", hint: "sel_login_3", terms: ["auto-assertion", "auto-waits"], check: ["welcome", "assert"] },
+      ] },
+    ] },
+  // ---- Cypress practice group (TypeScript) ----
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-login", navKey: "practica.login.nav", blocks: [
+      { type: "prose", html: "practica.login.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.login.t1", why: "practica.login.w1", hint: "cy_login_1", terms: ["auto-locator"], check: ["cy.get", "type"] },
+        { text: "practica.login.t2", why: "practica.login.w2", hint: "cy_login_2", terms: ["auto-autowait", "auto-waits"], check: ["cy", "click"] },
+        { text: "practica.login.t3", why: "practica.login.w3", hint: "cy_login_3", terms: ["auto-assertion"], check: ["should", "welcome"] },
+      ] },
+    ] },
+  // ---- Robot Framework practice group ----
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-login", navKey: "practica.login.nav", blocks: [
+      { type: "prose", html: "practica.login.lead" },
+      { type: "lab", stage: "login", lang: "Robot", tasks: [
+        { text: "practica.login.t1", why: "practica.login.w1", hint: "rf_login_1", terms: ["auto-locator"], check: ["input text"] },
+        { text: "practica.login.t2", why: "practica.login.w2", hint: "rf_login_2", terms: ["auto-autowait", "auto-waits"], check: ["click"] },
+        { text: "practica.login.t3", why: "practica.login.w3", hint: "rf_login_3", terms: ["auto-assertion"], check: ["should contain", "welcome"] },
+      ] },
+    ] },
 
   {
     id: "key-terms",

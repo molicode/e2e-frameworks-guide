@@ -175,7 +175,7 @@ function renderLab(block, dict) {
                 data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
               <div class="lab__console-foot">
                 <button class="lab-check" type="button" data-i18n="practica.check">${escText(t(dict, "practica.check"))}</button>
-                <span class="lab__console-lang">TYPESCRIPT</span>
+                <span class="lab__console-lang">${escText((block.lang || "TypeScript").toUpperCase())}</span>
               </div>
             </div>
           </div>
@@ -897,6 +897,8 @@ const NODE_LOGO = {
   python: "python", typescript: "typescript",
   selenium: "selenium", cypress: "cypress", playwright: "playwright", robot: "robot",
   bdd: "cucumber", perf: "k6", ci: "githubactions", skills: "git",
+  // Práctica per-framework groups reuse the official framework logos.
+  pwpr: "playwright", selpr: "selenium", cypr: "cypress", robotpr: "robot",
 };
 // The media inside a learning-path node: an official technology logo where
 // one exists, otherwise a clean line icon (not a system emoji).
@@ -914,7 +916,7 @@ const NAV_GROUPS = [
   { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
   { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
   { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica", "practica-login", "practica-order", "practica-api"] },
+  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica", "pwpr", "selpr", "cypr", "robotpr"] },
   { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
