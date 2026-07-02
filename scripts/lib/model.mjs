@@ -3132,6 +3132,25 @@ function aiQaGroup() {
         ai: { title: "ai.ai.title", body: "ai.ai.body", sample: "aiPromptGenerate" } },
       { type: "callout", variant: "danger", html: "prompts.callout" },
     ] },
+    { ...grp, id: "aiqa-flujos", navKey: "aiqa.nav.flows", blocks: [
+      { type: "prose", html: "flows.lead" },
+      { type: "label", text: "flow.gen.title" },
+      { type: "prose", html: "flows.gen.lead" },
+      { type: "aiflow", flow: "gen" },
+      { type: "label", text: "flow.selfheal.title" },
+      { type: "prose", html: "flows.selfheal.lead" },
+      { type: "aiflow", flow: "selfheal" },
+      { type: "label", text: "flow.rag.title" },
+      { type: "prose", html: "flows.rag.lead" },
+      { type: "aiflow", flow: "rag" },
+      { type: "label", text: "flow.agent.title" },
+      { type: "prose", html: "flows.agent.lead" },
+      { type: "aiflow", flow: "agent" },
+      { type: "label", text: "flow.hitl.title" },
+      { type: "prose", html: "flows.hitl.lead" },
+      { type: "aiflow", flow: "hitl" },
+      { type: "callout", variant: "ok", html: "flows.callout" },
+    ] },
     { ...grp, id: "aiqa-ejercicios", navKey: "page.exercises", blocks: [
       { type: "prose", html: "aiqa.exr.lead" },
       { type: "steps", items: ["aiqa.exr.1", "aiqa.exr.2", "aiqa.exr.3", "aiqa.exr.4", "aiqa.exr.5"] },
@@ -3148,6 +3167,68 @@ function aiQaGroup() {
     ] },
   ];
 }
+
+/* ==========================================================================
+   AI FLOWS — data for the animated, step-by-step flow diagrams. Each flow is a
+   linear pipeline of nodes (icon + short title + one-line explanation). The
+   `aiflow` block and the AI concept deep-dive pages render these; js/flow.js
+   auto-plays them (highlighting one node at a time) with a live caption.
+   Every `t`/`d` is an i18n key so the diagram is bilingual and JS-off readable.
+   ========================================================================== */
+export const AI_FLOWS = {
+  rag: {
+    titleKey: "flow.rag.title",
+    steps: [
+      { icon: "message-square", t: "flow.rag.s0.t", d: "flow.rag.s0.d" },
+      { icon: "puzzle",         t: "flow.rag.s1.t", d: "flow.rag.s1.d" },
+      { icon: "database",       t: "flow.rag.s2.t", d: "flow.rag.s2.d" },
+      { icon: "file-text",      t: "flow.rag.s3.t", d: "flow.rag.s3.d" },
+      { icon: "bot",            t: "flow.rag.s4.t", d: "flow.rag.s4.d" },
+      { icon: "book-open",      t: "flow.rag.s5.t", d: "flow.rag.s5.d" },
+    ],
+  },
+  agent: {
+    titleKey: "flow.agent.title",
+    steps: [
+      { icon: "target",          t: "flow.agent.s0.t", d: "flow.agent.s0.d" },
+      { icon: "brain",           t: "flow.agent.s1.t", d: "flow.agent.s1.d" },
+      { icon: "settings",        t: "flow.agent.s2.t", d: "flow.agent.s2.d" },
+      { icon: "globe",           t: "flow.agent.s3.t", d: "flow.agent.s3.d" },
+      { icon: "refresh-cw",      t: "flow.agent.s4.t", d: "flow.agent.s4.d" },
+      { icon: "best-practices",  t: "flow.agent.s5.t", d: "flow.agent.s5.d" },
+    ],
+  },
+  selfheal: {
+    titleKey: "flow.selfheal.title",
+    steps: [
+      { icon: "triangle-alert", t: "flow.selfheal.s0.t", d: "flow.selfheal.s0.d" },
+      { icon: "brain",          t: "flow.selfheal.s1.t", d: "flow.selfheal.s1.d" },
+      { icon: "puzzle",         t: "flow.selfheal.s2.t", d: "flow.selfheal.s2.d" },
+      { icon: "repeat",         t: "flow.selfheal.s3.t", d: "flow.selfheal.s3.d" },
+      { icon: "file-text",      t: "flow.selfheal.s4.t", d: "flow.selfheal.s4.d" },
+    ],
+  },
+  hitl: {
+    titleKey: "flow.hitl.title",
+    steps: [
+      { icon: "bot",            t: "flow.hitl.s0.t", d: "flow.hitl.s0.d" },
+      { icon: "message-square", t: "flow.hitl.s1.t", d: "flow.hitl.s1.d" },
+      { icon: "pencil-line",    t: "flow.hitl.s2.t", d: "flow.hitl.s2.d" },
+      { icon: "best-practices", t: "flow.hitl.s3.t", d: "flow.hitl.s3.d" },
+      { icon: "refresh-cw",     t: "flow.hitl.s4.t", d: "flow.hitl.s4.d" },
+    ],
+  },
+  gen: {
+    titleKey: "flow.gen.title",
+    steps: [
+      { icon: "file-text",      t: "flow.gen.s0.t", d: "flow.gen.s0.d" },
+      { icon: "pencil-line",    t: "flow.gen.s1.t", d: "flow.gen.s1.d" },
+      { icon: "bot",            t: "flow.gen.s2.t", d: "flow.gen.s2.d" },
+      { icon: "why",            t: "flow.gen.s3.t", d: "flow.gen.s3.d" },
+      { icon: "best-practices", t: "flow.gen.s4.t", d: "flow.gen.s4.d" },
+    ],
+  },
+};
 
 /* ------------------------------------------------------------------ *
  * 3. SECTIONS                                                         *
@@ -3278,19 +3359,19 @@ export const CONCEPTS = [
     refs: [{ title: "Prompt Engineering Guide", url: "https://www.promptingguide.ai/" }] },
   { id: "ai-halluc", cat: "ai", term: "Hallucination", def: "kt.ai.halluc", full: true, example: "cpt.ai-halluc.ex", usecase: "cpt.ai-halluc.uc",
     refs: [{ title: "IBM — AI hallucinations", url: "https://www.ibm.com/topics/ai-hallucinations" }] },
-  { id: "ai-selfheal", cat: "ai", term: "Self-healing locators", def: "kt.ai.selfheal", full: true, example: "cpt.ai-selfheal.ex", usecase: "cpt.ai-selfheal.uc",
+  { id: "ai-selfheal", cat: "ai", term: "Self-healing locators", def: "kt.ai.selfheal", full: true, flow: "selfheal", example: "cpt.ai-selfheal.ex", usecase: "cpt.ai-selfheal.uc",
     refs: [{ title: "Healenium — Self-healing for Selenium", url: "https://healenium.io/" }] },
-  { id: "ai-gen", cat: "ai", term: "LLM test generation", def: "kt.ai.gen", full: true, example: "cpt.ai-gen.ex", usecase: "cpt.ai-gen.uc",
+  { id: "ai-gen", cat: "ai", term: "LLM test generation", def: "kt.ai.gen", full: true, flow: "gen", example: "cpt.ai-gen.ex", usecase: "cpt.ai-gen.uc",
     refs: [{ title: "Anthropic — Documentation", url: "https://docs.anthropic.com/" }] },
-  { id: "ai-hitl", cat: "ai", term: "Human-in-the-loop", def: "kt.ai.hitl", full: true, example: "cpt.ai-hitl.ex", usecase: "cpt.ai-hitl.uc",
+  { id: "ai-hitl", cat: "ai", term: "Human-in-the-loop", def: "kt.ai.hitl", full: true, flow: "hitl", example: "cpt.ai-hitl.ex", usecase: "cpt.ai-hitl.uc",
     refs: [{ title: "Google — People + AI Guidebook", url: "https://pair.withgoogle.com/guidebook/" }] },
   { id: "ai-mcp", cat: "ai", term: "MCP (Model Context Protocol)", def: "kt.ai.mcp", full: true, example: "cpt.ai-mcp.ex", usecase: "cpt.ai-mcp.uc",
     refs: [{ title: "Model Context Protocol", url: "https://modelcontextprotocol.io/" }] },
   { id: "ai-skill", cat: "ai", term: "Skill", def: "kt.ai.skill", full: true, example: "cpt.ai-skill.ex", usecase: "cpt.ai-skill.uc",
     refs: [{ title: "Anthropic — Documentation", url: "https://docs.anthropic.com/" }] },
-  { id: "ai-agent", cat: "ai", term: "Agent / sub-agent", def: "kt.ai.agent", full: true, example: "cpt.ai-agent.ex", usecase: "cpt.ai-agent.uc",
+  { id: "ai-agent", cat: "ai", term: "Agent / sub-agent", def: "kt.ai.agent", full: true, flow: "agent", example: "cpt.ai-agent.ex", usecase: "cpt.ai-agent.uc",
     refs: [{ title: "Anthropic — Building effective agents", url: "https://www.anthropic.com/research/building-effective-agents" }] },
-  { id: "ai-rag", cat: "ai", term: "RAG (Retrieval-Augmented Generation)", def: "kt.ai.rag", full: true, example: "cpt.ai-rag.ex", usecase: "cpt.ai-rag.uc",
+  { id: "ai-rag", cat: "ai", term: "RAG (Retrieval-Augmented Generation)", def: "kt.ai.rag", full: true, flow: "rag", example: "cpt.ai-rag.ex", usecase: "cpt.ai-rag.uc",
     refs: [{ title: "AWS — What is RAG", url: "https://aws.amazon.com/what-is/retrieval-augmented-generation/" }] },
   { id: "ai-context", cat: "ai", term: "Context window / tokens", def: "kt.ai.context", full: true, example: "cpt.ai-context.ex", usecase: "cpt.ai-context.uc",
     refs: [{ title: "Anthropic — Context windows", url: "https://docs.anthropic.com/en/docs/build-with-claude/context-windows" }] },
