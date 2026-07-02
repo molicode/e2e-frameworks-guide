@@ -984,12 +984,14 @@ const NODE_LOGO = {
   // Práctica per-framework groups reuse the official framework logos.
   pwpr: "playwright", selpr: "selenium", cypr: "cypress", robotpr: "robot",
 };
+// Práctica groups without a technology logo fall back to a themed line icon.
+const NODE_ICON = { aipr: "ai" };
 // The media inside a learning-path node: an official technology logo where
 // one exists, otherwise a clean line icon (not a system emoji).
 function nodeMedia(key) {
   const logo = NODE_LOGO[key];
   if (logo) return `<span class="lnode__logo" aria-hidden="true">${techLogo(logo, "lnode__svg")}</span>`;
-  return `<span class="lnode__icon" aria-hidden="true">${uiIcon(key, "lnode__ui")}</span>`;
+  return `<span class="lnode__icon" aria-hidden="true">${uiIcon(NODE_ICON[key] || key, "lnode__ui")}</span>`;
 }
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
@@ -1000,7 +1002,7 @@ const NAV_GROUPS = [
   { key: "approaches",  label: "grp.approaches",  icon: "approaches", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
   { key: "ai",          label: "grp.ai",          icon: "ai", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
   { key: "process",     label: "grp.process",     icon: "process", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "practica", color: "var(--cat-practica)",    members: ["practica", "pwpr", "selpr", "cypr", "robotpr"] },
+  { key: "practica",    label: "grp.practica",    icon: "practica", color: "var(--cat-practica)",    members: ["practica", "pwpr", "selpr", "cypr", "robotpr", "aipr"] },
   { key: "glossary",    label: "grp.glossary",    icon: "glossary", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
