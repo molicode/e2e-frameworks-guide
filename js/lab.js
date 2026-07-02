@@ -83,7 +83,50 @@
     updateProgress(lab);
   }
 
+  /* ---- animated walkthrough of the lab screen (Práctica intro) ---- */
+  function setupTour() {
+    var tour = document.querySelector(".labtour");
+    if (!tour) return;
+    var steps = parseInt(tour.getAttribute("data-steps"), 10) || 0;
+    var regions = Array.prototype.slice.call(tour.querySelectorAll(".lt-region"));
+    var dots = Array.prototype.slice.call(tour.querySelectorAll(".labtour__dot"));
+    var caption = tour.querySelector("#labtour-caption");
+    var cur = -1, timer = null;
+
+    function show(i) {
+      cur = i;
+      regions.forEach(function (r) {
+        r.classList.toggle("is-active", parseInt(r.getAttribute("data-step"), 10) === i);
+      });
+      dots.forEach(function (d, di) { d.classList.toggle("is-active", di === i); });
+      if (caption) {
+        caption.setAttribute("data-i18n", "practica.tour.s" + i);
+        caption.textContent = t("practica.tour.s" + i);
+      }
+    }
+    function next() { show((cur + 1) % steps); }
+    function play() { if (!timer) timer = global.setInterval(next, 2600); }
+    function pause() { if (timer) { global.clearInterval(timer); timer = null; } }
+
+    show(0);
+    var reduce = global.matchMedia && global.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) {
+      play();
+      tour.addEventListener("mouseenter", pause);
+      tour.addEventListener("mouseleave", play);
+    }
+    dots.forEach(function (d, di) {
+      d.addEventListener("click", function () { pause(); show(di); if (!reduce) play(); });
+    });
+    regions.forEach(function (r) {
+      r.addEventListener("click", function () {
+        pause(); show(parseInt(r.getAttribute("data-step"), 10)); if (!reduce) play();
+      });
+    });
+  }
+
   function setup() {
+    setupTour();
     Array.prototype.forEach.call(document.querySelectorAll(".lab-check"), function (btn) {
       btn.addEventListener("click", function () { run(btn); });
     });

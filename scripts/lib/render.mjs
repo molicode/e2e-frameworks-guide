@@ -187,11 +187,51 @@ function renderLab(block, dict) {
         </div>`;
 }
 
+/* ---- animated walkthrough of the lab screen (Práctica intro) ---- */
+function renderLabTour(dict) {
+  const STEPS = 7;
+  const dots = Array.from({ length: STEPS }, (_, i) =>
+    `<button class="labtour__dot" type="button" data-step="${i}" aria-label="${i + 1}"></button>`).join("");
+  return `
+        <div class="labtour" data-steps="${STEPS}">
+          <div class="labtour__view">
+            <div class="labtour__col labtour__col--work">
+              <div class="lt-region lt-sut" data-step="0">
+                <span class="lt-tag" data-i18n="practica.sut">${escText(t(dict, "practica.sut"))}</span>
+                <div class="lt-appbar"><i></i><i></i><i></i></div>
+                <div class="lt-app"><span class="lt-line"></span><span class="lt-line lt-line--sm"></span><span class="lt-btn"></span></div>
+              </div>
+              <div class="lt-region lt-editor" data-step="1">
+                <span class="lt-tag" data-i18n="practica.yourSolution">${escText(t(dict, "practica.yourSolution"))}</span>
+                <div class="lt-code"><span></span><span></span><span></span></div>
+              </div>
+              <div class="lt-region lt-check" data-step="6">
+                <span class="lt-checkbtn" data-i18n="practica.check">${escText(t(dict, "practica.check"))}</span>
+                <span class="lt-prog">2 / 3</span>
+              </div>
+            </div>
+            <div class="labtour__col labtour__col--panel">
+              <div class="lt-region lt-instr" data-step="2"><span class="lt-num">1</span><span class="lt-lines"><span class="lt-line"></span><span class="lt-line lt-line--sm"></span></span></div>
+              <div class="lt-region lt-why" data-step="3"><span data-i18n="practica.why">${escText(t(dict, "practica.why"))}</span></div>
+              <div class="lt-region lt-hint" data-step="4"><span data-i18n="practica.hint">${escText(t(dict, "practica.hint"))}</span></div>
+              <div class="lt-region lt-terms" data-step="5"><span class="lt-terms-lbl" data-i18n="practica.keyTerms">${escText(t(dict, "practica.keyTerms"))}</span><span class="lt-pill"></span><span class="lt-pill"></span></div>
+            </div>
+          </div>
+          <div class="labtour__caption">
+            <p class="labtour__text" id="labtour-caption" data-i18n="practica.tour.s0">${escText(t(dict, "practica.tour.s0"))}</p>
+            <div class="labtour__dots">${dots}</div>
+          </div>
+        </div>`;
+}
+
 /* ---- block dispatcher ---- */
 function renderBlock(block, dict) {
   switch (block.type) {
     case "lab":
       return renderLab(block, dict);
+
+    case "labtour":
+      return renderLabTour(dict);
 
     case "prose":
       return `\n        <div class="prose" data-i18n-html="${block.html}">${t(dict, block.html)}</div>`;

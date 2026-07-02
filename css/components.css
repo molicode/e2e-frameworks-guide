@@ -2804,3 +2804,87 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 /* the current (next pending) instruction is highlighted */
 .lab-task.is-active .lab-task__num { box-shadow: 0 0 0 3px var(--accent-soft); }
 .lab-task.is-solved.is-active .lab-task__num { box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 25%, transparent); }
+
+/* ==========================================================================
+   Lab tour — an auto-playing diagram that explains the lab screen (Práctica
+   intro). It spotlights each region in turn while the caption updates.
+   ========================================================================== */
+.labtour {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: var(--space-5);
+  margin: var(--space-4) 0 var(--space-6);
+}
+.labtour__view {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+.labtour__col--work { display: flex; flex-direction: column; gap: var(--space-3); }
+.labtour__col--panel { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.lt-region {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  padding: 10px 12px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+}
+.lt-region.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+.lt-tag { display: block; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.lt-appbar { display: flex; gap: 4px; margin-bottom: 8px; }
+.lt-appbar i { width: 7px; height: 7px; border-radius: 50%; background: var(--border-strong); }
+.lt-app { display: flex; flex-direction: column; gap: 7px; }
+.lt-line { height: 8px; border-radius: 4px; background: var(--border-strong); width: 90%; }
+.lt-line--sm { width: 55%; }
+.lt-btn { height: 16px; width: 64px; border-radius: 6px; background: var(--accent); opacity: 0.8; margin-top: 2px; }
+.lt-code { display: flex; flex-direction: column; gap: 6px; background: var(--code-bg); border-radius: 6px; padding: 10px; }
+.lt-code span { height: 7px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.lt-code span:nth-child(1) { width: 85%; }
+.lt-code span:nth-child(2) { width: 70%; }
+.lt-code span:nth-child(3) { width: 78%; }
+.lt-check { display: flex; align-items: center; justify-content: space-between; }
+.lt-checkbtn { font-size: var(--fs-xs); font-weight: 500; padding: 5px 14px; border-radius: var(--radius-pill); background: var(--cta-bg); color: var(--cta-text); }
+.lt-prog { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+
+.lt-instr { display: flex; align-items: flex-start; gap: 8px; }
+.lt-num { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 500; }
+.lt-lines { display: flex; flex-direction: column; gap: 6px; flex: 1; padding-top: 4px; }
+.lt-why, .lt-hint { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); color: var(--text-soft); }
+.lt-why::before, .lt-hint::before { content: ""; width: 12px; height: 12px; border-radius: 50%; flex: none; }
+.lt-why::before { background: var(--accent); }
+.lt-hint::before { background: var(--warning); }
+.lt-terms { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.lt-terms-lbl { font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); }
+.lt-pill { height: 16px; width: 46px; border-radius: var(--radius-pill); background: var(--accent-soft); }
+
+.labtour__caption {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.labtour__text { margin: 0; flex: 1; font-size: var(--fs-sm); color: var(--text); min-height: 2.6em; }
+.labtour__dots { display: flex; gap: 6px; }
+.labtour__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: none; padding: 0; cursor: pointer;
+  background: var(--border-strong);
+  transition: background var(--transition), transform var(--transition);
+}
+.labtour__dot.is-active { background: var(--accent); transform: scale(1.25); }
+
+@media (max-width: 520px) {
+  .labtour__view { grid-template-columns: 1fr; }
+  .labtour__caption { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+}
