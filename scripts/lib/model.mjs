@@ -93,6 +93,79 @@ WebDriverWait(driver, 5).until(
 assert "Welcome" in driver.page_source`,
   },
 
+  /* ---- Práctica: extra Selenium scenarios (Python) ---- */
+  sel_order_1: { lang: "Python", code: `total = driver.find_element(By.CSS_SELECTOR, "[data-testid='order-total']").text
+assert total == "250"` },
+  sel_order_2: { lang: "Python", code: `status = driver.find_element(By.CSS_SELECTOR, "[data-testid='order-status']").text
+assert status == "PAID"` },
+  sel_order_3: { lang: "Python", code: `items = driver.find_elements(By.CSS_SELECTOR, ".order-items li")
+assert len(items) == 3` },
+
+  sel_api_1: { lang: "Python", code: `import requests
+res = requests.post("https://api.example.com/orders", json={"item": "book", "qty": 1})
+assert res.status_code == 201` },
+  sel_api_2: { lang: "Python", code: `res = requests.get("https://api.example.com/orders/42")
+assert res.status_code == 200
+assert res.json()["status"] == "PAID"` },
+  sel_api_3: { lang: "Python", code: `res = requests.delete("https://api.example.com/orders/42")
+assert res.status_code == 204` },
+
+  sel_loginfail_1: { lang: "Python", code: `driver.find_element(By.NAME, "user").send_keys("ana")
+driver.find_element(By.NAME, "password").send_keys("wrong-pass")` },
+  sel_loginfail_2: { lang: "Python", code: `driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()` },
+  sel_loginfail_3: { lang: "Python", code: `assert "Invalid credentials" in driver.page_source
+assert "Welcome" not in driver.page_source` },
+
+  sel_autowait_1: { lang: "Python", code: `driver.find_element(By.XPATH, "//button[text()='Load']").click()` },
+  sel_autowait_2: { lang: "Python", code: `# No sleeps: wait until the spinner is gone.
+WebDriverWait(driver, 5).until(
+    EC.invisibility_of_element_located((By.CSS_SELECTOR, "[data-testid='spinner']"))
+)` },
+  sel_autowait_3: { lang: "Python", code: `assert "Done" in driver.page_source` },
+
+  sel_flaky_1: { lang: "Python", code: `# Replace time.sleep(2) with an explicit wait.
+WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located((By.XPATH, "//*[contains(., 'Ready')]"))
+)` },
+  sel_flaky_2: { lang: "Python", code: `driver.find_element(By.XPATH, "//button[text()='Submit']").click()` },
+  sel_flaky_3: { lang: "Python", code: `assert "Saved" in driver.page_source` },
+
+  sel_locators_1: { lang: "Python", code: `# Prefer a semantic locator over a brittle CSS chain.
+driver.find_element(By.NAME, "user").send_keys("ana")` },
+  sel_locators_2: { lang: "Python", code: `driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()` },
+  sel_locators_3: { lang: "Python", code: `# A test id is the most stable hook.
+driver.find_element(By.CSS_SELECTOR, "[data-testid='welcome']")` },
+
+  sel_cart_1: { lang: "Python", code: `driver.find_elements(By.CSS_SELECTOR, ".order-items button")[0].click()` },
+  sel_cart_2: { lang: "Python", code: `items = driver.find_elements(By.CSS_SELECTOR, ".order-items li")
+assert len(items) == 2` },
+  sel_cart_3: { lang: "Python", code: `total = driver.find_element(By.CSS_SELECTOR, "[data-testid='order-total']").text
+assert total != "250"` },
+
+  sel_pom_1: { lang: "Python", code: `class LoginPage:
+    def __init__(self, driver):
+        self.driver = driver
+        self.user = (By.NAME, "user")
+        self.password = (By.NAME, "password")
+        self.submit = (By.CSS_SELECTOR, "button[type='submit']")` },
+  sel_pom_2: { lang: "Python", code: `    def login(self, u, p):
+        self.driver.find_element(*self.user).send_keys(u)
+        self.driver.find_element(*self.password).send_keys(p)
+        self.driver.find_element(*self.submit).click()` },
+  sel_pom_3: { lang: "Python", code: `page = LoginPage(driver)
+page.login("ana", "s3cret!")
+assert "Welcome" in driver.page_source` },
+
+  sel_apistatus_1: { lang: "Python", code: `res = requests.get("https://api.example.com/orders/1")   # no token
+assert res.status_code == 401` },
+  sel_apistatus_2: { lang: "Python", code: `res = requests.get(
+    "https://api.example.com/orders/42",
+    headers={"Authorization": "Bearer t0ken"},
+)
+assert res.status_code == 200` },
+  sel_apistatus_3: { lang: "Python", code: `res = requests.get("https://api.example.com/orders/999")
+assert res.status_code == 404` },
+
   /* ---- Práctica: Cypress (TypeScript) login solution ---- */
   cy_login_1: {
     lang: "TypeScript",
@@ -3441,6 +3514,87 @@ export const SECTIONS = [
         { text: "practica.login.t1", why: "practica.login.w1", hint: "sel_login_1", terms: ["auto-locator"], check: ["find_element", "send_keys"] },
         { text: "practica.login.t2", why: "practica.login.w2", hint: "sel_login_2", terms: ["auto-autowait", "auto-waits"], check: ["find_element", "click"] },
         { text: "practica.login.t3", why: "practica.login.w3", hint: "sel_login_3", terms: ["auto-assertion", "auto-waits"], check: ["welcome", "assert"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-order", navKey: "practica.order.nav", blocks: [
+      { type: "prose", html: "practica.order.lead" },
+      { type: "lab", stage: "order", lang: "Python", tasks: [
+        { text: "practica.order.t1", why: "practica.order.w1", hint: "sel_order_1", terms: ["auto-locator"], check: ["find_element", "250"] },
+        { text: "practica.order.t2", why: "practica.order.w2", hint: "sel_order_2", terms: ["auto-assertion"], check: ["find_element", "paid"] },
+        { text: "practica.order.t3", why: "practica.order.w3", hint: "sel_order_3", terms: ["auto-assertion"], check: ["find_elements", "len"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-api", navKey: "practica.api.nav", blocks: [
+      { type: "prose", html: "practica.api.lead" },
+      { type: "lab", stage: "verbs", lang: "Python", tasks: [
+        { text: "practica.api.t1", why: "practica.api.w1", hint: "sel_api_1", terms: ["api-methods", "api-crud"], check: ["post", "201"] },
+        { text: "practica.api.t2", why: "practica.api.w2", hint: "sel_api_2", terms: ["api-safe", "api-status"], check: ["get", "200"] },
+        { text: "practica.api.t3", why: "practica.api.w3", hint: "sel_api_3", terms: ["api-idempotency", "api-status"], check: ["delete", "204"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-loginfail", navKey: "practica.loginfail.nav", blocks: [
+      { type: "prose", html: "practica.loginfail.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.loginfail.t1", why: "practica.loginfail.w1", hint: "sel_loginfail_1", terms: ["auto-locator"], check: ["find_element", "send_keys"] },
+        { text: "practica.loginfail.t2", why: "practica.loginfail.w2", hint: "sel_loginfail_2", terms: ["auto-autowait"], check: ["find_element", "click"] },
+        { text: "practica.loginfail.t3", why: "practica.loginfail.w3", hint: "sel_loginfail_3", terms: ["auto-assertion"], check: ["invalid", "assert"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-autowait", navKey: "practica.autowait.nav", blocks: [
+      { type: "prose", html: "practica.autowait.lead" },
+      { type: "lab", stage: "flaky", lang: "Python", tasks: [
+        { text: "practica.autowait.t1", why: "practica.autowait.w1", hint: "sel_autowait_1", terms: ["auto-autowait"], check: ["find_element", "click"] },
+        { text: "practica.autowait.t2", why: "practica.autowait.w2", hint: "sel_autowait_2", terms: ["auto-autowait", "auto-waits"], check: ["webdriverwait", "invisibility"] },
+        { text: "practica.autowait.t3", why: "practica.autowait.w3", hint: "sel_autowait_3", terms: ["auto-assertion"], check: ["assert", "done"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-flaky", navKey: "practica.flaky.nav", blocks: [
+      { type: "prose", html: "practica.flaky.lead" },
+      { type: "lab", stage: "flaky", lang: "Python", tasks: [
+        { text: "practica.flaky.t1", why: "practica.flaky.w1", hint: "sel_flaky_1", terms: ["auto-flaky", "auto-waits"], check: ["webdriverwait", "ready"] },
+        { text: "practica.flaky.t2", why: "practica.flaky.w2", hint: "sel_flaky_2", terms: ["auto-locator"], check: ["find_element", "click"] },
+        { text: "practica.flaky.t3", why: "practica.flaky.w3", hint: "sel_flaky_3", terms: ["auto-assertion"], check: ["assert", "saved"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-locators", navKey: "practica.locators.nav", blocks: [
+      { type: "prose", html: "practica.locators.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.locators.t1", why: "practica.locators.w1", hint: "sel_locators_1", terms: ["auto-locator"], check: ["find_element", "send_keys"] },
+        { text: "practica.locators.t2", why: "practica.locators.w2", hint: "sel_locators_2", terms: ["auto-locator"], check: ["find_element", "click"] },
+        { text: "practica.locators.t3", why: "practica.locators.w3", hint: "sel_locators_3", terms: ["auto-locator"], check: ["testid"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-cart", navKey: "practica.cart.nav", blocks: [
+      { type: "prose", html: "practica.cart.lead" },
+      { type: "lab", stage: "order", lang: "Python", tasks: [
+        { text: "practica.cart.t1", why: "practica.cart.w1", hint: "sel_cart_1", terms: ["auto-locator"], check: ["find_elements", "click"] },
+        { text: "practica.cart.t2", why: "practica.cart.w2", hint: "sel_cart_2", terms: ["auto-assertion"], check: ["find_elements", "len"] },
+        { text: "practica.cart.t3", why: "practica.cart.w3", hint: "sel_cart_3", terms: ["auto-assertion"], check: ["find_element", "assert"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-pom", navKey: "practica.pom.nav", blocks: [
+      { type: "prose", html: "practica.pom.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.pom.t1", why: "practica.pom.w1", hint: "sel_pom_1", terms: ["auto-pom", "auto-locator"], check: ["class", "loginpage"] },
+        { text: "practica.pom.t2", why: "practica.pom.w2", hint: "sel_pom_2", terms: ["auto-pom"], check: ["def login", "find_element"] },
+        { text: "practica.pom.t3", why: "practica.pom.w3", hint: "sel_pom_3", terms: ["auto-pom", "auto-assertion"], check: ["loginpage", "assert"] },
+      ] },
+    ] },
+  { group: "selpr", groupKey: "practica.grp.sel", chip: { label: "Selenium", color: "var(--fw-selenium)", lang: "Python" },
+    id: "practica-sel-apistatus", navKey: "practica.apistatus.nav", blocks: [
+      { type: "prose", html: "practica.apistatus.lead" },
+      { type: "lab", stage: "verbs", lang: "Python", tasks: [
+        { text: "practica.apistatus.t1", why: "practica.apistatus.w1", hint: "sel_apistatus_1", terms: ["api-status"], check: ["get", "401"] },
+        { text: "practica.apistatus.t2", why: "practica.apistatus.w2", hint: "sel_apistatus_2", terms: ["api-status", "api-safe"], check: ["get", "200"] },
+        { text: "practica.apistatus.t3", why: "practica.apistatus.w3", hint: "sel_apistatus_3", terms: ["api-status"], check: ["get", "404"] },
       ] },
     ] },
   // ---- Cypress practice group (TypeScript) ----
