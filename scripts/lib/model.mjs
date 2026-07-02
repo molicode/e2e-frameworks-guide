@@ -314,6 +314,65 @@ Input Text      name:password   s3cret!`,
 Page Should Contain         Welcome`,
   },
 
+  /* ---- Práctica: extra Robot Framework scenarios ---- */
+  rf_order_1: { lang: "Robot", code: `Element Text Should Be    css:[data-testid='order-total']    250` },
+  rf_order_2: { lang: "Robot", code: `Element Text Should Be    css:[data-testid='order-status']    PAID` },
+  rf_order_3: { lang: "Robot", code: `Page Should Contain Element    css:.order-items li    limit=3` },
+
+  rf_api_1: { lang: "Robot", code: `\${res}=    POST    https://api.example.com/orders    json={"item": "book"}
+Status Should Be    201    \${res}` },
+  rf_api_2: { lang: "Robot", code: `\${res}=    GET    https://api.example.com/orders/42
+Status Should Be    200    \${res}` },
+  rf_api_3: { lang: "Robot", code: `\${res}=    DELETE    https://api.example.com/orders/42
+Status Should Be    204    \${res}` },
+
+  rf_loginfail_1: { lang: "Robot", code: `Input Text      name:user       ana
+Input Text      name:password   wrong-pass` },
+  rf_loginfail_2: { lang: "Robot", code: `Click Button    Sign in` },
+  rf_loginfail_3: { lang: "Robot", code: `Page Should Contain        Invalid credentials
+Page Should Not Contain    Welcome` },
+
+  rf_autowait_1: { lang: "Robot", code: `Click Button    Load` },
+  rf_autowait_2: { lang: "Robot", code: `Wait Until Element Is Not Visible    css:[data-testid='spinner']    timeout=5s` },
+  rf_autowait_3: { lang: "Robot", code: `Page Should Contain    Done` },
+
+  rf_flaky_1: { lang: "Robot", code: `# Replace "Sleep    2s" with a condition wait.
+Wait Until Page Contains    Ready    timeout=5s` },
+  rf_flaky_2: { lang: "Robot", code: `Click Button    Submit` },
+  rf_flaky_3: { lang: "Robot", code: `Page Should Contain    Saved` },
+
+  rf_locators_1: { lang: "Robot", code: `Input Text    name:user    ana` },
+  rf_locators_2: { lang: "Robot", code: `Click Button    Sign in` },
+  rf_locators_3: { lang: "Robot", code: `Page Should Contain Element    css:[data-testid='welcome']` },
+
+  rf_cart_1: { lang: "Robot", code: `Click Element    css:.order-items button:first-child` },
+  rf_cart_2: { lang: "Robot", code: `Page Should Contain Element    css:.order-items li    limit=2` },
+  rf_cart_3: { lang: "Robot", code: `\${total}=    Get Text    css:[data-testid='order-total']
+Should Not Be Equal    \${total}    250` },
+
+  rf_pom_1: { lang: "Robot", code: `*** Variables ***
+\${USER_FIELD}    name:user
+\${PASS_FIELD}    name:password
+\${SIGN_IN}       Sign in` },
+  rf_pom_2: { lang: "Robot", code: `*** Keywords ***
+Login
+    [Arguments]    \${u}    \${p}
+    Input Text      \${USER_FIELD}    \${u}
+    Input Text      \${PASS_FIELD}    \${p}
+    Click Button    \${SIGN_IN}` },
+  rf_pom_3: { lang: "Robot", code: `*** Test Cases ***
+Valid Login
+    Login    ana    s3cret!
+    Page Should Contain    Welcome` },
+
+  rf_apistatus_1: { lang: "Robot", code: `\${res}=    GET    https://api.example.com/orders/1    expected_status=any
+Status Should Be    401    \${res}` },
+  rf_apistatus_2: { lang: "Robot", code: `\${headers}=    Create Dictionary    Authorization=Bearer t0ken
+\${res}=    GET    https://api.example.com/orders/42    headers=\${headers}
+Status Should Be    200    \${res}` },
+  rf_apistatus_3: { lang: "Robot", code: `\${res}=    GET    https://api.example.com/orders/999    expected_status=any
+Status Should Be    404    \${res}` },
+
   /* ---- Fundamentals ---- */
   assertion: {
     lang: "JavaScript",
@@ -3757,6 +3816,87 @@ export const SECTIONS = [
         { text: "practica.login.t1", why: "practica.login.w1", hint: "rf_login_1", terms: ["auto-locator"], check: ["input text"] },
         { text: "practica.login.t2", why: "practica.login.w2", hint: "rf_login_2", terms: ["auto-autowait", "auto-waits"], check: ["click"] },
         { text: "practica.login.t3", why: "practica.login.w3", hint: "rf_login_3", terms: ["auto-assertion"], check: ["should contain", "welcome"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-order", navKey: "practica.order.nav", blocks: [
+      { type: "prose", html: "practica.order.lead" },
+      { type: "lab", stage: "order", lang: "Robot", tasks: [
+        { text: "practica.order.t1", why: "practica.order.w1", hint: "rf_order_1", terms: ["auto-locator"], check: ["should be", "250"] },
+        { text: "practica.order.t2", why: "practica.order.w2", hint: "rf_order_2", terms: ["auto-assertion"], check: ["should be", "paid"] },
+        { text: "practica.order.t3", why: "practica.order.w3", hint: "rf_order_3", terms: ["auto-assertion"], check: ["should contain", "3"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-api", navKey: "practica.api.nav", blocks: [
+      { type: "prose", html: "practica.api.lead" },
+      { type: "lab", stage: "verbs", lang: "Robot", tasks: [
+        { text: "practica.api.t1", why: "practica.api.w1", hint: "rf_api_1", terms: ["api-methods", "api-crud"], check: ["post", "201"] },
+        { text: "practica.api.t2", why: "practica.api.w2", hint: "rf_api_2", terms: ["api-safe", "api-status"], check: ["get", "200"] },
+        { text: "practica.api.t3", why: "practica.api.w3", hint: "rf_api_3", terms: ["api-idempotency", "api-status"], check: ["delete", "204"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-loginfail", navKey: "practica.loginfail.nav", blocks: [
+      { type: "prose", html: "practica.loginfail.lead" },
+      { type: "lab", stage: "login", lang: "Robot", tasks: [
+        { text: "practica.loginfail.t1", why: "practica.loginfail.w1", hint: "rf_loginfail_1", terms: ["auto-locator"], check: ["input text"] },
+        { text: "practica.loginfail.t2", why: "practica.loginfail.w2", hint: "rf_loginfail_2", terms: ["auto-autowait"], check: ["click"] },
+        { text: "practica.loginfail.t3", why: "practica.loginfail.w3", hint: "rf_loginfail_3", terms: ["auto-assertion"], check: ["invalid", "not contain"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-autowait", navKey: "practica.autowait.nav", blocks: [
+      { type: "prose", html: "practica.autowait.lead" },
+      { type: "lab", stage: "flaky", lang: "Robot", tasks: [
+        { text: "practica.autowait.t1", why: "practica.autowait.w1", hint: "rf_autowait_1", terms: ["auto-autowait"], check: ["click"] },
+        { text: "practica.autowait.t2", why: "practica.autowait.w2", hint: "rf_autowait_2", terms: ["auto-autowait", "auto-waits"], check: ["not visible"] },
+        { text: "practica.autowait.t3", why: "practica.autowait.w3", hint: "rf_autowait_3", terms: ["auto-assertion"], check: ["should contain", "done"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-flaky", navKey: "practica.flaky.nav", blocks: [
+      { type: "prose", html: "practica.flaky.lead" },
+      { type: "lab", stage: "flaky", lang: "Robot", tasks: [
+        { text: "practica.flaky.t1", why: "practica.flaky.w1", hint: "rf_flaky_1", terms: ["auto-flaky", "auto-waits"], check: ["page contains", "ready"] },
+        { text: "practica.flaky.t2", why: "practica.flaky.w2", hint: "rf_flaky_2", terms: ["auto-locator"], check: ["click"] },
+        { text: "practica.flaky.t3", why: "practica.flaky.w3", hint: "rf_flaky_3", terms: ["auto-assertion"], check: ["should contain", "saved"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-locators", navKey: "practica.locators.nav", blocks: [
+      { type: "prose", html: "practica.locators.lead" },
+      { type: "lab", stage: "login", lang: "Robot", tasks: [
+        { text: "practica.locators.t1", why: "practica.locators.w1", hint: "rf_locators_1", terms: ["auto-locator"], check: ["input text"] },
+        { text: "practica.locators.t2", why: "practica.locators.w2", hint: "rf_locators_2", terms: ["auto-locator"], check: ["click"] },
+        { text: "practica.locators.t3", why: "practica.locators.w3", hint: "rf_locators_3", terms: ["auto-locator"], check: ["testid"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-cart", navKey: "practica.cart.nav", blocks: [
+      { type: "prose", html: "practica.cart.lead" },
+      { type: "lab", stage: "order", lang: "Robot", tasks: [
+        { text: "practica.cart.t1", why: "practica.cart.w1", hint: "rf_cart_1", terms: ["auto-locator"], check: ["click"] },
+        { text: "practica.cart.t2", why: "practica.cart.w2", hint: "rf_cart_2", terms: ["auto-assertion"], check: ["should contain", "2"] },
+        { text: "practica.cart.t3", why: "practica.cart.w3", hint: "rf_cart_3", terms: ["auto-assertion"], check: ["should not", "250"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-pom", navKey: "practica.pom.nav", blocks: [
+      { type: "prose", html: "practica.pom.lead" },
+      { type: "lab", stage: "login", lang: "Robot", tasks: [
+        { text: "practica.pom.t1", why: "practica.pom.w1", hint: "rf_pom_1", terms: ["auto-pom", "auto-locator"], check: ["variables", "user_field"] },
+        { text: "practica.pom.t2", why: "practica.pom.w2", hint: "rf_pom_2", terms: ["auto-pom"], check: ["login", "input text"] },
+        { text: "practica.pom.t3", why: "practica.pom.w3", hint: "rf_pom_3", terms: ["auto-pom", "auto-assertion"], check: ["login", "should contain"] },
+      ] },
+    ] },
+  { group: "robotpr", groupKey: "practica.grp.robot", chip: { label: "Robot Framework", color: "var(--fw-robot)", lang: "Robot" },
+    id: "practica-robot-apistatus", navKey: "practica.apistatus.nav", blocks: [
+      { type: "prose", html: "practica.apistatus.lead" },
+      { type: "lab", stage: "verbs", lang: "Robot", tasks: [
+        { text: "practica.apistatus.t1", why: "practica.apistatus.w1", hint: "rf_apistatus_1", terms: ["api-status"], check: ["get", "401"] },
+        { text: "practica.apistatus.t2", why: "practica.apistatus.w2", hint: "rf_apistatus_2", terms: ["api-status", "api-safe"], check: ["get", "200"] },
+        { text: "practica.apistatus.t3", why: "practica.apistatus.w3", hint: "rf_apistatus_3", terms: ["api-status"], check: ["get", "404"] },
       ] },
     ] },
 
