@@ -823,10 +823,9 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
   <script>
     (function () {
       try {
+        // Default to the light theme; only honour an explicit saved choice.
         var saved = localStorage.getItem('qaguide-theme');
-        var prefersDark = window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        document.documentElement.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
         // Restore the collapsed-sidebar (icon rail) preference before first paint.
         if (localStorage.getItem('qaguide-nav') === 'rail') {
           document.documentElement.classList.add('nav-collapsed');
