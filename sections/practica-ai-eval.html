@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title>Base de datos vectorial</title>
+  <title data-i18n="practica.ai.eval.nav">Armá un eval</title>
   <script>
     (function () {
       try {
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--concept page--ai-vectordb">
+<body class="page--section page--practica-ai-eval">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -479,8 +479,8 @@
           </div>
           </div>
         </div>
-        <div class="nav-group-item nav-group-item--top">
-          <button class="nav-link nav-group nav-group--top" type="button" aria-expanded="false" title="Práctica">
+        <div class="nav-group-item nav-group-item--top is-open">
+          <button class="nav-link nav-group nav-group--top is-active-group" type="button" aria-expanded="true" title="Práctica">
             <span class="nav-link__num">07</span>
             <span class="nav-link__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg></span>
             <span class="nav-link__txt" data-i18n="grp.practica">Práctica</span>
@@ -642,8 +642,8 @@
               </a>
             </div>
           </div>
-          <div class="nav-group-item nav-group-item--nested">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+          <div class="nav-group-item nav-group-item--nested is-open">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
               <span data-i18n="practica.grp.ai">AI QA Engineer</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -657,23 +657,23 @@
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
                 <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
               </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
+              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="practica-ai-eval.html" aria-current="page">
                 <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
               </a>
             </div>
           </div>
           </div>
         </div>
-        <div class="nav-group-item nav-group-item--top is-open">
-          <button class="nav-link nav-group nav-group--top is-active-group" type="button" aria-expanded="true" title="Glosario">
+        <div class="nav-group-item nav-group-item--top">
+          <button class="nav-link nav-group nav-group--top" type="button" aria-expanded="false" title="Glosario">
             <span class="nav-link__num">08</span>
             <span class="nav-link__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 6 4 14" /> <path d="M12 6v14" /> <path d="M8 8v12" /> <path d="M4 4v16" /></svg></span>
             <span class="nav-link__txt" data-i18n="grp.glossary">Glosario</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
           </button>
           <div class="nav-sub">
-        <div class="nav-group-item nav-group-item--nested is-open">
-          <button class="nav-link nav-group nav-group--nested is-active-group" type="button" aria-expanded="true">
+        <div class="nav-group-item nav-group-item--nested">
+          <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
             <span data-i18n="nav.keyterms">Conceptos clave</span>
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
           </button>
@@ -883,8 +883,8 @@
               </a>
             </div>
           </div>
-          <div class="nav-group-item nav-group-item--nested is-open">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
               <span data-i18n="kt.cat.ai">AI en QA</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -928,7 +928,7 @@
               <a class="nav-link nav-sublink nav-sublink--deep" href="ai-embeddings.html">
                 <span>Embeddings</span>
               </a>
-              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="ai-vectordb.html" aria-current="page">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai-vectordb.html">
                 <span>Base de datos vectorial</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="ai-evals.html">
@@ -1032,33 +1032,180 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="cpt-crumb"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
-        <span class="cpt-cat" style="--c:var(--fw-maturity)" data-i18n="kt.cat.ai">AI en QA</span>
-        <h1 class="section__title cpt-title">Base de datos vectorial</h1>
-        <div class="cpt-body">
-          <section class="cpt-sec">
-            <h2 class="block-label" data-i18n="cpt.def">Definición</h2>
-            <div class="cpt-rich cpt-def" data-i18n-html="kt.ai.vectordb">Base de datos que guarda embeddings y encuentra a gran velocidad los más parecidos (los «vecinos más cercanos») a una consulta.</div>
-          </section>
-        <section class="cpt-sec">
-          <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.ai-vectordb.ex">Buscás por parecido, no por coincidencia exacta:<pre class="cpt-code"><code>consulta → embedding → top-k por similitud coseno
-→ devuelve los 3 fragmentos más relevantes del proyecto</code></pre></div>
-        </section>
-        <section class="cpt-sec">
-          <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.ai-vectordb.uc">Es el paso «recuperar» de RAG. QA la alimenta con specs, criterios de aceptación y bugs previos para que el asistente responda con <strong>contexto real del proyecto</strong> y no con suposiciones genéricas.</div>
-        </section>
-        <section class="cpt-sec">
-          <h2 class="block-label" data-i18n="cpt.refs">Para profundizar</h2>
-          <ul class="ref-list">
-            <li class="ref">
-              <a class="ref__link" href="https://www.pinecone.io/learn/vector-database/" target="_blank" rel="noopener noreferrer">Pinecone — What is a vector database</a>
-            </li>
-          </ul>
-        </section>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-maturity)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>AI QA Engineer</span><span class="lang-pill" title="Lenguaje de los ejemplos">Prompt</span></div>
+        <h1 class="section__title" data-i18n="practica.ai.eval.nav">Armá un eval</h1>
+        <div class="prose" data-i18n-html="practica.ai.eval.lead"><p>Cambiaste de modelo y querés saber si la calidad bajó. Armá un <strong>eval</strong>: un mini test de regresión para la IA. Definí el dataset, el juez y el umbral.</p></div>
+        <div class="lab">
+          <div class="lab__work">
+            <div class="lab__stage">
+              <div class="lab__stage-head">
+                <span class="lab__dot"></span><span class="lab__dot"></span><span class="lab__dot"></span>
+                <span class="lab__stage-title" data-i18n="practica.sut">Sistema bajo prueba</span>
+              </div>
+              <div class="lab__stage-body">
+        <div class="mock mock--api">
+          <div class="mock__bar mock__bar--api">
+            <span class="mock__url">API console · api.example.com/orders</span>
+          </div>
+          <div class="mock__body mock__body--api">
+            <div class="mock-req">
+              <span class="mock-method mock-method--post">POST</span>
+              <span class="mock-req__path">/orders</span>
+              <span class="mock-status mock-status--ok">201 Created</span>
+              <span class="mock-req__note">create</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">read</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--put">PUT</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">replace · idempotent</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--patch">PATCH</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">200 OK</span>
+              <span class="mock-req__note">partial update</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--delete">DELETE</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--ok">204 No Content</span>
+              <span class="mock-req__note">remove · idempotent</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/42</span>
+              <span class="mock-status mock-status--bad">404 Not Found</span>
+              <span class="mock-req__note">after delete</span>
+            </div>
+            <div class="mock-req">
+              <span class="mock-method mock-method--get">GET</span>
+              <span class="mock-req__path">/orders/1</span>
+              <span class="mock-status mock-status--bad">401 Unauthorized</span>
+              <span class="mock-req__note">no token</span>
+            </div>
+            <div class="mock-tags-row">
+              <code class="mock-tag mock-tag--good">✓ 2xx happy paths</code>
+              <code class="mock-tag mock-tag--good">✓ 401 / 404 unhappy paths</code>
+              <code class="mock-tag">idempotent: GET · PUT · DELETE</code>
+            </div>
+          </div>
+        </div></div>
+            </div>
+            <div class="lab__console">
+              <div class="lab__console-head">
+                <span class="lab__console-title" data-i18n="practica.yourSolution">Tu solución</span>
+                <span class="lab__progress" role="status" aria-live="polite">0 / 3</span>
+              </div>
+              <textarea class="lab-editor" spellcheck="false" rows="7" data-tasks="[[&quot;dataset&quot;,&quot;201&quot;],[&quot;llm-as-judge&quot;,&quot;criteri&quot;],[&quot;90&quot;,&quot;prompt&quot;]]"
+                placeholder="// Escribí acá tu test — una línea por tarea…"
+                aria-label="Editor de código del reto"
+                data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
+              <div class="lab__console-foot">
+                <button class="lab-check" type="button" data-i18n="practica.check">Comprobar</button>
+                <span class="lab__console-lang">PROMPT</span>
+              </div>
+            </div>
+          </div>
+          <div class="lab__panel">
+            <p class="lab__panel-title" data-i18n="practica.tasks">Instrucciones</p>
+            <ol class="lab__tasks">
+              <li class="lab-task is-active" data-task="0">
+                <div class="lab-task__num">1</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="practica.ai.eval.t1">Definí un <strong>dataset</strong> de 3 casos con su resultado esperado.</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="practica.ai.eval.w1">Sin un set fijo de casos no podés comparar versiones: el dataset es tu «suite» para la IA.</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
+                    <div class="lab-acc__body">
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Prompt</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code>Dataset de <span class="tok-number">3</span> casos <span class="tok-punctuation">(</span>entrada <span class="tok-punctuation">-&gt;</span> esperado<span class="tok-punctuation">):</span>
+<span class="tok-punctuation">{</span> <span class="tok-keyword">in</span><span class="tok-punctuation">:</span> <span class="tok-string">"POST /orders"</span><span class="tok-punctuation">,</span>    exp<span class="tok-punctuation">:</span> <span class="tok-number">201</span> <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">{</span> <span class="tok-keyword">in</span><span class="tok-punctuation">:</span> <span class="tok-string">"GET /orders/1"</span><span class="tok-punctuation">,</span>   exp<span class="tok-punctuation">:</span> <span class="tok-number">200</span> <span class="tok-punctuation">}</span>
+<span class="tok-punctuation">{</span> <span class="tok-keyword">in</span><span class="tok-punctuation">:</span> <span class="tok-string">"GET /orders/999"</span><span class="tok-punctuation">,</span> exp<span class="tok-punctuation">:</span> <span class="tok-number">404</span> <span class="tok-punctuation">}</span></code></pre>
+        </div></div>
+                  </details>
+                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">Key terms:</span><a class="kt-link" href="ai-evals.html">Evals / LLM-as-judge</a></div>
+                </div>
+              </li>
+              <li class="lab-task" data-task="1">
+                <div class="lab-task__num">2</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="practica.ai.eval.t2">Usá un <strong>juez</strong> (LLM-as-judge) que puntúe cada salida contra un criterio claro.</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="practica.ai.eval.w2">Cuando no hay un valor exacto esperado, un juez con rúbrica resuelve el problema del oráculo.</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
+                    <div class="lab-acc__body">
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Prompt</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code>Juez <span class="tok-punctuation">(</span>LLM<span class="tok-punctuation">-</span><span class="tok-keyword">as</span><span class="tok-punctuation">-</span>judge<span class="tok-punctuation">):</span> puntu<span class="tok-punctuation">á</span> cada salida contra el criterio de la
+r<span class="tok-punctuation">ú</span>brica <span class="tok-punctuation">(¿</span>status correcto<span class="tok-punctuation">?</span> <span class="tok-punctuation">¿</span>sin datos inventados<span class="tok-punctuation">?).</span></code></pre>
+        </div></div>
+                  </details>
+                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">Key terms:</span><a class="kt-link" href="ai-oracle.html">Oráculo de prueba con IA</a></div>
+                </div>
+              </li>
+              <li class="lab-task" data-task="2">
+                <div class="lab-task__num">3</div>
+                <div class="lab-task__main">
+                  <div class="lab-task__text" data-i18n-html="practica.ai.eval.t3">Definí el <strong>umbral</strong>: si pasa menos del 90%, no promocionás el prompt ni el modelo.</div>
+                  <details class="lab-acc lab-acc--why">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
+                    <div class="lab-acc__body" data-i18n-html="practica.ai.eval.w3">El umbral convierte el eval en un gate: bloquea cambios que empeoran la calidad, como un test que falla.</div>
+                  </details>
+                  <details class="lab-acc lab-acc--hint">
+                    <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
+                    <div class="lab-acc__body">
+        <div class="code-block">
+          <div class="code-block__head">
+            <span class="code-block__lang">Prompt</span>
+            <button class="copy-btn" type="button">
+              <span data-i18n="ui.copy">Copiar</span>
+            </button>
+          </div>
+          <pre><code>Umbral<span class="tok-punctuation">:</span> si pasa menos del <span class="tok-number">90</span><span class="tok-punctuation">%,</span> no se promociona ese prompt
+ni ese modelo <span class="tok-punctuation">(</span>regresi<span class="tok-punctuation">ó</span>n de la IA<span class="tok-punctuation">).</span></code></pre>
+        </div></div>
+                  </details>
+                <div class="lab-task__terms"><span class="lab-task__terms-label" data-i18n="practica.keyTerms">Key terms:</span><a class="kt-link" href="ai-evals.html">Evals / LLM-as-judge</a></div>
+                </div>
+              </li>
+            </ol>
+          </div>
         </div>
-        <div class="page-nav page-nav--single"><a class="cpt-back" href="key-terms.html" data-i18n="cpt.back">← Volver a Conceptos clave</a></div>
+        <nav class="page-nav" aria-label="Pagination">
+          <a class="page-nav__link page-nav__prev" href="practica-ai-injection.html">
+            <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
+            <span class="page-nav__title" data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+          </a>
+          <a class="page-nav__link page-nav__next" href="key-terms.html">
+            <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
+            <span class="page-nav__title" data-i18n="nav.keyterms">Conceptos clave</span>
+          </a>
+        </nav>
       </div>
     </main>
     <aside class="rail" id="page-rail" aria-label="En esta sección"></aside>
