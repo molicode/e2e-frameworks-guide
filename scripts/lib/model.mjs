@@ -3281,6 +3281,7 @@ export const SECTIONS = [
     navKey: "practica.intro.nav",
     blocks: [
       { type: "prose", html: "practica.lead" },
+      { type: "labtour" },
       { type: "label", text: "practica.howLabel" },
       { type: "steps", items: ["practica.how.1", "practica.how.2", "practica.how.3"] },
       { type: "callout", variant: "ok", html: "practica.callout" },
