@@ -11,6 +11,8 @@
    language-neutral and never translated.
    ========================================================================== */
 
+import { uiIcon } from "./ui-icons.mjs";
+
 function browser(url, body) {
   return `
         <div class="mock">
@@ -211,7 +213,7 @@ function errorScreen() {
     "shop.example.com/orders/42",
     `
             <div class="mock-card mock-card--error">
-              <div class="mock-error-icon">⚠️</div>
+              <div class="mock-error-icon">${uiIcon("triangle-alert")}</div>
               <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
@@ -323,7 +325,7 @@ function forbiddenScreen() {
     "app.example.com/orders/99",
     `
             <div class="mock-card mock-card--error">
-              <div class="mock-error-icon">🔒</div>
+              <div class="mock-error-icon">${uiIcon("lock")}</div>
               <p class="mock-h">403 — Forbidden</p>
               <p class="mock-error-msg">You don't have permission to view this order.</p>
               <div class="mock-http">GET /api/orders/99 → 403</div>
@@ -425,7 +427,7 @@ function gherkinScreen() {
   return `
         <div class="mock mock--file">
           <div class="mock__bar mock__bar--file">
-            <span class="mock-file__icon">📄</span>
+            <span class="mock-file__icon">${uiIcon("file-text")}</span>
             <span class="mock__url">checkout.feature</span>
           </div>
           <div class="mock__body mock__body--file">

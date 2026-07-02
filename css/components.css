@@ -465,11 +465,11 @@ html[lang="en"] .code-i18n--en { display: block; }
   border-color: var(--border-strong);
 }
 .tile__icon {
-  font-family: var(--font-mono);
-  font-size: 1.4rem;
   color: var(--accent);
   margin-bottom: var(--space-2);
+  line-height: 0;
 }
+.tile__icon .ui-icon { width: 28px; height: 28px; display: block; }
 .tile h3 { margin: 0 0 var(--space-2); font-size: var(--fs-base); }
 .tile p { margin: 0; font-size: var(--fs-sm); color: var(--text-soft); }
 
@@ -920,7 +920,8 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .mock-toast__icon { color: var(--success); font-weight: 700; }
 
 .mock-card--error { text-align: center; border-color: color-mix(in srgb, var(--danger) 40%, var(--border)); }
-.mock-error-icon { font-size: 2rem; }
+.mock-error-icon { line-height: 0; color: var(--danger); }
+.mock-error-icon .ui-icon { width: 32px; height: 32px; display: block; }
 .mock-error-msg { color: var(--text-soft); font-size: var(--fs-sm); margin: var(--space-2) 0; }
 .mock-http { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, transparent); border-radius: var(--radius-sm); padding: var(--space-2); display: inline-block; }
 
@@ -1028,7 +1029,8 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 
 /* ---- Gherkin .feature file mock ---- */
 .mock--file .mock__bar--file { gap: var(--space-2); }
-.mock-file__icon { font-size: 1em; }
+.mock-file__icon { line-height: 0; display: inline-flex; }
+.mock-file__icon .ui-icon { width: 16px; height: 16px; display: block; }
 .mock__body--file { background: none; }
 .mock-gherkin {
   margin: 0 0 var(--space-3); padding: var(--space-4);
@@ -1886,7 +1888,8 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
   border-bottom: 1px solid var(--border);
   border-left: 3px solid var(--c);
 }
-.kt-branch__icon { font-size: 1.15em; line-height: 1; }
+.kt-branch__icon { line-height: 0; color: var(--c, var(--accent)); }
+.kt-branch__icon .ui-icon { width: 18px; height: 18px; display: block; }
 .kt-branch__name { flex: 1; }
 .kt-branch__count {
   font-family: var(--font-mono);

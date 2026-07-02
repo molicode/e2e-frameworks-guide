@@ -980,17 +980,17 @@
         <div class="prose" data-i18n-html="fund.theory.types"><p>Hay tres niveles principales de tests automatizados:</p><ul><li><strong>Unit</strong>: prueban una función o componente aislado. Son rapidísimos y muy específicos. Ejemplo: <code>sum(2, 3) === 5</code>.</li><li><strong>Integration</strong>: prueban que varias piezas trabajen juntas (por ejemplo, un servicio + su base de datos).</li><li><strong>End-to-end (E2E)</strong>: prueban el flujo completo como lo haría un usuario real en el navegador. Selenium, Cypress y Playwright viven en este nivel.</li></ul></div>
         <div class="tile-grid">
             <div class="tile">
-              <div class="tile__icon">🧪</div>
+              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /> <path d="M6.453 15h11.094" /> <path d="M8.5 2h7" /></svg></div>
               <h3 data-i18n="fund.tile.unit.title">Unit</h3>
               <p data-i18n="fund.tile.unit.body">Una función o componente aislado. Rapidísimos y muy específicos: la base de la pirámide.</p>
             </div>
             <div class="tile">
-              <div class="tile__icon">🔗</div>
+              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></div>
               <h3 data-i18n="fund.tile.integration.title">Integration</h3>
               <p data-i18n="fund.tile.integration.body">Varias piezas trabajando juntas (un servicio + su base de datos, módulos entre sí).</p>
             </div>
             <div class="tile">
-              <div class="tile__icon">🌐</div>
+              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></svg></div>
               <h3 data-i18n="fund.tile.e2e.title">End-to-end (E2E)</h3>
               <p data-i18n="fund.tile.e2e.body">El flujo completo como un usuario real, en el navegador. Acá viven Selenium, Cypress y Playwright.</p>
             </div>
@@ -1107,7 +1107,7 @@ page.getByTestId("</span>submit<span class="tok-punctuation">-</span>order<span 
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" data-i18n="fund.flaky.label">Tests flaky</h2>
         <div class="prose" data-i18n-html="fund.flaky.body"><p>Un test <strong>flaky</strong> es el que a veces pasa y a veces falla sin que el código haya cambiado. Suele deberse a esperas mal hechas, datos compartidos o tiempos de red. Son veneno para la confianza del equipo: si un test miente, la gente empieza a ignorar los rojos. La cura: esperar por <em>condiciones</em>, no por el reloj.</p></div>
@@ -1158,7 +1158,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" data-i18n="fund.levels.label">Niveles y tipos de prueba</h2>
         <div class="prose" data-i18n-html="fund.levels.body"><p>Más allá de unit/integration/E2E, vas a escuchar:</p><ul><li><strong>Smoke</strong>: chequeo rápido de que lo crítico funciona (¿prende?).</li><li><strong>Sanity</strong>: verificación acotada tras un cambio puntual.</li><li><strong>Regression</strong>: re-correr la suite para asegurar que lo nuevo no rompió lo viejo.</li><li><strong>Exploratory</strong>: probar sin guion, aprendiendo del sistema sobre la marcha.</li><li><strong>Acceptance / UAT</strong>: valida que cumple los criterios del negocio/usuario.</li></ul></div>
@@ -1196,7 +1196,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
             
           </div>
         </div>
-        <h2 class="block-label" data-i18n="fc.title">🃏 Flashcards — repasá lo aprendido</h2>
+        <h2 class="block-label" data-i18n="fc.title">Flashcards — repasá lo aprendido</h2>
         <div class="flashcards" data-flashcards>
           <div class="fc-stage">
             <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">

@@ -331,7 +331,7 @@ function renderBlock(block, dict) {
         .map(
           (item) => `
             <div class="tile">
-              <div class="tile__icon">${item.icon}</div>
+              <div class="tile__icon">${uiIcon(item.icon)}</div>
               <h3 data-i18n="${item.title}">${escText(t(dict, item.title))}</h3>
               <p data-i18n="${item.body}">${escText(t(dict, item.body))}</p>
             </div>`
@@ -457,14 +457,14 @@ function renderBlock(block, dict) {
    deep-dive page with example + use case + references).
    ========================================================================== */
 const KT_CATS = [
-  { key: "process",    icon: "🔄", color: "var(--fw-ci)" },
-  { key: "design",     icon: "📐", color: "var(--accent)" },
-  { key: "defects",    icon: "🐞", color: "var(--fw-verbs)" },
-  { key: "automation", icon: "⚙️", color: "var(--fw-playwright)" },
-  { key: "api",        icon: "🔌", color: "var(--fw-python)" },
-  { key: "ai",         icon: "🤖", color: "var(--fw-maturity)" },
-  { key: "security",   icon: "🔒", color: "var(--danger)" },
-  { key: "maturity",   icon: "📊", color: "var(--fw-skills)" },
+  { key: "process",    icon: "refresh-cw",   color: "var(--fw-ci)" },
+  { key: "design",     icon: "ruler",        color: "var(--accent)" },
+  { key: "defects",    icon: "bug",          color: "var(--fw-verbs)" },
+  { key: "automation", icon: "settings",     color: "var(--fw-playwright)" },
+  { key: "api",        icon: "plug",         color: "var(--fw-python)" },
+  { key: "ai",         icon: "bot",          color: "var(--fw-maturity)" },
+  { key: "security",   icon: "lock",         color: "var(--danger)" },
+  { key: "maturity",   icon: "chart-column", color: "var(--fw-skills)" },
 ];
 
 // Every concept category lives under the "Key terms" glossary.
@@ -494,7 +494,7 @@ function conceptMenu(dict, hostId) {
     return `
           <div class="kt-branch" style="--c:${cat.color}">
             <div class="kt-branch__head">
-              <span class="kt-branch__icon" aria-hidden="true">${cat.icon}</span>
+              <span class="kt-branch__icon" aria-hidden="true">${uiIcon(cat.icon)}</span>
               <span class="kt-branch__name" data-i18n="${cat.labelKey}">${escText(t(dict, cat.labelKey))}</span>
               <span class="kt-branch__count">${list.length}</span>
             </div>
@@ -949,14 +949,14 @@ function nodeMedia(key) {
 // The thematic "grandparent" groups. Shared by BOTH the home learning path
 // (units) and the sidebar (collapsible grandparents), so the two stay in sync.
 const NAV_GROUPS = [
-  { key: "foundations", label: "grp.foundations", icon: "🧭", color: "var(--cat-foundations)", members: ["intro", "fundamentals"] },
-  { key: "languages",   label: "grp.languages",   icon: "💻", color: "var(--cat-languages)",   members: ["python", "typescript"] },
-  { key: "frameworks",  label: "grp.frameworks",  icon: "🧩", color: "var(--cat-frameworks)",  members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
-  { key: "approaches",  label: "grp.approaches",  icon: "🧪", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
-  { key: "ai",          label: "grp.ai",          icon: "🤖", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
-  { key: "process",     label: "grp.process",     icon: "🚦", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "🎯", color: "var(--cat-practica)",    members: ["practica", "pwpr", "selpr", "cypr", "robotpr"] },
-  { key: "glossary",    label: "grp.glossary",    icon: "📚", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
+  { key: "foundations", label: "grp.foundations", icon: "compass", color: "var(--cat-foundations)", members: ["intro", "fundamentals"] },
+  { key: "languages",   label: "grp.languages",   icon: "languages", color: "var(--cat-languages)",   members: ["python", "typescript"] },
+  { key: "frameworks",  label: "grp.frameworks",  icon: "frameworks", color: "var(--cat-frameworks)",  members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
+  { key: "approaches",  label: "grp.approaches",  icon: "approaches", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
+  { key: "ai",          label: "grp.ai",          icon: "ai", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
+  { key: "process",     label: "grp.process",     icon: "process", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
+  { key: "practica",    label: "grp.practica",    icon: "practica", color: "var(--cat-practica)",    members: ["practica", "pwpr", "selpr", "cypr", "robotpr"] },
+  { key: "glossary",    label: "grp.glossary",    icon: "glossary", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
 // Horizontal offsets that give the path its gentle zig-zag (cycled by node).
