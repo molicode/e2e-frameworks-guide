@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" data-i18n-attr="content:meta.description" content="Guía interactiva para aprender QA Automation desde cero: fundamentos, Selenium, Cypress, Playwright y cómo la AI complementa cada etapa." />
   <meta name="color-scheme" content="light dark" />
-  <title data-i18n="page.content">Contenido</title>
+  <title data-i18n="aiqa.nav.flows">Flujos</title>
   <script>
     (function () {
       try {
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 </head>
-<body class="page--section page--ai101-intro">
+<body class="page--section page--aiqa-flujos">
   <div class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" id="reading-progress-bar"></div>
   </div>
@@ -352,13 +352,13 @@
             <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
           </button>
           <div class="nav-sub">
-          <div class="nav-group-item nav-group-item--nested is-open">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
+          <div class="nav-group-item nav-group-item--nested">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
               <span data-i18n="nav.ai101">AI 101</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
             <div class="nav-sub nav-sub--nested">
-              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="ai101-intro.html" aria-current="page">
+              <a class="nav-link nav-sublink nav-sublink--deep" href="ai101-intro.html">
                 <span data-i18n="page.content">Contenido</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="ai101-ejemplos.html">
@@ -375,8 +375,8 @@
               </a>
             </div>
           </div>
-          <div class="nav-group-item nav-group-item--nested">
-            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="false">
+          <div class="nav-group-item nav-group-item--nested is-open">
+            <button class="nav-link nav-group nav-group--nested" type="button" aria-expanded="true">
               <span data-i18n="nav.aiqa">AI QA Engineer</span>
               <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 6l6 6-6 6z"/></svg>
             </button>
@@ -390,7 +390,7 @@
               <a class="nav-link nav-sublink nav-sublink--deep" href="aiqa-prompts.html">
                 <span data-i18n="aiqa.nav.prompts">Prompt engineering</span>
               </a>
-              <a class="nav-link nav-sublink nav-sublink--deep" href="aiqa-flujos.html">
+              <a class="nav-link nav-sublink nav-sublink--deep is-active" href="aiqa-flujos.html" aria-current="page">
                 <span data-i18n="aiqa.nav.flows">Flujos</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="aiqa-ejercicios.html">
@@ -976,42 +976,181 @@
     </aside>
     <main class="content" id="main-content">
       <div class="content__inner">
-        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--accent)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>AI 101</span></div>
-        <h1 class="section__title" data-i18n="page.content">Contenido</h1>
-        <div class="prose" data-i18n-html="ai101.lead"><p><strong>AI 101 para QA:</strong> lo mínimo que necesitás entender de la IA generativa para usarla bien en testing. Sin humo y con ejemplos.</p></div>
-        <h2 class="block-label" data-i18n="ui.theory">Teoría</h2>
-        <div class="prose" data-i18n-html="ai101.what"><p>Un <strong>LLM</strong> (modelo de lenguaje) predice el texto más probable dado lo que le escribís. No “sabe” ni “entiende”: completa patrones aprendidos. Por eso es potentísimo para generar y transformar texto (¡y código de tests!), pero también puede equivocarse con total seguridad. El trabajo del QA es aprovechar lo primero y controlar lo segundo.</p></div>
-        <div class="tile-grid">
-            <div class="tile">
-              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /> <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /> <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /> <path d="M18 18a4 4 0 0 0 2-7.464" /> <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /> <path d="M6 18a4 4 0 0 1-2-7.464" /> <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></div>
-              <h3 data-i18n="ai101.t1.title">¿Qué es un LLM?</h3>
-              <p data-i18n="ai101.t1.body">El motor que genera texto (Claude, GPT, Gemini…). Le das un prompt y devuelve una continuación probable.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
-              <h3 data-i18n="ai101.t2.title">Prompt</h3>
-              <p data-i18n="ai101.t2.body">La instrucción que le das. Cuanto más claros el rol, el contexto y el formato, mejor y más repetible la salida.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /> <path d="M13 5v2" /> <path d="M13 17v2" /> <path d="M13 11v2" /></svg></div>
-              <h3 data-i18n="ai101.t3.title">Tokens y contexto</h3>
-              <p data-i18n="ai101.t3.body">El modelo lee en tokens (~¾ de palabra) y tiene una ventana limitada: meté solo lo relevante, no todo el repo.</p>
-            </div>
-            <div class="tile">
-              <div class="tile__icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></svg></div>
-              <h3 data-i18n="ai101.t4.title">Alucinación</h3>
-              <p data-i18n="ai101.t4.body">Cuando inventa algo falso que suena bien (un método que no existe). Por eso todo lo que genera se verifica siempre.</p>
-            </div>
-        </div>
-        <div class="callout" data-i18n-html="ai101.concepts.note">Cada término (LLM, prompt, token, alucinación, RAG, agente…) tiene su definición formal en <a href="key-terms.html"><strong>Conceptos clave</strong></a>. Acá los vemos en acción.</div>
+        <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-maturity)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>AI QA Engineer</span></div>
+        <h1 class="section__title" data-i18n="aiqa.nav.flows">Flujos</h1>
+        <div class="prose" data-i18n-html="flows.lead"><p>La teoría se entiende mejor viéndola en movimiento. Estos son los <strong>flujos clave</strong> que todo AI QA Engineer debería tener en la cabeza. Cada diagrama avanza solo, paso a paso — pasá el mouse para pausarlo, o tocá un nodo para saltar a ese paso.</p></div>
+        <h2 class="block-label" data-i18n="flow.gen.title">Generar tests con un LLM</h2>
+        <div class="prose" data-i18n-html="flows.gen.lead"><p>El caso más común: convertir una spec o un cambio de código en tests, con un humano validando antes de que entren a CI.</p></div>
+        <figure class="aiflow" data-flow data-steps="5">
+          <div class="aiflow__track">
+              <div class="aiflow__node is-active" data-step="0" data-desc="flow.gen.s0.d" role="button" tabindex="0" aria-label="Spec o cambio">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.gen.s0.t">Spec o cambio</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="1" data-desc="flow.gen.s1.d" role="button" tabindex="0" aria-label="Prompt con contexto">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8" /> <path d="m15 5 4 4" /> <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.gen.s1.t">Prompt con contexto</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="2" data-desc="flow.gen.s2.d" role="button" tabindex="0" aria-label="El LLM genera">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.gen.s2.t">El LLM genera</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="3" data-desc="flow.gen.s3.d" role="button" tabindex="0" aria-label="Revisión humana">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.gen.s3.t">Revisión humana</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="4" data-desc="flow.gen.s4.d" role="button" tabindex="0" aria-label="Entran a CI">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m9 12 2 2 4-4" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.gen.s4.t">Entran a CI</span>
+              </div>
+          </div>
+          <figcaption class="aiflow__cap">
+            <span class="aiflow__count" aria-hidden="true"><span class="aiflow__stepnum">1</span> / 5</span>
+            <p class="aiflow__desc" data-i18n="flow.gen.s0.d">Partís de un requisito, una historia de usuario o el diff de un pull request.</p>
+            <div class="aiflow__dots"><button class="aiflow__dot is-active" type="button" data-step="0" aria-label="1"></button><button class="aiflow__dot" type="button" data-step="1" aria-label="2"></button><button class="aiflow__dot" type="button" data-step="2" aria-label="3"></button><button class="aiflow__dot" type="button" data-step="3" aria-label="4"></button><button class="aiflow__dot" type="button" data-step="4" aria-label="5"></button></div>
+          </figcaption>
+        </figure>
+        <h2 class="block-label" data-i18n="flow.selfheal.title">Self-healing locators</h2>
+        <div class="prose" data-i18n-html="flows.selfheal.lead"><p>Qué pasa cuando el front cambia y un selector deja de existir: en vez de romperse, el test se «cura» solo y avisa.</p></div>
+        <figure class="aiflow" data-flow data-steps="5">
+          <div class="aiflow__track">
+              <div class="aiflow__node is-active" data-step="0" data-desc="flow.selfheal.s0.d" role="button" tabindex="0" aria-label="El locator falla">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.selfheal.s0.t">El locator falla</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="1" data-desc="flow.selfheal.s1.d" role="button" tabindex="0" aria-label="La AI lee el DOM">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /> <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /> <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /> <path d="M18 18a4 4 0 0 0 2-7.464" /> <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /> <path d="M6 18a4 4 0 0 1-2-7.464" /> <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.selfheal.s1.t">La AI lee el DOM</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="2" data-desc="flow.selfheal.s2.d" role="button" tabindex="0" aria-label="Propone un selector">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.selfheal.s2.t">Propone un selector</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="3" data-desc="flow.selfheal.s3.d" role="button" tabindex="0" aria-label="Reintenta">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.selfheal.s3.t">Reintenta</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="4" data-desc="flow.selfheal.s4.d" role="button" tabindex="0" aria-label="Reporta el cambio">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.selfheal.s4.t">Reporta el cambio</span>
+              </div>
+          </div>
+          <figcaption class="aiflow__cap">
+            <span class="aiflow__count" aria-hidden="true"><span class="aiflow__stepnum">1</span> / 5</span>
+            <p class="aiflow__desc" data-i18n="flow.selfheal.s0.d">El selector #login-btn ya no existe: el front cambió y el test se rompería.</p>
+            <div class="aiflow__dots"><button class="aiflow__dot is-active" type="button" data-step="0" aria-label="1"></button><button class="aiflow__dot" type="button" data-step="1" aria-label="2"></button><button class="aiflow__dot" type="button" data-step="2" aria-label="3"></button><button class="aiflow__dot" type="button" data-step="3" aria-label="4"></button><button class="aiflow__dot" type="button" data-step="4" aria-label="5"></button></div>
+          </figcaption>
+        </figure>
+        <h2 class="block-label" data-i18n="flow.rag.title">RAG — Retrieval-Augmented Generation</h2>
+        <div class="prose" data-i18n-html="flows.rag.lead"><p>Cómo un asistente responde con datos de TU proyecto (docs, specs, código) en vez de inventar: recupera contexto real antes de responder.</p></div>
+        <figure class="aiflow" data-flow data-steps="6">
+          <div class="aiflow__track">
+              <div class="aiflow__node is-active" data-step="0" data-desc="flow.rag.s0.d" role="button" tabindex="0" aria-label="Pregunta">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.rag.s0.t">Pregunta</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="1" data-desc="flow.rag.s1.d" role="button" tabindex="0" aria-label="Embedding">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.rag.s1.t">Embedding</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="2" data-desc="flow.rag.s2.d" role="button" tabindex="0" aria-label="Búsqueda vectorial">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.rag.s2.t">Búsqueda vectorial</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="3" data-desc="flow.rag.s3.d" role="button" tabindex="0" aria-label="Aumentar el prompt">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.rag.s3.t">Aumentar el prompt</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="4" data-desc="flow.rag.s4.d" role="button" tabindex="0" aria-label="El LLM responde">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.rag.s4.t">El LLM responde</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="5" data-desc="flow.rag.s5.d" role="button" tabindex="0" aria-label="Respuesta con fuentes">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.rag.s5.t">Respuesta con fuentes</span>
+              </div>
+          </div>
+          <figcaption class="aiflow__cap">
+            <span class="aiflow__count" aria-hidden="true"><span class="aiflow__stepnum">1</span> / 6</span>
+            <p class="aiflow__desc" data-i18n="flow.rag.s0.d">El usuario (o el sistema) hace una pregunta en lenguaje natural, por ejemplo: «¿qué casos cubren el login?».</p>
+            <div class="aiflow__dots"><button class="aiflow__dot is-active" type="button" data-step="0" aria-label="1"></button><button class="aiflow__dot" type="button" data-step="1" aria-label="2"></button><button class="aiflow__dot" type="button" data-step="2" aria-label="3"></button><button class="aiflow__dot" type="button" data-step="3" aria-label="4"></button><button class="aiflow__dot" type="button" data-step="4" aria-label="5"></button><button class="aiflow__dot" type="button" data-step="5" aria-label="6"></button></div>
+          </figcaption>
+        </figure>
+        <h2 class="block-label" data-i18n="flow.agent.title">El loop de un agente</h2>
+        <div class="prose" data-i18n-html="flows.agent.lead"><p>Lo que distingue a un agente de un simple prompt: no responde y ya, sino que actúa, observa el resultado y vuelve a intentar hasta cumplir el objetivo.</p></div>
+        <figure class="aiflow" data-flow data-steps="6">
+          <div class="aiflow__track">
+              <div class="aiflow__node is-active" data-step="0" data-desc="flow.agent.s0.d" role="button" tabindex="0" aria-label="Objetivo">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.agent.s0.t">Objetivo</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="1" data-desc="flow.agent.s1.d" role="button" tabindex="0" aria-label="Planifica">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /> <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /> <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /> <path d="M18 18a4 4 0 0 0 2-7.464" /> <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /> <path d="M6 18a4 4 0 0 1-2-7.464" /> <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.agent.s1.t">Planifica</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="2" data-desc="flow.agent.s2.d" role="button" tabindex="0" aria-label="Actúa (usa una tool)">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.agent.s2.t">Actúa (usa una tool)</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="3" data-desc="flow.agent.s3.d" role="button" tabindex="0" aria-label="Observa">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.agent.s3.t">Observa</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="4" data-desc="flow.agent.s4.d" role="button" tabindex="0" aria-label="Reflexiona y repite">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.agent.s4.t">Reflexiona y repite</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="5" data-desc="flow.agent.s5.d" role="button" tabindex="0" aria-label="Termina">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m9 12 2 2 4-4" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.agent.s5.t">Termina</span>
+              </div>
+          </div>
+          <figcaption class="aiflow__cap">
+            <span class="aiflow__count" aria-hidden="true"><span class="aiflow__stepnum">1</span> / 6</span>
+            <p class="aiflow__desc" data-i18n="flow.agent.s0.d">Le das una meta de alto nivel, por ejemplo: «escribí y corré los tests del carrito».</p>
+            <div class="aiflow__dots"><button class="aiflow__dot is-active" type="button" data-step="0" aria-label="1"></button><button class="aiflow__dot" type="button" data-step="1" aria-label="2"></button><button class="aiflow__dot" type="button" data-step="2" aria-label="3"></button><button class="aiflow__dot" type="button" data-step="3" aria-label="4"></button><button class="aiflow__dot" type="button" data-step="4" aria-label="5"></button><button class="aiflow__dot" type="button" data-step="5" aria-label="6"></button></div>
+          </figcaption>
+        </figure>
+        <h2 class="block-label" data-i18n="flow.hitl.title">Human-in-the-loop</h2>
+        <div class="prose" data-i18n-html="flows.hitl.lead"><p>El principio de seguridad que sostiene todo lo demás: la AI propone, pero una persona revisa y decide qué se aplica.</p></div>
+        <figure class="aiflow" data-flow data-steps="5">
+          <div class="aiflow__track">
+              <div class="aiflow__node is-active" data-step="0" data-desc="flow.hitl.s0.d" role="button" tabindex="0" aria-label="La AI genera">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.hitl.s0.t">La AI genera</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="1" data-desc="flow.hitl.s1.d" role="button" tabindex="0" aria-label="Se presenta">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.hitl.s1.t">Se presenta</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="2" data-desc="flow.hitl.s2.d" role="button" tabindex="0" aria-label="El humano revisa">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8" /> <path d="m15 5 4 4" /> <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.hitl.s2.t">El humano revisa</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="3" data-desc="flow.hitl.s3.d" role="button" tabindex="0" aria-label="Se aprueba">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m9 12 2 2 4-4" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.hitl.s3.t">Se aprueba</span>
+              </div><span class="aiflow__link" aria-hidden="true"></span>
+              <div class="aiflow__node" data-step="4" data-desc="flow.hitl.s4.d" role="button" tabindex="0" aria-label="El feedback mejora">
+                <span class="aiflow__ico" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /></svg></span>
+                <span class="aiflow__t" data-i18n="flow.hitl.s4.t">El feedback mejora</span>
+              </div>
+          </div>
+          <figcaption class="aiflow__cap">
+            <span class="aiflow__count" aria-hidden="true"><span class="aiflow__stepnum">1</span> / 5</span>
+            <p class="aiflow__desc" data-i18n="flow.hitl.s0.d">El modelo produce algo: tests, datos de prueba o un locator candidato.</p>
+            <div class="aiflow__dots"><button class="aiflow__dot is-active" type="button" data-step="0" aria-label="1"></button><button class="aiflow__dot" type="button" data-step="1" aria-label="2"></button><button class="aiflow__dot" type="button" data-step="2" aria-label="3"></button><button class="aiflow__dot" type="button" data-step="3" aria-label="4"></button><button class="aiflow__dot" type="button" data-step="4" aria-label="5"></button></div>
+          </figcaption>
+        </figure>
+        <div class="callout callout--ok" data-i18n-html="flows.callout">Regla de oro: la AI acelera el trabajo, no reemplaza el criterio. En todos estos flujos hay —o debería haber— un humano validando los puntos que importan.</div>
         <nav class="page-nav" aria-label="Pagination">
-          <a class="page-nav__link page-nav__prev" href="perf-locust.html">
+          <a class="page-nav__link page-nav__prev" href="aiqa-prompts.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
-            <span class="page-nav__title" data-i18n="perf.page.locust">Locust</span>
+            <span class="page-nav__title" data-i18n="aiqa.nav.prompts">Prompt engineering</span>
           </a>
-          <a class="page-nav__link page-nav__next" href="ai101-ejemplos.html">
+          <a class="page-nav__link page-nav__next" href="aiqa-ejercicios.html">
             <span class="page-nav__dir" data-i18n="ui.next">Siguiente</span>
-            <span class="page-nav__title" data-i18n="page.examples">Ejemplos</span>
+            <span class="page-nav__title" data-i18n="page.exercises">Ejercicios</span>
           </a>
         </nav>
       </div>

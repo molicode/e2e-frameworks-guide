@@ -12,7 +12,7 @@
    ========================================================================== */
 
 import { readFileSync } from "node:fs";
-import { SAMPLES, CONCEPTS } from "./model.mjs";
+import { SAMPLES, CONCEPTS, AI_FLOWS } from "./model.mjs";
 import { highlight } from "./highlight.mjs";
 import { renderMock } from "./mocks.mjs";
 import { renderRunner } from "./runner.mjs";
@@ -224,6 +224,40 @@ function renderLabTour(dict) {
         </div>`;
 }
 
+/* ---- animated flow diagram (data-driven, auto-play step-by-step) ----
+   A linear pipeline of nodes; js/flow.js highlights one at a time and shows
+   its explanation in the caption. Bilingual (data-i18n) and readable JS-off
+   (node 0 is pre-highlighted and its description is shown by default). */
+function renderAiFlow(flowId, dict) {
+  const flow = AI_FLOWS[flowId];
+  if (!flow) return "";
+  const steps = flow.steps;
+  const n = steps.length;
+  const nodes = steps
+    .map((s, i) => {
+      const connector = i < n - 1 ? `<span class="aiflow__link${i === 0 ? "" : ""}" aria-hidden="true"></span>` : "";
+      return `
+              <div class="aiflow__node${i === 0 ? " is-active" : ""}" data-step="${i}" data-desc="${s.d}" role="button" tabindex="0" aria-label="${escAttr(t(dict, s.t))}">
+                <span class="aiflow__ico" aria-hidden="true">${uiIcon(s.icon)}</span>
+                <span class="aiflow__t" data-i18n="${s.t}">${escText(t(dict, s.t))}</span>
+              </div>${connector}`;
+    })
+    .join("");
+  const dots = steps
+    .map((s, i) => `<button class="aiflow__dot${i === 0 ? " is-active" : ""}" type="button" data-step="${i}" aria-label="${i + 1}"></button>`)
+    .join("");
+  return `
+        <figure class="aiflow" data-flow data-steps="${n}">
+          <div class="aiflow__track">${nodes}
+          </div>
+          <figcaption class="aiflow__cap">
+            <span class="aiflow__count" aria-hidden="true"><span class="aiflow__stepnum">1</span> / ${n}</span>
+            <p class="aiflow__desc" data-i18n="${steps[0].d}">${escText(t(dict, steps[0].d))}</p>
+            <div class="aiflow__dots">${dots}</div>
+          </figcaption>
+        </figure>`;
+}
+
 /* ---- block dispatcher ---- */
 function renderBlock(block, dict) {
   switch (block.type) {
@@ -232,6 +266,9 @@ function renderBlock(block, dict) {
 
     case "labtour":
       return renderLabTour(dict);
+
+    case "aiflow":
+      return renderAiFlow(block.flow, dict);
 
     case "prose":
       return `\n        <div class="prose" data-i18n-html="${block.html}">${t(dict, block.html)}</div>`;
@@ -552,6 +589,13 @@ export function conceptMain(concept, dict) {
           </ul>
         </section>`
     : "";
+  const flowSec = concept.flow
+    ? `
+        <section class="cpt-sec">
+          <h2 class="block-label" data-i18n="cpt.flow">${escText(t(dict, "cpt.flow"))}</h2>
+          ${renderAiFlow(concept.flow, dict)}
+        </section>`
+    : "";
   return `
         <div class="cpt-crumb">${back}</div>
         <span class="cpt-cat" style="--c:${(KT_CATS.find((c) => c.key === concept.cat) || {}).color || "var(--accent)"}" data-i18n="${catKey}">${escText(t(dict, catKey))}</span>
@@ -560,7 +604,7 @@ export function conceptMain(concept, dict) {
           <section class="cpt-sec">
             <h2 class="block-label" data-i18n="cpt.def">${escText(t(dict, "cpt.def"))}</h2>
             <div class="cpt-rich cpt-def" data-i18n-html="${concept.def}">${t(dict, concept.def)}</div>
-          </section>${sec("cpt.example", concept.example)}${sec("cpt.usecase", concept.usecase)}${refsSec}
+          </section>${flowSec}${sec("cpt.example", concept.example)}${sec("cpt.usecase", concept.usecase)}${refsSec}
         </div>
         <div class="page-nav page-nav--single">${back}</div>`;
 }
@@ -906,6 +950,7 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
   <script src="${assetPrefix}js/interview.js"></script>
   <script src="${assetPrefix}js/concepts.js"></script>
   <script src="${assetPrefix}js/lab.js"></script>
+  <script src="${assetPrefix}js/flow.js"></script>
   <script src="${assetPrefix}js/progress.js"></script>
 </body>
 </html>
