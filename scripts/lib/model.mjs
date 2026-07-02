@@ -182,6 +182,67 @@ cy.get('[name="password"]').type('s3cret!');`,
 cy.contains('Welcome').should('be.visible');`,
   },
 
+  /* ---- Práctica: extra Cypress scenarios (TypeScript) ---- */
+  cy_order_1: { lang: "TypeScript", code: `cy.get('[data-testid="order-total"]').should('have.text', '250');` },
+  cy_order_2: { lang: "TypeScript", code: `cy.get('[data-testid="order-status"]').should('have.text', 'PAID');` },
+  cy_order_3: { lang: "TypeScript", code: `cy.get('.order-items li').should('have.length', 3);` },
+
+  cy_api_1: { lang: "TypeScript", code: `cy.request('POST', '/api/orders', { item: 'book', qty: 1 })
+  .its('status').should('eq', 201);` },
+  cy_api_2: { lang: "TypeScript", code: `cy.request('/api/orders/42').then((res) => {
+  expect(res.status).to.eq(200);
+  expect(res.body.status).to.eq('PAID');
+});` },
+  cy_api_3: { lang: "TypeScript", code: `cy.request('DELETE', '/api/orders/42')
+  .its('status').should('eq', 204);` },
+
+  cy_loginfail_1: { lang: "TypeScript", code: `cy.get('[name="user"]').type('ana');
+cy.get('[name="password"]').type('wrong-pass');` },
+  cy_loginfail_2: { lang: "TypeScript", code: `cy.contains('button', 'Sign in').click();` },
+  cy_loginfail_3: { lang: "TypeScript", code: `cy.contains('Invalid credentials').should('be.visible');
+cy.contains('Welcome').should('not.exist');` },
+
+  cy_autowait_1: { lang: "TypeScript", code: `cy.contains('button', 'Load').click();` },
+  cy_autowait_2: { lang: "TypeScript", code: `// Cypress retries until the spinner is gone.
+cy.get('[data-testid="spinner"]').should('not.exist');` },
+  cy_autowait_3: { lang: "TypeScript", code: `cy.contains('Done').should('be.visible');` },
+
+  cy_flaky_1: { lang: "TypeScript", code: `// Drop cy.wait(2000): assert the state directly.
+cy.contains('Ready').should('be.visible');` },
+  cy_flaky_2: { lang: "TypeScript", code: `cy.contains('button', 'Submit').click();` },
+  cy_flaky_3: { lang: "TypeScript", code: `cy.contains('Saved').should('be.visible');` },
+
+  cy_locators_1: { lang: "TypeScript", code: `cy.get('[name="user"]').type('ana');` },
+  cy_locators_2: { lang: "TypeScript", code: `cy.contains('button', 'Sign in').click();` },
+  cy_locators_3: { lang: "TypeScript", code: `cy.get('[data-testid="welcome"]').should('be.visible');` },
+
+  cy_cart_1: { lang: "TypeScript", code: `cy.get('.order-items button').first().click();` },
+  cy_cart_2: { lang: "TypeScript", code: `cy.get('.order-items li').should('have.length', 2);` },
+  cy_cart_3: { lang: "TypeScript", code: `cy.get('[data-testid="order-total"]').should('not.have.text', '250');` },
+
+  cy_pom_1: { lang: "TypeScript", code: `class LoginPage {
+  user = () => cy.get('[name="user"]');
+  pass = () => cy.get('[name="password"]');
+  submit = () => cy.contains('button', 'Sign in');
+}` },
+  cy_pom_2: { lang: "TypeScript", code: `login(u: string, p: string) {
+  this.user().type(u);
+  this.pass().type(p);
+  this.submit().click();
+}` },
+  cy_pom_3: { lang: "TypeScript", code: `const login = new LoginPage();
+login.login('ana', 's3cret!');
+cy.contains('Welcome').should('be.visible');` },
+
+  cy_apistatus_1: { lang: "TypeScript", code: `cy.request({ url: '/api/orders/1', failOnStatusCode: false })
+  .its('status').should('eq', 401);` },
+  cy_apistatus_2: { lang: "TypeScript", code: `cy.request({
+  url: '/api/orders/42',
+  headers: { Authorization: 'Bearer t0ken' },
+}).its('status').should('eq', 200);` },
+  cy_apistatus_3: { lang: "TypeScript", code: `cy.request({ url: '/api/orders/999', failOnStatusCode: false })
+  .its('status').should('eq', 404);` },
+
   /* ---- Práctica: extra Playwright scenarios (TypeScript) ---- */
   pw_loginfail_1: { lang: "TypeScript", code: `await page.getByLabel('User').fill('ana');
 await page.getByLabel('Password').fill('wrong-pass');` },
@@ -3605,6 +3666,87 @@ export const SECTIONS = [
         { text: "practica.login.t1", why: "practica.login.w1", hint: "cy_login_1", terms: ["auto-locator"], check: ["cy.get", "type"] },
         { text: "practica.login.t2", why: "practica.login.w2", hint: "cy_login_2", terms: ["auto-autowait", "auto-waits"], check: ["cy", "click"] },
         { text: "practica.login.t3", why: "practica.login.w3", hint: "cy_login_3", terms: ["auto-assertion"], check: ["should", "welcome"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-order", navKey: "practica.order.nav", blocks: [
+      { type: "prose", html: "practica.order.lead" },
+      { type: "lab", stage: "order", lang: "TypeScript", tasks: [
+        { text: "practica.order.t1", why: "practica.order.w1", hint: "cy_order_1", terms: ["auto-locator"], check: ["should", "250"] },
+        { text: "practica.order.t2", why: "practica.order.w2", hint: "cy_order_2", terms: ["auto-assertion"], check: ["should", "paid"] },
+        { text: "practica.order.t3", why: "practica.order.w3", hint: "cy_order_3", terms: ["auto-assertion"], check: ["should", "length"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-api", navKey: "practica.api.nav", blocks: [
+      { type: "prose", html: "practica.api.lead" },
+      { type: "lab", stage: "verbs", lang: "TypeScript", tasks: [
+        { text: "practica.api.t1", why: "practica.api.w1", hint: "cy_api_1", terms: ["api-methods", "api-crud"], check: ["request", "201"] },
+        { text: "practica.api.t2", why: "practica.api.w2", hint: "cy_api_2", terms: ["api-safe", "api-status"], check: ["request", "200"] },
+        { text: "practica.api.t3", why: "practica.api.w3", hint: "cy_api_3", terms: ["api-idempotency", "api-status"], check: ["delete", "204"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-loginfail", navKey: "practica.loginfail.nav", blocks: [
+      { type: "prose", html: "practica.loginfail.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.loginfail.t1", why: "practica.loginfail.w1", hint: "cy_loginfail_1", terms: ["auto-locator"], check: ["cy.get", "type"] },
+        { text: "practica.loginfail.t2", why: "practica.loginfail.w2", hint: "cy_loginfail_2", terms: ["auto-autowait"], check: ["cy", "click"] },
+        { text: "practica.loginfail.t3", why: "practica.loginfail.w3", hint: "cy_loginfail_3", terms: ["auto-assertion"], check: ["invalid", "should"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-autowait", navKey: "practica.autowait.nav", blocks: [
+      { type: "prose", html: "practica.autowait.lead" },
+      { type: "lab", stage: "flaky", lang: "TypeScript", tasks: [
+        { text: "practica.autowait.t1", why: "practica.autowait.w1", hint: "cy_autowait_1", terms: ["auto-autowait"], check: ["cy", "click"] },
+        { text: "practica.autowait.t2", why: "practica.autowait.w2", hint: "cy_autowait_2", terms: ["auto-autowait", "auto-waits"], check: ["should", "not.exist"] },
+        { text: "practica.autowait.t3", why: "practica.autowait.w3", hint: "cy_autowait_3", terms: ["auto-assertion"], check: ["should", "done"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-flaky", navKey: "practica.flaky.nav", blocks: [
+      { type: "prose", html: "practica.flaky.lead" },
+      { type: "lab", stage: "flaky", lang: "TypeScript", tasks: [
+        { text: "practica.flaky.t1", why: "practica.flaky.w1", hint: "cy_flaky_1", terms: ["auto-flaky", "auto-waits"], check: ["should", "ready"] },
+        { text: "practica.flaky.t2", why: "practica.flaky.w2", hint: "cy_flaky_2", terms: ["auto-locator"], check: ["cy", "click"] },
+        { text: "practica.flaky.t3", why: "practica.flaky.w3", hint: "cy_flaky_3", terms: ["auto-assertion"], check: ["should", "saved"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-locators", navKey: "practica.locators.nav", blocks: [
+      { type: "prose", html: "practica.locators.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.locators.t1", why: "practica.locators.w1", hint: "cy_locators_1", terms: ["auto-locator"], check: ["cy.get", "type"] },
+        { text: "practica.locators.t2", why: "practica.locators.w2", hint: "cy_locators_2", terms: ["auto-locator"], check: ["contains", "click"] },
+        { text: "practica.locators.t3", why: "practica.locators.w3", hint: "cy_locators_3", terms: ["auto-locator"], check: ["testid"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-cart", navKey: "practica.cart.nav", blocks: [
+      { type: "prose", html: "practica.cart.lead" },
+      { type: "lab", stage: "order", lang: "TypeScript", tasks: [
+        { text: "practica.cart.t1", why: "practica.cart.w1", hint: "cy_cart_1", terms: ["auto-locator"], check: ["cy.get", "click"] },
+        { text: "practica.cart.t2", why: "practica.cart.w2", hint: "cy_cart_2", terms: ["auto-assertion"], check: ["should", "length"] },
+        { text: "practica.cart.t3", why: "practica.cart.w3", hint: "cy_cart_3", terms: ["auto-assertion"], check: ["should", "total"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-pom", navKey: "practica.pom.nav", blocks: [
+      { type: "prose", html: "practica.pom.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.pom.t1", why: "practica.pom.w1", hint: "cy_pom_1", terms: ["auto-pom", "auto-locator"], check: ["class", "loginpage"] },
+        { text: "practica.pom.t2", why: "practica.pom.w2", hint: "cy_pom_2", terms: ["auto-pom"], check: ["login", "type"] },
+        { text: "practica.pom.t3", why: "practica.pom.w3", hint: "cy_pom_3", terms: ["auto-pom", "auto-assertion"], check: ["loginpage", "should"] },
+      ] },
+    ] },
+  { group: "cypr", groupKey: "practica.grp.cy", chip: { label: "Cypress", color: "var(--fw-cypress)", lang: "TypeScript" },
+    id: "practica-cy-apistatus", navKey: "practica.apistatus.nav", blocks: [
+      { type: "prose", html: "practica.apistatus.lead" },
+      { type: "lab", stage: "verbs", lang: "TypeScript", tasks: [
+        { text: "practica.apistatus.t1", why: "practica.apistatus.w1", hint: "cy_apistatus_1", terms: ["api-status"], check: ["request", "401"] },
+        { text: "practica.apistatus.t2", why: "practica.apistatus.w2", hint: "cy_apistatus_2", terms: ["api-status", "api-safe"], check: ["request", "200"] },
+        { text: "practica.apistatus.t3", why: "practica.apistatus.w3", hint: "cy_apistatus_3", terms: ["api-status"], check: ["request", "404"] },
       ] },
     ] },
   // ---- Robot Framework practice group ----

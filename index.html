@@ -572,6 +572,33 @@
               <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-login.html">
                 <span data-i18n="practica.login.nav">Reto: Login</span>
               </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-order.html">
+                <span data-i18n="practica.order.nav">Reto: Aserciones de una orden</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-api.html">
+                <span data-i18n="practica.api.nav">Reto: API y verbos HTTP</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-loginfail.html">
+                <span data-i18n="practica.loginfail.nav">Reto: Login inválido</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-autowait.html">
+                <span data-i18n="practica.autowait.nav">Reto: Auto-wait sobre un spinner</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-flaky.html">
+                <span data-i18n="practica.flaky.nav">Reto: Estabilizar un test flaky</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-locators.html">
+                <span data-i18n="practica.locators.nav">Reto: Localizadores robustos</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-cart.html">
+                <span data-i18n="practica.cart.nav">Reto: Carrito — quitar un ítem</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-pom.html">
+                <span data-i18n="practica.pom.nav">Reto: Page Object Model</span>
+              </a>
+              <a class="nav-link nav-sublink nav-sublink--deep" href="sections/practica-cy-apistatus.html">
+                <span data-i18n="practica.apistatus.nav">Reto: API — status y auth</span>
+              </a>
             </div>
           </div>
           <div class="nav-group-item nav-group-item--nested">
@@ -1823,13 +1850,77 @@
                   </li>
                 </ol>
               </li>
-              <li class="lnode" style="--x:0px;--c:var(--cat-practica)" data-pages="practica-cy-login">
-                <a class="lnode__btn" href="sections/practica-cy-login.html" aria-label="Cypress" data-i18n-attr="aria-label:practica.grp.cy">
+              <li class="lnode lnode--group" style="--x:0px;--c:var(--cat-practica)" data-pages="practica-cy-login,practica-cy-order,practica-cy-api,practica-cy-loginfail,practica-cy-autowait,practica-cy-flaky,practica-cy-locators,practica-cy-cart,practica-cy-pom,practica-cy-apistatus">
+                <button class="lnode__btn lnode__btn--group" type="button" aria-expanded="false" aria-label="Cypress" data-i18n-attr="aria-label:practica.grp.cy">
                   <span class="lnode__logo" aria-hidden="true"><svg class="lnode__svg" viewBox="0 0 128 128" aria-hidden="true" focusable="false"><defs><linearGradient id="cypress-b" x1="323.384" x2="56.936" y1="12.396" y2="577.503" gradientTransform="translate(-.876 -.754) scale(.13472)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#69d3a7"/><stop offset=".823" stop-color="#2ab586"/><stop offset="1" stop-color="#1cae7f"/></linearGradient><linearGradient id="cypress-a" x1="992.991" x2="568.87" y1="483.702" y2="758.304" gradientTransform="translate(-.876 -.754) scale(.13472)" gradientUnits="userSpaceOnUse"><stop offset=".081" stop-color="#69d3a7"/><stop offset="1" stop-color="#69d3a7" stop-opacity="0"/></linearGradient><linearGradient id="cypress-c" x1="5.828" x2="704.494" y1="697.848" y2="917.116" gradientTransform="translate(-.876 -.754) scale(.13472)" gradientUnits="userSpaceOnUse"><stop offset=".077" stop-color="#1cae7f"/><stop offset=".164" stop-color="#1ca379"/><stop offset=".316" stop-color="#1c8568"/><stop offset=".516" stop-color="#1b554d"/><stop offset=".719" stop-color="#1b1e2e"/></linearGradient></defs><path d="M44.984 50.817c5.173 0 9.377 2.762 11.532 7.558l.162.378 8.676-2.95-.175-.445c-3.355-8.192-11.101-13.27-20.195-13.27-6.4 0-11.6 2.047-15.897 6.264-4.271 4.19-6.427 9.458-6.427 15.655 0 6.157 2.17 11.397 6.427 15.574 4.297 4.217 9.498 6.264 15.897 6.264 9.094 0 16.827-5.092 20.195-13.27l.175-.444-8.69-2.95-.148.39c-1.94 4.729-6.251 7.544-11.532 7.544-3.597 0-6.642-1.253-9.04-3.732-2.439-2.505-3.665-5.671-3.665-9.376 0-3.732 1.2-6.83 3.665-9.458 2.411-2.479 5.443-3.732 9.04-3.732z" class="st0"/><path fill="url(#cypress-a)" d="m82.652 125.13-2.586-8.528c23.334-7.086 39.015-28.224 39.015-52.595 0-6.723-1.199-13.297-3.57-19.522l8.326-3.166A63.468 63.468 0 0 1 128 64.02c-.013 28.305-18.228 52.865-45.348 61.11Z"/><path fill="#69d3a7" d="M116.67 47.894C109.543 24.641 88.378 9.026 63.993 9.026a56.039 56.039 0 0 0-9.861.876l-1.577-8.77A64.836 64.836 0 0 1 63.993.108c28.319 0 52.906 18.147 61.191 45.159z"/><path fill="url(#cypress-b)" d="M4.096 86.532C1.374 79.338 0 71.753 0 64.007 0 31 24.776 3.664 57.634.43l.876 8.865C30.232 12.085 8.905 35.607 8.905 64.006a54.82 54.82 0 0 0 3.516 19.387z"/><path d="M64.33 42.896 81.79 85.63l-12.718 30.85 8.905 1.779 30.96-75.364h-9.62l-12.353 31.31-12.449-31.31z" class="st0"/><path fill="url(#cypress-c)" d="m70.675 112.601-1.872 4.54c-.431 1.038-1.415 1.752-2.52 1.792-.767.027-1.522.054-2.303.054-24.452 0-46.224-16.369-52.946-39.81l-8.569 2.451c7.814 27.228 33.102 46.25 61.501 46.264h.014c.889 0 1.778-.013 2.667-.054 4.567-.188 8.65-3.058 10.4-7.302l2.534-6.156z"/></svg></span>
                   <span class="lnode__check" aria-hidden="true">✓</span>
                   <span class="lnode__start" data-i18n="game.start">EMPIEZA</span>
-                </a>
+                  <span class="lnode__count" aria-hidden="true"></span>
+                  <span class="lnode__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 15.5 5.5 9 7 7.5l5 5 5-5L18.5 9z"/></svg></span>
+                </button>
                 <span class="lnode__label" data-i18n="practica.grp.cy">Cypress</span>
+                <ol class="lnode__children">
+                  <li class="lchild" data-page="practica-cy-login">
+                    <a class="lchild__link" href="sections/practica-cy-login.html">
+                      <span class="lchild__dot" aria-hidden="true">1</span>
+                      <span class="lchild__label" data-i18n="practica.login.nav">Reto: Login</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-order">
+                    <a class="lchild__link" href="sections/practica-cy-order.html">
+                      <span class="lchild__dot" aria-hidden="true">2</span>
+                      <span class="lchild__label" data-i18n="practica.order.nav">Reto: Aserciones de una orden</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-api">
+                    <a class="lchild__link" href="sections/practica-cy-api.html">
+                      <span class="lchild__dot" aria-hidden="true">3</span>
+                      <span class="lchild__label" data-i18n="practica.api.nav">Reto: API y verbos HTTP</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-loginfail">
+                    <a class="lchild__link" href="sections/practica-cy-loginfail.html">
+                      <span class="lchild__dot" aria-hidden="true">4</span>
+                      <span class="lchild__label" data-i18n="practica.loginfail.nav">Reto: Login inválido</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-autowait">
+                    <a class="lchild__link" href="sections/practica-cy-autowait.html">
+                      <span class="lchild__dot" aria-hidden="true">5</span>
+                      <span class="lchild__label" data-i18n="practica.autowait.nav">Reto: Auto-wait sobre un spinner</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-flaky">
+                    <a class="lchild__link" href="sections/practica-cy-flaky.html">
+                      <span class="lchild__dot" aria-hidden="true">6</span>
+                      <span class="lchild__label" data-i18n="practica.flaky.nav">Reto: Estabilizar un test flaky</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-locators">
+                    <a class="lchild__link" href="sections/practica-cy-locators.html">
+                      <span class="lchild__dot" aria-hidden="true">7</span>
+                      <span class="lchild__label" data-i18n="practica.locators.nav">Reto: Localizadores robustos</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-cart">
+                    <a class="lchild__link" href="sections/practica-cy-cart.html">
+                      <span class="lchild__dot" aria-hidden="true">8</span>
+                      <span class="lchild__label" data-i18n="practica.cart.nav">Reto: Carrito — quitar un ítem</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-pom">
+                    <a class="lchild__link" href="sections/practica-cy-pom.html">
+                      <span class="lchild__dot" aria-hidden="true">9</span>
+                      <span class="lchild__label" data-i18n="practica.pom.nav">Reto: Page Object Model</span>
+                    </a>
+                  </li>
+                  <li class="lchild" data-page="practica-cy-apistatus">
+                    <a class="lchild__link" href="sections/practica-cy-apistatus.html">
+                      <span class="lchild__dot" aria-hidden="true">10</span>
+                      <span class="lchild__label" data-i18n="practica.apistatus.nav">Reto: API — status y auth</span>
+                    </a>
+                  </li>
+                </ol>
               </li>
               <li class="lnode" style="--x:-54px;--c:var(--cat-practica)" data-pages="practica-robot-login">
                 <a class="lnode__btn" href="sections/practica-robot-login.html" aria-label="Robot Framework" data-i18n-attr="aria-label:practica.grp.robot">
@@ -1892,7 +1983,7 @@
 
   <div class="toast-host" id="toast-host" aria-live="polite" aria-atomic="false"></div>
 
-  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai101-intro","ai101-ejemplos","ai101-ejercicios","ai101-flashcards","ai101-entrevista","aiqa-intro","aiqa-herramientas","aiqa-prompts","aiqa-ejercicios","aiqa-flashcards","aiqa-entrevista","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","practica","practica-login","practica-order","practica-api","practica-loginfail","practica-autowait","practica-flaky","practica-locators","practica-cart","practica-pom","practica-apistatus","practica-sel-login","practica-sel-order","practica-sel-api","practica-sel-loginfail","practica-sel-autowait","practica-sel-flaky","practica-sel-locators","practica-sel-cart","practica-sel-pom","practica-sel-apistatus","practica-cy-login","practica-robot-login","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai101","label":"nav.ai101","pages":["ai101-intro","ai101-ejemplos","ai101-ejercicios","ai101-flashcards","ai101-entrevista"]},{"key":"aiqa","label":"nav.aiqa","pages":["aiqa-intro","aiqa-herramientas","aiqa-prompts","aiqa-ejercicios","aiqa-flashcards","aiqa-entrevista"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"practica","label":"practica.intro.nav","pages":["practica"]},{"key":"pwpr","label":"practica.grp.pw","pages":["practica-login","practica-order","practica-api","practica-loginfail","practica-autowait","practica-flaky","practica-locators","practica-cart","practica-pom","practica-apistatus"]},{"key":"selpr","label":"practica.grp.sel","pages":["practica-sel-login","practica-sel-order","practica-sel-api","practica-sel-loginfail","practica-sel-autowait","practica-sel-flaky","practica-sel-locators","practica-sel-cart","practica-sel-pom","practica-sel-apistatus"]},{"key":"cypr","label":"practica.grp.cy","pages":["practica-cy-login"]},{"key":"robotpr","label":"practica.grp.robot","pages":["practica-robot-login"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
+  <script>window.QAGUIDE_PROGRESS = {"pages":["intro","fundamentals","python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente","ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente","selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista","cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista","playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista","robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista","bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica","comparison","perf-intro","perf-k6","perf-jmeter","perf-locust","ai101-intro","ai101-ejemplos","ai101-ejercicios","ai101-flashcards","ai101-entrevista","aiqa-intro","aiqa-herramientas","aiqa-prompts","aiqa-ejercicios","aiqa-flashcards","aiqa-entrevista","best-practices","ci-intro","ci-pipeline","ci-matrix","ci-gates","skills-intro","skills-sql","skills-git","skills-appium","maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb","practica","practica-login","practica-order","practica-api","practica-loginfail","practica-autowait","practica-flaky","practica-locators","practica-cart","practica-pom","practica-apistatus","practica-sel-login","practica-sel-order","practica-sel-api","practica-sel-loginfail","practica-sel-autowait","practica-sel-flaky","practica-sel-locators","practica-sel-cart","practica-sel-pom","practica-sel-apistatus","practica-cy-login","practica-cy-order","practica-cy-api","practica-cy-loginfail","practica-cy-autowait","practica-cy-flaky","practica-cy-locators","practica-cy-cart","practica-cy-pom","practica-cy-apistatus","practica-robot-login","key-terms","bibliography"],"tops":[{"key":"intro","label":"nav.intro","pages":["intro"]},{"key":"fundamentals","label":"nav.fundamentals","pages":["fundamentals"]},{"key":"python","label":"nav.pyqa","pages":["python-intro","python-hola","python-fundamentos","python-datos","python-pytest","python-componente"]},{"key":"typescript","label":"nav.tsqa","pages":["ts-intro","ts-hola","ts-fundamentos","ts-tipos","ts-pruebas","ts-componente"]},{"key":"selenium","label":"nav.selenium","pages":["selenium-filosofia","selenium-hola-mundo","selenium-ruta","selenium-componentes","selenium-criticos","selenium-verbos","selenium-flashcards","selenium-entrevista"]},{"key":"cypress","label":"nav.cypress","pages":["cypress-filosofia","cypress-hola-mundo","cypress-ruta","cypress-componentes","cypress-criticos","cypress-verbos","cypress-flashcards","cypress-entrevista"]},{"key":"playwright","label":"nav.playwright","pages":["playwright-filosofia","playwright-hola-mundo","playwright-ruta","playwright-componentes","playwright-criticos","playwright-verbos","playwright-flashcards","playwright-entrevista"]},{"key":"robot","label":"nav.robot","pages":["robot-filosofia","robot-hola-mundo","robot-ruta","robot-componentes","robot-criticos","robot-verbos","robot-flashcards","robot-entrevista"]},{"key":"bdd","label":"nav.bdd","pages":["bdd-intro","bdd-gherkin","bdd-cucumber","bdd-practica"]},{"key":"comparison","label":"nav.comparison","pages":["comparison"]},{"key":"perf","label":"nav.perf","pages":["perf-intro","perf-k6","perf-jmeter","perf-locust"]},{"key":"ai101","label":"nav.ai101","pages":["ai101-intro","ai101-ejemplos","ai101-ejercicios","ai101-flashcards","ai101-entrevista"]},{"key":"aiqa","label":"nav.aiqa","pages":["aiqa-intro","aiqa-herramientas","aiqa-prompts","aiqa-ejercicios","aiqa-flashcards","aiqa-entrevista"]},{"key":"best-practices","label":"nav.best","pages":["best-practices"]},{"key":"ci","label":"nav.ci","pages":["ci-intro","ci-pipeline","ci-matrix","ci-gates"]},{"key":"skills","label":"nav.skills","pages":["skills-intro","skills-sql","skills-git","skills-appium"]},{"key":"maturity","label":"nav.maturity","pages":["maturity-intro","maturity-roadmap","maturity-kpis","maturity-istqb"]},{"key":"practica","label":"practica.intro.nav","pages":["practica"]},{"key":"pwpr","label":"practica.grp.pw","pages":["practica-login","practica-order","practica-api","practica-loginfail","practica-autowait","practica-flaky","practica-locators","practica-cart","practica-pom","practica-apistatus"]},{"key":"selpr","label":"practica.grp.sel","pages":["practica-sel-login","practica-sel-order","practica-sel-api","practica-sel-loginfail","practica-sel-autowait","practica-sel-flaky","practica-sel-locators","practica-sel-cart","practica-sel-pom","practica-sel-apistatus"]},{"key":"cypr","label":"practica.grp.cy","pages":["practica-cy-login","practica-cy-order","practica-cy-api","practica-cy-loginfail","practica-cy-autowait","practica-cy-flaky","practica-cy-locators","practica-cy-cart","practica-cy-pom","practica-cy-apistatus"]},{"key":"robotpr","label":"practica.grp.robot","pages":["practica-robot-login"]},{"key":"key-terms","label":"nav.keyterms","pages":["key-terms"]},{"key":"bibliography","label":"nav.biblio","pages":["bibliography"]}]};</script>
   <script src="js/i18n.js"></script>
   <script src="i18n/es.js"></script>
   <script src="i18n/en.js"></script>
