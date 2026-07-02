@@ -1068,7 +1068,7 @@ expect(page.locator("</span><span class="tok-punctuation">.</span><span class="t
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</h2>
         <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>, <code>to_be_visible()</code>, <code>to_have_count()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, un <code>assert</code> común no reintenta.</p></div>
@@ -1127,7 +1127,7 @@ expect(page.get_by_text("</span>Payment confirmed<span class="tok-punctuation">"
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</h2>
         <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>fixtures</strong> de pytest (en <code>conftest.py</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una fixture propia con <code>@pytest.fixture</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
@@ -1247,7 +1247,7 @@ expect(page.locator("</span><span class="tok-punctuation">.</span><span class="t
           </div>
           <div class="mock__body">
             <div class="mock-card mock-card--error">
-              <div class="mock-error-icon">⚠️</div>
+              <div class="mock-error-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></svg></div>
               <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
@@ -1258,7 +1258,7 @@ expect(page.locator("</span><span class="tok-punctuation">.</span><span class="t
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</h2>
         <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>pytest.ini</code> activás <strong>traces</strong> (<code>--tracing retain-on-failure</code>) y artefactos. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>

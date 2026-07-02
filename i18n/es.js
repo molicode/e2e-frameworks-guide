@@ -37,7 +37,7 @@ I18n.register("es", {
   "ui.langLabel": "Lenguaje de los ejemplos",
   "ui.prev": "Anterior",
   "ui.next": "Siguiente",
-  "ui.mockCaption": "👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.",
+  "ui.mockCaption": "Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.",
   "runner.caption": "▶ Demo interactivo: dale play y mirá cómo se ejecuta el código de este framework línea por línea mientras la pantalla reacciona.",
   "runner.run": "Reproducir la demo",
   "runner.replay": "Reiniciar la demo",
@@ -45,7 +45,7 @@ I18n.register("es", {
   /* ====================================================================
      FLASHCARDS (repaso al final de cada sección)
      ==================================================================== */
-  "fc.title": "🃏 Flashcards — repasá lo aprendido",
+  "fc.title": "Flashcards — repasá lo aprendido",
   "fc.q": "Pregunta",
   "fc.a": "Respuesta",
   "fc.hint": "Tocá la tarjeta para ver la respuesta",
@@ -520,7 +520,7 @@ I18n.register("es", {
   "game.ach.champion": "Campeón/a de QA",
 
   /* ---- mapa interactivo (home) ---- */
-  "map.title": "🗺️ Mapa interactivo — tocá un tema para ir directo",
+  "map.title": "Mapa interactivo — tocá un tema para ir directo",
   "map.root": "QA Automation",
   "map.foundations": "Fundamentos",
   "map.languages": "Lenguajes",
@@ -1408,7 +1408,7 @@ I18n.register("es", {
   "aiqa.build.body":
     "<p>Como <strong>AI QA Engineer</strong> no solo escribís prompts: armás <strong>skills</strong>, <strong>hooks</strong> y <strong>agentes</strong> que hacen el trabajo repetible por vos. Acá va el <em>cómo</em> de cada uno aplicado a QA.</p>",
   "aiqa.concepts.note":
-    "💡 Las <strong>definiciones</strong> de skill, hook, agente, modelo, MCP y RAG viven en <a href=\"key-terms.html\"><strong>Conceptos clave</strong></a>. Acá nos enfocamos en cómo crearlos y usarlos.",
+    "Las <strong>definiciones</strong> de skill, hook, agente, modelo, MCP y RAG viven en <a href=\"key-terms.html\"><strong>Conceptos clave</strong></a>. Acá nos enfocamos en cómo crearlos y usarlos.",
   "aiqa.nav.tools": "Skills, hooks y agentes",
   "aiqa.nav.prompts": "Prompt engineering",
   "aiqa.exr.lead": "<p>Poné en práctica lo aplicado. Hacelo en un repo real (o de juguete) con tu asistente de AI:</p>",
@@ -1430,7 +1430,7 @@ I18n.register("es", {
   "ai101.t3.body": "El modelo lee en tokens (~¾ de palabra) y tiene una ventana limitada: meté solo lo relevante, no todo el repo.",
   "ai101.t4.title": "Alucinación",
   "ai101.t4.body": "Cuando inventa algo falso que suena bien (un método que no existe). Por eso todo lo que genera se verifica siempre.",
-  "ai101.concepts.note": "📖 Cada término (LLM, prompt, token, alucinación, RAG, agente…) tiene su definición formal en <a href=\"key-terms.html\"><strong>Conceptos clave</strong></a>. Acá los vemos en acción.",
+  "ai101.concepts.note": "Cada término (LLM, prompt, token, alucinación, RAG, agente…) tiene su definición formal en <a href=\"key-terms.html\"><strong>Conceptos clave</strong></a>. Acá los vemos en acción.",
   "ai101.ex.lead": "<p>Tres cosas que vas a hacer todo el tiempo como QA con AI: escribir buenos prompts, empaquetar tus reglas en una skill y dejar que un agente itere.</p>",
   "ai101.ex.prompt.label": "Un buen prompt vs uno vago",
   "ai101.ex.prompt.body": "<p>Un prompt específico (rol, contexto, casos, formato) da un test usable; uno vago da algo genérico que hay que rehacer:</p>",

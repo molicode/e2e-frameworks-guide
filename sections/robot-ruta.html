@@ -1103,7 +1103,7 @@ Element Text Should Be       css<span class="tok-punctuation">=.</span><span cla
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="rf-rung-4" data-i18n="rf.rung4.title">Esperas explícitas</h2>
         <div class="prose" data-i18n-html="rf.rung4.body"><p>Como en Selenium, nunca uses un <code>Sleep</code> fijo: es la causa número uno de flakiness. Usá los keywords <code>Wait Until Element Is Visible</code>, <code>Wait Until Page Contains</code> o <code>Wait Until Element Is Enabled</code> con un <code>timeout</code>. Esperás la <strong>condición</strong>, no un tiempo arbitrario.</p></div>
@@ -1150,7 +1150,7 @@ Wait Until Element Is Enabled    id<span class="tok-punctuation">=</span>pay
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="rf-rung-5" data-i18n="rf.rung5.title">APIs con RequestsLibrary</h2>
         <div class="prose" data-i18n-html="rf.rung5.body"><p>Para testear APIs sin navegador usás <code>RequestsLibrary</code>: abrís una sesión con <code>Create Session</code> y disparás <code>GET/POST/PATCH/DELETE On Session</code>. Verificás el status con <code>Status Should Be</code> (o el parámetro <code>expected_status</code>) y la forma del body con <code>Should Be Equal As Strings</code>. Mismo contrato CRUD que en los otros frameworks.</p></div>
@@ -1179,7 +1179,7 @@ Read an order over HTTP
           </div>
           <div class="mock__body">
             <div class="mock-card mock-card--error">
-              <div class="mock-error-icon">⚠️</div>
+              <div class="mock-error-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></svg></div>
               <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
@@ -1190,7 +1190,7 @@ Read an order over HTTP
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="rf-rung-6" data-i18n="rf.rung6.title">Resource files (POM) y CI</h2>
         <div class="prose" data-i18n-html="rf.rung6.body"><p>El <strong>Page Object Model</strong> en Robot son los <strong>resource files</strong>: archivos <code>.resource</code> con keywords compartidos que importás con <code>Resource</code>. Encapsulás selectores y acciones de una página en un solo lugar. En CI corrés <code>robot --variable BROWSER:headlesschrome --outputdir results tests/</code> y publicás el <code>report.html</code>.</p></div>
@@ -1250,7 +1250,7 @@ Order Total Should Be
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="robot-hola-mundo.html">

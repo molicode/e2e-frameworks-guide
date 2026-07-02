@@ -1099,7 +1099,7 @@ cy.get("</span><span class="tok-punctuation">[</span>data<span class="tok-punctu
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="cyp-rung-4" data-i18n="cyp.rung4.title">Network con cy.intercept()</h2>
         <div class="prose" data-i18n-html="cyp.rung4.body"><p>Con <code>cy.intercept()</code> interceptás y <strong>mockeás</strong> las llamadas de red: devolvés datos fijos para tests rápidos y deterministas. Le ponés un alias con <code>.as()</code> y esperás la request con <code>cy.wait('@alias')</code> — nunca un sleep. Cambiando el <code>statusCode</code> probás estados de error (500, 404).</p></div>
@@ -1142,7 +1142,7 @@ cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-pun
           </div>
           <div class="mock__body">
             <div class="mock-card mock-card--error">
-              <div class="mock-error-icon">⚠️</div>
+              <div class="mock-error-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></svg></div>
               <p class="mock-h">Something went wrong</p>
               <p class="mock-error-msg">We couldn't load this order. Please try again.</p>
               <div class="mock-http">HTTP 500 · Internal Server Error</div>
@@ -1153,7 +1153,7 @@ cy.intercept("</span>GET<span class="tok-string">", "</span><span class="tok-pun
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="cyp-rung-5" data-i18n="cyp.rung5.title">Custom commands y fixtures</h2>
         <div class="prose" data-i18n-html="cyp.rung5.body"><p>Repetís un flujo (como el login) en muchos tests: encapsulalo una vez con <code>Cypress.Commands.add()</code> y reusalo en todos. <code>cy.session()</code> cachea la sesión para no re-loguear. Los datos de prueba viven en <strong>fixtures</strong> JSON y se cargan con <code>cy.fixture()</code>.</p></div>
@@ -1258,7 +1258,7 @@ cy<span class="tok-punctuation">.</span><span class="tok-function">login</span><
             </div>
           </div>
         </div>
-          <figcaption class="mock__caption" data-i18n="ui.mockCaption">👆 Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
+          <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="cypress-hola-mundo.html">

@@ -36,7 +36,7 @@ I18n.register("en", {
   "ui.langLabel": "Language of the examples",
   "ui.prev": "Previous",
   "ui.next": "Next",
-  "ui.mockCaption": "👆 Mock screen: this is what the code above tests. The chips show which selector targets each element.",
+  "ui.mockCaption": "Mock screen: this is what the code above tests. The chips show which selector targets each element.",
   "runner.caption": "▶ Interactive demo: hit play and watch this framework's code run line by line while the screen reacts.",
   "runner.run": "Play the demo",
   "runner.replay": "Replay the demo",
@@ -44,7 +44,7 @@ I18n.register("en", {
   /* ====================================================================
      FLASHCARDS (end-of-section review)
      ==================================================================== */
-  "fc.title": "🃏 Flashcards — review what you learned",
+  "fc.title": "Flashcards — review what you learned",
   "fc.q": "Question",
   "fc.a": "Answer",
   "fc.hint": "Tap the card to reveal the answer",
@@ -519,7 +519,7 @@ I18n.register("en", {
   "game.ach.champion": "QA Champion",
 
   /* ---- interactive map (home) ---- */
-  "map.title": "🗺️ Interactive map — tap a topic to jump straight in",
+  "map.title": "Interactive map — tap a topic to jump straight in",
   "map.root": "QA Automation",
   "map.foundations": "Foundations",
   "map.languages": "Languages",
@@ -1407,7 +1407,7 @@ I18n.register("en", {
   "aiqa.build.body":
     "<p>As an <strong>AI QA Engineer</strong> you don't just write prompts: you build <strong>skills</strong>, <strong>hooks</strong> and <strong>agents</strong> that make the repeatable work happen for you. Here's the <em>how</em> of each, applied to QA.</p>",
   "aiqa.concepts.note":
-    "💡 The <strong>definitions</strong> of skill, hook, agent, model, MCP and RAG live in <a href=\"key-terms.html\"><strong>Key terms</strong></a>. Here we focus on how to build and use them.",
+    "The <strong>definitions</strong> of skill, hook, agent, model, MCP and RAG live in <a href=\"key-terms.html\"><strong>Key terms</strong></a>. Here we focus on how to build and use them.",
   "aiqa.nav.tools": "Skills, hooks & agents",
   "aiqa.nav.prompts": "Prompt engineering",
   "aiqa.exr.lead": "<p>Put the applied part into practice. Do it in a real (or toy) repo with your AI assistant:</p>",
@@ -1429,7 +1429,7 @@ I18n.register("en", {
   "ai101.t3.body": "The model reads in tokens (~¾ of a word) and has a limited window: include only what's relevant, not the whole repo.",
   "ai101.t4.title": "Hallucination",
   "ai101.t4.body": "When it invents something false that sounds right (a method that doesn't exist). That's why everything it generates is verified.",
-  "ai101.concepts.note": "📖 Each term (LLM, prompt, token, hallucination, RAG, agent…) has its formal definition in <a href=\"key-terms.html\"><strong>Key terms</strong></a>. Here we see them in action.",
+  "ai101.concepts.note": "Each term (LLM, prompt, token, hallucination, RAG, agent…) has its formal definition in <a href=\"key-terms.html\"><strong>Key terms</strong></a>. Here we see them in action.",
   "ai101.ex.lead": "<p>Three things you'll do all the time as a QA with AI: write good prompts, package your rules into a skill, and let an agent iterate.</p>",
   "ai101.ex.prompt.label": "A good prompt vs a vague one",
   "ai101.ex.prompt.body": "<p>A specific prompt (role, context, cases, format) gives a usable test; a vague one gives something generic you have to redo:</p>",
