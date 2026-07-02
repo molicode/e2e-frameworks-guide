@@ -109,6 +109,61 @@ cy.get('[name="password"]').type('s3cret!');`,
 cy.contains('Welcome').should('be.visible');`,
   },
 
+  /* ---- Práctica: extra Playwright scenarios (TypeScript) ---- */
+  pw_loginfail_1: { lang: "TypeScript", code: `await page.getByLabel('User').fill('ana');
+await page.getByLabel('Password').fill('wrong-pass');` },
+  pw_loginfail_2: { lang: "TypeScript", code: `await page.getByRole('button', { name: 'Sign in' }).click();` },
+  pw_loginfail_3: { lang: "TypeScript", code: `// Assert the error shows AND the user did NOT get in.
+await expect(page.getByText('Invalid credentials')).toBeVisible();
+await expect(page.getByText('Welcome')).toHaveCount(0);` },
+
+  pw_autowait_1: { lang: "TypeScript", code: `await page.getByRole('button', { name: 'Load' }).click();` },
+  pw_autowait_2: { lang: "TypeScript", code: `// No sleeps: auto-wait until the spinner is gone.
+await expect(page.getByTestId('spinner')).toBeHidden();` },
+  pw_autowait_3: { lang: "TypeScript", code: `await expect(page.getByText('Done')).toBeVisible();` },
+
+  pw_flaky_1: { lang: "TypeScript", code: `// Replace the fixed sleep with a web-first assertion.
+// ❌ await page.waitForTimeout(2000)
+await expect(page.getByText('Ready')).toBeVisible();` },
+  pw_flaky_2: { lang: "TypeScript", code: `// Robust locator instead of a brittle nth-child / xpath.
+await page.getByRole('button', { name: 'Submit' }).click();` },
+  pw_flaky_3: { lang: "TypeScript", code: `await expect(page.getByText('Saved')).toBeVisible();` },
+
+  pw_locators_1: { lang: "TypeScript", code: `// Prefer accessible role/label over CSS or XPath.
+await page.getByLabel('User').fill('ana');` },
+  pw_locators_2: { lang: "TypeScript", code: `await page.getByRole('button', { name: 'Sign in' }).click();` },
+  pw_locators_3: { lang: "TypeScript", code: `// A test id is the most stable hook when there's no good role/label.
+await expect(page.getByTestId('welcome')).toBeVisible();` },
+
+  pw_cart_1: { lang: "TypeScript", code: `await page.getByRole('button', { name: 'Remove' }).first().click();` },
+  pw_cart_2: { lang: "TypeScript", code: `await expect(page.getByRole('listitem')).toHaveCount(2);` },
+  pw_cart_3: { lang: "TypeScript", code: `// The total must reflect the removed item.
+await expect(page.getByTestId('order-total')).not.toHaveText('250');` },
+
+  pw_pom_1: { lang: "TypeScript", code: `class LoginPage {
+  constructor(private page: Page) {}
+  user = () => this.page.getByLabel('User');
+  pass = () => this.page.getByLabel('Password');
+  submit = () => this.page.getByRole('button', { name: 'Sign in' });
+}` },
+  pw_pom_2: { lang: "TypeScript", code: `async login(u: string, p: string) {
+  await this.user().fill(u);
+  await this.pass().fill(p);
+  await this.submit().click();
+}` },
+  pw_pom_3: { lang: "TypeScript", code: `const login = new LoginPage(page);
+await login.login('ana', 's3cret!');
+await expect(page.getByText('Welcome')).toBeVisible();` },
+
+  pw_apistatus_1: { lang: "TypeScript", code: `const res = await request.get('/api/orders/1');   // no token
+expect(res.status()).toBe(401);                     // Unauthorized` },
+  pw_apistatus_2: { lang: "TypeScript", code: `const res = await request.get('/api/orders/42', {
+  headers: { Authorization: 'Bearer t0ken' },
+});
+expect(res.status()).toBe(200);` },
+  pw_apistatus_3: { lang: "TypeScript", code: `const res = await request.get('/api/orders/999');
+expect(res.status()).toBe(404);                     // Not Found` },
+
   /* ---- Práctica: Robot Framework login solution ---- */
   rf_login_1: {
     lang: "Robot",
@@ -3313,6 +3368,69 @@ export const SECTIONS = [
         { text: "practica.api.t1", why: "practica.api.w1", hint: "p_api_post", terms: ["api-methods", "api-crud"], check: ["post", "201"] },
         { text: "practica.api.t2", why: "practica.api.w2", hint: "p_api_get", terms: ["api-safe", "api-status"], check: ["get", "200"] },
         { text: "practica.api.t3", why: "practica.api.w3", hint: "p_api_delete", terms: ["api-idempotency", "api-status"], check: ["delete", "204"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-loginfail", navKey: "practica.loginfail.nav", blocks: [
+      { type: "prose", html: "practica.loginfail.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.loginfail.t1", why: "practica.loginfail.w1", hint: "pw_loginfail_1", terms: ["auto-locator"], check: ["getby", "fill"] },
+        { text: "practica.loginfail.t2", why: "practica.loginfail.w2", hint: "pw_loginfail_2", terms: ["auto-autowait"], check: ["click"] },
+        { text: "practica.loginfail.t3", why: "practica.loginfail.w3", hint: "pw_loginfail_3", terms: ["auto-assertion"], check: ["expect", "invalid"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-autowait", navKey: "practica.autowait.nav", blocks: [
+      { type: "prose", html: "practica.autowait.lead" },
+      { type: "lab", stage: "flaky", lang: "TypeScript", tasks: [
+        { text: "practica.autowait.t1", why: "practica.autowait.w1", hint: "pw_autowait_1", terms: ["auto-autowait"], check: ["click"] },
+        { text: "practica.autowait.t2", why: "practica.autowait.w2", hint: "pw_autowait_2", terms: ["auto-autowait", "auto-waits"], check: ["expect", "tobehidden"] },
+        { text: "practica.autowait.t3", why: "practica.autowait.w3", hint: "pw_autowait_3", terms: ["auto-assertion"], check: ["expect", "tobevisible"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-flaky", navKey: "practica.flaky.nav", blocks: [
+      { type: "prose", html: "practica.flaky.lead" },
+      { type: "lab", stage: "flaky", lang: "TypeScript", tasks: [
+        { text: "practica.flaky.t1", why: "practica.flaky.w1", hint: "pw_flaky_1", terms: ["auto-flaky", "auto-waits"], check: ["expect", "tobevisible"] },
+        { text: "practica.flaky.t2", why: "practica.flaky.w2", hint: "pw_flaky_2", terms: ["auto-locator"], check: ["getbyrole", "click"] },
+        { text: "practica.flaky.t3", why: "practica.flaky.w3", hint: "pw_flaky_3", terms: ["auto-assertion"], check: ["expect", "saved"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-locators", navKey: "practica.locators.nav", blocks: [
+      { type: "prose", html: "practica.locators.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.locators.t1", why: "practica.locators.w1", hint: "pw_locators_1", terms: ["auto-locator"], check: ["getbylabel", "fill"] },
+        { text: "practica.locators.t2", why: "practica.locators.w2", hint: "pw_locators_2", terms: ["auto-locator"], check: ["getbyrole"] },
+        { text: "practica.locators.t3", why: "practica.locators.w3", hint: "pw_locators_3", terms: ["auto-locator"], check: ["testid"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-cart", navKey: "practica.cart.nav", blocks: [
+      { type: "prose", html: "practica.cart.lead" },
+      { type: "lab", stage: "order", lang: "TypeScript", tasks: [
+        { text: "practica.cart.t1", why: "practica.cart.w1", hint: "pw_cart_1", terms: ["auto-locator"], check: ["remove", "click"] },
+        { text: "practica.cart.t2", why: "practica.cart.w2", hint: "pw_cart_2", terms: ["auto-assertion"], check: ["tohavecount", "2"] },
+        { text: "practica.cart.t3", why: "practica.cart.w3", hint: "pw_cart_3", terms: ["auto-assertion"], check: ["expect", "tohavetext"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-pom", navKey: "practica.pom.nav", blocks: [
+      { type: "prose", html: "practica.pom.lead" },
+      { type: "lab", stage: "login", lang: "TypeScript", tasks: [
+        { text: "practica.pom.t1", why: "practica.pom.w1", hint: "pw_pom_1", terms: ["auto-pom", "auto-locator"], check: ["class", "loginpage"] },
+        { text: "practica.pom.t2", why: "practica.pom.w2", hint: "pw_pom_2", terms: ["auto-pom"], check: ["login", "fill"] },
+        { text: "practica.pom.t3", why: "practica.pom.w3", hint: "pw_pom_3", terms: ["auto-pom", "auto-assertion"], check: ["loginpage", "expect"] },
+      ] },
+    ] },
+  { group: "pwpr", groupKey: "practica.grp.pw", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" },
+    id: "practica-apistatus", navKey: "practica.apistatus.nav", blocks: [
+      { type: "prose", html: "practica.apistatus.lead" },
+      { type: "lab", stage: "verbs", lang: "TypeScript", tasks: [
+        { text: "practica.apistatus.t1", why: "practica.apistatus.w1", hint: "pw_apistatus_1", terms: ["api-status"], check: ["get", "401"] },
+        { text: "practica.apistatus.t2", why: "practica.apistatus.w2", hint: "pw_apistatus_2", terms: ["api-status", "api-safe"], check: ["get", "200"] },
+        { text: "practica.apistatus.t3", why: "practica.apistatus.w3", hint: "pw_apistatus_3", terms: ["api-status"], check: ["get", "404"] },
       ] },
     ] },
   // ---- Selenium practice group (Python) ----
