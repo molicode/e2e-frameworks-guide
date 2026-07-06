@@ -2485,4 +2485,11 @@ I18n.register("en", {
   "practica.ai.eval.w2": "When there's no exact expected value, a judge with a rubric solves the oracle problem.",
   "practica.ai.eval.t3": "Define the <strong>threshold</strong>: if it passes below 90%, you don't promote the prompt or the model.",
   "practica.ai.eval.w3": "The threshold turns the eval into a gate: it blocks changes that worsen quality, like a failing test.",
+
+  /* ---- Listen / text-to-speech ---- */
+  "read.listen": "Listen",
+  "read.pause": "Pause",
+  "read.resume": "Resume",
+  "read.stop": "Stop",
+  "read.speed": "Reading speed",
 });

@@ -2486,4 +2486,11 @@ I18n.register("es", {
   "practica.ai.eval.w2": "Cuando no hay un valor exacto esperado, un juez con rúbrica resuelve el problema del oráculo.",
   "practica.ai.eval.t3": "Definí el <strong>umbral</strong>: si pasa menos del 90%, no promocionás el prompt ni el modelo.",
   "practica.ai.eval.w3": "El umbral convierte el eval en un gate: bloquea cambios que empeoran la calidad, como un test que falla.",
+
+  /* ---- Listen / text-to-speech ---- */
+  "read.listen": "Escuchar",
+  "read.pause": "Pausar",
+  "read.resume": "Reanudar",
+  "read.stop": "Detener",
+  "read.speed": "Velocidad de lectura",
 });
