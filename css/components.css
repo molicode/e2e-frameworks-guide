@@ -3058,6 +3058,21 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 .reader__speed:hover { color: var(--text); }
 .reader__speed.is-active { background: var(--accent-soft); color: var(--accent); }
 
+.reader__voice { display: none; }
+.reader.is-active .reader__voice {
+  display: inline-block;
+  max-width: 150px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.reader__voice:hover { color: var(--text); border-color: var(--border-strong); }
+
 /* the block currently being read aloud */
 .is-reading {
   background: var(--accent-soft);

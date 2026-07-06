@@ -62,12 +62,34 @@
 
   var voices = [];
   function loadVoices() { try { voices = synth.getVoices() || []; } catch (e) { voices = []; } }
-  function pickVoice(tag) {
+
+  // Preferred voices per language, best first. These are the natural, usually
+  // female voices shipped by Chrome/Edge/Safari/Android; the fallback scoring
+  // below still favours quality when none of these is present.
+  var PREFERRED = {
+    en: ["google us english", "google uk english female", "samantha", "microsoft aria",
+         "microsoft jenny", "microsoft michelle", "microsoft zira", "ava", "allison",
+         "susan", "karen", "moira", "tessa", "fiona", "serena", "zoe", "nicky", "google english"],
+    es: ["google español de estados unidos", "google español", "mónica", "monica", "paulina",
+         "microsoft sabina", "microsoft helena", "microsoft laura", "marisol", "angelica",
+         "microsoft dalia", "google español latinoamérica"]
+  };
+  function scoreVoice(v, tag) {
+    var name = (v.name || "").toLowerCase();
+    var pref = PREFERRED[tag.slice(0, 2)] || [];
+    var s = 0;
+    for (var i = 0; i < pref.length; i++) { if (name.indexOf(pref[i]) !== -1) { s += 1000 - i * 10; break; } }
+    if (/female|mujer/.test(name)) s += 60;
+    if (/google|natural|neural|premium|enhanced|siri|wavenet|online/.test(name)) s += 40;
+    if (/espeak|compact|eloquence|robo|pico/.test(name)) s -= 200; // the "dying robot" voices
+    if (v.localService === false) s += 8; // network voices are usually the good ones
+    if (v.default) s += 3;
+    return s;
+  }
+  function voicesFor(tag) {
     var pref = tag.slice(0, 2);
-    var match = voices.filter(function (v) { return (v.lang || "").toLowerCase().indexOf(pref) === 0; });
-    // Prefer a local (offline) voice when several are available.
-    var local = match.filter(function (v) { return v.localService; });
-    return local[0] || match[0] || null;
+    return voices.filter(function (v) { return (v.lang || "").toLowerCase().indexOf(pref) === 0; })
+      .sort(function (a, b) { return scoreVoice(b, tag) - scoreVoice(a, tag); });
   }
 
   function init() {
@@ -77,13 +99,51 @@
 
     var toggleBtn = document.getElementById("reader-toggle");
     var stopBtn = document.getElementById("reader-stop");
+    var voiceSel = document.getElementById("reader-voice");
     var label = reader.querySelector(".reader__label");
     var speedBtns = slice(reader.querySelectorAll(".reader__speed"));
     var content = document.querySelector(".content__inner");
     if (!content) { reader.parentNode && reader.parentNode.removeChild(reader); return; }
 
+    // Remember the chosen voice per language so it sticks across pages.
+    function savedVoiceKey(tag) { return "qaguide-voice-" + tag.slice(0, 2); }
+    function getSavedVoice(tag) { try { return localStorage.getItem(savedVoiceKey(tag)); } catch (e) { return null; } }
+    function setSavedVoice(tag, name) { try { localStorage.setItem(savedVoiceKey(tag), name); } catch (e) {} }
+
+    // The voice to use: the user's saved choice for this language, else the best-scored.
+    function pickVoice(tag) {
+      var list = voicesFor(tag);
+      if (!list.length) return null;
+      var saved = getSavedVoice(tag);
+      if (saved) {
+        for (var i = 0; i < list.length; i++) { if (list[i].name === saved) return list[i]; }
+      }
+      return list[0];
+    }
+
+    // Fill the picker with this language's voices, best first, current one selected.
+    function populateVoices() {
+      if (!voiceSel) return;
+      var tag = langTag();
+      var list = voicesFor(tag);
+      var chosen = pickVoice(tag);
+      voiceSel.innerHTML = "";
+      list.forEach(function (v) {
+        var o = document.createElement("option");
+        o.value = v.name;
+        o.textContent = v.name.replace(/^(Google|Microsoft)\s+/i, "");
+        if (chosen && v.name === chosen.name) o.selected = true;
+        voiceSel.appendChild(o);
+      });
+      voiceSel.disabled = list.length <= 1;
+      voiceSel.hidden = list.length === 0;
+    }
+
     loadVoices();
-    if (typeof synth.onvoiceschanged !== "undefined") synth.onvoiceschanged = loadVoices;
+    populateVoices();
+    if (typeof synth.onvoiceschanged !== "undefined") {
+      synth.onvoiceschanged = function () { loadVoices(); populateVoices(); };
+    }
 
     var blocks = [];
     var idx = -1;
@@ -161,10 +221,18 @@
     speedBtns.forEach(function (b) {
       b.addEventListener("click", function () { setRate(parseFloat(b.getAttribute("data-rate"))); });
     });
+    if (voiceSel) {
+      voiceSel.addEventListener("change", function () {
+        setSavedVoice(langTag(), voiceSel.value);
+        if (state === "playing") { synth.cancel(); speak(idx); } // apply immediately
+      });
+    }
 
-    // Follow the live language toggle: re-read the current block in the new language.
+    // Follow the live language toggle: re-populate the voices and re-read the
+    // current block in the new language (with that language's chosen voice).
     if (global.I18n && global.I18n.onChange) {
       global.I18n.onChange(function () {
+        populateVoices();
         if (state === "playing") { synth.cancel(); speak(idx); }
         else setState(state); // refresh the pill label text
       });

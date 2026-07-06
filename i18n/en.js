@@ -2492,4 +2492,5 @@ I18n.register("en", {
   "read.resume": "Resume",
   "read.stop": "Stop",
   "read.speed": "Reading speed",
+  "read.voice": "Voice",
 });
