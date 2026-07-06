@@ -950,6 +950,8 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
     <button class="reader__stop" id="reader-stop" type="button"
             aria-label="${escAttr(t(dict, "read.stop"))}" data-i18n-attr="aria-label:read.stop"
             title="${escAttr(t(dict, "read.stop"))}">${uiIcon("square")}</button>
+    <select class="reader__voice" id="reader-voice"
+            aria-label="${escAttr(t(dict, "read.voice"))}" data-i18n-attr="aria-label:read.voice"></select>
     <div class="reader__speeds" role="group"
          aria-label="${escAttr(t(dict, "read.speed"))}" data-i18n-attr="aria-label:read.speed">
       <button class="reader__speed" type="button" data-rate="0.75">0.75×</button>

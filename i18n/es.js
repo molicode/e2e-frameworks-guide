@@ -2493,4 +2493,5 @@ I18n.register("es", {
   "read.resume": "Reanudar",
   "read.stop": "Detener",
   "read.speed": "Velocidad de lectura",
+  "read.voice": "Voz",
 });
