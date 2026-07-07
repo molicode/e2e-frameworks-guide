@@ -2987,90 +2987,99 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 }
 
 /* ---- "Listen to this page" reader (text-to-speech) ---- */
+/* Resting = just a small translucent round headphones button. Active = a
+   compact frosted pill: icon-only play/stop + two small dropdowns (speed, voice). */
 .reader {
   position: fixed;
-  right: var(--space-5);
-  bottom: var(--space-5);
+  right: var(--space-4);
+  bottom: var(--space-4);
   z-index: 60;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: var(--space-2);
-  padding: 6px;
-  background: var(--surface);
+  gap: 6px;
+}
+.reader.is-active {
+  padding: 5px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
-  box-shadow: 0 2px 14px rgba(30, 25, 15, 0.10); /* functional: a floating overlay */
+  box-shadow: 0 2px 12px rgba(30, 25, 15, 0.10); /* functional: a floating overlay */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
+
 .reader__toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px 8px 12px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 55%, transparent); /* translucent at rest */
+  color: var(--accent);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.reader__toggle:hover { transform: translateY(-1px); }
+/* when active, the toggle is the primary (peach) round button */
+.reader.is-active .reader__toggle {
+  width: 34px;
+  height: 34px;
   border: none;
-  border-radius: var(--radius-pill);
   background: var(--cta-bg);
   color: var(--cta-text);
-  font: var(--md-label-large);
-  cursor: pointer;
-  transition: background var(--transition);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
-.reader__toggle:hover { background: var(--cta-bg-hover); }
+.reader.is-active .reader__toggle:hover { background: var(--cta-bg-hover); }
 .reader__ico { display: none; line-height: 0; }
 .reader__ico .ui-icon { width: 18px; height: 18px; display: block; }
 .reader:not(.is-active) .reader__ico--listen { display: inline-flex; }
 .reader.is-playing .reader__ico--pause { display: inline-flex; }
 .reader.is-paused .reader__ico--play { display: inline-flex; }
 
+/* stop + dropdowns appear only when active */
 .reader__stop,
-.reader__speeds { display: none; }
+.reader__speed,
+.reader__voice { display: none; }
 .reader.is-active .reader__stop { display: inline-flex; }
-.reader.is-active .reader__speeds { display: inline-flex; }
+.reader.is-active .reader__speed { display: inline-block; }
+.reader.is-active .reader__voice { display: inline-block; }
 
 .reader__stop {
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border: 1px solid var(--border);
   border-radius: 50%;
-  background: var(--surface);
+  background: transparent;
   color: var(--text-soft);
   cursor: pointer;
   transition: color var(--transition), border-color var(--transition);
 }
 .reader__stop:hover { color: var(--danger); border-color: var(--danger); }
-.reader__stop .ui-icon { width: 15px; height: 15px; }
+.reader__stop .ui-icon { width: 14px; height: 14px; }
 
-.reader__speeds { align-items: center; gap: 2px; }
-.reader__speed {
-  border: none;
-  background: transparent;
-  color: var(--text-soft);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 5px 8px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: background var(--transition), color var(--transition);
-}
-.reader__speed:hover { color: var(--text); }
-.reader__speed.is-active { background: var(--accent-soft); color: var(--accent); }
-
-.reader__voice { display: none; }
-.reader.is-active .reader__voice {
-  display: inline-block;
-  max-width: 150px;
+.reader__speed,
+.reader__voice {
+  height: 34px;
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
-  background: var(--surface);
+  background: transparent;
   color: var(--text-soft);
   font-family: var(--font-sans);
   font-size: 12px;
-  padding: 6px 10px;
+  padding: 0 8px;
   cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
 }
+.reader__speed { font-family: var(--font-mono); }
+.reader__voice { max-width: 116px; }
+.reader__speed:hover,
 .reader__voice:hover { color: var(--text); border-color: var(--border-strong); }
 
 /* the block currently being read aloud */
@@ -3083,8 +3092,9 @@ table.cmp td:first-child { font-weight: 600; color: var(--text); }
 
 @media (max-width: 640px) {
   .reader { right: var(--space-3); bottom: var(--space-3); }
-  .reader.is-active { left: var(--space-3); }
+  .reader__voice { max-width: 92px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .reader__toggle,
   .is-reading { transition: none; }
 }
