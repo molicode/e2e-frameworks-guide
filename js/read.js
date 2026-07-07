@@ -86,10 +86,22 @@
     if (v.default) s += 3;
     return s;
   }
+  // iOS/macOS ships a lot of novelty voices (Fred, Zarvox, Bubbles…) that sound
+  // unprofessional for reading long content. Hide them from the picker.
+  var NOVELTY = ["albert", "bad news", "bahh", "bells", "boing", "bubbles", "cellos",
+    "deranged", "good news", "jester", "organ", "superstar", "trinoids", "whisper",
+    "wobble", "zarvox", "fred", "junior", "kathy", "ralph", "hysterical", "bruce",
+    "grandma", "grandpa", "flo", "eddy", "reed", "rocko", "sandy", "shelley"];
+  function isNovelty(v) {
+    var name = (v.name || "").toLowerCase();
+    for (var i = 0; i < NOVELTY.length; i++) { if (name.indexOf(NOVELTY[i]) !== -1) return true; }
+    return false;
+  }
   function voicesFor(tag) {
     var pref = tag.slice(0, 2);
-    return voices.filter(function (v) { return (v.lang || "").toLowerCase().indexOf(pref) === 0; })
-      .sort(function (a, b) { return scoreVoice(b, tag) - scoreVoice(a, tag); });
+    var all = voices.filter(function (v) { return (v.lang || "").toLowerCase().indexOf(pref) === 0; });
+    var good = all.filter(function (v) { return !isNovelty(v); });
+    return (good.length ? good : all).sort(function (a, b) { return scoreVoice(b, tag) - scoreVoice(a, tag); });
   }
 
   function init() {
@@ -150,8 +162,13 @@
     var state = "idle";      // idle | playing | paused
     var rate = 1;
     var cur = null;          // highlighted element
+    var speakToken = 0;      // generation guard: ignore onend from cancelled utterances
 
     reader.hidden = false;
+
+    // Cancel the current speech WITHOUT letting its (possibly synchronous, on iOS)
+    // onend advance to the next block. Bumping the token first invalidates it.
+    function cancelSpeech() { speakToken++; try { synth.cancel(); } catch (e) {} }
 
     function setState(s) {
       state = s;
@@ -176,14 +193,17 @@
       if (i < 0 || i >= blocks.length) { stop(); return; }
       idx = i;
       highlight(blocks[i]);
+      var my = ++speakToken;   // this utterance's generation
       var tag = langTag();
       var u = new global.SpeechSynthesisUtterance(textOf(blocks[i]));
       u.lang = tag;
       u.rate = rate;
       var v = pickVoice(tag);
       if (v) { try { u.voice = v; } catch (e) { /* invalid voice — u.lang alone still steers it */ } }
-      u.onend = function () { if (state === "playing") speak(idx + 1); };
-      u.onerror = function () { if (state === "playing") speak(idx + 1); };
+      // Only advance if this is still the active utterance and we're playing —
+      // a cancelled utterance (stop / speed / language change) must NOT continue.
+      u.onend = function () { if (my === speakToken && state === "playing") speak(idx + 1); };
+      u.onerror = function () { if (my === speakToken && state === "playing") speak(idx + 1); };
       synth.speak(u);
     }
 
@@ -197,19 +217,21 @@
 
     function play() {
       if (state === "paused") { synth.resume(); setState("playing"); return; }
-      synth.cancel();
+      cancelSpeech();
       blocks = collect(content);
       if (!blocks.length) return;
       setState("playing");
       speak(firstVisibleIndex());
     }
     function pause() { if (state === "playing") { synth.pause(); setState("paused"); } }
-    function stop() { synth.cancel(); clearHighlight(); idx = -1; setState("idle"); }
+    // Order matters: go idle FIRST so any (synchronous, iOS) onend from cancel
+    // sees state !== "playing" and can't resume reading.
+    function stop() { setState("idle"); clearHighlight(); idx = -1; cancelSpeech(); }
 
     function setRate(r) {
       rate = r;
       if (speedSel && parseFloat(speedSel.value) !== r) speedSel.value = String(r);
-      if (state === "playing") { synth.cancel(); speak(idx); } // apply immediately
+      if (state === "playing") { cancelSpeech(); speak(idx); } // apply immediately
     }
 
     toggleBtn.addEventListener("click", function () {
@@ -222,7 +244,7 @@
     if (voiceSel) {
       voiceSel.addEventListener("change", function () {
         setSavedVoice(langTag(), voiceSel.value);
-        if (state === "playing") { synth.cancel(); speak(idx); } // apply immediately
+        if (state === "playing") { cancelSpeech(); speak(idx); } // apply immediately
       });
     }
 
@@ -231,7 +253,7 @@
     if (global.I18n && global.I18n.onChange) {
       global.I18n.onChange(function () {
         populateVoices();
-        if (state === "playing") { synth.cancel(); speak(idx); }
+        if (state === "playing") { cancelSpeech(); speak(idx); }
         else setState(state); // refresh the pill label text
       });
     }
