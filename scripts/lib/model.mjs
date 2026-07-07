@@ -432,6 +432,38 @@ ni ese modelo (regresión de la IA).` },
   pwtsToast: { lang: "TypeScript", code: "// Toast / alert — assert it appears, then disappears on its own.\nawait page.getByRole('button', { name: 'Save' }).click();\nconst toast = page.getByRole('alert');\nawait expect(toast).toContainText('saved successfully');\nawait expect(toast).toBeHidden({ timeout: 6000 });" },
   pwtsA11y: { lang: "TypeScript", code: "// Accessibility — scan the page with axe and assert zero violations.\nimport { test, expect } from '@playwright/test';\nimport AxeBuilder from '@axe-core/playwright';\n\ntest('home page has no a11y violations', async ({ page }) => {\n  await page.goto('/');\n  const results = await new AxeBuilder({ page }).analyze();\n  expect(results.violations).toEqual([]);\n});\n\n// Bonus: querying by role + name makes tests resilient AND accessible.\nawait expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();" },
   verbsPlaywrightTs: { lang: "TypeScript", code: "// Every HTTP verb with Playwright's request context.\nconst api = await playwright.request.newContext({\n  baseURL: 'https://api.example.com',\n  extraHTTPHeaders: { Authorization: `Bearer ${token}` },\n});\n\n// GET — read (safe, idempotent)\nexpect((await api.get('/orders/42')).status()).toBe(200);\n\n// POST — create (NOT idempotent)\nconst created = await api.post('/orders', { data: { items: ['book'] } });\nexpect(created.status()).toBe(201);\nconst orderId = (await created.json()).id;\n\n// PUT — replace the whole resource (idempotent)\nexpect((await api.put(`/orders/${orderId}`,\n  { data: { items: ['pen'], status: 'NEW' } })).status()).toBe(200);\n\n// PATCH — partial update\nexpect((await api.patch(`/orders/${orderId}`, { data: { status: 'PAID' } })).status()).toBe(200);\n\n// DELETE — remove (idempotent)\nexpect((await api.delete(`/orders/${orderId}`)).status()).toBe(204);\n\n// HEAD — headers only, no body\nexpect((await api.head('/orders/42')).status()).toBe(200);\n\n// OPTIONS — allowed methods (use the generic fetch)\nconst opt = await api.fetch('/orders', { method: 'OPTIONS' });\nexpect(opt.headers()['allow']).toContain('POST');" },
+
+  /* ---- Playwright (Python) practice hints ---- */
+  pypw_login_1: { lang: "Python", code: "# Prefer accessible locators over brittle CSS / XPath.\npage.get_by_label(\"User\").fill(\"ana\")\npage.get_by_label(\"Password\").fill(\"s3cret!\")" },
+  pypw_login_2: { lang: "Python", code: "# Playwright auto-waits for the button to be actionable — no sleeps.\npage.get_by_role(\"button\", name=\"Sign in\").click()" },
+  pypw_login_3: { lang: "Python", code: "# Assert the expected final state; the test fails if login breaks.\nexpect(page.get_by_text(\"Welcome, ana\")).to_be_visible()" },
+  pypw_order_1: { lang: "Python", code: "# Target a stable test id, not the formatted text.\nexpect(page.get_by_test_id(\"order-total\")).to_have_text(\"250\")" },
+  pypw_order_2: { lang: "Python", code: "# Web-first assertion: retries until the status renders.\nexpect(page.get_by_test_id(\"order-status\")).to_have_text(\"PAID\")" },
+  pypw_order_3: { lang: "Python", code: "# Counting validates the whole list (missing / duplicated items).\nexpect(page.get_by_role(\"listitem\")).to_have_count(3)" },
+  pypw_api_1: { lang: "Python", code: "res = request.post(\"/api/orders\", data={\"item\": \"The Pragmatic Programmer\", \"qty\": 1})\nassert res.status == 201            # Created\nassert \"id\" in res.json()" },
+  pypw_api_2: { lang: "Python", code: "res = request.get(\"/api/orders/42\")\nassert res.status == 200            # OK, safe read\nbody = res.json()\nassert body[\"status\"] == \"PAID\" and body[\"total\"] == 250" },
+  pypw_api_3: { lang: "Python", code: "res = request.delete(\"/api/orders/42\")\nassert res.status == 204            # No Content\n# idempotent: deleting again leaves the same final state\nassert request.delete(\"/api/orders/42\").status == 204" },
+  pypw_loginfail_1: { lang: "Python", code: "page.get_by_label(\"User\").fill(\"ana\")\npage.get_by_label(\"Password\").fill(\"wrong-pass\")" },
+  pypw_loginfail_2: { lang: "Python", code: "page.get_by_role(\"button\", name=\"Sign in\").click()" },
+  pypw_loginfail_3: { lang: "Python", code: "# Assert the error shows AND the user did NOT get in.\nexpect(page.get_by_text(\"Invalid credentials\")).to_be_visible()\nexpect(page.get_by_text(\"Welcome\")).to_have_count(0)" },
+  pypw_autowait_1: { lang: "Python", code: "page.get_by_role(\"button\", name=\"Load\").click()" },
+  pypw_autowait_2: { lang: "Python", code: "# No sleeps: auto-wait until the spinner is gone.\nexpect(page.get_by_test_id(\"spinner\")).to_be_hidden()" },
+  pypw_autowait_3: { lang: "Python", code: "expect(page.get_by_text(\"Done\")).to_be_visible()" },
+  pypw_flaky_1: { lang: "Python", code: "# Replace the fixed sleep with a web-first assertion.\n# NO: page.wait_for_timeout(2000)\nexpect(page.get_by_text(\"Ready\")).to_be_visible()" },
+  pypw_flaky_2: { lang: "Python", code: "# Robust locator instead of a brittle nth-child / xpath.\npage.get_by_role(\"button\", name=\"Submit\").click()" },
+  pypw_flaky_3: { lang: "Python", code: "expect(page.get_by_text(\"Saved\")).to_be_visible()" },
+  pypw_locators_1: { lang: "Python", code: "# Prefer accessible role/label over CSS or XPath.\npage.get_by_label(\"User\").fill(\"ana\")" },
+  pypw_locators_2: { lang: "Python", code: "page.get_by_role(\"button\", name=\"Sign in\").click()" },
+  pypw_locators_3: { lang: "Python", code: "# A test id is the most stable hook when there's no good role/label.\nexpect(page.get_by_test_id(\"welcome\")).to_be_visible()" },
+  pypw_cart_1: { lang: "Python", code: "page.get_by_role(\"button\", name=\"Remove\").first.click()" },
+  pypw_cart_2: { lang: "Python", code: "expect(page.get_by_role(\"listitem\")).to_have_count(2)" },
+  pypw_cart_3: { lang: "Python", code: "# The total must reflect the removed item.\nexpect(page.get_by_test_id(\"order-total\")).not_to_have_text(\"250\")" },
+  pypw_pom_1: { lang: "Python", code: "class LoginPage:\n    def __init__(self, page):\n        self.page = page\n        self.user = page.get_by_label(\"User\")\n        self.password = page.get_by_label(\"Password\")\n        self.submit = page.get_by_role(\"button\", name=\"Sign in\")" },
+  pypw_pom_2: { lang: "Python", code: "    def login(self, u, p):\n        self.user.fill(u)\n        self.password.fill(p)\n        self.submit.click()" },
+  pypw_pom_3: { lang: "Python", code: "login = LoginPage(page)\nlogin.login(\"ana\", \"s3cret!\")\nexpect(page.get_by_text(\"Welcome\")).to_be_visible()" },
+  pypw_apistatus_1: { lang: "Python", code: "res = request.get(\"/api/orders/1\")     # no token\nassert res.status == 401               # Unauthorized" },
+  pypw_apistatus_2: { lang: "Python", code: "res = request.get(\"/api/orders/42\", headers={\"Authorization\": \"Bearer t0ken\"})\nassert res.status == 200" },
+  pypw_apistatus_3: { lang: "Python", code: "res = request.get(\"/api/orders/999\")\nassert res.status == 404               # Not Found" },
   /* ---- Fundamentals ---- */
   assertion: {
     lang: "JavaScript",
@@ -3828,6 +3860,97 @@ export const SECTIONS = [
         { text: "practica.apistatus.t1", why: "practica.apistatus.w1", hint: "pw_apistatus_1", terms: ["api-status"], check: ["get", "401"] },
         { text: "practica.apistatus.t2", why: "practica.apistatus.w2", hint: "pw_apistatus_2", terms: ["api-status", "api-safe"], check: ["get", "200"] },
         { text: "practica.apistatus.t3", why: "practica.apistatus.w3", hint: "pw_apistatus_3", terms: ["api-status"], check: ["get", "404"] },
+      ] },
+    ] },
+  // ---- Playwright practice group (Python) ----
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-login", navKey: "practica.login.nav", blocks: [
+      { type: "prose", html: "practica.login.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.login.t1", why: "practica.login.w1", hint: "pypw_login_1", terms: ["auto-locator"], check: ["get_by","fill"] },
+        { text: "practica.login.t2", why: "practica.login.w2", hint: "pypw_login_2", terms: ["auto-autowait","auto-waits"], check: ["get_by_role","click"] },
+        { text: "practica.login.t3", why: "practica.login.w3", hint: "pypw_login_3", terms: ["auto-assertion"], check: ["expect","to_be_visible"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-order", navKey: "practica.order.nav", blocks: [
+      { type: "prose", html: "practica.order.lead" },
+      { type: "lab", stage: "order", lang: "Python", tasks: [
+        { text: "practica.order.t1", why: "practica.order.w1", hint: "pypw_order_1", terms: ["auto-locator"], check: ["expect","250"] },
+        { text: "practica.order.t2", why: "practica.order.w2", hint: "pypw_order_2", terms: ["auto-assertion","auto-autowait"], check: ["expect","paid"] },
+        { text: "practica.order.t3", why: "practica.order.w3", hint: "pypw_order_3", terms: ["auto-assertion"], check: ["expect","to_have_count"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-api", navKey: "practica.api.nav", blocks: [
+      { type: "prose", html: "practica.api.lead" },
+      { type: "lab", stage: "verbs", lang: "Python", tasks: [
+        { text: "practica.api.t1", why: "practica.api.w1", hint: "pypw_api_1", terms: ["api-methods","api-crud"], check: ["post","201"] },
+        { text: "practica.api.t2", why: "practica.api.w2", hint: "pypw_api_2", terms: ["api-safe","api-status"], check: ["get","200"] },
+        { text: "practica.api.t3", why: "practica.api.w3", hint: "pypw_api_3", terms: ["api-idempotency","api-status"], check: ["delete","204"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-loginfail", navKey: "practica.loginfail.nav", blocks: [
+      { type: "prose", html: "practica.loginfail.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.loginfail.t1", why: "practica.loginfail.w1", hint: "pypw_loginfail_1", terms: ["auto-locator"], check: ["get_by","fill"] },
+        { text: "practica.loginfail.t2", why: "practica.loginfail.w2", hint: "pypw_loginfail_2", terms: ["auto-autowait"], check: ["click"] },
+        { text: "practica.loginfail.t3", why: "practica.loginfail.w3", hint: "pypw_loginfail_3", terms: ["auto-assertion"], check: ["expect","invalid"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-autowait", navKey: "practica.autowait.nav", blocks: [
+      { type: "prose", html: "practica.autowait.lead" },
+      { type: "lab", stage: "flaky", lang: "Python", tasks: [
+        { text: "practica.autowait.t1", why: "practica.autowait.w1", hint: "pypw_autowait_1", terms: ["auto-autowait"], check: ["click"] },
+        { text: "practica.autowait.t2", why: "practica.autowait.w2", hint: "pypw_autowait_2", terms: ["auto-autowait","auto-waits"], check: ["expect","to_be_hidden"] },
+        { text: "practica.autowait.t3", why: "practica.autowait.w3", hint: "pypw_autowait_3", terms: ["auto-assertion"], check: ["expect","to_be_visible"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-flaky", navKey: "practica.flaky.nav", blocks: [
+      { type: "prose", html: "practica.flaky.lead" },
+      { type: "lab", stage: "flaky", lang: "Python", tasks: [
+        { text: "practica.flaky.t1", why: "practica.flaky.w1", hint: "pypw_flaky_1", terms: ["auto-flaky","auto-waits"], check: ["expect","to_be_visible"] },
+        { text: "practica.flaky.t2", why: "practica.flaky.w2", hint: "pypw_flaky_2", terms: ["auto-locator"], check: ["get_by_role","click"] },
+        { text: "practica.flaky.t3", why: "practica.flaky.w3", hint: "pypw_flaky_3", terms: ["auto-assertion"], check: ["expect","saved"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-locators", navKey: "practica.locators.nav", blocks: [
+      { type: "prose", html: "practica.locators.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.locators.t1", why: "practica.locators.w1", hint: "pypw_locators_1", terms: ["auto-locator"], check: ["get_by_label","fill"] },
+        { text: "practica.locators.t2", why: "practica.locators.w2", hint: "pypw_locators_2", terms: ["auto-locator"], check: ["get_by_role"] },
+        { text: "practica.locators.t3", why: "practica.locators.w3", hint: "pypw_locators_3", terms: ["auto-locator"], check: ["test_id"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-cart", navKey: "practica.cart.nav", blocks: [
+      { type: "prose", html: "practica.cart.lead" },
+      { type: "lab", stage: "order", lang: "Python", tasks: [
+        { text: "practica.cart.t1", why: "practica.cart.w1", hint: "pypw_cart_1", terms: ["auto-locator"], check: ["remove","click"] },
+        { text: "practica.cart.t2", why: "practica.cart.w2", hint: "pypw_cart_2", terms: ["auto-assertion"], check: ["to_have_count","2"] },
+        { text: "practica.cart.t3", why: "practica.cart.w3", hint: "pypw_cart_3", terms: ["auto-assertion"], check: ["expect","to_have_text"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-pom", navKey: "practica.pom.nav", blocks: [
+      { type: "prose", html: "practica.pom.lead" },
+      { type: "lab", stage: "login", lang: "Python", tasks: [
+        { text: "practica.pom.t1", why: "practica.pom.w1", hint: "pypw_pom_1", terms: ["auto-pom","auto-locator"], check: ["class","loginpage"] },
+        { text: "practica.pom.t2", why: "practica.pom.w2", hint: "pypw_pom_2", terms: ["auto-pom"], check: ["login","fill"] },
+        { text: "practica.pom.t3", why: "practica.pom.w3", hint: "pypw_pom_3", terms: ["auto-pom","auto-assertion"], check: ["loginpage","expect"] },
+      ] },
+    ] },
+  { group: "pwpypr", groupKey: "practica.grp.pwpy", chip: { label: "Playwright", color: "var(--fw-playwright)", lang: "Python" },
+    id: "practica-pwpy-apistatus", navKey: "practica.apistatus.nav", blocks: [
+      { type: "prose", html: "practica.apistatus.lead" },
+      { type: "lab", stage: "verbs", lang: "Python", tasks: [
+        { text: "practica.apistatus.t1", why: "practica.apistatus.w1", hint: "pypw_apistatus_1", terms: ["api-status"], check: ["get","401"] },
+        { text: "practica.apistatus.t2", why: "practica.apistatus.w2", hint: "pypw_apistatus_2", terms: ["api-status","api-safe"], check: ["get","200"] },
+        { text: "practica.apistatus.t3", why: "practica.apistatus.w3", hint: "pypw_apistatus_3", terms: ["api-status"], check: ["get","404"] },
       ] },
     ] },
   // ---- Selenium practice group (Python) ----

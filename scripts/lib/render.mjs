@@ -1007,7 +1007,7 @@ const NODE_LOGO = {
   "playwright-ts": "playwright",
   bdd: "cucumber", perf: "k6", ci: "githubactions", skills: "git",
   // Práctica per-framework groups reuse the official framework logos.
-  pwpr: "playwright", selpr: "selenium", cypr: "cypress", robotpr: "robot",
+  pwpr: "playwright", pwpypr: "playwright", selpr: "selenium", cypr: "cypress", robotpr: "robot",
 };
 // Práctica groups without a technology logo fall back to a themed line icon.
 const NODE_ICON = { aipr: "ai" };
@@ -1027,7 +1027,7 @@ const NAV_GROUPS = [
   { key: "approaches",  label: "grp.approaches",  icon: "approaches", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
   { key: "ai",          label: "grp.ai",          icon: "ai", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
   { key: "process",     label: "grp.process",     icon: "process", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
-  { key: "practica",    label: "grp.practica",    icon: "practica", color: "var(--cat-practica)",    members: ["practica", "pwpr", "selpr", "cypr", "robotpr", "aipr"] },
+  { key: "practica",    label: "grp.practica",    icon: "practica", color: "var(--cat-practica)",    members: ["practica", "pwpr", "pwpypr", "selpr", "cypr", "robotpr", "aipr"] },
   { key: "glossary",    label: "grp.glossary",    icon: "glossary", color: "var(--cat-glossary)",    members: ["key-terms", "bibliography"] },
 ];
 const PATH_UNITS = NAV_GROUPS;
