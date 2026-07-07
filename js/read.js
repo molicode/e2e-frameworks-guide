@@ -100,8 +100,8 @@
     var toggleBtn = document.getElementById("reader-toggle");
     var stopBtn = document.getElementById("reader-stop");
     var voiceSel = document.getElementById("reader-voice");
+    var speedSel = document.getElementById("reader-speed");
     var label = reader.querySelector(".reader__label");
-    var speedBtns = slice(reader.querySelectorAll(".reader__speed"));
     var content = document.querySelector(".content__inner");
     if (!content) { reader.parentNode && reader.parentNode.removeChild(reader); return; }
 
@@ -208,9 +208,7 @@
 
     function setRate(r) {
       rate = r;
-      speedBtns.forEach(function (b) {
-        b.classList.toggle("is-active", parseFloat(b.getAttribute("data-rate")) === r);
-      });
+      if (speedSel && parseFloat(speedSel.value) !== r) speedSel.value = String(r);
       if (state === "playing") { synth.cancel(); speak(idx); } // apply immediately
     }
 
@@ -218,9 +216,9 @@
       if (state === "playing") pause(); else play();
     });
     stopBtn.addEventListener("click", stop);
-    speedBtns.forEach(function (b) {
-      b.addEventListener("click", function () { setRate(parseFloat(b.getAttribute("data-rate"))); });
-    });
+    if (speedSel) {
+      speedSel.addEventListener("change", function () { setRate(parseFloat(speedSel.value)); });
+    }
     if (voiceSel) {
       voiceSel.addEventListener("change", function () {
         setSavedVoice(langTag(), voiceSel.value);

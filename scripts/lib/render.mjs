@@ -941,25 +941,25 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
 
   <div class="reader" id="reader" hidden>
     <button class="reader__toggle" id="reader-toggle" type="button"
-            aria-label="${escAttr(t(dict, "read.listen"))}" data-i18n-attr="aria-label:read.listen">
+            aria-label="${escAttr(t(dict, "read.listen"))}" data-i18n-attr="aria-label:read.listen"
+            title="${escAttr(t(dict, "read.listen"))}">
       <span class="reader__ico reader__ico--listen" aria-hidden="true">${uiIcon("headphones")}</span>
       <span class="reader__ico reader__ico--pause" aria-hidden="true">${uiIcon("pause")}</span>
       <span class="reader__ico reader__ico--play" aria-hidden="true">${uiIcon("play")}</span>
-      <span class="reader__label" data-i18n="read.listen">${escText(t(dict, "read.listen"))}</span>
     </button>
     <button class="reader__stop" id="reader-stop" type="button"
             aria-label="${escAttr(t(dict, "read.stop"))}" data-i18n-attr="aria-label:read.stop"
             title="${escAttr(t(dict, "read.stop"))}">${uiIcon("square")}</button>
+    <select class="reader__speed" id="reader-speed"
+            aria-label="${escAttr(t(dict, "read.speed"))}" data-i18n-attr="aria-label:read.speed">
+      <option value="0.75">0.75×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.5">1.5×</option>
+      <option value="2">2×</option>
+      <option value="2.5">2.5×</option>
+    </select>
     <select class="reader__voice" id="reader-voice"
             aria-label="${escAttr(t(dict, "read.voice"))}" data-i18n-attr="aria-label:read.voice"></select>
-    <div class="reader__speeds" role="group"
-         aria-label="${escAttr(t(dict, "read.speed"))}" data-i18n-attr="aria-label:read.speed">
-      <button class="reader__speed" type="button" data-rate="0.75">0.75×</button>
-      <button class="reader__speed is-active" type="button" data-rate="1">1×</button>
-      <button class="reader__speed" type="button" data-rate="1.5">1.5×</button>
-      <button class="reader__speed" type="button" data-rate="2">2×</button>
-      <button class="reader__speed" type="button" data-rate="2.5">2.5×</button>
-    </div>
   </div>
 
   <script>window.QAGUIDE_PROGRESS = ${progressJson || "null"};</script>
