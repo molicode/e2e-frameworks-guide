@@ -410,6 +410,28 @@ rúbrica (¿status correcto? ¿sin datos inventados?).` },
   ai_ev_3: { lang: "Prompt", code: `Umbral: si pasa menos del 90%, no se promociona ese prompt
 ni ese modelo (regresión de la IA).` },
 
+
+  /* ---- Playwright (TypeScript) framework samples ---- */
+  pwtsSetup: { lang: "Bash", code: "# Scaffold a Playwright project (installs @playwright/test + browsers):\nnpm init playwright@latest\n\n# Run the suite (headless Chromium by default):\nnpx playwright test\n\n# Run across all three engines, headed:\nnpx playwright test --project=chromium --project=firefox --project=webkit --headed" },
+  pwtsFirst: { lang: "TypeScript", code: "// tests/login.spec.ts — @playwright/test\nimport { test, expect } from '@playwright/test';\n\ntest('greets the user after login', async ({ page }) => {\n  await page.goto('https://example.com/login');\n\n  // Locators are lazy and auto-wait for the element to be actionable.\n  await page.getByLabel('Username').fill('demo');\n  await page.getByLabel('Password').fill('secret');\n  await page.getByRole('button', { name: 'Sign in' }).click();\n\n  // Web-first assertions auto-retry until they pass or time out.\n  await expect(page.getByText('Welcome, demo')).toBeVisible();\n});" },
+  pwtsLocators: { lang: "TypeScript", code: "// Locators are lazy: they describe HOW to find an element and resolve\n// at the moment you act or assert. Prefer user-facing queries.\nawait page.getByRole('button', { name: 'Sign in' }).click();\nawait page.getByLabel('Email').fill('demo@acme.test');\nawait page.getByText('Welcome').click();\n\n// Filter and narrow down lists:\nconst rows = page.getByRole('row');\nawait rows.filter({ hasText: 'book' }).getByRole('button', { name: 'Remove' }).click();\n\n// Index into a list with .nth() (0-based), or .first() / .last():\nawait page.locator('.order-items li').nth(2).click();\nawait expect(page.locator('.order-items li')).toHaveCount(3);" },
+  pwtsAssertions: { lang: "TypeScript", code: "// Web-first assertions auto-retry until they pass or hit the timeout.\n// You almost never wait manually.\nawait expect(page.getByRole('heading')).toHaveText('Order #42');\nawait expect(page.locator('.order-status')).toHaveText('PAID');\nawait expect(page.locator('.order-items li')).toHaveCount(3);\nawait expect(page.getByTestId('pay-btn')).toBeDisabled();\n\n// A plain expect is for non-DOM values (it does not retry):\nexpect(1 + 1).toBe(2);\n\n// Need a specific state? Wait for the CONDITION, not a sleep:\nawait page.getByRole('button', { name: 'Pay' }).click();\nawait expect(page.getByText('Payment confirmed')).toBeVisible();" },
+  pwtsFixtures: { lang: "TypeScript", code: "// order-page.ts — a Page Object encapsulates selectors + actions.\nimport { type Page, type Locator } from '@playwright/test';\n\nexport class OrderPage {\n  readonly total: Locator;\n  readonly status: Locator;\n  constructor(private page: Page) {\n    this.total = page.locator('.order-total');\n    this.status = page.locator('.order-status');\n  }\n  async goto(orderId: number) {\n    await this.page.goto(`/orders/${orderId}`);\n  }\n}\n\n// fixtures.ts — expose the Page Object as a custom fixture.\nimport { test as base } from '@playwright/test';\nimport { OrderPage } from './order-page';\n\nexport const test = base.extend<{ orderPage: OrderPage }>({\n  orderPage: async ({ page }, use) => { await use(new OrderPage(page)); },\n});\n\n// order.spec.ts — the fixture keeps tests clean.\nimport { expect } from '@playwright/test';\nimport { test } from './fixtures';\n\ntest('verify order', async ({ orderPage }) => {\n  await orderPage.goto(42);\n  await expect(orderPage.total).toHaveText('250');\n  await expect(orderPage.status).toHaveText('PAID');\n});" },
+  pwtsNetwork: { lang: "TypeScript", code: "// Mock an API so the test is fast and deterministic (no real backend).\nawait page.route('**/api/orders/42', (route) =>\n  route.fulfill({\n    status: 200,\n    contentType: 'application/json',\n    body: JSON.stringify({ total: 250, status: 'PAID', items: ['book'] }),\n  }),\n);\nawait page.goto('/orders/42');\nawait expect(page.locator('.order-total')).toHaveText('250');\n\n// Reuse a logged-in session across tests with storageState:\n//   1) Save it once after logging in: await context.storageState({ path: 'auth.json' })\n//   2) Reuse it via the config's  use: { storageState: 'auth.json' }" },
+  pwtsConfig: { lang: "TypeScript", code: "// playwright.config.ts — base URL, tracing and CI retries.\nimport { defineConfig } from '@playwright/test';\n\nexport default defineConfig({\n  use: {\n    baseURL: 'http://localhost:3000',\n    trace: 'retain-on-failure',\n  },\n  retries: process.env.CI ? 2 : 0, // re-run flaky tests only on CI\n  reporter: [['html', { outputFolder: 'playwright-report' }]],\n});" },
+  pwtsCIyml: { lang: "YAML", code: "# .github/workflows/e2e.yml — run Playwright on every pull request.\n- run: npm ci\n- run: npx playwright install --with-deps\n- run: npx playwright test\n- uses: actions/upload-artifact@v4\n  if: always()\n  with:\n    name: playwright-report\n    path: playwright-report/\n# Locally, inspect a failure: npx playwright show-trace test-results/.../trace.zip" },
+  pwtsApiCrud: { lang: "TypeScript", code: "// API CRUD with auth — exercise EVERY verb against the contract. No UI.\nconst api = await playwright.request.newContext({\n  baseURL: 'https://api.example.com',\n  extraHTTPHeaders: { Authorization: `Bearer ${token}` },\n});\n\n// CREATE (POST) -> 201 + the new id\nconst created = await api.post('/orders', { data: { items: ['book'] } });\nexpect(created.status()).toBe(201);\nconst orderId = (await created.json()).id;\n\n// READ (GET) -> 200 + the expected shape\nconst got = await api.get(`/orders/${orderId}`);\nexpect(got.ok()).toBeTruthy();\nexpect((await got.json()).status).toBe('NEW');\n\n// UPDATE (PATCH) -> 200 + the change persisted\nconst patched = await api.patch(`/orders/${orderId}`, { data: { status: 'PAID' } });\nexpect(patched.status()).toBe(200);\nexpect((await patched.json()).status).toBe('PAID');\n\n// DELETE -> 204, then a follow-up GET is 404\nexpect((await api.delete(`/orders/${orderId}`)).status()).toBe(204);\nexpect((await api.get(`/orders/${orderId}`)).status()).toBe(404);\n\n// Without a token -> 401 (not a silent 200 or a 500)\nconst anon = await playwright.request.newContext();\nexpect((await anon.get(`https://api.example.com/orders/${orderId}`)).status()).toBe(401);" },
+  pwtsReceipt: { lang: "TypeScript", code: "// Payment receipt — the money math must ALWAYS add up.\n// Work in integer cents to avoid floating-point errors.\nconst r = await (await api.get('/api/receipts/9087')).json();\n\n// Sum of line items equals the subtotal.\nconst itemsTotal = r.items.reduce((sum: number, it: any) => sum + it.cents, 0);\nexpect(itemsTotal).toBe(r.subtotalCents);                    // 9000\n\n// Tax and total are exact.\nexpect(r.taxCents).toBe(Math.round(r.subtotalCents * 0.21)); // 1890\nexpect(r.totalCents).toBe(r.subtotalCents + r.taxCents);     // 10890\n\n// Invariants: never negative, status consistent with the amount paid.\nexpect(r.totalCents).toBeGreaterThan(0);\nexpect(r.status).toBe('PAID');" },
+  pwtsDocs: { lang: "TypeScript", code: "// Legal document validation (Playwright) — invoice required fields & format.\nawait page.goto('/invoices/INV-2026-0042');\nawait expect(page.locator('.invoice-number')).toHaveText(/^INV-\\d{4}-\\d{4}$/);\nawait expect(page.locator('.tax-id')).not.toBeEmpty();\nawait expect(page.locator('.doc-status')).toHaveText('SIGNED');\n\nconst issued = await page.locator('.issued-date').textContent();\nexpect(new Date(issued!) <= new Date()).toBeTruthy(); // not in the future" },
+  pwtsSecurity: { lang: "TypeScript", code: "// Security (Playwright) — authorization/IDOR + XSS.\n// User A must NOT read user B's invoice by changing the id.\nconst asUserA = await playwright.request.newContext({\n  extraHTTPHeaders: { Authorization: `Bearer ${userAToken}` },\n});\nconst res = await asUserA.get('/api/invoices/INV-2026-0099');\nexpect(res.status()).toBe(403); // forbidden, NOT 200\n\n// XSS: the payload renders as text, never executes.\nawait page.goto('/search?q=<script>alert(1)</script>');\nawait expect(page.getByText('<script>alert(1)</script>')).toBeVisible();\nawait expect(page.locator('.results')).toBeVisible();" },
+  pwtsValidation: { lang: "TypeScript", code: "// Form validation — the inline error shows and submit stays disabled.\nawait page.getByLabel('Email').fill('not-an-email');\nawait page.getByRole('button', { name: 'Sign up' }).click();\nawait expect(page.getByText('Enter a valid email')).toBeVisible();\nawait expect(page.getByRole('button', { name: 'Sign up' })).toBeDisabled();" },
+  pwtsSelect: { lang: "TypeScript", code: "// Select / dropdown — choose an option and assert the value.\nconst country = page.getByRole('combobox', { name: 'Country' });\nawait country.selectOption('AR');\nawait expect(country).toHaveValue('AR');" },
+  pwtsCheckbox: { lang: "TypeScript", code: "// Checkbox / toggle — check it and assert its state.\nconst optIn = page.getByRole('checkbox', { name: 'Email me about updates' });\nawait optIn.check();\nawait expect(optIn).toBeChecked();" },
+  pwtsModal: { lang: "TypeScript", code: "// Modal / dialog — open it, scope queries to the dialog, confirm, assert it closed.\nawait page.getByRole('button', { name: 'Delete order' }).click();\nconst dialog = page.getByRole('dialog');\nawait expect(dialog).toBeVisible();\nawait dialog.getByRole('button', { name: 'Delete' }).click();\nawait expect(dialog).toBeHidden();" },
+  pwtsTable: { lang: "TypeScript", code: "// Data table — assert the row count and a specific cell.\nawait expect(page.getByRole('row')).toHaveCount(4); // 1 header + 3 data rows\nawait expect(page.getByRole('cell', { name: 'Ada Lovelace' })).toBeVisible();" },
+  pwtsToast: { lang: "TypeScript", code: "// Toast / alert — assert it appears, then disappears on its own.\nawait page.getByRole('button', { name: 'Save' }).click();\nconst toast = page.getByRole('alert');\nawait expect(toast).toContainText('saved successfully');\nawait expect(toast).toBeHidden({ timeout: 6000 });" },
+  pwtsA11y: { lang: "TypeScript", code: "// Accessibility — scan the page with axe and assert zero violations.\nimport { test, expect } from '@playwright/test';\nimport AxeBuilder from '@axe-core/playwright';\n\ntest('home page has no a11y violations', async ({ page }) => {\n  await page.goto('/');\n  const results = await new AxeBuilder({ page }).analyze();\n  expect(results.violations).toEqual([]);\n});\n\n// Bonus: querying by role + name makes tests resilient AND accessible.\nawait expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();" },
+  verbsPlaywrightTs: { lang: "TypeScript", code: "// Every HTTP verb with Playwright's request context.\nconst api = await playwright.request.newContext({\n  baseURL: 'https://api.example.com',\n  extraHTTPHeaders: { Authorization: `Bearer ${token}` },\n});\n\n// GET — read (safe, idempotent)\nexpect((await api.get('/orders/42')).status()).toBe(200);\n\n// POST — create (NOT idempotent)\nconst created = await api.post('/orders', { data: { items: ['book'] } });\nexpect(created.status()).toBe(201);\nconst orderId = (await created.json()).id;\n\n// PUT — replace the whole resource (idempotent)\nexpect((await api.put(`/orders/${orderId}`,\n  { data: { items: ['pen'], status: 'NEW' } })).status()).toBe(200);\n\n// PATCH — partial update\nexpect((await api.patch(`/orders/${orderId}`, { data: { status: 'PAID' } })).status()).toBe(200);\n\n// DELETE — remove (idempotent)\nexpect((await api.delete(`/orders/${orderId}`)).status()).toBe(204);\n\n// HEAD — headers only, no body\nexpect((await api.head('/orders/42')).status()).toBe(200);\n\n// OPTIONS — allowed methods (use the generic fetch)\nconst opt = await api.fetch('/orders', { method: 'OPTIONS' });\nexpect(opt.headers()['allow']).toContain('POST');" },
   /* ---- Fundamentals ---- */
   assertion: {
     lang: "JavaScript",
@@ -2583,8 +2605,12 @@ function verbsBlocks(verbs) {
 // A framework is a GROUP of sub-pages (so students don't scroll forever):
 // Philosophy · Hello world · Learning path · Components · Critical cases · HTTP verbs.
 // Returns an array of leaf sections sharing { group, groupKey, chip }.
-function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components, verbs) {
+function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components, verbs, opts = {}) {
   const grp = { group: id, groupKey: navKey, chip };
+  // A language variant (e.g. Playwright TS) can reuse another group's conceptual
+  // flashcards / interview Q&A instead of duplicating them.
+  const fcId = opts.fcId || id;
+  const ivId = opts.ivId || id;
   return [
     {
       ...grp, id: `${id}-filosofia`, navKey: "page.philosophy",
@@ -2624,7 +2650,7 @@ function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components, verb
         { type: "label", text: "fc.title" },
         {
           type: "flashcards",
-          cards: Array.from({ length: 10 }, (_, i) => ({ q: `fc.${id}.q${i + 1}`, a: `fc.${id}.a${i + 1}` })),
+          cards: Array.from({ length: 10 }, (_, i) => ({ q: `fc.${fcId}.q${i + 1}`, a: `fc.${fcId}.a${i + 1}` })),
         },
       ],
     },
@@ -2634,7 +2660,7 @@ function frameworkGroup(id, navKey, prefix, chip, rungs, cases, components, verb
         { type: "prose", html: "page.interview.lead" },
         {
           type: "interview",
-          items: Array.from({ length: 6 }, (_, i) => ({ q: `iv.${id}.q${i + 1}`, a: `iv.${id}.a${i + 1}` })),
+          items: Array.from({ length: 6 }, (_, i) => ({ q: `iv.${ivId}.q${i + 1}`, a: `iv.${ivId}.a${i + 1}` })),
         },
       ],
     },
@@ -3619,6 +3645,22 @@ export const SECTIONS = [
        }[k])),
        { sample: "verbsPlaywright", leadKey: "verbs.pw.lead", bodyKey: "verbs.pw.body" }),
 
+  ...frameworkGroup("playwright-ts", "nav.pwts", "pwts",
+    { label: "Playwright", color: "var(--fw-playwright)", lang: "TypeScript" }, [
+      { codes: ["pwtsSetup", "pwtsFirst"], mock: "login" }, // 1 Setup & first test
+      { codes: ["pwtsLocators"], mock: "order" },           // 2 Locators & actions
+      { codes: ["pwtsAssertions"], mock: "flaky" },         // 3 Assertions & auto-waiting
+      { codes: ["pwtsFixtures"] },                          // 4 Fixtures & organization
+      { codes: ["pwtsNetwork"], mock: "error" },            // 5 Network & auth
+      { codes: ["pwtsConfig", "pwtsCIyml"] },               // 6 CI + trace viewer
+    ], frameworkCases("pwtsApiCrud", "pwtsReceipt", "pwtsDocs", "pwtsSecurity"),
+       frameworkComponents((k) => ({
+         Validation: "pwtsValidation", Select: "pwtsSelect", Checkbox: "pwtsCheckbox",
+         Modal: "pwtsModal", Table: "pwtsTable", Toast: "pwtsToast", A11y: "pwtsA11y",
+       }[k])),
+       { sample: "verbsPlaywrightTs", leadKey: "verbs.pwts.lead", bodyKey: "verbs.pwts.body" },
+       { fcId: "playwright", ivId: "playwright" }),
+
   ...frameworkGroup("robot", "nav.robot", "rf",
     { label: "Robot Framework", color: "var(--fw-robot)" }, [
       { codes: ["rfSetup", "rfFirst"], mock: "login" }, // 1 Setup & first test
@@ -4237,7 +4279,7 @@ const RUNNER_PAGES = [
 ];
 // The HTTP-verbs page gets ONE test + animation per verb, separately.
 const VERB_KEYS = ["get", "post", "put", "patch", "delete", "head", "options"];
-["selenium", "cypress", "playwright", "robot"].forEach((fw) => {
+["selenium", "cypress", "playwright", "playwright-ts", "robot"].forEach((fw) => {
   RUNNER_PAGES.forEach(({ page, scenario }) => {
     const s = SECTIONS.find((x) => x.id === `${fw}-${page}`);
     if (s) s.blocks = [{ type: "runner", fw, scenario }, ...s.blocks];
