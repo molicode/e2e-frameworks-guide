@@ -51,6 +51,10 @@ const FW = {
     label: "Playwright", color: "var(--fw-playwright)", badge: "PYTHON",
     file: (n) => `test_${n}.py`, chips: ["Python", "Auto-wait", "Trace viewer"],
   },
+  "playwright-ts": {
+    label: "Playwright", color: "var(--fw-playwright)", badge: "TYPESCRIPT",
+    file: (n) => `${n}.spec.ts`, chips: ["TypeScript", "Auto-wait", "Trace viewer"],
+  },
   robot: {
     label: "Robot Framework", color: "var(--fw-robot)", badge: "ROBOT",
     file: (n) => `${n}.robot`, chips: ["Keyword-driven", "Readable", "SeleniumLibrary"],
@@ -174,6 +178,13 @@ const SCENARIOS = {
         ['expect(page.get_by_text("Welcome"))', "success"],
         ["    .to_be_visible()", "success"],
       ],
+      "playwright-ts": [
+        ["await page.goto('https://app.test/login');", "form"],
+        ["await page.getByLabel('User').fill('admin');", "typing"],
+        ["await page.getByRole('button', { name: 'Go' }).click();", "submit"],
+        ["await expect(page.getByText('Welcome'))", "success"],
+        ["  .toBeVisible();", "success"],
+      ],
       robot: [
         ["Open Browser      https://app.test/login    chrome", "form"],
         ["Input Text        id=user    admin", "typing"],
@@ -203,6 +214,12 @@ const SCENARIOS = {
         ['page.get_by_label("Email").fill("not-an-email")', "typing"],
         ['expect(page.get_by_text("valid email")).to_be_visible()', "error"],
         ['expect(page.get_by_role("button")).to_be_disabled()', "error"],
+      ],
+      "playwright-ts": [
+        ["await page.goto('https://app.test/signup');", "form"],
+        ["await page.getByLabel('Email').fill('not-an-email');", "typing"],
+        ["await expect(page.getByText('valid email')).toBeVisible();", "error"],
+        ["await expect(page.getByRole('button')).toBeDisabled();", "error"],
       ],
       robot: [
         ["Go To            https://app.test/signup", "form"],
@@ -234,6 +251,12 @@ const SCENARIOS = {
         ['expect(page.locator(".status")).to_have_text("PAID")', "a2"],
         ['expect(page.locator(".items li")).to_have_count(3)', "a3"],
       ],
+      "playwright-ts": [
+        ["await page.goto('https://app.test/order/42');", "show"],
+        ["await expect(page.locator('.total')).toHaveText('250');", "a1"],
+        ["await expect(page.locator('.status')).toHaveText('PAID');", "a2"],
+        ["await expect(page.locator('.items li')).toHaveCount(3);", "a3"],
+      ],
       robot: [
         ["Go To    https://app.test/order/42", "show"],
         ["Element Text Should Be    css=.total    250", "a1"],
@@ -263,6 +286,12 @@ const SCENARIOS = {
         ['assert api.get("/orders/42").status == 200', "get"],
         ['assert api.put("/orders/42", data=data).status == 200', "put"],
         ['assert api.delete("/orders/42").status == 204', "delete"],
+      ],
+      "playwright-ts": [
+        ["expect((await api.post('/orders', { data })).status()).toBe(201);", "post"],
+        ["expect((await api.get('/orders/42')).status()).toBe(200);", "get"],
+        ["expect((await api.put('/orders/42', { data })).status()).toBe(200);", "put"],
+        ["expect((await api.delete('/orders/42')).status()).toBe(204);", "delete"],
       ],
       robot: [
         ["POST On Session      api    /orders    expected_status=201", "post"],
@@ -304,6 +333,17 @@ const CODEGEN = {
     return [
       [`r = ${call}`, "send"],
       [`assert r.status == ${v.status}`, "resp"],
+    ];
+  },
+  "playwright-ts": (v) => {
+    const m = v.method.toLowerCase();
+    const body = v.hasBody ? ", { data }" : "";
+    const call = v.method === "OPTIONS"
+      ? `api.fetch('${v.path}', { method: 'OPTIONS' })`
+      : `api.${m}('${v.path}'${body})`;
+    return [
+      [`const r = await ${call};`, "send"],
+      [`expect(r.status()).toBe(${v.status});`, "resp"],
     ];
   },
   cypress: (v) => {

@@ -1004,6 +1004,7 @@ export function sectionMain(sections, index, dict) {
 const NODE_LOGO = {
   python: "python", typescript: "typescript",
   selenium: "selenium", cypress: "cypress", playwright: "playwright", robot: "robot",
+  "playwright-ts": "playwright",
   bdd: "cucumber", perf: "k6", ci: "githubactions", skills: "git",
   // Práctica per-framework groups reuse the official framework logos.
   pwpr: "playwright", selpr: "selenium", cypr: "cypress", robotpr: "robot",
@@ -1022,7 +1023,7 @@ function nodeMedia(key) {
 const NAV_GROUPS = [
   { key: "foundations", label: "grp.foundations", icon: "compass", color: "var(--cat-foundations)", members: ["intro", "fundamentals"] },
   { key: "languages",   label: "grp.languages",   icon: "languages", color: "var(--cat-languages)",   members: ["python", "typescript"] },
-  { key: "frameworks",  label: "grp.frameworks",  icon: "frameworks", color: "var(--cat-frameworks)",  members: ["selenium", "cypress", "playwright", "robot", "comparison"] },
+  { key: "frameworks",  label: "grp.frameworks",  icon: "frameworks", color: "var(--cat-frameworks)",  members: ["selenium", "cypress", "playwright", "playwright-ts", "robot", "comparison"] },
   { key: "approaches",  label: "grp.approaches",  icon: "approaches", color: "var(--cat-approaches)",  members: ["bdd", "perf"] },
   { key: "ai",          label: "grp.ai",          icon: "ai", color: "var(--cat-ai)",          members: ["ai101", "aiqa"] },
   { key: "process",     label: "grp.process",     icon: "process", color: "var(--cat-process)",     members: ["ci", "best-practices", "skills", "maturity"] },
