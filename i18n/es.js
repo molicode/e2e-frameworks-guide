@@ -545,8 +545,8 @@ I18n.register("es", {
     "<p>Repasá los conceptos clave de este framework con tarjetas: leé la pregunta, pensá tu respuesta y dala vuelta para comprobar.</p>",
   "page.interview.lead":
     "<p>Una entrevista simulada: preguntas típicas de este framework. Leé cada una, pensá cómo responderías y revelá una respuesta de referencia.</p>",
-  "iv.role.q": "Reclutador",
-  "iv.role.a": "Candidato/a",
+  "iv.role.q": "Profesor",
+  "iv.role.a": "Estudiante",
   "iv.reveal": "Ver respuesta",
   "iv.hide": "Ocultar respuesta",
   "iv.showAll": "Mostrar todas",
