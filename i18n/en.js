@@ -544,8 +544,8 @@ I18n.register("en", {
     "<p>Review this framework's key concepts with cards: read the question, think of your answer, then flip to check.</p>",
   "page.interview.lead":
     "<p>A simulated interview: typical questions for this framework. Read each one, think how you'd answer, then reveal a reference answer.</p>",
-  "iv.role.q": "Recruiter",
-  "iv.role.a": "Candidate",
+  "iv.role.q": "Teacher",
+  "iv.role.a": "Student",
   "iv.reveal": "Reveal answer",
   "iv.hide": "Hide answer",
   "iv.showAll": "Show all",
