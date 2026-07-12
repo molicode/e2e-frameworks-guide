@@ -963,6 +963,7 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
   </div>
 
   <script>window.QAGUIDE_PROGRESS = ${progressJson || "null"};</script>
+  <script src="${assetPrefix}js/vendor/gsap.min.js"></script>
   <script src="${assetPrefix}js/i18n.js"></script>
   <script src="${assetPrefix}i18n/es.js"></script>
   <script src="${assetPrefix}i18n/en.js"></script>
@@ -975,6 +976,7 @@ export function layout({ lang, dict, titleKey, titleText, descKey, bodyClass, as
   <script src="${assetPrefix}js/lab.js"></script>
   <script src="${assetPrefix}js/flow.js"></script>
   <script src="${assetPrefix}js/read.js"></script>
+  <script src="${assetPrefix}js/reveal.js"></script>
   <script src="${assetPrefix}js/progress.js"></script>
 </body>
 </html>
