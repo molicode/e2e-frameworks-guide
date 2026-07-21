@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1104,7 +1104,7 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-maturity)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>AI QA Engineer</span><span class="lang-pill" title="Lenguaje de los ejemplos">Prompt</span></div>
         <h1 class="section__title" data-i18n="practica.ai.gen.nav">Generar tests con IA</h1>
-        <div class="prose" data-i18n-html="practica.ai.gen.lead"><p>Escribí el <strong>prompt</strong> que le pedirías a un LLM para que genere los tests del login de la izquierda. Un buen prompt es específico: da rol, enumera casos y fija el formato. Escribí tu prompt abajo y comprobá cada parte.</p></div>
+        <div class="prose" data-i18n-html="practica.ai.gen.lead"><p>Escribe el <strong>prompt</strong> que le pedirías a un LLM para que genere los tests del login de la izquierda. Un buen prompt es específico: da rol, enumera casos y fija el formato. Escribe tu prompt abajo y comprueba cada parte.</p></div>
         <div class="lab">
           <div class="lab__work">
             <div class="lab__stage">
@@ -1147,7 +1147,7 @@
                 <span class="lab__progress" role="status" aria-live="polite">0 / 3</span>
               </div>
               <textarea class="lab-editor" spellcheck="false" rows="7" data-tasks="[[&quot;qa&quot;,&quot;login&quot;],[&quot;401&quot;,&quot;400&quot;],[&quot;playwright&quot;,&quot;getbyrole&quot;]]"
-                placeholder="// Escribí acá tu test — una línea por tarea…"
+                placeholder="// Escribe acá tu test — una línea por tarea…"
                 aria-label="Editor de código del reto"
                 data-i18n-attr="placeholder:practica.editorPlaceholder;aria-label:practica.editorAria"></textarea>
               <div class="lab__console-foot">
@@ -1162,7 +1162,7 @@
               <li class="lab-task is-active" data-task="0">
                 <div class="lab-task__num">1</div>
                 <div class="lab-task__main">
-                  <div class="lab-task__text" data-i18n-html="practica.ai.gen.t1">Empezá dándole <strong>rol y contexto</strong>: que es un QA y qué pantalla prueba (el login).</div>
+                  <div class="lab-task__text" data-i18n-html="practica.ai.gen.t1">Empieza dándole <strong>rol y contexto</strong>: que es un QA y qué pantalla prueba (el login).</div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.ai.gen.w1">Sin contexto, el modelo adivina. El rol y el objetivo enfocan la respuesta y reducen alucinaciones.</div>
@@ -1187,10 +1187,10 @@ de arriba <span class="tok-punctuation">(</span>usuario <span class="tok-punctua
               <li class="lab-task" data-task="1">
                 <div class="lab-task__num">2</div>
                 <div class="lab-task__main">
-                  <div class="lab-task__text" data-i18n-html="practica.ai.gen.t2">Enumerá los <strong>casos</strong>: válidas → 200, inválidas → 401 y email vacío → 400.</div>
+                  <div class="lab-task__text" data-i18n-html="practica.ai.gen.t2">Enumera los <strong>casos</strong>: válidas → 200, inválidas → 401 y email vacío → 400.</div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
-                    <div class="lab-acc__body" data-i18n-html="practica.ai.gen.w2">Si no listás los casos borde, el modelo suele cubrir solo el happy path y te perdés los 401/400.</div>
+                    <div class="lab-acc__body" data-i18n-html="practica.ai.gen.w2">Si no listas los casos borde, el modelo suele cubrir solo el happy path y te pierdes los 401/400.</div>
                   </details>
                   <details class="lab-acc lab-acc--hint">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg><span data-i18n="practica.hint">Hint (solución completa)</span></summary>
@@ -1214,7 +1214,7 @@ de arriba <span class="tok-punctuation">(</span>usuario <span class="tok-punctua
               <li class="lab-task" data-task="2">
                 <div class="lab-task__num">3</div>
                 <div class="lab-task__main">
-                  <div class="lab-task__text" data-i18n-html="practica.ai.gen.t3">Fijá el <strong>formato</strong>: Playwright (TypeScript) con getByRole y expect().</div>
+                  <div class="lab-task__text" data-i18n-html="practica.ai.gen.t3">Fija el <strong>formato</strong>: Playwright (TypeScript) con getByRole y expect().</div>
                   <details class="lab-acc lab-acc--why">
                     <summary class="lab-acc__sum"><svg class="lab-acc__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg><span data-i18n="practica.why">¿Por qué importa?</span></summary>
                     <div class="lab-acc__body" data-i18n-html="practica.ai.gen.w3">Pedir el formato y las herramientas exactas hace que la salida sea usable sin retrabajo.</div>

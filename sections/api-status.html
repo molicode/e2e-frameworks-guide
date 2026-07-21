@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1108,7 +1108,7 @@
         <div class="cpt-body">
           <section class="cpt-sec">
             <h2 class="block-label" data-i18n="cpt.def">Definición</h2>
-            <div class="cpt-rich cpt-def" data-i18n-html="kt.api.status"><strong>Códigos de estado</strong>: <code>2xx</code> ok (200, 201, 204), <code>3xx</code> redirección, <code>4xx</code> error del cliente (400, 401, 403, 404), <code>5xx</code> error del servidor. Lo primero que verificás en un test de API.</div>
+            <div class="cpt-rich cpt-def" data-i18n-html="kt.api.status"><strong>Códigos de estado</strong>: <code>2xx</code> ok (200, 201, 204), <code>3xx</code> redirección, <code>4xx</code> error del cliente (400, 401, 403, 404), <code>5xx</code> error del servidor. Lo primero que verificas en un test de API.</div>
           </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
@@ -1119,7 +1119,7 @@
         </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-status.uc">Es lo primero que assertás en un test de API: el código correcto para cada caso, no solo el <em>happy path</em>. Login ok → <code>200</code>, alta → <code>201</code>, sin token → <code>401</code>, sin permiso → <code>403</code>, recurso inexistente → <code>404</code>, dato inválido → <code>400/422</code>.<pre class="cpt-code"><code>assert requests.post("/login", json=bad).status_code == 401
+          <div class="cpt-rich" data-i18n-html="cpt.api-status.uc">Es lo primero que assertas en un test de API: el código correcto para cada caso, no solo el <em>happy path</em>. Login ok → <code>200</code>, alta → <code>201</code>, sin token → <code>401</code>, sin permiso → <code>403</code>, recurso inexistente → <code>404</code>, dato inválido → <code>400/422</code>.<pre class="cpt-code"><code>assert requests.post("/login", json=bad).status_code == 401
 assert requests.get("/orders/999999").status_code == 404</code></pre></div>
         </section>
         <section class="cpt-sec">

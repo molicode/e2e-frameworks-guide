@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1120,7 +1120,7 @@ DELETE /orders/42   → elimina la orden 42</code></pre>El mismo <code>/orders/4
         </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-methods.uc">En QA validás que cada verbo respete su semántica y devuelva el estado esperado: <code>GET</code> nunca debe crear datos, <code>POST</code> debe responder <code>201</code> con el recurso creado y un verbo no soportado debe dar <code>405 Method Not Allowed</code>.<pre class="cpt-code"><code>res = requests.post("/orders", json=payload)
+          <div class="cpt-rich" data-i18n-html="cpt.api-methods.uc">En QA validas que cada verbo respete su semántica y devuelva el estado esperado: <code>GET</code> nunca debe crear datos, <code>POST</code> debe responder <code>201</code> con el recurso creado y un verbo no soportado debe dar <code>405 Method Not Allowed</code>.<pre class="cpt-code"><code>res = requests.post("/orders", json=payload)
 assert res.status_code == 201
 assert res.json()["id"]        # vino un id nuevo
 

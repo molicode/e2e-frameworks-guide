@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1109,12 +1109,12 @@
             <li>
               <a class="roadmap__link" href="#pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="pw.rung2.desc">Dominá getByRole/Label/Text. Filtrá, encadená y manejá listas con .nth().</span>
+              <span data-i18n="pw.rung2.desc">Domina getByRole/Label/Text. Filtra, encadena y maneja listas con .nth().</span>
             </li>
             <li>
               <a class="roadmap__link" href="#pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="pw.rung3.desc">Aprendé las web-first assertions y por qué casi nunca esperás a mano.</span>
+              <span data-i18n="pw.rung3.desc">Aprende las web-first assertions y por qué casi nunca esperas a mano.</span>
             </li>
             <li>
               <a class="roadmap__link" href="#pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</a>
@@ -1124,16 +1124,16 @@
             <li>
               <a class="roadmap__link" href="#pw-rung-5" data-i18n="pw.rung5.title">Network y auth</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="pw.rung5.desc">Interceptá con page.route(), mockeá APIs y reusá sesión con storageState.</span>
+              <span data-i18n="pw.rung5.desc">Intercepta con page.route(), mockea APIs y reúsa sesión con storageState.</span>
             </li>
             <li>
               <a class="roadmap__link" href="#pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="pw.rung6.desc">Integralo al pipeline, activá traces y reportes. Acá es donde brilla.</span>
+              <span data-i18n="pw.rung6.desc">Intégralo al pipeline, activa traces y reportes. Acá es donde brilla.</span>
             </li>
         </ol>
         <h2 class="block-label" id="pw-rung-2" data-i18n="pw.rung2.title">Locators y acciones</h2>
-        <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Preferí queries centradas en el usuario: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_text</code>. Refinás listas con <code>.filter()</code>, indexás con <code>.nth()</code>/<code>.first</code>/<code>.last</code> y encadenás para llegar al elemento exacto.</p></div>
+        <div class="prose" data-i18n-html="pw.rung2.body"><p>Los <strong>locators</strong> son perezosos: describen <em>cómo</em> encontrar un elemento y se resuelven al actuar o afirmar. Prefiere queries centradas en el usuario: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_text</code>. Refinas listas con <code>.filter()</code>, indexas con <code>.nth()</code>/<code>.first</code>/<code>.last</code> y encadenas para llegar al elemento exacto.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1200,7 +1200,7 @@ expect(page.locator("</span><span class="tok-punctuation">.</span><span class="t
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="pw-rung-3" data-i18n="pw.rung3.title">Assertions y auto-waiting</h2>
-        <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>, <code>to_be_visible()</code>, <code>to_have_count()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperás a mano. Para valores que no son del DOM, un <code>assert</code> común no reintenta.</p></div>
+        <div class="prose" data-i18n-html="pw.rung3.body"><p>Las <strong>web-first assertions</strong> (<code>expect(locator).to_have_text(...)</code>, <code>to_be_visible()</code>, <code>to_have_count()</code>) <strong>reintentan solas</strong> hasta cumplirse o expirar. Por eso casi nunca esperas a mano. Para valores que no son del DOM, un <code>assert</code> común no reintenta.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1259,7 +1259,7 @@ expect(page.get_by_text("</span>Payment confirmed<span class="tok-punctuation">"
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="pw-rung-4" data-i18n="pw.rung4.title">Fixtures y organización</h2>
-        <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usá <strong>fixtures</strong> de pytest (en <code>conftest.py</code>) para el setup, encapsulá páginas en un <strong>Page Object</strong> y exponelo como una fixture propia con <code>@pytest.fixture</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
+        <div class="prose" data-i18n-html="pw.rung4.body"><p>Para que la suite escale: usa <strong>fixtures</strong> de pytest (en <code>conftest.py</code>) para el setup, encapsula páginas en un <strong>Page Object</strong> y exponlo como una fixture propia con <code>@pytest.fixture</code>. Así cada test recibe justo lo que necesita y queda limpio y legible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1326,7 +1326,7 @@ expect(page.get_by_text("</span>Payment confirmed<span class="tok-punctuation">"
     expect(order_page.status).to_have_text("</span>PAID<span class="tok-punctuation">")</span></code></pre>
         </div>
         <h2 class="block-label" id="pw-rung-5" data-i18n="pw.rung5.title">Network y auth</h2>
-        <div class="prose" data-i18n-html="pw.rung5.body"><p>Con <code>page.route()</code> interceptás requests y respondés con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardás la sesión una vez con <code>storage_state</code> y la reusás vía la fixture <code>browser_context_args</code>. Menos flakiness, más velocidad.</p></div>
+        <div class="prose" data-i18n-html="pw.rung5.body"><p>Con <code>page.route()</code> interceptas requests y respondes con datos mockeados: tests rápidos y deterministas sin backend real. Para no loguearte en cada test, guardas la sesión una vez con <code>storage_state</code> y la reúsas vía la fixture <code>browser_context_args</code>. Menos flakiness, más velocidad.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1390,7 +1390,7 @@ expect(page.locator("</span><span class="tok-punctuation">.</span><span class="t
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="pw-rung-6" data-i18n="pw.rung6.title">CI + trace viewer</h2>
-        <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>pytest.ini</code> activás <strong>traces</strong> (<code>--tracing retain-on-failure</code>) y artefactos. Ante un fallo en CI, abrís el <strong>trace viewer</strong> con <code>playwright show-trace</code> y ves cada paso, el DOM y la red. Sumá reintentos y artefactos en el pipeline.</p></div>
+        <div class="prose" data-i18n-html="pw.rung6.body"><p>Donde Playwright brilla: en <code>pytest.ini</code> activas <strong>traces</strong> (<code>--tracing retain-on-failure</code>) y artefactos. Ante un fallo en CI, abres el <strong>trace viewer</strong> con <code>playwright show-trace</code> y ves cada paso, el DOM y la red. Suma reintentos y artefactos en el pipeline.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">INI</span>

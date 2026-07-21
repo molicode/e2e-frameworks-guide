@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1105,7 +1105,7 @@
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-ci)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>CI/CD</span></div>
         <h1 class="section__title" data-i18n="ci.page.pipeline">Un pipeline de ejemplo</h1>
         <div class="prose" data-i18n-html="ci.pipe.lead"><p>Un pipeline es una secuencia de <strong>jobs</strong> y <strong>steps</strong> que corre en un runner limpio. Para QA, el corazón es: traer el código, instalar dependencias, lint, tests (unit → integración → e2e) y guardar los resultados.</p></div>
-        <div class="prose" data-i18n-html="ci.pipe.body"><p>Acá, un workflow de <strong>GitHub Actions</strong> que se dispara en cada <code>push</code> y <code>pull_request</code>. Ordenado para <strong>fallar rápido</strong> (lint antes que e2e) y subir los artefactos <strong>siempre</strong> (<code>if: always()</code>), también cuando falla — que es justo cuando los necesitás.</p></div>
+        <div class="prose" data-i18n-html="ci.pipe.body"><p>Acá, un workflow de <strong>GitHub Actions</strong> que se dispara en cada <code>push</code> y <code>pull_request</code>. Ordenado para <strong>fallar rápido</strong> (lint antes que e2e) y subir los artefactos <strong>siempre</strong> (<code>if: always()</code>), también cuando falla — que es justo cuando los necesitas.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">YAML</span>
@@ -1159,7 +1159,7 @@ jobs<span class="tok-punctuation">:</span>
         <span class="tok-keyword">if</span><span class="tok-punctuation">:</span> <span class="tok-function">always</span><span class="tok-punctuation">()</span>
         <span class="tok-keyword">with</span><span class="tok-punctuation">:</span> <span class="tok-punctuation">{</span> name<span class="tok-punctuation">:</span> test<span class="tok-punctuation">-</span>results<span class="tok-punctuation">,</span> path<span class="tok-punctuation">:</span> test<span class="tok-punctuation">-</span>results<span class="tok-punctuation">/</span> <span class="tok-punctuation">}</span></code></pre>
         </div>
-        <div class="callout callout--ok" data-i18n-html="ci.pipe.callout"><strong>Cacheá lo que puedas:</strong> dependencias y navegadores. Un pipeline de 20 minutos se ignora; uno de 3 se mira. La velocidad del CI es una feature de QA, no un lujo.</div>
+        <div class="callout callout--ok" data-i18n-html="ci.pipe.callout"><strong>Cachea lo que puedas:</strong> dependencias y navegadores. Un pipeline de 20 minutos se ignora; uno de 3 se mira. La velocidad del CI es una feature de QA, no un lujo.</div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="ci-intro.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>

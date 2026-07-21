@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1106,7 +1106,7 @@
         <h1 class="section__title" data-i18n="bdd.page.cucumber">Cucumber y step definitions</h1>
         <div class="prose" data-i18n-html="bdd.cuke.lead"><p>Gherkin describe <em>qué</em> probar; los <strong>step definitions</strong> dicen <em>cómo</em>. <strong>Cucumber</strong> es la herramienta que conecta cada paso en lenguaje natural con el código que lo ejecuta (el "glue"). Existe para casi todos los lenguajes.</p></div>
         <h2 class="block-label" data-i18n="bdd.cuke.js.label">Cucumber.js (con Playwright)</h2>
-        <div class="prose" data-i18n-html="bdd.cuke.js.body"><p>En JS/TS usás <code>@cucumber/cucumber</code>: registrás <code>Given</code>/<code>When</code>/<code>Then</code> con la frase exacta del paso y el código que la implementa (acá, con Playwright). Los <code>{string}</code> capturan valores del paso y llegan como argumento.</p></div>
+        <div class="prose" data-i18n-html="bdd.cuke.js.body"><p>En JS/TS usas <code>@cucumber/cucumber</code>: registras <code>Given</code>/<code>When</code>/<code>Then</code> con la frase exacta del paso y el código que la implementa (acá, con Playwright). Los <code>{string}</code> capturan valores del paso y llegan como argumento.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">JavaScript</span>
@@ -1147,7 +1147,7 @@ Then("</span>the order status should be <span class="tok-punctuation">{</span>st
 <span class="tok-punctuation">});</span></code></pre>
         </div>
         <h2 class="block-label" data-i18n="bdd.cuke.py.label">pytest-bdd (con Python)</h2>
-        <div class="prose" data-i18n-html="bdd.cuke.py.body"><p>En Python, <code>pytest-bdd</code> (o <code>behave</code>) hace lo mismo: <code>scenarios("checkout.feature")</code> ata los escenarios del archivo y decorás funciones con <code>@given</code>/<code>@when</code>/<code>@then</code>. Reusás toda la potencia de pytest (fixtures, parametrize).</p></div>
+        <div class="prose" data-i18n-html="bdd.cuke.py.body"><p>En Python, <code>pytest-bdd</code> (o <code>behave</code>) hace lo mismo: <code>scenarios("checkout.feature")</code> ata los escenarios del archivo y decoras funciones con <code>@given</code>/<code>@when</code>/<code>@then</code>. Reúsas toda la potencia de pytest (fixtures, parametrize).</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1195,7 +1195,7 @@ def pay(page: Page):
 def status_paid(page: Page):
     expect(page.locator("</span><span class="tok-punctuation">.</span><span class="tok-property">order</span><span class="tok-punctuation">-</span>status<span class="tok-string">")).to_have_text("</span>PAID<span class="tok-punctuation">")</span></code></pre>
         </div>
-        <div class="callout" data-i18n-html="bdd.cuke.callout"><strong>Tip:</strong> mantené los step definitions <strong>finos</strong> — que llamen a Page Objects o helpers, no que tengan lógica de test adentro. Steps reutilizables = features que escalan.</div>
+        <div class="callout" data-i18n-html="bdd.cuke.callout"><strong>Tip:</strong> mantén los step definitions <strong>finos</strong> — que llamen a Page Objects o helpers, no que tengan lógica de test adentro. Steps reutilizables = features que escalan.</div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="bdd-gherkin.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>

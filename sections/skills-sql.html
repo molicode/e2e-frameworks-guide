@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1104,9 +1104,9 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-skills)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M11.923 0C5.937 0 .976 4.384.07 10.115a11.943 11.943 0 0 1 7.645-2.754 11.982 11.982 0 0 1 9.43 4.58 11.942 11.942 0 0 0 1.015-8.769 12.066 12.066 0 0 0-.626-1.772l-.003-.008A11.968 11.968 0 0 0 11.923 0Zm7.721 2.754A12.002 12.002 0 0 1 9.398 16.521a12.082 12.082 0 0 0 9.02 5.617c.24-.119.766-.51 1.224-.89A11.971 11.971 0 0 0 23.995 12a11.98 11.98 0 0 0-4.35-9.247zM9.33 7.557a12.159 12.159 0 0 0-2.647.401A11.944 11.944 0 0 0 .01 12.595l-.005.006c.021.427.065.853.131 1.275C1.037 19.61 6 24 11.991 24c1.45 0 2.887-.26 4.243-.773a12 12 0 0 1-6.905-15.67z"/></svg>Habilidades QA</span></div>
         <h1 class="section__title" data-i18n="skills.page.sql">SQL para QA</h1>
-        <div class="prose" data-i18n-html="skills.sql.lead"><p>El testing es validar datos, y muchos viven en una base relacional. Con saber <strong>leer</strong> (no hace falta ser DBA) ya verificás un montón: que un pago se guardó, que no hay duplicados, que los montos cierran.</p></div>
+        <div class="prose" data-i18n-html="skills.sql.lead"><p>El testing es validar datos, y muchos viven en una base relacional. Con saber <strong>leer</strong> (no hace falta ser DBA) ya verificas un montón: que un pago se guardó, que no hay duplicados, que los montos cierran.</p></div>
         <h2 class="block-label" data-i18n="skills.sql.basics.label">Leer datos: SELECT</h2>
-        <div class="prose" data-i18n-html="skills.sql.basics.body"><p>El 90% del SQL para QA es leer. <code>SELECT</code> elige columnas, <code>FROM</code> la tabla, <code>WHERE</code> filtra filas, <code>ORDER BY</code> ordena y <code>LIMIT</code> acota. Con eso ya inspeccionás lo que tu test dejó en la base.</p></div>
+        <div class="prose" data-i18n-html="skills.sql.basics.body"><p>El 90% del SQL para QA es leer. <code>SELECT</code> elige columnas, <code>FROM</code> la tabla, <code>WHERE</code> filtra filas, <code>ORDER BY</code> ordena y <code>LIMIT</code> acota. Con eso ya inspeccionas lo que tu test dejó en la base.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">SQL</span>
@@ -1127,7 +1127,7 @@ ORDER BY total DESC            <span class="tok-punctuation">--</span> biggest f
 LIMIT <span class="tok-number">10</span><span class="tok-punctuation">;</span>                      <span class="tok-punctuation">--</span> only the top <span class="tok-number">10</span></code></pre>
         </div>
         <h2 class="block-label" data-i18n="skills.sql.join.label">Cruzar tablas: JOIN y agregaciones</h2>
-        <div class="prose" data-i18n-html="skills.sql.join.body"><p>Los datos están repartidos en tablas relacionadas. Un <code>JOIN</code> las cruza por su clave. Sumá <code>COUNT</code>, <code>SUM</code>, <code>GROUP BY</code> y <code>HAVING</code> para encontrar problemas: usuarios duplicados, totales que no cuadran, pedidos huérfanos.</p></div>
+        <div class="prose" data-i18n-html="skills.sql.join.body"><p>Los datos están repartidos en tablas relacionadas. Un <code>JOIN</code> las cruza por su clave. Suma <code>COUNT</code>, <code>SUM</code>, <code>GROUP BY</code> y <code>HAVING</code> para encontrar problemas: usuarios duplicados, totales que no cuadran, pedidos huérfanos.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">SQL</span>
@@ -1150,7 +1150,7 @@ GROUP BY u<span class="tok-punctuation">.</span><span class="tok-property">email
 HAVING <span class="tok-function">COUNT</span><span class="tok-punctuation">(</span>o<span class="tok-punctuation">.</span><span class="tok-property">id</span><span class="tok-punctuation">)</span> <span class="tok-punctuation">&gt;</span> <span class="tok-number">1</span><span class="tok-punctuation">;</span>                <span class="tok-punctuation">--</span> users <span class="tok-keyword">with</span> more than one order</code></pre>
         </div>
         <h2 class="block-label" data-i18n="skills.sql.validate.label">Validar la DB desde un test</h2>
-        <div class="prose" data-i18n-html="skills.sql.validate.body"><p>El truco más potente: después de una acción en la UI, <strong>verificá la base directamente</strong>. La UI puede mostrar "PAID" por un cache o un bug visual; la fila en la tabla no miente. Una query dentro del test cierra el círculo.</p></div>
+        <div class="prose" data-i18n-html="skills.sql.validate.body"><p>El truco más potente: después de una acción en la UI, <strong>verifica la base directamente</strong>. La UI puede mostrar "PAID" por un cache o un bug visual; la fila en la tabla no miente. Una query dentro del test cierra el círculo.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1184,7 +1184,7 @@ HAVING <span class="tok-function">COUNT</span><span class="tok-punctuation">(</s
     <span class="tok-comment"># What the UI showed as PAID must really be PAID in the database.</span>
     <span class="tok-keyword">assert</span> row <span class="tok-punctuation">==</span> <span class="tok-punctuation">("</span>PAID<span class="tok-punctuation">",</span> <span class="tok-number">250</span><span class="tok-punctuation">)</span></code></pre>
         </div>
-        <div class="callout" data-i18n-html="skills.sql.callout"><strong>Cuidá la base de pruebas:</strong> consultá datos de test, nunca de producción, y preferí transacciones o datos sembrados (seeds) que puedas limpiar. Un <code>SELECT</code> es inofensivo; un <code>DELETE</code> sin <code>WHERE</code>, no.</div>
+        <div class="callout" data-i18n-html="skills.sql.callout"><strong>Cuida la base de pruebas:</strong> consulta datos de test, nunca de producción, y prefiere transacciones o datos sembrados (seeds) que puedas limpiar. Un <code>SELECT</code> es inofensivo; un <code>DELETE</code> sin <code>WHERE</code>, no.</div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="skills-intro.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>
