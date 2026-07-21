@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1124,9 +1124,9 @@
               <p data-i18n="fund.tile.e2e.body">El flujo completo como un usuario real, en el navegador. Acá viven Selenium, Cypress y Playwright.</p>
             </div>
         </div>
-        <div class="prose" data-i18n-html="fund.theory.pyramid"><p>La <strong>pirámide de testing</strong> es una guía de proporciones: muchos tests unit (base ancha), menos de integración (medio) y pocos E2E (punta). ¿Por qué? Los E2E son los más realistas pero también los más lentos y frágiles. Si invertís la pirámide (un <em>“cono de helado”</em>: muchos E2E, pocos unit) tu suite se vuelve lenta e inestable.</p></div>
+        <div class="prose" data-i18n-html="fund.theory.pyramid"><p>La <strong>pirámide de testing</strong> es una guía de proporciones: muchos tests unit (base ancha), menos de integración (medio) y pocos E2E (punta). ¿Por qué? Los E2E son los más realistas pero también los más lentos y frágiles. Si inviertes la pirámide (un <em>“cono de helado”</em>: muchos E2E, pocos unit) tu suite se vuelve lenta e inestable.</p></div>
         <h2 class="block-label" data-i18n="fund.aaa.label">Anatomía de un test (AAA)</h2>
-        <div class="prose" data-i18n-html="fund.aaa.body"><p>Casi todo test sigue el patrón <strong>Arrange-Act-Assert</strong>: <strong>preparás</strong> el estado, <strong>ejecutás</strong> la única acción bajo prueba y <strong>afirmás</strong> el resultado esperado. En BDD se expresa como <em>Given-When-Then</em>. Una intención por test.</p></div>
+        <div class="prose" data-i18n-html="fund.aaa.body"><p>Casi todo test sigue el patrón <strong>Arrange-Act-Assert</strong>: <strong>preparas</strong> el estado, <strong>ejecutas</strong> la única acción bajo prueba y <strong>afirmas</strong> el resultado esperado. En BDD se expresa como <em>Given-When-Then</em>. Una intención por test.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">JavaScript</span>
@@ -1182,7 +1182,7 @@
 <span class="tok-comment">// so it can never catch a regression.</span></code></pre>
         </div>
         <h2 class="block-label" data-i18n="fund.selectors.label">Selectores</h2>
-        <div class="prose" data-i18n-html="fund.selectors.body"><p>Un <strong>selector</strong> le dice al framework <em>qué</em> elemento de la página tocar o leer. Elegir buenos selectores es la diferencia entre un test estable y uno que se rompe con cada cambio de diseño. Preferí selectores que un usuario reconocería (roles, etiquetas, texto) por encima de detalles internos del DOM.</p></div>
+        <div class="prose" data-i18n-html="fund.selectors.body"><p>Un <strong>selector</strong> le dice al framework <em>qué</em> elemento de la página tocar o leer. Elegir buenos selectores es la diferencia entre un test estable y uno que se rompe con cada cambio de diseño. Prefiere selectores que un usuario reconocería (roles, etiquetas, texto) por encima de detalles internos del DOM.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">JavaScript</span>
@@ -1292,7 +1292,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
         <h2 class="block-label" data-i18n="fund.levels.label">Niveles y tipos de prueba</h2>
         <div class="prose" data-i18n-html="fund.levels.body"><p>Más allá de unit/integration/E2E, vas a escuchar:</p><ul><li><strong>Smoke</strong>: chequeo rápido de que lo crítico funciona (¿prende?).</li><li><strong>Sanity</strong>: verificación acotada tras un cambio puntual.</li><li><strong>Regression</strong>: re-correr la suite para asegurar que lo nuevo no rompió lo viejo.</li><li><strong>Exploratory</strong>: probar sin guion, aprendiendo del sistema sobre la marcha.</li><li><strong>Acceptance / UAT</strong>: valida que cumple los criterios del negocio/usuario.</li></ul></div>
         <h2 class="block-label" data-i18n="fund.design.label">Técnicas de diseño de casos</h2>
-        <div class="prose" data-i18n-html="fund.design.body"><p>Para cubrir más con menos casos:</p><ul><li><strong>Partición de equivalencia</strong>: agrupás entradas que se comportan igual y probás una de cada grupo.</li><li><strong>Valores límite</strong>: los bugs viven en los bordes (0, 1, máx, máx+1).</li><li><strong>Tabla de decisión</strong>: combinaciones de condiciones → acción esperada.</li><li><strong>Transición de estados</strong>: probás los caminos entre estados (borrador → pagado → reembolsado).</li></ul></div>
+        <div class="prose" data-i18n-html="fund.design.body"><p>Para cubrir más con menos casos:</p><ul><li><strong>Partición de equivalencia</strong>: agrupas entradas que se comportan igual y pruebas una de cada grupo.</li><li><strong>Valores límite</strong>: los bugs viven en los bordes (0, 1, máx, máx+1).</li><li><strong>Tabla de decisión</strong>: combinaciones de condiciones → acción esperada.</li><li><strong>Transición de estados</strong>: pruebas los caminos entre estados (borrador → pagado → reembolsado).</li></ul></div>
         <h2 class="block-label" data-i18n="fund.nonfunc.label">Funcional vs no funcional</h2>
         <div class="prose" data-i18n-html="fund.nonfunc.body"><p>Lo <strong>funcional</strong> verifica <em>qué</em> hace el sistema; lo <strong>no funcional</strong>, <em>cómo</em> se comporta: <strong>performance</strong> (carga, estrés), <strong>seguridad</strong>, <strong>accesibilidad</strong> (a11y), <strong>usabilidad</strong> y <strong>compatibilidad</strong> entre navegadores y dispositivos.</p></div>
         <h2 class="block-label" data-i18n="fund.defects.label">Defectos: severidad vs prioridad</h2>
@@ -1313,7 +1313,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
               <span class="vs-badge" data-i18n="ui.manual">Manual</span>
               <span data-i18n="fund.manual.title">A mano</span>
             </div>
-            <div data-i18n-html="fund.manual.body"><p>Diseñás los casos pensando vos: hacés una lista de escenarios, elegís selectores leyendo el HTML y depurás los flaky a pulso, leyendo logs.</p></div>
+            <div data-i18n-html="fund.manual.body"><p>Diseñas los casos pensando tú: haces una lista de escenarios, eliges selectores leyendo el HTML y depuras los flaky a pulso, leyendo logs.</p></div>
             
           </div>
           <div class="vs-card vs-card--ai">
@@ -1321,11 +1321,11 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
               <span class="vs-badge" data-i18n="ui.ai">Con AI</span>
               <span data-i18n="fund.ai.title">Con AI</span>
             </div>
-            <div data-i18n-html="fund.ai.body"><p>Le pedís a la AI que proponga escenarios que se te pasaron, que sugiera selectores robustos a partir del HTML y que analice por qué un test es flaky.</p><ul><li>“Listá 5 edge cases que falten para este formulario.”</li><li>“Convertí este <code>xpath</code> frágil en un selector por rol.”</li></ul></div>
+            <div data-i18n-html="fund.ai.body"><p>Le pides a la AI que proponga escenarios que se te pasaron, que sugiera selectores robustos a partir del HTML y que analice por qué un test es flaky.</p><ul><li>“Lista 5 edge cases que falten para este formulario.”</li><li>“Convierte este <code>xpath</code> frágil en un selector por rol.”</li></ul></div>
             
           </div>
         </div>
-        <h2 class="block-label" data-i18n="fc.title">Flashcards — repasá lo aprendido</h2>
+        <h2 class="block-label" data-i18n="fc.title">Flashcards — repasa lo aprendido</h2>
         <div class="flashcards" data-flashcards>
           <div class="fc-stage">
             <div class="fc-card is-active" data-fc-card tabindex="0" role="button" aria-label="Dar vuelta">
@@ -1333,7 +1333,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q1">¿Qué es la pirámide de testing?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1346,7 +1346,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q2">¿Qué es una aserción (assertion)?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1359,7 +1359,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q3">¿Qué es un test flaky?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1372,7 +1372,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q4">¿Por qué preferir selectores por rol/label antes que un XPath frágil?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1385,7 +1385,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q5">¿Qué es un test unitario?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1398,7 +1398,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q6">¿Qué es un test de integración?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1411,7 +1411,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q7">¿Qué es un test E2E?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1424,7 +1424,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q8">¿Qué es la cobertura de código?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1437,7 +1437,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q9">¿Qué es un mock o stub?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>
@@ -1450,7 +1450,7 @@ await expect(page.locator("</span><span class="tok-punctuation">.</span><span cl
                 <div class="fc-face fc-face--q">
                   <span class="fc-tag" data-i18n="fc.q">Pregunta</span>
                   <p class="fc-text" data-i18n="fc.fundamentals.q10">¿Qué es un selector?</p>
-                  <span class="fc-hint" data-i18n="fc.hint">Tocá la tarjeta para ver la respuesta</span>
+                  <span class="fc-hint" data-i18n="fc.hint">Toca la tarjeta para ver la respuesta</span>
                 </div>
                 <div class="fc-face fc-face--a" aria-hidden="true">
                   <span class="fc-tag fc-tag--a" data-i18n="fc.a">Respuesta</span>

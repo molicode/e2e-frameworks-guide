@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1112,7 +1112,7 @@
           </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-sql.ex">Para validar en la base lo que la API dice, consultás con SQL y cruzás tablas con <strong>JOIN</strong>:<pre class="cpt-code"><code>SELECT o.id, o.total, u.email
+          <div class="cpt-rich" data-i18n-html="cpt.api-sql.ex">Para validar en la base lo que la API dice, consultas con SQL y cruzas tablas con <strong>JOIN</strong>:<pre class="cpt-code"><code>SELECT o.id, o.total, u.email
 FROM orders o
 JOIN users u ON u.id = o.user_id
 WHERE o.status = 'PAID'
@@ -1120,7 +1120,7 @@ WHERE o.status = 'PAID'
         </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-sql.uc">Sirve para <strong>verificar datos de punta a punta</strong>: creás una orden por la API y confirmás en la base que se guardó bien (monto, estado, relación con el usuario). Detectás inconsistencias que la UI oculta.<pre class="cpt-code"><code>-- tras POST /orders debería existir 1 fila
+          <div class="cpt-rich" data-i18n-html="cpt.api-sql.uc">Sirve para <strong>verificar datos de punta a punta</strong>: creas una orden por la API y confirmas en la base que se guardó bien (monto, estado, relación con el usuario). Detectas inconsistencias que la UI oculta.<pre class="cpt-code"><code>-- tras POST /orders debería existir 1 fila
 SELECT COUNT(*) FROM orders WHERE id = :new_id;  -- espera 1</code></pre></div>
         </section>
         <section class="cpt-sec">

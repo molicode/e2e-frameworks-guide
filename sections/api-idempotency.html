@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1112,7 +1112,7 @@
           </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.example">Ejemplo</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-idempotency.ex">Repetí la misma llamada N veces y compará el estado final:<pre class="cpt-code"><code># PUT idempotente: 5 veces = mismo resultado
+          <div class="cpt-rich" data-i18n-html="cpt.api-idempotency.ex">Repite la misma llamada N veces y compara el estado final:<pre class="cpt-code"><code># PUT idempotente: 5 veces = mismo resultado
 for _ in range(5):
     requests.put("/users/7", json={"name": "Ana"})
 # el usuario 7 sigue con name=Ana (un solo estado)
@@ -1124,7 +1124,7 @@ for _ in range(5):
         </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-idempotency.uc">Es clave para los <strong>reintentos</strong>: si la red falla y el cliente reintenta, un <code>PUT</code>/<code>DELETE</code> es seguro de repetir, pero un <code>POST</code> puede duplicar. En QA lo probás repitiendo el request y verificando que no se creen registros de más — y si el <code>POST</code> usa una <em>idempotency key</em>, que la segunda llamada devuelva el mismo recurso en vez de uno nuevo.<pre class="cpt-code"><code>a = requests.delete("/users/7").status_code
+          <div class="cpt-rich" data-i18n-html="cpt.api-idempotency.uc">Es clave para los <strong>reintentos</strong>: si la red falla y el cliente reintenta, un <code>PUT</code>/<code>DELETE</code> es seguro de repetir, pero un <code>POST</code> puede duplicar. En QA lo pruebas repitiendo el request y verificando que no se creen registros de más — y si el <code>POST</code> usa una <em>idempotency key</em>, que la segunda llamada devuelva el mismo recurso en vez de uno nuevo.<pre class="cpt-code"><code>a = requests.delete("/users/7").status_code
 b = requests.delete("/users/7").status_code
 assert a in (200, 204) and b in (200, 204, 404)  # sigue 'borrado'</code></pre></div>
         </section>

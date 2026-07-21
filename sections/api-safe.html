@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1120,7 +1120,7 @@ POST/PUT/PATCH/DELETE  → NO seguros (modifican)</code></pre>Todo método segur
         </section>
         <section class="cpt-sec">
           <h2 class="block-label" data-i18n="cpt.usecase">Caso de uso en QA</h2>
-          <div class="cpt-rich" data-i18n-html="cpt.api-safe.uc">Sirve para saber qué podés cachear y para detectar un bug clásico: un <code>GET</code> que <em>escribe</em> (ej. <code>GET /cart/add?id=3</code> que agrega al carrito). En QA verificás que tras una serie de <code>GET</code>/<code>HEAD</code> el estado no cambió:<pre class="cpt-code"><code>before = requests.get("/cart").json()
+          <div class="cpt-rich" data-i18n-html="cpt.api-safe.uc">Sirve para saber qué puedes cachear y para detectar un bug clásico: un <code>GET</code> que <em>escribe</em> (ej. <code>GET /cart/add?id=3</code> que agrega al carrito). En QA verificas que tras una serie de <code>GET</code>/<code>HEAD</code> el estado no cambió:<pre class="cpt-code"><code>before = requests.get("/cart").json()
 requests.get("/products?page=2")   # solo navegación
 after = requests.get("/cart").json()
 assert before == after             # nada mutó</code></pre></div>

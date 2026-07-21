@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1104,9 +1104,9 @@
       <div class="content__inner">
         <div class="section__crumb"><span class="fw-chip" style="--chip-color:var(--fw-skills)"><svg class="fw-chip__logo" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M11.923 0C5.937 0 .976 4.384.07 10.115a11.943 11.943 0 0 1 7.645-2.754 11.982 11.982 0 0 1 9.43 4.58 11.942 11.942 0 0 0 1.015-8.769 12.066 12.066 0 0 0-.626-1.772l-.003-.008A11.968 11.968 0 0 0 11.923 0Zm7.721 2.754A12.002 12.002 0 0 1 9.398 16.521a12.082 12.082 0 0 0 9.02 5.617c.24-.119.766-.51 1.224-.89A11.971 11.971 0 0 0 23.995 12a11.98 11.98 0 0 0-4.35-9.247zM9.33 7.557a12.159 12.159 0 0 0-2.647.401A11.944 11.944 0 0 0 .01 12.595l-.005.006c.021.427.065.853.131 1.275C1.037 19.61 6 24 11.991 24c1.45 0 2.887-.26 4.243-.773a12 12 0 0 1-6.905-15.67z"/></svg>Habilidades QA</span></div>
         <h1 class="section__title" data-i18n="skills.page.git">Git para QA</h1>
-        <div class="prose" data-i18n-html="skills.git.lead"><p>Tus tests son código: viven en un repositorio y se revisan como cualquier cambio. <strong>Git</strong> es la herramienta de versionado estándar — sin ella no colaborás ni te integrás a un pipeline de CI.</p></div>
+        <div class="prose" data-i18n-html="skills.git.lead"><p>Tus tests son código: viven en un repositorio y se revisan como cualquier cambio. <strong>Git</strong> es la herramienta de versionado estándar — sin ella no colaboras ni te integras a un pipeline de CI.</p></div>
         <h2 class="block-label" data-i18n="skills.git.basics.label">El flujo básico</h2>
-        <div class="prose" data-i18n-html="skills.git.basics.body"><p>El ciclo de todos los días: <code>clone</code> el repo, creás una <strong>branch</strong> propia (nunca toques <code>main</code> directo), hacés <code>add</code> + <code>commit</code> con un mensaje claro y <code>push</code>. Un buen mensaje de commit explica el <em>por qué</em>, no solo el qué.</p></div>
+        <div class="prose" data-i18n-html="skills.git.basics.body"><p>El ciclo de todos los días: <code>clone</code> el repo, creas una <strong>branch</strong> propia (nunca toques <code>main</code> directo), haces <code>add</code> + <code>commit</code> con un mensaje claro y <code>push</code>. Un buen mensaje de commit explica el <em>por qué</em>, no solo el qué.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Bash</span>
@@ -1129,7 +1129,7 @@ git commit <span class="tok-punctuation">-</span>m <span class="tok-string">"tes
 git push <span class="tok-punctuation">-</span>u origin feature<span class="tok-punctuation">/</span>login<span class="tok-punctuation">-</span>tests</code></pre>
         </div>
         <h2 class="block-label" data-i18n="skills.git.flow.label">Actualizar y resolver conflictos</h2>
-        <div class="prose" data-i18n-html="skills.git.flow.body"><p>Antes de abrir un PR, traés lo último de <code>main</code> con <code>pull --rebase</code>. Si hay un <strong>conflicto</strong>, editás el archivo, <code>git add</code> y <code>git rebase --continue</code> (o <code>--abort</code> para volver atrás). <code>git stash</code> te guarda cambios a medio hacer para cambiar de tarea sin commitear.</p></div>
+        <div class="prose" data-i18n-html="skills.git.flow.body"><p>Antes de abrir un PR, traes lo último de <code>main</code> con <code>pull --rebase</code>. Si hay un <strong>conflicto</strong>, editas el archivo, <code>git add</code> y <code>git rebase --continue</code> (o <code>--abort</code> para volver atrás). <code>git stash</code> te guarda cambios a medio hacer para cambiar de tarea sin commitear.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Bash</span>
@@ -1157,7 +1157,7 @@ git rebase <span class="tok-punctuation">--</span><span class="tok-keyword">cont
 git stash            <span class="tok-comment"># save changes</span>
 git stash pop        <span class="tok-comment"># bring them back</span></code></pre>
         </div>
-        <div class="callout callout--warn" data-i18n-html="skills.git.callout"><strong>Regla de oro:</strong> commits chicos y frecuentes, branches por feature, y nunca reescribas la historia de una branch compartida con <code>--force</code> salvo que sepas exactamente lo que hacés.</div>
+        <div class="callout callout--warn" data-i18n-html="skills.git.callout"><strong>Regla de oro:</strong> commits chicos y frecuentes, branches por feature, y nunca reescribas la historia de una branch compartida con <code>--force</code> salvo que sepas exactamente lo que haces.</div>
         <nav class="page-nav" aria-label="Pagination">
           <a class="page-nav__link page-nav__prev" href="skills-sql.html">
             <span class="page-nav__dir" data-i18n="ui.prev">Anterior</span>

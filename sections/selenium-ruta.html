@@ -725,10 +725,10 @@
                 <span data-i18n="practica.ai.fewshot.nav">Few-shot: tu estilo</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-injection.html">
-                <span data-i18n="practica.ai.injection.nav">Frená un prompt injection</span>
+                <span data-i18n="practica.ai.injection.nav">Frena un prompt injection</span>
               </a>
               <a class="nav-link nav-sublink nav-sublink--deep" href="practica-ai-eval.html">
-                <span data-i18n="practica.ai.eval.nav">Armá un eval</span>
+                <span data-i18n="practica.ai.eval.nav">Arma un eval</span>
               </a>
             </div>
           </div>
@@ -1109,31 +1109,31 @@
             <li>
               <a class="roadmap__link" href="#sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="sel.rung2.desc">Dominá los By: CSS sobre XPath siempre que puedas. Practicá selectores robustos.</span>
+              <span data-i18n="sel.rung2.desc">Domina los By: CSS sobre XPath siempre que puedas. Practica selectores robustos.</span>
             </li>
             <li>
               <a class="roadmap__link" href="#sel-rung-3" data-i18n="sel.rung3.title">Esperas explícitas</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="sel.rung3.desc">El concepto más importante. WebDriverWait + ExpectedConditions. Evitá Thread.sleep.</span>
+              <span data-i18n="sel.rung3.desc">El concepto más importante. WebDriverWait + ExpectedConditions. Evita Thread.sleep.</span>
             </li>
             <li>
               <a class="roadmap__link" href="#sel-rung-4" data-i18n="sel.rung4.title">Runner + assertions</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="sel.rung4.desc">Integralo con JUnit5/TestNG (Java) o pytest (Python). Selenium conduce, no testea.</span>
+              <span data-i18n="sel.rung4.desc">Intégralo con JUnit5/TestNG (Java) o pytest (Python). Selenium conduce, no testea.</span>
             </li>
             <li>
               <a class="roadmap__link" href="#sel-rung-5" data-i18n="sel.rung5.title">Page Object Model</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="sel.rung5.desc">Refactorizá a POM antes de que la suite crezca. La diferencia entre mantenible e infierno.</span>
+              <span data-i18n="sel.rung5.desc">Refactoriza a POM antes de que la suite crezca. La diferencia entre mantenible e infierno.</span>
             </li>
             <li>
               <a class="roadmap__link" href="#sel-rung-6" data-i18n="sel.rung6.title">Grid y CI</a>
               <span class="roadmap__sep"> — </span>
-              <span data-i18n="sel.rung6.desc">Corré en paralelo con Selenium Grid o un servicio cloud, e integralo al pipeline.</span>
+              <span data-i18n="sel.rung6.desc">Corre en paralelo con Selenium Grid o un servicio cloud, e intégralo al pipeline.</span>
             </li>
         </ol>
         <h2 class="block-label" id="sel-rung-2" data-i18n="sel.rung2.title">Localizar elementos</h2>
-        <div class="prose" data-i18n-html="sel.rung2.body"><p>Selenium localiza elementos con la clase <code>By</code>: <code>By.ID</code>, <code>By.CSS_SELECTOR</code>, <code>By.XPATH</code>… Usá <code>find_element</code> para uno y <code>find_elements</code> para una lista. Regla práctica: <strong>preferí CSS sobre XPath</strong> (más legible y rápido) y reservá XPath para buscar por texto visible.</p></div>
+        <div class="prose" data-i18n-html="sel.rung2.body"><p>Selenium localiza elementos con la clase <code>By</code>: <code>By.ID</code>, <code>By.CSS_SELECTOR</code>, <code>By.XPATH</code>… Usa <code>find_element</code> para uno y <code>find_elements</code> para una lista. Regla práctica: <strong>prefiere CSS sobre XPath</strong> (más legible y rápido) y reserva XPath para buscar por texto visible.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1190,7 +1190,7 @@ driver<span class="tok-punctuation">.</span><span class="tok-function">find_elem
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="sel-rung-3" data-i18n="sel.rung3.title">Esperas explícitas</h2>
-        <div class="prose" data-i18n-html="sel.rung3.body"><p>Selenium <strong>no reintenta solo</strong>: si actuás antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en Python, <code>WebDriverWait(driver, 5).until(...)</code> junto con <code>expected_conditions</code> (EC). Nunca uses un <code>time.sleep</code> fijo: es la causa número uno de flakiness.</p></div>
+        <div class="prose" data-i18n-html="sel.rung3.body"><p>Selenium <strong>no reintenta solo</strong>: si actúas antes de que el elemento exista, falla. La solución son las <strong>esperas explícitas</strong>: en Python, <code>WebDriverWait(driver, 5).until(...)</code> junto con <code>expected_conditions</code> (EC). Nunca uses un <code>time.sleep</code> fijo: es la causa número uno de flakiness.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1286,7 +1286,7 @@ wait<span class="tok-punctuation">.</span><span class="tok-function">until</span
     assert total == "</span><span class="tok-number">250</span><span class="tok-punctuation">"</span></code></pre>
         </div>
         <h2 class="block-label" id="sel-rung-5" data-i18n="sel.rung5.title">Page Object Model</h2>
-        <div class="prose" data-i18n-html="sel.rung5.body"><p>El <strong>Page Object Model (POM)</strong> encapsula los selectores y acciones de una página en una clase con métodos que revelan intención (<code>order.total()</code> en vez de un <code>css</code> suelto). Cuando el HTML cambia, tocás un solo lugar. Es la diferencia entre una suite mantenible y un infierno de selectores repetidos.</p></div>
+        <div class="prose" data-i18n-html="sel.rung5.body"><p>El <strong>Page Object Model (POM)</strong> encapsula los selectores y acciones de una página en una clase con métodos que revelan intención (<code>order.total()</code> en vez de un <code>css</code> suelto). Cuando el HTML cambia, tocas un solo lugar. Es la diferencia entre una suite mantenible y un infierno de selectores repetidos.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
@@ -1366,7 +1366,7 @@ order<span class="tok-punctuation">.</span><span class="tok-function">open</span
           <figcaption class="mock__caption" data-i18n="ui.mockCaption">Pantalla ficticia: esto es lo que prueba el código de arriba. Los chips muestran qué selector apunta a cada elemento.</figcaption>
         </figure>
         <h2 class="block-label" id="sel-rung-6" data-i18n="sel.rung6.title">Grid y CI</h2>
-        <div class="prose" data-i18n-html="sel.rung6.body"><p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: usás <code>webdriver.Remote(command_executor=...)</code> apuntando a un hub en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p></div>
+        <div class="prose" data-i18n-html="sel.rung6.body"><p><strong>Selenium Grid</strong> te deja correr los tests en navegadores remotos y en paralelo: usas <code>webdriver.Remote(command_executor=...)</code> apuntando a un hub en vez de a un navegador local. En CI se levanta el Grid (por ejemplo, con Docker) y se ejecuta la suite en cada pull request.</p></div>
         <div class="code-block">
           <div class="code-block__head">
             <span class="code-block__lang">Python</span>
